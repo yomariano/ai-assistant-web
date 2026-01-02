@@ -1,0 +1,146 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - complementary [ref=e3]:
+      - link "ValidateCall" [ref=e5] [cursor=pointer]:
+        - /url: /dashboard
+        - img [ref=e7]
+        - generic [ref=e9]: ValidateCall
+      - navigation [ref=e10]:
+        - link "Dashboard" [ref=e11] [cursor=pointer]:
+          - /url: /dashboard
+          - img [ref=e12]
+          - generic [ref=e17]: Dashboard
+        - link "AI Assistant" [ref=e18] [cursor=pointer]:
+          - /url: /assistant
+          - img [ref=e19]
+          - generic [ref=e22]: AI Assistant
+        - link "New Call" [ref=e23] [cursor=pointer]:
+          - /url: /call
+          - img [ref=e24]
+          - generic [ref=e26]: New Call
+        - link "Agenda" [ref=e27] [cursor=pointer]:
+          - /url: /agenda
+          - img [ref=e28]
+          - generic [ref=e31]: Agenda
+        - link "Scheduled" [ref=e32] [cursor=pointer]:
+          - /url: /scheduled
+          - img [ref=e33]
+          - generic [ref=e35]: Scheduled
+        - link "History" [ref=e36] [cursor=pointer]:
+          - /url: /history
+          - img [ref=e37]
+          - generic [ref=e41]: History
+        - link "Billing" [ref=e42] [cursor=pointer]:
+          - /url: /billing
+          - img [ref=e43]
+          - generic [ref=e45]: Billing
+        - link "Settings" [ref=e46] [cursor=pointer]:
+          - /url: /settings
+          - img [ref=e47]
+          - generic [ref=e50]: Settings
+      - generic [ref=e51]:
+        - button "Logout" [ref=e52]:
+          - img [ref=e53]
+          - generic [ref=e56]: Logout
+        - button "Collapse" [ref=e57]:
+          - img [ref=e58]
+          - generic [ref=e60]: Collapse
+    - generic [ref=e61]:
+      - banner [ref=e62]:
+        - generic [ref=e64]:
+          - img [ref=e65]
+          - textbox "Search..." [ref=e68]
+        - generic [ref=e69]:
+          - button [ref=e70]:
+            - img [ref=e71]
+          - generic [ref=e76]:
+            - generic [ref=e77]:
+              - paragraph [ref=e78]: Test User
+              - paragraph [ref=e79]: Administrator
+            - generic [ref=e80]: T
+      - main [ref=e81]:
+        - generic [ref=e83]:
+          - generic [ref=e84]:
+            - generic [ref=e85]:
+              - heading "Welcome back, Test!" [level=1] [ref=e86]
+              - paragraph [ref=e87]: Monitoring your AI agents and call activity.
+            - link "Launch New Call" [ref=e88] [cursor=pointer]:
+              - /url: /call
+              - button "Launch New Call" [ref=e89]:
+                - img [ref=e90]
+                - text: Launch New Call
+          - generic [ref=e92]:
+            - generic [ref=e95]:
+              - generic [ref=e96]:
+                - paragraph [ref=e97]: Total Calls
+                - paragraph [ref=e98]: "0"
+              - img [ref=e100]
+            - generic [ref=e104]:
+              - generic [ref=e105]:
+                - paragraph [ref=e106]: Saved Calls
+                - paragraph [ref=e107]: "0"
+              - img [ref=e109]
+            - generic [ref=e114]:
+              - generic [ref=e115]:
+                - paragraph [ref=e116]: Scheduled
+                - paragraph [ref=e117]: "0"
+              - img [ref=e119]
+            - generic [ref=e123]:
+              - generic [ref=e124]:
+                - paragraph [ref=e125]: Call Minutes
+                - paragraph [ref=e126]: "0"
+              - img [ref=e128]
+          - generic [ref=e131]:
+            - generic [ref=e132]:
+              - generic [ref=e133]:
+                - heading "Recent Activity" [level=2] [ref=e134]
+                - link "View History" [ref=e135] [cursor=pointer]:
+                  - /url: /history
+                  - button "View History" [ref=e136]:
+                    - text: View History
+                    - img [ref=e137]
+              - generic [ref=e141]:
+                - img [ref=e143]
+                - paragraph [ref=e147]: No recent activity found.
+            - generic [ref=e148]:
+              - heading "Quick Tools" [level=2] [ref=e149]
+              - generic [ref=e150]:
+                - link "AI Assistant Configure your voice AI" [ref=e151] [cursor=pointer]:
+                  - /url: /assistant
+                  - generic [ref=e154]:
+                    - img [ref=e156]
+                    - generic [ref=e159]:
+                      - heading "AI Assistant" [level=3] [ref=e160]
+                      - paragraph [ref=e161]: Configure your voice AI
+                - link "Agendas Ready-to-use call templates" [ref=e162] [cursor=pointer]:
+                  - /url: /agenda
+                  - generic [ref=e165]:
+                    - img [ref=e167]
+                    - generic [ref=e170]:
+                      - heading "Agendas" [level=3] [ref=e171]
+                      - paragraph [ref=e172]: Ready-to-use call templates
+                - link "Planner Manage future call schedules" [ref=e173] [cursor=pointer]:
+                  - /url: /scheduled
+                  - generic [ref=e176]:
+                    - img [ref=e178]
+                    - generic [ref=e180]:
+                      - heading "Planner" [level=3] [ref=e181]
+                      - paragraph [ref=e182]: Manage future call schedules
+                - link "Configurations System and profile preferences" [ref=e183] [cursor=pointer]:
+                  - /url: /settings
+                  - generic [ref=e186]:
+                    - img [ref=e188]
+                    - generic [ref=e191]:
+                      - heading "Configurations" [level=3] [ref=e192]
+                      - paragraph [ref=e193]: System and profile preferences
+    - 'button "Dev: starter" [ref=e196]':
+      - img [ref=e197]
+      - generic [ref=e202]: "Dev: starter"
+      - img [ref=e204]
+  - button "Open Next.js Dev Tools" [ref=e211] [cursor=pointer]:
+    - img [ref=e212]
+  - alert [ref=e215]
+```
