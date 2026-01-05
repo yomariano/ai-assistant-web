@@ -8,7 +8,7 @@ export { default as ComparisonSection } from "./ComparisonSection";
 export { default as TechnologySection } from "./TechnologySection";
 export { default as CaseStudiesSection } from "./CaseStudiesSection";
 export { default as ROICalculator } from "./ROICalculator";
-export { default as IntegrationsSection } from "./IntegrationsSection";
+export { default as FeaturesSection } from "./IntegrationsSection";
 export { default as SecuritySection } from "./SecuritySection";
 export { default as PricingSection } from "./PricingSection";
 export { default as DemoSection } from "./DemoSection";

@@ -9,10 +9,10 @@ const TechnologySection = () => {
     { icon: Shield, label: "PCI DSS ready" },
   ];
 
-  const integrations = [
-    { category: "CRM", items: ["Salesforce", "HubSpot", "Zendesk"] },
-    { category: "Telephony", items: ["SIP", "PSTN", "WebRTC"] },
-    { category: "Analytics", items: ["Real-time dashboard", "Custom reports"] },
+  const capabilities = [
+    { category: "Voice", items: ["Natural language AI", "Multi-accent support", "Real-time processing"] },
+    { category: "Telephony", items: ["Irish numbers", "Call forwarding", "Voicemail"] },
+    { category: "Notifications", items: ["SMS alerts", "Email summaries", "Webhooks (Pro)"] },
   ];
 
   return (
@@ -51,9 +51,9 @@ const TechnologySection = () => {
                 </div>
               </div>
 
-              {/* Integrations */}
+              {/* Capabilities */}
               <div className="space-y-4">
-                {integrations.map((group, i) => (
+                {capabilities.map((group, i) => (
                   <div key={i} className="flex items-center gap-4">
                     <div className="w-20 text-xs font-medium text-primary-foreground/60">
                       {group.category}

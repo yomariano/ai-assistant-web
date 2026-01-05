@@ -9,7 +9,7 @@ import {
   TechnologySection,
   CaseStudiesSection,
   ROICalculator,
-  IntegrationsSection,
+  FeaturesSection,
   SecuritySection,
   PricingSection,
   DemoSection,
@@ -31,7 +31,7 @@ export default function Home() {
         <TechnologySection />
         <CaseStudiesSection />
         <ROICalculator />
-        <IntegrationsSection />
+        <FeaturesSection />
         <SecuritySection />
         <PricingSection />
         <DemoSection />

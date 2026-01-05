@@ -104,7 +104,7 @@ const ROICalculator = () => {
   return (
     <section className="py-16 lg:py-28 bg-gradient-subtle">
       <div className="container mx-auto px-4">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-5xl mx-auto">
           <div className="text-center mb-8 lg:mb-12">
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full mb-4 lg:mb-6">
               <Calculator className="w-4 h-4 text-primary" />
@@ -114,139 +114,230 @@ const ROICalculator = () => {
               Calculate Your <span className="text-gradient-primary">Savings</span>
             </h2>
             <p className="text-base lg:text-lg text-muted-foreground">
-              See how much you could save with VoiceFleet AI agents
+              Select your industry to see how much you could save with VoiceFleet
             </p>
           </div>
 
           <div className="bg-card rounded-2xl border border-border shadow-xl overflow-hidden">
-            <div className="grid lg:grid-cols-2">
-              {/* Inputs */}
-              <div className="p-5 sm:p-8 lg:p-10 space-y-6 sm:space-y-8">
-                {/* Call Volume */}
-                <div>
-                  <label className="block text-sm font-semibold text-foreground mb-3">
-                    Monthly Call Volume
-                  </label>
-                  <div className="grid grid-cols-3 sm:flex sm:flex-wrap gap-2">
-                    {volumeOptions.map((option) => (
-                      <button
-                        key={option.value}
-                        onClick={() => setCallVolume(option.value)}
-                        className={`px-2 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-medium transition-all ${
-                          callVolume === option.value
-                            ? "bg-primary text-primary-foreground shadow-md"
-                            : "bg-muted text-muted-foreground hover:bg-muted/80"
-                        }`}
-                      >
-                        {option.label}
-                      </button>
-                    ))}
-                  </div>
-                </div>
+            {/* Input Section */}
+            <div className="p-5 sm:p-8 lg:p-10 space-y-6 border-b border-border">
+              {/* Industry Dropdown */}
+              <div>
+                <label className="flex items-center gap-2 text-sm font-semibold text-foreground mb-3">
+                  <Building2 className="w-4 h-4 text-primary" />
+                  Select Your Industry
+                </label>
+                <select
+                  value={selectedIndustry.id}
+                  onChange={(e) => handleIndustryChange(e.target.value)}
+                  className="w-full px-4 py-3 bg-muted border border-border rounded-xl text-foreground font-medium focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all cursor-pointer"
+                >
+                  {industries.map((industry) => (
+                    <option key={industry.id} value={industry.id}>
+                      {industry.name}
+                    </option>
+                  ))}
+                </select>
+                {!isCustom && (
+                  <p className="text-xs text-muted-foreground mt-2">
+                    Industry average: {selectedIndustry.avgCalls} calls/month at €{selectedIndustry.avgCostPerCall.toFixed(2)}/call
+                  </p>
+                )}
+              </div>
 
-                {/* Handle Time */}
+              {/* Adjustable Parameters */}
+              <div className="grid sm:grid-cols-3 gap-6">
+                {/* Monthly Calls */}
                 <div>
                   <label className="block text-sm font-semibold text-foreground mb-3">
-                    Average Handle Time: <span className="text-primary">{handleTime} minutes</span>
+                    Monthly Calls: <span className="text-primary">{callVolume}</span>
                   </label>
                   <input
                     type="range"
-                    min="2"
-                    max="10"
-                    value={handleTime}
-                    onChange={(e) => setHandleTime(Number(e.target.value))}
+                    min="50"
+                    max="800"
+                    step="10"
+                    value={callVolume}
+                    onChange={(e) => {
+                      setCallVolume(Number(e.target.value));
+                      setIsCustom(true);
+                    }}
                     className="w-full h-2 bg-muted rounded-lg appearance-none cursor-pointer accent-primary"
                   />
                   <div className="flex justify-between text-xs text-muted-foreground mt-1">
-                    <span>2 min</span>
-                    <span>10 min</span>
+                    <span>50</span>
+                    <span>800</span>
                   </div>
                 </div>
 
                 {/* Cost Per Call */}
                 <div>
                   <label className="block text-sm font-semibold text-foreground mb-3">
-                    Current Cost Per Call: <span className="text-primary">€{costPerCall.toFixed(2)}</span>
+                    Cost Per Call: <span className="text-primary">€{costPerCall.toFixed(2)}</span>
                   </label>
                   <input
                     type="range"
                     min="1"
-                    max="5"
-                    step="0.5"
+                    max="6"
+                    step="0.25"
                     value={costPerCall}
-                    onChange={(e) => setCostPerCall(Number(e.target.value))}
+                    onChange={(e) => {
+                      setCostPerCall(Number(e.target.value));
+                      setIsCustom(true);
+                    }}
                     className="w-full h-2 bg-muted rounded-lg appearance-none cursor-pointer accent-primary"
                   />
                   <div className="flex justify-between text-xs text-muted-foreground mt-1">
-                    <span>€1.00</span>
-                    <span>€5.00</span>
+                    <span>€1</span>
+                    <span>€6</span>
                   </div>
                 </div>
 
-                {/* Automatable */}
+                {/* Automatable % */}
                 <div>
                   <label className="block text-sm font-semibold text-foreground mb-3">
-                    Percentage Automatable: <span className="text-primary">{automatable}%</span>
+                    Automatable: <span className="text-primary">{automatable}%</span>
                   </label>
                   <input
                     type="range"
-                    min="40"
-                    max="80"
+                    min="30"
+                    max="90"
                     step="5"
                     value={automatable}
-                    onChange={(e) => setAutomatable(Number(e.target.value))}
+                    onChange={(e) => {
+                      setAutomatable(Number(e.target.value));
+                      setIsCustom(true);
+                    }}
                     className="w-full h-2 bg-muted rounded-lg appearance-none cursor-pointer accent-primary"
                   />
                   <div className="flex justify-between text-xs text-muted-foreground mt-1">
-                    <span>40%</span>
-                    <span>80%</span>
+                    <span>30%</span>
+                    <span>90%</span>
                   </div>
                 </div>
               </div>
 
-              {/* Results */}
-              <div className="bg-gradient-hero p-5 sm:p-8 lg:p-10 text-primary-foreground">
-                <div className="h-full flex flex-col justify-between">
-                  <div>
-                    <div className="flex items-center gap-2 mb-4 sm:mb-6">
-                      <TrendingUp className="w-5 h-5" />
-                      <span className="text-sm font-medium text-primary-foreground/80">
-                        Estimated Savings
-                      </span>
-                    </div>
-
-                    <div className="space-y-4 sm:space-y-6">
-                      <div>
-                        <p className="text-sm text-primary-foreground/70 mb-1">Monthly Savings</p>
-                        <p className="text-3xl sm:text-4xl lg:text-5xl font-heading font-extrabold">
-                          €{savings.monthly.toLocaleString()}
-                        </p>
-                      </div>
-
-                      <div>
-                        <p className="text-sm text-primary-foreground/70 mb-1">Annual Savings</p>
-                        <p className="text-2xl sm:text-3xl font-heading font-bold">
-                          €{savings.yearly.toLocaleString()}
-                        </p>
-                      </div>
-
-                      <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 bg-primary-foreground/20 rounded-full">
-                        <span className="text-xl sm:text-2xl font-bold">{savings.percentage}%</span>
-                        <span className="text-sm">cost reduction</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="mt-6 sm:mt-8">
-                    <p className="text-sm text-primary-foreground/80 mb-4 hidden sm:block">
-                      Based on your inputs, VoiceFleet could save you significantly while improving customer experience.
-                    </p>
-                    <Button variant="heroOutline" size="lg" className="w-full">
-                      Get Custom ROI Analysis
-                      <ArrowRight className="w-5 h-5" />
-                    </Button>
-                  </div>
+              {/* Current Cost Summary */}
+              <div className="bg-muted/50 rounded-xl p-4 flex flex-wrap items-center justify-between gap-4">
+                <div>
+                  <p className="text-sm text-muted-foreground">Your Current Monthly Cost</p>
+                  <p className="text-2xl font-heading font-bold text-foreground">
+                    €{planCalculations[0].currentMonthlyCost.toLocaleString()}
+                  </p>
                 </div>
+                <div className="text-right">
+                  <p className="text-sm text-muted-foreground">Calls AI Can Handle</p>
+                  <p className="text-2xl font-heading font-bold text-primary">
+                    {planCalculations[0].automatableCalls.toLocaleString()}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Plan Comparison Section */}
+            <div className="p-5 sm:p-8 lg:p-10">
+              <div className="flex items-center gap-2 mb-6">
+                <TrendingUp className="w-5 h-5 text-accent" />
+                <span className="text-lg font-semibold text-foreground">Your Savings by Plan</span>
+              </div>
+
+              <div className="grid sm:grid-cols-3 gap-4 mb-8">
+                {planCalculations.map((plan) => {
+                  const Icon = plan.icon;
+                  const isBest = plan.id === bestPlan.id;
+
+                  return (
+                    <div
+                      key={plan.id}
+                      className={`relative rounded-xl p-5 transition-all ${
+                        isBest
+                          ? "bg-gradient-hero text-primary-foreground ring-2 ring-primary shadow-lg"
+                          : "bg-muted/50 border border-border"
+                      }`}
+                    >
+                      {isBest && (
+                        <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 bg-accent text-accent-foreground text-xs font-bold rounded-full">
+                          Best Value
+                        </div>
+                      )}
+
+                      <div className="flex items-center gap-2 mb-3">
+                        <Icon className={`w-5 h-5 ${isBest ? "text-primary-foreground" : "text-primary"}`} />
+                        <span className={`font-heading font-bold ${isBest ? "text-primary-foreground" : "text-foreground"}`}>
+                          {plan.name}
+                        </span>
+                      </div>
+
+                      <div className="mb-4">
+                        <p className={`text-xs ${isBest ? "text-primary-foreground/70" : "text-muted-foreground"}`}>
+                          VoiceFleet Cost
+                        </p>
+                        <p className={`text-lg font-bold ${isBest ? "text-primary-foreground" : "text-foreground"}`}>
+                          €{plan.voicefleetCost}/mo
+                        </p>
+                        <p className={`text-xs ${isBest ? "text-primary-foreground/60" : "text-muted-foreground"}`}>
+                          €{plan.monthlyFee} + {plan.perCallCost > 0 ? `€${plan.perCallCost}/call` : "unlimited"}
+                        </p>
+                      </div>
+
+                      {plan.makesSense ? (
+                        <>
+                          <div className="mb-3">
+                            <p className={`text-xs ${isBest ? "text-primary-foreground/70" : "text-muted-foreground"}`}>
+                              Monthly Savings
+                            </p>
+                            <p className={`text-2xl font-heading font-extrabold ${isBest ? "text-primary-foreground" : "text-accent"}`}>
+                              €{plan.monthlySavings.toLocaleString()}
+                            </p>
+                          </div>
+
+                          <div className={`inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-semibold ${
+                            isBest ? "bg-primary-foreground/20 text-primary-foreground" : "bg-accent/10 text-accent"
+                          }`}>
+                            <Check className="w-3 h-3" />
+                            {plan.savingsPercentage}% savings
+                          </div>
+
+                          <div className={`mt-3 pt-3 border-t ${isBest ? "border-primary-foreground/20" : "border-border"}`}>
+                            <p className={`text-xs ${isBest ? "text-primary-foreground/70" : "text-muted-foreground"}`}>
+                              Annual Savings
+                            </p>
+                            <p className={`text-lg font-bold ${isBest ? "text-primary-foreground" : "text-foreground"}`}>
+                              €{plan.yearlySavings.toLocaleString()}
+                            </p>
+                          </div>
+                        </>
+                      ) : (
+                        <div className="text-center py-4">
+                          <p className={`text-sm ${isBest ? "text-primary-foreground/70" : "text-muted-foreground"}`}>
+                            Not cost-effective<br />for your volume
+                          </p>
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+
+              {/* CTA */}
+              <div className="bg-gradient-to-r from-indigo-50 to-purple-50 rounded-xl p-6 text-center">
+                <p className="text-foreground font-medium mb-2">
+                  {bestPlan.makesSense ? (
+                    <>
+                      With <span className="font-bold text-primary">{bestPlan.name}</span>, you could save{" "}
+                      <span className="font-bold text-accent">€{bestPlan.yearlySavings.toLocaleString()}/year</span>
+                    </>
+                  ) : (
+                    "Let us create a custom plan for your business"
+                  )}
+                </p>
+                <p className="text-sm text-muted-foreground mb-4">
+                  Get a personalized analysis for your {selectedIndustry.name.toLowerCase()} business
+                </p>
+                <Button variant="hero" size="lg">
+                  Get Custom ROI Analysis
+                  <ArrowRight className="w-5 h-5" />
+                </Button>
               </div>
             </div>
           </div>

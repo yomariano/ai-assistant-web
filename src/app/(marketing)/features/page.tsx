@@ -36,8 +36,9 @@ const features = [
     name: "AI Call Handling",
     slug: "ai-call-handling",
     description:
-      "Natural conversations powered by advanced AI. Handle inquiries, take orders, and book appointments automatically.",
-    highlights: ["Natural language understanding", "Context-aware responses", "Seamless handoff to humans"],
+      "Natural conversations powered by advanced AI. Take orders, book reservations, and answer customer questions automatically.",
+    highlights: ["Natural language understanding", "Order taking & reservations", "Custom greeting for your business"],
+    availableOn: "All plans",
   },
   {
     icon: Clock,
@@ -45,87 +46,98 @@ const features = [
     slug: "24-7-availability",
     description:
       "Never miss a call again. Your AI assistant works around the clock, even on holidays and weekends.",
-    highlights: ["No overtime costs", "Global time zone coverage", "Instant response every time"],
+    highlights: ["No overtime costs", "After-hours coverage", "Instant response every time"],
+    availableOn: "All plans",
   },
   {
     icon: Calendar,
-    name: "Smart Scheduling",
-    slug: "smart-scheduling",
+    name: "Calendar Integration",
+    slug: "calendar-integration",
     description:
-      "Automatically book appointments based on your availability. Integrates with Google Calendar, Outlook, and more.",
-    highlights: ["Calendar sync", "Conflict detection", "Automated reminders"],
+      "Automatically book appointments based on your availability. Sync with Google Calendar, Outlook, and more.",
+    highlights: ["Real-time availability", "Automated booking confirmations", "Reminder notifications"],
+    availableOn: "Growth & Pro",
   },
   {
     icon: MessageSquare,
     name: "SMS & Email Notifications",
     slug: "notifications",
     description:
-      "Get instant alerts for every call. Receive summaries, transcripts, and follow-up actions via SMS or email.",
-    highlights: ["Real-time alerts", "Call summaries", "Custom notification rules"],
+      "Get instant alerts for every call. Receive order details, booking confirmations, and call summaries.",
+    highlights: ["Real-time SMS alerts", "Email summaries", "Order/booking details"],
+    availableOn: "All plans (Email on Growth+)",
   },
   {
     icon: Globe,
-    name: "Multi-Language Support",
-    slug: "multi-language",
+    name: "Irish Phone Numbers",
+    slug: "irish-numbers",
     description:
-      "Serve customers in their preferred language. Support for English, Irish, and major European languages.",
-    highlights: ["Automatic language detection", "Native-quality speech", "Cultural awareness"],
+      "Get a local Irish phone number included with every plan. Build trust with customers using a familiar local number.",
+    highlights: ["Dublin & regional numbers", "Number porting available", "EU-based infrastructure"],
+    availableOn: "All plans",
   },
   {
     icon: BarChart3,
     name: "Analytics Dashboard",
     slug: "analytics",
     description:
-      "Track call volumes, resolution rates, peak hours, and more. Data-driven insights to optimize your operations.",
-    highlights: ["Real-time metrics", "Custom reports", "Trend analysis"],
+      "Track call volumes, peak hours, popular orders, and more. Data-driven insights to optimize your business.",
+    highlights: ["Call volume tracking", "Peak hours analysis", "Order trends"],
+    availableOn: "Growth & Pro",
   },
   {
     icon: Shield,
-    name: "Enterprise Security",
+    name: "GDPR Compliant",
     slug: "security",
     description:
-      "GDPR compliant with EU data residency. SOC 2 certified infrastructure keeps your data safe.",
-    highlights: ["EU data centres", "End-to-end encryption", "GDPR compliant"],
+      "Your data stays in Europe. Fully GDPR compliant with EU data residency and enterprise-grade security.",
+    highlights: ["EU data centres", "Data encryption", "GDPR compliant"],
+    availableOn: "All plans",
   },
   {
     icon: Zap,
     name: "Instant Setup",
     slug: "instant-setup",
     description:
-      "Go live in under an hour. No complex integrations or IT support required. Simple configuration wizard.",
-    highlights: ["No-code setup", "Pre-built templates", "Guided onboarding"],
+      "Go live in under an hour. No technical skills required. Just tell us about your business and we handle the rest.",
+    highlights: ["Free setup included", "No IT required", "Ready in < 1 hour"],
+    availableOn: "All plans",
   },
   {
     icon: Users,
-    name: "CRM Integration",
-    slug: "crm-integration",
+    name: "Multi-Location Support",
+    slug: "multi-location",
     description:
-      "Connect with your existing tools. Sync call data with Salesforce, HubSpot, and popular CRMs.",
-    highlights: ["Two-way sync", "Custom field mapping", "Automated workflows"],
+      "Manage multiple business locations from one dashboard. Each location gets its own phone number and settings.",
+    highlights: ["Up to 5 phone numbers", "Per-location analytics", "Centralized management"],
+    availableOn: "Pro only",
   },
   {
     icon: Settings,
-    name: "Custom Call Flows",
-    slug: "custom-call-flows",
+    name: "Order & Reservation Management",
+    slug: "order-management",
     description:
-      "Design conversation flows that match your business. Easy drag-and-drop editor for non-technical users.",
-    highlights: ["Visual flow builder", "Conditional logic", "A/B testing"],
+      "AI handles orders and reservations seamlessly. Customers can place orders, book tables, or schedule appointments.",
+    highlights: ["Order taking", "Table reservations", "Appointment booking"],
+    availableOn: "All plans",
   },
   {
     icon: Headphones,
-    name: "Call Recording & Transcription",
-    slug: "call-recording",
+    name: "Priority Support",
+    slug: "priority-support",
     description:
-      "Every call recorded and transcribed automatically. Search through past conversations instantly.",
-    highlights: ["Searchable transcripts", "Keyword tagging", "Compliance storage"],
+      "Get help when you need it. Business hours support on all plans, with 24/7 priority support on Pro.",
+    highlights: ["Business hours support", "24/7 on Pro plan", "Dedicated account manager"],
+    availableOn: "All plans (24/7 on Pro)",
   },
   {
     icon: Bell,
-    name: "Smart Escalation",
-    slug: "smart-escalation",
+    name: "Smart Call Routing",
+    slug: "smart-routing",
     description:
-      "AI knows when to escalate to a human. Set custom rules for urgent matters or VIP customers.",
-    highlights: ["Priority detection", "Staff routing", "Callback scheduling"],
+      "AI knows when to handle calls and when to transfer to staff. Set rules for urgent matters or VIP customers.",
+    highlights: ["Automatic escalation", "Staff transfer option", "Voicemail fallback"],
+    availableOn: "All plans",
   },
 ];
 
@@ -157,16 +169,45 @@ export default function FeaturesPage() {
         {/* Features Grid */}
         <section className="py-16 lg:py-24">
           <div className="container mx-auto px-4">
+            {/* Plan Legend */}
+            <div className="flex flex-wrap justify-center gap-4 mb-10">
+              <div className="flex items-center gap-2">
+                <span className="w-3 h-3 rounded-full bg-accent/30" />
+                <span className="text-sm text-muted-foreground">All plans</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="w-3 h-3 rounded-full bg-blue-200" />
+                <span className="text-sm text-muted-foreground">Growth & Pro</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="w-3 h-3 rounded-full bg-amber-200" />
+                <span className="text-sm text-muted-foreground">Pro only</span>
+              </div>
+            </div>
+
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
               {features.map((feature) => {
                 const Icon = feature.icon;
+                const isPro = feature.availableOn.includes("Pro only");
+                const isGrowth = feature.availableOn.includes("Growth");
                 return (
                   <article
                     key={feature.slug}
                     className="group bg-card rounded-2xl border border-border p-6 hover:shadow-xl hover:border-primary/20 transition-all duration-300"
                   >
-                    <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
-                      <Icon className="w-6 h-6 text-primary" />
+                    <div className="flex items-start justify-between mb-4">
+                      <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                        <Icon className="w-6 h-6 text-primary" />
+                      </div>
+                      <span className={`text-xs font-medium px-2 py-1 rounded-full ${
+                        isPro
+                          ? "bg-amber-100 text-amber-700"
+                          : isGrowth
+                          ? "bg-blue-100 text-blue-700"
+                          : "bg-accent/10 text-accent"
+                      }`}>
+                        {feature.availableOn}
+                      </span>
                     </div>
 
                     <h2 className="text-xl font-heading font-bold text-foreground mb-2 group-hover:text-primary transition-colors">
@@ -207,10 +248,10 @@ export default function FeaturesPage() {
               </p>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+            <div className="grid md:grid-cols-4 gap-6 max-w-5xl mx-auto mb-12">
               <div className="bg-card rounded-xl border border-border p-6 text-center">
-                <div className="text-4xl font-heading font-bold text-primary mb-2">80%</div>
-                <p className="text-muted-foreground">Lower cost vs human agents</p>
+                <div className="text-4xl font-heading font-bold text-primary mb-2">€19</div>
+                <p className="text-muted-foreground">Starting price per month</p>
               </div>
               <div className="bg-card rounded-xl border border-border p-6 text-center">
                 <div className="text-4xl font-heading font-bold text-accent mb-2">24/7</div>
@@ -220,6 +261,20 @@ export default function FeaturesPage() {
                 <div className="text-4xl font-heading font-bold text-primary mb-2">&lt;1hr</div>
                 <p className="text-muted-foreground">Setup time to go live</p>
               </div>
+              <div className="bg-card rounded-xl border border-border p-6 text-center">
+                <div className="text-4xl font-heading font-bold text-accent mb-2">100%</div>
+                <p className="text-muted-foreground">GDPR compliant</p>
+              </div>
+            </div>
+
+            <div className="text-center">
+              <Link
+                href="/#pricing"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground font-semibold rounded-xl hover:bg-primary/90 transition-colors"
+              >
+                Compare Plans & Pricing
+                <ArrowRight className="w-4 h-4" />
+              </Link>
             </div>
           </div>
         </section>
