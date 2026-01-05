@@ -38,13 +38,21 @@ const HeroSection = () => {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 mb-10 animate-fade-up stagger-3">
-              <Button variant="hero" size="xl">
-                Book a Demo
-                <ArrowRight className="w-5 h-5" />
-              </Button>
-              <Button variant="outline" size="xl">
-                See Case Studies
-              </Button>
+              <a
+                href="https://calendly.com/voicefleet"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Button variant="hero" size="xl">
+                  Book a Demo
+                  <ArrowRight className="w-5 h-5" />
+                </Button>
+              </a>
+              <a href="#case-studies">
+                <Button variant="outline" size="xl">
+                  See Case Studies
+                </Button>
+              </a>
             </div>
 
             {/* Trust Badges */}

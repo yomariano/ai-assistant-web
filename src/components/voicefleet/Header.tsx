@@ -55,9 +55,15 @@ const Header = () => {
             <a href="tel:+35312345678" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
               +353 1 234 5678
             </a>
-            <Button variant="default" size="default">
-              Book a Demo
-            </Button>
+            <a
+              href="https://calendly.com/voicefleet"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Button variant="default" size="default">
+                Book a Demo
+              </Button>
+            </a>
           </div>
 
           {/* Mobile Menu Button */}
@@ -103,9 +109,16 @@ const Header = () => {
                   <Phone className="w-4 h-4" />
                   +353 1 234 5678
                 </a>
-                <Button variant="default" size="lg" className="w-full">
-                  Book a Demo
-                </Button>
+                <a
+                  href="https://calendly.com/voicefleet"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block"
+                >
+                  <Button variant="default" size="lg" className="w-full">
+                    Book a Demo
+                  </Button>
+                </a>
               </div>
             </nav>
           </div>
