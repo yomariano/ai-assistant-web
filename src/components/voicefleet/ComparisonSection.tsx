@@ -1,62 +1,78 @@
 import { Check, X } from "lucide-react";
 
 const ComparisonSection = () => {
+  const competitors = [
+    { key: "voicefleet", name: "VoiceFleet", highlight: true },
+    { key: "smithai", name: "Smith.ai" },
+    { key: "ruby", name: "Ruby" },
+    { key: "dialpad", name: "Dialpad" },
+    { key: "aircall", name: "Aircall" },
+  ];
+
   const features = [
     {
-      name: "Natural conversation",
+      name: "Starting price",
+      voicefleet: "€19/mo",
+      smithai: "$140/mo",
+      ruby: "$230/mo",
+      dialpad: "$15/user/mo",
+      aircall: "€30/user/mo",
+    },
+    {
+      name: "True AI (no humans)",
       voicefleet: true,
-      ivr: "Press 1, Press 2",
-      offshore: true,
-      diy: "Varies",
+      smithai: false,
+      ruby: false,
+      dialpad: "Partial",
+      aircall: "Add-on",
     },
     {
       name: "24/7 availability",
       voicefleet: true,
-      ivr: true,
-      offshore: "Limited",
-      diy: true,
+      smithai: "Extra cost",
+      ruby: "Limited",
+      dialpad: true,
+      aircall: true,
     },
     {
-      name: "Instant scalability",
-      voicefleet: true,
-      ivr: true,
-      offshore: "Weeks to scale",
-      diy: true,
-    },
-    {
-      name: "Cost per interaction",
-      voicefleet: "€0.25-0.50",
-      ivr: "€0.10",
-      offshore: "€1.50-3.00",
-      diy: "€0.30-0.80",
-    },
-    {
-      name: "Resolution rate",
-      voicefleet: "85-95%",
-      ivr: "20-30%",
-      offshore: "70-85%",
-      diy: "60-80%",
+      name: "Per-call fees",
+      voicefleet: "None",
+      smithai: "$6-12/call",
+      ruby: "Per minute",
+      dialpad: "None",
+      aircall: "None",
     },
     {
       name: "Setup time",
-      voicefleet: "2-4 weeks",
-      ivr: "1-2 months",
-      offshore: "2-3 months",
-      diy: "3-6 months",
+      voicefleet: "< 1 hour",
+      smithai: "3-5 days",
+      ruby: "1-2 weeks",
+      dialpad: "1-2 days",
+      aircall: "1-2 days",
     },
     {
-      name: "Maintenance burden",
-      voicefleet: "Managed",
-      ivr: "High",
-      offshore: "Medium",
-      diy: "Very High",
-    },
-    {
-      name: "European data residency",
+      name: "EUR pricing",
       voicefleet: true,
-      ivr: "Varies",
-      offshore: false,
-      diy: "Varies",
+      smithai: false,
+      ruby: false,
+      dialpad: false,
+      aircall: true,
+    },
+    {
+      name: "Irish phone numbers",
+      voicefleet: true,
+      smithai: false,
+      ruby: false,
+      dialpad: true,
+      aircall: true,
+    },
+    {
+      name: "GDPR compliant",
+      voicefleet: true,
+      smithai: "Varies",
+      ruby: "Varies",
+      dialpad: true,
+      aircall: true,
     },
   ];
 
@@ -104,7 +120,7 @@ const ComparisonSection = () => {
             How VoiceFleet <span className="text-gradient-primary">Compares</span>
           </h2>
           <p className="text-base lg:text-lg text-muted-foreground">
-            See why leading contact centers choose VoiceFleet
+            See how we stack up against the leading alternatives
           </p>
         </div>
 
@@ -114,23 +130,20 @@ const ComparisonSection = () => {
             <thead>
               <tr className="border-b border-border">
                 <th className="py-4 px-4 text-left text-sm font-semibold text-muted-foreground">
-                  Capability
+                  Feature
                 </th>
-                <th className="py-4 px-4 text-center">
-                  <div className="inline-flex flex-col items-center">
-                    <span className="text-lg font-heading font-bold text-primary">VoiceFleet</span>
-                    <span className="text-xs text-accent">Recommended</span>
-                  </div>
-                </th>
-                <th className="py-4 px-4 text-center text-sm font-semibold text-muted-foreground">
-                  Traditional IVR
-                </th>
-                <th className="py-4 px-4 text-center text-sm font-semibold text-muted-foreground">
-                  Offshore Agents
-                </th>
-                <th className="py-4 px-4 text-center text-sm font-semibold text-muted-foreground">
-                  DIY AI Stack
-                </th>
+                {competitors.map((comp) => (
+                  <th key={comp.key} className="py-4 px-4 text-center">
+                    {comp.highlight ? (
+                      <div className="inline-flex flex-col items-center">
+                        <span className="text-lg font-heading font-bold text-primary">{comp.name}</span>
+                        <span className="text-xs text-accent">Recommended</span>
+                      </div>
+                    ) : (
+                      <span className="text-sm font-semibold text-muted-foreground">{comp.name}</span>
+                    )}
+                  </th>
+                ))}
               </tr>
             </thead>
             <tbody>
@@ -142,18 +155,14 @@ const ComparisonSection = () => {
                   <td className="py-4 px-4 text-sm font-medium text-foreground">
                     {feature.name}
                   </td>
-                  <td className="py-4 px-4 text-center bg-primary/5">
-                    {renderCell(feature.voicefleet)}
-                  </td>
-                  <td className="py-4 px-4 text-center">
-                    {renderCell(feature.ivr)}
-                  </td>
-                  <td className="py-4 px-4 text-center">
-                    {renderCell(feature.offshore)}
-                  </td>
-                  <td className="py-4 px-4 text-center">
-                    {renderCell(feature.diy)}
-                  </td>
+                  {competitors.map((comp) => (
+                    <td
+                      key={comp.key}
+                      className={`py-4 px-4 text-center ${comp.highlight ? "bg-primary/5" : ""}`}
+                    >
+                      {renderCell(feature[comp.key as keyof typeof feature] as boolean | string)}
+                    </td>
+                  ))}
                 </tr>
               ))}
             </tbody>
@@ -168,26 +177,50 @@ const ComparisonSection = () => {
               className="bg-card rounded-xl border border-border p-4"
             >
               <h3 className="font-semibold text-foreground mb-3">{feature.name}</h3>
-              <div className="grid grid-cols-2 gap-3">
-                <div className="flex items-center justify-between bg-primary/5 rounded-lg p-2">
-                  <span className="text-xs font-medium text-primary">VoiceFleet</span>
-                  {renderMobileCell(feature.voicefleet)}
-                </div>
-                <div className="flex items-center justify-between bg-muted/50 rounded-lg p-2">
-                  <span className="text-xs text-muted-foreground">IVR</span>
-                  {renderMobileCell(feature.ivr)}
-                </div>
-                <div className="flex items-center justify-between bg-muted/50 rounded-lg p-2">
-                  <span className="text-xs text-muted-foreground">Offshore</span>
-                  {renderMobileCell(feature.offshore)}
-                </div>
-                <div className="flex items-center justify-between bg-muted/50 rounded-lg p-2">
-                  <span className="text-xs text-muted-foreground">DIY AI</span>
-                  {renderMobileCell(feature.diy)}
-                </div>
+              <div className="grid grid-cols-2 gap-2">
+                {competitors.map((comp) => (
+                  <div
+                    key={comp.key}
+                    className={`flex items-center justify-between rounded-lg p-2 ${
+                      comp.highlight ? "bg-primary/5" : "bg-muted/50"
+                    }`}
+                  >
+                    <span className={`text-xs font-medium ${comp.highlight ? "text-primary" : "text-muted-foreground"}`}>
+                      {comp.name}
+                    </span>
+                    {renderMobileCell(feature[comp.key as keyof typeof feature] as boolean | string)}
+                  </div>
+                ))}
               </div>
             </div>
           ))}
+        </div>
+
+        {/* Bottom CTA */}
+        <div className="mt-12 text-center">
+          <p className="text-muted-foreground mb-4">
+            Want a detailed comparison? Check out our blog posts
+          </p>
+          <div className="flex flex-wrap justify-center gap-3">
+            <a
+              href="/blog/voicefleet-vs-smith-ai-comparison"
+              className="text-sm text-primary hover:underline"
+            >
+              VoiceFleet vs Smith.ai →
+            </a>
+            <a
+              href="/blog/voicefleet-vs-ruby-receptionists"
+              className="text-sm text-primary hover:underline"
+            >
+              VoiceFleet vs Ruby →
+            </a>
+            <a
+              href="/blog/best-ai-phone-answering-service-ireland"
+              className="text-sm text-primary hover:underline"
+            >
+              Full Comparison Guide →
+            </a>
+          </div>
         </div>
       </div>
     </section>
