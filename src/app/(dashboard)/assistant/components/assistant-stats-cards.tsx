@@ -2,7 +2,7 @@
 
 import { memo } from 'react';
 import { Phone, Clock, Sparkles } from 'lucide-react';
-import { Card, CardContent } from '@/components/ui/Card';
+import { Card, CardContent } from '@/components/ui/card';
 
 export interface AssistantStatsCardsProps {
   phoneNumbersCount: number;

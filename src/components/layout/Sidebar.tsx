@@ -19,7 +19,7 @@ import {
   Bell
 } from 'lucide-react';
 import { useAuthStore } from '@/lib/store';
-import Button from '@/components/ui/Button';
+import Button from '@/components/ui/button';
 
 const navItems = [
   { href: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },

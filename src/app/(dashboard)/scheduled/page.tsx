@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from 'react';
 import { Calendar, X } from 'lucide-react';
-import { Card, CardContent } from '@/components/ui/Card';
-import Button from '@/components/ui/Button';
+import { Card, CardContent } from '@/components/ui/card';
+import Button from '@/components/ui/button';
 import { scheduledCallsApi } from '@/lib/api';
 import type { ScheduledCall } from '@/types';
 import { format } from 'date-fns';

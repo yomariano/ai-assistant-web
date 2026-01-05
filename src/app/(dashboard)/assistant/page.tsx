@@ -2,9 +2,9 @@
 
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Bot, Save, RefreshCw } from 'lucide-react';
-import { Card, CardContent } from '@/components/ui/Card';
-import Button from '@/components/ui/Button';
-import Input from '@/components/ui/Input';
+import { Card, CardContent } from '@/components/ui/card';
+import Button from '@/components/ui/button';
+import Input from '@/components/ui/input';
 import { assistantApi, billingApi } from '@/lib/api';
 import type { Assistant, Voice, PhoneNumber } from '@/types';
 import { AssistantStatsCards } from './components/assistant-stats-cards';

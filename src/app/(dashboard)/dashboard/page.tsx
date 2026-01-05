@@ -3,8 +3,8 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Phone, BookMarked, Calendar, Clock, ArrowRight, History as HistoryIcon, Settings as SettingsIcon, Bot } from 'lucide-react';
-import { Card, CardContent } from '@/components/ui/Card';
-import Button from '@/components/ui/Button';
+import { Card, CardContent } from '@/components/ui/card';
+import Button from '@/components/ui/button';
 import { userApi, historyApi } from '@/lib/api';
 import type { UserStats, CallHistory } from '@/types';
 import { useAuthStore } from '@/lib/store';

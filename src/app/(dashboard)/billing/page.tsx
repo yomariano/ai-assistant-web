@@ -2,8 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import { CreditCard, ExternalLink, Clock, Phone, TrendingUp, AlertCircle } from 'lucide-react';
-import { Card, CardContent } from '@/components/ui/Card';
-import Button from '@/components/ui/Button';
+import { Card, CardContent } from '@/components/ui/card';
+import Button from '@/components/ui/button';
 import { billingApi } from '@/lib/api';
 
 interface UsageData {

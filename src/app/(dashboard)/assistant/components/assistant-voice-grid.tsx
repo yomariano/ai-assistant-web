@@ -2,7 +2,7 @@
 
 import { memo } from 'react';
 import { Volume2 } from 'lucide-react';
-import { Card, CardContent } from '@/components/ui/Card';
+import { Card, CardContent } from '@/components/ui/card';
 import type { Voice } from '@/types';
 
 export interface AssistantVoiceGridProps {

@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { Phone, History } from 'lucide-react';
-import { Card, CardContent } from '@/components/ui/Card';
+import { Card, CardContent } from '@/components/ui/card';
 import { historyApi } from '@/lib/api';
 import type { CallHistory } from '@/types';
 import { format, formatDistanceToNow } from 'date-fns';

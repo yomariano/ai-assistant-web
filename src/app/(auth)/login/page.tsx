@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { Phone } from 'lucide-react';
 import { useAuthStore } from '@/lib/store';
-import Button from '@/components/ui/Button';
+import Button from '@/components/ui/button';
 
 export default function LoginPage() {
   const router = useRouter();

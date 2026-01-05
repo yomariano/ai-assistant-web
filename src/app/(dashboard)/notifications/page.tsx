@@ -2,9 +2,9 @@
 
 import { useState, useEffect } from 'react';
 import { Save, Mail, MessageSquare, PhoneForwarded, Send, Loader2 } from 'lucide-react';
-import { Card, CardContent } from '@/components/ui/Card';
-import Button from '@/components/ui/Button';
-import Input from '@/components/ui/Input';
+import { Card, CardContent } from '@/components/ui/card';
+import Button from '@/components/ui/button';
+import Input from '@/components/ui/input';
 import { notificationsApi } from '@/lib/api';
 import type { NotificationPreferences, EscalationSettings } from '@/types';
 

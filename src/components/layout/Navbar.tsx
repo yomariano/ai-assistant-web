@@ -2,7 +2,7 @@
 
 import { Menu, Bell, Search, User } from 'lucide-react';
 import { useAuthStore } from '@/lib/store';
-import Button from '@/components/ui/Button';
+import Button from '@/components/ui/button';
 
 interface NavbarProps {
     onMenuClick?: () => void;
