@@ -28,15 +28,18 @@ const Footer = () => {
 
           {/* Links */}
           <div className="flex flex-wrap gap-x-8 gap-y-4 text-sm">
-            <a href="#features" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
+            <Link href="/features" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
               Features
-            </a>
+            </Link>
+            <Link href="/for" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
+              Industries
+            </Link>
             <a href="#pricing" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
               Pricing
             </a>
-            <a href="#demo" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
-              Demo
-            </a>
+            <Link href="/blog" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
+              Blog
+            </Link>
             <Link href="/privacy" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
               Privacy
             </Link>
