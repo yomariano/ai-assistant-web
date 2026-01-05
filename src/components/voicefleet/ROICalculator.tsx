@@ -2,36 +2,104 @@
 
 import { useState, useMemo } from "react";
 import { Button } from "@/components/ui/button";
-import { Calculator, TrendingUp, ArrowRight } from "lucide-react";
+import { Calculator, TrendingUp, ArrowRight, Building2, Check, Zap, Rocket, Crown } from "lucide-react";
+
+// Industry data with realistic averages
+const industries = [
+  { id: "restaurant", name: "Restaurant / Food Service", avgCalls: 200, avgCostPerCall: 2.50, automatable: 70 },
+  { id: "healthcare", name: "Healthcare / Medical", avgCalls: 350, avgCostPerCall: 3.50, automatable: 55 },
+  { id: "dental", name: "Dental Practice", avgCalls: 250, avgCostPerCall: 3.00, automatable: 65 },
+  { id: "legal", name: "Legal / Law Firm", avgCalls: 150, avgCostPerCall: 4.00, automatable: 50 },
+  { id: "realestate", name: "Real Estate", avgCalls: 180, avgCostPerCall: 3.00, automatable: 60 },
+  { id: "auto", name: "Auto Dealership", avgCalls: 300, avgCostPerCall: 2.80, automatable: 65 },
+  { id: "homeservices", name: "Home Services", avgCalls: 220, avgCostPerCall: 2.50, automatable: 70 },
+  { id: "insurance", name: "Insurance Agency", avgCalls: 280, avgCostPerCall: 3.20, automatable: 55 },
+  { id: "hospitality", name: "Hospitality / Hotels", avgCalls: 400, avgCostPerCall: 2.30, automatable: 75 },
+  { id: "property", name: "Property Management", avgCalls: 250, avgCostPerCall: 2.80, automatable: 65 },
+  { id: "custom", name: "Custom / Other", avgCalls: 200, avgCostPerCall: 2.50, automatable: 60 },
+];
+
+// VoiceFleet pricing plans
+const plans = [
+  { id: "lite", name: "Lite", monthlyFee: 19, perCallCost: 0.95, maxCalls: 100, icon: Zap },
+  { id: "growth", name: "Growth", monthlyFee: 99, perCallCost: 0.45, maxCalls: 400, icon: Rocket },
+  { id: "pro", name: "Pro", monthlyFee: 249, perCallCost: 0, maxCalls: 1500, icon: Crown },
+];
 
 const ROICalculator = () => {
-  const [callVolume, setCallVolume] = useState(25000);
-  const [handleTime, setHandleTime] = useState(5);
-  const [costPerCall, setCostPerCall] = useState(2.5);
-  const [automatable, setAutomatable] = useState(60);
+  const [selectedIndustry, setSelectedIndustry] = useState(industries[0]);
+  const [callVolume, setCallVolume] = useState(industries[0].avgCalls);
+  const [costPerCall, setCostPerCall] = useState(industries[0].avgCostPerCall);
+  const [automatable, setAutomatable] = useState(industries[0].automatable);
+  const [isCustom, setIsCustom] = useState(false);
 
-  const savings = useMemo(() => {
-    const automatableCalls = callVolume * (automatable / 100);
-    const currentCost = automatableCalls * costPerCall;
-    const aiCost = automatableCalls * 0.35;
-    const monthlySavings = currentCost - aiCost;
-    const yearlySavings = monthlySavings * 12;
-    const savingsPercentage = ((currentCost - aiCost) / currentCost) * 100;
+  // Calculate costs and savings for each plan
+  const planCalculations = useMemo(() => {
+    const automatableCalls = Math.round(callVolume * (automatable / 100));
+    const currentMonthlyCost = automatableCalls * costPerCall;
 
-    return {
-      monthly: Math.round(monthlySavings),
-      yearly: Math.round(yearlySavings),
-      percentage: Math.round(savingsPercentage),
-    };
+    return plans.map(plan => {
+      let voicefleetCost: number;
+
+      if (plan.id === "pro") {
+        // Pro is unlimited (up to 1500 cap)
+        voicefleetCost = plan.monthlyFee;
+      } else {
+        // Lite and Growth have per-call costs
+        voicefleetCost = plan.monthlyFee + (automatableCalls * plan.perCallCost);
+      }
+
+      const monthlySavings = currentMonthlyCost - voicefleetCost;
+      const yearlySavings = monthlySavings * 12;
+      const savingsPercentage = currentMonthlyCost > 0
+        ? ((currentMonthlyCost - voicefleetCost) / currentMonthlyCost) * 100
+        : 0;
+
+      // Determine if this plan is recommended based on call volume
+      let isRecommended = false;
+      if (automatableCalls <= 100 && plan.id === "lite") isRecommended = true;
+      else if (automatableCalls > 100 && automatableCalls <= 400 && plan.id === "growth") isRecommended = true;
+      else if (automatableCalls > 400 && plan.id === "pro") isRecommended = true;
+
+      // Check if savings are positive (plan makes sense)
+      const makesSense = monthlySavings > 0;
+
+      return {
+        ...plan,
+        automatableCalls,
+        currentMonthlyCost: Math.round(currentMonthlyCost),
+        voicefleetCost: Math.round(voicefleetCost),
+        monthlySavings: Math.round(monthlySavings),
+        yearlySavings: Math.round(yearlySavings),
+        savingsPercentage: Math.round(savingsPercentage),
+        isRecommended,
+        makesSense,
+      };
+    });
   }, [callVolume, costPerCall, automatable]);
 
-  const volumeOptions = [
-    { value: 5000, label: "5,000" },
-    { value: 10000, label: "10,000" },
-    { value: 25000, label: "25,000" },
-    { value: 50000, label: "50,000" },
-    { value: 100000, label: "100,000+" },
-  ];
+  // Find the best plan (highest savings that makes sense)
+  const bestPlan = useMemo(() => {
+    const validPlans = planCalculations.filter(p => p.makesSense);
+    if (validPlans.length === 0) return planCalculations[0];
+    return validPlans.reduce((best, plan) =>
+      plan.monthlySavings > best.monthlySavings ? plan : best
+    );
+  }, [planCalculations]);
+
+  const handleIndustryChange = (industryId: string) => {
+    const industry = industries.find(i => i.id === industryId) || industries[0];
+    setSelectedIndustry(industry);
+
+    if (industryId === "custom") {
+      setIsCustom(true);
+    } else {
+      setIsCustom(false);
+      setCallVolume(industry.avgCalls);
+      setCostPerCall(industry.avgCostPerCall);
+      setAutomatable(industry.automatable);
+    }
+  };
 
   return (
     <section className="py-16 lg:py-28 bg-gradient-subtle">
