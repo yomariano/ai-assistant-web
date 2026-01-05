@@ -69,7 +69,7 @@ export default function AgendaPage() {
           <p className="text-slate-500 mt-1">Pre-configured scripts and templates for your AI agents.</p>
         </div>
         <Link href="/call">
-          <Button variant="outline" size="md" className="group">
+          <Button variant="outline" size="default" className="group">
             <BookMarked className="w-4 h-4 mr-2 text-primary" />
             Create New Agenda
           </Button>
