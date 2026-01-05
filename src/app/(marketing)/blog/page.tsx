@@ -22,12 +22,12 @@ export default async function BlogPage() {
       <Header />
 
       {/* Hero */}
-      <section className="pt-32 pb-16 bg-gradient-to-br from-indigo-600 to-purple-600">
+      <section className="pt-32 pb-16 bg-gradient-hero">
         <div className="max-w-7xl mx-auto px-6 text-center">
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
             VoiceFleet Blog
           </h1>
-          <p className="text-xl text-indigo-100 max-w-2xl mx-auto">
+          <p className="text-xl text-primary-foreground/80 max-w-2xl mx-auto">
             Insights on AI voice agents, automation, and scaling customer support
             without scaling headcount.
           </p>
@@ -64,11 +64,11 @@ export default async function BlogPage() {
                   )}
                   <div className="p-6">
                     {post.category && (
-                      <span className="inline-block px-3 py-1 text-xs font-medium text-indigo-600 bg-indigo-50 rounded-full mb-3">
+                      <span className="inline-block px-3 py-1 text-xs font-medium text-primary bg-primary/10 rounded-full mb-3">
                         {post.category}
                       </span>
                     )}
-                    <h2 className="text-xl font-semibold text-foreground group-hover:text-indigo-600 transition-colors mb-2">
+                    <h2 className="text-xl font-semibold text-foreground group-hover:text-primary transition-colors mb-2">
                       {post.title}
                     </h2>
                     <p className="text-muted-foreground line-clamp-2 mb-4">

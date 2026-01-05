@@ -84,7 +84,7 @@ export default async function BlogPostPage({ params }: Props) {
         <article className="max-w-4xl mx-auto px-6 py-12">
           <header className="mb-12">
             {post.category && (
-              <span className="inline-block px-3 py-1 text-sm font-medium text-indigo-600 bg-indigo-50 rounded-full mb-4">
+              <span className="inline-block px-3 py-1 text-sm font-medium text-primary bg-primary/10 rounded-full mb-4">
                 {post.category}
               </span>
             )}
@@ -115,7 +115,7 @@ export default async function BlogPostPage({ params }: Props) {
           )}
 
           <div
-            className="prose prose-lg max-w-none prose-headings:font-bold prose-headings:text-foreground prose-p:text-muted-foreground prose-a:text-indigo-600 prose-a:no-underline hover:prose-a:underline"
+            className="prose prose-lg max-w-none prose-headings:font-bold prose-headings:text-foreground prose-p:text-muted-foreground prose-a:text-primary prose-a:no-underline hover:prose-a:underline"
             dangerouslySetInnerHTML={{ __html: post.content }}
           />
 
