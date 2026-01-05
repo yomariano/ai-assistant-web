@@ -95,7 +95,14 @@ const Header = () => {
                   </Link>
                 )
               )}
-              <div className="pt-4 border-t border-border">
+              <div className="pt-4 border-t border-border space-y-3">
+                <a
+                  href="tel:+35312345678"
+                  className="flex items-center justify-center gap-2 text-base font-medium text-muted-foreground hover:text-foreground transition-colors py-2"
+                >
+                  <Phone className="w-4 h-4" />
+                  +353 1 234 5678
+                </a>
                 <Button variant="default" size="lg" className="w-full">
                   Book a Demo
                 </Button>

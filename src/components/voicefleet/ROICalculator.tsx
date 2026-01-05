@@ -34,18 +34,18 @@ const ROICalculator = () => {
   ];
 
   return (
-    <section className="py-20 lg:py-28 bg-gradient-subtle">
+    <section className="py-16 lg:py-28 bg-gradient-subtle">
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-12">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full mb-6">
+          <div className="text-center mb-8 lg:mb-12">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full mb-4 lg:mb-6">
               <Calculator className="w-4 h-4 text-primary" />
               <span className="text-sm font-medium text-primary">ROI Calculator</span>
             </div>
-            <h2 className="text-3xl lg:text-4xl font-heading font-bold text-foreground mb-4">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-heading font-bold text-foreground mb-4">
               Calculate Your <span className="text-gradient-primary">Savings</span>
             </h2>
-            <p className="text-lg text-muted-foreground">
+            <p className="text-base lg:text-lg text-muted-foreground">
               See how much you could save with VoiceFleet AI agents
             </p>
           </div>
@@ -53,18 +53,18 @@ const ROICalculator = () => {
           <div className="bg-card rounded-2xl border border-border shadow-xl overflow-hidden">
             <div className="grid lg:grid-cols-2">
               {/* Inputs */}
-              <div className="p-8 lg:p-10 space-y-8">
+              <div className="p-5 sm:p-8 lg:p-10 space-y-6 sm:space-y-8">
                 {/* Call Volume */}
                 <div>
                   <label className="block text-sm font-semibold text-foreground mb-3">
                     Monthly Call Volume
                   </label>
-                  <div className="flex flex-wrap gap-2">
+                  <div className="grid grid-cols-3 sm:flex sm:flex-wrap gap-2">
                     {volumeOptions.map((option) => (
                       <button
                         key={option.value}
                         onClick={() => setCallVolume(option.value)}
-                        className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+                        className={`px-2 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-medium transition-all ${
                           callVolume === option.value
                             ? "bg-primary text-primary-foreground shadow-md"
                             : "bg-muted text-muted-foreground hover:bg-muted/80"
@@ -137,40 +137,40 @@ const ROICalculator = () => {
               </div>
 
               {/* Results */}
-              <div className="bg-gradient-hero p-8 lg:p-10 text-primary-foreground">
+              <div className="bg-gradient-hero p-5 sm:p-8 lg:p-10 text-primary-foreground">
                 <div className="h-full flex flex-col justify-between">
                   <div>
-                    <div className="flex items-center gap-2 mb-6">
+                    <div className="flex items-center gap-2 mb-4 sm:mb-6">
                       <TrendingUp className="w-5 h-5" />
                       <span className="text-sm font-medium text-primary-foreground/80">
                         Estimated Savings
                       </span>
                     </div>
 
-                    <div className="space-y-6">
+                    <div className="space-y-4 sm:space-y-6">
                       <div>
                         <p className="text-sm text-primary-foreground/70 mb-1">Monthly Savings</p>
-                        <p className="text-4xl lg:text-5xl font-heading font-extrabold">
+                        <p className="text-3xl sm:text-4xl lg:text-5xl font-heading font-extrabold">
                           €{savings.monthly.toLocaleString()}
                         </p>
                       </div>
 
                       <div>
                         <p className="text-sm text-primary-foreground/70 mb-1">Annual Savings</p>
-                        <p className="text-3xl font-heading font-bold">
+                        <p className="text-2xl sm:text-3xl font-heading font-bold">
                           €{savings.yearly.toLocaleString()}
                         </p>
                       </div>
 
-                      <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary-foreground/20 rounded-full">
-                        <span className="text-2xl font-bold">{savings.percentage}%</span>
+                      <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 bg-primary-foreground/20 rounded-full">
+                        <span className="text-xl sm:text-2xl font-bold">{savings.percentage}%</span>
                         <span className="text-sm">cost reduction</span>
                       </div>
                     </div>
                   </div>
 
-                  <div className="mt-8">
-                    <p className="text-sm text-primary-foreground/80 mb-4">
+                  <div className="mt-6 sm:mt-8">
+                    <p className="text-sm text-primary-foreground/80 mb-4 hidden sm:block">
                       Based on your inputs, VoiceFleet could save you significantly while improving customer experience.
                     </p>
                     <Button variant="heroOutline" size="lg" className="w-full">

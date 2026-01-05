@@ -63,9 +63,9 @@ const HeroSection = () => {
             {/* Enterprise Logos */}
             <div className="mt-10 pt-10 border-t border-border animate-fade-up stagger-5">
               <p className="text-sm text-muted-foreground mb-4">Trusted by leading European contact centers</p>
-              <div className="flex items-center gap-8 opacity-60">
+              <div className="flex items-center gap-6 sm:gap-8 opacity-60 overflow-x-auto pb-2 -mx-4 px-4 sm:mx-0 sm:px-0 sm:overflow-visible">
                 {[1, 2, 3, 4, 5].map((i) => (
-                  <div key={i} className="h-8 w-24 bg-muted rounded" />
+                  <div key={i} className="h-6 sm:h-8 w-20 sm:w-24 bg-muted rounded flex-shrink-0" />
                 ))}
               </div>
             </div>
@@ -85,12 +85,12 @@ const HeroSection = () => {
               </div>
 
               {/* Dashboard Content */}
-              <div className="p-6 space-y-6">
+              <div className="p-4 sm:p-6 space-y-4 sm:space-y-6">
                 {/* Stats Row */}
-                <div className="grid grid-cols-3 gap-4">
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
                   <DashboardStat icon={Phone} label="Active Calls" value="127" trend="+12%" />
                   <DashboardStat icon={Users} label="AI Agents" value="24" trend="Online" positive />
-                  <DashboardStat icon={CheckCircle2} label="Resolved" value="1,842" trend="Today" />
+                  <DashboardStat icon={CheckCircle2} label="Resolved" value="1,842" trend="Today" className="col-span-2 sm:col-span-1" />
                 </div>
 
                 {/* Live Calls */}
@@ -104,9 +104,9 @@ const HeroSection = () => {
                   </div>
                   <div className="space-y-3">
                     {[
-                      { status: "Handling inquiry", duration: "2:34", type: "Billing" },
-                      { status: "Processing request", duration: "1:12", type: "Support" },
-                      { status: "Scheduling", duration: "0:45", type: "Appointment" },
+                      { status: "Handling inquiry", duration: "2:34", type: "Billing", bars: [10, 14, 8, 12] },
+                      { status: "Processing request", duration: "1:12", type: "Support", bars: [6, 12, 10, 8] },
+                      { status: "Scheduling", duration: "0:45", type: "Appointment", bars: [14, 8, 6, 10] },
                     ].map((call, i) => (
                       <div key={i} className="flex items-center justify-between p-3 bg-card rounded-lg border border-border">
                         <div className="flex items-center gap-3">
@@ -121,13 +121,13 @@ const HeroSection = () => {
                         <div className="text-right">
                           <p className="text-sm font-mono text-foreground">{call.duration}</p>
                           <div className="flex gap-1 mt-1">
-                            {[1, 2, 3, 4].map((bar) => (
+                            {call.bars.map((height, bar) => (
                               <div
                                 key={bar}
                                 className="w-1 bg-accent rounded-full animate-pulse-subtle"
                                 style={{
-                                  height: `${Math.random() * 12 + 4}px`,
-                                  animationDelay: `${bar * 0.1}s`
+                                  height: `${height}px`,
+                                  animationDelay: `${(bar + 1) * 0.1}s`
                                 }}
                               />
                             ))}
@@ -158,7 +158,7 @@ const HeroSection = () => {
             </div>
 
             {/* Floating Elements */}
-            <div className="absolute -top-4 -right-4 bg-card rounded-xl shadow-lg border border-border p-4 animate-float">
+            <div className="hidden sm:block absolute -top-4 -right-4 bg-card rounded-xl shadow-lg border border-border p-4 animate-float">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 bg-accent/10 rounded-full flex items-center justify-center">
                   <TrendingUp className="w-5 h-5 text-accent" />
@@ -181,15 +181,17 @@ const DashboardStat = ({
   label,
   value,
   trend,
-  positive = true
+  positive = true,
+  className = ""
 }: {
   icon: React.ElementType;
   label: string;
   value: string;
   trend: string;
   positive?: boolean;
+  className?: string;
 }) => (
-  <div className="bg-muted/50 rounded-xl p-4">
+  <div className={`bg-muted/50 rounded-xl p-3 sm:p-4 ${className}`}>
     <div className="flex items-center gap-2 mb-2">
       <Icon className="w-4 h-4 text-muted-foreground" />
       <span className="text-xs text-muted-foreground">{label}</span>

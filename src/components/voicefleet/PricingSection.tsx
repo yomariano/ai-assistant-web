@@ -70,25 +70,25 @@ const PricingSection = () => {
   ];
 
   return (
-    <section id="pricing" className="py-20 lg:py-28 bg-background">
+    <section id="pricing" className="py-16 lg:py-28 bg-background">
       <div className="container mx-auto px-4">
-        <div className="max-w-3xl mx-auto text-center mb-16">
-          <h2 className="text-3xl lg:text-4xl font-heading font-bold text-foreground mb-4">
+        <div className="max-w-3xl mx-auto text-center mb-10 lg:mb-16">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-heading font-bold text-foreground mb-4">
             Simple, <span className="text-gradient-primary">Transparent</span> Pricing
           </h2>
-          <p className="text-lg text-muted-foreground">
+          <p className="text-base lg:text-lg text-muted-foreground">
             No hidden fees. Pay for what you use.
             <span className="font-semibold text-foreground"> Cancel anytime.</span>
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-3 gap-8 mb-12">
+        <div className="grid lg:grid-cols-3 gap-6 lg:gap-8 mb-12">
           {tiers.map((tier, index) => (
             <div
               key={index}
               className={`relative bg-card rounded-2xl border shadow-elegant overflow-hidden ${
                 tier.popular
-                  ? "border-primary ring-2 ring-primary/20"
+                  ? "border-primary ring-2 ring-primary/20 order-first lg:order-none"
                   : "border-border"
               }`}
             >
@@ -100,7 +100,7 @@ const PricingSection = () => {
                 </div>
               )}
 
-              <div className={`p-8 ${tier.popular ? "pt-12" : ""}`}>
+              <div className={`p-5 sm:p-8 ${tier.popular ? "pt-10 sm:pt-12" : ""}`}>
                 <div className="flex items-center gap-3 mb-4">
                   <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${
                     tier.popular ? "bg-gradient-hero" : "bg-primary/10"
@@ -166,14 +166,14 @@ const PricingSection = () => {
           </p>
         </div>
 
-        <div className="bg-muted/50 rounded-xl p-6 max-w-2xl mx-auto">
+        <div className="bg-muted/50 rounded-xl p-4 sm:p-6 max-w-2xl mx-auto">
           <p className="text-center text-sm text-muted-foreground mb-4">
             <span className="font-semibold text-foreground">All plans include:</span>
           </p>
-          <div className="flex flex-wrap justify-center gap-4">
+          <div className="grid grid-cols-2 sm:flex sm:flex-wrap justify-center gap-3 sm:gap-4">
             {includedFeatures.map((feature, i) => (
-              <span key={i} className="flex items-center gap-2 text-sm text-foreground">
-                <Check className="w-4 h-4 text-accent" />
+              <span key={i} className="flex items-center gap-2 text-xs sm:text-sm text-foreground">
+                <Check className="w-4 h-4 text-accent flex-shrink-0" />
                 {feature}
               </span>
             ))}

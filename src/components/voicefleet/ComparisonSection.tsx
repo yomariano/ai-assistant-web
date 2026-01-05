@@ -78,20 +78,39 @@ const ComparisonSection = () => {
     return <span className="text-sm text-muted-foreground">{value}</span>;
   };
 
+  const renderMobileCell = (value: boolean | string) => {
+    if (value === true) {
+      return (
+        <span className="inline-flex items-center justify-center w-5 h-5 bg-accent/20 rounded-full">
+          <Check className="w-3 h-3 text-accent" />
+        </span>
+      );
+    }
+    if (value === false) {
+      return (
+        <span className="inline-flex items-center justify-center w-5 h-5 bg-destructive/20 rounded-full">
+          <X className="w-3 h-3 text-destructive" />
+        </span>
+      );
+    }
+    return <span className="text-xs text-muted-foreground">{value}</span>;
+  };
+
   return (
-    <section className="py-20 lg:py-28 bg-gradient-subtle">
+    <section className="py-16 lg:py-28 bg-gradient-subtle">
       <div className="container mx-auto px-4">
-        <div className="max-w-3xl mx-auto text-center mb-16">
-          <h2 className="text-3xl lg:text-4xl font-heading font-bold text-foreground mb-4">
+        <div className="max-w-3xl mx-auto text-center mb-10 lg:mb-16">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-heading font-bold text-foreground mb-4">
             How VoiceFleet <span className="text-gradient-primary">Compares</span>
           </h2>
-          <p className="text-lg text-muted-foreground">
+          <p className="text-base lg:text-lg text-muted-foreground">
             See why leading contact centers choose VoiceFleet
           </p>
         </div>
 
-        <div className="overflow-x-auto">
-          <table className="w-full min-w-[800px]">
+        {/* Desktop Table View */}
+        <div className="hidden lg:block overflow-x-auto">
+          <table className="w-full">
             <thead>
               <tr className="border-b border-border">
                 <th className="py-4 px-4 text-left text-sm font-semibold text-muted-foreground">
@@ -139,6 +158,36 @@ const ComparisonSection = () => {
               ))}
             </tbody>
           </table>
+        </div>
+
+        {/* Mobile Card View */}
+        <div className="lg:hidden space-y-4">
+          {features.map((feature, index) => (
+            <div
+              key={index}
+              className="bg-card rounded-xl border border-border p-4"
+            >
+              <h3 className="font-semibold text-foreground mb-3">{feature.name}</h3>
+              <div className="grid grid-cols-2 gap-3">
+                <div className="flex items-center justify-between bg-primary/5 rounded-lg p-2">
+                  <span className="text-xs font-medium text-primary">VoiceFleet</span>
+                  {renderMobileCell(feature.voicefleet)}
+                </div>
+                <div className="flex items-center justify-between bg-muted/50 rounded-lg p-2">
+                  <span className="text-xs text-muted-foreground">IVR</span>
+                  {renderMobileCell(feature.ivr)}
+                </div>
+                <div className="flex items-center justify-between bg-muted/50 rounded-lg p-2">
+                  <span className="text-xs text-muted-foreground">Offshore</span>
+                  {renderMobileCell(feature.offshore)}
+                </div>
+                <div className="flex items-center justify-between bg-muted/50 rounded-lg p-2">
+                  <span className="text-xs text-muted-foreground">DIY AI</span>
+                  {renderMobileCell(feature.diy)}
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>
