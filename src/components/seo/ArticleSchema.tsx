@@ -1,6 +1,6 @@
 import { JsonLd } from "./JsonLd";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://validatecall.com";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://voicefleet.ai";
 
 interface ArticleSchemaProps {
   title: string;
@@ -35,7 +35,7 @@ export function ArticleSchema({
     },
     publisher: {
       "@type": "Organization",
-      name: "ValidateCall",
+      name: "VoiceFleet",
       logo: {
         "@type": "ImageObject",
         url: `${siteUrl}/logo.png`,

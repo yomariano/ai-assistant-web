@@ -1,10 +1,10 @@
 export const SEO_CONFIG = {
-  siteName: "ValidateCall",
-  siteUrl: process.env.NEXT_PUBLIC_SITE_URL || "https://validatecall.com",
+  siteName: "VoiceFleet",
+  siteUrl: process.env.NEXT_PUBLIC_SITE_URL || "https://voicefleet.ai",
   defaultOgImage: "/og-image.jpg",
-  twitterHandle: "@validatecall",
+  twitterHandle: "@voicefleetai",
   defaultDescription:
-    "AI Voice Agents that make phone calls on your behalf. Save hours, avoid hold times, and get results faster with automated phone calls.",
+    "AI Voice Agents that handle calls at 80% lower cost. Scale support without scaling headcount.",
   defaultKeywords: [
     "AI voice assistant",
     "automated phone calls",

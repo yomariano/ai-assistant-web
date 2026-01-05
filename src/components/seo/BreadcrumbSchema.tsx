@@ -1,6 +1,6 @@
 import { JsonLd } from "./JsonLd";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://validatecall.com";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://voicefleet.ai";
 
 interface BreadcrumbItem {
   name: string;

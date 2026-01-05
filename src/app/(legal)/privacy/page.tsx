@@ -2,8 +2,8 @@ import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
 
 export const metadata = {
-    title: 'Privacy Policy | ValidateCall',
-    description: 'Privacy Policy for ValidateCall AI Voice Assistant',
+    title: 'Privacy Policy | VoiceFleet',
+    description: 'Privacy Policy for VoiceFleet AI Voice Agents',
 };
 
 export default function PrivacyPolicy() {
@@ -57,12 +57,12 @@ export default function PrivacyPolicy() {
 
                         <section>
                             <h2 className="font-display text-lg font-bold text-white mb-3">6. Your Rights</h2>
-                            <p>You have the right to access, correct, or delete your personal data. Contact us at privacy@validatecall.com to exercise these rights.</p>
+                            <p>You have the right to access, correct, or delete your personal data. Contact us at privacy@voicefleet.ai to exercise these rights.</p>
                         </section>
 
                         <section>
                             <h2 className="font-display text-lg font-bold text-white mb-3">7. Contact</h2>
-                            <p>For privacy questions, contact us at privacy@validatecall.com</p>
+                            <p>For privacy questions, contact us at privacy@voicefleet.ai</p>
                         </section>
                     </div>
                 </div>

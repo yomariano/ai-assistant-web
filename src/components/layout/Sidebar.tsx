@@ -73,7 +73,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
             </div>
             {!isCollapsed && (
               <span className="text-lg font-bold text-white whitespace-nowrap">
-                ValidateCall
+                VoiceFleet
               </span>
             )}
           </Link>

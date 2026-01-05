@@ -2,10 +2,10 @@ import { Metadata } from "next";
 import type { BlogPost, FeaturePage, LocationPage, UseCasePage } from "@/lib/supabase-server";
 
 const BASE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://validatecall.com";
-const SITE_NAME = "ValidateCall";
+  process.env.NEXT_PUBLIC_SITE_URL || "https://voicefleet.ai";
+const SITE_NAME = "VoiceFleet";
 const DEFAULT_OG_IMAGE = `${BASE_URL}/og-image.jpg`;
-const TWITTER_HANDLE = "@validatecall";
+const TWITTER_HANDLE = "@voicefleetai";
 
 interface GenerateMetadataOptions {
   title: string;

@@ -19,7 +19,7 @@ export default function SecuritySection() {
                             <span className="text-transparent bg-clip-text bg-gradient-to-r from-y2k-cyan to-y2k-electric-blue">Trust</span>
                         </p>
                         <p className="mt-4 text-base leading-7 text-y2k-chrome">
-                            We understand that voice data is sensitive. That's why we've built ValidateCall with a security-first architecture, ensuring your data remains private and protected at all times.
+                            We understand that voice data is sensitive. That's why we've built VoiceFleet with a security-first architecture, ensuring your data remains private and protected at all times.
                         </p>
 
                         <div className="mt-8 space-y-3">

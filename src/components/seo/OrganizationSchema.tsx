@@ -1,23 +1,23 @@
 import { JsonLd } from "./JsonLd";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://validatecall.com";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://voicefleet.ai";
 
 export function OrganizationSchema() {
   const schema = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: "ValidateCall",
+    name: "VoiceFleet",
     url: siteUrl,
     logo: `${siteUrl}/logo.png`,
     description:
-      "AI Voice Agents that make phone calls on your behalf. Save hours, avoid hold times, and get results.",
+      "AI Voice Agents that handle calls at 80% lower cost. Scale support without scaling headcount.",
     sameAs: [
-      "https://twitter.com/validatecall",
-      "https://linkedin.com/company/validatecall",
+      "https://twitter.com/voicefleetai",
+      "https://linkedin.com/company/voicefleet",
     ],
     contactPoint: {
       "@type": "ContactPoint",
-      email: "support@validatecall.com",
+      email: "support@voicefleet.ai",
       contactType: "customer service",
     },
   };

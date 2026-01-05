@@ -1,20 +1,20 @@
 import { JsonLd } from "./JsonLd";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://validatecall.com";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://voicefleet.ai";
 
 export function ProductSchema() {
   const schema = {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
-    name: "ValidateCall",
+    name: "VoiceFleet",
     applicationCategory: "BusinessApplication",
     operatingSystem: "Web",
     url: siteUrl,
     offers: {
       "@type": "AggregateOffer",
       lowPrice: "19",
-      highPrice: "149",
-      priceCurrency: "USD",
+      highPrice: "249",
+      priceCurrency: "EUR",
       offerCount: 3,
     },
     aggregateRating: {
@@ -23,10 +23,10 @@ export function ProductSchema() {
       ratingCount: "150",
     },
     description:
-      "AI Voice Agents that make phone calls on your behalf. Automate appointment scheduling, customer service calls, and more.",
+      "AI Voice Agents that handle calls at 80% lower cost. Scale support without scaling headcount.",
     featureList: [
       "AI-powered voice calls",
-      "Call scheduling",
+      "24/7 availability",
       "Multiple languages",
       "Call history tracking",
       "Custom call scripts",

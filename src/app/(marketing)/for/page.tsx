@@ -9,7 +9,7 @@ import CTASection from "@/components/marketing/CTASection";
 export const metadata: Metadata = generatePageMetadata({
   title: "AI Voice Assistant for Every Industry",
   description:
-    "Discover how ValidateCall AI voice assistants help businesses across healthcare, real estate, finance, and more automate phone calls and save time.",
+    "Discover how VoiceFleet AI voice agents help businesses across healthcare, real estate, finance, and more handle phone calls at 80% lower cost.",
   path: "/for",
 });
 
@@ -81,10 +81,10 @@ export default async function UseCasesPage() {
 
       <CTASection
         title="Don't see your industry?"
-        description="ValidateCall works for any business that makes phone calls. Try it free today."
-        primaryButtonText="Start Free Trial"
+        description="VoiceFleet works for any business that handles phone calls. Book a demo today."
+        primaryButtonText="Book a Demo"
         secondaryButtonText="Contact Sales"
-        secondaryButtonHref="mailto:sales@validatecall.com"
+        secondaryButtonHref="mailto:sales@voicefleet.ai"
       />
     </div>
   );

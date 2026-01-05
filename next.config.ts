@@ -14,7 +14,7 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: "https",
-        hostname: "validatecall.com",
+        hostname: "voicefleet.ai",
       },
     ],
     // Modern image formats for better compression

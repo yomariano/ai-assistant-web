@@ -9,7 +9,7 @@ import { MapPin } from "lucide-react";
 export const metadata: Metadata = generatePageMetadata({
   title: "AI Voice Assistant - Available Locations",
   description:
-    "ValidateCall AI voice assistant is available nationwide. Find AI-powered phone automation services in your city.",
+    "VoiceFleet AI voice agents are available across Ireland and Europe. Find AI-powered phone automation services in your city.",
   path: "/in",
 });
 
@@ -46,7 +46,7 @@ export default async function LocationsPage() {
             AI Voice Assistant Locations
           </h1>
           <p className="text-xl text-blue-100 max-w-2xl mx-auto">
-            ValidateCall serves businesses nationwide. Find local AI phone
+            VoiceFleet serves businesses across Ireland and Europe. Find local AI phone
             automation services in your area.
           </p>
         </div>
@@ -88,7 +88,7 @@ export default async function LocationsPage() {
 
       <CTASection
         title="Don't see your city?"
-        description="ValidateCall works anywhere in the US. Start your free trial today."
+        description="VoiceFleet works anywhere in Ireland and Europe. Book a demo today."
       />
     </div>
   );

@@ -2,8 +2,8 @@ import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
 
 export const metadata = {
-    title: 'Terms of Service | ValidateCall',
-    description: 'Terms of Service for ValidateCall AI Voice Assistant',
+    title: 'Terms of Service | VoiceFleet',
+    description: 'Terms of Service for VoiceFleet AI Voice Agents',
 };
 
 export default function TermsOfService() {
@@ -22,12 +22,12 @@ export default function TermsOfService() {
                     <div className="space-y-6 text-y2k-chrome text-sm leading-relaxed">
                         <section>
                             <h2 className="font-display text-lg font-bold text-white mb-3">1. Acceptance of Terms</h2>
-                            <p>By accessing and using ValidateCall, you agree to be bound by these Terms of Service.</p>
+                            <p>By accessing and using VoiceFleet, you agree to be bound by these Terms of Service.</p>
                         </section>
 
                         <section>
                             <h2 className="font-display text-lg font-bold text-white mb-3">2. Description of Service</h2>
-                            <p>ValidateCall provides AI-powered voice calling services that can make phone calls on your behalf using artificial intelligence.</p>
+                            <p>VoiceFleet provides AI-powered voice agents that handle phone calls for businesses using artificial intelligence.</p>
                         </section>
 
                         <section>
@@ -67,7 +67,7 @@ export default function TermsOfService() {
 
                         <section>
                             <h2 className="font-display text-lg font-bold text-white mb-3">7. Limitation of Liability</h2>
-                            <p>ValidateCall shall not be liable for any indirect, incidental, special, or consequential damages. Our total liability shall not exceed the amount you paid us in the past 12 months.</p>
+                            <p>VoiceFleet shall not be liable for any indirect, incidental, special, or consequential damages. Our total liability shall not exceed the amount you paid us in the past 12 months.</p>
                         </section>
 
                         <section>
@@ -77,7 +77,7 @@ export default function TermsOfService() {
 
                         <section>
                             <h2 className="font-display text-lg font-bold text-white mb-3">9. Contact</h2>
-                            <p>For questions about these Terms, contact us at legal@validatecall.com</p>
+                            <p>For questions about these Terms, contact us at legal@voicefleet.ai</p>
                         </section>
                     </div>
                 </div>

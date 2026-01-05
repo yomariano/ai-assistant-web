@@ -53,7 +53,7 @@ export default async function LocationPage({ params }: Props) {
   return (
     <>
       <LocalBusinessSchema
-        name={`ValidateCall ${page.city_name}`}
+        name={`VoiceFleet ${page.city_name}`}
         city={page.city_name}
         state={page.state_code || ""}
         latitude={page.latitude || undefined}

@@ -114,7 +114,7 @@ export default async function UseCasePage({ params }: Props) {
           <section className="bg-gray-50 py-16">
             <div className="max-w-7xl mx-auto px-6">
               <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">
-                Why {page.industry_name} Professionals Choose ValidateCall
+                Why {page.industry_name} Professionals Choose VoiceFleet
               </h2>
               <div className="grid md:grid-cols-3 gap-8">
                 {page.benefits.map((benefit, i) => (

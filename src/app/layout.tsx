@@ -21,12 +21,12 @@ const orbitron = Orbitron({
 });
 
 const siteConfig = {
-  name: "ValidateCall",
+  name: "VoiceFleet",
   description:
-    "AI Voice Agents that make phone calls on your behalf. Save hours, avoid hold times, and get results faster with automated phone calls.",
-  url: process.env.NEXT_PUBLIC_SITE_URL || "https://validatecall.com",
+    "AI Voice Agents that handle calls at 80% lower cost. Scale support without scaling headcount.",
+  url: process.env.NEXT_PUBLIC_SITE_URL || "https://voicefleet.ai",
   ogImage: "/og-image.jpg",
-  twitterHandle: "@validatecall",
+  twitterHandle: "@volocefleetai",
 };
 
 export const metadata: Metadata = {

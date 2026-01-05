@@ -3,11 +3,13 @@ import { notFound } from "next/navigation";
 import { getBlogPost, getBlogPostSlugs } from "@/lib/content/blog";
 import { generateBlogMetadata } from "@/lib/seo/metadata";
 import { ArticleSchema, BreadcrumbSchema } from "@/components/seo";
-import Breadcrumbs from "@/components/marketing/Breadcrumbs";
+import Header from "@/components/voicefleet/Header";
+import Footer from "@/components/voicefleet/Footer";
 import AuthorCard from "@/components/marketing/AuthorCard";
 import RelatedContent from "@/components/marketing/RelatedContent";
 import CTASection from "@/components/marketing/CTASection";
 import Image from "next/image";
+import Link from "next/link";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -44,7 +46,7 @@ export default async function BlogPostPage({ params }: Props) {
   ];
 
   const siteUrl =
-    process.env.NEXT_PUBLIC_SITE_URL || "https://validatecall.com";
+    process.env.NEXT_PUBLIC_SITE_URL || "https://voicefleet.ai";
 
   return (
     <>
@@ -59,8 +61,25 @@ export default async function BlogPostPage({ params }: Props) {
       />
       <BreadcrumbSchema items={breadcrumbs} />
 
-      <div className="min-h-screen bg-white">
-        <Breadcrumbs items={breadcrumbs} />
+      <div className="min-h-screen bg-background">
+        <Header />
+
+        {/* Breadcrumb */}
+        <div className="pt-24 pb-4 bg-muted/30">
+          <div className="max-w-4xl mx-auto px-6">
+            <nav className="flex items-center gap-2 text-sm text-muted-foreground">
+              <Link href="/" className="hover:text-foreground transition-colors">
+                Home
+              </Link>
+              <span>/</span>
+              <Link href="/blog" className="hover:text-foreground transition-colors">
+                Blog
+              </Link>
+              <span>/</span>
+              <span className="text-foreground truncate max-w-[200px]">{post.title}</span>
+            </nav>
+          </div>
+        </div>
 
         <article className="max-w-4xl mx-auto px-6 py-12">
           <header className="mb-12">
@@ -69,11 +88,11 @@ export default async function BlogPostPage({ params }: Props) {
                 {post.category}
               </span>
             )}
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
               {post.title}
             </h1>
             {post.excerpt && (
-              <p className="text-xl text-gray-600 mb-8">{post.excerpt}</p>
+              <p className="text-xl text-muted-foreground mb-8">{post.excerpt}</p>
             )}
             <AuthorCard
               name={post.author_name}
@@ -83,7 +102,7 @@ export default async function BlogPostPage({ params }: Props) {
           </header>
 
           {post.featured_image_url && (
-            <div className="relative aspect-video rounded-2xl overflow-hidden mb-12 bg-gray-100">
+            <div className="relative aspect-video rounded-2xl overflow-hidden mb-12 bg-muted">
               <Image
                 src={post.featured_image_url}
                 alt={post.featured_image_alt || post.title}
@@ -96,17 +115,17 @@ export default async function BlogPostPage({ params }: Props) {
           )}
 
           <div
-            className="prose prose-lg max-w-none prose-headings:font-bold prose-headings:text-gray-900 prose-p:text-gray-600 prose-a:text-indigo-600 prose-a:no-underline hover:prose-a:underline"
+            className="prose prose-lg max-w-none prose-headings:font-bold prose-headings:text-foreground prose-p:text-muted-foreground prose-a:text-indigo-600 prose-a:no-underline hover:prose-a:underline"
             dangerouslySetInnerHTML={{ __html: post.content }}
           />
 
           {post.tags && post.tags.length > 0 && (
-            <div className="mt-12 pt-8 border-t border-gray-200">
+            <div className="mt-12 pt-8 border-t border-border">
               <div className="flex flex-wrap gap-2">
                 {post.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="px-3 py-1 text-sm bg-gray-100 text-gray-700 rounded-full"
+                    className="px-3 py-1 text-sm bg-muted text-muted-foreground rounded-full"
                   >
                     #{tag}
                   </span>
@@ -122,7 +141,12 @@ export default async function BlogPostPage({ params }: Props) {
           />
         </article>
 
-        <CTASection />
+        <CTASection
+          title="Ready to Scale Your Support?"
+          description="See how VoiceFleet AI voice agents can handle your calls at 80% lower cost."
+        />
+
+        <Footer />
       </div>
     </>
   );

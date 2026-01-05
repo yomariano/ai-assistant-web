@@ -175,7 +175,7 @@ export default async function FeaturePage({ params }: Props) {
                         Feature
                       </th>
                       <th className="text-center py-4 px-6 font-semibold text-indigo-600">
-                        ValidateCall
+                        VoiceFleet
                       </th>
                       <th className="text-center py-4 px-6 font-semibold text-gray-500">
                         Others

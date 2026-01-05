@@ -10,7 +10,7 @@ import { ArrowRight } from "lucide-react";
 export const metadata: Metadata = generatePageMetadata({
   title: "Features - AI Voice Assistant Capabilities",
   description:
-    "Explore ValidateCall's powerful AI voice assistant features: call scheduling, multi-language support, call history, and more.",
+    "Explore VoiceFleet's powerful AI voice agent features: 24/7 availability, multi-language support, call history, and more.",
   path: "/features",
 });
 

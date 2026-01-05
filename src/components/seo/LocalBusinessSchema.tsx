@@ -1,6 +1,6 @@
 import { JsonLd } from "./JsonLd";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://validatecall.com";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://voicefleet.ai";
 
 interface LocalBusinessSchemaProps {
   name: string;
@@ -23,12 +23,12 @@ export function LocalBusinessSchema({
     name: name,
     image: `${siteUrl}/logo.png`,
     url: siteUrl,
-    description: `AI Voice Assistant services in ${city}, ${state}. Automated phone calls for businesses.`,
+    description: `AI Voice Agent services in ${city}, ${state}. Automated phone calls for businesses.`,
     address: {
       "@type": "PostalAddress",
       addressLocality: city,
       addressRegion: state,
-      addressCountry: "US",
+      addressCountry: "IE",
     },
     ...(latitude &&
       longitude && {
