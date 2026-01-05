@@ -5,11 +5,12 @@ import { getBlogPosts } from "@/lib/content/blog";
 import { generatePageMetadata } from "@/lib/seo/metadata";
 import Breadcrumbs from "@/components/marketing/Breadcrumbs";
 import CTASection from "@/components/marketing/CTASection";
+import Footer from "@/components/landing/Footer";
 
 export const metadata: Metadata = generatePageMetadata({
-  title: "Blog - AI Voice Assistant Insights & Tips",
+  title: "Blog - Restaurant Phone Tips & Insights | OrderBot",
   description:
-    "Learn how to automate phone calls, save time, and boost productivity with AI voice assistants. Tips, guides, and industry insights.",
+    "Tips for Irish restaurants, cafés, and takeaways on never missing orders, handling busy periods, and growing your business with AI phone answering.",
   path: "/blog",
 });
 
@@ -25,14 +26,14 @@ export default async function BlogPage() {
     <div className="min-h-screen bg-white">
       <Breadcrumbs items={breadcrumbs} />
 
-      <section className="py-16 bg-gradient-to-br from-indigo-600 to-purple-700">
+      <section className="py-16 bg-gradient-to-br from-orange-500 to-orange-600">
         <div className="max-w-7xl mx-auto px-6 text-center">
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            ValidateCall Blog
+            OrderBot Blog
           </h1>
-          <p className="text-xl text-indigo-100 max-w-2xl mx-auto">
-            Insights, tips, and guides on automating phone calls with AI voice
-            assistants.
+          <p className="text-xl text-orange-100 max-w-2xl mx-auto">
+            Tips and insights for Irish restaurants, cafés, and takeaways on
+            never missing another order.
           </p>
         </div>
       </section>
@@ -66,11 +67,11 @@ export default async function BlogPage() {
                   )}
                   <div className="p-6">
                     {post.category && (
-                      <span className="inline-block px-3 py-1 text-xs font-medium text-indigo-600 bg-indigo-50 rounded-full mb-3">
+                      <span className="inline-block px-3 py-1 text-xs font-medium text-orange-600 bg-orange-50 rounded-full mb-3">
                         {post.category}
                       </span>
                     )}
-                    <h2 className="text-xl font-semibold text-gray-900 group-hover:text-indigo-600 transition-colors mb-2">
+                    <h2 className="text-xl font-semibold text-gray-900 group-hover:text-orange-600 transition-colors mb-2">
                       {post.title}
                     </h2>
                     <p className="text-gray-600 line-clamp-2 mb-4">
@@ -82,7 +83,7 @@ export default async function BlogPage() {
                       <time dateTime={post.published_at || undefined}>
                         {post.published_at
                           ? new Date(post.published_at).toLocaleDateString(
-                              "en-US",
+                              "en-IE",
                               {
                                 month: "short",
                                 day: "numeric",
@@ -101,9 +102,11 @@ export default async function BlogPage() {
       </section>
 
       <CTASection
-        title="Ready to try AI voice calls?"
-        description="Start automating your phone calls today and save hours every week."
+        title="Ready to Stop Missing Orders?"
+        description="Join hundreds of Irish restaurants already using OrderBot to capture every call."
       />
+
+      <Footer />
     </div>
   );
 }

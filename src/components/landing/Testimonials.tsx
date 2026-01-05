@@ -1,22 +1,25 @@
-import { Star } from 'lucide-react';
+import { Star, Quote } from 'lucide-react';
 
 const reviews = [
     {
-        content: "I used to dread calling the DMV to renew my registration. ValidateCall waited on hold for 2 hours and patched me in only when a human actually picked up. Absolute lifesaver!",
-        author: "Sarah J.",
-        role: "Small Business Owner",
+        content: "We were losing 10+ orders every Saturday during rush. OrderBot paid for itself in the first weekend.",
+        author: "Sarah",
+        business: "The Rolling Scone",
+        location: "Dublin",
         rating: 5
     },
     {
-        content: "Canceling my gym membership was always a nightmare of retention scripts and guilt trips. This AI handled the entire conversation firmly and got it cancelled in under 5 minutes.",
-        author: "Michael Chen",
-        role: "Software Engineer",
+        content: "I was skeptical about AI but customers can't tell the difference. Some even prefer it because there's no hold time.",
+        author: "Michael",
+        business: "Pasta Palace",
+        location: "Cork",
         rating: 5
     },
     {
-        content: "As a non-native English speaker, I sometimes struggle with fast-talking service reps. The AI speaks perfectly and gets my appointments sorted without any confusion.",
-        author: "Elena Rodriguez",
-        role: "Marketing Director",
+        content: "Setup took 20 minutes. They called me, asked about my menu, and it was live the next day. Brilliant.",
+        author: "Emma",
+        business: "Green Bean Café",
+        location: "Galway",
         rating: 5
     }
 ];
@@ -26,12 +29,12 @@ export default function Testimonials() {
         <section className="py-20 bg-white">
             <div className="mx-auto max-w-7xl px-6 lg:px-8">
                 <div className="text-center max-w-3xl mx-auto mb-16">
-                    <h2 className="text-sm font-semibold text-indigo-600 uppercase tracking-wide mb-3">Testimonials</h2>
+                    <h2 className="text-sm font-semibold text-orange-500 uppercase tracking-wide mb-3">Testimonials</h2>
                     <p className="text-3xl sm:text-4xl font-bold text-gray-900">
-                        Loved by People Who Value Their Time
+                        Trusted by 50+ Irish Food Businesses
                     </p>
                     <p className="mt-4 text-lg text-gray-600">
-                        Join thousands of users who have reclaimed their day from hold music and call anxiety.
+                        Hear from restaurant owners, café managers, and takeaway shops across Ireland.
                     </p>
                 </div>
 
@@ -39,22 +42,38 @@ export default function Testimonials() {
                     {reviews.map((review, index) => (
                         <div
                             key={index}
-                            className="bg-gray-50 rounded-2xl p-8 border border-gray-100"
+                            className="bg-gray-50 rounded-2xl p-8 border border-gray-100 relative"
                         >
-                            <div className="flex gap-x-1 text-amber-400 mb-4">
+                            {/* Quote icon */}
+                            <Quote className="h-8 w-8 text-orange-200 absolute top-6 right-6" />
+
+                            <div className="flex gap-x-1 text-orange-400 mb-4">
                                 {[...Array(review.rating)].map((_, i) => (
                                     <Star key={i} className="h-5 w-5 fill-current" />
                                 ))}
                             </div>
-                            <blockquote className="text-gray-700 leading-relaxed">
-                                "{review.content}"
+                            <blockquote className="text-gray-700 leading-relaxed text-lg">
+                                &ldquo;{review.content}&rdquo;
                             </blockquote>
                             <div className="mt-6 pt-6 border-t border-gray-200">
                                 <div className="font-semibold text-gray-900">{review.author}</div>
-                                <div className="text-sm text-gray-500">{review.role}</div>
+                                <div className="text-sm text-orange-600 font-medium">{review.business}</div>
+                                <div className="text-sm text-gray-500">{review.location}</div>
                             </div>
                         </div>
                     ))}
+                </div>
+
+                {/* Logo bar placeholder */}
+                <div className="mt-16 pt-12 border-t border-gray-100">
+                    <p className="text-center text-sm text-gray-500 mb-8">Trusted by restaurants, cafés, and takeaways across Ireland</p>
+                    <div className="flex flex-wrap justify-center items-center gap-8 opacity-50">
+                        <div className="h-8 w-24 bg-gray-200 rounded" />
+                        <div className="h-8 w-28 bg-gray-200 rounded" />
+                        <div className="h-8 w-20 bg-gray-200 rounded" />
+                        <div className="h-8 w-32 bg-gray-200 rounded" />
+                        <div className="h-8 w-24 bg-gray-200 rounded" />
+                    </div>
                 </div>
             </div>
         </section>

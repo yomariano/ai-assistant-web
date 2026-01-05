@@ -7,11 +7,18 @@ interface ContentItem {
   updated_at: string;
 }
 
+interface ComboItem {
+  industry_slug: string;
+  location_slug: string;
+  updated_at: string;
+}
+
 interface SitemapData {
   blogPosts: ContentItem[];
   useCases: ContentItem[];
   locations: ContentItem[];
   features: ContentItem[];
+  combos: ComboItem[];
 }
 
 async function fetchSitemapData(): Promise<SitemapData | null> {
@@ -130,5 +137,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.8,
   }));
 
-  return [...staticPages, ...blogPosts, ...useCases, ...locations, ...features];
+  // Dynamic combo pages (industry + location)
+  const combos: MetadataRoute.Sitemap = (content.combos || []).map((page) => ({
+    url: `${BASE_URL}/${page.industry_slug}/${page.location_slug}`,
+    lastModified: new Date(page.updated_at),
+    changeFrequency: 'monthly',
+    priority: 0.7,
+  }));
+
+  return [...staticPages, ...blogPosts, ...useCases, ...locations, ...features, ...combos];
 }

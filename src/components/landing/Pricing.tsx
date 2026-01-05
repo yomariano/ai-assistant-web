@@ -1,103 +1,119 @@
+'use client';
+
 import { Check } from 'lucide-react';
 import Link from 'next/link';
 
-const tiers = [
+interface TierData {
+    name: string;
+    id: string;
+    href: string;
+    price: string;
+    description: string;
+    features: string[];
+    perfectFor: string;
+    mostPopular: boolean;
+    cta: string;
+}
+
+const tiers: TierData[] = [
     {
         name: 'Starter',
         id: 'tier-starter',
-        href: '/login',
-        priceMonthly: '$29',
-        description: 'Perfect for small businesses getting started.',
-        planId: 'starter',
+        href: '/register',
+        price: '€149',
+        description: 'Everything you need to stop missing orders.',
+        perfectFor: 'Perfect for: Small cafés',
         features: [
-            '30 minutes included',
-            '1 phone number',
-            'Business hours (9am-6pm)',
-            'Standard AI voices',
-            'Call transcripts',
-            'Email notifications',
-            '$0.25/min overage',
+            '200 calls included',
+            'Order taking',
+            'SMS notifications',
+            'Business hours support',
+            'Custom greeting',
         ],
         mostPopular: false,
+        cta: 'Start Free Trial',
     },
     {
         name: 'Growth',
         id: 'tier-growth',
-        href: '/login',
-        priceMonthly: '$79',
-        description: 'For growing businesses with more call volume.',
-        planId: 'growth',
+        href: '/register',
+        price: '€249',
+        description: 'For busy restaurants that need more.',
+        perfectFor: 'Perfect for: Busy restaurants',
         features: [
-            '100 minutes included',
-            '2 phone numbers',
-            'Business hours (9am-6pm)',
-            '3 concurrent calls',
-            'Voice cloning',
-            'Calendar booking',
-            'Analytics dashboard',
-            '$0.22/min overage',
+            '500 calls included',
+            'Orders + Reservations',
+            'SMS + Email notifications',
+            'Extended support',
+            'Basic analytics',
+            'Calendar integration',
         ],
         mostPopular: true,
+        cta: 'Start Free Trial',
     },
     {
-        name: 'Scale',
-        id: 'tier-scale',
-        href: '/login',
-        priceMonthly: '$199',
-        description: 'For high-volume businesses that need more.',
-        planId: 'scale',
+        name: 'Pro',
+        id: 'tier-pro',
+        href: '/register',
+        price: '€399',
+        description: 'For restaurant groups and high volume.',
+        perfectFor: 'Perfect for: Restaurant groups',
         features: [
-            '300 minutes included',
-            '5 phone numbers',
-            'Extended hours (7am-10pm)',
-            '10 concurrent calls',
-            'Custom knowledge base',
+            'Unlimited calls',
+            'Full feature set',
+            'Multi-location support',
             'Priority support',
             'Advanced analytics',
-            '$0.18/min overage',
+            'Custom integrations',
+            'Dedicated account manager',
         ],
         mostPopular: false,
+        cta: 'Contact Sales',
     },
 ];
 
 function getCardClass(mostPopular: boolean) {
     const base = 'relative flex flex-col rounded-2xl p-8';
     if (mostPopular) {
-        return base + ' bg-indigo-600 text-white ring-2 ring-indigo-600 lg:scale-105 lg:z-10 shadow-xl';
+        return base + ' bg-orange-500 text-white ring-2 ring-orange-500 lg:scale-105 lg:z-10 shadow-xl';
     }
     return base + ' bg-white border border-gray-200';
 }
 
 function getTitleClass(mostPopular: boolean) {
-    return mostPopular ? 'text-lg font-semibold text-white' : 'text-lg font-semibold text-gray-900';
+    return mostPopular ? 'text-xl font-semibold text-white' : 'text-xl font-semibold text-gray-900';
 }
 
 function getDescClass(mostPopular: boolean) {
-    return mostPopular ? 'mt-2 text-sm text-indigo-100' : 'mt-2 text-sm text-gray-600';
+    return mostPopular ? 'mt-2 text-sm text-orange-100' : 'mt-2 text-sm text-gray-600';
 }
 
 function getPriceClass(mostPopular: boolean) {
-    return mostPopular ? 'text-4xl font-bold text-white' : 'text-4xl font-bold text-gray-900';
+    return mostPopular ? 'text-5xl font-bold text-white' : 'text-5xl font-bold text-gray-900';
 }
 
 function getPriceSubClass(mostPopular: boolean) {
-    return mostPopular ? 'text-sm text-indigo-200' : 'text-sm text-gray-500';
+    return mostPopular ? 'text-sm text-orange-200' : 'text-sm text-gray-500';
 }
 
 function getCheckClass(mostPopular: boolean) {
-    return mostPopular ? 'h-5 w-5 flex-none text-indigo-200' : 'h-5 w-5 flex-none text-indigo-600';
+    return mostPopular ? 'h-5 w-5 flex-none text-orange-200' : 'h-5 w-5 flex-none text-orange-500';
 }
 
 function getFeatureClass(mostPopular: boolean) {
-    return mostPopular ? 'text-indigo-50' : 'text-gray-600';
+    return mostPopular ? 'text-orange-50' : 'text-gray-600';
+}
+
+function getPerfectForClass(mostPopular: boolean) {
+    return mostPopular ? 'text-sm text-orange-200 font-medium' : 'text-sm text-gray-500 font-medium';
 }
 
 function getButtonClass(mostPopular: boolean) {
     const base = 'mt-8 block rounded-lg px-4 py-3 text-center text-sm font-semibold transition-colors';
     if (mostPopular) {
-        return base + ' bg-white text-indigo-600 hover:bg-indigo-50';
+        return base + ' bg-white text-orange-600 hover:bg-orange-50';
     }
-    return base + ' bg-indigo-600 text-white hover:bg-indigo-700';
+    return base + ' bg-orange-500 text-white hover:bg-orange-600';
 }
 
 export default function Pricing() {
@@ -105,12 +121,12 @@ export default function Pricing() {
         <section id="pricing" className="py-20 bg-gray-50">
             <div className="mx-auto max-w-7xl px-6 lg:px-8">
                 <div className="text-center max-w-3xl mx-auto mb-16">
-                    <h2 className="text-sm font-semibold text-indigo-600 uppercase tracking-wide mb-3">Pricing</h2>
+                    <h2 className="text-sm font-semibold text-orange-500 uppercase tracking-wide mb-3">Pricing</h2>
                     <p className="text-3xl sm:text-4xl font-bold text-gray-900">
-                        Simple, Transparent Pricing
+                        Simple Pricing. Massive ROI.
                     </p>
                     <p className="mt-4 text-lg text-gray-600">
-                        No per-minute fees. No hidden charges. Just straightforward plans that scale with you.
+                        One missed order per day costs more than OrderBot. Do the math.
                     </p>
                 </div>
 
@@ -121,7 +137,7 @@ export default function Pricing() {
                             className={getCardClass(tier.mostPopular)}
                         >
                             {tier.mostPopular && (
-                                <div className="absolute -top-4 left-1/2 -translate-x-1/2 rounded-full bg-indigo-500 px-4 py-1 text-xs font-semibold text-white">
+                                <div className="absolute -top-4 left-1/2 -translate-x-1/2 rounded-full bg-gray-900 px-4 py-1 text-xs font-semibold text-white">
                                     Most Popular
                                 </div>
                             )}
@@ -134,11 +150,14 @@ export default function Pricing() {
                                 </p>
                                 <p className="mt-6 flex items-baseline gap-x-1">
                                     <span className={getPriceClass(tier.mostPopular)}>
-                                        {tier.priceMonthly}
+                                        {tier.price}
                                     </span>
                                     <span className={getPriceSubClass(tier.mostPopular)}>
                                         /month
                                     </span>
+                                </p>
+                                <p className={`mt-2 ${getPerfectForClass(tier.mostPopular)}`}>
+                                    {tier.perfectFor}
                                 </p>
                                 <ul role="list" className="mt-8 space-y-3">
                                     {tier.features.map((feature) => (
@@ -155,15 +174,20 @@ export default function Pricing() {
                                 href={tier.href}
                                 className={getButtonClass(tier.mostPopular)}
                             >
-                                Get Started
+                                {tier.cta}
                             </Link>
                         </div>
                     ))}
                 </div>
 
-                <p className="mt-12 text-center text-sm text-gray-500">
-                    All plans include a 7-day free trial. No credit card required.
-                </p>
+                <div className="mt-12 text-center">
+                    <p className="text-sm text-gray-500">
+                        All plans include: <span className="font-medium">14-day free trial</span> • Cancel anytime • GDPR compliant
+                    </p>
+                    <p className="text-sm text-gray-400 mt-2">
+                        One-time setup fee: €299-799 depending on menu complexity
+                    </p>
+                </div>
             </div>
         </section>
     );

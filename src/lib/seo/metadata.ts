@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import type { BlogPost, FeaturePage, LocationPage, UseCasePage } from "@/lib/supabase-server";
 
 const BASE_URL =
   process.env.NEXT_PUBLIC_SITE_URL || "https://validatecall.com";
@@ -77,42 +78,48 @@ export function generatePageMetadata(options: GenerateMetadataOptions): Metadata
   };
 }
 
-export function generateBlogMetadata(post: {
-  title: string;
-  excerpt: string;
-  slug: string;
-  meta_title?: string;
-  meta_description?: string;
-  og_image_url?: string;
-  featured_image_url?: string;
-  published_at: string;
-  updated_at: string;
-  author_name: string;
-  tags?: string[];
-}): Metadata {
+export function generateBlogMetadata(
+  post: Pick<
+    BlogPost,
+    | "title"
+    | "excerpt"
+    | "slug"
+    | "meta_title"
+    | "meta_description"
+    | "og_image_url"
+    | "featured_image_url"
+    | "published_at"
+    | "updated_at"
+    | "author_name"
+    | "tags"
+  >
+): Metadata {
   return generatePageMetadata({
     title: post.meta_title || post.title,
-    description: post.meta_description || post.excerpt,
+    description: post.meta_description || post.excerpt || "",
     path: `/blog/${post.slug}`,
-    ogImage: post.og_image_url || post.featured_image_url,
+    ogImage: post.og_image_url || post.featured_image_url || undefined,
     type: "article",
-    publishedTime: post.published_at,
+    publishedTime: post.published_at || undefined,
     modifiedTime: post.updated_at,
     author: post.author_name,
-    keywords: post.tags,
+    keywords: post.tags ?? undefined,
   });
 }
 
-export function generateUseCaseMetadata(page: {
-  slug: string;
-  industry_name: string;
-  headline: string;
-  subheadline: string;
-  meta_title?: string;
-  meta_description?: string;
-  og_image_url?: string;
-  hero_image_url?: string;
-}): Metadata {
+export function generateUseCaseMetadata(
+  page: Pick<
+    UseCasePage,
+    | "slug"
+    | "industry_name"
+    | "headline"
+    | "subheadline"
+    | "meta_title"
+    | "meta_description"
+    | "og_image_url"
+    | "hero_image_url"
+  >
+): Metadata {
   return generatePageMetadata({
     title:
       page.meta_title || `AI Voice Assistant for ${page.industry_name}`,
@@ -121,7 +128,7 @@ export function generateUseCaseMetadata(page: {
       page.subheadline ||
       `Automated phone calls for ${page.industry_name}. Save time with AI voice agents.`,
     path: `/for/${page.slug}`,
-    ogImage: page.og_image_url || page.hero_image_url,
+    ogImage: page.og_image_url || page.hero_image_url || undefined,
     keywords: [
       `AI voice assistant ${page.industry_name}`,
       `${page.industry_name} automation`,
@@ -130,45 +137,53 @@ export function generateUseCaseMetadata(page: {
   });
 }
 
-export function generateLocationMetadata(page: {
-  slug: string;
-  city_name: string;
-  state_code: string;
-  headline: string;
-  subheadline?: string;
-  meta_title?: string;
-  meta_description?: string;
-  og_image_url?: string;
-  hero_image_url?: string;
-}): Metadata {
+export function generateLocationMetadata(
+  page: Pick<
+    LocationPage,
+    | "slug"
+    | "city_name"
+    | "state_code"
+    | "headline"
+    | "subheadline"
+    | "meta_title"
+    | "meta_description"
+    | "og_image_url"
+    | "hero_image_url"
+  >
+): Metadata {
+  const stateCode = page.state_code ? `, ${page.state_code}` : "";
+
   return generatePageMetadata({
     title:
       page.meta_title ||
-      `AI Voice Assistant in ${page.city_name}, ${page.state_code}`,
+      `AI Voice Assistant in ${page.city_name}${stateCode}`,
     description:
       page.meta_description ||
       page.subheadline ||
       `Automated phone calls for businesses in ${page.city_name}. Save time with AI voice agents.`,
     path: `/in/${page.slug}`,
-    ogImage: page.og_image_url || page.hero_image_url,
+    ogImage: page.og_image_url || page.hero_image_url || undefined,
     keywords: [
       `AI voice assistant ${page.city_name}`,
       `automated calls ${page.city_name}`,
-      `phone automation ${page.state_code}`,
+      ...(page.state_code ? [`phone automation ${page.state_code}`] : []),
     ],
   });
 }
 
-export function generateFeatureMetadata(page: {
-  slug: string;
-  feature_name: string;
-  headline: string;
-  subheadline?: string;
-  meta_title?: string;
-  meta_description?: string;
-  og_image_url?: string;
-  hero_image_url?: string;
-}): Metadata {
+export function generateFeatureMetadata(
+  page: Pick<
+    FeaturePage,
+    | "slug"
+    | "feature_name"
+    | "headline"
+    | "subheadline"
+    | "meta_title"
+    | "meta_description"
+    | "og_image_url"
+    | "hero_image_url"
+  >
+): Metadata {
   return generatePageMetadata({
     title: page.meta_title || page.feature_name,
     description:
@@ -176,7 +191,7 @@ export function generateFeatureMetadata(page: {
       page.subheadline ||
       `Learn about ${page.feature_name}. Powerful AI voice assistant features for automated phone calls.`,
     path: `/features/${page.slug}`,
-    ogImage: page.og_image_url || page.hero_image_url,
+    ogImage: page.og_image_url || page.hero_image_url || undefined,
     keywords: [
       page.feature_name,
       "AI voice assistant features",

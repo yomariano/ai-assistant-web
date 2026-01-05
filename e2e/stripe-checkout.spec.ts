@@ -7,11 +7,12 @@ const STRIPE_PAYMENT_LINKS = {
   growth: 'https://buy.stripe.com/test_bJe14m32KfFc1Re7UgfQI05',
   scale: 'https://buy.stripe.com/test_fZu6oGbzg3Wu7bycawfQI06',
 };
-// Expected phone numbers per plan
+// Expected phone numbers per plan (OrderBot.ie Pricing Jan 2026)
+// Lite: 1 phone | Growth: 2 phones | Pro: 5 phones
 const PLAN_PHONE_LIMITS = {
-  starter: 1,
-  growth: 2,
-  scale: 5,
+  starter: 1,  // Lite
+  growth: 2,   // Growth
+  scale: 5,    // Pro
 };
 const TEST_USER_ID = '00000000-0000-0000-0000-000000000099'; // Must be valid UUID for database
 
@@ -430,8 +431,8 @@ test.describe('Plan Upgrade/Downgrade Flow', () => {
       headers: { 'Cookie': cookie }
     });
     const phonesData = await phonesResponse.json();
-    expect(phonesData.numbers.length).toBe(3);
-    console.log(`Pro plan: ${phonesData.numbers.length} phone numbers`);
+    expect(phonesData.numbers.length).toBe(PLAN_PHONE_LIMITS.growth);
+    console.log(`Growth plan: ${phonesData.numbers.length} phone numbers`);
 
     // VERIFY DB STATE DIRECTLY
     const dbState = await getDbState(request, TEST_USER_ID);
@@ -439,7 +440,7 @@ test.describe('Plan Upgrade/Downgrade Flow', () => {
       hasSubscription: true,
       subscriptionStatus: 'active',
       planId: 'growth',
-      activePhoneCount: 3,
+      activePhoneCount: PLAN_PHONE_LIMITS.growth,
     });
     expect(dbCheck.passed).toBe(true);
     console.log('✓ DB state verified: upgraded to growth with 2 phones');
@@ -462,8 +463,8 @@ test.describe('Plan Upgrade/Downgrade Flow', () => {
       headers: { 'Cookie': cookie }
     });
     const phonesBefore = await phonesBeforeResponse.json();
-    expect(phonesBefore.numbers.length).toBe(3);
-    console.log(`Pro plan: ${phonesBefore.numbers.length} phone numbers`);
+    expect(phonesBefore.numbers.length).toBe(PLAN_PHONE_LIMITS.growth);
+    console.log(`Growth plan: ${phonesBefore.numbers.length} phone numbers`);
 
     // Step 2: Simulate downgrade to Starter (1 phone number)
     const downgradeResponse = await request.post(`${API_URL}/api/billing/test/simulate-plan-change`, {
@@ -478,7 +479,7 @@ test.describe('Plan Upgrade/Downgrade Flow', () => {
     console.log('Downgrade result:', downgradeResult);
     expect(downgradeResult.success).toBe(true);
     expect(downgradeResult.result.action).toBe('downgrade');
-    expect(downgradeResult.result.released).toBe(2); // 3 - 1 = 2 released
+    expect(downgradeResult.result.released).toBe(PLAN_PHONE_LIMITS.growth - PLAN_PHONE_LIMITS.starter); // 2 - 1 = 1 released
 
     // Step 3: Verify subscription is now starter
     const subResponse = await request.get(`${API_URL}/api/billing/subscription`, {
@@ -501,11 +502,11 @@ test.describe('Plan Upgrade/Downgrade Flow', () => {
     const dbCheck = verifyDbState(dbState, {
       hasSubscription: true,
       planId: 'starter',
-      activePhoneCount: 1,
-      releasedPhoneCount: 2, // 2 phones should be marked as released
+      activePhoneCount: PLAN_PHONE_LIMITS.starter,
+      releasedPhoneCount: PLAN_PHONE_LIMITS.growth - PLAN_PHONE_LIMITS.starter, // 1 phone released
     });
     expect(dbCheck.passed).toBe(true);
-    console.log('✓ DB state verified: downgraded to starter, 2 phones released');
+    console.log('✓ DB state verified: downgraded to starter, 1 phone released');
   });
 
   test('upgrade from starter to scale adds more phone numbers', async ({ page, request }) => {
@@ -525,10 +526,10 @@ test.describe('Plan Upgrade/Downgrade Flow', () => {
       headers: { 'Cookie': cookie }
     });
     const phonesBefore = await phonesBeforeResponse.json();
-    expect(phonesBefore.numbers.length).toBe(1);
+    expect(phonesBefore.numbers.length).toBe(PLAN_PHONE_LIMITS.starter);
     console.log(`Starter plan: ${phonesBefore.numbers.length} phone numbers`);
 
-    // Step 2: Upgrade to Agency (10 phone numbers)
+    // Step 2: Upgrade to Pro/Scale (5 phone numbers)
     const upgradeResponse = await request.post(`${API_URL}/api/billing/test/simulate-plan-change`, {
       data: {
         userId: TEST_USER_ID,
@@ -540,15 +541,15 @@ test.describe('Plan Upgrade/Downgrade Flow', () => {
     const upgradeResult = await upgradeResponse.json();
     console.log('Upgrade result:', upgradeResult);
     expect(upgradeResult.result.action).toBe('upgrade');
-    expect(upgradeResult.result.added).toBe(9); // 10 - 1 = 9 added
+    expect(upgradeResult.result.added).toBe(PLAN_PHONE_LIMITS.scale - PLAN_PHONE_LIMITS.starter); // 5 - 1 = 4 added
 
     // Step 3: Verify scale has 5 phones
     const phonesAfterResponse = await request.get(`${API_URL}/api/billing/phone-numbers`, {
       headers: { 'Cookie': cookie }
     });
     const phonesAfter = await phonesAfterResponse.json();
-    expect(phonesAfter.numbers.length).toBe(10);
-    console.log(`Agency plan: ${phonesAfter.numbers.length} phone numbers`);
+    expect(phonesAfter.numbers.length).toBe(PLAN_PHONE_LIMITS.scale);
+    console.log(`Pro plan: ${phonesAfter.numbers.length} phone numbers`);
 
     // Verify plan changed
     const subResponse = await request.get(`${API_URL}/api/billing/subscription`, {
@@ -562,7 +563,7 @@ test.describe('Plan Upgrade/Downgrade Flow', () => {
     const dbCheck = verifyDbState(dbState, {
       hasSubscription: true,
       planId: 'scale',
-      activePhoneCount: 10,
+      activePhoneCount: PLAN_PHONE_LIMITS.scale,
     });
     expect(dbCheck.passed).toBe(true);
     console.log('✓ DB state verified: upgraded to scale with 5 phones');

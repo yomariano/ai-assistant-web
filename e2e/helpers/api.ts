@@ -201,3 +201,107 @@ export async function waitForProvisioning(
 
   return false;
 }
+
+// ============================================
+// NOTIFICATION API HELPERS
+// ============================================
+
+export interface NotificationPreferences {
+  email_enabled: boolean;
+  email_address?: string;
+  sms_enabled: boolean;
+  sms_number?: string;
+  notify_on_call_complete: boolean;
+  notify_on_message_taken: boolean;
+  notify_on_escalation: boolean;
+  notify_on_voicemail: boolean;
+  business_hours_only: boolean;
+  timezone: string;
+}
+
+export interface EscalationSettings {
+  transfer_enabled: boolean;
+  transfer_number?: string;
+  transfer_method: string;
+  trigger_keywords: string[];
+  max_failed_attempts: number;
+  business_hours_only: boolean;
+  business_hours_start: string;
+  business_hours_end: string;
+  business_days: number[];
+  timezone: string;
+  after_hours_action: string;
+  after_hours_message: string;
+}
+
+/**
+ * Get notification preferences
+ */
+export async function getNotificationPreferences(): Promise<{ preferences: NotificationPreferences }> {
+  const response = await fetch(`${API_URL}/api/notifications/preferences`);
+  if (!response.ok) {
+    throw new Error(`Failed to get notification preferences: ${response.statusText}`);
+  }
+  return response.json();
+}
+
+/**
+ * Update notification preferences
+ */
+export async function updateNotificationPreferences(
+  updates: Partial<NotificationPreferences>
+): Promise<{ preferences: NotificationPreferences; message: string }> {
+  const response = await fetch(`${API_URL}/api/notifications/preferences`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(updates),
+  });
+  if (!response.ok) {
+    const error = await response.json();
+    throw new Error(error.error?.message || `Failed to update preferences: ${response.statusText}`);
+  }
+  return response.json();
+}
+
+/**
+ * Get escalation settings
+ */
+export async function getEscalationSettings(): Promise<{ settings: EscalationSettings }> {
+  const response = await fetch(`${API_URL}/api/notifications/escalation`);
+  if (!response.ok) {
+    throw new Error(`Failed to get escalation settings: ${response.statusText}`);
+  }
+  return response.json();
+}
+
+/**
+ * Update escalation settings
+ */
+export async function updateEscalationSettings(
+  updates: Partial<EscalationSettings>
+): Promise<{ settings: EscalationSettings; message: string }> {
+  const response = await fetch(`${API_URL}/api/notifications/escalation`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(updates),
+  });
+  if (!response.ok) {
+    const error = await response.json();
+    throw new Error(error.error?.message || `Failed to update escalation: ${response.statusText}`);
+  }
+  return response.json();
+}
+
+/**
+ * Send test notification
+ */
+export async function sendTestNotification(
+  type: 'email' | 'sms'
+): Promise<{ success: boolean; message: string; messageId?: string }> {
+  const response = await fetch(`${API_URL}/api/notifications/test`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ type }),
+  });
+  return response.json();
+}

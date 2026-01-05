@@ -126,3 +126,35 @@ export interface BillingInfo {
   usage: UsageInfo;
   phoneNumbers: PhoneNumber[];
 }
+
+export interface NotificationPreferences {
+  id?: string;
+  user_id?: string;
+  email_enabled: boolean;
+  email_address?: string;
+  sms_enabled: boolean;
+  sms_number?: string;
+  notify_on_call_complete: boolean;
+  notify_on_message_taken: boolean;
+  notify_on_escalation: boolean;
+  notify_on_voicemail: boolean;
+  business_hours_only: boolean;
+  timezone: string;
+}
+
+export interface EscalationSettings {
+  id?: string;
+  user_id?: string;
+  transfer_enabled: boolean;
+  transfer_number?: string;
+  transfer_method: 'blind_transfer' | 'warm_transfer' | 'callback' | 'sms_alert';
+  trigger_keywords: string[];
+  max_failed_attempts: number;
+  business_hours_only: boolean;
+  business_hours_start: string;
+  business_hours_end: string;
+  business_days: number[];
+  timezone: string;
+  after_hours_action: 'voicemail' | 'sms_alert' | 'callback_promise' | 'ai_only';
+  after_hours_message: string;
+}

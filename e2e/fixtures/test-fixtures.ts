@@ -11,10 +11,11 @@ export const TEST_USERS = {
 };
 
 // Plan limits for verification
+// OrderBot.ie Pricing (January 2026) - Pay per call model
 export const PLAN_LIMITS = {
-  starter: { phoneNumbers: 1, minutesIncluded: 30 },
-  growth: { phoneNumbers: 2, minutesIncluded: 100 },
-  scale: { phoneNumbers: 5, minutesIncluded: 300 },
+  starter: { phoneNumbers: 1, perCallPrice: 0.95 },  // Lite: €19/mo + €0.95/call
+  growth: { phoneNumbers: 2, perCallPrice: 0.45 },   // Growth: €99/mo + €0.45/call
+  scale: { phoneNumbers: 5, perCallPrice: 0 },       // Pro: €249/mo unlimited (1500 cap)
 };
 
 // Extended test fixture with helpers

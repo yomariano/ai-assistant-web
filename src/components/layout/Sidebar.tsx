@@ -15,7 +15,8 @@ import {
   ChevronRight,
   X,
   Bot,
-  CreditCard
+  CreditCard,
+  Bell
 } from 'lucide-react';
 import { useAuthStore } from '@/lib/store';
 import Button from '@/components/ui/Button';
@@ -27,6 +28,7 @@ const navItems = [
   { href: '/agenda', label: 'Agenda', icon: BookMarked },
   { href: '/scheduled', label: 'Scheduled', icon: Calendar },
   { href: '/history', label: 'History', icon: History },
+  { href: '/notifications', label: 'Notifications', icon: Bell },
   { href: '/billing', label: 'Billing', icon: CreditCard },
   { href: '/settings', label: 'Settings', icon: Settings },
 ];

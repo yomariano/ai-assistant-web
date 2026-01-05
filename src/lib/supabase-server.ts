@@ -129,3 +129,41 @@ export interface FeaturePage {
   related_features: string[];
   related_use_cases: string[];
 }
+
+export interface ComboPage {
+  id: string;
+  slug: string;
+  location_slug: string;
+  industry_slug: string;
+  city_name: string;
+  industry_name: string;
+  headline: string;
+  subheadline: string | null;
+  hero_image_url: string | null;
+  hero_image_alt: string | null;
+  content: {
+    intro: string;
+    why_need: string;
+    local_industry_context?: string;
+    benefits: Array<{ title: string; description: string }>;
+    local_stats?: Record<string, string | number>;
+    case_study?: {
+      business_name: string;
+      challenge: string;
+      solution: string;
+      results: string[];
+    };
+    faq: Array<{ question: string; answer: string }>;
+    cta_text?: string;
+  };
+  status: "draft" | "published" | "archived";
+  published_at: string | null;
+  created_at: string;
+  updated_at: string;
+  meta_title: string | null;
+  meta_description: string | null;
+  og_image_url: string | null;
+  canonical_url: string | null;
+  related_locations: string[];
+  related_industries: string[];
+}

@@ -1,0 +1,187 @@
+import { Button } from "@/components/ui/button";
+import { Check, Zap, Rocket, Crown } from "lucide-react";
+
+const PricingSection = () => {
+  const tiers = [
+    {
+      icon: Zap,
+      name: "Lite",
+      price: 19,
+      perCall: 0.95,
+      description: "Perfect for testing or low-volume",
+      volume: "< 100 calls/month",
+      features: [
+        "1 phone number",
+        "Pay per call",
+        "Order taking",
+        "SMS notifications",
+        "Business hours support",
+        "Custom greeting",
+      ],
+      cta: "Get Started",
+      popular: false,
+    },
+    {
+      icon: Rocket,
+      name: "Growth",
+      price: 99,
+      perCall: 0.45,
+      description: "For most businesses",
+      volume: "100-400 calls/month",
+      features: [
+        "2 phone numbers",
+        "Lower per-call rate",
+        "Orders + Reservations",
+        "SMS + Email notifications",
+        "Extended support hours",
+        "Analytics dashboard",
+        "Calendar integration",
+      ],
+      cta: "Get Started",
+      popular: true,
+    },
+    {
+      icon: Crown,
+      name: "Pro",
+      price: 249,
+      perCall: null,
+      description: "For busy venues",
+      volume: "400+ calls/month",
+      features: [
+        "5 phone numbers",
+        "Unlimited calls*",
+        "Full feature set",
+        "Multi-location support",
+        "Priority 24/7 support",
+        "Advanced analytics",
+        "Custom integrations",
+        "Dedicated account manager",
+      ],
+      cta: "Get Started",
+      popular: false,
+    },
+  ];
+
+  const includedFeatures = [
+    "AI-powered call handling",
+    "Irish phone number",
+    "Order management",
+    "Free setup",
+  ];
+
+  return (
+    <section id="pricing" className="py-20 lg:py-28 bg-background">
+      <div className="container mx-auto px-4">
+        <div className="max-w-3xl mx-auto text-center mb-16">
+          <h2 className="text-3xl lg:text-4xl font-heading font-bold text-foreground mb-4">
+            Simple, <span className="text-gradient-primary">Transparent</span> Pricing
+          </h2>
+          <p className="text-lg text-muted-foreground">
+            No hidden fees. Pay for what you use.
+            <span className="font-semibold text-foreground"> Cancel anytime.</span>
+          </p>
+        </div>
+
+        <div className="grid lg:grid-cols-3 gap-8 mb-12">
+          {tiers.map((tier, index) => (
+            <div
+              key={index}
+              className={`relative bg-card rounded-2xl border shadow-elegant overflow-hidden ${
+                tier.popular
+                  ? "border-primary ring-2 ring-primary/20"
+                  : "border-border"
+              }`}
+            >
+              {tier.popular && (
+                <div className="absolute top-0 left-0 right-0 bg-gradient-hero py-2 text-center">
+                  <span className="text-xs font-semibold text-primary-foreground uppercase tracking-wide">
+                    Most Popular
+                  </span>
+                </div>
+              )}
+
+              <div className={`p-8 ${tier.popular ? "pt-12" : ""}`}>
+                <div className="flex items-center gap-3 mb-4">
+                  <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${
+                    tier.popular ? "bg-gradient-hero" : "bg-primary/10"
+                  }`}>
+                    <tier.icon className={`w-6 h-6 ${
+                      tier.popular ? "text-primary-foreground" : "text-primary"
+                    }`} />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-heading font-bold text-foreground">
+                      {tier.name}
+                    </h3>
+                    <p className="text-sm text-muted-foreground">{tier.description}</p>
+                  </div>
+                </div>
+
+                <div className="mb-6">
+                  <div className="flex items-baseline gap-1">
+                    <span className="text-4xl font-heading font-bold text-foreground">
+                      &euro;{tier.price}
+                    </span>
+                    <span className="text-muted-foreground">/month</span>
+                  </div>
+                  {tier.perCall !== null ? (
+                    <p className="text-sm text-muted-foreground mt-1">
+                      + &euro;{tier.perCall.toFixed(2)} per call
+                    </p>
+                  ) : (
+                    <p className="text-sm text-accent font-medium mt-1">
+                      Unlimited calls included*
+                    </p>
+                  )}
+                </div>
+
+                <p className="text-xs font-medium text-primary mb-4 bg-primary/5 py-1 px-2 rounded inline-block">
+                  {tier.volume}
+                </p>
+
+                <ul className="space-y-3 mb-8">
+                  {tier.features.map((feature, i) => (
+                    <li key={i} className="flex items-center gap-2 text-sm text-foreground">
+                      <Check className="w-4 h-4 text-accent flex-shrink-0" />
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+
+                <Button
+                  variant={tier.popular ? "hero" : "outline"}
+                  size="lg"
+                  className="w-full"
+                >
+                  {tier.cta}
+                </Button>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="text-center mb-8">
+          <p className="text-xs text-muted-foreground">
+            * Fair use policy: 1,500 calls/month cap on Pro plan
+          </p>
+        </div>
+
+        <div className="bg-muted/50 rounded-xl p-6 max-w-2xl mx-auto">
+          <p className="text-center text-sm text-muted-foreground mb-4">
+            <span className="font-semibold text-foreground">All plans include:</span>
+          </p>
+          <div className="flex flex-wrap justify-center gap-4">
+            {includedFeatures.map((feature, i) => (
+              <span key={i} className="flex items-center gap-2 text-sm text-foreground">
+                <Check className="w-4 h-4 text-accent" />
+                {feature}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default PricingSection;

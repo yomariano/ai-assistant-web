@@ -1,92 +1,79 @@
-import { Calendar, PhoneOff, Building2, Stethoscope, CreditCard, HelpCircle } from 'lucide-react';
+import { PhoneOff, Users, Clock } from 'lucide-react';
 
-const useCases = [
+const painPoints = [
     {
-        title: "Book Appointments",
-        description: "Schedule doctor visits, salon appointments, or restaurant reservations without the back-and-forth.",
-        icon: Calendar,
-        example: "\"Book me a haircut for Saturday afternoon\"",
-        color: "indigo"
-    },
-    {
-        title: "Cancel Subscriptions",
-        description: "Navigate retention scripts and cancel unwanted services. No guilt trips, no hassle.",
         icon: PhoneOff,
-        example: "\"Cancel my gym membership effective immediately\"",
-        color: "rose"
+        title: "Phone rings during rush hour. You can't answer.",
+        description: "That's €15 walking out the door.",
+        stat: "€15",
+        statLabel: "Lost per missed call"
     },
     {
-        title: "Government & DMV",
-        description: "Let AI wait on hold for hours and connect you only when a human is ready.",
-        icon: Building2,
-        example: "\"Renew my vehicle registration\"",
-        color: "amber"
+        icon: Users,
+        title: "You hire someone just to answer phones.",
+        description: "That's €2,000/month for a part-time task.",
+        stat: "€2,000",
+        statLabel: "Monthly staff cost"
     },
     {
-        title: "Healthcare Calls",
-        description: "Schedule appointments, request prescription refills, or check on insurance claims.",
-        icon: Stethoscope,
-        example: "\"Schedule my annual checkup with Dr. Smith\"",
-        color: "emerald"
-    },
-    {
-        title: "Billing Disputes",
-        description: "Negotiate bills, dispute charges, or request refunds on your behalf.",
-        icon: CreditCard,
-        example: "\"Dispute the $50 late fee on my account\"",
-        color: "violet"
-    },
-    {
-        title: "Customer Support",
-        description: "Handle returns, track packages, or resolve issues with any company.",
-        icon: HelpCircle,
-        example: "\"Check the status of my return request\"",
-        color: "sky"
+        icon: Clock,
+        title: "Customers leave voicemails. You call back hours later.",
+        description: "They've already ordered elsewhere.",
+        stat: "73%",
+        statLabel: "Won't leave a voicemail"
     }
 ];
 
-const colorClasses = {
-    indigo: { bg: "bg-indigo-50", text: "text-indigo-600", border: "border-indigo-100" },
-    rose: { bg: "bg-rose-50", text: "text-rose-600", border: "border-rose-100" },
-    amber: { bg: "bg-amber-50", text: "text-amber-600", border: "border-amber-100" },
-    emerald: { bg: "bg-emerald-50", text: "text-emerald-600", border: "border-emerald-100" },
-    violet: { bg: "bg-violet-50", text: "text-violet-600", border: "border-violet-100" },
-    sky: { bg: "bg-sky-50", text: "text-sky-600", border: "border-sky-100" },
-};
-
 export default function UseCases() {
     return (
-        <section id="use-cases" className="py-20 bg-gray-50">
+        <section id="problem" className="py-20 bg-gray-900">
             <div className="mx-auto max-w-7xl px-6 lg:px-8">
                 <div className="text-center max-w-3xl mx-auto mb-16">
-                    <h2 className="text-sm font-semibold text-indigo-600 uppercase tracking-wide mb-3">Use Cases</h2>
-                    <p className="text-3xl sm:text-4xl font-bold text-gray-900">
-                        What Can Our AI Call For You?
+                    <h2 className="text-sm font-semibold text-orange-400 uppercase tracking-wide mb-3">Sound Familiar?</h2>
+                    <p className="text-3xl sm:text-4xl font-bold text-white">
+                        Every Missed Call is Money Lost
                     </p>
-                    <p className="mt-4 text-lg text-gray-600">
-                        From personal errands to business operations, our AI handles any phone call with human-like conversation.
+                    <p className="mt-4 text-lg text-gray-400">
+                        Running a café or restaurant means your hands are always full. But the phone keeps ringing.
                     </p>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {useCases.map((useCase) => {
-                        const colors = colorClasses[useCase.color as keyof typeof colorClasses];
-                        return (
-                            <div 
-                                key={useCase.title} 
-                                className="bg-white rounded-2xl p-6 border border-gray-100 hover:border-gray-200 hover:shadow-lg transition-all duration-300"
-                            >
-                                <div className={`inline-flex items-center justify-center w-12 h-12 rounded-xl ${colors.bg} mb-4`}>
-                                    <useCase.icon className={`h-6 w-6 ${colors.text}`} />
-                                </div>
-                                <h3 className="text-lg font-semibold text-gray-900 mb-2">{useCase.title}</h3>
-                                <p className="text-gray-600 text-sm mb-4">{useCase.description}</p>
-                                <div className={`${colors.bg} ${colors.border} border rounded-lg px-3 py-2`}>
-                                    <p className={`text-sm ${colors.text} italic`}>{useCase.example}</p>
-                                </div>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    {painPoints.map((point, index) => (
+                        <div
+                            key={index}
+                            className="relative bg-gray-800 rounded-2xl p-8 border border-gray-700 hover:border-orange-500/50 transition-all duration-300"
+                        >
+                            {/* Icon */}
+                            <div className="inline-flex items-center justify-center w-14 h-14 rounded-xl bg-red-500/10 mb-6">
+                                <point.icon className="h-7 w-7 text-red-400" />
                             </div>
-                        );
-                    })}
+
+                            {/* Content */}
+                            <h3 className="text-xl font-semibold text-white mb-3">
+                                {point.title}
+                            </h3>
+                            <p className="text-gray-400 mb-6">
+                                {point.description}
+                            </p>
+
+                            {/* Stat */}
+                            <div className="pt-6 border-t border-gray-700">
+                                <div className="text-3xl font-bold text-orange-400">{point.stat}</div>
+                                <div className="text-sm text-gray-500">{point.statLabel}</div>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+
+                {/* Solution Teaser */}
+                <div className="mt-16 text-center">
+                    <p className="text-lg text-gray-400">
+                        What if every call was answered in 0.5 seconds?
+                    </p>
+                    <p className="text-2xl font-semibold text-white mt-2">
+                        Meet <span className="text-orange-400">OrderBot</span> — Your 24/7 Order Taker
+                    </p>
                 </div>
             </div>
         </section>

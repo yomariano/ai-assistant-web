@@ -1,5 +1,5 @@
 import axios from 'axios';
-import type { User, SavedCall, ScheduledCall, CallHistory, UserStats, CallRequest, AssistantResponse, Voice, PhoneNumber } from '@/types';
+import type { User, SavedCall, ScheduledCall, CallHistory, UserStats, CallRequest, AssistantResponse, Voice, PhoneNumber, NotificationPreferences, EscalationSettings } from '@/types';
 import { getSession } from './supabase';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
@@ -216,6 +216,34 @@ export const assistantApi = {
 
   getStats: async (): Promise<{ thisMonth: { calls: number; minutes: number }; limits: { minutesIncluded: number; maxMinutesPerCall: number } }> => {
     const { data } = await api.get('/api/assistant/stats');
+    return data;
+  },
+};
+
+// Notifications
+export const notificationsApi = {
+  getPreferences: async (): Promise<{ preferences: NotificationPreferences }> => {
+    const { data } = await api.get('/api/notifications/preferences');
+    return data;
+  },
+
+  updatePreferences: async (updates: Partial<NotificationPreferences>): Promise<{ preferences: NotificationPreferences; message: string }> => {
+    const { data } = await api.put('/api/notifications/preferences', updates);
+    return data;
+  },
+
+  getEscalation: async (): Promise<{ settings: EscalationSettings }> => {
+    const { data } = await api.get('/api/notifications/escalation');
+    return data;
+  },
+
+  updateEscalation: async (updates: Partial<EscalationSettings>): Promise<{ settings: EscalationSettings; message: string }> => {
+    const { data } = await api.put('/api/notifications/escalation', updates);
+    return data;
+  },
+
+  sendTest: async (type: 'email' | 'sms'): Promise<{ success: boolean; message: string; messageId?: string }> => {
+    const { data } = await api.post('/api/notifications/test', { type });
     return data;
   },
 };

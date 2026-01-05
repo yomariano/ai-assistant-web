@@ -1,27 +1,41 @@
-import LandingNavbar from '@/components/landing/LandingNavbar';
-import Hero from '@/components/landing/Hero';
-import UseCases from '@/components/landing/UseCases';
-import HowItWorks from '@/components/landing/HowItWorks';
-import FeaturesGrid from '@/components/landing/FeaturesGrid';
-import Comparison from '@/components/landing/Comparison';
-import Pricing from '@/components/landing/Pricing';
-import Testimonials from '@/components/landing/Testimonials';
-import CTA from '@/components/landing/CTA';
-import Footer from '@/components/landing/Footer';
+import {
+  Header,
+  HeroSection,
+  MetricsBar,
+  ProblemSection,
+  SolutionSection,
+  UseCasesSection,
+  ComparisonSection,
+  TechnologySection,
+  CaseStudiesSection,
+  ROICalculator,
+  IntegrationsSection,
+  SecuritySection,
+  PricingSection,
+  DemoSection,
+  FAQSection,
+  Footer,
+} from "@/components/voicefleet";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-white">
-      <LandingNavbar />
+    <div className="min-h-screen bg-background">
+      <Header />
       <main>
-        <Hero />
-        <UseCases />
-        <HowItWorks />
-        <FeaturesGrid />
-        <Comparison />
-        <Pricing />
-        <Testimonials />
-        <CTA />
+        <HeroSection />
+        <MetricsBar />
+        <ProblemSection />
+        <SolutionSection />
+        <UseCasesSection />
+        <ComparisonSection />
+        <TechnologySection />
+        <CaseStudiesSection />
+        <ROICalculator />
+        <IntegrationsSection />
+        <SecuritySection />
+        <PricingSection />
+        <DemoSection />
+        <FAQSection />
       </main>
       <Footer />
     </div>

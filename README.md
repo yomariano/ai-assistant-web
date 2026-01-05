@@ -1,102 +1,86 @@
-# AI Assistant Web
+# OrderBot Web
 
-Frontend SaaS dashboard for the AI Voice Assistant, built with Next.js, TypeScript, and Tailwind CSS.
+Frontend for OrderBot.ie - AI Voice Assistant for Restaurants.
 
-## Features
+> See the main [README.md](../README.md) for full project documentation.
 
-- User authentication (login/register)
-- Dashboard with stats overview
-- Make AI-powered phone calls
-- Save calls for quick reuse
-- Schedule calls for later
-- Call history
-- Profile settings
-
-## Tech Stack
-
-- **Next.js 15** - React framework with App Router
-- **TypeScript** - Type safety
-- **Tailwind CSS** - Styling
-- **Zustand** - State management
-- **Axios** - API client
-- **date-fns** - Date formatting
-- **Lucide React** - Icons
-
-## Prerequisites
-
-- Node.js 18+
-- Backend API running (ai-assistant-api)
-
-## Setup
-
-### 1. Clone and install
+## Quick Start
 
 ```bash
-git clone <repo-url>
-cd ai-assistant-web
+# Install dependencies
 npm install
-```
 
-### 2. Configure environment
-
-```bash
+# Copy environment file
 cp .env.example .env.local
-```
 
-Edit `.env.local`:
-
-```env
-NEXT_PUBLIC_API_URL=http://localhost:3000
-```
-
-### 3. Run the development server
-
-```bash
+# Run development server
 npm run dev
 ```
 
-Open [http://localhost:3001](http://localhost:3001) in your browser.
+App runs at http://localhost:3001
 
-## Project Structure
+## Tech Stack
 
-```
-src/
-├── app/                    # Next.js App Router
-│   ├── (auth)/            # Auth pages (login, register)
-│   ├── (dashboard)/       # Protected dashboard pages
-│   └── layout.tsx         # Root layout
-├── components/
-│   ├── layout/            # Layout components (Sidebar, etc.)
-│   └── ui/                # Reusable UI components
-├── lib/
-│   ├── api.ts             # API client
-│   └── store.ts           # Zustand stores
-├── hooks/                 # Custom React hooks
-└── types/                 # TypeScript types
-```
+- **Next.js 15** - App Router
+- **TypeScript**
+- **Tailwind CSS**
+- **Zustand** - State management
+- **Playwright** - E2E testing
 
 ## Pages
 
 | Path | Description |
 |------|-------------|
-| `/login` | Login page |
-| `/register` | Registration page |
-| `/dashboard` | Main dashboard with stats |
-| `/call` | New call form |
-| `/agenda` | Saved calls list |
-| `/scheduled` | Scheduled calls list |
+| `/` | VoiceFleet landing page |
+| `/pricing` | OrderBot pricing (€19/€99/€249) |
+| `/login` | Authentication |
+| `/dashboard` | Main dashboard |
+| `/notifications` | Email/SMS/escalation settings |
+| `/assistant` | AI assistant configuration |
+| `/billing` | Subscription management |
 | `/history` | Call history |
 | `/settings` | Profile settings |
 
-## Deployment
+## Key Components
 
-### Vercel (Recommended)
+| Component | Location | Description |
+|-----------|----------|-------------|
+| **VoiceFleet Landing** | `components/voicefleet/` | Landing page sections |
+| **PricingSection** | `components/voicefleet/PricingSection.tsx` | OrderBot pricing display |
+| **Notifications Page** | `app/(dashboard)/notifications/page.tsx` | Email/SMS settings UI |
+| **Sidebar** | `components/layout/Sidebar.tsx` | Dashboard navigation |
 
-1. Push to GitHub
-2. Import project in Vercel
-3. Set environment variables
-4. Deploy
+## API Client
 
-## License
+Located in `src/lib/api.ts`:
 
-MIT
+```typescript
+// Available API modules
+authApi        // Authentication
+userApi        // User profile
+billingApi     // Subscriptions, usage
+notificationsApi  // Email/SMS/escalation settings
+assistantApi   // AI assistant config
+```
+
+## E2E Testing
+
+```bash
+# Run all E2E tests
+npx playwright test
+
+# Run specific tests
+npx playwright test notifications.spec.ts
+npx playwright test eur-checkout.spec.ts
+
+# Run with UI
+npx playwright test --ui
+```
+
+## Environment Variables
+
+```env
+NEXT_PUBLIC_API_URL=http://localhost:3000
+NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
+```

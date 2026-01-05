@@ -1,62 +1,83 @@
-import { Zap, Shield, Globe2, Clock, Brain, Headphones } from 'lucide-react';
+import { ShoppingBag, Calendar, HelpCircle, Mic, Bell, Clock } from 'lucide-react';
 
 const features = [
     {
-        title: "Human-Like Voice",
-        description: "Advanced text-to-speech that sounds natural, with proper pacing, emotion, and conversational flow.",
-        icon: Headphones,
+        icon: ShoppingBag,
+        title: "Takes Orders",
+        description: "Handles takeaway orders, modifications, special requests. Just like your best staff.",
+        color: "orange"
     },
     {
-        title: "Real-Time Intelligence",
-        description: "AI understands context, handles interruptions, and adapts to unexpected questions mid-call.",
-        icon: Brain,
+        icon: Calendar,
+        title: "Makes Bookings",
+        description: "Table reservations with date, time, party size. Syncs with your calendar.",
+        color: "blue"
     },
     {
-        title: "Sub-500ms Response",
-        description: "Ultra-low latency ensures natural conversation rhythm without awkward pauses.",
-        icon: Zap,
+        icon: HelpCircle,
+        title: "Answers Questions",
+        description: "Opening hours, menu items, allergens, parking. Trained on YOUR info.",
+        color: "green"
     },
     {
-        title: "50+ Languages",
-        description: "Native-level fluency in major languages with automatic accent matching.",
-        icon: Globe2,
+        icon: Mic,
+        title: "Speaks Irish English",
+        description: "Not an American robot. Natural voice your customers trust.",
+        color: "purple"
     },
     {
-        title: "24/7 Availability",
-        description: "Your AI agent never sleeps. Make calls anytime, any timezone, any day.",
+        icon: Bell,
+        title: "Sends Notifications",
+        description: "Instant SMS to you AND the customer. Nothing falls through cracks.",
+        color: "pink"
+    },
+    {
         icon: Clock,
-    },
-    {
-        title: "Enterprise Security",
-        description: "SOC2 compliant, end-to-end encryption, and automatic PII redaction.",
-        icon: Shield,
-    },
+        title: "Works 24/7",
+        description: "3am order? Bank holiday? Makes no difference. Always on.",
+        color: "amber"
+    }
 ];
+
+const colorClasses = {
+    orange: { bg: "bg-orange-100", text: "text-orange-600" },
+    blue: { bg: "bg-blue-100", text: "text-blue-600" },
+    green: { bg: "bg-green-100", text: "text-green-600" },
+    purple: { bg: "bg-purple-100", text: "text-purple-600" },
+    pink: { bg: "bg-pink-100", text: "text-pink-600" },
+    amber: { bg: "bg-amber-100", text: "text-amber-600" },
+};
 
 export default function FeaturesGrid() {
     return (
         <section id="features" className="py-20 bg-gray-50">
             <div className="mx-auto max-w-7xl px-6 lg:px-8">
                 <div className="text-center max-w-3xl mx-auto mb-16">
-                    <h2 className="text-sm font-semibold text-indigo-600 uppercase tracking-wide mb-3">Features</h2>
+                    <h2 className="text-sm font-semibold text-orange-500 uppercase tracking-wide mb-3">Features</h2>
                     <p className="text-3xl sm:text-4xl font-bold text-gray-900">
-                        Enterprise-Grade AI, Consumer Simple
+                        Everything You Need to Never Miss an Order
                     </p>
                     <p className="mt-4 text-lg text-gray-600">
-                        Built with the latest AI technology to deliver calls that are indistinguishable from human conversations.
+                        OrderBot does more than answer calls — it becomes an extension of your team.
                     </p>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {features.map((feature) => (
-                        <div key={feature.title} className="bg-white rounded-2xl p-6 border border-gray-100">
-                            <div className="w-12 h-12 rounded-xl bg-indigo-100 flex items-center justify-center mb-4">
-                                <feature.icon className="h-6 w-6 text-indigo-600" />
+                    {features.map((feature) => {
+                        const colors = colorClasses[feature.color as keyof typeof colorClasses];
+                        return (
+                            <div
+                                key={feature.title}
+                                className="bg-white rounded-2xl p-8 border border-gray-100 hover:border-orange-200 hover:shadow-lg transition-all duration-300"
+                            >
+                                <div className={`inline-flex items-center justify-center w-14 h-14 rounded-xl ${colors.bg} mb-6`}>
+                                    <feature.icon className={`h-7 w-7 ${colors.text}`} />
+                                </div>
+                                <h3 className="text-xl font-semibold text-gray-900 mb-3">{feature.title}</h3>
+                                <p className="text-gray-600">{feature.description}</p>
                             </div>
-                            <h3 className="text-lg font-semibold text-gray-900 mb-2">{feature.title}</h3>
-                            <p className="text-gray-600 text-sm leading-relaxed">{feature.description}</p>
-                        </div>
-                    ))}
+                        );
+                    })}
                 </div>
             </div>
         </section>
