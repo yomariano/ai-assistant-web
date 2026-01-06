@@ -44,11 +44,14 @@ export default function BillingPage() {
         billingApi.getUsage()
       ]);
 
-      // API returns subscription data directly or with nested structure
-      if (subRes.status !== 'none') {
-        setSubscription(subRes);
+      // API returns subscription data directly with status field
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const subData = subRes as any;
+      if (subData.status && subData.status !== 'none') {
+        setSubscription(subData);
       }
-      setUsage(usageRes);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      setUsage(usageRes as any);
     } catch (err) {
       console.error('Failed to fetch billing data:', err);
     } finally {
