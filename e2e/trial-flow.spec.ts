@@ -170,7 +170,7 @@ test.describe('Trial Flow', () => {
 });
 
 test.describe('Trial to Paid Conversion', () => {
-  const STRIPE_PAYMENT_LINK = 'https://buy.stripe.com/test_eVq4gy46OeB8cvS2zWfQI04';
+  const STRIPE_PAYMENT_LINK = 'https://buy.stripe.com/test_6oUaEWeLs9gO8fCgqMfQI07';
 
   test.beforeEach(async ({ request }) => {
     await createTestUser(request, TEST_USER_ID);

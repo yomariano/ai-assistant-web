@@ -30,8 +30,8 @@ const TEST_CARD = {
   zip: '10001'
 };
 
-// Stripe Payment Link for starter plan (1 phone number)
-const STARTER_PAYMENT_LINK = 'https://buy.stripe.com/test_eVq4gy46OeB8cvS2zWfQI04';
+// Stripe Payment Link for starter plan (1 phone number) - EUR
+const STARTER_PAYMENT_LINK = 'https://buy.stripe.com/test_6oUaEWeLs9gO8fCgqMfQI07';
 
 // Helper to get raw DB state
 async function getDbState(request: any, userId: string) {

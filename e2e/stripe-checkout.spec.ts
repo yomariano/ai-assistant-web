@@ -1,11 +1,11 @@
 import { test, expect } from '@playwright/test';
 
 const API_URL = 'http://localhost:3000';
-// Stripe payment links for each plan
+// Stripe payment links for each plan (EUR - Ireland/EU)
 const STRIPE_PAYMENT_LINKS = {
-  starter: 'https://buy.stripe.com/test_eVq4gy46OeB8cvS2zWfQI04',
-  growth: 'https://buy.stripe.com/test_bJe14m32KfFc1Re7UgfQI05',
-  scale: 'https://buy.stripe.com/test_fZu6oGbzg3Wu7bycawfQI06',
+  starter: 'https://buy.stripe.com/test_6oUaEWeLs9gO8fCgqMfQI07',
+  growth: 'https://buy.stripe.com/test_28E6oG0UC78G53qb6sfQI08',
+  scale: 'https://buy.stripe.com/test_00w4gyfPw64C53q4I4fQI09',
 };
 // Expected phone numbers per plan (OrderBot.ie Pricing Jan 2026)
 // Lite: 1 phone | Growth: 2 phones | Pro: 5 phones

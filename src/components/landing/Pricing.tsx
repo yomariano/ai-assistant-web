@@ -17,18 +17,18 @@ interface TierData {
 
 const tiers: TierData[] = [
     {
-        name: 'Starter',
+        name: 'Lite',
         id: 'tier-starter',
         href: '/register',
-        price: '€149',
-        description: 'Everything you need to stop missing orders.',
-        perfectFor: 'Perfect for: Small cafés',
+        price: '€19',
+        description: 'Start automating your calls with pay-as-you-go pricing.',
+        perfectFor: 'Perfect for: Getting started',
         features: [
-            '200 calls included',
-            'Order taking',
-            'SMS notifications',
-            'Business hours support',
-            'Custom greeting',
+            '€0.95 per call',
+            '1 phone number',
+            'AI voice assistant',
+            'Call scheduling',
+            'Email notifications',
         ],
         mostPopular: false,
         cta: 'Start Free Trial',
@@ -37,16 +37,16 @@ const tiers: TierData[] = [
         name: 'Growth',
         id: 'tier-growth',
         href: '/register',
-        price: '€249',
-        description: 'For busy restaurants that need more.',
-        perfectFor: 'Perfect for: Busy restaurants',
+        price: '€99',
+        description: 'Scale your operations with lower per-call rates.',
+        perfectFor: 'Perfect for: Growing businesses',
         features: [
-            '500 calls included',
-            'Orders + Reservations',
-            'SMS + Email notifications',
-            'Extended support',
-            'Basic analytics',
-            'Calendar integration',
+            '€0.45 per call',
+            '2 phone numbers',
+            'Priority support',
+            'Call analytics',
+            'Webhook integrations',
+            'Custom voice settings',
         ],
         mostPopular: true,
         cta: 'Start Free Trial',
@@ -55,20 +55,20 @@ const tiers: TierData[] = [
         name: 'Pro',
         id: 'tier-pro',
         href: '/register',
-        price: '€399',
-        description: 'For restaurant groups and high volume.',
-        perfectFor: 'Perfect for: Restaurant groups',
+        price: '€249',
+        description: 'For high-volume operations with predictable costs.',
+        perfectFor: 'Perfect for: Enterprises',
         features: [
-            'Unlimited calls',
-            'Full feature set',
-            'Multi-location support',
-            'Priority support',
+            '1,500 calls included',
+            '5 phone numbers',
+            'Dedicated support',
             'Advanced analytics',
             'Custom integrations',
-            'Dedicated account manager',
+            'SLA guarantee',
+            'Account manager',
         ],
         mostPopular: false,
-        cta: 'Contact Sales',
+        cta: 'Start Free Trial',
     },
 ];
 
@@ -126,7 +126,7 @@ export default function Pricing() {
                         Simple Pricing. Massive ROI.
                     </p>
                     <p className="mt-4 text-lg text-gray-600">
-                        One missed order per day costs more than OrderBot. Do the math.
+                        AI voice agents at a fraction of the cost. Pay only for what you use.
                     </p>
                 </div>
 
@@ -182,10 +182,7 @@ export default function Pricing() {
 
                 <div className="mt-12 text-center">
                     <p className="text-sm text-gray-500">
-                        All plans include: <span className="font-medium">14-day free trial</span> • Cancel anytime • GDPR compliant
-                    </p>
-                    <p className="text-sm text-gray-400 mt-2">
-                        One-time setup fee: €299-799 depending on menu complexity
+                        All plans include: <span className="font-medium">3 free trial calls</span> • Cancel anytime • GDPR compliant
                     </p>
                 </div>
             </div>
