@@ -2,8 +2,10 @@
 
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Shield, Clock, CheckCircle2, Phone, Users, TrendingUp, Headphones } from "lucide-react";
+import { useAuthStore } from "@/lib/store";
 
 const HeroSection = () => {
+  const { loginWithGoogle, isAuthenticated } = useAuthStore();
   const trustBadges = [
     { icon: Shield, label: "SOC 2 Compliant" },
     { icon: Shield, label: "GDPR Ready" },
@@ -48,11 +50,19 @@ const HeroSection = () => {
                   <ArrowRight className="w-5 h-5" />
                 </Button>
               </a>
-              <a href="#case-studies">
-                <Button variant="outline" size="xl">
-                  See Case Studies
+              {isAuthenticated ? (
+                <a href="/dashboard">
+                  <Button variant="outline" size="xl">
+                    Go to Dashboard
+                    <ArrowRight className="w-5 h-5" />
+                  </Button>
+                </a>
+              ) : (
+                <Button variant="outline" size="xl" onClick={loginWithGoogle}>
+                  Get Started
+                  <ArrowRight className="w-5 h-5" />
                 </Button>
-              </a>
+              )}
             </div>
 
             {/* Trust Badges */}
