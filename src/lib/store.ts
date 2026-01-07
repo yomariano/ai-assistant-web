@@ -132,27 +132,27 @@ export const useAuthStore = create<AuthState>()(
 );
 
 // Listen for Supabase auth changes
-if (typeof window !== 'undefined') {
+if (typeof window !== 'undefined' && supabase) {
   supabase.auth.onAuthStateChange(async (event, session) => {
     if (event === 'SIGNED_IN' && session) {
       try {
         const { user } = await authApi.me(session.access_token);
-        useAuthStore.setState({ 
-          user, 
-          token: session.access_token, 
+        useAuthStore.setState({
+          user,
+          token: session.access_token,
           isAuthenticated: true,
           devMode: false,
-          isLoading: false 
+          isLoading: false
         });
       } catch (error) {
         console.error('Failed to get user after sign in:', error);
       }
     } else if (event === 'SIGNED_OUT') {
-      useAuthStore.setState({ 
-        user: null, 
-        token: null, 
+      useAuthStore.setState({
+        user: null,
+        token: null,
         isAuthenticated: false,
-        devMode: false 
+        devMode: false
       });
     }
   });
