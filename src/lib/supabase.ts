@@ -38,8 +38,21 @@ export const signOut = async () => {
 
 export const getSession = async () => {
   console.log('[SUPABASE] getSession called');
+  console.log('[SUPABASE] Using URL:', supabaseUrl?.substring(0, 30) + '...');
+
   try {
-    const { data: { session }, error } = await supabase.auth.getSession();
+    // Add timeout to prevent hanging forever
+    const timeoutPromise = new Promise((_, reject) => {
+      setTimeout(() => reject(new Error('getSession timeout after 10s')), 10000);
+    });
+
+    const sessionPromise = supabase.auth.getSession();
+
+    const { data: { session }, error } = await Promise.race([
+      sessionPromise,
+      timeoutPromise
+    ]) as Awaited<ReturnType<typeof supabase.auth.getSession>>;
+
     console.log('[SUPABASE] getSession result:', {
       hasSession: !!session,
       userId: session?.user?.id,
