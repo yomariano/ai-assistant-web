@@ -61,46 +61,18 @@ export const useAuthStore = create<AuthState>()(
       },
 
       checkAuth: async () => {
+        console.log('[STORE] checkAuth started');
         try {
-          // First check if we have a Supabase session
-          let session = null;
+          // Check for dev mode FIRST (faster, no Supabase dependency)
           try {
-            session = await getSession();
-            console.log('Supabase session:', session ? 'exists' : 'none');
-          } catch (sessionError) {
-            console.error('Failed to get Supabase session:', sessionError);
-          }
-
-          if (session?.access_token) {
-            // Get user profile from our backend
-            try {
-              console.log('Calling /api/auth/me...');
-              const { user } = await authApi.me(session.access_token);
-              console.log('Got user profile:', user?.email);
-              set({
-                user,
-                token: session.access_token,
-                isAuthenticated: true,
-                isLoading: false,
-                devMode: false
-              });
-              return;
-            } catch (error) {
-              console.error('Failed to get user profile:', error);
-              // Continue to dev mode check
-            }
-          }
-
-          // Check for dev mode
-          try {
-            console.log('Checking dev mode config...');
+            console.log('[STORE] Checking dev mode config...');
             const config = await authApi.getConfig();
-            console.log('Dev mode config:', config);
+            console.log('[STORE] Dev mode config:', config);
             if (config.devMode) {
               // Try dev login
-              console.log('Attempting dev login...');
+              console.log('[STORE] Dev mode enabled, attempting dev login...');
               const { user, devMode } = await authApi.devLogin();
-              console.log('Dev login successful:', user?.email);
+              console.log('[STORE] Dev login successful:', user?.email);
               set({
                 user,
                 token: 'dev-mode',
@@ -111,14 +83,43 @@ export const useAuthStore = create<AuthState>()(
               return;
             }
           } catch (error) {
-            console.error('Config/dev-login failed:', error);
-            // Config fetch failed, continue to unauthenticated state
+            console.error('[STORE] Config/dev-login failed:', error);
+            // Continue to Supabase auth
           }
 
-          console.log('No auth found, setting unauthenticated');
+          // Try Supabase session (only if dev mode is not enabled)
+          let session = null;
+          try {
+            console.log('[STORE] Checking Supabase session...');
+            session = await getSession();
+            console.log('[STORE] Supabase session:', session ? 'exists' : 'none');
+          } catch (sessionError) {
+            console.error('[STORE] Failed to get Supabase session:', sessionError);
+          }
+
+          if (session?.access_token) {
+            // Get user profile from our backend
+            try {
+              console.log('[STORE] Calling /api/auth/me...');
+              const { user } = await authApi.me(session.access_token);
+              console.log('[STORE] Got user profile:', user?.email);
+              set({
+                user,
+                token: session.access_token,
+                isAuthenticated: true,
+                isLoading: false,
+                devMode: false
+              });
+              return;
+            } catch (error) {
+              console.error('[STORE] Failed to get user profile:', error);
+            }
+          }
+
+          console.log('[STORE] No auth found, setting unauthenticated');
           set({ isLoading: false, isAuthenticated: false });
         } catch (error) {
-          console.error('Auth check failed:', error);
+          console.error('[STORE] Auth check failed:', error);
           set({ user: null, token: null, isAuthenticated: false, isLoading: false });
         }
       },
