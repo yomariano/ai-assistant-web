@@ -66,11 +66,11 @@ export default function AssistantPage() {
         setSystemPrompt(assistantRes.assistant.systemPrompt || '');
       }
 
-      setVoices(voicesRes.voices);
-      setPlanId(voicesRes.planId);
-      setPhoneNumbers(phoneRes.phoneNumbers);
-      setStats(statsRes.thisMonth);
-      setLimits(statsRes.limits);
+      setVoices(voicesRes.voices || []);
+      setPlanId(voicesRes.planId || 'starter');
+      setPhoneNumbers(phoneRes.phoneNumbers || []);
+      setStats(statsRes.thisMonth || null);
+      setLimits(statsRes.limits || null);
     } catch (err) {
       console.error('Failed to fetch assistant data:', err);
       setError('Failed to load assistant configuration');
