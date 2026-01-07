@@ -1,91 +1,81 @@
-import { createServerClient } from '@supabase/ssr';
-import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-
-// Get the base URL, handling reverse proxy environments
-function getBaseUrl(request: NextRequest): string {
-  // First, check for forwarded headers (set by reverse proxies like Traefik)
-  const forwardedHost = request.headers.get('x-forwarded-host');
-  const forwardedProto = request.headers.get('x-forwarded-proto') || 'https';
-
-  console.log('[AUTH CALLBACK] getBaseUrl - forwardedHost:', forwardedHost, 'forwardedProto:', forwardedProto);
-
-  if (forwardedHost) {
-    const url = `${forwardedProto}://${forwardedHost}`;
-    console.log('[AUTH CALLBACK] Using forwarded URL:', url);
-    return url;
-  }
-
-  // Fallback to configured site URL for production
-  if (process.env.NEXT_PUBLIC_SITE_URL) {
-    console.log('[AUTH CALLBACK] Using NEXT_PUBLIC_SITE_URL:', process.env.NEXT_PUBLIC_SITE_URL);
-    return process.env.NEXT_PUBLIC_SITE_URL;
-  }
-
-  // Last resort: use request.url (works for local dev)
-  const url = new URL(request.url);
-  const baseUrl = `${url.protocol}//${url.host}`;
-  console.log('[AUTH CALLBACK] Using request.url fallback:', baseUrl);
-  return baseUrl;
-}
+import { createClient } from '@/utils/supabase/server';
 
 export async function GET(request: NextRequest) {
   console.log('[AUTH CALLBACK] ====== Auth callback started ======');
   console.log('[AUTH CALLBACK] Request URL:', request.url);
 
-  const requestUrl = new URL(request.url);
-  const code = requestUrl.searchParams.get('code');
-  const error = requestUrl.searchParams.get('error');
-  const errorDescription = requestUrl.searchParams.get('error_description');
+  const { searchParams, origin } = new URL(request.url);
+  const code = searchParams.get('code');
+  const error = searchParams.get('error');
+  const errorDescription = searchParams.get('error_description');
+
+  // Support "next" parameter for custom redirect paths
+  let next = searchParams.get('next') ?? '/dashboard';
+  if (!next.startsWith('/')) {
+    next = '/dashboard';
+  }
 
   console.log('[AUTH CALLBACK] Code present:', !!code);
   console.log('[AUTH CALLBACK] Error:', error);
   console.log('[AUTH CALLBACK] Error description:', errorDescription);
+  console.log('[AUTH CALLBACK] Next path:', next);
+
+  if (error) {
+    console.error('[AUTH CALLBACK] OAuth error:', error, errorDescription);
+    // Redirect to login with error
+    return NextResponse.redirect(new URL(`/login?error=${encodeURIComponent(error)}`, origin));
+  }
 
   if (code) {
     console.log('[AUTH CALLBACK] Exchanging code for session...');
-    const cookieStore = await cookies();
-    const supabase = createServerClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL!,
-      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-      {
-        cookies: {
-          getAll() {
-            return cookieStore.getAll();
-          },
-          setAll(cookiesToSet) {
-            console.log('[AUTH CALLBACK] Setting cookies:', cookiesToSet.map(c => c.name));
-            try {
-              cookiesToSet.forEach(({ name, value, options }) =>
-                cookieStore.set(name, value, options)
-              );
-            } catch (e) {
-              console.error('[AUTH CALLBACK] Cookie set error:', e);
-            }
-          },
-        },
-      }
-    );
+    const supabase = await createClient();
 
-    try {
-      const { data, error: sessionError } = await supabase.auth.exchangeCodeForSession(code);
-      console.log('[AUTH CALLBACK] Session exchange result:', {
-        success: !!data.session,
-        userId: data.session?.user?.id,
-        email: data.session?.user?.email,
-        error: sessionError?.message
-      });
-    } catch (e) {
-      console.error('[AUTH CALLBACK] Session exchange exception:', e);
+    const { data, error: sessionError } = await supabase.auth.exchangeCodeForSession(code);
+
+    console.log('[AUTH CALLBACK] Session exchange result:', {
+      success: !!data.session,
+      userId: data.session?.user?.id,
+      email: data.session?.user?.email,
+      error: sessionError?.message
+    });
+
+    if (sessionError) {
+      console.error('[AUTH CALLBACK] Session exchange failed:', sessionError);
+      return NextResponse.redirect(new URL(`/login?error=${encodeURIComponent(sessionError.message)}`, origin));
+    }
+
+    // Handle reverse proxy environments (Traefik, etc.)
+    const forwardedHost = request.headers.get('x-forwarded-host');
+    const isLocalEnv = process.env.NODE_ENV === 'development';
+
+    console.log('[AUTH CALLBACK] forwardedHost:', forwardedHost);
+    console.log('[AUTH CALLBACK] isLocalEnv:', isLocalEnv);
+
+    if (isLocalEnv) {
+      // In local dev, no load balancer, use origin directly
+      console.log('[AUTH CALLBACK] Local env - redirecting to:', `${origin}${next}`);
+      return NextResponse.redirect(new URL(next, origin));
+    } else if (forwardedHost) {
+      // Behind reverse proxy - use forwarded host
+      const forwardedProto = request.headers.get('x-forwarded-proto') || 'https';
+      const redirectUrl = `${forwardedProto}://${forwardedHost}${next}`;
+      console.log('[AUTH CALLBACK] Reverse proxy - redirecting to:', redirectUrl);
+      return NextResponse.redirect(new URL(redirectUrl));
+    } else if (process.env.NEXT_PUBLIC_SITE_URL) {
+      // Fallback to configured site URL
+      const redirectUrl = `${process.env.NEXT_PUBLIC_SITE_URL}${next}`;
+      console.log('[AUTH CALLBACK] Using SITE_URL - redirecting to:', redirectUrl);
+      return NextResponse.redirect(new URL(redirectUrl));
+    } else {
+      // Last resort - use origin
+      console.log('[AUTH CALLBACK] Fallback - redirecting to:', `${origin}${next}`);
+      return NextResponse.redirect(new URL(next, origin));
     }
   }
 
-  // Redirect to dashboard after successful authentication
-  const baseUrl = getBaseUrl(request);
-  const redirectUrl = new URL('/dashboard', baseUrl);
-  console.log('[AUTH CALLBACK] Redirecting to:', redirectUrl.toString());
-  console.log('[AUTH CALLBACK] ====== Auth callback completed ======');
-
-  return NextResponse.redirect(redirectUrl);
+  // No code provided - redirect to login
+  console.log('[AUTH CALLBACK] No code provided, redirecting to login');
+  return NextResponse.redirect(new URL('/login', origin));
 }

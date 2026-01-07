@@ -2,7 +2,8 @@ import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import type { User } from '@/types';
 import { authApi } from './api';
-import { supabase, signInWithGoogle, signOut as supabaseSignOut, getSession } from './supabase';
+import { signInWithGoogle, signOut as supabaseSignOut, getSession } from './supabase';
+import { createClient } from '@/utils/supabase/client';
 
 interface AuthState {
   user: User | null;
@@ -132,30 +133,41 @@ export const useAuthStore = create<AuthState>()(
 );
 
 // Listen for Supabase auth changes
-if (typeof window !== 'undefined' && supabase) {
-  supabase.auth.onAuthStateChange(async (event, session) => {
-    if (event === 'SIGNED_IN' && session) {
-      try {
-        const { user } = await authApi.me(session.access_token);
-        useAuthStore.setState({
-          user,
-          token: session.access_token,
-          isAuthenticated: true,
-          devMode: false,
-          isLoading: false
-        });
-      } catch (error) {
-        console.error('Failed to get user after sign in:', error);
-      }
-    } else if (event === 'SIGNED_OUT') {
-      useAuthStore.setState({
-        user: null,
-        token: null,
-        isAuthenticated: false,
-        devMode: false
+if (typeof window !== 'undefined') {
+  try {
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+    const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+    if (supabaseUrl && supabaseKey) {
+      const supabase = createClient();
+      supabase.auth.onAuthStateChange(async (event, session) => {
+        console.log('[STORE] Auth state changed:', event);
+        if (event === 'SIGNED_IN' && session) {
+          try {
+            const { user } = await authApi.me(session.access_token);
+            useAuthStore.setState({
+              user,
+              token: session.access_token,
+              isAuthenticated: true,
+              devMode: false,
+              isLoading: false
+            });
+          } catch (error) {
+            console.error('Failed to get user after sign in:', error);
+          }
+        } else if (event === 'SIGNED_OUT') {
+          useAuthStore.setState({
+            user: null,
+            token: null,
+            isAuthenticated: false,
+            devMode: false
+          });
+        }
       });
     }
-  });
+  } catch (e) {
+    console.error('[STORE] Failed to setup auth state listener:', e);
+  }
 }
 
 // Call form state

@@ -1,20 +1,30 @@
-import { createBrowserClient } from '@supabase/ssr';
+import { createClient } from '@/utils/supabase/client';
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
+// Create singleton client instance
+let supabaseInstance: ReturnType<typeof createClient> | null = null;
 
-console.log('[SUPABASE] Initializing client with URL:', supabaseUrl ? supabaseUrl.substring(0, 40) : 'MISSING');
-console.log('[SUPABASE] Anon key:', supabaseAnonKey ? 'SET (' + supabaseAnonKey.length + ' chars)' : 'MISSING');
+function getSupabase() {
+  if (!supabaseInstance) {
+    const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+    const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
-// Only create client if we have valid config
-export const supabase = (supabaseUrl && supabaseAnonKey)
-  ? createBrowserClient(supabaseUrl, supabaseAnonKey)
-  : null;
+    console.log('[SUPABASE] Initializing client with URL:', url ? url.substring(0, 40) : 'MISSING');
+    console.log('[SUPABASE] Anon key:', key ? 'SET (' + key.length + ' chars)' : 'MISSING');
+
+    if (url && key) {
+      supabaseInstance = createClient();
+    }
+  }
+  return supabaseInstance;
+}
+
+export const supabase = getSupabase();
 
 export type AuthProvider = 'google';
 
 export const signInWithGoogle = async () => {
-  if (!supabase) {
+  const client = getSupabase();
+  if (!client) {
     console.error('[SUPABASE] Client not initialized');
     throw new Error('Supabase client not initialized');
   }
@@ -22,7 +32,7 @@ export const signInWithGoogle = async () => {
   const redirectTo = `${window.location.origin}/auth/callback`;
   console.log('[SUPABASE] signInWithGoogle - redirectTo:', redirectTo);
 
-  const { data, error } = await supabase.auth.signInWithOAuth({
+  const { data, error } = await client.auth.signInWithOAuth({
     provider: 'google',
     options: {
       redirectTo,
@@ -35,13 +45,14 @@ export const signInWithGoogle = async () => {
 };
 
 export const signOut = async () => {
-  if (!supabase) {
+  const client = getSupabase();
+  if (!client) {
     console.log('[SUPABASE] Client not initialized, nothing to sign out');
     return;
   }
 
   console.log('[SUPABASE] signOut called');
-  const { error } = await supabase.auth.signOut();
+  const { error } = await client.auth.signOut();
   if (error) {
     console.error('[SUPABASE] signOut error:', error);
     throw error;
@@ -52,20 +63,19 @@ export const signOut = async () => {
 export const getSession = async () => {
   console.log('[SUPABASE] getSession called');
 
-  if (!supabase) {
+  const client = getSupabase();
+  if (!client) {
     console.log('[SUPABASE] Client not initialized, returning null session');
     return null;
   }
 
-  console.log('[SUPABASE] Using URL:', supabaseUrl?.substring(0, 30) + '...');
-
   try {
-    // Add timeout to prevent hanging forever (reduced to 5s)
+    // Add timeout to prevent hanging forever (5s)
     const timeoutPromise = new Promise<never>((_, reject) => {
       setTimeout(() => reject(new Error('getSession timeout after 5s')), 5000);
     });
 
-    const sessionPromise = supabase.auth.getSession();
+    const sessionPromise = client.auth.getSession();
 
     const { data: { session }, error } = await Promise.race([
       sessionPromise,
@@ -89,13 +99,14 @@ export const getSession = async () => {
 };
 
 export const getUser = async () => {
-  if (!supabase) {
+  const client = getSupabase();
+  if (!client) {
     console.log('[SUPABASE] Client not initialized, returning null user');
     return null;
   }
 
   console.log('[SUPABASE] getUser called');
-  const { data: { user }, error } = await supabase.auth.getUser();
+  const { data: { user }, error } = await client.auth.getUser();
   console.log('[SUPABASE] getUser result:', { userId: user?.id, email: user?.email, error: error?.message });
   if (error) throw error;
   return user;
