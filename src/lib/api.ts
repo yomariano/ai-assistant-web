@@ -13,9 +13,23 @@ const api = axios.create({
   },
 });
 
+// Endpoints that don't require authentication
+const PUBLIC_ENDPOINTS = [
+  '/api/auth/config',
+  '/api/auth/dev-login',
+  '/api/auth/dev-users',
+];
+
 // Request interceptor to add auth token
 api.interceptors.request.use(async (config) => {
   console.log('[API] Request interceptor - URL:', config.url);
+
+  // Skip auth for public endpoints
+  const isPublicEndpoint = PUBLIC_ENDPOINTS.some(endpoint => config.url?.includes(endpoint));
+  if (isPublicEndpoint) {
+    console.log('[API] Public endpoint, skipping auth');
+    return config;
+  }
 
   // Check for dev mode first
   const storedAuth = localStorage.getItem('auth-storage');
@@ -27,7 +41,7 @@ api.interceptors.request.use(async (config) => {
     }
   }
 
-  // Try to get Supabase session token
+  // Try to get Supabase session token (with short timeout)
   try {
     console.log('[API] Getting Supabase session for auth header...');
     const session = await getSession();
