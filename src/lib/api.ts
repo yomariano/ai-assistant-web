@@ -4,6 +4,8 @@ import { getSession } from './supabase';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
 
+console.log('[API] Initializing with API_URL:', API_URL);
+
 const api = axios.create({
   baseURL: API_URL,
   headers: {
@@ -13,43 +15,60 @@ const api = axios.create({
 
 // Request interceptor to add auth token
 api.interceptors.request.use(async (config) => {
+  console.log('[API] Request interceptor - URL:', config.url);
+
   // Check for dev mode first
   const storedAuth = localStorage.getItem('auth-storage');
   if (storedAuth) {
     const { state } = JSON.parse(storedAuth);
     if (state?.devMode && state?.token === 'dev-mode') {
-      // Dev mode - no token needed, backend will use dev user
+      console.log('[API] Dev mode detected, skipping auth token');
       return config;
     }
   }
 
   // Try to get Supabase session token
   try {
+    console.log('[API] Getting Supabase session for auth header...');
     const session = await getSession();
     if (session?.access_token) {
       config.headers.Authorization = `Bearer ${session.access_token}`;
+      console.log('[API] Added auth token to request');
+    } else {
+      console.log('[API] No session token available');
     }
   } catch (error) {
-    console.error('Failed to get session:', error);
+    console.error('[API] Failed to get session:', error);
   }
-  
+
   return config;
 });
 
 // Response interceptor to handle auth errors
 api.interceptors.response.use(
-  (response) => response,
+  (response) => {
+    console.log('[API] Response success:', response.config.url, response.status);
+    return response;
+  },
   (error) => {
+    console.error('[API] Response error:', {
+      url: error.config?.url,
+      status: error.response?.status,
+      message: error.message,
+      data: error.response?.data
+    });
+
     if (error.response?.status === 401) {
       // Check if in dev mode before redirecting
       const storedAuth = localStorage.getItem('auth-storage');
       if (storedAuth) {
         const { state } = JSON.parse(storedAuth);
         if (state?.devMode) {
-          // In dev mode, don't redirect
+          console.log('[API] 401 error in dev mode, not redirecting');
           return Promise.reject(error);
         }
       }
+      console.log('[API] 401 error, redirecting to login');
       localStorage.removeItem('auth-storage');
       window.location.href = '/login';
     }
