@@ -63,44 +63,59 @@ export const useAuthStore = create<AuthState>()(
       checkAuth: async () => {
         try {
           // First check if we have a Supabase session
-          const session = await getSession();
-          
+          let session = null;
+          try {
+            session = await getSession();
+            console.log('Supabase session:', session ? 'exists' : 'none');
+          } catch (sessionError) {
+            console.error('Failed to get Supabase session:', sessionError);
+          }
+
           if (session?.access_token) {
             // Get user profile from our backend
             try {
+              console.log('Calling /api/auth/me...');
               const { user } = await authApi.me(session.access_token);
-              set({ 
-                user, 
-                token: session.access_token, 
-                isAuthenticated: true, 
+              console.log('Got user profile:', user?.email);
+              set({
+                user,
+                token: session.access_token,
+                isAuthenticated: true,
                 isLoading: false,
                 devMode: false
               });
               return;
             } catch (error) {
               console.error('Failed to get user profile:', error);
+              // Continue to dev mode check
             }
           }
 
           // Check for dev mode
           try {
+            console.log('Checking dev mode config...');
             const config = await authApi.getConfig();
+            console.log('Dev mode config:', config);
             if (config.devMode) {
               // Try dev login
+              console.log('Attempting dev login...');
               const { user, devMode } = await authApi.devLogin();
-              set({ 
-                user, 
-                token: 'dev-mode', 
-                isAuthenticated: true, 
+              console.log('Dev login successful:', user?.email);
+              set({
+                user,
+                token: 'dev-mode',
+                isAuthenticated: true,
                 devMode,
-                isLoading: false 
+                isLoading: false
               });
               return;
             }
           } catch (error) {
+            console.error('Config/dev-login failed:', error);
             // Config fetch failed, continue to unauthenticated state
           }
 
+          console.log('No auth found, setting unauthenticated');
           set({ isLoading: false, isAuthenticated: false });
         } catch (error) {
           console.error('Auth check failed:', error);
