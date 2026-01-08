@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testFlow id="ireland_signup_flow" version="1.0">
+  <metadata>
+    <name>Ireland Signup and EUR Checkout Flow</name>
+    <description>Tests the complete signup process for Irish users with EUR pricing and VoIPCloud number provisioning</description>
+    <priority>critical</priority>
+    <estimatedDuration>5m</estimatedDuration>
+    <tags>
+      <tag>signup</tag>
+      <tag>ireland</tag>
+      <tag>eur</tag>
+      <tag>voipcloud</tag>
+    </tags>
+  </metadata>
+
+  <testData>
+    <variable name="testEmail" value="test.ireland@voicefleet.ai" />
+    <variable name="testFullName" value="Patrick O'Brien" />
+    <variable name="testPlan" value="Lite" />
+    <variable name="expectedPrice" value="€19" />
+    <variable name="expectedPerCallRate" value="€0.95" />
+  </testData>
+
+  <steps>
+    <step id="1" type="navigation">
+      <action>Navigate to landing page</action>
+      <url>https://voicefleet.ai</url>
+      <expectedResult>
+        <condition type="pageTitle">VoiceFleet - AI Voice Agents for Phone Calls</condition>
+        <condition type="elementVisible">"AI Receptionist for Irish Businesses" badge</condition>
+        <condition type="elementVisible">Phone number +353 1 234 5678</condition>
+      </expectedResult>
+    </step>
+
+    <step id="2" type="interaction">
+      <action>Click Pricing navigation link</action>
+      <target selector="nav" text="Pricing" />
+      <expectedResult>
+        <condition type="urlContains">#pricing</condition>
+        <condition type="elementVisible">Three pricing tiers with EUR currency</condition>
+      </expectedResult>
+    </step>
+
+    <step id="3" type="verification">
+      <action>Verify EUR pricing display</action>
+      <expectedResult>
+        <condition type="textPresent">€19/month</condition>
+        <condition type="textPresent">€99/month</condition>
+        <condition type="textPresent">€249/month</condition>
+        <condition type="textPresent">+ €0.95 per call</condition>
+        <condition type="textPresent">+ €0.45 per call</condition>
+      </expectedResult>
+    </step>
+
+    <step id="4" type="interaction">
+      <action>Click Get Started on Lite plan</action>
+      <target selector="button" text="Get Started" plan="Lite" />
+      <expectedResult>
+        <condition type="redirectTo">Stripe checkout or login page</condition>
+      </expectedResult>
+    </step>
+
+    <step id="5" type="interaction">
+      <action>Complete Google OAuth signup</action>
+      <target selector="button" text="Sign in with Google" />
+      <testData>
+        <field name="email" value="${testEmail}" />
+      </testData>
+      <expectedResult>
+        <condition type="authenticated">true</condition>
+        <condition type="userCreated">true</condition>
+      </expectedResult>
+    </step>
+
+    <step id="6" type="interaction">
+      <action>Complete Stripe EUR checkout</action>
+      <target type="external">Stripe Checkout</target>
+      <testData>
+        <field name="cardNumber" value="4242424242424242" />
+        <field name="expiry" value="12/30" />
+        <field name="cvc" value="123" />
+        <field name="postalCode" value="D02 XY45" />
+      </testData>
+      <expectedResult>
+        <condition type="paymentSuccess">true</condition>
+        <condition type="redirectTo">Dashboard or onboarding</condition>
+      </expectedResult>
+    </step>
+
+    <step id="7" type="verification">
+      <action>Verify webhook triggered Ireland provisioning</action>
+      <target type="backend">POST /webhooks/stripe</target>
+      <expectedResult>
+        <condition type="apiCall">provisionIrelandUser() executed</condition>
+        <condition type="databaseRecord">user_subscriptions.status = 'active'</condition>
+        <condition type="databaseRecord">user_phone_numbers assigned from pool</condition>
+      </expectedResult>
+    </step>
+
+    <step id="8" type="verification">
+      <action>Verify phone number assignment from VoIPCloud pool</action>
+      <expectedResult>
+        <condition type="databaseQuery">
+          SELECT * FROM user_phone_numbers
+          WHERE user_id = (SELECT id FROM users WHERE email = '${testEmail}')
+          AND pool_number_id IS NOT NULL
+        </condition>
+        <condition type="phoneNumberFormat">+353 1 XXX XXXX</condition>
+        <condition type="vapiProvider">byo-sip-trunk</condition>
+      </expectedResult>
+    </step>
+
+    <step id="9" type="interaction">
+      <action>Navigate to dashboard</action>
+      <url>/dashboard</url>
+      <expectedResult>
+        <condition type="elementVisible">Welcome message with user name</condition>
+        <condition type="elementVisible">Inbound metrics: Calls Answered, Messages Taken</condition>
+      </expectedResult>
+    </step>
+
+    <step id="10" type="verification">
+      <action>Verify subscription and billing</action>
+      <url>/billing</url>
+      <expectedResult>
+        <condition type="textPresent">Lite</condition>
+        <condition type="textPresent">€19/mo</condition>
+        <condition type="textPresent">+ €0.95/call</condition>
+        <condition type="elementVisible">Per Call Rate: €0.95</condition>
+      </expectedResult>
+    </step>
+  </steps>
+
+  <teardown>
+    <step>
+      <action>Delete test user</action>
+      <target type="api">POST /api/billing/test/reset-user</target>
+      <data>{ "userId": "${userId}" }</data>
+    </step>
+    <step>
+      <action>Release pool number</action>
+      <target type="api">POST /api/billing/test/release-pool-number</target>
+      <data>{ "userId": "${userId}" }</data>
+    </step>
+  </teardown>
+
+  <notes>
+    <note>Ensure VoIPCloud pool has available numbers before running</note>
+    <note>Test Stripe webhook is configured for EUR checkout</note>
+    <note>Verify VAPI_VOIPCLOUD_CREDENTIAL_ID is set in environment</note>
+  </notes>
+</testFlow>

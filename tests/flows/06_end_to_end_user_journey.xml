@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testFlow id="end_to_end_user_journey" version="1.0">
+  <metadata>
+    <name>Complete End-to-End User Journey</name>
+    <description>Tests the entire user journey from landing to first call: Discovery → Signup → Onboarding → Configuration → First Call</description>
+    <priority>critical</priority>
+    <estimatedDuration>10m</estimatedDuration>
+    <tags>
+      <tag>e2e</tag>
+      <tag>user-journey</tag>
+      <tag>complete-flow</tag>
+    </tags>
+  </metadata>
+
+  <personas>
+    <persona id="irish_dentist">
+      <name>Dr. Mary O'Connor</name>
+      <business>Dublin Dental Care</business>
+      <location>Dublin, Ireland</location>
+      <goal>Get AI receptionist to handle appointment bookings</goal>
+      <painPoint>Missing patient calls during procedures</painPoint>
+    </persona>
+  </personas>
+
+  <testData>
+    <user>
+      <email>mary.oconnor@dublindentalcare.ie</email>
+      <fullName>Mary O'Connor</fullName>
+      <businessName>Dublin Dental Care</businessName>
+      <businessType>Dental Practice</businessType>
+    </user>
+    <subscription>
+      <plan>Lite</plan>
+      <currency>EUR</currency>
+    </subscription>
+  </testData>
+
+  <journey>
+    <phase name="Discovery" duration="2m">
+      <step id="1" type="navigation">
+        <action>Land on homepage via Google search</action>
+        <url>https://voicefleet.ai</url>
+        <userIntent>Looking for AI receptionist for Irish business</userIntent>
+        <expectedResult>
+          <condition type="heroMessage">Never Miss Another Call</condition>
+          <condition type="badge">AI Receptionist for Irish Businesses</condition>
+          <condition type="phoneNumber">+353 format visible</condition>
+        </expectedResult>
+      </step>
+
+      <step id="2" type="interaction">
+        <action>Scroll and read features</action>
+        <userThought>Does this handle appointments and messages?</userThought>
+        <expectedResult>
+          <condition type="featureVisible">Appointment booking</condition>
+          <condition type="featureVisible">Message taking</condition>
+          <condition type="featureVisible">24/7 availability</condition>
+          <condition type="featureVisible">FAQ handling</condition>
+        </expectedResult>
+      </step>
+
+      <step id="3" type="interaction">
+        <action>Click Pricing to understand costs</action>
+        <target selector="nav" text="Pricing" />
+        <userThought>Is this affordable for a small practice?</userThought>
+        <expectedResult>
+          <condition type="pricingVisible">€19/mo starting price</condition>
+          <condition type="transparency">No contracts, cancel anytime</condition>
+          <condition type="comparison">3 plans clearly compared</condition>
+        </expectedResult>
+      </step>
+
+      <step id="4" type="decision">
+        <action>User decides to try Lite plan</action>
+        <reasoning>€19/mo is reasonable, pay-per-call works for low volume</reasoning>
+        <target selector="button" text="Get Started" plan="Lite" />
+      </step>
+    </phase>
+
+    <phase name="Signup" duration="2m">
+      <step id="5" type="interaction">
+        <action>Click Get Started button</action>
+        <expectedResult>
+          <condition type="redirectTo">/login or Stripe checkout</condition>
+        </expectedResult>
+      </step>
+
+      <step id="6" type="interaction">
+        <action>Sign up with Google OAuth</action>
+        <target selector="button" text="Sign in with Google" />
+        <data email="${user.email}" />
+        <expectedResult>
+          <condition type="accountCreated">true</condition>
+          <condition type="authenticated">true</condition>
+        </expectedResult>
+      </step>
+
+      <step id="7" type="interaction">
+        <action>Complete Stripe checkout</action>
+        <target type="external">Stripe Checkout</target>
+        <data>
+          <cardNumber>4242424242424242</cardNumber>
+          <expiry>12/30</expiry>
+          <cvc>123</cvc>
+          <postalCode>D02 XY45</postalCode>
+        </data>
+        <userThought>Hope this is secure...</userThought>
+        <expectedResult>
+          <condition type="paymentSuccess">true</condition>
+          <condition type="subscriptionActive">true</condition>
+          <condition type="webhookProcessed">Ireland provisioning triggered</condition>
+        </expectedResult>
+      </step>
+
+      <step id="8" type="verification">
+        <action>Verify backend provisioning</action>
+        <expectedResult>
+          <condition type="phoneNumberAssigned">Dublin number from VoIPCloud pool</condition>
+          <condition type="assistantCreated">Default assistant in Vapi</condition>
+          <condition type="vapiPhoneImported">byo-sip-trunk configured</condition>
+        </expectedResult>
+      </step>
+    </phase>
+
+    <phase name="Onboarding" duration="2m">
+      <step id="9" type="interaction">
+        <action>Onboarding modal appears</action>
+        <url>/dashboard</url>
+        <userEmotion>Excited but slightly overwhelmed</userEmotion>
+        <expectedResult>
+          <condition type="modalVisible">Welcome to VoiceFleet!</condition>
+          <condition type="phoneNumberDisplayed">+353 1 XXX XXXX</condition>
+          <condition type="instructionsClear">Call forwarding steps</condition>
+        </expectedResult>
+      </step>
+
+      <step id="10" type="interaction">
+        <action>Copy VoiceFleet phone number</action>
+        <target selector="button[data-action='copy-phone']" />
+        <userThought>I'll set up call forwarding later today</userThought>
+        <expectedResult>
+          <condition type="clipboard">Phone number copied</condition>
+          <condition type="toast">Number copied!</condition>
+        </expectedResult>
+      </step>
+
+      <step id="11" type="interaction">
+        <action>Complete onboarding</action>
+        <target selector="button" text="Got It" />
+        <expectedResult>
+          <condition type="modalClosed">true</condition>
+          <condition type="dashboardVisible">true</condition>
+        </expectedResult>
+      </step>
+    </phase>
+
+    <phase name="Configuration" duration="3m">
+      <step id="12" type="navigation">
+        <action>Navigate to AI Assistant to configure</action>
+        <url>/assistant</url>
+        <userGoal>Set up assistant for dental practice</userGoal>
+        <expectedResult>
+          <condition type="phoneVisible">1 phone number assigned</condition>
+          <condition type="templatesVisible">6 industry templates</condition>
+        </expectedResult>
+      </step>
+
+      <step id="13" type="interaction">
+        <action>Select Medical &amp; Dental template</action>
+        <target selector=".template-card" text="Medical &amp; Dental" />
+        <userThought>This should have dental-specific features</userThought>
+        <expectedResult>
+          <condition type="modalOpened">Template preview</condition>
+          <condition type="guidelinesVisible">Patient safety, confidentiality</condition>
+          <condition type="greetingVisible">Professional healthcare greeting</condition>
+        </expectedResult>
+      </step>
+
+      <step id="14" type="interaction">
+        <action>Apply Medical &amp; Dental template</action>
+        <target selector="button" text="Use This Template" />
+        <expectedResult>
+          <condition type="fieldsPopulated">Business identity auto-filled</condition>
+          <condition type="assistantName">Sarah</condition>
+          <condition type="greetingUpdated">Healthcare-appropriate greeting</condition>
+        </expectedResult>
+      </step>
+
+      <step id="15" type="interaction">
+        <action>Customize business information</action>
+        <fields>
+          <field name="businessName">Dublin Dental Care</field>
+          <field name="businessDescription">Modern dental practice in Dublin 2 offering general dentistry, cosmetics, and emergency care</field>
+          <field name="assistantName">Sarah</field>
+        </fields>
+        <expectedResult>
+          <condition type="fieldsUpdated">All fields filled</condition>
+        </expectedResult>
+      </step>
+
+      <step id="16" type="interaction">
+        <action>Keep Jennifer voice selected</action>
+        <userThought>Female voice sounds professional and friendly</userThought>
+        <expectedResult>
+          <condition type="voiceSelected">Jennifer (Female)</condition>
+        </expectedResult>
+      </step>
+
+      <step id="17" type="interaction">
+        <action>Review and customize greeting</action>
+        <editing>
+          <original>Good morning/afternoon, thank you for calling {business_name}...</original>
+          <customized>Good morning, thank you for calling Dublin Dental Care. This is Sarah, your virtual receptionist. How may I help you today?</customized>
+        </editing>
+        <expectedResult>
+          <condition type="greetingUpdated">true</condition>
+        </expectedResult>
+      </step>
+
+      <step id="18" type="interaction">
+        <action>Review system prompt / behavior</action>
+        <verification>
+          <check>Mentions appointment booking</check>
+          <check>Includes emergency protocols</check>
+          <check>References Dublin Dental Care</check>
+        </verification>
+        <userThought>This looks good, should handle most calls</userThought>
+      </step>
+
+      <step id="19" type="interaction">
+        <action>Save configuration</action>
+        <target selector="button" text="Save Configuration" />
+        <expectedResult>
+          <condition type="apiSuccess">PUT /api/assistant → 200</condition>
+          <condition type="vapiUpdated">Assistant updated in Vapi</condition>
+          <condition type="toast">Configuration saved</condition>
+        </expectedResult>
+      </step>
+    </phase>
+
+    <phase name="Call Forwarding Setup" duration="External">
+      <step id="20" type="external">
+        <action>User contacts Vodafone to set up call forwarding</action>
+        <process>
+          <substep>Calls Vodafone customer service</substep>
+          <substep>Requests unconditional call forwarding</substep>
+          <substep>Provides VoiceFleet number: +353 1 XXX XXXX</substep>
+          <substep>Confirms setup active</substep>
+        </process>
+        <expectedResult>
+          <condition type="forwarding">All calls forward to VoiceFleet</condition>
+          <condition type="cost">~€5/month with Vodafone</condition>
+        </expectedResult>
+      </step>
+    </phase>
+
+    <phase name="First Call Test" duration="1m">
+      <step id="21" type="interaction">
+        <action>User tests system with personal phone</action>
+        <scenario>Calls practice number from mobile</scenario>
+        <expectedBehavior>
+          <greeting>Sarah answers with custom greeting</greeting>
+          <conversation>AI handles appointment inquiry</conversation>
+          <outcome>Message taken, appointment booked</outcome>
+        </expectedBehavior>
+        <expectedResult>
+          <condition type="callConnected">true</condition>
+          <condition type="greetingPlayed">Custom dental greeting</condition>
+          <condition type="aiResponding">true</condition>
+        </expectedResult>
+      </step>
+
+      <step id="22" type="verification">
+        <action>Check call appears in dashboard</action>
+        <url>/dashboard</url>
+        <expectedResult>
+          <condition type="callVisible">Recent activity shows call</condition>
+          <condition type="metricsUpdated">Calls Answered: 1</condition>
+          <condition type="transcriptAvailable">Call details accessible</condition>
+        </expectedResult>
+      </step>
+
+      <step id="23" type="verification">
+        <action>Verify billing updated</action>
+        <url>/billing</url>
+        <expectedResult>
+          <condition type="usageIncremented">Calls Made: 1</condition>
+          <condition type="chargeAdded">Call Charges: €0.95</condition>
+        </expectedResult>
+      </step>
+    </phase>
+
+    <phase name="Success" duration="ongoing">
+      <step id="24" type="outcome">
+        <action>User achieves goal</action>
+        <success>
+          <achievement>AI receptionist answering calls 24/7</achievement>
+          <achievement>Missing fewer patient calls</achievement>
+          <achievement>Appointment bookings being handled</achievement>
+          <achievement>Messages being taken accurately</achievement>
+        </success>
+        <userEmotion>Satisfied, relieved</userEmotion>
+        <userThought>This is exactly what I needed. Worth every euro.</userThought>
+      </step>
+    </phase>
+  </journey>
+
+  <metrics>
+    <conversionPoints>
+      <point>Landing to pricing view</point>
+      <point>Pricing to signup</point>
+      <point>Signup to onboarding complete</point>
+      <point>Onboarding to configuration complete</point>
+      <point>Configuration to first call</point>
+    </conversionPoints>
+    <dropoffRisks>
+      <risk phase="signup">Complex payment form</risk>
+      <risk phase="onboarding">Confusing forwarding instructions</risk>
+      <risk phase="configuration">Too many configuration options</risk>
+    </dropoffRisks>
+  </metrics>
+
+  <notes>
+    <note>This flow represents the ideal "happy path" user journey</note>
+    <note>Monitor each phase for user drop-off and optimize</note>
+    <note>Consider adding in-app chat support during configuration</note>
+    <note>Track time-to-first-call as key success metric</note>
+  </notes>
+</testFlow>

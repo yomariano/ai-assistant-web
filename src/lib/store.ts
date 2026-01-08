@@ -11,6 +11,7 @@ interface AuthState {
   isLoading: boolean;
   isAuthenticated: boolean;
   devMode: boolean;
+  hasExplicitlyLoggedOut: boolean;
 
   loginWithGoogle: () => Promise<void>;
   devLogin: () => Promise<void>;
@@ -27,8 +28,10 @@ export const useAuthStore = create<AuthState>()(
       isLoading: true,
       isAuthenticated: false,
       devMode: false,
+      hasExplicitlyLoggedOut: false,
 
       loginWithGoogle: async () => {
+        set({ hasExplicitlyLoggedOut: false });
         await signInWithGoogle();
         // The redirect will happen automatically
       },
@@ -36,12 +39,13 @@ export const useAuthStore = create<AuthState>()(
       devLogin: async () => {
         try {
           const { user, devMode } = await authApi.devLogin();
-          set({ 
-            user, 
-            token: 'dev-mode', 
-            isAuthenticated: true, 
+          set({
+            user,
+            token: 'dev-mode',
+            isAuthenticated: true,
             devMode: devMode,
-            isLoading: false 
+            isLoading: false,
+            hasExplicitlyLoggedOut: false
           });
         } catch (error) {
           console.error('Dev login failed:', error);
@@ -54,7 +58,7 @@ export const useAuthStore = create<AuthState>()(
         if (!devMode) {
           await supabaseSignOut();
         }
-        set({ user: null, token: null, isAuthenticated: false, devMode: false });
+        set({ user: null, token: null, isAuthenticated: false, devMode: false, hasExplicitlyLoggedOut: true });
       },
 
       setUser: (user: User) => {
@@ -63,6 +67,15 @@ export const useAuthStore = create<AuthState>()(
 
       checkAuth: async () => {
         console.log('[STORE] checkAuth started');
+        const { hasExplicitlyLoggedOut } = get();
+
+        // If user explicitly logged out, don't auto-login
+        if (hasExplicitlyLoggedOut) {
+          console.log('[STORE] User has explicitly logged out, skipping auto-login');
+          set({ isLoading: false, isAuthenticated: false });
+          return;
+        }
+
         try {
           // Check for dev mode FIRST (faster, no Supabase dependency)
           try {
@@ -127,7 +140,11 @@ export const useAuthStore = create<AuthState>()(
     }),
     {
       name: 'auth-storage',
-      partialize: (state) => ({ token: state.token, devMode: state.devMode }),
+      partialize: (state) => ({
+        token: state.token,
+        devMode: state.devMode,
+        hasExplicitlyLoggedOut: state.hasExplicitlyLoggedOut
+      }),
     }
   )
 );

@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testFlow id="onboarding_flow" version="1.0">
+  <metadata>
+    <name>User Onboarding Modal Flow</name>
+    <description>Tests the onboarding modal that appears after signup with call forwarding instructions</description>
+    <priority>high</priority>
+    <estimatedDuration>2m</estimatedDuration>
+    <tags>
+      <tag>onboarding</tag>
+      <tag>first-run</tag>
+      <tag>modal</tag>
+    </tags>
+  </metadata>
+
+  <prerequisites>
+    <condition>User just completed signup and payment</condition>
+    <condition>User has phone number assigned</condition>
+    <condition>onboarding_completed flag is false</condition>
+  </prerequisites>
+
+  <testData>
+    <phoneNumber>+353 1 265 5181</phoneNumber>
+    <forwardingSteps>
+      <step>Contact your phone provider</step>
+      <step>Set up call forwarding</step>
+      <step>Forward calls to your VoiceFleet number</step>
+    </forwardingSteps>
+  </testData>
+
+  <steps>
+    <step id="1" type="navigation">
+      <action>Land on dashboard after signup</action>
+      <url>/dashboard</url>
+      <expectedResult>
+        <condition type="modalVisible">Onboarding modal appears automatically</condition>
+        <condition type="modalTitle">Welcome to VoiceFleet!</condition>
+      </expectedResult>
+    </step>
+
+    <step id="2" type="verification">
+      <action>Verify onboarding modal content</action>
+      <expectedResult>
+        <condition type="elementVisible">Welcome message</condition>
+        <condition type="elementVisible">Your VoiceFleet Number section</condition>
+        <condition type="elementVisible">Call Forwarding Instructions</condition>
+        <condition type="elementVisible">Step-by-step guide</condition>
+      </expectedResult>
+    </step>
+
+    <step id="3" type="verification">
+      <action>Verify phone number is displayed prominently</action>
+      <expectedResult>
+        <condition type="textPresent">+353 1 XXX XXXX</condition>
+        <condition type="elementVisible">Copy button next to phone number</condition>
+        <condition type="fontSize" selector=".phone-number">Large and readable</condition>
+      </expectedResult>
+    </step>
+
+    <step id="4" type="interaction">
+      <action>Click copy phone number</action>
+      <target selector="button[data-action='copy-phone']" />
+      <expectedResult>
+        <condition type="clipboard">Phone number copied</condition>
+        <condition type="toastVisible">Number copied!</condition>
+        <condition type="buttonState">Checkmark icon shown temporarily</condition>
+      </expectedResult>
+    </step>
+
+    <step id="5" type="verification">
+      <action>Verify forwarding instructions are clear</action>
+      <expectedResult>
+        <condition type="listItems">3 or more steps</condition>
+        <condition type="textPresent">Contact your phone provider</condition>
+        <condition type="textPresent">call forwarding</condition>
+        <condition type="textPresent">forward to</condition>
+      </expectedResult>
+    </step>
+
+    <step id="6" type="verification">
+      <action>Verify help resources provided</action>
+      <expectedResult>
+        <condition type="elementVisible">Link to documentation</condition>
+        <condition type="elementVisible">Contact support option</condition>
+        <condition type="textPresent">Need help?</condition>
+      </expectedResult>
+    </step>
+
+    <step id="7" type="verification">
+      <action>Verify visual aids present</action>
+      <expectedResult>
+        <condition type="imageVisible">Call forwarding illustration</condition>
+        <condition type="iconVisible">Phone icon</condition>
+        <condition type="iconVisible">Arrow icon showing forwarding</condition>
+      </expectedResult>
+    </step>
+
+    <step id="8" type="interaction">
+      <action>Try to close modal with X button</action>
+      <target selector="button[data-action='close-modal']" />
+      <expectedResult>
+        <condition type="modalVisible">false</condition>
+        <condition type="pageVisible">Dashboard</condition>
+      </expectedResult>
+    </step>
+
+    <step id="9" type="verification">
+      <action>Verify onboarding completed flag set</action>
+      <expectedResult>
+        <condition type="databaseQuery">
+          SELECT onboarding_completed FROM users WHERE id = '${userId}'
+        </condition>
+        <condition type="queryResult">true</condition>
+      </expectedResult>
+    </step>
+
+    <step id="10" type="interaction">
+      <action>Navigate away and back to dashboard</action>
+      <url>/billing</url>
+      <then>
+        <url>/dashboard</url>
+      </then>
+      <expectedResult>
+        <condition type="modalVisible">false</condition>
+        <condition type="comment">Modal should not appear again</condition>
+      </expectedResult>
+    </step>
+
+    <step id="11" type="interaction">
+      <action>Test "Got It" or "Complete Onboarding" button</action>
+      <setup>
+        <action>Reset onboarding_completed to false</action>
+      </setup>
+      <url>/dashboard</url>
+      <then>
+        <action>Click primary action button</action>
+        <target selector="button[data-action='complete-onboarding']" />
+      </then>
+      <expectedResult>
+        <condition type="modalClosed">true</condition>
+        <condition type="databaseField" name="onboarding_completed">true</condition>
+      </expectedResult>
+    </step>
+
+    <step id="12" type="verification">
+      <action>Test "Skip for now" secondary action</action>
+      <setup>
+        <action>Reset onboarding_completed to false</action>
+      </setup>
+      <url>/dashboard</url>
+      <then>
+        <action>Click skip button</action>
+        <target selector="button[data-action='skip-onboarding']" />
+      </then>
+      <expectedResult>
+        <condition type="modalClosed">true</condition>
+        <condition type="databaseField" name="onboarding_completed">true</condition>
+        <condition type="comment">User can still access instructions later</condition>
+      </expectedResult>
+    </step>
+
+    <step id="13" type="verification">
+      <action>Verify mobile responsiveness</action>
+      <viewport width="375" height="667" />
+      <url>/dashboard</url>
+      <expectedResult>
+        <condition type="modalVisible">true</condition>
+        <condition type="modalWidth">Fits mobile viewport</condition>
+        <condition type="textReadable">Font sizes appropriate for mobile</condition>
+        <condition type="buttonsAccessible">Touch targets minimum 44x44px</condition>
+      </expectedResult>
+    </step>
+  </steps>
+
+  <variations>
+    <variation name="ireland_user">
+      <description>Ireland-specific onboarding with local provider tips</description>
+      <condition>User has EUR subscription</condition>
+      <expectedContent>
+        <text>Irish phone providers: Vodafone, Three, Eir</text>
+        <text>Call forwarding typically costs €X per month</text>
+      </expectedContent>
+    </variation>
+
+    <variation name="us_user">
+      <description>US-specific onboarding</description>
+      <condition>User has USD subscription</condition>
+      <expectedContent>
+        <text>US carriers: AT&amp;T, Verizon, T-Mobile</text>
+      </expectedContent>
+    </variation>
+  </variations>
+
+  <notes>
+    <note>Modal should be dismissible but informative</note>
+    <note>Phone number should be formatted for user's locale</note>
+    <note>Consider adding video tutorial link</note>
+    <note>Track analytics: completion rate, skip rate, time spent</note>
+  </notes>
+</testFlow>

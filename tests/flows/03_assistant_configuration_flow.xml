@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testFlow id="assistant_configuration_flow" version="1.0">
+  <metadata>
+    <name>AI Assistant Configuration Flow</name>
+    <description>Tests the complete assistant configuration including business identity, voice, greeting, and behavior</description>
+    <priority>high</priority>
+    <estimatedDuration>4m</estimatedDuration>
+    <tags>
+      <tag>assistant</tag>
+      <tag>configuration</tag>
+      <tag>voice</tag>
+    </tags>
+  </metadata>
+
+  <prerequisites>
+    <condition>User authenticated with active subscription</condition>
+    <condition>User has at least one phone number assigned</condition>
+  </prerequisites>
+
+  <testData>
+    <businessInfo>
+      <businessName>Dublin Dental Clinic</businessName>
+      <businessDescription>A modern dental practice offering general dentistry, cosmetic treatments, and emergency dental care in Dublin city centre.</businessDescription>
+      <assistantName>Sarah</assistantName>
+    </businessInfo>
+    <voice>
+      <selectedVoice>Jennifer (Female)</selectedVoice>
+      <alternativeVoice>Michael (Male)</alternativeVoice>
+    </voice>
+    <greeting>
+      <text>Good morning, thank you for calling Dublin Dental Clinic. This is Sarah speaking. How may I assist you today?</text>
+    </greeting>
+  </testData>
+
+  <steps>
+    <step id="1" type="navigation">
+      <action>Navigate to AI Assistant page</action>
+      <url>/assistant</url>
+      <expectedResult>
+        <condition type="pageLoaded">true</condition>
+        <condition type="elementVisible">Phone Numbers section</condition>
+        <condition type="elementVisible">Business Identity section</condition>
+        <condition type="elementVisible">Voice section</condition>
+        <condition type="elementVisible">Greeting section</condition>
+        <condition type="elementVisible">Behavior section</condition>
+      </expectedResult>
+    </step>
+
+    <step id="2" type="verification">
+      <action>Verify phone number is displayed</action>
+      <expectedResult>
+        <condition type="elementVisible">Primary phone number</condition>
+        <condition type="badgeVisible" text="active" />
+        <condition type="textPresent">1 Phone Number</condition>
+      </expectedResult>
+    </step>
+
+    <step id="3" type="interaction">
+      <action>Fill Business Name field</action>
+      <target selector="input[name='businessName']" />
+      <data value="Dublin Dental Clinic" />
+      <expectedResult>
+        <condition type="fieldValue" name="businessName">Dublin Dental Clinic</condition>
+      </expectedResult>
+    </step>
+
+    <step id="4" type="interaction">
+      <action>Fill Business Description field</action>
+      <target selector="textarea[name='businessDescription']" />
+      <data value="${businessInfo.businessDescription}" />
+      <expectedResult>
+        <condition type="fieldValue" name="businessDescription">${businessInfo.businessDescription}</condition>
+      </expectedResult>
+    </step>
+
+    <step id="5" type="interaction">
+      <action>Fill Assistant Name field</action>
+      <target selector="input[name='assistantName']" />
+      <data value="Sarah" />
+      <expectedResult>
+        <condition type="fieldValue" name="assistantName">Sarah</condition>
+      </expectedResult>
+    </step>
+
+    <step id="6" type="interaction">
+      <action>Select voice - Jennifer (Female)</action>
+      <target selector="button[data-voice='Jennifer']" />
+      <expectedResult>
+        <condition type="buttonSelected" voice="Jennifer">true</condition>
+        <condition type="audioPreviewAvailable">true</condition>
+      </expectedResult>
+    </step>
+
+    <step id="7" type="interaction">
+      <action>Test voice preview</action>
+      <target selector="button[data-action='play-voice']" voice="Jennifer" />
+      <expectedResult>
+        <condition type="audioPlaying">true</condition>
+        <condition type="buttonState">playing</condition>
+      </expectedResult>
+    </step>
+
+    <step id="8" type="interaction">
+      <action>Switch to Michael voice</action>
+      <target selector="button[data-voice='Michael']" />
+      <expectedResult>
+        <condition type="buttonSelected" voice="Michael">true</condition>
+        <condition type="buttonSelected" voice="Jennifer">false</condition>
+      </expectedResult>
+    </step>
+
+    <step id="9" type="interaction">
+      <action>Switch back to Jennifer voice</action>
+      <target selector="button[data-voice='Jennifer']" />
+      <expectedResult>
+        <condition type="buttonSelected" voice="Jennifer">true</condition>
+      </expectedResult>
+    </step>
+
+    <step id="10" type="interaction">
+      <action>Update greeting text</action>
+      <target selector="textarea[name='greeting']" />
+      <data value="${greeting.text}" />
+      <expectedResult>
+        <condition type="fieldValue" name="greeting">${greeting.text}</condition>
+      </expectedResult>
+    </step>
+
+    <step id="11" type="verification">
+      <action>Verify Regenerate from Business Info button</action>
+      <expectedResult>
+        <condition type="elementVisible">button with text "Regenerate from Business Info"</condition>
+      </expectedResult>
+    </step>
+
+    <step id="12" type="interaction">
+      <action>Click Regenerate from Business Info</action>
+      <target selector="button" text="Regenerate from Business Info" />
+      <expectedResult>
+        <condition type="fieldUpdated" name="behavior">System prompt regenerated</condition>
+        <condition type="textContains" field="behavior">Dublin Dental Clinic</condition>
+        <condition type="textContains" field="behavior">Sarah</condition>
+      </expectedResult>
+    </step>
+
+    <step id="13" type="verification">
+      <action>Verify behavior/system prompt contains business context</action>
+      <expectedResult>
+        <condition type="textContains" field="behavior">dental practice</condition>
+        <condition type="textContains" field="behavior">Dublin</condition>
+        <condition type="textContains" field="behavior">appointments</condition>
+      </expectedResult>
+    </step>
+
+    <step id="14" type="interaction">
+      <action>Manually edit behavior/system prompt</action>
+      <target selector="textarea[name='behavior']" />
+      <data append="true">
+
+Additional instructions:
+- Always ask for patient's date of birth for verification
+- Mention we accept new patients
+- Emergency slots available same-day
+      </data>
+      <expectedResult>
+        <condition type="fieldContains" name="behavior">Always ask for patient's date of birth</condition>
+      </expectedResult>
+    </step>
+
+    <step id="15" type="interaction">
+      <action>Save configuration</action>
+      <target selector="button" text="Save Configuration" />
+      <expectedResult>
+        <condition type="loading">true</condition>
+        <condition type="apiCall">PUT /api/assistant</condition>
+        <condition type="responseStatus">200</condition>
+      </expectedResult>
+    </step>
+
+    <step id="16" type="verification">
+      <action>Verify success toast notification</action>
+      <expectedResult>
+        <condition type="toastVisible">Configuration saved successfully</condition>
+        <condition type="toastType">success</condition>
+      </expectedResult>
+    </step>
+
+    <step id="17" type="verification">
+      <action>Verify changes persisted in Vapi</action>
+      <expectedResult>
+        <condition type="apiCall">Vapi assistant update called</condition>
+        <condition type="vapiField" name="voice">playht-jennifer</condition>
+        <condition type="vapiField" name="firstMessage">${greeting.text}</condition>
+        <condition type="vapiField" name="model.messages[0].content">Contains business context</condition>
+      </expectedResult>
+    </step>
+
+    <step id="18" type="interaction">
+      <action>Reload page</action>
+      <url>/assistant</url>
+      <expectedResult>
+        <condition type="pageLoaded">true</condition>
+      </expectedResult>
+    </step>
+
+    <step id="19" type="verification">
+      <action>Verify configuration persisted after reload</action>
+      <expectedResult>
+        <condition type="fieldValue" name="businessName">Dublin Dental Clinic</condition>
+        <condition type="fieldValue" name="assistantName">Sarah</condition>
+        <condition type="buttonSelected" voice="Jennifer">true</condition>
+        <condition type="fieldValue" name="greeting">${greeting.text}</condition>
+        <condition type="fieldContains" name="behavior">Always ask for patient's date of birth</condition>
+      </expectedResult>
+    </step>
+  </steps>
+
+  <notes>
+    <note>Voice preview should use actual Vapi voice samples</note>
+    <note>Regenerate button should use business context intelligently</note>
+    <note>Unsaved changes should trigger warning before navigation</note>
+    <note>Test voice selection persists across sessions</note>
+  </notes>
+</testFlow>

@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testFlow id="template_selection_flow" version="1.0">
+  <metadata>
+    <name>Industry Template Selection Flow</name>
+    <description>Tests the template selector feature with different industry templates</description>
+    <priority>high</priority>
+    <estimatedDuration>3m</estimatedDuration>
+    <tags>
+      <tag>templates</tag>
+      <tag>assistant</tag>
+      <tag>configuration</tag>
+    </tags>
+  </metadata>
+
+  <prerequisites>
+    <condition>User must be authenticated</condition>
+    <condition>User must have active subscription</condition>
+    <condition>User must have at least one phone number</condition>
+  </prerequisites>
+
+  <testData>
+    <templates>
+      <template id="general_business">
+        <name>General Business</name>
+        <suggestedAssistantName>your AI assistant</suggestedAssistantName>
+        <keyGuidelines>
+          <guideline>Answer questions professionally</guideline>
+          <guideline>Help with scheduling</guideline>
+          <guideline>Take messages accurately</guideline>
+        </keyGuidelines>
+      </template>
+      <template id="medical_dental">
+        <name>Medical &amp; Dental</name>
+        <suggestedAssistantName>Sarah</suggestedAssistantName>
+        <keyGuidelines>
+          <guideline>Never provide medical advice or diagnoses</guideline>
+          <guideline>Always direct emergencies to 999/112</guideline>
+          <guideline>Be extra patient with anxious callers</guideline>
+          <guideline>Maintain strict patient confidentiality</guideline>
+        </keyGuidelines>
+      </template>
+      <template id="legal_accounting">
+        <name>Legal &amp; Accounting</name>
+        <suggestedAssistantName>your assistant</suggestedAssistantName>
+      </template>
+      <template id="trades_services">
+        <name>Trades &amp; Services</name>
+        <suggestedAssistantName>your assistant</suggestedAssistantName>
+      </template>
+      <template id="hospitality">
+        <name>Hospitality</name>
+        <suggestedAssistantName>your assistant</suggestedAssistantName>
+      </template>
+      <template id="property_real_estate">
+        <name>Property &amp; Real Estate</name>
+        <suggestedAssistantName>your assistant</suggestedAssistantName>
+      </template>
+    </templates>
+  </testData>
+
+  <steps>
+    <step id="1" type="navigation">
+      <action>Navigate to AI Assistant page</action>
+      <url>/assistant</url>
+      <expectedResult>
+        <condition type="elementVisible">Start with a Template section</condition>
+        <condition type="elementCount" selector=".template-card">6</condition>
+      </expectedResult>
+    </step>
+
+    <step id="2" type="verification">
+      <action>Verify all templates are displayed</action>
+      <expectedResult>
+        <condition type="elementVisible" text="General Business" />
+        <condition type="elementVisible" text="Medical &amp; Dental" />
+        <condition type="elementVisible" text="Legal &amp; Accounting" />
+        <condition type="elementVisible" text="Trades &amp; Services" />
+        <condition type="elementVisible" text="Hospitality" />
+        <condition type="elementVisible" text="Property &amp; Real Estate" />
+      </expectedResult>
+    </step>
+
+    <step id="3" type="interaction">
+      <action>Click on Medical &amp; Dental template</action>
+      <target selector=".template-card" text="Medical &amp; Dental" />
+      <expectedResult>
+        <condition type="modalOpened">Template preview modal</condition>
+        <condition type="elementVisible">Key Guidelines section</condition>
+        <condition type="elementVisible">Sample Greeting section</condition>
+        <condition type="elementVisible">Suggested Assistant Name section</condition>
+      </expectedResult>
+    </step>
+
+    <step id="4" type="verification">
+      <action>Verify Medical &amp; Dental template content</action>
+      <expectedResult>
+        <condition type="textPresent">Never provide medical advice or diagnoses</condition>
+        <condition type="textPresent">Always direct emergencies to 999/112</condition>
+        <condition type="textPresent">Be extra patient with anxious callers</condition>
+        <condition type="textPresent">Suggested Assistant Name: Sarah</condition>
+        <condition type="elementVisible">System Prompt Preview</condition>
+      </expectedResult>
+    </step>
+
+    <step id="5" type="verification">
+      <action>Verify sample greeting contains placeholders</action>
+      <expectedResult>
+        <condition type="textContains">{business_name}</condition>
+        <condition type="textContains">{assistant_name}</condition>
+      </expectedResult>
+    </step>
+
+    <step id="6" type="verification">
+      <action>Verify required information fields</action>
+      <expectedResult>
+        <condition type="elementVisible" text="Practice Name" />
+        <condition type="elementVisible" text="Assistant Name" />
+        <condition type="elementVisible" text="Practice Type" />
+        <condition type="elementVisible" text="Opening Hours" />
+        <condition type="elementVisible" text="Practice Address" />
+      </expectedResult>
+    </step>
+
+    <step id="7" type="verification">
+      <action>Verify system prompt preview</action>
+      <expectedResult>
+        <condition type="textPresent">You are a professional and empathetic AI receptionist</condition>
+        <condition type="textPresent">Answer calls with a calm, reassuring tone</condition>
+        <condition type="textPresent">Help patients schedule, reschedule, or cancel appointments</condition>
+      </expectedResult>
+    </step>
+
+    <step id="8" type="interaction">
+      <action>Click Use This Template button</action>
+      <target selector="button" text="Use This Template" />
+      <expectedResult>
+        <condition type="modalClosed">true</condition>
+        <condition type="formPopulated">Business Identity section filled</condition>
+        <condition type="formPopulated">Assistant Name set to "Sarah"</condition>
+        <condition type="formPopulated">Greeting updated with template</condition>
+        <condition type="formPopulated">Behavior/System Prompt updated</condition>
+      </expectedResult>
+    </step>
+
+    <step id="9" type="interaction">
+      <action>Test other template - Legal &amp; Accounting</action>
+      <target selector=".template-card" text="Legal &amp; Accounting" />
+      <expectedResult>
+        <condition type="modalOpened">true</condition>
+        <condition type="textPresent">solicitors, accountants, financial advisors</condition>
+      </expectedResult>
+    </step>
+
+    <step id="10" type="interaction">
+      <action>Cancel template selection</action>
+      <target selector="button" text="Cancel" />
+      <expectedResult>
+        <condition type="modalClosed">true</condition>
+        <condition type="formUnchanged">Configuration remains as before</condition>
+      </expectedResult>
+    </step>
+
+    <step id="11" type="interaction">
+      <action>Apply General Business template</action>
+      <target selector=".template-card" text="General Business" />
+      <then>
+        <action>Click Use This Template</action>
+      </then>
+      <expectedResult>
+        <condition type="formPopulated">Generic business configuration applied</condition>
+        <condition type="formField" name="assistantName">your AI assistant</condition>
+      </expectedResult>
+    </step>
+
+    <step id="12" type="interaction">
+      <action>Save configuration with template</action>
+      <target selector="button" text="Save Configuration" />
+      <expectedResult>
+        <condition type="apiCall">PUT /api/assistant</condition>
+        <condition type="successToast">Configuration saved successfully</condition>
+      </expectedResult>
+    </step>
+
+    <step id="13" type="verification">
+      <action>Verify template applied in database</action>
+      <expectedResult>
+        <condition type="databaseQuery">
+          SELECT * FROM user_assistants
+          WHERE user_id = '${userId}'
+          AND first_message LIKE '%General Business%'
+        </condition>
+      </expectedResult>
+    </step>
+  </steps>
+
+  <notes>
+    <note>Templates should intelligently populate all configuration fields</note>
+    <note>Switching templates should warn if unsaved changes exist</note>
+    <note>Template preview should show actual rendered greeting with placeholder substitution</note>
+  </notes>
+</testFlow>

@@ -1,0 +1,132 @@
+{
+  "testFlows": [
+    {
+      "id": "ireland_signup_flow",
+      "file": "01_ireland_signup_flow.xml",
+      "name": "Ireland Signup and EUR Checkout Flow",
+      "priority": "critical",
+      "duration": "5m",
+      "tags": ["signup", "ireland", "eur", "voipcloud"],
+      "prerequisites": [
+        "VoIPCloud pool has available numbers",
+        "Stripe webhook configured for EUR",
+        "VAPI_VOIPCLOUD_CREDENTIAL_ID set"
+      ]
+    },
+    {
+      "id": "template_selection_flow",
+      "file": "02_template_selection_flow.xml",
+      "name": "Industry Template Selection Flow",
+      "priority": "high",
+      "duration": "3m",
+      "tags": ["templates", "assistant", "configuration"],
+      "prerequisites": [
+        "User authenticated",
+        "Active subscription",
+        "At least one phone number"
+      ]
+    },
+    {
+      "id": "assistant_configuration_flow",
+      "file": "03_assistant_configuration_flow.xml",
+      "name": "AI Assistant Configuration Flow",
+      "priority": "high",
+      "duration": "4m",
+      "tags": ["assistant", "configuration", "voice"],
+      "prerequisites": [
+        "User authenticated with active subscription",
+        "At least one phone number assigned"
+      ]
+    },
+    {
+      "id": "onboarding_flow",
+      "file": "04_onboarding_flow.xml",
+      "name": "User Onboarding Modal Flow",
+      "priority": "high",
+      "duration": "2m",
+      "tags": ["onboarding", "first-run", "modal"],
+      "prerequisites": [
+        "User just completed signup",
+        "Phone number assigned",
+        "onboarding_completed flag is false"
+      ]
+    },
+    {
+      "id": "billing_management_flow",
+      "file": "05_billing_management_flow.xml",
+      "name": "Billing and Subscription Management Flow",
+      "priority": "critical",
+      "duration": "5m",
+      "tags": ["billing", "subscription", "usage", "stripe"],
+      "prerequisites": [
+        "User authenticated with active Lite EUR subscription"
+      ]
+    },
+    {
+      "id": "end_to_end_user_journey",
+      "file": "06_end_to_end_user_journey.xml",
+      "name": "Complete End-to-End User Journey",
+      "priority": "critical",
+      "duration": "10m",
+      "tags": ["e2e", "user-journey", "complete-flow"],
+      "prerequisites": [],
+      "persona": {
+        "name": "Dr. Mary O'Connor",
+        "business": "Dublin Dental Care",
+        "location": "Dublin, Ireland",
+        "goal": "Get AI receptionist to handle appointment bookings"
+      }
+    },
+    {
+      "id": "call_history_messages_flow",
+      "file": "07_call_history_messages_flow.xml",
+      "name": "Call History and Messages Flow",
+      "priority": "high",
+      "duration": "4m",
+      "tags": ["calls", "history", "transcripts", "messages"],
+      "prerequisites": [
+        "User has received at least 3 calls",
+        "Calls include various types"
+      ]
+    }
+  ],
+  "metadata": {
+    "version": "1.0",
+    "created": "2026-01-08",
+    "totalFlows": 7,
+    "totalDuration": "33m",
+    "criticalFlows": 3,
+    "highFlows": 4
+  },
+  "coverage": {
+    "authentication": ["ireland_signup_flow"],
+    "payments": ["ireland_signup_flow", "billing_management_flow"],
+    "onboarding": ["onboarding_flow", "end_to_end_user_journey"],
+    "configuration": [
+      "template_selection_flow",
+      "assistant_configuration_flow"
+    ],
+    "telephony": [
+      "ireland_signup_flow",
+      "call_history_messages_flow"
+    ],
+    "userJourney": ["end_to_end_user_journey"]
+  },
+  "runOrder": {
+    "smoke": ["end_to_end_user_journey"],
+    "critical": [
+      "ireland_signup_flow",
+      "billing_management_flow",
+      "end_to_end_user_journey"
+    ],
+    "full": [
+      "ireland_signup_flow",
+      "template_selection_flow",
+      "assistant_configuration_flow",
+      "onboarding_flow",
+      "billing_management_flow",
+      "end_to_end_user_journey",
+      "call_history_messages_flow"
+    ]
+  }
+}

@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testFlow id="call_history_messages_flow" version="1.0">
+  <metadata>
+    <name>Call History and Messages Flow</name>
+    <description>Tests viewing call history, listening to recordings, reading transcripts, and managing messages</description>
+    <priority>high</priority>
+    <estimatedDuration>4m</estimatedDuration>
+    <tags>
+      <tag>calls</tag>
+      <tag>history</tag>
+      <tag>transcripts</tag>
+      <tag>messages</tag>
+    </tags>
+  </metadata>
+
+  <prerequisites>
+    <condition>User has received at least 3 calls</condition>
+    <condition>Calls include various types: answered, voicemail, message taken</condition>
+  </prerequisites>
+
+  <testData>
+    <calls>
+      <call id="1">
+        <type>inbound</type>
+        <status>completed</status>
+        <duration>145</duration>
+        <caller>+353 87 123 4567</caller>
+        <timestamp>2026-01-08T10:30:00Z</timestamp>
+        <outcome>appointment_booked</outcome>
+        <hasRecording>true</hasRecording>
+        <hasTranscript>true</hasTranscript>
+      </call>
+      <call id="2">
+        <type>inbound</type>
+        <status>completed</status>
+        <duration>62</duration>
+        <caller>+353 86 987 6543</caller>
+        <timestamp>2026-01-08T14:15:00Z</timestamp>
+        <outcome>message_taken</outcome>
+        <hasRecording>true</hasRecording>
+        <hasTranscript>true</hasTranscript>
+        <message>
+          <content>Patient calling to reschedule appointment from Thursday to Friday</content>
+          <urgent>false</urgent>
+        </message>
+      </call>
+      <call id="3">
+        <type>inbound</type>
+        <status>voicemail</status>
+        <duration>0</duration>
+        <caller>+353 85 555 1234</caller>
+        <timestamp>2026-01-08T16:45:00Z</timestamp>
+        <outcome>voicemail</outcome>
+        <hasRecording>true</hasRecording>
+      </call>
+    </calls>
+  </testData>
+
+  <steps>
+    <step id="1" type="navigation">
+      <action>Navigate to Call History page</action>
+      <url>/call-history</url>
+      <expectedResult>
+        <condition type="pageTitle">Call History</condition>
+        <condition type="elementVisible">Call list with filters</condition>
+        <condition type="elementVisible">Search bar</condition>
+      </expectedResult>
+    </step>
+
+    <step id="2" type="verification">
+      <action>Verify calls are listed chronologically</action>
+      <expectedResult>
+        <condition type="sortOrder">Most recent first</condition>
+        <condition type="listItems">3 calls displayed</condition>
+        <condition type="callDetails">Phone number, duration, timestamp visible</condition>
+      </expectedResult>
+    </step>
+
+    <step id="3" type="verification">
+      <action>Verify call type indicators</action>
+      <expectedResult>
+        <condition type="iconVisible" call="1">Completed call icon</condition>
+        <condition type="iconVisible" call="2">Message icon</condition>
+        <condition type="iconVisible" call="3">Voicemail icon</condition>
+        <condition type="badgeVisible" call="2" text="Message" />
+      </expectedResult>
+    </step>
+
+    <step id="4" type="interaction">
+      <action>Click on first call to view details</action>
+      <target selector=".call-row" callId="1" />
+      <expectedResult>
+        <condition type="modalOpened">Call details modal</condition>
+        <condition type="elementVisible">Call information</condition>
+        <condition type="elementVisible">Recording player</condition>
+        <condition type="elementVisible">Transcript</condition>
+      </expectedResult>
+    </step>
+
+    <step id="5" type="verification">
+      <action>Verify call details displayed</action>
+      <expectedResult>
+        <condition type="textPresent">+353 87 123 4567</condition>
+        <condition type="textPresent">145 seconds (2m 25s)</condition>
+        <condition type="textPresent">January 8, 2026 at 10:30</condition>
+        <condition type="badgeVisible">Appointment Booked</condition>
+      </expectedResult>
+    </step>
+
+    <step id="6" type="interaction">
+      <action>Play call recording</action>
+      <target selector="button[data-action='play-recording']" />
+      <expectedResult>
+        <condition type="audioPlaying">true</condition>
+        <condition type="playerControls">Play/pause, seek, volume visible</condition>
+        <condition type="waveform">Audio waveform displayed</condition>
+      </expectedResult>
+    </step>
+
+    <step id="7" type="verification">
+      <action>Verify recording playback controls</action>
+      <interactions>
+        <test>Pause playback</test>
+        <test>Seek to middle of recording</test>
+        <test>Adjust volume</test>
+        <test>Resume playback</test>
+      </interactions>
+      <expectedResult>
+        <condition type="controlsWorking">All player controls functional</condition>
+      </expectedResult>
+    </step>
+
+    <step id="8" type="verification">
+      <action>Read call transcript</action>
+      <expectedResult>
+        <condition type="transcriptVisible">Full conversation text</condition>
+        <condition type="speakerLabels">AI: and Caller: labels</condition>
+        <condition type="timestamps">Timestamps for each message</condition>
+        <condition type="scrollable">Long transcript is scrollable</condition>
+      </expectedResult>
+    </step>
+
+    <step id="9" type="verification">
+      <action>Verify transcript quality</action>
+      <expectedResult>
+        <condition type="textPresent">appointment</condition>
+        <condition type="textPresent">book</condition>
+        <condition type="textPresent">patient</condition>
+        <condition type="formatting">Proper punctuation and capitalization</condition>
+      </expectedResult>
+    </step>
+
+    <step id="10" type="interaction">
+      <action>Download transcript</action>
+      <target selector="button" text="Download Transcript" />
+      <expectedResult>
+        <condition type="fileDownloaded">call-transcript-${callId}.txt</condition>
+      </expectedResult>
+    </step>
+
+    <step id="11" type="interaction">
+      <action>Close call details and open message call</action>
+      <target selector=".call-row" callId="2" />
+      <expectedResult>
+        <condition type="modalOpened">Call details with message</condition>
+        <condition type="elementVisible">Message section highlighted</condition>
+      </expectedResult>
+    </step>
+
+    <step id="12" type="verification">
+      <action>Verify message details</action>
+      <expectedResult>
+        <condition type="messageVisible">Patient calling to reschedule</condition>
+        <condition type="callerInfo">+353 86 987 6543</condition>
+        <condition type="timestamp">January 8, 2026 at 14:15</condition>
+        <condition type="urgencyBadge">Not urgent</condition>
+      </expectedResult>
+    </step>
+
+    <step id="13" type="interaction">
+      <action>Mark message as read</action>
+      <target selector="button" text="Mark as Read" />
+      <expectedResult>
+        <condition type="messageStatus">read</condition>
+        <condition type="iconUpdated">Read checkmark shown</condition>
+      </expectedResult>
+    </step>
+
+    <step id="14" type="interaction">
+      <action>Test search functionality</action>
+      <target selector="input[type='search']" />
+      <data value="reschedule" />
+      <expectedResult>
+        <condition type="resultsFiltered">Only call 2 displayed</condition>
+        <condition type="highlightedText">Search term highlighted</condition>
+      </expectedResult>
+    </step>
+
+    <step id="15" type="interaction">
+      <action>Clear search</action>
+      <target selector="button[data-action='clear-search']" />
+      <expectedResult>
+        <condition type="resultsReset">All 3 calls displayed again</condition>
+      </expectedResult>
+    </step>
+
+    <step id="16" type="interaction">
+      <action>Filter by call type - Messages only</action>
+      <target selector="select[name='filterType']" />
+      <option value="messages" />
+      <expectedResult>
+        <condition type="resultsFiltered">Only message calls shown</condition>
+        <condition type="listItems">1 call (call 2)</condition>
+      </expectedResult>
+    </step>
+
+    <step id="17" type="interaction">
+      <action>Filter by date range</action>
+      <target selector="input[name='dateFrom']" />
+      <data value="2026-01-08" />
+      <target selector="input[name='dateTo']" />
+      <data value="2026-01-08" />
+      <expectedResult>
+        <condition type="resultsFiltered">Calls from today only</condition>
+      </expectedResult>
+    </step>
+
+    <step id="18" type="verification">
+      <action>Verify dashboard Recent Activity sync</action>
+      <url>/dashboard</url>
+      <expectedResult>
+        <condition type="recentActivityVisible">Same calls shown</condition>
+        <condition type="metricsAccurate">Call counts match history</condition>
+      </expectedResult>
+    </step>
+
+    <step id="19" type="verification">
+      <action>Test pagination with many calls</action>
+      <setup>
+        <action>Simulate 50 more calls</action>
+      </setup>
+      <url>/call-history</url>
+      <expectedResult>
+        <condition type="paginationVisible">Page numbers or infinite scroll</condition>
+        <condition type="itemsPerPage">20 calls per page</condition>
+        <condition type="navigationWorking">Next/Previous functional</condition>
+      </expectedResult>
+    </step>
+
+    <step id="20" type="interaction">
+      <action>Export call history</action>
+      <target selector="button" text="Export CSV" />
+      <expectedResult>
+        <condition type="fileDownloaded">call-history-${date}.csv</condition>
+        <condition type="csvColumns">Date, Time, Caller, Duration, Type, Outcome</condition>
+      </expectedResult>
+    </step>
+  </steps>
+
+  <features>
+    <feature name="bulk_actions">
+      <description>Select multiple calls and perform bulk operations</description>
+      <actions>
+        <action>Mark multiple as read</action>
+        <action>Delete multiple calls</action>
+        <action>Export selected calls</action>
+      </actions>
+    </feature>
+
+    <feature name="call_notes">
+      <description>Add notes to calls for follow-up</description>
+      <interaction>Click "Add Note" on call details</interaction>
+      <expectedBehavior>Note saved and displayed with call</expectedBehavior>
+    </feature>
+
+    <feature name="callback_reminders">
+      <description>Set reminders for callbacks</description>
+      <interaction>Click "Set Reminder" and choose date/time</interaction>
+      <expectedBehavior>Notification sent at reminder time</expectedBehavior>
+    </feature>
+  </features>
+
+  <analytics>
+    <metric>Call duration distribution</metric>
+    <metric>Most common call outcomes</metric>
+    <metric>Peak call times</metric>
+    <metric>Message response time</metric>
+  </analytics>
+
+  <notes>
+    <note>Ensure recording playback works across browsers</note>
+    <note>Transcript quality depends on Vapi transcription</note>
+    <note>Consider adding sentiment analysis to calls</note>
+    <note>GDPR compliance: ability to delete call data</note>
+  </notes>
+</testFlow>

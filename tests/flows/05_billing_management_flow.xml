@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testFlow id="billing_management_flow" version="1.0">
+  <metadata>
+    <name>Billing and Subscription Management Flow</name>
+    <description>Tests billing page, usage tracking, subscription management, and payment updates</description>
+    <priority>critical</priority>
+    <estimatedDuration>5m</estimatedDuration>
+    <tags>
+      <tag>billing</tag>
+      <tag>subscription</tag>
+      <tag>usage</tag>
+      <tag>stripe</tag>
+    </tags>
+  </metadata>
+
+  <prerequisites>
+    <condition>User authenticated with active Lite EUR subscription</condition>
+  </prerequisites>
+
+  <testData>
+    <subscription>
+      <plan>Lite</plan>
+      <currency>EUR</currency>
+      <monthlyFee>19.00</monthlyFee>
+      <perCallRate>0.95</perCallRate>
+      <renewalDate>2026-02-07</renewalDate>
+    </subscription>
+    <usage>
+      <callsMade>0</callsMade>
+      <minutesUsed>0</minutesUsed>
+      <callCharges>0.00</callCharges>
+    </usage>
+  </testData>
+
+  <steps>
+    <step id="1" type="navigation">
+      <action>Navigate to Billing page</action>
+      <url>/billing</url>
+      <expectedResult>
+        <condition type="pageTitle">Billing &amp; Usage</condition>
+        <condition type="elementVisible">Current Plan section</condition>
+        <condition type="elementVisible">Usage This Period section</condition>
+      </expectedResult>
+    </step>
+
+    <step id="2" type="verification">
+      <action>Verify Current Plan details</action>
+      <expectedResult>
+        <condition type="textPresent">Lite</condition>
+        <condition type="badgeVisible" text="active" />
+        <condition type="textPresent">€19/mo</condition>
+        <condition type="textPresent">+ €0.95/call</condition>
+        <condition type="textPresent">Renews on February 7, 2026</condition>
+      </expectedResult>
+    </step>
+
+    <step id="3" type="verification">
+      <action>Verify Manage Subscription button</action>
+      <expectedResult>
+        <condition type="elementVisible">button with text "Manage Subscription"</condition>
+        <condition type="elementEnabled">true</condition>
+      </expectedResult>
+    </step>
+
+    <step id="4" type="verification">
+      <action>Verify Usage This Period section</action>
+      <expectedResult>
+        <condition type="cardVisible" title="Calls Made">0</condition>
+        <condition type="cardVisible" title="Call Charges">€0.00</condition>
+        <condition type="cardVisible" title="Per Call Rate">€0.95</condition>
+      </expectedResult>
+    </step>
+
+    <step id="5" type="verification">
+      <action>Verify pay-per-call explanation</action>
+      <expectedResult>
+        <condition type="textPresent">You're on a pay-per-call plan</condition>
+        <condition type="textPresent">Each call costs €0.95</condition>
+        <condition type="textPresent">Call charges are added to your monthly invoice</condition>
+      </expectedResult>
+    </step>
+
+    <step id="6" type="interaction">
+      <action>Click Manage Subscription button</action>
+      <target selector="button" text="Manage Subscription" />
+      <expectedResult>
+        <condition type="redirectTo">Stripe Customer Portal</condition>
+        <condition type="urlContains">billing.stripe.com</condition>
+      </expectedResult>
+    </step>
+
+    <step id="7" type="verification">
+      <action>Verify Stripe portal loaded</action>
+      <target type="external">Stripe Customer Portal</target>
+      <expectedResult>
+        <condition type="pageLoaded">Stripe billing portal</condition>
+        <condition type="elementVisible">Subscription details</condition>
+        <condition type="elementVisible">Payment method section</condition>
+        <condition type="elementVisible">Cancel subscription option</condition>
+      </expectedResult>
+    </step>
+
+    <step id="8" type="interaction">
+      <action>Return to VoiceFleet</action>
+      <target selector="button" text="Back to VoiceFleet" />
+      <expectedResult>
+        <condition type="redirectTo">/billing</condition>
+      </expectedResult>
+    </step>
+
+    <step id="9" type="interaction">
+      <action>Simulate call usage</action>
+      <target type="api">POST /api/calls/test/simulate</target>
+      <data>
+        {
+          "userId": "${userId}",
+          "calls": [
+            { "duration": 120, "type": "inbound" },
+            { "duration": 45, "type": "inbound" },
+            { "duration": 300, "type": "inbound" }
+          ]
+        }
+      </data>
+      <expectedResult>
+        <condition type="responseStatus">200</condition>
+        <condition type="databaseRecords">3 call records created</condition>
+      </expectedResult>
+    </step>
+
+    <step id="10" type="interaction">
+      <action>Refresh billing page</action>
+      <url>/billing</url>
+      <expectedResult>
+        <condition type="pageLoaded">true</condition>
+      </expectedResult>
+    </step>
+
+    <step id="11" type="verification">
+      <action>Verify usage updated</action>
+      <expectedResult>
+        <condition type="cardValue" title="Calls Made">3</condition>
+        <condition type="cardValue" title="Call Charges">€2.85</condition>
+        <condition type="calculation">3 calls × €0.95 = €2.85</condition>
+      </expectedResult>
+    </step>
+
+    <step id="12" type="verification">
+      <action>Verify usage tracking accuracy</action>
+      <expectedResult>
+        <condition type="databaseQuery">
+          SELECT COUNT(*) as call_count, SUM(cost) as total_cost
+          FROM calls
+          WHERE user_id = '${userId}'
+          AND created_at >= DATE_TRUNC('month', CURRENT_DATE)
+        </condition>
+        <condition type="queryResult" field="call_count">3</condition>
+        <condition type="queryResult" field="total_cost">2.85</condition>
+      </expectedResult>
+    </step>
+
+    <step id="13" type="verification">
+      <action>Test plan upgrade scenario</action>
+      <testCase>User upgrades to Growth plan</testCase>
+      <expectedResult>
+        <condition type="planChange">Lite → Growth</condition>
+        <condition type="textPresent">€99/mo</condition>
+        <condition type="textPresent">+ €0.45/call</condition>
+        <condition type="textPresent">Lower per-call rate</condition>
+        <condition type="phoneNumberLimit">2</condition>
+      </expectedResult>
+    </step>
+
+    <step id="14" type="verification">
+      <action>Test subscription cancellation flow</action>
+      <target type="external">Stripe Customer Portal</target>
+      <then>
+        <action>Click Cancel Subscription</action>
+      </then>
+      <expectedResult>
+        <condition type="confirmationDialog">Are you sure?</condition>
+        <condition type="textPresent">cancel at period end</condition>
+        <condition type="textPresent">access until ${renewalDate}</condition>
+      </expectedResult>
+    </step>
+
+    <step id="15" type="interaction">
+      <action>Confirm cancellation</action>
+      <target selector="button" text="Confirm Cancellation" />
+      <expectedResult>
+        <condition type="webhookTriggered">customer.subscription.updated</condition>
+        <condition type="databaseField" name="cancel_at_period_end">true</condition>
+        <condition type="statusUpdate">Cancels on ${renewalDate}</condition>
+      </expectedResult>
+    </step>
+
+    <step id="16" type="verification">
+      <action>Verify cancellation reflected in VoiceFleet</action>
+      <url>/billing</url>
+      <expectedResult>
+        <condition type="alertVisible" type="warning">Subscription ending</condition>
+        <condition type="textPresent">Your subscription will end on ${renewalDate}</condition>
+        <condition type="buttonVisible">Reactivate Subscription</condition>
+      </expectedResult>
+    </step>
+
+    <step id="17" type="interaction">
+      <action>Reactivate subscription</action>
+      <target selector="button" text="Reactivate Subscription" />
+      <expectedResult>
+        <condition type="redirectTo">Stripe portal</condition>
+        <condition type="buttonVisible">Resume Subscription</condition>
+      </expectedResult>
+    </step>
+
+    <step id="18" type="verification">
+      <action>Verify invoices section</action>
+      <url>/billing</url>
+      <scroll>bottom</scroll>
+      <expectedResult>
+        <condition type="sectionVisible">Invoice History</condition>
+        <condition type="listItems">Past invoices listed</condition>
+        <condition type="elementVisible">Download PDF button for each invoice</condition>
+      </expectedResult>
+    </step>
+  </steps>
+
+  <edgeCases>
+    <case name="payment_failed">
+      <description>Test when payment fails</description>
+      <trigger>Stripe webhook: invoice.payment_failed</trigger>
+      <expectedBehavior>
+        <alert type="error">Payment failed</alert>
+        <action>Update payment method prompt</action>
+        <restriction>Service limited after grace period</restriction>
+      </expectedBehavior>
+    </case>
+
+    <case name="trial_ending">
+      <description>Test trial period ending notification</description>
+      <condition>trial_ends_at within 3 days</condition>
+      <expectedBehavior>
+        <alert type="info">Trial ending soon</alert>
+        <action>Prompt to add payment method</action>
+      </expectedBehavior>
+    </case>
+
+    <case name="usage_limit">
+      <description>Test when approaching usage limits</description>
+      <condition>Minutes used > 80% of plan limit</condition>
+      <expectedBehavior>
+        <alert type="warning">Approaching limit</alert>
+        <suggestion>Consider upgrading</suggestion>
+      </expectedBehavior>
+    </case>
+  </edgeCases>
+
+  <notes>
+    <note>Test currency display for both EUR and USD users</note>
+    <note>Verify timezone handling for renewal dates</note>
+    <note>Test proration when upgrading mid-cycle</note>
+    <note>Ensure Stripe webhooks are properly handled</note>
+  </notes>
+</testFlow>
