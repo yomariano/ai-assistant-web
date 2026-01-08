@@ -11,8 +11,12 @@ export default function LoginPage() {
   const { loginWithGoogle, devLogin, isAuthenticated, isLoading, checkAuth } = useAuthStore();
   const [error, setError] = useState('');
   const [isSigningIn, setIsSigningIn] = useState(false);
+  const [isLocalhost, setIsLocalhost] = useState(false);
 
   useEffect(() => {
+    // Check if running on localhost
+    const hostname = window.location.hostname;
+    setIsLocalhost(hostname === 'localhost' || hostname === '127.0.0.1');
     checkAuth();
   }, [checkAuth]);
 
@@ -107,14 +111,14 @@ export default function LoginPage() {
             Sign in with Google
           </Button>
 
-          {process.env.NODE_ENV === 'development' && (
+          {isLocalhost && (
             <>
               <div className="relative">
                 <div className="absolute inset-0 flex items-center">
                   <div className="w-full border-t border-gray-300" />
                 </div>
                 <div className="relative flex justify-center text-sm">
-                  <span className="px-2 bg-white text-gray-500">Development Only</span>
+                  <span className="px-2 bg-white text-gray-500">Localhost Only</span>
                 </div>
               </div>
 
