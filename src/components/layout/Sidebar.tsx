@@ -5,29 +5,24 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import {
   Phone,
-  BookMarked,
   History,
   Settings,
   LogOut,
-  Calendar,
   LayoutDashboard,
   ChevronLeft,
   ChevronRight,
   X,
   Bot,
   CreditCard,
-  Bell
+  Bell,
+  MessageSquare
 } from 'lucide-react';
 import { useAuthStore } from '@/lib/store';
-import Button from '@/components/ui/button';
 
 const navItems = [
   { href: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
   { href: '/assistant', label: 'AI Assistant', icon: Bot },
-  { href: '/call', label: 'New Call', icon: Phone },
-  { href: '/agenda', label: 'Agenda', icon: BookMarked },
-  { href: '/scheduled', label: 'Scheduled', icon: Calendar },
-  { href: '/history', label: 'History', icon: History },
+  { href: '/history', label: 'Call History', icon: Phone },
   { href: '/notifications', label: 'Notifications', icon: Bell },
   { href: '/billing', label: 'Billing', icon: CreditCard },
   { href: '/settings', label: 'Settings', icon: Settings },

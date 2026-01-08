@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { Phone, BookMarked, Calendar, Clock, ArrowRight, History as HistoryIcon, Settings as SettingsIcon, Bot } from 'lucide-react';
+import { Phone, MessageSquare, Clock, ArrowRight, History as HistoryIcon, Settings as SettingsIcon, Bot, Voicemail } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import Button from '@/components/ui/button';
 import { userApi, historyApi } from '@/lib/api';
@@ -43,30 +43,22 @@ export default function DashboardPage() {
   }
 
   const statCards = [
-    { label: 'Total Calls', value: stats?.totalCalls || 0, icon: Phone, color: 'bg-indigo-50 text-indigo-600' },
-    { label: 'Saved Calls', value: stats?.savedCalls || 0, icon: BookMarked, color: 'bg-emerald-50 text-emerald-600' },
-    { label: 'Scheduled', value: stats?.pendingScheduled || 0, icon: Calendar, color: 'bg-amber-50 text-amber-600' },
+    { label: 'Calls Answered', value: stats?.totalCalls || 0, icon: Phone, color: 'bg-indigo-50 text-indigo-600' },
+    { label: 'Messages Taken', value: stats?.savedCalls || 0, icon: MessageSquare, color: 'bg-emerald-50 text-emerald-600' },
+    { label: 'Voicemails', value: stats?.pendingScheduled || 0, icon: Voicemail, color: 'bg-amber-50 text-amber-600' },
     { label: 'Call Minutes', value: stats?.totalDurationMinutes || 0, icon: Clock, color: 'bg-blue-50 text-blue-600' },
   ];
 
   return (
     <div className="space-y-10 pb-12">
       {/* Welcome Header */}
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-        <div>
-          <h1 className="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">
-            Welcome back, {user?.fullName?.split(' ')[0]}!
-          </h1>
-          <p className="text-slate-500 mt-1">
-            Monitoring your AI agents and call activity.
-          </p>
-        </div>
-        <Link href="/call">
-          <Button size="lg" className="w-full sm:w-auto shadow-indigo-200 shadow-lg">
-            <Phone className="w-4 h-4 mr-2" />
-            Launch New Call
-          </Button>
-        </Link>
+      <div>
+        <h1 className="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">
+          Welcome back, {user?.fullName?.split(' ')[0]}!
+        </h1>
+        <p className="text-slate-500 mt-1">
+          Your AI receptionist is handling calls 24/7.
+        </p>
       </div>
 
       {/* Stats Grid */}
@@ -165,32 +157,32 @@ export default function DashboardPage() {
               </Card>
             </Link>
 
-            <Link href="/agenda">
+            <Link href="/history">
               <Card className="hover:shadow-md transition-all border-none ring-1 ring-slate-200 group cursor-pointer">
                 <CardContent className="p-5">
                   <div className="flex items-center gap-4">
-                    <div className="p-3 bg-indigo-50 text-indigo-600 rounded-xl group-hover:scale-110 transition-transform">
-                      <BookMarked className="w-5 h-5" />
+                    <div className="p-3 bg-emerald-50 text-emerald-600 rounded-xl group-hover:scale-110 transition-transform">
+                      <MessageSquare className="w-5 h-5" />
                     </div>
                     <div>
-                      <h3 className="font-bold text-slate-900 leading-tight">Agendas</h3>
-                      <p className="text-xs text-slate-500 mt-1">Ready-to-use call templates</p>
+                      <h3 className="font-bold text-slate-900 leading-tight">Messages</h3>
+                      <p className="text-xs text-slate-500 mt-1">View caller messages</p>
                     </div>
                   </div>
                 </CardContent>
               </Card>
             </Link>
 
-            <Link href="/scheduled">
+            <Link href="/notifications">
               <Card className="hover:shadow-md transition-all border-none ring-1 ring-slate-200 group cursor-pointer">
                 <CardContent className="p-5">
                   <div className="flex items-center gap-4">
                     <div className="p-3 bg-amber-50 text-amber-600 rounded-xl group-hover:scale-110 transition-transform">
-                      <Calendar className="w-5 h-5" />
+                      <Voicemail className="w-5 h-5" />
                     </div>
                     <div>
-                      <h3 className="font-bold text-slate-900 leading-tight">Planner</h3>
-                      <p className="text-xs text-slate-500 mt-1">Manage future call schedules</p>
+                      <h3 className="font-bold text-slate-900 leading-tight">Notifications</h3>
+                      <p className="text-xs text-slate-500 mt-1">Manage call alerts</p>
                     </div>
                   </div>
                 </CardContent>
