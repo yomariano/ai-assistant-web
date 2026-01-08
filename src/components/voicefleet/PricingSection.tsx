@@ -8,14 +8,14 @@ const PricingSection = () => {
       name: "Lite",
       price: 19,
       perCall: 0.95,
-      description: "Perfect for testing or low-volume",
+      description: "Perfect for solo practitioners",
       volume: "< 100 calls/month",
       features: [
         "1 phone number",
         "Pay per call",
-        "Order taking",
+        "24/7 call answering",
+        "Message taking",
         "SMS notifications",
-        "Business hours support",
         "Custom greeting",
       ],
       cta: "Get Started",
@@ -26,16 +26,16 @@ const PricingSection = () => {
       name: "Growth",
       price: 99,
       perCall: 0.45,
-      description: "For most businesses",
+      description: "For busy small businesses",
       volume: "100-400 calls/month",
       features: [
         "2 phone numbers",
         "Lower per-call rate",
-        "Orders + Reservations",
+        "Appointment booking",
         "SMS + Email notifications",
-        "Extended support hours",
-        "Analytics dashboard",
         "Calendar integration",
+        "Analytics dashboard",
+        "FAQ handling",
       ],
       cta: "Get Started",
       popular: true,
@@ -45,7 +45,7 @@ const PricingSection = () => {
       name: "Pro",
       price: 249,
       perCall: null,
-      description: "For busy venues",
+      description: "For multi-location businesses",
       volume: "400+ calls/month",
       features: [
         "5 phone numbers",
@@ -63,10 +63,10 @@ const PricingSection = () => {
   ];
 
   const includedFeatures = [
-    "AI-powered call handling",
+    "AI receptionist",
     "Irish phone number",
-    "Order management",
-    "Free setup",
+    "Message notifications",
+    "Free setup & support",
   ];
 
   return (
@@ -77,7 +77,7 @@ const PricingSection = () => {
             Simple, <span className="text-gradient-primary">Transparent</span> Pricing
           </h2>
           <p className="text-base lg:text-lg text-muted-foreground">
-            No hidden fees. Pay for what you use.
+            No hidden fees. No contracts. Pay for what you use.
             <span className="font-semibold text-foreground"> Cancel anytime.</span>
           </p>
         </div>

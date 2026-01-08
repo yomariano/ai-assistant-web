@@ -1,30 +1,30 @@
-import { TrendingUp, Users, AlertCircle } from "lucide-react";
+import { PhoneMissed, Clock, Wallet } from "lucide-react";
 
 const ProblemSection = () => {
   const problems = [
     {
-      icon: TrendingUp,
-      title: "Rising Costs",
+      icon: PhoneMissed,
+      title: "Missed Calls = Lost Business",
       description:
-        "Agent salaries up 15% YoY. Training costs €5k per hire. Turnover at 30-40%. The numbers don't add up.",
-      stat: "€5k",
-      statLabel: "per hire training",
+        "Phone rings while you're with a customer. You can't answer. That caller moves on to your competitor. Every missed call is money walking out the door.",
+      stat: "67%",
+      statLabel: "of callers won't leave a voicemail",
     },
     {
-      icon: Users,
-      title: "Scaling Challenges",
+      icon: Clock,
+      title: "After-Hours Hang-Ups",
       description:
-        "Peak season means overtime or dropped calls. Hiring takes months. By the time you're staffed, the rush is over.",
-      stat: "3-6",
-      statLabel: "months to hire",
-    },
-    {
-      icon: AlertCircle,
-      title: "Quality Inconsistency",
-      description:
-        "Your best agent handles 80 calls perfectly. Your worst creates complaints. AI delivers the same quality every time.",
+        "Customers call at 6pm, 8pm, weekends. Your phone goes to voicemail. They hang up and try someone else. You never even knew they called.",
       stat: "40%",
-      statLabel: "quality variance",
+      statLabel: "of calls come outside business hours",
+    },
+    {
+      icon: Wallet,
+      title: "Receptionist Costs",
+      description:
+        "Hiring someone just to answer phones costs €30,000+ per year. And they still can't work nights, weekends, or bank holidays.",
+      stat: "€30k+",
+      statLabel: "annual receptionist salary",
     },
   ];
 
@@ -33,11 +33,11 @@ const ProblemSection = () => {
       <div className="container mx-auto px-4">
         <div className="max-w-3xl mx-auto text-center mb-16">
           <h2 className="text-3xl lg:text-4xl font-heading font-bold text-foreground mb-4">
-            The Contact Center Math{" "}
-            <span className="text-gradient-primary">Doesn&apos;t Work</span> Anymore
+            Every Missed Call Is{" "}
+            <span className="text-gradient-primary">A Missed Opportunity</span>
           </h2>
           <p className="text-lg text-muted-foreground">
-            Legacy approaches are breaking under modern demands
+            Small businesses lose thousands in revenue each year from unanswered calls
           </p>
         </div>
 

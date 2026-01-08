@@ -1,27 +1,27 @@
-import { Brain, CheckCircle2, ArrowUpRight, Headphones } from "lucide-react";
+import { Phone, MessageSquare, Calendar, CheckCircle2, Headphones } from "lucide-react";
 
 const SolutionSection = () => {
   const capabilities = [
     {
-      icon: Brain,
-      title: "Understand",
+      icon: Phone,
+      title: "Answers Every Call",
       description:
-        "Natural language processing handles accents, interruptions, and complex requests with human-like comprehension.",
-      features: ["Multi-language support", "Context awareness", "Intent recognition"],
+        "Your AI receptionist picks up in under 1 second, every time. No hold music, no voicemail, no missed opportunities.",
+      features: ["24/7 availability", "Instant pickup", "Natural Irish English"],
     },
     {
-      icon: CheckCircle2,
-      title: "Resolve",
+      icon: MessageSquare,
+      title: "Takes Messages",
       description:
-        "Complete transactions, update accounts, answer questions — end-to-end resolution without human intervention.",
-      features: ["Transaction processing", "Account management", "Knowledge base access"],
+        "Captures caller details, reason for calling, and urgency. Sends you an instant notification by SMS or email.",
+      features: ["Caller name & number", "Message transcription", "Instant notifications"],
     },
     {
-      icon: ArrowUpRight,
-      title: "Escalate",
+      icon: Calendar,
+      title: "Books Appointments",
       description:
-        "Seamlessly transfers to human agents when needed, with full context and conversation history.",
-      features: ["Smart routing", "Context transfer", "Priority queuing"],
+        "Checks your availability, books appointments, and sends confirmation to both you and the caller.",
+      features: ["Calendar integration", "Booking confirmations", "Reschedule handling"],
     },
   ];
 
@@ -31,18 +31,18 @@ const SolutionSection = () => {
         <div className="max-w-3xl mx-auto text-center mb-16">
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-accent/10 rounded-full mb-6">
             <Headphones className="w-4 h-4 text-accent" />
-            <span className="text-sm font-medium text-accent">The Solution</span>
+            <span className="text-sm font-medium text-accent">How It Works</span>
           </div>
 
           <h2 className="text-3xl lg:text-4xl font-heading font-bold text-foreground mb-6">
-            AI Agents That{" "}
-            <span className="text-gradient-accent">Actually Work</span>
+            Your Calls Handled{" "}
+            <span className="text-gradient-accent">Professionally</span>
           </h2>
 
           <p className="text-lg text-muted-foreground leading-relaxed">
-            VoiceFleet isn&apos;t a chatbot reading scripts. Our AI agents understand context,
-            handle complex conversations, and know when to escalate. They&apos;re trained on
-            <span className="font-semibold text-foreground"> YOUR processes, YOUR products, YOUR brand voice.</span>
+            Forward your business number to VoiceFleet. Our AI receptionist answers,
+            handles the call, and keeps you informed —{" "}
+            <span className="font-semibold text-foreground">just like having your own front desk.</span>
           </p>
         </div>
 

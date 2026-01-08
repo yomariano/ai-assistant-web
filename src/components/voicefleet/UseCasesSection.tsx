@@ -1,49 +1,49 @@
 import {
-  Headphones,
-  Calendar,
-  Package,
-  CreditCard,
-  UserCheck,
-  Megaphone
+  Stethoscope,
+  Scale,
+  Wrench,
+  Home,
+  Scissors,
+  Store
 } from "lucide-react";
 
 const UseCasesSection = () => {
   const useCases = [
     {
-      icon: Headphones,
-      title: "Inbound Support",
-      description: "First-line customer service, FAQs, account inquiries",
-      volume: "High Volume",
+      icon: Stethoscope,
+      title: "Medical & Dental",
+      description: "Appointment bookings, patient queries, prescription requests, after-hours triage",
+      tag: "Healthcare",
     },
     {
-      icon: Calendar,
-      title: "Appointment Scheduling",
-      description: "Healthcare, services, consultations",
-      volume: "Time-Sensitive",
+      icon: Scale,
+      title: "Legal & Accounting",
+      description: "Client intake, consultation scheduling, case inquiries, document requests",
+      tag: "Professional",
     },
     {
-      icon: Package,
-      title: "Order Status",
-      description: "Tracking, modifications, cancellations",
-      volume: "Peak Demand",
+      icon: Wrench,
+      title: "Trades & Services",
+      description: "Job enquiries, quote requests, emergency call-outs, scheduling",
+      tag: "Trade",
     },
     {
-      icon: CreditCard,
-      title: "Payment Processing",
-      description: "Collections, billing inquiries, payment plans",
-      volume: "Secure",
+      icon: Home,
+      title: "Property & Letting",
+      description: "Viewing requests, tenant queries, maintenance reports, availability checks",
+      tag: "Property",
     },
     {
-      icon: UserCheck,
-      title: "Lead Qualification",
-      description: "Inbound lead capture and qualification",
-      volume: "24/7",
+      icon: Scissors,
+      title: "Salons & Wellness",
+      description: "Appointment bookings, service enquiries, cancellations, availability",
+      tag: "Beauty",
     },
     {
-      icon: Megaphone,
-      title: "Outbound Campaigns",
-      description: "Surveys, reminders, confirmations",
-      volume: "Scalable",
+      icon: Store,
+      title: "Retail & Hospitality",
+      description: "Opening hours, reservations, product queries, directions",
+      tag: "Retail",
     },
   ];
 
@@ -52,11 +52,11 @@ const UseCasesSection = () => {
       <div className="container mx-auto px-4">
         <div className="max-w-3xl mx-auto text-center mb-16">
           <h2 className="text-3xl lg:text-4xl font-heading font-bold text-foreground mb-4">
-            Built for{" "}
-            <span className="text-gradient-primary">High-Volume</span> Operations
+            Perfect for{" "}
+            <span className="text-gradient-primary">Every Industry</span>
           </h2>
           <p className="text-lg text-muted-foreground">
-            Deploy AI agents across your entire call operation
+            Irish businesses of all types trust VoiceFleet to handle their calls
           </p>
         </div>
 
@@ -76,7 +76,7 @@ const UseCasesSection = () => {
                       {useCase.title}
                     </h3>
                     <span className="text-xs font-medium text-accent bg-accent/10 px-2 py-1 rounded-full">
-                      {useCase.volume}
+                      {useCase.tag}
                     </span>
                   </div>
                   <p className="text-sm text-muted-foreground">
