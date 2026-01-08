@@ -10,6 +10,8 @@ import type { Assistant, Voice, PhoneNumber } from '@/types';
 import { AssistantStatsCards } from './components/assistant-stats-cards';
 import { AssistantPhoneNumbers } from './components/assistant-phone-numbers';
 import { AssistantVoiceGrid } from './components/assistant-voice-grid';
+import { PromptTemplateSelector } from '@/components/assistant/PromptTemplateSelector';
+import type { PromptTemplate } from '@/lib/content/prompt-templates';
 
 export default function AssistantPage() {
   const [assistant, setAssistant] = useState<Assistant | null>(null);
@@ -30,6 +32,16 @@ export default function AssistantPage() {
   const [selectedVoice, setSelectedVoice] = useState('');
   const [firstMessage, setFirstMessage] = useState('');
   const [systemPrompt, setSystemPrompt] = useState('');
+  const [selectedTemplateId, setSelectedTemplateId] = useState<string | undefined>();
+
+  // Handle template selection
+  const handleTemplateSelect = useCallback((template: PromptTemplate) => {
+    setSelectedTemplateId(template.id);
+    setGreetingName(template.suggestedAssistantName);
+    setFirstMessage(template.firstMessage);
+    setSystemPrompt(template.systemPrompt);
+    setSuccess(`Applied "${template.name}" template. Customize the placeholders in curly braces with your business information.`);
+  }, []);
 
   const minutesUsed = stats?.minutes ?? 0;
   const minutesIncluded = limits?.minutesIncluded ?? 0;
@@ -178,6 +190,16 @@ export default function AssistantPage() {
       <AssistantStatsCards {...statsProps} />
 
       <AssistantPhoneNumbers phoneNumbers={phoneNumbers} />
+
+      {/* Template Selector */}
+      <Card className="border-none shadow-md ring-1 ring-slate-200 overflow-hidden">
+        <CardContent className="p-6">
+          <PromptTemplateSelector
+            onSelectTemplate={handleTemplateSelect}
+            currentTemplateId={selectedTemplateId}
+          />
+        </CardContent>
+      </Card>
 
       {/* Business Info */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
