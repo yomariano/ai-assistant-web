@@ -68,7 +68,7 @@ export default function AssistantPage() {
 
       setVoices(voicesRes.voices || []);
       setPlanId(voicesRes.planId || 'starter');
-      setPhoneNumbers(phoneRes.phoneNumbers || []);
+      setPhoneNumbers(phoneRes.numbers || []);
       setStats(statsRes.thisMonth || null);
       setLimits(statsRes.limits || null);
     } catch (err) {

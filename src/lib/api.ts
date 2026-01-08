@@ -109,6 +109,22 @@ export const authApi = {
   },
 };
 
+// Onboarding types
+export interface OnboardingProgress {
+  currentStep: number;
+  stepsCompleted: string[];
+  callForwardingProvider?: string;
+  testCallMade: boolean;
+  startedAt?: string;
+  completedAt?: string;
+}
+
+export interface OnboardingStatus {
+  completed: boolean;
+  completedAt?: string;
+  progress: OnboardingProgress;
+}
+
 // User
 export const userApi = {
   getProfile: async (): Promise<User> => {
@@ -123,6 +139,22 @@ export const userApi = {
 
   getStats: async (): Promise<UserStats> => {
     const { data } = await api.get('/api/users/stats');
+    return data;
+  },
+
+  // Onboarding
+  getOnboarding: async (): Promise<OnboardingStatus> => {
+    const { data } = await api.get('/api/users/onboarding');
+    return data;
+  },
+
+  updateOnboarding: async (updates: Partial<OnboardingProgress>): Promise<OnboardingProgress> => {
+    const { data } = await api.patch('/api/users/onboarding', updates);
+    return data;
+  },
+
+  completeOnboarding: async (): Promise<{ completed: boolean; completedAt: string; message: string }> => {
+    const { data } = await api.post('/api/users/onboarding/complete');
     return data;
   },
 };
@@ -303,7 +335,7 @@ export const billingApi = {
     return data;
   },
 
-  getPhoneNumbers: async (): Promise<{ phoneNumbers: PhoneNumber[]; limit: number }> => {
+  getPhoneNumbers: async (): Promise<{ numbers: PhoneNumber[]; count: number; maxAllowed: number; canAddMore: boolean }> => {
     const { data } = await api.get('/api/billing/phone-numbers');
     return data;
   },
