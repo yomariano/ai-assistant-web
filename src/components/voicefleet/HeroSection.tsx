@@ -27,13 +27,13 @@ const HeroSection = () => {
               <span className="text-sm font-medium text-accent">AI Receptionist for Irish Businesses</span>
             </div>
 
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-heading font-extrabold text-foreground leading-tight mb-6 animate-fade-up stagger-1">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-heading font-extrabold text-foreground leading-tight mb-6 animate-fade-up stagger-1">
               Never Miss Another Call.{" "}
               <span className="text-gradient-primary">Your AI Receptionist</span>{" "}
               Answers 24/7.
             </h1>
 
-            <p className="text-lg lg:text-xl text-muted-foreground mb-8 leading-relaxed animate-fade-up stagger-2">
+            <p className="text-base sm:text-lg lg:text-xl text-muted-foreground mb-8 leading-relaxed animate-fade-up stagger-2">
               Forward your calls to VoiceFleet. We answer, take messages, book appointments,
               and handle FAQs —{" "}
               <span className="font-semibold text-foreground">even at 3am or on bank holidays</span>.
