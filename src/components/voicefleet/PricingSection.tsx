@@ -1,7 +1,9 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Check, Zap, Rocket, Crown } from "lucide-react";
+import { useAuthStore } from "@/lib/store";
 
 // Get payment links based on stripe mode
 const getPaymentLinks = () => {
@@ -24,9 +26,27 @@ const getPaymentLinks = () => {
 
 const PricingSection = () => {
   const paymentLinks = getPaymentLinks();
+  const { isAuthenticated, checkAuth } = useAuthStore();
+  const [authChecked, setAuthChecked] = useState(false);
+
+  useEffect(() => {
+    checkAuth().then(() => setAuthChecked(true));
+  }, [checkAuth]);
 
   const handleGetStarted = (planId: string) => {
     const link = paymentLinks[planId as keyof typeof paymentLinks];
+
+    // If user is not authenticated, redirect to login with plan
+    if (!isAuthenticated) {
+      // Store the payment link for after login
+      if (link) {
+        sessionStorage.setItem('pendingPaymentLink', link);
+      }
+      window.location.href = `/login?plan=${planId}`;
+      return;
+    }
+
+    // User is authenticated, go directly to Stripe
     if (link) {
       window.location.href = link;
     } else {

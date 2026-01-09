@@ -32,6 +32,15 @@ function LoginContent() {
 
   useEffect(() => {
     if (!isLoading && isAuthenticated) {
+      // Check if there's a pending payment link from pricing page
+      const pendingPaymentLink = sessionStorage.getItem('pendingPaymentLink');
+      if (pendingPaymentLink) {
+        sessionStorage.removeItem('pendingPaymentLink');
+        sessionStorage.removeItem('selectedPlan');
+        window.location.href = pendingPaymentLink;
+        return;
+      }
+
       // Check if user was trying to go somewhere before login
       const redirectPath = sessionStorage.getItem('redirectAfterLogin');
       if (redirectPath) {
@@ -40,11 +49,12 @@ function LoginContent() {
         return;
       }
 
-      // Check if user selected a plan before login
+      // Check if user selected a plan before login (fallback)
       const plan = sessionStorage.getItem('selectedPlan') || selectedPlan;
       if (plan) {
         sessionStorage.removeItem('selectedPlan');
-        router.push(`/checkout?plan=${plan}`);
+        // Redirect to dashboard - payment will be handled separately
+        router.push('/dashboard');
       } else {
         router.push('/dashboard');
       }
@@ -71,14 +81,16 @@ function LoginContent() {
 
     try {
       await devLogin();
-      // Check if user selected a plan before login
-      const plan = sessionStorage.getItem('selectedPlan') || selectedPlan;
-      if (plan) {
+      // Check if there's a pending payment link from pricing page
+      const pendingPaymentLink = sessionStorage.getItem('pendingPaymentLink');
+      if (pendingPaymentLink) {
+        sessionStorage.removeItem('pendingPaymentLink');
         sessionStorage.removeItem('selectedPlan');
-        router.push(`/checkout?plan=${plan}`);
-      } else {
-        router.push('/dashboard');
+        window.location.href = pendingPaymentLink;
+        return;
       }
+      // Fallback to dashboard
+      router.push('/dashboard');
     } catch (err: unknown) {
       const errorMessage = err instanceof Error ? err.message : 'Dev login failed';
       setError(errorMessage);
