@@ -5,20 +5,20 @@ import { Check, Zap, Rocket, Crown } from "lucide-react";
 
 // Get payment links based on stripe mode
 const getPaymentLinks = () => {
-  const isLiveMode = import.meta.env.VITE_STRIPE_MODE === "live";
+  const isLiveMode = process.env.NEXT_PUBLIC_STRIPE_MODE === "live";
 
   if (isLiveMode) {
     return {
-      starter: import.meta.env.VITE_STRIPE_LIVE_LINK_STARTER,
-      growth: import.meta.env.VITE_STRIPE_LIVE_LINK_GROWTH,
-      scale: import.meta.env.VITE_STRIPE_LIVE_LINK_SCALE,
+      starter: process.env.NEXT_PUBLIC_STRIPE_LIVE_LINK_STARTER,
+      growth: process.env.NEXT_PUBLIC_STRIPE_LIVE_LINK_GROWTH,
+      scale: process.env.NEXT_PUBLIC_STRIPE_LIVE_LINK_SCALE,
     };
   }
 
   return {
-    starter: import.meta.env.VITE_STRIPE_TEST_LINK_STARTER,
-    growth: import.meta.env.VITE_STRIPE_TEST_LINK_GROWTH,
-    scale: import.meta.env.VITE_STRIPE_TEST_LINK_SCALE,
+    starter: process.env.NEXT_PUBLIC_STRIPE_TEST_LINK_STARTER,
+    growth: process.env.NEXT_PUBLIC_STRIPE_TEST_LINK_GROWTH,
+    scale: process.env.NEXT_PUBLIC_STRIPE_TEST_LINK_SCALE,
   };
 };
 
