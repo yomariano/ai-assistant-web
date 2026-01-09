@@ -1,11 +1,11 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { Loader2, AlertCircle } from 'lucide-react';
 import { billingApi } from '@/lib/api';
 
-export default function CheckoutPage() {
+function CheckoutContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const [error, setError] = useState<string | null>(null);
@@ -106,4 +106,19 @@ export default function CheckoutPage() {
   }
 
   return null;
+}
+
+export default function CheckoutPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-[60vh] flex flex-col items-center justify-center">
+        <Loader2 className="w-12 h-12 animate-spin text-primary mb-4" />
+        <h2 className="text-xl font-semibold text-slate-900 mb-2">
+          Loading checkout...
+        </h2>
+      </div>
+    }>
+      <CheckoutContent />
+    </Suspense>
+  );
 }
