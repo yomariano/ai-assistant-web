@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import {
   Phone,
   History,
@@ -35,8 +35,14 @@ interface SidebarProps {
 
 export default function Sidebar({ isOpen, onClose }: SidebarProps) {
   const pathname = usePathname();
+  const router = useRouter();
   const { user, logout } = useAuthStore();
   const [isCollapsed, setIsCollapsed] = useState(false);
+
+  const handleLogout = async () => {
+    await logout();
+    router.push('/');
+  };
 
   // Close sidebar on route change (mobile)
   useEffect(() => {
@@ -110,7 +116,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
         {/* User & Settings Section */}
         <div className="border-t border-white/10 p-4 space-y-2">
           <button
-            onClick={logout}
+            onClick={handleLogout}
             className="flex w-full items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:bg-rose-500/10 hover:text-rose-500 transition-colors group"
           >
             <LogOut className="h-5 w-5 shrink-0" />

@@ -37,8 +37,13 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
   useEffect(() => {
     console.log('[DASHBOARD] useEffect - auth state changed:', { isLoading, isAuthenticated });
     if (!isLoading && !isAuthenticated) {
-      console.log('[DASHBOARD] Not authenticated, redirecting to /login');
-      router.push('/login');
+      // Store the intended destination if coming from checkout
+      const currentPath = window.location.pathname + window.location.search;
+      if (currentPath.startsWith('/checkout')) {
+        sessionStorage.setItem('redirectAfterLogin', currentPath);
+      }
+      console.log('[DASHBOARD] Not authenticated, redirecting to landing page');
+      router.push('/');
     }
   }, [isLoading, isAuthenticated, router]);
 

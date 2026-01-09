@@ -1,11 +1,19 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import { Check, Zap, Rocket, Crown } from "lucide-react";
 
 const PricingSection = () => {
+  const handleGetStarted = (planId: string) => {
+    // Redirect directly to checkout - dashboard layout will handle auth
+    window.location.href = `/checkout?plan=${planId}`;
+  };
+
   const tiers = [
     {
       icon: Zap,
       name: "Lite",
+      planId: "starter",
       price: 19,
       perCall: 0.95,
       description: "Perfect for solo practitioners",
@@ -24,6 +32,7 @@ const PricingSection = () => {
     {
       icon: Rocket,
       name: "Growth",
+      planId: "growth",
       price: 99,
       perCall: 0.45,
       description: "For busy small businesses",
@@ -43,6 +52,7 @@ const PricingSection = () => {
     {
       icon: Crown,
       name: "Pro",
+      planId: "scale",
       price: 249,
       perCall: null,
       description: "For multi-location businesses",
@@ -152,6 +162,7 @@ const PricingSection = () => {
                   variant={tier.popular ? "hero" : "outline"}
                   size="lg"
                   className="w-full"
+                  onClick={() => handleGetStarted(tier.planId)}
                 >
                   {tier.cta}
                 </Button>

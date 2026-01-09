@@ -1,30 +1,55 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { Phone } from 'lucide-react';
 import { useAuthStore } from '@/lib/store';
 import Button from '@/components/ui/button';
 
 export default function LoginPage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const { loginWithGoogle, devLogin, isAuthenticated, isLoading, checkAuth } = useAuthStore();
   const [error, setError] = useState('');
   const [isSigningIn, setIsSigningIn] = useState(false);
   const [isLocalhost, setIsLocalhost] = useState(false);
 
+  // Get the plan from URL if user came from pricing
+  const selectedPlan = searchParams.get('plan');
+
   useEffect(() => {
     // Check if running on localhost
     const hostname = window.location.hostname;
     setIsLocalhost(hostname === 'localhost' || hostname === '127.0.0.1');
+
+    // Store selected plan in sessionStorage for after OAuth redirect
+    if (selectedPlan) {
+      sessionStorage.setItem('selectedPlan', selectedPlan);
+    }
+
     checkAuth();
-  }, [checkAuth]);
+  }, [checkAuth, selectedPlan]);
 
   useEffect(() => {
     if (!isLoading && isAuthenticated) {
-      router.push('/dashboard');
+      // Check if user was trying to go somewhere before login
+      const redirectPath = sessionStorage.getItem('redirectAfterLogin');
+      if (redirectPath) {
+        sessionStorage.removeItem('redirectAfterLogin');
+        router.push(redirectPath);
+        return;
+      }
+
+      // Check if user selected a plan before login
+      const plan = sessionStorage.getItem('selectedPlan') || selectedPlan;
+      if (plan) {
+        sessionStorage.removeItem('selectedPlan');
+        router.push(`/checkout?plan=${plan}`);
+      } else {
+        router.push('/dashboard');
+      }
     }
-  }, [isLoading, isAuthenticated, router]);
+  }, [isLoading, isAuthenticated, router, selectedPlan]);
 
   const handleGoogleSignIn = async () => {
     setError('');
@@ -46,7 +71,14 @@ export default function LoginPage() {
 
     try {
       await devLogin();
-      router.push('/dashboard');
+      // Check if user selected a plan before login
+      const plan = sessionStorage.getItem('selectedPlan') || selectedPlan;
+      if (plan) {
+        sessionStorage.removeItem('selectedPlan');
+        router.push(`/checkout?plan=${plan}`);
+      } else {
+        router.push('/dashboard');
+      }
     } catch (err: unknown) {
       const errorMessage = err instanceof Error ? err.message : 'Dev login failed';
       setError(errorMessage);

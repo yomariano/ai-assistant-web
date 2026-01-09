@@ -169,6 +169,13 @@ if (typeof window !== 'undefined') {
               devMode: false,
               isLoading: false
             });
+
+            // Check if user was trying to checkout before login
+            const redirectPath = sessionStorage.getItem('redirectAfterLogin');
+            if (redirectPath) {
+              sessionStorage.removeItem('redirectAfterLogin');
+              window.location.href = redirectPath;
+            }
           } catch (error) {
             console.error('Failed to get user after sign in:', error);
           }
