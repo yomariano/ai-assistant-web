@@ -3,10 +3,36 @@
 import { Button } from "@/components/ui/button";
 import { Check, Zap, Rocket, Crown } from "lucide-react";
 
+// Get payment links based on stripe mode
+const getPaymentLinks = () => {
+  const isLiveMode = import.meta.env.VITE_STRIPE_MODE === "live";
+
+  if (isLiveMode) {
+    return {
+      starter: import.meta.env.VITE_STRIPE_LIVE_LINK_STARTER,
+      growth: import.meta.env.VITE_STRIPE_LIVE_LINK_GROWTH,
+      scale: import.meta.env.VITE_STRIPE_LIVE_LINK_SCALE,
+    };
+  }
+
+  return {
+    starter: import.meta.env.VITE_STRIPE_TEST_LINK_STARTER,
+    growth: import.meta.env.VITE_STRIPE_TEST_LINK_GROWTH,
+    scale: import.meta.env.VITE_STRIPE_TEST_LINK_SCALE,
+  };
+};
+
 const PricingSection = () => {
+  const paymentLinks = getPaymentLinks();
+
   const handleGetStarted = (planId: string) => {
-    // Redirect directly to checkout - dashboard layout will handle auth
-    window.location.href = `/checkout?plan=${planId}`;
+    const link = paymentLinks[planId as keyof typeof paymentLinks];
+    if (link) {
+      window.location.href = link;
+    } else {
+      // Fallback to checkout page if no payment link configured
+      window.location.href = `/checkout?plan=${planId}`;
+    }
   };
 
   const tiers = [
