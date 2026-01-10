@@ -1,6 +1,10 @@
-import { supabaseServer, ComboPage } from "../supabase-server";
+import type { ComboPage } from "../supabase-server";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
+if (!API_URL) {
+  console.warn('[combo] NEXT_PUBLIC_API_URL is not set - content API calls will fail');
+}
 
 export interface ComboPageSummary {
   id: string;
@@ -21,119 +25,90 @@ export async function getComboPages(options?: {
   limit?: number;
   offset?: number;
 }): Promise<ComboPageSummary[]> {
+  if (!API_URL) return [];
+
   const { location, industry, limit = 100, offset = 0 } = options || {};
 
-  if (API_URL) {
-    try {
-      const params = new URLSearchParams();
-      if (location) params.append("location", location);
-      if (industry) params.append("industry", industry);
-      params.append("limit", limit.toString());
-      params.append("offset", offset.toString());
+  try {
+    const params = new URLSearchParams();
+    if (location) params.append("location", location);
+    if (industry) params.append("industry", industry);
+    params.append("limit", limit.toString());
+    params.append("offset", offset.toString());
 
-      const queryString = params.toString() ? `?${params.toString()}` : "";
-      const res = await fetch(`${API_URL}/api/content/combo${queryString}`, {
-        next: { revalidate: 3600 },
-      });
+    const queryString = params.toString() ? `?${params.toString()}` : "";
+    const res = await fetch(`${API_URL}/api/content/combo${queryString}`, {
+      next: { revalidate: 3600 },
+    });
 
-      if (res.ok) {
-        return res.json();
-      }
-    } catch {
-      // Fallback to direct Supabase
+    if (res.ok) {
+      return res.json();
     }
-  }
 
-  let query = supabaseServer
-    .from("combo_pages")
-    .select(
-      "id, slug, location_slug, industry_slug, city_name, industry_name, headline, subheadline, published_at, updated_at"
-    )
-    .eq("status", "published")
-    .order("city_name", { ascending: true })
-    .range(offset, offset + limit - 1);
-
-  if (location) {
-    query = query.eq("location_slug", location);
-  }
-
-  if (industry) {
-    query = query.eq("industry_slug", industry);
-  }
-
-  const { data, error } = await query;
-
-  if (error) {
-    console.error("Error fetching combo pages:", error);
+    console.error("[combo] Failed to fetch combo pages:", res.status);
+    return [];
+  } catch (error) {
+    console.error("[combo] Error fetching combo pages:", error);
     return [];
   }
-
-  return (data as ComboPageSummary[]) || [];
 }
 
 export async function getComboPage(
   industry: string,
   location: string
 ): Promise<ComboPage | null> {
-  if (API_URL) {
-    try {
-      const res = await fetch(
-        `${API_URL}/api/content/combo/${industry}/${location}`,
-        {
-          next: { revalidate: 3600 },
-        }
-      );
+  if (!API_URL) return null;
 
-      if (res.ok) {
-        return res.json();
+  try {
+    const res = await fetch(
+      `${API_URL}/api/content/combo/${industry}/${location}`,
+      {
+        next: { revalidate: 3600 },
       }
+    );
 
-      if (res.status === 404) {
-        return null;
-      }
-    } catch {
-      // Fallback to direct Supabase
+    if (res.ok) {
+      return res.json();
     }
-  }
 
-  const { data, error } = await supabaseServer
-    .from("combo_pages")
-    .select("*")
-    .eq("industry_slug", industry)
-    .eq("location_slug", location)
-    .eq("status", "published")
-    .single();
-
-  if (error) {
-    if (error.code === "PGRST116") {
+    if (res.status === 404) {
       return null;
     }
-    console.error("Error fetching combo page:", error);
+
+    console.error("[combo] Failed to fetch combo page:", res.status);
+    return null;
+  } catch (error) {
+    console.error("[combo] Error fetching combo page:", error);
     return null;
   }
-
-  return data as ComboPage;
 }
 
 export async function getComboSlugs(): Promise<
   { industry: string; location: string }[]
 > {
-  const { data, error } = await supabaseServer
-    .from("combo_pages")
-    .select("industry_slug, location_slug")
-    .eq("status", "published");
+  if (!API_URL) return [];
 
-  if (error) {
-    console.error("Error fetching combo slugs:", error);
+  try {
+    const res = await fetch(`${API_URL}/api/content/sitemap-data`, {
+      next: { revalidate: 3600 },
+    });
+
+    if (res.ok) {
+      const data = await res.json();
+      return (
+        data.combos?.map((page: { industry_slug: string; location_slug: string }) => ({
+          industry: page.industry_slug,
+          location: page.location_slug,
+        })) || []
+      );
+    }
+
+    console.error("[combo] Failed to fetch combo slugs:", res.status);
+    return [];
+  } catch (error) {
+    console.error("[combo] Error fetching combo slugs:", error);
     return [];
   }
-
-  return (
-    data?.map((page) => ({
-      industry: page.industry_slug,
-      location: page.location_slug,
-    })) || []
-  );
 }
 
 export async function getRelatedCombos(
@@ -141,22 +116,26 @@ export async function getRelatedCombos(
   currentLocation: string,
   limit: number = 6
 ): Promise<ComboPageSummary[]> {
-  // Get combos with same industry OR same location (excluding current)
-  const { data, error } = await supabaseServer
-    .from("combo_pages")
-    .select(
-      "id, slug, location_slug, industry_slug, city_name, industry_name, headline, subheadline, published_at, updated_at"
-    )
-    .eq("status", "published")
-    .or(`industry_slug.eq.${currentIndustry},location_slug.eq.${currentLocation}`)
-    .not("industry_slug", "eq", currentIndustry)
-    .not("location_slug", "eq", currentLocation)
-    .limit(limit);
+  if (!API_URL) return [];
 
-  if (error) {
-    console.error("Error fetching related combos:", error);
+  try {
+    const params = new URLSearchParams();
+    params.set("industry", currentIndustry);
+    params.set("location", currentLocation);
+    params.set("limit", String(limit));
+
+    const res = await fetch(`${API_URL}/api/content/combo/related?${params}`, {
+      next: { revalidate: 3600 },
+    });
+
+    if (res.ok) {
+      return res.json();
+    }
+
+    console.error("[combo] Failed to fetch related combos:", res.status);
+    return [];
+  } catch (error) {
+    console.error("[combo] Error fetching related combos:", error);
     return [];
   }
-
-  return (data as ComboPageSummary[]) || [];
 }
