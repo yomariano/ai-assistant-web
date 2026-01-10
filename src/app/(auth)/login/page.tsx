@@ -31,34 +31,53 @@ function LoginContent() {
   }, [checkAuth, selectedPlan]);
 
   useEffect(() => {
-    if (!isLoading && isAuthenticated) {
-      // Check if there's a pending payment link from pricing page
-      const pendingPaymentLink = sessionStorage.getItem('pendingPaymentLink');
-      if (pendingPaymentLink) {
-        sessionStorage.removeItem('pendingPaymentLink');
-        sessionStorage.removeItem('selectedPlan');
-        window.location.href = pendingPaymentLink;
-        return;
-      }
+    const handlePostAuthRedirect = async () => {
+      if (!isLoading && isAuthenticated) {
+        // Check if user was trying to go somewhere before login
+        const redirectPath = sessionStorage.getItem('redirectAfterLogin');
+        if (redirectPath) {
+          sessionStorage.removeItem('redirectAfterLogin');
+          router.push(redirectPath);
+          return;
+        }
 
-      // Check if user was trying to go somewhere before login
-      const redirectPath = sessionStorage.getItem('redirectAfterLogin');
-      if (redirectPath) {
-        sessionStorage.removeItem('redirectAfterLogin');
-        router.push(redirectPath);
-        return;
-      }
+        // Check if user selected a plan from pricing page
+        const plan = sessionStorage.getItem('selectedPlan') || selectedPlan;
+        if (plan) {
+          sessionStorage.removeItem('selectedPlan');
+          sessionStorage.removeItem('pendingPaymentLink');
 
-      // Check if user selected a plan before login (fallback)
-      const plan = sessionStorage.getItem('selectedPlan') || selectedPlan;
-      if (plan) {
-        sessionStorage.removeItem('selectedPlan');
-        // Redirect to dashboard - payment will be handled separately
-        router.push('/dashboard');
-      } else {
+          try {
+            // Call the redirect API to determine where to send the user
+            // This checks subscription status and returns either:
+            // - Payment link URL (new user)
+            // - Customer Portal URL (existing subscriber)
+            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/billing/redirect?planId=${plan}`, {
+              credentials: 'include',
+            });
+
+            if (response.ok) {
+              const data = await response.json();
+              if (data.url) {
+                window.location.href = data.url;
+                return;
+              }
+            }
+          } catch (error) {
+            console.error('Failed to get redirect URL:', error);
+          }
+
+          // Fallback: if redirect API fails, go to dashboard
+          router.push('/dashboard');
+          return;
+        }
+
+        // No plan selected - go to dashboard
         router.push('/dashboard');
       }
-    }
+    };
+
+    handlePostAuthRedirect();
   }, [isLoading, isAuthenticated, router, selectedPlan]);
 
   const handleGoogleSignIn = async () => {
@@ -81,16 +100,9 @@ function LoginContent() {
 
     try {
       await devLogin();
-      // Check if there's a pending payment link from pricing page
-      const pendingPaymentLink = sessionStorage.getItem('pendingPaymentLink');
-      if (pendingPaymentLink) {
-        sessionStorage.removeItem('pendingPaymentLink');
-        sessionStorage.removeItem('selectedPlan');
-        window.location.href = pendingPaymentLink;
-        return;
-      }
-      // Fallback to dashboard
-      router.push('/dashboard');
+      // The useEffect will handle redirect after isAuthenticated becomes true
+      // Just need to trigger a re-check of auth state
+      await checkAuth();
     } catch (err: unknown) {
       const errorMessage = err instanceof Error ? err.message : 'Dev login failed';
       setError(errorMessage);
