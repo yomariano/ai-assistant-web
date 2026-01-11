@@ -98,7 +98,16 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
 
       try {
         console.log('[DASHBOARD] Checking subscription status...');
-        const { subscription } = await billingApi.getSubscription();
+        // API returns subscription fields at the top-level (not nested under `subscription`).
+        // Keep backward-compat in case response shape changes.
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const subscriptionResponse: any = await billingApi.getSubscription();
+        const subscription =
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+          subscriptionResponse && typeof subscriptionResponse === 'object' && 'subscription' in subscriptionResponse
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+            ? subscriptionResponse.subscription
+            : subscriptionResponse;
         console.log('[DASHBOARD] Subscription data:', subscription);
 
         const isActive = subscription &&
