@@ -33,6 +33,15 @@ function CheckoutContent() {
         const { url } = await billingApi.getPaymentLink(planId);
 
         if (url) {
+          // Mark that we initiated Stripe checkout so /dashboard can auto-refresh subscription on return
+          try {
+            sessionStorage.setItem(
+              'postCheckoutSubscriptionRefresh',
+              JSON.stringify({ startedAt: Date.now(), planId })
+            );
+          } catch {
+            // ignore storage errors
+          }
           // Redirect to Stripe checkout
           window.location.href = url;
         } else {

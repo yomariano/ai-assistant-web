@@ -39,11 +39,90 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
   }, [user]);
 
   const isCheckoutRoute = pathname === '/checkout';
+  const isDashboardRoute = pathname === '/dashboard';
 
   const refreshSubscription = useCallback(async () => {
     setSubscriptionChecked(false);
     setHasSubscription(null);
   }, []);
+
+  useEffect(() => {
+    // Auto-refresh subscription after returning from Stripe.
+    // Stripe Payment Links may redirect back before webhooks finish writing to `user_subscriptions`,
+    // so we poll for a short window and then clear the flag.
+    if (!isDashboardRoute) return;
+    if (devMode) return;
+    if (!isAuthenticated || isLoading) return;
+
+    const raw =
+      typeof window !== 'undefined'
+        ? window.sessionStorage.getItem('postCheckoutSubscriptionRefresh')
+        : null;
+    if (!raw) return;
+
+    let startedAt = 0;
+    try {
+      const parsed = JSON.parse(raw) as { startedAt?: number };
+      startedAt = typeof parsed?.startedAt === 'number' ? parsed.startedAt : 0;
+    } catch {
+      // ignore parse errors
+    }
+
+    // If it's stale, clear it and stop.
+    if (!startedAt || Date.now() - startedAt > 15 * 60 * 1000) {
+      try {
+        window.sessionStorage.removeItem('postCheckoutSubscriptionRefresh');
+      } catch {
+        // ignore
+      }
+      return;
+    }
+
+    let isCancelled = false;
+
+    const sleep = async (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+
+    const poll = async () => {
+      // Up to ~30s total
+      for (let attempt = 0; attempt < 15; attempt += 1) {
+        if (isCancelled) return;
+
+        try {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          const subscriptionResponse: any = await billingApi.getSubscription();
+          const subscription =
+            subscriptionResponse && typeof subscriptionResponse === 'object' && 'subscription' in subscriptionResponse
+              ? subscriptionResponse.subscription
+              : subscriptionResponse;
+
+          const isActive =
+            subscription && (subscription.status === 'active' || subscription.status === 'trialing');
+
+          setHasSubscription(!!isActive);
+          setSubscriptionChecked(true);
+
+          if (isActive) {
+            try {
+              window.sessionStorage.removeItem('postCheckoutSubscriptionRefresh');
+            } catch {
+              // ignore
+            }
+            return;
+          }
+        } catch (e) {
+          console.warn('[DASHBOARD] Post-checkout subscription poll failed:', e);
+        }
+
+        await sleep(2000);
+      }
+    };
+
+    void poll();
+
+    return () => {
+      isCancelled = true;
+    };
+  }, [isDashboardRoute, devMode, isAuthenticated, isLoading]);
 
   console.log('[DASHBOARD] ====== DashboardLayout render ======');
   console.log('[DASHBOARD] State:', { isLoading, isAuthenticated, devMode, userEmail: user?.email, hasSubscription });
