@@ -1,5 +1,5 @@
 import axios from 'axios';
-import type { User, SavedCall, ScheduledCall, CallHistory, UserStats, CallRequest, AssistantResponse, Voice, PhoneNumber, NotificationPreferences, EscalationSettings } from '@/types';
+import type { User, SavedCall, ScheduledCall, CallHistory, UserStats, CallRequest, AssistantResponse, Voice, PhoneNumber, NotificationPreferences, EscalationSettings, TestConfig } from '@/types';
 import { getSession } from './supabase';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
@@ -281,6 +281,11 @@ export const assistantApi = {
 
   getStats: async (): Promise<{ thisMonth: { calls: number; minutes: number }; limits: { minutesIncluded: number; maxMinutesPerCall: number } }> => {
     const { data } = await api.get('/api/assistant/stats');
+    return data;
+  },
+
+  getTestConfig: async (): Promise<TestConfig> => {
+    const { data } = await api.get('/api/assistant/test-config');
     return data;
   },
 };

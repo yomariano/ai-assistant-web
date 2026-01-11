@@ -1,7 +1,7 @@
 'use client';
 
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { Bot, Save, RefreshCw } from 'lucide-react';
+import { Bot, Save, RefreshCw, Phone } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import Button from '@/components/ui/button';
 import Input from '@/components/ui/input';
@@ -10,8 +10,10 @@ import type { Assistant, Voice, PhoneNumber } from '@/types';
 import { AssistantStatsCards } from './components/assistant-stats-cards';
 import { AssistantPhoneNumbers } from './components/assistant-phone-numbers';
 import { AssistantVoiceGrid } from './components/assistant-voice-grid';
+import { TestAgentModal } from './components/test-agent-modal';
 import { PromptTemplateSelector } from '@/components/assistant/PromptTemplateSelector';
 import type { PromptTemplate } from '@/lib/content/prompt-templates';
+import type { TestConfig } from '@/types';
 
 export default function AssistantPage() {
   const [assistant, setAssistant] = useState<Assistant | null>(null);
@@ -33,6 +35,10 @@ export default function AssistantPage() {
   const [firstMessage, setFirstMessage] = useState('');
   const [systemPrompt, setSystemPrompt] = useState('');
   const [selectedTemplateId, setSelectedTemplateId] = useState<string | undefined>();
+
+  // Test modal state
+  const [isTestModalOpen, setIsTestModalOpen] = useState(false);
+  const [testConfig, setTestConfig] = useState<TestConfig | null>(null);
 
   // Handle template selection
   const handleTemplateSelect = useCallback((template: PromptTemplate) => {
@@ -76,6 +82,14 @@ export default function AssistantPage() {
         setSelectedVoice(assistantRes.assistant.voice.id || '');
         setFirstMessage(assistantRes.assistant.firstMessage || '');
         setSystemPrompt(assistantRes.assistant.systemPrompt || '');
+
+        // Fetch test config if assistant exists
+        try {
+          const testConfigRes = await assistantApi.getTestConfig();
+          setTestConfig(testConfigRes);
+        } catch (testErr) {
+          console.warn('Failed to fetch test config:', testErr);
+        }
       }
 
       setVoices(voicesRes.voices || []);
@@ -168,9 +182,21 @@ export default function AssistantPage() {
 
   return (
     <div className="max-w-4xl mx-auto space-y-10 pb-12">
-      <div>
-        <h1 className="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">AI Assistant</h1>
-        <p className="text-slate-500 mt-2">Configure how your AI assistant handles calls.</p>
+      <div className="flex items-start justify-between">
+        <div>
+          <h1 className="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">AI Assistant</h1>
+          <p className="text-slate-500 mt-2">Configure how your AI assistant handles calls.</p>
+        </div>
+        {testConfig && (
+          <Button
+            onClick={() => setIsTestModalOpen(true)}
+            variant="outline"
+            className="shrink-0"
+          >
+            <Phone className="w-4 h-4 mr-2" />
+            Test Agent
+          </Button>
+        )}
       </div>
 
       {success && (
@@ -310,6 +336,16 @@ export default function AssistantPage() {
           Save Configuration
         </Button>
       </div>
+
+      {/* Test Agent Modal */}
+      {testConfig && (
+        <TestAgentModal
+          isOpen={isTestModalOpen}
+          onClose={() => setIsTestModalOpen(false)}
+          vapiAssistantId={testConfig.vapiAssistantId}
+          assistantName={testConfig.assistantName}
+        />
+      )}
     </div>
   );
 }

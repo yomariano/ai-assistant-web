@@ -158,3 +158,8 @@ export interface EscalationSettings {
   after_hours_action: 'voicemail' | 'sms_alert' | 'callback_promise' | 'ai_only';
   after_hours_message: string;
 }
+
+export interface TestConfig {
+  vapiAssistantId: string;
+  assistantName: string;
+}
