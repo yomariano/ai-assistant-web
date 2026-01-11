@@ -236,15 +236,41 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
             assistantApi.get().catch(() => ({ exists: false })),
           ]);
 
+          let onboardingPhoneNumbers: Array<{ number: string; label: string }> = [];
+
+          if (phoneData.numbers.length > 0) {
+            onboardingPhoneNumbers = phoneData.numbers.map(
+              (p: { phone_number?: string; phoneNumber?: string; label?: string }) => ({
+                number: p.phone_number || p.phoneNumber || '',
+                label: p.label || 'Primary',
+              })
+            );
+          } else {
+            // No active numbers yet. Try to show a real reserved pool number (VoIPCloud IE flow)
+            // so we don't display a fake placeholder while provisioning finishes.
+            try {
+              const provisioning = await billingApi.getProvisioningStatus();
+              if (provisioning?.reserved?.phone_number) {
+                onboardingPhoneNumbers = [
+                  {
+                    number: provisioning.reserved.phone_number,
+                    label: 'Reserved (Activating...)',
+                  },
+                ];
+              }
+            } catch (e) {
+              // ignore; fall back below
+            }
+          }
+
+          if (onboardingPhoneNumbers.length === 0) {
+            onboardingPhoneNumbers = [{ number: '+353 1 234 5678', label: 'Primary (Demo)' }];
+          }
+
           const data: OnboardingData = {
             userId: user?.id || '',
             userName: user?.fullName?.split(' ')[0] || user?.email?.split('@')[0],
-            phoneNumbers: phoneData.numbers.length > 0
-              ? phoneData.numbers.map((p: { phone_number?: string; phoneNumber?: string; label?: string }) => ({
-                  number: p.phone_number || p.phoneNumber || '',
-                  label: p.label || 'Primary',
-                }))
-              : [{ number: '+353 1 234 5678', label: 'Primary (Demo)' }],
+            phoneNumbers: onboardingPhoneNumbers,
             hasExistingAssistant: assistantData.exists || false,
           };
 

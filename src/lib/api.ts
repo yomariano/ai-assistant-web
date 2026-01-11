@@ -355,6 +355,17 @@ export const billingApi = {
     return data;
   },
 
+  getProvisioningStatus: async (): Promise<{
+    provisioning: unknown | null;
+    numbers: Array<{ phone_number: string; status: string; created_at: string }>;
+    reserved: { phone_number: string; reserved_until: string; region: string } | null;
+    isComplete: boolean;
+    hasFailed: boolean;
+  }> => {
+    const { data } = await api.get('/api/billing/provisioning-status');
+    return data;
+  },
+
   createPortalSession: async (): Promise<{ url: string }> => {
     const { data } = await api.post('/api/billing/portal');
     return data;
