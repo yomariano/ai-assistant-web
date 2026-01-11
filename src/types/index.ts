@@ -163,3 +163,97 @@ export interface TestConfig {
   vapiAssistantId: string;
   assistantName: string;
 }
+
+// Integrations / Booking System Types
+
+export interface BookingField {
+  id: string;
+  label: string;
+  type: 'text' | 'number' | 'date' | 'time' | 'select' | 'phone' | 'email';
+  required: boolean;
+  voicePrompt?: string;
+  options?: string[];
+  validation?: Record<string, unknown>;
+}
+
+export interface VerificationConfig {
+  enabled: boolean;
+  fields?: string[];
+}
+
+export interface PaymentConfig {
+  type: 'none' | 'card_hold' | 'deposit';
+  amount?: number;
+}
+
+export interface IndustryTemplate {
+  id: string;
+  name: string;
+  description: string;
+  icon: string;
+  defaultFields: BookingField[];
+  defaultVerification: VerificationConfig;
+  defaultPayment: PaymentConfig;
+}
+
+export interface BookingConfig {
+  id: string;
+  industryTemplateId: string | null;
+  bookingFields: BookingField[];
+  verificationEnabled: boolean;
+  verificationFields: string[];
+  verificationOnFail: 'transfer_to_staff' | 'take_message' | 'retry';
+  newCustomerAction: string;
+  newCustomerFields: string[];
+  paymentRequired: boolean;
+  paymentType: 'none' | 'card_hold' | 'deposit';
+  depositAmountCents: number;
+  calendarProvider: string | null;
+  calendarId: string | null;
+  calendarConnected: boolean;
+  smsConfirmation: boolean;
+  emailConfirmation: boolean;
+  confirmationTemplate: string | null;
+  isActive: boolean;
+  createdAt?: string;
+  updatedAt?: string;
+}
+
+export interface Customer {
+  id: string;
+  fullName: string;
+  dateOfBirth?: string;
+  phone?: string;
+  email?: string;
+  addressLine1?: string;
+  addressLine2?: string;
+  city?: string;
+  postcode?: string;
+  country?: string;
+  customFields?: Record<string, unknown>;
+  notes?: string;
+  tags?: string[];
+  createdAt: string;
+  lastBookingAt?: string;
+}
+
+export interface Booking {
+  id: string;
+  customerId?: string;
+  status: 'pending' | 'pending_payment' | 'confirmed' | 'cancelled' | 'completed' | 'no_show';
+  bookingData: Record<string, unknown>;
+  bookingDate: string;
+  bookingTime: string;
+  durationMinutes?: number;
+  customerName: string;
+  customerPhone?: string;
+  customerEmail?: string;
+  paymentRequired: boolean;
+  paymentStatus?: string;
+  paymentAmountCents?: number;
+  source: 'phone' | 'web' | 'walk_in';
+  confirmedAt?: string;
+  cancelledAt?: string;
+  createdAt: string;
+  customer?: Customer;
+}

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import type { User, SavedCall, ScheduledCall, CallHistory, UserStats, CallRequest, AssistantResponse, Voice, PhoneNumber, NotificationPreferences, EscalationSettings, TestConfig } from '@/types';
+import type { User, SavedCall, ScheduledCall, CallHistory, UserStats, CallRequest, AssistantResponse, Voice, PhoneNumber, NotificationPreferences, EscalationSettings, TestConfig, IndustryTemplate, BookingConfig, Customer, Booking, BookingField } from '@/types';
 import { getSession } from './supabase';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
@@ -347,6 +347,99 @@ export const billingApi = {
 
   createPortalSession: async (): Promise<{ url: string }> => {
     const { data } = await api.post('/api/billing/portal');
+    return data;
+  },
+};
+
+// Integrations / Booking System
+export const integrationsApi = {
+  // Templates
+  getTemplates: async (): Promise<{ templates: IndustryTemplate[] }> => {
+    const { data } = await api.get('/api/integrations/templates');
+    return data;
+  },
+
+  // Config
+  getConfig: async (): Promise<{ exists: boolean; config?: BookingConfig }> => {
+    const { data } = await api.get('/api/integrations/config');
+    return data;
+  },
+
+  saveConfig: async (config: Partial<BookingConfig> & { industryTemplateId?: string; bookingFields?: BookingField[] }): Promise<{ success: boolean; config: BookingConfig }> => {
+    const { data } = await api.post('/api/integrations/config', config);
+    return data;
+  },
+
+  deleteConfig: async (): Promise<{ success: boolean }> => {
+    const { data } = await api.delete('/api/integrations/config');
+    return data;
+  },
+
+  // Customers
+  listCustomers: async (params?: { search?: string; limit?: number; offset?: number }): Promise<{ customers: Customer[]; total: number }> => {
+    const { data } = await api.get('/api/integrations/customers', { params });
+    return data;
+  },
+
+  getCustomer: async (id: string): Promise<{ customer: Customer; bookings: Booking[] }> => {
+    const { data } = await api.get(`/api/integrations/customers/${id}`);
+    return data;
+  },
+
+  createCustomer: async (customer: Partial<Customer>): Promise<{ success: boolean; customer: Customer }> => {
+    const { data } = await api.post('/api/integrations/customers', customer);
+    return data;
+  },
+
+  updateCustomer: async (id: string, updates: Partial<Customer>): Promise<{ success: boolean; customer: Customer }> => {
+    const { data } = await api.patch(`/api/integrations/customers/${id}`, updates);
+    return data;
+  },
+
+  deleteCustomer: async (id: string): Promise<{ success: boolean }> => {
+    const { data } = await api.delete(`/api/integrations/customers/${id}`);
+    return data;
+  },
+
+  verifyCustomer: async (verificationData: Record<string, string>, requiredFields: string[]): Promise<{ verified: boolean; customer?: Customer; error?: string; mismatches?: string[] }> => {
+    const { data } = await api.post('/api/integrations/customers/verify', { verificationData, requiredFields });
+    return data;
+  },
+
+  // Bookings
+  listBookings: async (params?: { status?: string; startDate?: string; endDate?: string; limit?: number; offset?: number }): Promise<{ bookings: Booking[]; total: number }> => {
+    const { data } = await api.get('/api/integrations/bookings', { params });
+    return data;
+  },
+
+  getBooking: async (id: string): Promise<{ booking: Booking }> => {
+    const { data } = await api.get(`/api/integrations/bookings/${id}`);
+    return data;
+  },
+
+  createBooking: async (booking: Partial<Booking>): Promise<{ success: boolean; booking: Booking }> => {
+    const { data } = await api.post('/api/integrations/bookings', booking);
+    return data;
+  },
+
+  updateBooking: async (id: string, updates: Partial<Booking>): Promise<{ success: boolean; booking: Booking }> => {
+    const { data } = await api.patch(`/api/integrations/bookings/${id}`, updates);
+    return data;
+  },
+
+  cancelBooking: async (id: string): Promise<{ success: boolean; message: string }> => {
+    const { data } = await api.delete(`/api/integrations/bookings/${id}`);
+    return data;
+  },
+
+  confirmBooking: async (id: string, paymentDetails?: Record<string, unknown>): Promise<{ success: boolean; booking: Booking }> => {
+    const { data } = await api.post(`/api/integrations/bookings/${id}/confirm`, paymentDetails);
+    return data;
+  },
+
+  // Calendar
+  getCalendarStatus: async (): Promise<{ connected: boolean; provider: string | null; calendarId: string | null }> => {
+    const { data } = await api.get('/api/integrations/calendar/status');
     return data;
   },
 };

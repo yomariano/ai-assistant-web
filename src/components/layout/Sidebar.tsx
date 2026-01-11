@@ -15,13 +15,15 @@ import {
   Bot,
   CreditCard,
   Bell,
-  MessageSquare
+  MessageSquare,
+  Plug
 } from 'lucide-react';
 import { useAuthStore } from '@/lib/store';
 
 const navItems = [
   { href: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
   { href: '/assistant', label: 'AI Assistant', icon: Bot },
+  { href: '/integrations', label: 'Integrations', icon: Plug },
   { href: '/history', label: 'Call History', icon: Phone },
   { href: '/notifications', label: 'Notifications', icon: Bell },
   { href: '/billing', label: 'Billing', icon: CreditCard },
