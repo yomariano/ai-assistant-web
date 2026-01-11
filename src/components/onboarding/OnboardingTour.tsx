@@ -88,9 +88,11 @@ export function OnboardingTour({
 
   const handleSelectPlan = useCallback(
     (planId: PlanId) => {
+      // Close modal before navigating so /checkout can run its redirect effect unobstructed.
+      onOpenChange(false);
       router.push(`/checkout?plan=${planId}`);
     },
-    [router]
+    [onOpenChange, router]
   );
 
   const handleRefreshSubscription = useCallback(async () => {

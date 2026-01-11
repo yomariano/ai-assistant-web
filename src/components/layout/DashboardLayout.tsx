@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState, useCallback } from 'react';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { useAuthStore } from '@/lib/store';
 import Sidebar from './Sidebar';
 import Navbar from './Navbar';
@@ -15,6 +15,7 @@ interface DashboardLayoutProps {
 
 export default function DashboardLayout({ children }: DashboardLayoutProps) {
   const router = useRouter();
+  const pathname = usePathname();
   const { isAuthenticated, isLoading, checkAuth, devMode, user } = useAuthStore();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
@@ -36,6 +37,8 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
     });
     setShowOnboarding(true);
   }, [user]);
+
+  const isCheckoutRoute = pathname === '/checkout';
 
   const refreshSubscription = useCallback(async () => {
     setSubscriptionChecked(false);
@@ -73,10 +76,11 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
       new URLSearchParams(window.location.search).get('paywall') === '1';
     if (!shouldShowPaywall) return;
     if (isLoading || !isAuthenticated) return;
+    if (isCheckoutRoute) return;
 
     console.log('[DASHBOARD] paywall=1 detected - opening onboarding paywall');
     openPaywallOnboarding();
-  }, [isLoading, isAuthenticated, openPaywallOnboarding]);
+  }, [isLoading, isAuthenticated, openPaywallOnboarding, isCheckoutRoute]);
 
   // Check subscription status after authentication
   useEffect(() => {
@@ -104,20 +108,24 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
         setSubscriptionChecked(true);
 
         if (!isActive) {
-          console.log('[DASHBOARD] No active subscription - opening onboarding paywall');
-          openPaywallOnboarding();
+          if (!isCheckoutRoute) {
+            console.log('[DASHBOARD] No active subscription - opening onboarding paywall');
+            openPaywallOnboarding();
+          }
         }
       } catch (error) {
         console.error('[DASHBOARD] Failed to check subscription:', error);
         // On error, open onboarding paywall (safer than bouncing to landing)
         setHasSubscription(false);
         setSubscriptionChecked(true);
-        openPaywallOnboarding();
+        if (!isCheckoutRoute) {
+          openPaywallOnboarding();
+        }
       }
     };
 
     checkSubscription();
-  }, [isAuthenticated, isLoading, subscriptionChecked, devMode, openPaywallOnboarding]);
+  }, [isAuthenticated, isLoading, subscriptionChecked, devMode, openPaywallOnboarding, isCheckoutRoute]);
 
   // Check onboarding status after authentication and subscription verification
   useEffect(() => {
@@ -209,7 +217,8 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
   }
 
   // Gate dashboard content behind subscription, but keep user inside dashboard with onboarding paywall.
-  if (!hasSubscription) {
+  // Exception: allow /checkout to render so it can redirect to Stripe.
+  if (!hasSubscription && !isCheckoutRoute) {
     console.log('[DASHBOARD] No subscription - gating content and showing paywall onboarding');
     return (
       <div className="flex min-h-screen bg-background text-foreground">
