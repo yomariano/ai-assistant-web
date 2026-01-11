@@ -9,7 +9,7 @@ import Button from '@/components/ui/button';
 function LoginContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const { loginWithGoogle, devLogin, isAuthenticated, isLoading, checkAuth } = useAuthStore();
+  const { loginWithGoogle, devLogin, isAuthenticated, isLoading, checkAuth, token } = useAuthStore();
   const [error, setError] = useState('');
   const [isSigningIn, setIsSigningIn] = useState(false);
   const [isLocalhost, setIsLocalhost] = useState(false);
@@ -52,8 +52,14 @@ function LoginContent() {
             // This checks subscription status and returns either:
             // - Payment link URL (new user)
             // - Customer Portal URL (existing subscriber)
+            const headers: Record<string, string> = {};
+            if (token) {
+              headers['Authorization'] = `Bearer ${token}`;
+            }
+
             const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/billing/redirect?planId=${plan}`, {
               credentials: 'include',
+              headers
             });
 
             if (response.ok) {
@@ -78,7 +84,7 @@ function LoginContent() {
     };
 
     handlePostAuthRedirect();
-  }, [isLoading, isAuthenticated, router, selectedPlan]);
+  }, [isLoading, isAuthenticated, router, selectedPlan, token]);
 
   const handleGoogleSignIn = async () => {
     setError('');

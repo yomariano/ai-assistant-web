@@ -58,10 +58,12 @@ const HeroSection = () => {
                   </Button>
                 </a>
               ) : (
-                <Button variant="outline" size="xl" onClick={loginWithGoogle}>
-                  Start Free Trial
-                  <ArrowRight className="w-5 h-5" />
-                </Button>
+                <a href="/login?plan=starter">
+                  <Button variant="outline" size="xl">
+                    Start Free Trial
+                    <ArrowRight className="w-5 h-5" />
+                  </Button>
+                </a>
               )}
             </div>
 

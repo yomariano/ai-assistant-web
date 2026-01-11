@@ -26,7 +26,7 @@ const getPaymentLinks = () => {
 
 const PricingSection = () => {
   const paymentLinks = getPaymentLinks();
-  const { isAuthenticated, checkAuth } = useAuthStore();
+  const { isAuthenticated, token, checkAuth } = useAuthStore();
   const [authChecked, setAuthChecked] = useState(false);
   const [redirectingPlan, setRedirectingPlan] = useState<string | null>(null);
 
@@ -47,9 +47,17 @@ const PricingSection = () => {
     setRedirectingPlan(planId);
 
     try {
+      const headers: Record<string, string> = {};
+      if (token) {
+        headers['Authorization'] = `Bearer ${token}`;
+      }
+
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_API_URL}/api/billing/redirect?planId=${planId}`,
-        { credentials: 'include' }
+        {
+          credentials: 'include',
+          headers
+        }
       );
 
       if (response.ok) {
