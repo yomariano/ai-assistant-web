@@ -27,6 +27,21 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
   const [onboardingData, setOnboardingData] = useState<OnboardingData | null>(null);
   const [onboardingChecked, setOnboardingChecked] = useState(false);
 
+  const openPaywallOnboarding = useCallback(() => {
+    setOnboardingData({
+      userId: user?.id || '',
+      userName: user?.fullName?.split(' ')[0] || user?.email?.split('@')[0],
+      phoneNumbers: [{ number: '+353 1 234 5678', label: 'Primary (Demo)' }],
+      hasExistingAssistant: false,
+    });
+    setShowOnboarding(true);
+  }, [user]);
+
+  const refreshSubscription = useCallback(async () => {
+    setSubscriptionChecked(false);
+    setHasSubscription(null);
+  }, []);
+
   console.log('[DASHBOARD] ====== DashboardLayout render ======');
   console.log('[DASHBOARD] State:', { isLoading, isAuthenticated, devMode, userEmail: user?.email, hasSubscription });
 
@@ -50,6 +65,18 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
       router.push('/');
     }
   }, [isLoading, isAuthenticated, router]);
+
+  useEffect(() => {
+    // Allow other pages (billing/assistant/etc.) to send the user to the in-dashboard paywall.
+    const shouldShowPaywall =
+      typeof window !== 'undefined' &&
+      new URLSearchParams(window.location.search).get('paywall') === '1';
+    if (!shouldShowPaywall) return;
+    if (isLoading || !isAuthenticated) return;
+
+    console.log('[DASHBOARD] paywall=1 detected - opening onboarding paywall');
+    openPaywallOnboarding();
+  }, [isLoading, isAuthenticated, openPaywallOnboarding]);
 
   // Check subscription status after authentication
   useEffect(() => {
@@ -77,20 +104,20 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
         setSubscriptionChecked(true);
 
         if (!isActive) {
-          console.log('[DASHBOARD] No active subscription, redirecting to pricing...');
-          router.push('/#pricing');
+          console.log('[DASHBOARD] No active subscription - opening onboarding paywall');
+          openPaywallOnboarding();
         }
       } catch (error) {
         console.error('[DASHBOARD] Failed to check subscription:', error);
-        // On error, redirect to pricing to be safe
+        // On error, open onboarding paywall (safer than bouncing to landing)
         setHasSubscription(false);
         setSubscriptionChecked(true);
-        router.push('/#pricing');
+        openPaywallOnboarding();
       }
     };
 
     checkSubscription();
-  }, [isAuthenticated, isLoading, subscriptionChecked, devMode, router]);
+  }, [isAuthenticated, isLoading, subscriptionChecked, devMode, openPaywallOnboarding]);
 
   // Check onboarding status after authentication and subscription verification
   useEffect(() => {
@@ -181,10 +208,40 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
     return null;
   }
 
-  // Block access if no subscription (redirect already triggered in useEffect)
+  // Gate dashboard content behind subscription, but keep user inside dashboard with onboarding paywall.
   if (!hasSubscription) {
-    console.log('[DASHBOARD] No subscription, returning null');
-    return null;
+    console.log('[DASHBOARD] No subscription - gating content and showing paywall onboarding');
+    return (
+      <div className="flex min-h-screen bg-background text-foreground">
+        <Sidebar isOpen={isSidebarOpen} onClose={closeSidebar} />
+        <div className="flex flex-1 flex-col overflow-hidden">
+          <Navbar onMenuClick={toggleSidebar} />
+          <main className="flex-1 overflow-y-auto px-4 py-8 lg:px-8">
+            <div className="mx-auto max-w-3xl">
+              <div className="rounded-2xl border border-border bg-card p-8">
+                <h1 className="text-2xl font-bold tracking-tight text-foreground">Subscription required</h1>
+                <p className="mt-2 text-muted-foreground">
+                  Complete the first onboarding step to choose a plan and activate your dashboard.
+                </p>
+              </div>
+            </div>
+          </main>
+        </div>
+        {devMode && <DevUserSwitcher />}
+        {onboardingData && (
+          <OnboardingTour
+            open={showOnboarding}
+            onOpenChange={setShowOnboarding}
+            data={onboardingData}
+            onComplete={handleOnboardingComplete}
+            onProgressUpdate={handleOnboardingProgressUpdate}
+            requiresSubscription
+            hasSubscription={false}
+            onRefreshSubscription={refreshSubscription}
+          />
+        )}
+      </div>
+    );
   }
 
   console.log('[DASHBOARD] Rendering full dashboard');
@@ -210,6 +267,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
           data={onboardingData}
           onComplete={handleOnboardingComplete}
           onProgressUpdate={handleOnboardingProgressUpdate}
+          hasSubscription={true}
         />
       )}
     </div>

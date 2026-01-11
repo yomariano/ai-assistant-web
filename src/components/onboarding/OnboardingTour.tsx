@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/dialog";
 import { OnboardingProgress } from "./OnboardingProgress";
 import {
+  PaywallStep,
   WelcomeStep,
   PhoneNumberStep,
   CallForwardingStep,
@@ -15,6 +16,7 @@ import {
   TestCallStep,
   CompletionStep,
 } from "./steps";
+import type { PlanId } from "./steps/PaywallStep";
 
 export interface OnboardingData {
   userId: string;
@@ -29,18 +31,10 @@ interface OnboardingTourProps {
   data: OnboardingData;
   onComplete: () => void;
   onProgressUpdate?: (step: number, stepsCompleted: string[], provider?: string, testCallMade?: boolean) => void;
+  requiresSubscription?: boolean;
+  hasSubscription?: boolean;
+  onRefreshSubscription?: () => Promise<void> | void;
 }
-
-const TOTAL_STEPS = 6;
-
-const stepTitles = [
-  "Welcome",
-  "Phone Number",
-  "Call Forwarding",
-  "AI Setup",
-  "Test Call",
-  "Complete",
-];
 
 export function OnboardingTour({
   open,
@@ -48,12 +42,16 @@ export function OnboardingTour({
   data,
   onComplete,
   onProgressUpdate,
+  requiresSubscription = false,
+  hasSubscription = true,
+  onRefreshSubscription,
 }: OnboardingTourProps) {
   const router = useRouter();
   const [currentStep, setCurrentStep] = useState(1);
   const [stepsCompleted, setStepsCompleted] = useState<string[]>([]);
   const [selectedProvider, setSelectedProvider] = useState<string | null>(null);
   const [testCallMade, setTestCallMade] = useState(false);
+  const [isRefreshingSubscription, setIsRefreshingSubscription] = useState(false);
 
   const voicefleetNumber = data.phoneNumbers[0]?.number || "+353 1 234 5678";
 
@@ -69,18 +67,41 @@ export function OnboardingTour({
     onProgressUpdate?.(step, stepsCompleted, selectedProvider || undefined, testCallMade);
   }, [stepsCompleted, selectedProvider, testCallMade, onProgressUpdate]);
 
+  const stepTitles = requiresSubscription
+    ? ["Plan", "Welcome", "Phone Number", "Call Forwarding", "AI Setup", "Test Call", "Complete"]
+    : ["Welcome", "Phone Number", "Call Forwarding", "AI Setup", "Test Call", "Complete"];
+
+  const totalSteps = stepTitles.length;
+
   const nextStep = useCallback(() => {
-    if (currentStep < TOTAL_STEPS) {
-      markStepComplete(stepTitles[currentStep - 1]);
+    if (currentStep < totalSteps) {
+      markStepComplete(stepTitles[currentStep - 1] ?? `Step ${currentStep}`);
       goToStep(currentStep + 1);
     }
-  }, [currentStep, markStepComplete, goToStep]);
+  }, [currentStep, totalSteps, markStepComplete, goToStep, stepTitles]);
 
   const prevStep = useCallback(() => {
     if (currentStep > 1) {
       goToStep(currentStep - 1);
     }
   }, [currentStep, goToStep]);
+
+  const handleSelectPlan = useCallback(
+    (planId: PlanId) => {
+      router.push(`/checkout?plan=${planId}`);
+    },
+    [router]
+  );
+
+  const handleRefreshSubscription = useCallback(async () => {
+    if (!onRefreshSubscription) return;
+    setIsRefreshingSubscription(true);
+    try {
+      await onRefreshSubscription();
+    } finally {
+      setIsRefreshingSubscription(false);
+    }
+  }, [onRefreshSubscription]);
 
   const handleProviderSelect = useCallback((providerId: string) => {
     setSelectedProvider(providerId);
@@ -108,6 +129,8 @@ export function OnboardingTour({
     completed: stepsCompleted.includes(title) || index < currentStep - 1,
   }));
 
+  const offset = requiresSubscription ? 1 : 0;
+
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent
@@ -115,11 +138,11 @@ export function OnboardingTour({
         showCloseButton={currentStep > 1}
       >
         {/* Progress indicator */}
-        {currentStep > 1 && currentStep < TOTAL_STEPS && (
+        {currentStep > 1 && currentStep < totalSteps && (
           <div className="mb-4">
             <OnboardingProgress
               currentStep={currentStep}
-              totalSteps={TOTAL_STEPS}
+              totalSteps={totalSteps}
               steps={steps}
             />
           </div>
@@ -127,17 +150,26 @@ export function OnboardingTour({
 
         {/* Step content */}
         <div className="min-h-[300px]">
-          {currentStep === 1 && (
+          {requiresSubscription && currentStep === 1 && (
+            <PaywallStep
+              hasSubscription={hasSubscription}
+              isRefreshing={isRefreshingSubscription}
+              onSelectPlan={handleSelectPlan}
+              onRefresh={handleRefreshSubscription}
+              onContinue={nextStep}
+            />
+          )}
+          {currentStep === 1 + offset && (
             <WelcomeStep userName={data.userName} onNext={nextStep} />
           )}
-          {currentStep === 2 && (
+          {currentStep === 2 + offset && (
             <PhoneNumberStep
               phoneNumbers={data.phoneNumbers}
               onNext={nextStep}
               onBack={prevStep}
             />
           )}
-          {currentStep === 3 && (
+          {currentStep === 3 + offset && (
             <CallForwardingStep
               voicefleetNumber={voicefleetNumber}
               onProviderSelect={handleProviderSelect}
@@ -145,7 +177,7 @@ export function OnboardingTour({
               onBack={prevStep}
             />
           )}
-          {currentStep === 4 && (
+          {currentStep === 4 + offset && (
             <AssistantConfigStep
               hasExistingAssistant={data.hasExistingAssistant}
               onNext={nextStep}
@@ -153,7 +185,7 @@ export function OnboardingTour({
               onConfigureNow={handleConfigureNow}
             />
           )}
-          {currentStep === 5 && (
+          {currentStep === 5 + offset && (
             <TestCallStep
               voicefleetNumber={voicefleetNumber}
               onTestCallMade={handleTestCallMade}
@@ -161,7 +193,7 @@ export function OnboardingTour({
               onBack={prevStep}
             />
           )}
-          {currentStep === 6 && <CompletionStep onComplete={handleComplete} />}
+          {currentStep === 6 + offset && <CompletionStep onComplete={handleComplete} />}
         </div>
       </DialogContent>
     </Dialog>

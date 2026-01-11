@@ -1,3 +1,4 @@
+export { PaywallStep } from './PaywallStep';
 export { WelcomeStep } from './WelcomeStep';
 export { PhoneNumberStep } from './PhoneNumberStep';
 export { CallForwardingStep } from './CallForwardingStep';

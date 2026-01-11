@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import { CreditCard, ExternalLink, Phone, TrendingUp, AlertCircle, Euro } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import Button from '@/components/ui/button';
@@ -28,6 +29,7 @@ interface SubscriptionData {
 }
 
 export default function BillingPage() {
+  const router = useRouter();
   const [subscription, setSubscription] = useState<SubscriptionData | null>(null);
   const [usage, setUsage] = useState<UsageData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -176,8 +178,8 @@ export default function BillingPage() {
                 <p className="text-slate-500 mb-6">
                   Choose a plan to get started with your AI assistant.
                 </p>
-                <Button onClick={() => window.location.href = '/#pricing'}>
-                  View Plans
+                <Button onClick={() => router.push('/dashboard?paywall=1')}>
+                  Choose a Plan
                 </Button>
               </CardContent>
             </Card>

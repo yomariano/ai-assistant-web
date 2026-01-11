@@ -88,10 +88,10 @@ function CheckoutContent() {
           </p>
           <div className="space-x-4">
             <button
-              onClick={() => router.push('/#pricing')}
+              onClick={() => router.push('/dashboard?paywall=1')}
               className="px-6 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition"
             >
-              View Plans
+              Choose a Plan
             </button>
             <button
               onClick={() => router.push('/billing')}

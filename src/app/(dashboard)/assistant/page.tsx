@@ -1,6 +1,7 @@
 'use client';
 
 import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { Bot, Save, RefreshCw, Phone } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import Button from '@/components/ui/button';
@@ -16,6 +17,7 @@ import type { PromptTemplate } from '@/lib/content/prompt-templates';
 import type { TestConfig } from '@/types';
 
 export default function AssistantPage() {
+  const router = useRouter();
   const [assistant, setAssistant] = useState<Assistant | null>(null);
   const [voices, setVoices] = useState<Voice[]>([]);
   const [phoneNumbers, setPhoneNumbers] = useState<PhoneNumber[]>([]);
@@ -171,8 +173,8 @@ export default function AssistantPage() {
             <p className="text-slate-500 mb-6">
               Subscribe to a plan to get your AI assistant and phone number.
             </p>
-            <Button onClick={() => window.location.href = '/#pricing'}>
-              View Plans
+            <Button onClick={() => router.push('/dashboard?paywall=1')}>
+              Choose a Plan
             </Button>
           </CardContent>
         </Card>
