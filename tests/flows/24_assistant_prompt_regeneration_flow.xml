@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testFlow id="assistant_prompt_regeneration_flow" version="1.0">
+  <metadata>
+    <name>Assistant Prompt Regeneration Flow</name>
+    <description>Tests the AI-powered regeneration of system prompts from business information</description>
+    <priority>high</priority>
+    <estimatedDuration>3m</estimatedDuration>
+    <tags>
+      <tag>assistant</tag>
+      <tag>ai-generation</tag>
+      <tag>prompts</tag>
+      <tag>configuration</tag>
+    </tags>
+  </metadata>
+
+  <prerequisites>
+    <prerequisite>User authenticated with active subscription</prerequisite>
+    <prerequisite>Business information filled in</prerequisite>
+  </prerequisites>
+
+  <testData>
+    <variable name="baseUrl" value="https://voicefleet.ai" />
+    <variable name="businessName" value="Dublin Dental Care" />
+    <variable name="businessDescription" value="Family dental practice offering general dentistry, cosmetic procedures, and emergency care in South Dublin" />
+  </testData>
+
+  <steps>
+    <step id="1" type="navigation">
+      <action>Navigate to AI Assistant page</action>
+      <url>${baseUrl}/dashboard/assistant</url>
+      <expectedResult>
+        <condition type="pageLoaded">true</condition>
+      </expectedResult>
+    </step>
+
+    <step id="2" type="interaction">
+      <action>Fill in business name</action>
+      <target selector="input[name='businessName']" />
+      <testData>
+        <field name="businessName" value="${businessName}" />
+      </testData>
+      <expectedResult>
+        <condition type="fieldValue">${businessName}</condition>
+      </expectedResult>
+    </step>
+
+    <step id="3" type="interaction">
+      <action>Fill in business description</action>
+      <target selector="textarea[name='businessDescription']" />
+      <testData>
+        <field name="businessDescription" value="${businessDescription}" />
+      </testData>
+      <expectedResult>
+        <condition type="fieldValue">${businessDescription}</condition>
+      </expectedResult>
+    </step>
+
+    <step id="4" type="verification">
+      <action>Verify Regenerate button is enabled</action>
+      <target selector="button" text="Regenerate from Business Info" />
+      <expectedResult>
+        <condition type="buttonEnabled">true</condition>
+      </expectedResult>
+    </step>
+
+    <step id="5" type="interaction">
+      <action>Click Regenerate from Business Info</action>
+      <target selector="button" text="Regenerate from Business Info" />
+      <expectedResult>
+        <condition type="loading">Generating prompt...</condition>
+        <condition type="buttonDisabled">true during generation</condition>
+      </expectedResult>
+    </step>
+
+    <step id="6" type="verification">
+      <action>Verify API call to regenerate endpoint</action>
+      <target type="network">POST /api/assistant/regenerate-prompt</target>
+      <expectedResult>
+        <condition type="requestBody">businessName, businessDescription</condition>
+        <condition type="apiResponse">200 OK</condition>
+        <condition type="responseContains">systemPrompt</condition>
+      </expectedResult>
+    </step>
+
+    <step id="7" type="verification">
+      <action>Verify system prompt updated with AI-generated content</action>
+      <target selector="textarea[name='systemPrompt']" />
+      <expectedResult>
+        <condition type="textContains">Dublin Dental Care</condition>
+        <condition type="textContains">dental</condition>
+        <condition type="textLength" min="200">Substantial prompt generated</condition>
+      </expectedResult>
+    </step>
+
+    <step id="8" type="verification">
+      <action>Verify generated prompt includes key elements</action>
+      <expectedResult>
+        <condition type="textContains">receptionist</condition>
+        <condition type="textContains">appointments</condition>
+        <condition type="textContains">professional</condition>
+      </expectedResult>
+    </step>
+
+    <step id="9" type="interaction">
+      <action>Save the regenerated configuration</action>
+      <target selector="button" text="Save Changes" />
+      <expectedResult>
+        <condition type="successToast">Configuration saved</condition>
+      </expectedResult>
+    </step>
+
+    <step id="10" type="verification">
+      <action>Verify regenerated prompt persists</action>
+      <interaction>Refresh page</interaction>
+      <expectedResult>
+        <condition type="textContains">Dublin Dental Care</condition>
+        <condition type="promptPreserved">true</condition>
+      </expectedResult>
+    </step>
+  </steps>
+
+  <teardown>
+    <step>
+      <action>No cleanup needed</action>
+    </step>
+  </teardown>
+
+  <notes>
+    <note>Regeneration uses AI to create context-aware prompts</note>
+    <note>Business name and description are required inputs</note>
+    <note>User can edit the generated prompt before saving</note>
+  </notes>
+</testFlow>

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testFlow id="eur_currency_display_flow" version="1.0">
+  <metadata>
+    <name>EUR Currency Display Flow</name>
+    <description>Tests that all prices are displayed correctly in EUR format across the application</description>
+    <priority>medium</priority>
+    <estimatedDuration>2m</estimatedDuration>
+    <tags>
+      <tag>pricing</tag>
+      <tag>currency</tag>
+      <tag>eur</tag>
+      <tag>localization</tag>
+    </tags>
+  </metadata>
+
+  <prerequisites>
+    <prerequisite>Application configured for EUR currency</prerequisite>
+  </prerequisites>
+
+  <testData>
+    <variable name="baseUrl" value="https://voicefleet.ai" />
+    <variable name="expectedCurrency" value="EUR" />
+    <variable name="currencySymbol" value="EUR " />
+  </testData>
+
+  <steps>
+    <step id="1" type="navigation">
+      <action>Navigate to landing page</action>
+      <url>${baseUrl}</url>
+      <expectedResult>
+        <condition type="pageLoaded">true</condition>
+      </expectedResult>
+    </step>
+
+    <step id="2" type="verification">
+      <action>Verify pricing section shows EUR symbol</action>
+      <target selector="#pricing" />
+      <expectedResult>
+        <condition type="textPresent">EUR 19</condition>
+        <condition type="textPresent">EUR 99</condition>
+        <condition type="textPresent">EUR 249</condition>
+        <condition type="textNotPresent">$19</condition>
+        <condition type="textNotPresent">$99</condition>
+        <condition type="textNotPresent">$249</condition>
+      </expectedResult>
+    </step>
+
+    <step id="3" type="verification">
+      <action>Verify per-call rates show EUR</action>
+      <expectedResult>
+        <condition type="textPresent">EUR 0.95</condition>
+        <condition type="textPresent">EUR 0.45</condition>
+        <condition type="textNotPresent">$0.95</condition>
+        <condition type="textNotPresent">$0.45</condition>
+      </expectedResult>
+    </step>
+
+    <step id="4" type="verification">
+      <action>Verify /month format is consistent</action>
+      <expectedResult>
+        <condition type="textPresent">/month</condition>
+        <condition type="textPresent">per call</condition>
+      </expectedResult>
+    </step>
+
+    <step id="5" type="navigation">
+      <action>Login and navigate to billing page</action>
+      <url>${baseUrl}/dashboard/billing</url>
+      <expectedResult>
+        <condition type="pageLoaded">true</condition>
+      </expectedResult>
+    </step>
+
+    <step id="6" type="verification">
+      <action>Verify billing page shows EUR</action>
+      <expectedResult>
+        <condition type="currencySymbol">EUR </condition>
+        <condition type="textPresent">EUR /mo</condition>
+        <condition type="textPresent">EUR /call</condition>
+      </expectedResult>
+    </step>
+
+    <step id="7" type="verification">
+      <action>Verify usage charges show EUR</action>
+      <expectedResult>
+        <condition type="textPattern">EUR [0-9]+\.[0-9]{2}</condition>
+        <condition type="noUsdSymbols">true</condition>
+      </expectedResult>
+    </step>
+
+    <step id="8" type="verification">
+      <action>Verify decimal formatting is correct</action>
+      <expectedResult>
+        <condition type="decimalFormat">Two decimal places for cents</condition>
+        <condition type="thousandsSeparator">Optional comma or space</condition>
+      </expectedResult>
+    </step>
+  </steps>
+
+  <teardown>
+    <step>
+      <action>No cleanup needed</action>
+    </step>
+  </teardown>
+
+  <notes>
+    <note>VoiceFleet targets Irish/European market with EUR pricing</note>
+    <note>Currency symbol should be EUR  (with space)</note>
+    <note>Decimal format should be X.XX for cents</note>
+  </notes>
+</testFlow>

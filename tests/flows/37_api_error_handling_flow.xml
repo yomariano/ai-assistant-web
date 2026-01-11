@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testFlow id="api_error_handling_flow" version="1.0">
+  <metadata>
+    <name>API Error Handling Flow</name>
+    <description>Tests graceful error handling when API calls fail or return errors</description>
+    <priority>high</priority>
+    <estimatedDuration>3m</estimatedDuration>
+    <tags>
+      <tag>error-handling</tag>
+      <tag>api</tag>
+      <tag>resilience</tag>
+      <tag>ux</tag>
+    </tags>
+  </metadata>
+
+  <prerequisites>
+    <prerequisite>User authenticated</prerequisite>
+    <prerequisite>Ability to simulate network errors (DevTools or test environment)</prerequisite>
+  </prerequisites>
+
+  <testData>
+    <variable name="baseUrl" value="https://voicefleet.ai" />
+  </testData>
+
+  <steps>
+    <step id="1" type="setup">
+      <action>Navigate to dashboard with network throttling</action>
+      <url>${baseUrl}/dashboard</url>
+      <expectedResult>
+        <condition type="pageLoaded">true</condition>
+      </expectedResult>
+    </step>
+
+    <step id="2" type="interaction">
+      <action>Simulate slow network (DevTools throttling)</action>
+      <target type="browser">Network throttling: Slow 3G</target>
+      <expectedResult>
+        <condition type="throttlingEnabled">true</condition>
+      </expectedResult>
+    </step>
+
+    <step id="3" type="verification">
+      <action>Verify loading states appear</action>
+      <interaction>Refresh page</interaction>
+      <expectedResult>
+        <condition type="loadingIndicator">Skeleton or spinner visible</condition>
+        <condition type="noBlankScreen">true</condition>
+        <condition type="gracefulLoading">Content loads progressively</condition>
+      </expectedResult>
+    </step>
+
+    <step id="4" type="interaction">
+      <action>Simulate network offline</action>
+      <target type="browser">Network: Offline</target>
+      <expectedResult>
+        <condition type="networkOffline">true</condition>
+      </expectedResult>
+    </step>
+
+    <step id="5" type="interaction">
+      <action>Attempt to load dashboard data</action>
+      <interaction>Refresh or navigate to dashboard</interaction>
+      <expectedResult>
+        <condition type="errorMessage">Network error or connection problem</condition>
+        <condition type="userFriendlyMessage">true</condition>
+        <condition type="noTechnicalJargon">true</condition>
+      </expectedResult>
+    </step>
+
+    <step id="6" type="verification">
+      <action>Verify retry mechanism</action>
+      <expectedResult>
+        <condition type="retryButton">Retry or Try Again button visible</condition>
+        <condition type="buttonClickable">true</condition>
+      </expectedResult>
+    </step>
+
+    <step id="7" type="interaction">
+      <action>Restore network and retry</action>
+      <target type="browser">Network: Online</target>
+      <interaction>Click Retry button</interaction>
+      <expectedResult>
+        <condition type="dataLoaded">Dashboard content appears</condition>
+        <condition type="errorCleared">Error message disappears</condition>
+      </expectedResult>
+    </step>
+
+    <step id="8" type="interaction">
+      <action>Test form submission with server error</action>
+      <url>${baseUrl}/dashboard/assistant</url>
+      <interaction>Submit invalid data or simulate 500 error</interaction>
+      <expectedResult>
+        <condition type="errorToast">Something went wrong</condition>
+        <condition type="formNotCleared">User data preserved</condition>
+        <condition type="canRetry">true</condition>
+      </expectedResult>
+    </step>
+
+    <step id="9" type="verification">
+      <action>Verify 401 Unauthorized handling</action>
+      <interaction>Expire token or simulate 401 response</interaction>
+      <expectedResult>
+        <condition type="redirectTo">/login</condition>
+        <condition type="sessionCleared">true</condition>
+        <condition type="noInfiniteLoop">true</condition>
+      </expectedResult>
+    </step>
+
+    <step id="10" type="verification">
+      <action>Verify 404 page handling</action>
+      <url>${baseUrl}/dashboard/nonexistent-page</url>
+      <expectedResult>
+        <condition type="pageVisible">404 or Not Found page</condition>
+        <condition type="navigationAvailable">Can return to dashboard</condition>
+        <condition type="noBrokenUI">true</condition>
+      </expectedResult>
+    </step>
+  </steps>
+
+  <teardown>
+    <step>
+      <action>Restore normal network conditions</action>
+      <target type="browser">Network: Online, No throttling</target>
+    </step>
+    <step>
+      <action>Clear any error states</action>
+      <interaction>Refresh page</interaction>
+    </step>
+  </teardown>
+
+  <notes>
+    <note>Error messages should be user-friendly</note>
+    <note>Forms should preserve user input on error</note>
+    <note>401 errors should redirect to login</note>
+    <note>Network errors should offer retry option</note>
+  </notes>
+</testFlow>

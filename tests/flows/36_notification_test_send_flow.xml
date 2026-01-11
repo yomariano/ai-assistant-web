@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testFlow id="notification_test_send_flow" version="1.0">
+  <metadata>
+    <name>Notification Test Send Flow</name>
+    <description>Tests sending test email and SMS notifications to verify configuration</description>
+    <priority>medium</priority>
+    <estimatedDuration>2m</estimatedDuration>
+    <tags>
+      <tag>notifications</tag>
+      <tag>test</tag>
+      <tag>email</tag>
+      <tag>sms</tag>
+    </tags>
+  </metadata>
+
+  <prerequisites>
+    <prerequisite>User authenticated with active subscription</prerequisite>
+    <prerequisite>Email and/or SMS notifications enabled</prerequisite>
+    <prerequisite>Valid email and phone configured</prerequisite>
+  </prerequisites>
+
+  <testData>
+    <variable name="baseUrl" value="https://voicefleet.ai" />
+  </testData>
+
+  <steps>
+    <step id="1" type="navigation">
+      <action>Navigate to notifications settings</action>
+      <url>${baseUrl}/dashboard/notifications</url>
+      <expectedResult>
+        <condition type="pageLoaded">true</condition>
+      </expectedResult>
+    </step>
+
+    <step id="2" type="verification">
+      <action>Verify notifications are enabled</action>
+      <expectedResult>
+        <condition type="emailEnabled">true</condition>
+        <condition type="testButtonVisible">Send Test Email button</condition>
+      </expectedResult>
+    </step>
+
+    <step id="3" type="verification">
+      <action>Verify Send Test Email button exists</action>
+      <target selector="button" text="Send Test Email" />
+      <expectedResult>
+        <condition type="elementVisible">true</condition>
+        <condition type="buttonEnabled">true</condition>
+      </expectedResult>
+    </step>
+
+    <step id="4" type="interaction">
+      <action>Click Send Test Email</action>
+      <target selector="button" text="Send Test Email" />
+      <expectedResult>
+        <condition type="loading">Sending test email...</condition>
+      </expectedResult>
+    </step>
+
+    <step id="5" type="verification">
+      <action>Verify API call to send test</action>
+      <target type="network">POST /api/notifications/test</target>
+      <expectedResult>
+        <condition type="requestBody">type: email</condition>
+        <condition type="apiResponse">200 OK</condition>
+      </expectedResult>
+    </step>
+
+    <step id="6" type="verification">
+      <action>Verify success feedback for email</action>
+      <expectedResult>
+        <condition type="successToast">Test email sent</condition>
+        <condition type="textPresent">Check your inbox</condition>
+      </expectedResult>
+    </step>
+
+    <step id="7" type="verification">
+      <action>Verify Send Test SMS button (if SMS enabled)</action>
+      <condition>If SMS notifications enabled</condition>
+      <target selector="button" text="Send Test SMS" />
+      <expectedResult>
+        <condition type="elementVisible">true</condition>
+        <condition type="buttonEnabled">true</condition>
+      </expectedResult>
+    </step>
+
+    <step id="8" type="interaction">
+      <action>Click Send Test SMS</action>
+      <condition>If SMS enabled</condition>
+      <target selector="button" text="Send Test SMS" />
+      <expectedResult>
+        <condition type="loading">Sending test SMS...</condition>
+      </expectedResult>
+    </step>
+
+    <step id="9" type="verification">
+      <action>Verify API call for SMS test</action>
+      <condition>If SMS enabled</condition>
+      <target type="network">POST /api/notifications/test</target>
+      <expectedResult>
+        <condition type="requestBody">type: sms</condition>
+        <condition type="apiResponse">200 OK</condition>
+      </expectedResult>
+    </step>
+
+    <step id="10" type="verification">
+      <action>Verify success feedback for SMS</action>
+      <condition>If SMS enabled</condition>
+      <expectedResult>
+        <condition type="successToast">Test SMS sent</condition>
+        <condition type="textPresent">Check your phone</condition>
+      </expectedResult>
+    </step>
+  </steps>
+
+  <teardown>
+    <step>
+      <action>No cleanup needed</action>
+    </step>
+  </teardown>
+
+  <notes>
+    <note>Test notifications help verify configuration</note>
+    <note>Email should arrive within seconds</note>
+    <note>SMS may take a few seconds longer</note>
+    <note>Test button may have rate limiting</note>
+  </notes>
+</testFlow>

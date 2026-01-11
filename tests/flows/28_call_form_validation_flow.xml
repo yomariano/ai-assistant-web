@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testFlow id="call_form_validation_flow" version="1.0">
+  <metadata>
+    <name>Call Form Validation Flow</name>
+    <description>Tests validation errors when submitting call form with invalid data</description>
+    <priority>high</priority>
+    <estimatedDuration>2m</estimatedDuration>
+    <tags>
+      <tag>calls</tag>
+      <tag>validation</tag>
+      <tag>form</tag>
+      <tag>error-handling</tag>
+    </tags>
+  </metadata>
+
+  <prerequisites>
+    <prerequisite>User authenticated with active subscription</prerequisite>
+  </prerequisites>
+
+  <testData>
+    <variable name="baseUrl" value="https://voicefleet.ai" />
+    <variable name="invalidPhone" value="12345" />
+    <variable name="invalidPhoneLetters" value="abcdefghij" />
+    <variable name="validPhone" value="+353871234567" />
+  </testData>
+
+  <steps>
+    <step id="1" type="navigation">
+      <action>Navigate to Make a Call page</action>
+      <url>${baseUrl}/dashboard/call</url>
+      <expectedResult>
+        <condition type="pageLoaded">true</condition>
+      </expectedResult>
+    </step>
+
+    <step id="2" type="interaction">
+      <action>Submit form with empty fields</action>
+      <target selector="button" text="Make Call" />
+      <expectedResult>
+        <condition type="formNotSubmitted">true</condition>
+        <condition type="validationError">Phone number required</condition>
+      </expectedResult>
+    </step>
+
+    <step id="3" type="interaction">
+      <action>Enter invalid phone number (too short)</action>
+      <target selector="input[name='phoneNumber']" />
+      <testData>
+        <field name="phoneNumber" value="${invalidPhone}" />
+      </testData>
+      <expectedResult>
+        <condition type="validationError">Invalid phone number</condition>
+        <condition type="fieldHighlighted">Phone number field has error state</condition>
+      </expectedResult>
+    </step>
+
+    <step id="4" type="interaction">
+      <action>Enter invalid phone number (letters)</action>
+      <target selector="input[name='phoneNumber']" />
+      <testData>
+        <field name="phoneNumber" value="${invalidPhoneLetters}" />
+      </testData>
+      <expectedResult>
+        <condition type="validationError">Invalid phone number format</condition>
+      </expectedResult>
+    </step>
+
+    <step id="5" type="interaction">
+      <action>Enter valid phone but no message</action>
+      <target selector="input[name='phoneNumber']" />
+      <testData>
+        <field name="phoneNumber" value="${validPhone}" />
+      </testData>
+      <target selector="button" text="Make Call" />
+      <expectedResult>
+        <condition type="validationError">Message required</condition>
+      </expectedResult>
+    </step>
+
+    <step id="6" type="interaction">
+      <action>Enter message that's too long</action>
+      <target selector="textarea[name='message']" />
+      <testData>
+        <field name="message" value="A".repeat(2001) />
+      </testData>
+      <expectedResult>
+        <condition type="validationError">Message too long</condition>
+        <condition type="characterCounter">Shows exceeded limit</condition>
+      </expectedResult>
+    </step>
+
+    <step id="7" type="verification">
+      <action>Verify error styling</action>
+      <expectedResult>
+        <condition type="inputBorder">Red or error color</condition>
+        <condition type="errorIcon">Visible on invalid fields</condition>
+        <condition type="ariaInvalid">true on invalid fields</condition>
+      </expectedResult>
+    </step>
+
+    <step id="8" type="interaction">
+      <action>Fix all errors and submit successfully</action>
+      <testData>
+        <field name="phoneNumber" value="${validPhone}" />
+        <field name="message" value="Valid test message for the call" />
+      </testData>
+      <target selector="button" text="Make Call" />
+      <expectedResult>
+        <condition type="validationPassed">true</condition>
+        <condition type="formSubmitted">true</condition>
+        <condition type="noErrors">true</condition>
+      </expectedResult>
+    </step>
+
+    <step id="9" type="verification">
+      <action>Verify errors clear when corrected</action>
+      <expectedResult>
+        <condition type="noErrorMessages">true</condition>
+        <condition type="inputBorder">Normal state</condition>
+      </expectedResult>
+    </step>
+  </steps>
+
+  <teardown>
+    <step>
+      <action>No cleanup needed</action>
+    </step>
+  </teardown>
+
+  <notes>
+    <note>Phone validation uses international format</note>
+    <note>Error messages should be user-friendly</note>
+    <note>Inline validation provides immediate feedback</note>
+  </notes>
+</testFlow>

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testFlow id="dashboard_recent_activity_flow" version="1.0">
+  <metadata>
+    <name>Dashboard Recent Activity Flow</name>
+    <description>Tests the recent activity list on the dashboard showing recent calls</description>
+    <priority>high</priority>
+    <estimatedDuration>2m</estimatedDuration>
+    <tags>
+      <tag>dashboard</tag>
+      <tag>activity</tag>
+      <tag>calls</tag>
+      <tag>history</tag>
+    </tags>
+  </metadata>
+
+  <prerequisites>
+    <prerequisite>User authenticated with active subscription</prerequisite>
+    <prerequisite>User has at least 3 calls in history</prerequisite>
+  </prerequisites>
+
+  <testData>
+    <variable name="baseUrl" value="https://voicefleet.ai" />
+  </testData>
+
+  <steps>
+    <step id="1" type="navigation">
+      <action>Navigate to dashboard</action>
+      <url>${baseUrl}/dashboard</url>
+      <expectedResult>
+        <condition type="pageLoaded">true</condition>
+      </expectedResult>
+    </step>
+
+    <step id="2" type="verification">
+      <action>Verify Recent Activity section exists</action>
+      <expectedResult>
+        <condition type="elementVisible">Recent Activity heading</condition>
+        <condition type="elementVisible">Activity list container</condition>
+      </expectedResult>
+    </step>
+
+    <step id="3" type="verification">
+      <action>Verify activity items display</action>
+      <expectedResult>
+        <condition type="elementCount" min="1" max="5">Activity items</condition>
+        <condition type="eachItemHas">Phone number or contact name</condition>
+        <condition type="eachItemHas">Status badge</condition>
+        <condition type="eachItemHas">Relative time</condition>
+      </expectedResult>
+    </step>
+
+    <step id="4" type="verification">
+      <action>Verify status badges are correct</action>
+      <expectedResult>
+        <condition type="badgeColors">
+          <badge status="completed" color="green" />
+          <badge status="failed" color="red" />
+          <badge status="initiated" color="yellow" />
+          <badge status="voicemail" color="blue" />
+        </condition>
+      </expectedResult>
+    </step>
+
+    <step id="5" type="verification">
+      <action>Verify relative time formatting</action>
+      <expectedResult>
+        <condition type="textPattern">(\d+ (minute|hour|day)s? ago|Just now)</condition>
+        <condition type="timeLocalized">true</condition>
+      </expectedResult>
+    </step>
+
+    <step id="6" type="verification">
+      <action>Verify phone number formatting</action>
+      <expectedResult>
+        <condition type="phoneFormat">+353 XX XXX XXXX or similar</condition>
+        <condition type="noRawNumbers">true</condition>
+      </expectedResult>
+    </step>
+
+    <step id="7" type="verification">
+      <action>Verify empty state when no calls</action>
+      <condition>If user has no calls</condition>
+      <expectedResult>
+        <condition type="elementVisible">No recent activity message</condition>
+        <condition type="textPresent">No calls yet</condition>
+      </expectedResult>
+    </step>
+
+    <step id="8" type="interaction">
+      <action>Click View All link</action>
+      <target selector="a" text="View All" />
+      <expectedResult>
+        <condition type="redirectTo">/dashboard/history</condition>
+      </expectedResult>
+    </step>
+  </steps>
+
+  <teardown>
+    <step>
+      <action>No cleanup needed</action>
+    </step>
+  </teardown>
+
+  <notes>
+    <note>Shows last 5 calls by default</note>
+    <note>Clicking item should navigate to call details</note>
+    <note>Status badges provide quick visual reference</note>
+  </notes>
+</testFlow>

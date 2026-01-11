@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testFlow id="assistant_voice_selection_flow" version="1.0">
+  <metadata>
+    <name>Assistant Voice Selection Flow</name>
+    <description>Tests browsing, previewing, and selecting a voice for the AI assistant</description>
+    <priority>critical</priority>
+    <estimatedDuration>3m</estimatedDuration>
+    <tags>
+      <tag>assistant</tag>
+      <tag>voice</tag>
+      <tag>audio</tag>
+      <tag>configuration</tag>
+    </tags>
+  </metadata>
+
+  <prerequisites>
+    <prerequisite>User authenticated with active subscription</prerequisite>
+    <prerequisite>At least one phone number assigned</prerequisite>
+  </prerequisites>
+
+  <testData>
+    <variable name="baseUrl" value="https://voicefleet.ai" />
+    <variable name="defaultVoice" value="Jennifer" />
+    <variable name="alternateVoice" value="Michael" />
+  </testData>
+
+  <steps>
+    <step id="1" type="navigation">
+      <action>Navigate to AI Assistant page</action>
+      <url>${baseUrl}/dashboard/assistant</url>
+      <expectedResult>
+        <condition type="pageLoaded">true</condition>
+      </expectedResult>
+    </step>
+
+    <step id="2" type="verification">
+      <action>Verify voice selection section exists</action>
+      <expectedResult>
+        <condition type="elementVisible">Voice Selection section</condition>
+        <condition type="elementVisible">Current voice display</condition>
+      </expectedResult>
+    </step>
+
+    <step id="3" type="interaction">
+      <action>Open voice selection dropdown/modal</action>
+      <target selector="button" text="Change Voice" />
+      <expectedResult>
+        <condition type="elementVisible">Voice options list</condition>
+        <condition type="elementCount" min="2">Available voices</condition>
+      </expectedResult>
+    </step>
+
+    <step id="4" type="verification">
+      <action>Verify default voices available</action>
+      <expectedResult>
+        <condition type="textPresent">Jennifer</condition>
+        <condition type="textPresent">Michael</condition>
+        <condition type="eachVoiceHas">Preview button</condition>
+      </expectedResult>
+    </step>
+
+    <step id="5" type="interaction">
+      <action>Click preview button for Jennifer voice</action>
+      <target selector="button[data-voice='jennifer']" text="Preview" />
+      <expectedResult>
+        <condition type="audioPlaying">true</condition>
+        <condition type="buttonState">Playing indicator</condition>
+      </expectedResult>
+    </step>
+
+    <step id="6" type="verification">
+      <action>Wait for preview to complete</action>
+      <expectedResult>
+        <condition type="audioEnded">true</condition>
+        <condition type="buttonState">Preview (idle)</condition>
+      </expectedResult>
+    </step>
+
+    <step id="7" type="interaction">
+      <action>Click preview button for Michael voice</action>
+      <target selector="button[data-voice='michael']" text="Preview" />
+      <expectedResult>
+        <condition type="audioPlaying">true</condition>
+      </expectedResult>
+    </step>
+
+    <step id="8" type="interaction">
+      <action>Select Michael voice</action>
+      <target selector="[data-voice='michael']" text="Select" />
+      <expectedResult>
+        <condition type="voiceSelected">Michael</condition>
+        <condition type="selectionConfirmed">true</condition>
+      </expectedResult>
+    </step>
+
+    <step id="9" type="interaction">
+      <action>Save assistant configuration</action>
+      <target selector="button" text="Save Changes" />
+      <expectedResult>
+        <condition type="loading">Saving...</condition>
+        <condition type="successToast">Configuration saved</condition>
+      </expectedResult>
+    </step>
+
+    <step id="10" type="verification">
+      <action>Verify voice persisted after refresh</action>
+      <interaction>Refresh page</interaction>
+      <expectedResult>
+        <condition type="currentVoice">Michael</condition>
+        <condition type="apiResponse" endpoint="/api/assistant">voiceId: michael</condition>
+      </expectedResult>
+    </step>
+  </steps>
+
+  <teardown>
+    <step>
+      <action>Reset voice to default</action>
+      <target type="api">PATCH /api/assistant { voiceId: "jennifer" }</target>
+    </step>
+  </teardown>
+
+  <notes>
+    <note>Voice preview requires audio playback support</note>
+    <note>Some voices may be plan-restricted</note>
+    <note>Voice integrates with VAPI for calls</note>
+  </notes>
+</testFlow>

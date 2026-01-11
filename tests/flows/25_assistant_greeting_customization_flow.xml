@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testFlow id="assistant_greeting_customization_flow" version="1.0">
+  <metadata>
+    <name>Assistant Greeting Customization Flow</name>
+    <description>Tests customizing the greeting name and first message for the AI assistant</description>
+    <priority>high</priority>
+    <estimatedDuration>2m</estimatedDuration>
+    <tags>
+      <tag>assistant</tag>
+      <tag>greeting</tag>
+      <tag>customization</tag>
+      <tag>configuration</tag>
+    </tags>
+  </metadata>
+
+  <prerequisites>
+    <prerequisite>User authenticated with active subscription</prerequisite>
+  </prerequisites>
+
+  <testData>
+    <variable name="baseUrl" value="https://voicefleet.ai" />
+    <variable name="greetingName" value="Sarah" />
+    <variable name="firstMessage" value="Good morning, thank you for calling Dublin Dental Care. This is Sarah, how may I help you today?" />
+  </testData>
+
+  <steps>
+    <step id="1" type="navigation">
+      <action>Navigate to AI Assistant page</action>
+      <url>${baseUrl}/dashboard/assistant</url>
+      <expectedResult>
+        <condition type="pageLoaded">true</condition>
+      </expectedResult>
+    </step>
+
+    <step id="2" type="verification">
+      <action>Verify greeting customization fields exist</action>
+      <expectedResult>
+        <condition type="elementVisible">Greeting Name input</condition>
+        <condition type="elementVisible">First Message textarea</condition>
+      </expectedResult>
+    </step>
+
+    <step id="3" type="interaction">
+      <action>Clear and enter new greeting name</action>
+      <target selector="input[name='greetingName']" />
+      <testData>
+        <field name="greetingName" value="${greetingName}" />
+      </testData>
+      <expectedResult>
+        <condition type="fieldValue">${greetingName}</condition>
+      </expectedResult>
+    </step>
+
+    <step id="4" type="verification">
+      <action>Verify greeting name character limit</action>
+      <expectedResult>
+        <condition type="maxLength">50 characters or similar limit</condition>
+        <condition type="characterCounter">Shows remaining characters</condition>
+      </expectedResult>
+    </step>
+
+    <step id="5" type="interaction">
+      <action>Clear and enter new first message</action>
+      <target selector="textarea[name='firstMessage']" />
+      <testData>
+        <field name="firstMessage" value="${firstMessage}" />
+      </testData>
+      <expectedResult>
+        <condition type="fieldValue">${firstMessage}</condition>
+      </expectedResult>
+    </step>
+
+    <step id="6" type="verification">
+      <action>Verify first message character limit</action>
+      <expectedResult>
+        <condition type="maxLength">500 characters or similar</condition>
+        <condition type="textareaExpandable">true</condition>
+      </expectedResult>
+    </step>
+
+    <step id="7" type="interaction">
+      <action>Test greeting preview (if available)</action>
+      <target selector="button" text="Test Greeting" />
+      <expectedResult>
+        <condition type="apiCall">POST /api/assistant/test-greeting</condition>
+        <condition type="previewPlays">Audio or text preview</condition>
+      </expectedResult>
+    </step>
+
+    <step id="8" type="interaction">
+      <action>Save changes</action>
+      <target selector="button" text="Save Changes" />
+      <expectedResult>
+        <condition type="loading">Saving...</condition>
+        <condition type="successToast">Configuration saved</condition>
+      </expectedResult>
+    </step>
+
+    <step id="9" type="verification">
+      <action>Verify API call includes greeting data</action>
+      <target type="network">PATCH /api/assistant</target>
+      <expectedResult>
+        <condition type="requestBody">greetingName: Sarah</condition>
+        <condition type="requestBody">firstMessage: contains Dublin Dental Care</condition>
+        <condition type="apiResponse">200 OK</condition>
+      </expectedResult>
+    </step>
+
+    <step id="10" type="verification">
+      <action>Verify greeting persists after refresh</action>
+      <interaction>Refresh page</interaction>
+      <expectedResult>
+        <condition type="fieldValue" name="greetingName">${greetingName}</condition>
+        <condition type="fieldValue" name="firstMessage">${firstMessage}</condition>
+      </expectedResult>
+    </step>
+  </steps>
+
+  <teardown>
+    <step>
+      <action>No cleanup needed</action>
+    </step>
+  </teardown>
+
+  <notes>
+    <note>Greeting name is how the AI introduces itself</note>
+    <note>First message is the initial greeting to callers</note>
+    <note>Can include placeholders that get replaced</note>
+  </notes>
+</testFlow>

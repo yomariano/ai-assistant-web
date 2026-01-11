@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testFlow id="save_call_template_flow" version="1.0">
+  <metadata>
+    <name>Save Call Template Flow</name>
+    <description>Tests saving a call configuration as a reusable template in the agenda</description>
+    <priority>high</priority>
+    <estimatedDuration>2m</estimatedDuration>
+    <tags>
+      <tag>calls</tag>
+      <tag>templates</tag>
+      <tag>agenda</tag>
+      <tag>saved-calls</tag>
+    </tags>
+  </metadata>
+
+  <prerequisites>
+    <prerequisite>User authenticated with active subscription</prerequisite>
+  </prerequisites>
+
+  <testData>
+    <variable name="baseUrl" value="https://voicefleet.ai" />
+    <variable name="templateName" value="Appointment Reminder" />
+    <variable name="templateMessage" value="Hi, this is a reminder about your upcoming appointment. Please call us back to confirm or reschedule." />
+  </testData>
+
+  <steps>
+    <step id="1" type="navigation">
+      <action>Navigate to Make a Call page</action>
+      <url>${baseUrl}/dashboard/call</url>
+      <expectedResult>
+        <condition type="pageLoaded">true</condition>
+      </expectedResult>
+    </step>
+
+    <step id="2" type="interaction">
+      <action>Fill in call details</action>
+      <testData>
+        <field name="phoneNumber" value="+353871234567" />
+        <field name="message" value="${templateMessage}" />
+        <field name="contactName" value="Sample Contact" />
+      </testData>
+      <expectedResult>
+        <condition type="fieldsFilled">true</condition>
+      </expectedResult>
+    </step>
+
+    <step id="3" type="verification">
+      <action>Verify Save as Template option exists</action>
+      <expectedResult>
+        <condition type="elementVisible">Save as Template button or checkbox</condition>
+      </expectedResult>
+    </step>
+
+    <step id="4" type="interaction">
+      <action>Click Save as Template</action>
+      <target selector="button" text="Save as Template" />
+      <expectedResult>
+        <condition type="modalVisible">Save template dialog</condition>
+      </expectedResult>
+    </step>
+
+    <step id="5" type="interaction">
+      <action>Enter template name</action>
+      <target selector="input[name='templateName']" />
+      <testData>
+        <field name="templateName" value="${templateName}" />
+      </testData>
+      <expectedResult>
+        <condition type="fieldValue">${templateName}</condition>
+      </expectedResult>
+    </step>
+
+    <step id="6" type="interaction">
+      <action>Confirm save template</action>
+      <target selector="button" text="Save" />
+      <expectedResult>
+        <condition type="loading">Saving template...</condition>
+      </expectedResult>
+    </step>
+
+    <step id="7" type="verification">
+      <action>Verify API call to save template</action>
+      <target type="network">POST /api/saved-calls</target>
+      <expectedResult>
+        <condition type="requestBody">name: Appointment Reminder</condition>
+        <condition type="requestBody">message: contains appointment</condition>
+        <condition type="apiResponse">200 or 201</condition>
+      </expectedResult>
+    </step>
+
+    <step id="8" type="verification">
+      <action>Verify success feedback</action>
+      <expectedResult>
+        <condition type="successToast">Template saved</condition>
+        <condition type="modalClosed">true</condition>
+      </expectedResult>
+    </step>
+
+    <step id="9" type="navigation">
+      <action>Navigate to Agenda page</action>
+      <url>${baseUrl}/dashboard/agenda</url>
+      <expectedResult>
+        <condition type="pageLoaded">true</condition>
+      </expectedResult>
+    </step>
+
+    <step id="10" type="verification">
+      <action>Verify template appears in agenda</action>
+      <expectedResult>
+        <condition type="textPresent">${templateName}</condition>
+        <condition type="elementVisible">Template card or list item</condition>
+        <condition type="templateActions">Edit, Delete, Use buttons</condition>
+      </expectedResult>
+    </step>
+  </steps>
+
+  <teardown>
+    <step>
+      <action>Delete test template</action>
+      <target type="api">DELETE /api/saved-calls/{templateId}</target>
+    </step>
+  </teardown>
+
+  <notes>
+    <note>Templates save message and optionally phone number</note>
+    <note>Templates can be reused for quick calls</note>
+    <note>Useful for recurring call types</note>
+  </notes>
+</testFlow>

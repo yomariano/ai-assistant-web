@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testFlow id="notification_preferences_update_flow" version="1.0">
+  <metadata>
+    <name>Notification Preferences Update Flow</name>
+    <description>Tests enabling and configuring email and SMS notifications</description>
+    <priority>high</priority>
+    <estimatedDuration>2m</estimatedDuration>
+    <tags>
+      <tag>notifications</tag>
+      <tag>email</tag>
+      <tag>sms</tag>
+      <tag>preferences</tag>
+    </tags>
+  </metadata>
+
+  <prerequisites>
+    <prerequisite>User authenticated with active subscription</prerequisite>
+  </prerequisites>
+
+  <testData>
+    <variable name="baseUrl" value="https://voicefleet.ai" />
+    <variable name="testEmail" value="notifications@test.voicefleet.ai" />
+    <variable name="testPhone" value="+353871234567" />
+  </testData>
+
+  <steps>
+    <step id="1" type="navigation">
+      <action>Navigate to notifications settings</action>
+      <url>${baseUrl}/dashboard/notifications</url>
+      <expectedResult>
+        <condition type="pageLoaded">true</condition>
+        <condition type="elementVisible">Notification preferences</condition>
+      </expectedResult>
+    </step>
+
+    <step id="2" type="verification">
+      <action>Verify email notification section</action>
+      <expectedResult>
+        <condition type="elementVisible">Email Notifications section</condition>
+        <condition type="elementVisible">Email toggle/checkbox</condition>
+        <condition type="elementVisible">Email address input</condition>
+      </expectedResult>
+    </step>
+
+    <step id="3" type="interaction">
+      <action>Enable email notifications</action>
+      <target selector="input[name='emailEnabled']" type="checkbox" />
+      <expectedResult>
+        <condition type="checked">true</condition>
+        <condition type="emailFieldEnabled">true</condition>
+      </expectedResult>
+    </step>
+
+    <step id="4" type="interaction">
+      <action>Enter notification email address</action>
+      <target selector="input[name='notificationEmail']" />
+      <testData>
+        <field name="email" value="${testEmail}" />
+      </testData>
+      <expectedResult>
+        <condition type="fieldValue">${testEmail}</condition>
+        <condition type="validationPassed">true</condition>
+      </expectedResult>
+    </step>
+
+    <step id="5" type="verification">
+      <action>Verify SMS notification section</action>
+      <expectedResult>
+        <condition type="elementVisible">SMS Notifications section</condition>
+        <condition type="elementVisible">SMS toggle/checkbox</condition>
+        <condition type="elementVisible">Phone number input</condition>
+      </expectedResult>
+    </step>
+
+    <step id="6" type="interaction">
+      <action>Enable SMS notifications</action>
+      <target selector="input[name='smsEnabled']" type="checkbox" />
+      <expectedResult>
+        <condition type="checked">true</condition>
+        <condition type="phoneFieldEnabled">true</condition>
+      </expectedResult>
+    </step>
+
+    <step id="7" type="interaction">
+      <action>Enter notification phone number</action>
+      <target selector="input[name='notificationPhone']" />
+      <testData>
+        <field name="phone" value="${testPhone}" />
+      </testData>
+      <expectedResult>
+        <condition type="fieldValue">${testPhone}</condition>
+      </expectedResult>
+    </step>
+
+    <step id="8" type="interaction">
+      <action>Save notification preferences</action>
+      <target selector="button" text="Save Preferences" />
+      <expectedResult>
+        <condition type="loading">Saving...</condition>
+        <condition type="successToast">Preferences saved</condition>
+      </expectedResult>
+    </step>
+
+    <step id="9" type="verification">
+      <action>Verify API call to save preferences</action>
+      <target type="network">PUT /api/notifications/preferences</target>
+      <expectedResult>
+        <condition type="requestBody">emailEnabled: true</condition>
+        <condition type="requestBody">smsEnabled: true</condition>
+        <condition type="requestBody">email: ${testEmail}</condition>
+        <condition type="apiResponse">200 OK</condition>
+      </expectedResult>
+    </step>
+
+    <step id="10" type="verification">
+      <action>Verify preferences persist after refresh</action>
+      <interaction>Refresh page</interaction>
+      <expectedResult>
+        <condition type="emailEnabled">true</condition>
+        <condition type="smsEnabled">true</condition>
+        <condition type="emailValue">${testEmail}</condition>
+        <condition type="phoneValue">${testPhone}</condition>
+      </expectedResult>
+    </step>
+  </steps>
+
+  <teardown>
+    <step>
+      <action>Reset to default preferences (optional)</action>
+      <target type="api">PUT /api/notifications/preferences</target>
+    </step>
+  </teardown>
+
+  <notes>
+    <note>Email notifications sent for call events</note>
+    <note>SMS notifications may incur additional charges</note>
+    <note>Valid email and phone formats required</note>
+  </notes>
+</testFlow>

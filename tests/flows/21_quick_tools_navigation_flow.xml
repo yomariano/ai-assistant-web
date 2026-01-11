@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testFlow id="quick_tools_navigation_flow" version="1.0">
+  <metadata>
+    <name>Quick Tools Navigation Flow</name>
+    <description>Tests the quick tools/shortcuts on the dashboard for fast access to features</description>
+    <priority>medium</priority>
+    <estimatedDuration>2m</estimatedDuration>
+    <tags>
+      <tag>dashboard</tag>
+      <tag>navigation</tag>
+      <tag>quick-tools</tag>
+      <tag>shortcuts</tag>
+    </tags>
+  </metadata>
+
+  <prerequisites>
+    <prerequisite>User authenticated</prerequisite>
+    <prerequisite>On dashboard page</prerequisite>
+  </prerequisites>
+
+  <testData>
+    <variable name="baseUrl" value="https://voicefleet.ai" />
+  </testData>
+
+  <steps>
+    <step id="1" type="navigation">
+      <action>Navigate to dashboard</action>
+      <url>${baseUrl}/dashboard</url>
+      <expectedResult>
+        <condition type="pageLoaded">true</condition>
+      </expectedResult>
+    </step>
+
+    <step id="2" type="verification">
+      <action>Verify Quick Tools section exists</action>
+      <expectedResult>
+        <condition type="elementVisible">Quick Tools heading or section</condition>
+        <condition type="elementCount" min="3">Quick tool buttons/cards</condition>
+      </expectedResult>
+    </step>
+
+    <step id="3" type="verification">
+      <action>Verify AI Assistant quick tool</action>
+      <target selector="[data-tool='assistant']" />
+      <expectedResult>
+        <condition type="elementVisible">AI Assistant tool</condition>
+        <condition type="iconVisible">Bot or assistant icon</condition>
+        <condition type="elementClickable">true</condition>
+      </expectedResult>
+    </step>
+
+    <step id="4" type="interaction">
+      <action>Click AI Assistant quick tool</action>
+      <target selector="[data-tool='assistant']" />
+      <expectedResult>
+        <condition type="redirectTo">/dashboard/assistant</condition>
+      </expectedResult>
+    </step>
+
+    <step id="5" type="navigation">
+      <action>Return to dashboard</action>
+      <url>${baseUrl}/dashboard</url>
+      <expectedResult>
+        <condition type="pageLoaded">true</condition>
+      </expectedResult>
+    </step>
+
+    <step id="6" type="verification">
+      <action>Verify Messages quick tool</action>
+      <target selector="[data-tool='messages']" />
+      <expectedResult>
+        <condition type="elementVisible">Messages tool</condition>
+        <condition type="iconVisible">Message icon</condition>
+      </expectedResult>
+    </step>
+
+    <step id="7" type="interaction">
+      <action>Click Messages quick tool</action>
+      <target selector="[data-tool='messages']" />
+      <expectedResult>
+        <condition type="redirectTo">/dashboard/history</condition>
+      </expectedResult>
+    </step>
+
+    <step id="8" type="navigation">
+      <action>Return to dashboard</action>
+      <url>${baseUrl}/dashboard</url>
+      <expectedResult>
+        <condition type="pageLoaded">true</condition>
+      </expectedResult>
+    </step>
+
+    <step id="9" type="verification">
+      <action>Verify Notifications quick tool</action>
+      <target selector="[data-tool='notifications']" />
+      <expectedResult>
+        <condition type="elementVisible">Notifications tool</condition>
+        <condition type="iconVisible">Bell icon</condition>
+      </expectedResult>
+    </step>
+
+    <step id="10" type="interaction">
+      <action>Click Notifications quick tool</action>
+      <target selector="[data-tool='notifications']" />
+      <expectedResult>
+        <condition type="redirectTo">/dashboard/notifications</condition>
+      </expectedResult>
+    </step>
+  </steps>
+
+  <teardown>
+    <step>
+      <action>No cleanup needed</action>
+    </step>
+  </teardown>
+
+  <notes>
+    <note>Quick tools provide shortcuts to common actions</note>
+    <note>Should have hover states for interactivity feedback</note>
+    <note>Icons should be consistent with sidebar navigation</note>
+  </notes>
+</testFlow>

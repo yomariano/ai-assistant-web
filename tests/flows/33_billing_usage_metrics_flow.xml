@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testFlow id="billing_usage_metrics_flow" version="1.0">
+  <metadata>
+    <name>Billing Usage Metrics Flow</name>
+    <description>Tests that usage metrics (calls, minutes, charges) are displayed correctly</description>
+    <priority>high</priority>
+    <estimatedDuration>2m</estimatedDuration>
+    <tags>
+      <tag>billing</tag>
+      <tag>usage</tag>
+      <tag>metrics</tag>
+      <tag>charges</tag>
+    </tags>
+  </metadata>
+
+  <prerequisites>
+    <prerequisite>User authenticated with active subscription</prerequisite>
+    <prerequisite>User has some call history for current period</prerequisite>
+  </prerequisites>
+
+  <testData>
+    <variable name="baseUrl" value="https://voicefleet.ai" />
+  </testData>
+
+  <steps>
+    <step id="1" type="navigation">
+      <action>Navigate to billing page</action>
+      <url>${baseUrl}/dashboard/billing</url>
+      <expectedResult>
+        <condition type="pageLoaded">true</condition>
+      </expectedResult>
+    </step>
+
+    <step id="2" type="verification">
+      <action>Verify usage section exists</action>
+      <expectedResult>
+        <condition type="elementVisible">Current Period Usage section</condition>
+        <condition type="elementVisible">Usage metrics</condition>
+      </expectedResult>
+    </step>
+
+    <step id="3" type="verification">
+      <action>Verify calls made count</action>
+      <expectedResult>
+        <condition type="elementVisible">Calls this period</condition>
+        <condition type="numberDisplayed">Integer value >= 0</condition>
+        <condition type="labelPresent">calls</condition>
+      </expectedResult>
+    </step>
+
+    <step id="4" type="verification">
+      <action>Verify minutes used</action>
+      <expectedResult>
+        <condition type="elementVisible">Minutes used</condition>
+        <condition type="numberDisplayed">Integer or decimal >= 0</condition>
+        <condition type="labelPresent">minutes</condition>
+      </expectedResult>
+    </step>
+
+    <step id="5" type="verification">
+      <action>Verify per-call charges</action>
+      <expectedResult>
+        <condition type="elementVisible">Per-call charges</condition>
+        <condition type="currencyFormat">EUR X.XX</condition>
+        <condition type="calculatedCorrectly">calls * per-call rate</condition>
+      </expectedResult>
+    </step>
+
+    <step id="6" type="verification">
+      <action>Verify total charges for period</action>
+      <expectedResult>
+        <condition type="elementVisible">Total charges</condition>
+        <condition type="currencyFormat">EUR X.XX</condition>
+        <condition type="textPresent">This period</condition>
+      </expectedResult>
+    </step>
+
+    <step id="7" type="verification">
+      <action>Verify billing period dates</action>
+      <expectedResult>
+        <condition type="elementVisible">Billing period</condition>
+        <condition type="dateRange">Start date - End date</condition>
+      </expectedResult>
+    </step>
+
+    <step id="8" type="verification">
+      <action>Verify API call for usage data</action>
+      <target type="network">GET /api/billing/usage</target>
+      <expectedResult>
+        <condition type="apiResponse">200 OK</condition>
+        <condition type="responseContains">callsCount</condition>
+        <condition type="responseContains">minutesUsed</condition>
+        <condition type="responseContains">totalCharges</condition>
+      </expectedResult>
+    </step>
+
+    <step id="9" type="verification">
+      <action>Verify usage for new user (zero state)</action>
+      <condition>If no calls made</condition>
+      <expectedResult>
+        <condition type="zeroState">0 calls, 0 minutes, EUR 0.00 charges</condition>
+        <condition type="noErrorMessages">true</condition>
+      </expectedResult>
+    </step>
+
+    <step id="10" type="verification">
+      <action>Verify Pro plan shows unlimited calls note</action>
+      <condition>If on Pro plan</condition>
+      <expectedResult>
+        <condition type="textPresent">Unlimited calls included</condition>
+        <condition type="noPerCallCharges">true (unless over fair use)</condition>
+      </expectedResult>
+    </step>
+  </steps>
+
+  <teardown>
+    <step>
+      <action>No cleanup needed</action>
+    </step>
+  </teardown>
+
+  <notes>
+    <note>Usage resets each billing period</note>
+    <note>Per-call charges: Lite EUR 0.95, Growth EUR 0.45</note>
+    <note>Pro plan has 1,500 call fair use limit</note>
+  </notes>
+</testFlow>

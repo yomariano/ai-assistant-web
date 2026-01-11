@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testFlow id="checkout_declined_card_flow" version="1.0">
+  <metadata>
+    <name>Checkout Declined Card Flow</name>
+    <description>Tests error handling when payment is declined during checkout</description>
+    <priority>high</priority>
+    <estimatedDuration>3m</estimatedDuration>
+    <tags>
+      <tag>checkout</tag>
+      <tag>stripe</tag>
+      <tag>error-handling</tag>
+      <tag>declined</tag>
+    </tags>
+  </metadata>
+
+  <prerequisites>
+    <prerequisite>Stripe test mode enabled</prerequisite>
+    <prerequisite>User authenticated</prerequisite>
+  </prerequisites>
+
+  <testData>
+    <variable name="baseUrl" value="https://voicefleet.ai" />
+    <variable name="declinedCard" value="4000000000000002" />
+    <variable name="insufficientFundsCard" value="4000000000009995" />
+    <variable name="expiredCard" value="4000000000000069" />
+    <variable name="incorrectCvcCard" value="4000000000000127" />
+    <variable name="testExpiry" value="12/34" />
+    <variable name="testCvc" value="123" />
+  </testData>
+
+  <steps>
+    <step id="1" type="navigation">
+      <action>Navigate to pricing and select a plan</action>
+      <url>${baseUrl}/#pricing</url>
+      <interaction>Click Get Started on any plan</interaction>
+      <expectedResult>
+        <condition type="redirectTo">Stripe checkout</condition>
+      </expectedResult>
+    </step>
+
+    <step id="2" type="interaction">
+      <action>Enter generic declined card</action>
+      <testData>
+        <field name="cardNumber" value="${declinedCard}" />
+        <field name="expiry" value="${testExpiry}" />
+        <field name="cvc" value="${testCvc}" />
+      </testData>
+      <expectedResult>
+        <condition type="fieldsValid">true</condition>
+      </expectedResult>
+    </step>
+
+    <step id="3" type="interaction">
+      <action>Submit payment with declined card</action>
+      <target selector="button" text="Pay" />
+      <expectedResult>
+        <condition type="loading">Payment processing</condition>
+      </expectedResult>
+    </step>
+
+    <step id="4" type="verification">
+      <action>Verify decline error message displayed</action>
+      <expectedResult>
+        <condition type="errorMessage">Your card was declined</condition>
+        <condition type="noRedirect">/dashboard</condition>
+        <condition type="remainOnPage">Stripe checkout</condition>
+      </expectedResult>
+    </step>
+
+    <step id="5" type="interaction">
+      <action>Try insufficient funds card</action>
+      <testData>
+        <field name="cardNumber" value="${insufficientFundsCard}" />
+        <field name="expiry" value="${testExpiry}" />
+        <field name="cvc" value="${testCvc}" />
+      </testData>
+      <target selector="button" text="Pay" />
+      <expectedResult>
+        <condition type="errorMessage">Insufficient funds</condition>
+      </expectedResult>
+    </step>
+
+    <step id="6" type="interaction">
+      <action>Try expired card</action>
+      <testData>
+        <field name="cardNumber" value="${expiredCard}" />
+        <field name="expiry" value="${testExpiry}" />
+        <field name="cvc" value="${testCvc}" />
+      </testData>
+      <target selector="button" text="Pay" />
+      <expectedResult>
+        <condition type="errorMessage">Card expired</condition>
+      </expectedResult>
+    </step>
+
+    <step id="7" type="interaction">
+      <action>Try incorrect CVC card</action>
+      <testData>
+        <field name="cardNumber" value="${incorrectCvcCard}" />
+        <field name="expiry" value="${testExpiry}" />
+        <field name="cvc" value="${testCvc}" />
+      </testData>
+      <target selector="button" text="Pay" />
+      <expectedResult>
+        <condition type="errorMessage">Incorrect CVC</condition>
+      </expectedResult>
+    </step>
+
+    <step id="8" type="verification">
+      <action>Verify user can retry with valid card</action>
+      <testData>
+        <field name="cardNumber" value="4242424242424242" />
+        <field name="expiry" value="${testExpiry}" />
+        <field name="cvc" value="${testCvc}" />
+      </testData>
+      <target selector="button" text="Pay" />
+      <expectedResult>
+        <condition type="paymentSuccess">true</condition>
+        <condition type="redirectTo">/dashboard</condition>
+      </expectedResult>
+    </step>
+  </steps>
+
+  <teardown>
+    <step>
+      <action>Cancel any created subscription</action>
+      <target type="api">POST /api/billing/test/cancel-subscription</target>
+    </step>
+  </teardown>
+
+  <notes>
+    <note>Stripe test declined cards: https://docs.stripe.com/testing</note>
+    <note>4000000000000002 - Generic decline</note>
+    <note>4000000000009995 - Insufficient funds</note>
+    <note>4000000000000069 - Expired card</note>
+    <note>4000000000000127 - Incorrect CVC</note>
+  </notes>
+</testFlow>

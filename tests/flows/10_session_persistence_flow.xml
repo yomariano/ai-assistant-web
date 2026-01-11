@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testFlow id="session_persistence_flow" version="1.0">
+  <metadata>
+    <name>Session Persistence Flow</name>
+    <description>Tests that user session persists across browser refresh and tab reopening</description>
+    <priority>high</priority>
+    <estimatedDuration>2m</estimatedDuration>
+    <tags>
+      <tag>authentication</tag>
+      <tag>session</tag>
+      <tag>persistence</tag>
+      <tag>zustand</tag>
+    </tags>
+  </metadata>
+
+  <prerequisites>
+    <prerequisite>User has active account</prerequisite>
+    <prerequisite>Zustand persist middleware configured</prerequisite>
+  </prerequisites>
+
+  <testData>
+    <variable name="testEmail" value="test.session@voicefleet.ai" />
+    <variable name="baseUrl" value="https://voicefleet.ai" />
+  </testData>
+
+  <steps>
+    <step id="1" type="setup">
+      <action>Login to establish session</action>
+      <url>${baseUrl}/login</url>
+      <interaction>Complete dev login or OAuth</interaction>
+      <expectedResult>
+        <condition type="redirectTo">/dashboard</condition>
+        <condition type="authenticated">true</condition>
+      </expectedResult>
+    </step>
+
+    <step id="2" type="verification">
+      <action>Verify initial session state</action>
+      <expectedResult>
+        <condition type="localStorageKey">auth-storage</condition>
+        <condition type="localStorageContains">token</condition>
+        <condition type="localStorageContains">user</condition>
+        <condition type="elementVisible">User name in navbar</condition>
+      </expectedResult>
+    </step>
+
+    <step id="3" type="interaction">
+      <action>Refresh the page</action>
+      <target type="browser">location.reload()</target>
+      <expectedResult>
+        <condition type="pageLoaded">true</condition>
+      </expectedResult>
+    </step>
+
+    <step id="4" type="verification">
+      <action>Verify session persists after refresh</action>
+      <expectedResult>
+        <condition type="currentUrl">/dashboard</condition>
+        <condition type="authenticated">true</condition>
+        <condition type="elementVisible">Dashboard content</condition>
+        <condition type="noRedirect">/login</condition>
+      </expectedResult>
+    </step>
+
+    <step id="5" type="interaction">
+      <action>Navigate to different protected route</action>
+      <url>${baseUrl}/dashboard/assistant</url>
+      <expectedResult>
+        <condition type="pageLoaded">true</condition>
+        <condition type="authenticated">true</condition>
+      </expectedResult>
+    </step>
+
+    <step id="6" type="interaction">
+      <action>Use browser back button</action>
+      <target type="browser">history.back()</target>
+      <expectedResult>
+        <condition type="authenticated">true</condition>
+        <condition type="currentUrl">/dashboard</condition>
+      </expectedResult>
+    </step>
+
+    <step id="7" type="interaction">
+      <action>Close and reopen tab (simulate)</action>
+      <target type="browser">Close tab, open new tab to ${baseUrl}/dashboard</target>
+      <expectedResult>
+        <condition type="authenticated">true</condition>
+        <condition type="elementVisible">Dashboard content</condition>
+      </expectedResult>
+    </step>
+
+    <step id="8" type="verification">
+      <action>Verify API calls include auth token</action>
+      <target type="network">Monitor API requests</target>
+      <expectedResult>
+        <condition type="requestHeader">Authorization: Bearer {token}</condition>
+        <condition type="apiResponse">200 OK</condition>
+      </expectedResult>
+    </step>
+  </steps>
+
+  <teardown>
+    <step>
+      <action>Logout and clear session</action>
+      <target type="browser">localStorage.clear()</target>
+    </step>
+  </teardown>
+
+  <notes>
+    <note>Session persists via Zustand localStorage middleware</note>
+    <note>Token expiration should trigger re-authentication</note>
+    <note>Test in incognito mode for clean state</note>
+  </notes>
+</testFlow>

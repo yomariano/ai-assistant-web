@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testFlow id="schedule_future_call_flow" version="1.0">
+  <metadata>
+    <name>Schedule Future Call Flow</name>
+    <description>Tests scheduling a call for a future date and time</description>
+    <priority>high</priority>
+    <estimatedDuration>3m</estimatedDuration>
+    <tags>
+      <tag>calls</tag>
+      <tag>scheduling</tag>
+      <tag>future</tag>
+      <tag>calendar</tag>
+    </tags>
+  </metadata>
+
+  <prerequisites>
+    <prerequisite>User authenticated with active subscription</prerequisite>
+  </prerequisites>
+
+  <testData>
+    <variable name="baseUrl" value="https://voicefleet.ai" />
+    <variable name="testPhoneNumber" value="+353871234567" />
+    <variable name="testMessage" value="Scheduled reminder call for your appointment" />
+    <variable name="scheduledDate" value="tomorrow" />
+    <variable name="scheduledTime" value="10:00" />
+  </testData>
+
+  <steps>
+    <step id="1" type="navigation">
+      <action>Navigate to Make a Call page</action>
+      <url>${baseUrl}/dashboard/call</url>
+      <expectedResult>
+        <condition type="pageLoaded">true</condition>
+      </expectedResult>
+    </step>
+
+    <step id="2" type="interaction">
+      <action>Fill in call details</action>
+      <testData>
+        <field name="phoneNumber" value="${testPhoneNumber}" />
+        <field name="message" value="${testMessage}" />
+      </testData>
+      <expectedResult>
+        <condition type="fieldsFilled">true</condition>
+      </expectedResult>
+    </step>
+
+    <step id="3" type="verification">
+      <action>Verify Schedule for Later option exists</action>
+      <expectedResult>
+        <condition type="elementVisible">Schedule for Later button or toggle</condition>
+      </expectedResult>
+    </step>
+
+    <step id="4" type="interaction">
+      <action>Click Schedule for Later</action>
+      <target selector="button" text="Schedule for Later" />
+      <expectedResult>
+        <condition type="modalVisible">Schedule dialog</condition>
+        <condition type="elementVisible">Date picker</condition>
+        <condition type="elementVisible">Time picker</condition>
+      </expectedResult>
+    </step>
+
+    <step id="5" type="interaction">
+      <action>Select date (tomorrow)</action>
+      <target selector="input[type='date']" />
+      <testData>
+        <field name="date" value="${scheduledDate}" />
+      </testData>
+      <expectedResult>
+        <condition type="dateSelected">Tomorrow's date</condition>
+        <condition type="pastDatesDisabled">true</condition>
+      </expectedResult>
+    </step>
+
+    <step id="6" type="interaction">
+      <action>Select time</action>
+      <target selector="input[type='time']" />
+      <testData>
+        <field name="time" value="${scheduledTime}" />
+      </testData>
+      <expectedResult>
+        <condition type="timeSelected">10:00</condition>
+      </expectedResult>
+    </step>
+
+    <step id="7" type="verification">
+      <action>Verify timezone display</action>
+      <expectedResult>
+        <condition type="textPresent">IST or GMT or user timezone</condition>
+        <condition type="timezoneCorrect">true</condition>
+      </expectedResult>
+    </step>
+
+    <step id="8" type="interaction">
+      <action>Confirm schedule</action>
+      <target selector="button" text="Schedule Call" />
+      <expectedResult>
+        <condition type="loading">Scheduling...</condition>
+      </expectedResult>
+    </step>
+
+    <step id="9" type="verification">
+      <action>Verify API call to schedule</action>
+      <target type="network">POST /api/scheduled-calls</target>
+      <expectedResult>
+        <condition type="requestBody">phoneNumber: +353871234567</condition>
+        <condition type="requestBody">scheduledAt: ISO timestamp</condition>
+        <condition type="apiResponse">200 or 201</condition>
+      </expectedResult>
+    </step>
+
+    <step id="10" type="verification">
+      <action>Verify success feedback</action>
+      <expectedResult>
+        <condition type="successToast">Call scheduled</condition>
+        <condition type="modalClosed">true</condition>
+      </expectedResult>
+    </step>
+
+    <step id="11" type="navigation">
+      <action>Navigate to Scheduled Calls page</action>
+      <url>${baseUrl}/dashboard/scheduled</url>
+      <expectedResult>
+        <condition type="pageLoaded">true</condition>
+      </expectedResult>
+    </step>
+
+    <step id="12" type="verification">
+      <action>Verify scheduled call appears in list</action>
+      <expectedResult>
+        <condition type="textPresent">${testPhoneNumber}</condition>
+        <condition type="textPresent">Tomorrow at 10:00</condition>
+        <condition type="statusBadge">Scheduled</condition>
+        <condition type="cancelOption">Available</condition>
+      </expectedResult>
+    </step>
+  </steps>
+
+  <teardown>
+    <step>
+      <action>Cancel test scheduled call</action>
+      <target type="api">DELETE /api/scheduled-calls/{callId}</target>
+    </step>
+  </teardown>
+
+  <notes>
+    <note>Scheduled calls execute at the specified time</note>
+    <note>Users can cancel before execution</note>
+    <note>Timezone handling is important for Irish users</note>
+  </notes>
+</testFlow>

@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testFlow id="make_outbound_call_flow" version="1.0">
+  <metadata>
+    <name>Make Outbound Call Flow</name>
+    <description>Tests initiating an outbound call with a valid phone number and message</description>
+    <priority>critical</priority>
+    <estimatedDuration>3m</estimatedDuration>
+    <tags>
+      <tag>calls</tag>
+      <tag>outbound</tag>
+      <tag>telephony</tag>
+      <tag>core-feature</tag>
+    </tags>
+  </metadata>
+
+  <prerequisites>
+    <prerequisite>User authenticated with active subscription</prerequisite>
+    <prerequisite>At least one phone number assigned</prerequisite>
+    <prerequisite>Assistant configured</prerequisite>
+  </prerequisites>
+
+  <testData>
+    <variable name="baseUrl" value="https://voicefleet.ai" />
+    <variable name="testPhoneNumber" value="+353871234567" />
+    <variable name="testMessage" value="Hi, this is a reminder about your appointment tomorrow at 2pm. Please call us back to confirm." />
+    <variable name="contactName" value="John Murphy" />
+  </testData>
+
+  <steps>
+    <step id="1" type="navigation">
+      <action>Navigate to Make a Call page</action>
+      <url>${baseUrl}/dashboard/call</url>
+      <expectedResult>
+        <condition type="pageLoaded">true</condition>
+        <condition type="elementVisible">Call form</condition>
+      </expectedResult>
+    </step>
+
+    <step id="2" type="verification">
+      <action>Verify call form fields exist</action>
+      <expectedResult>
+        <condition type="elementVisible">Phone number input</condition>
+        <condition type="elementVisible">Message textarea</condition>
+        <condition type="elementVisible">Contact name input (optional)</condition>
+        <condition type="elementVisible">Language selector</condition>
+        <condition type="elementVisible">Make Call button</condition>
+      </expectedResult>
+    </step>
+
+    <step id="3" type="interaction">
+      <action>Enter phone number</action>
+      <target selector="input[name='phoneNumber']" />
+      <testData>
+        <field name="phoneNumber" value="${testPhoneNumber}" />
+      </testData>
+      <expectedResult>
+        <condition type="fieldValue">${testPhoneNumber}</condition>
+        <condition type="validationPassed">true</condition>
+      </expectedResult>
+    </step>
+
+    <step id="4" type="interaction">
+      <action>Enter message/script</action>
+      <target selector="textarea[name='message']" />
+      <testData>
+        <field name="message" value="${testMessage}" />
+      </testData>
+      <expectedResult>
+        <condition type="fieldValue">${testMessage}</condition>
+      </expectedResult>
+    </step>
+
+    <step id="5" type="interaction">
+      <action>Enter contact name (optional)</action>
+      <target selector="input[name='contactName']" />
+      <testData>
+        <field name="contactName" value="${contactName}" />
+      </testData>
+      <expectedResult>
+        <condition type="fieldValue">${contactName}</condition>
+      </expectedResult>
+    </step>
+
+    <step id="6" type="verification">
+      <action>Verify language selector</action>
+      <target selector="select[name='language']" />
+      <expectedResult>
+        <condition type="optionAvailable">English</condition>
+        <condition type="optionAvailable">Irish</condition>
+        <condition type="defaultSelected">English</condition>
+      </expectedResult>
+    </step>
+
+    <step id="7" type="interaction">
+      <action>Click Make Call button</action>
+      <target selector="button" text="Make Call" />
+      <expectedResult>
+        <condition type="loading">Initiating call...</condition>
+        <condition type="buttonDisabled">true during request</condition>
+      </expectedResult>
+    </step>
+
+    <step id="8" type="verification">
+      <action>Verify API call to initiate</action>
+      <target type="network">POST /api/calls</target>
+      <expectedResult>
+        <condition type="requestBody">phoneNumber: +353871234567</condition>
+        <condition type="requestBody">message: contains appointment</condition>
+        <condition type="apiResponse">200 or 201</condition>
+        <condition type="responseContains">callId</condition>
+      </expectedResult>
+    </step>
+
+    <step id="9" type="verification">
+      <action>Verify success feedback</action>
+      <expectedResult>
+        <condition type="successToast">Call initiated</condition>
+        <condition type="formReset">Fields cleared</condition>
+      </expectedResult>
+    </step>
+
+    <step id="10" type="verification">
+      <action>Verify call appears in history</action>
+      <url>${baseUrl}/dashboard/history</url>
+      <expectedResult>
+        <condition type="textPresent">${testPhoneNumber} or ${contactName}</condition>
+        <condition type="statusBadge">initiated or in-progress</condition>
+      </expectedResult>
+    </step>
+  </steps>
+
+  <teardown>
+    <step>
+      <action>No cleanup needed - call is logged</action>
+    </step>
+  </teardown>
+
+  <notes>
+    <note>Outbound calls use the configured AI assistant</note>
+    <note>Call charges apply based on subscription plan</note>
+    <note>Phone number must be valid international format</note>
+  </notes>
+</testFlow>

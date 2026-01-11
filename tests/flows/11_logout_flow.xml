@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testFlow id="logout_flow" version="1.0">
+  <metadata>
+    <name>Logout Flow</name>
+    <description>Tests the complete logout process including session cleanup and redirect</description>
+    <priority>high</priority>
+    <estimatedDuration>2m</estimatedDuration>
+    <tags>
+      <tag>authentication</tag>
+      <tag>logout</tag>
+      <tag>session</tag>
+      <tag>security</tag>
+    </tags>
+  </metadata>
+
+  <prerequisites>
+    <prerequisite>User is currently authenticated</prerequisite>
+    <prerequisite>User is on dashboard or protected route</prerequisite>
+  </prerequisites>
+
+  <testData>
+    <variable name="baseUrl" value="https://voicefleet.ai" />
+  </testData>
+
+  <steps>
+    <step id="1" type="setup">
+      <action>Ensure user is logged in</action>
+      <url>${baseUrl}/dashboard</url>
+      <expectedResult>
+        <condition type="authenticated">true</condition>
+        <condition type="elementVisible">Dashboard content</condition>
+      </expectedResult>
+    </step>
+
+    <step id="2" type="verification">
+      <action>Verify user menu is accessible</action>
+      <expectedResult>
+        <condition type="elementVisible">User avatar or menu</condition>
+        <condition type="elementClickable">User menu trigger</condition>
+      </expectedResult>
+    </step>
+
+    <step id="3" type="interaction">
+      <action>Open user menu</action>
+      <target selector="button" aria-label="User menu" />
+      <expectedResult>
+        <condition type="elementVisible">Logout option</condition>
+        <condition type="menuExpanded">true</condition>
+      </expectedResult>
+    </step>
+
+    <step id="4" type="interaction">
+      <action>Click Logout button</action>
+      <target selector="button" text="Logout" />
+      <expectedResult>
+        <condition type="redirectTo">/ or /login</condition>
+      </expectedResult>
+    </step>
+
+    <step id="5" type="verification">
+      <action>Verify session cleared from localStorage</action>
+      <expectedResult>
+        <condition type="localStorageKey" exists="false">auth-storage.token</condition>
+        <condition type="localStorageKey" exists="false">auth-storage.user</condition>
+      </expectedResult>
+    </step>
+
+    <step id="6" type="verification">
+      <action>Verify redirect to home or login page</action>
+      <expectedResult>
+        <condition type="currentUrl">/ or /login</condition>
+        <condition type="authenticated">false</condition>
+      </expectedResult>
+    </step>
+
+    <step id="7" type="navigation">
+      <action>Attempt to access protected route after logout</action>
+      <url>${baseUrl}/dashboard</url>
+      <expectedResult>
+        <condition type="redirectTo">/login</condition>
+        <condition type="noAccessToDashboard">true</condition>
+      </expectedResult>
+    </step>
+
+    <step id="8" type="verification">
+      <action>Verify Supabase session cleared</action>
+      <target type="api">GET /api/auth/me</target>
+      <expectedResult>
+        <condition type="apiResponse">401 Unauthorized</condition>
+      </expectedResult>
+    </step>
+  </steps>
+
+  <teardown>
+    <step>
+      <action>Ensure clean state</action>
+      <target type="browser">localStorage.clear(); sessionStorage.clear();</target>
+    </step>
+  </teardown>
+
+  <notes>
+    <note>Logout should clear both Zustand store and Supabase session</note>
+    <note>All protected routes should become inaccessible</note>
+    <note>No sensitive data should remain in storage</note>
+  </notes>
+</testFlow>

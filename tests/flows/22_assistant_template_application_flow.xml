@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testFlow id="assistant_template_application_flow" version="1.0">
+  <metadata>
+    <name>Assistant Template Application Flow</name>
+    <description>Tests selecting and applying an industry template to the AI assistant configuration</description>
+    <priority>critical</priority>
+    <estimatedDuration>3m</estimatedDuration>
+    <tags>
+      <tag>assistant</tag>
+      <tag>templates</tag>
+      <tag>configuration</tag>
+      <tag>industry</tag>
+    </tags>
+  </metadata>
+
+  <prerequisites>
+    <prerequisite>User authenticated with active subscription</prerequisite>
+    <prerequisite>At least one phone number assigned</prerequisite>
+  </prerequisites>
+
+  <testData>
+    <variable name="baseUrl" value="https://voicefleet.ai" />
+    <variable name="selectedTemplate" value="Medical &amp; Dental" />
+    <variable name="templateId" value="medical-dental" />
+  </testData>
+
+  <steps>
+    <step id="1" type="navigation">
+      <action>Navigate to AI Assistant page</action>
+      <url>${baseUrl}/dashboard/assistant</url>
+      <expectedResult>
+        <condition type="pageLoaded">true</condition>
+        <condition type="elementVisible">Assistant configuration form</condition>
+      </expectedResult>
+    </step>
+
+    <step id="2" type="verification">
+      <action>Verify template selector is visible</action>
+      <expectedResult>
+        <condition type="elementVisible">Template selection section</condition>
+        <condition type="elementVisible">Choose a template button or dropdown</condition>
+      </expectedResult>
+    </step>
+
+    <step id="3" type="interaction">
+      <action>Open template selector</action>
+      <target selector="button" text="Choose Template" />
+      <expectedResult>
+        <condition type="modalVisible">Template selection modal</condition>
+        <condition type="elementCount" value="6">Template options</condition>
+      </expectedResult>
+    </step>
+
+    <step id="4" type="verification">
+      <action>Verify all 6 templates are available</action>
+      <expectedResult>
+        <condition type="textPresent">General Business</condition>
+        <condition type="textPresent">Medical &amp; Dental</condition>
+        <condition type="textPresent">Legal &amp; Accounting</condition>
+        <condition type="textPresent">Trades &amp; Services</condition>
+        <condition type="textPresent">Hospitality</condition>
+        <condition type="textPresent">Property &amp; Real Estate</condition>
+      </expectedResult>
+    </step>
+
+    <step id="5" type="interaction">
+      <action>Select Medical &amp; Dental template</action>
+      <target selector="[data-template='medical-dental']" />
+      <expectedResult>
+        <condition type="templateSelected">medical-dental</condition>
+        <condition type="previewVisible">Template preview</condition>
+      </expectedResult>
+    </step>
+
+    <step id="6" type="verification">
+      <action>Verify template preview shows key guidelines</action>
+      <expectedResult>
+        <condition type="textPresent">Never provide medical advice</condition>
+        <condition type="textPresent">Direct emergencies to 999/112</condition>
+        <condition type="textPresent">Maintain patient confidentiality</condition>
+      </expectedResult>
+    </step>
+
+    <step id="7" type="interaction">
+      <action>Apply the selected template</action>
+      <target selector="button" text="Apply Template" />
+      <expectedResult>
+        <condition type="modalClosed">true</condition>
+        <condition type="fieldsPopulated">true</condition>
+      </expectedResult>
+    </step>
+
+    <step id="8" type="verification">
+      <action>Verify system prompt populated with template content</action>
+      <target selector="textarea[name='systemPrompt']" />
+      <expectedResult>
+        <condition type="textContains">professional and empathetic AI receptionist</condition>
+        <condition type="textContains">medical practice</condition>
+        <condition type="placeholdersPresent">{business_name}</condition>
+      </expectedResult>
+    </step>
+
+    <step id="9" type="verification">
+      <action>Verify first message/greeting populated</action>
+      <target selector="textarea[name='firstMessage']" />
+      <expectedResult>
+        <condition type="textContains">thank you for calling</condition>
+        <condition type="placeholdersPresent">{business_name}</condition>
+      </expectedResult>
+    </step>
+
+    <step id="10" type="verification">
+      <action>Verify suggested assistant name</action>
+      <expectedResult>
+        <condition type="fieldValue" name="greetingName">Sarah or suggested name</condition>
+      </expectedResult>
+    </step>
+  </steps>
+
+  <teardown>
+    <step>
+      <action>Reset to default template (optional)</action>
+      <target type="api">PATCH /api/assistant</target>
+    </step>
+  </teardown>
+
+  <notes>
+    <note>Templates include industry-specific prompts and guidelines</note>
+    <note>Placeholders like {business_name} should be replaced by user</note>
+    <note>Template application should preserve any custom phone numbers</note>
+  </notes>
+</testFlow>

@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testFlow id="starter_plan_checkout_flow" version="1.0">
+  <metadata>
+    <name>Starter Plan Checkout Flow</name>
+    <description>Tests the complete checkout flow for the Lite/Starter plan at EUR 19/month</description>
+    <priority>critical</priority>
+    <estimatedDuration>4m</estimatedDuration>
+    <tags>
+      <tag>checkout</tag>
+      <tag>stripe</tag>
+      <tag>starter-plan</tag>
+      <tag>eur</tag>
+    </tags>
+  </metadata>
+
+  <prerequisites>
+    <prerequisite>Stripe test mode enabled</prerequisite>
+    <prerequisite>Payment links configured in environment</prerequisite>
+  </prerequisites>
+
+  <testData>
+    <variable name="baseUrl" value="https://voicefleet.ai" />
+    <variable name="planName" value="Lite" />
+    <variable name="planPrice" value="19" />
+    <variable name="perCallRate" value="0.95" />
+    <variable name="testCard" value="4242424242424242" />
+    <variable name="testExpiry" value="12/34" />
+    <variable name="testCvc" value="123" />
+  </testData>
+
+  <steps>
+    <step id="1" type="navigation">
+      <action>Navigate to landing page</action>
+      <url>${baseUrl}</url>
+      <expectedResult>
+        <condition type="pageLoaded">true</condition>
+      </expectedResult>
+    </step>
+
+    <step id="2" type="navigation">
+      <action>Scroll to pricing section</action>
+      <target selector="#pricing" />
+      <expectedResult>
+        <condition type="elementVisible">Pricing cards</condition>
+        <condition type="elementVisible">Lite plan card</condition>
+      </expectedResult>
+    </step>
+
+    <step id="3" type="verification">
+      <action>Verify Lite plan details</action>
+      <expectedResult>
+        <condition type="textPresent">Lite</condition>
+        <condition type="textPresent">EUR 19/month</condition>
+        <condition type="textPresent">+ EUR 0.95 per call</condition>
+        <condition type="textPresent">1 phone number</condition>
+        <condition type="textPresent">Pay per call</condition>
+      </expectedResult>
+    </step>
+
+    <step id="4" type="interaction">
+      <action>Click Get Started on Lite plan</action>
+      <target selector="button" text="Get Started" plan="starter" />
+      <expectedResult>
+        <condition type="navigation">To login or Stripe checkout</condition>
+      </expectedResult>
+    </step>
+
+    <step id="5" type="conditional">
+      <action>Complete login if required</action>
+      <condition>If redirected to /login</condition>
+      <interaction>
+        <step>Complete dev login or OAuth</step>
+        <step>Wait for redirect to Stripe</step>
+      </interaction>
+      <expectedResult>
+        <condition type="redirectTo">Stripe checkout</condition>
+      </expectedResult>
+    </step>
+
+    <step id="6" type="verification">
+      <action>Verify Stripe checkout page</action>
+      <expectedResult>
+        <condition type="urlContains">checkout.stripe.com</condition>
+        <condition type="textPresent">EUR 19.00</condition>
+        <condition type="textPresent">VoiceFleet</condition>
+        <condition type="elementVisible">Card input fields</condition>
+      </expectedResult>
+    </step>
+
+    <step id="7" type="interaction">
+      <action>Enter test card details</action>
+      <testData>
+        <field name="cardNumber" value="${testCard}" />
+        <field name="expiry" value="${testExpiry}" />
+        <field name="cvc" value="${testCvc}" />
+        <field name="name" value="Test User" />
+        <field name="email" value="test@voicefleet.ai" />
+      </testData>
+      <expectedResult>
+        <condition type="fieldsValid">true</condition>
+      </expectedResult>
+    </step>
+
+    <step id="8" type="interaction">
+      <action>Submit payment</action>
+      <target selector="button" text="Pay" />
+      <expectedResult>
+        <condition type="loading">Payment processing</condition>
+      </expectedResult>
+    </step>
+
+    <step id="9" type="verification">
+      <action>Verify payment success and redirect</action>
+      <expectedResult>
+        <condition type="redirectTo">/dashboard</condition>
+        <condition type="paymentStatus">succeeded</condition>
+      </expectedResult>
+    </step>
+
+    <step id="10" type="verification">
+      <action>Verify subscription activated</action>
+      <url>${baseUrl}/dashboard/billing</url>
+      <expectedResult>
+        <condition type="textPresent">Lite</condition>
+        <condition type="textPresent">Active</condition>
+        <condition type="textPresent">EUR 19/mo</condition>
+      </expectedResult>
+    </step>
+  </steps>
+
+  <teardown>
+    <step>
+      <action>Cancel test subscription in Stripe</action>
+      <target type="api">POST /api/billing/test/cancel-subscription</target>
+    </step>
+  </teardown>
+
+  <notes>
+    <note>Use Stripe test card 4242424242424242</note>
+    <note>Test mode uses test payment links</note>
+    <note>Webhook triggers subscription activation</note>
+  </notes>
+</testFlow>

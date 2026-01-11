@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testFlow id="billing_subscription_display_flow" version="1.0">
+  <metadata>
+    <name>Billing Subscription Display Flow</name>
+    <description>Tests that current subscription details are displayed correctly on the billing page</description>
+    <priority>critical</priority>
+    <estimatedDuration>2m</estimatedDuration>
+    <tags>
+      <tag>billing</tag>
+      <tag>subscription</tag>
+      <tag>display</tag>
+      <tag>plan</tag>
+    </tags>
+  </metadata>
+
+  <prerequisites>
+    <prerequisite>User authenticated with active subscription</prerequisite>
+  </prerequisites>
+
+  <testData>
+    <variable name="baseUrl" value="https://voicefleet.ai" />
+  </testData>
+
+  <steps>
+    <step id="1" type="navigation">
+      <action>Navigate to billing page</action>
+      <url>${baseUrl}/dashboard/billing</url>
+      <expectedResult>
+        <condition type="pageLoaded">true</condition>
+        <condition type="elementVisible">Billing content</condition>
+      </expectedResult>
+    </step>
+
+    <step id="2" type="verification">
+      <action>Verify subscription section exists</action>
+      <expectedResult>
+        <condition type="elementVisible">Current Plan section</condition>
+        <condition type="elementVisible">Plan name</condition>
+        <condition type="elementVisible">Plan status</condition>
+      </expectedResult>
+    </step>
+
+    <step id="3" type="verification">
+      <action>Verify plan name displayed</action>
+      <expectedResult>
+        <condition type="textPresent">Lite OR Growth OR Pro</condition>
+        <condition type="planNameStyled">Prominent display</condition>
+      </expectedResult>
+    </step>
+
+    <step id="4" type="verification">
+      <action>Verify subscription status</action>
+      <expectedResult>
+        <condition type="statusBadge">Active (green)</condition>
+        <condition type="textPresent">Active</condition>
+      </expectedResult>
+    </step>
+
+    <step id="5" type="verification">
+      <action>Verify monthly price displayed</action>
+      <expectedResult>
+        <condition type="textPattern">EUR (19|99|249)/mo</condition>
+        <condition type="currencySymbol">EUR </condition>
+      </expectedResult>
+    </step>
+
+    <step id="6" type="verification">
+      <action>Verify per-call rate displayed</action>
+      <expectedResult>
+        <condition type="textPattern">EUR (0.95|0.45)/call OR Unlimited</condition>
+      </expectedResult>
+    </step>
+
+    <step id="7" type="verification">
+      <action>Verify renewal date displayed</action>
+      <expectedResult>
+        <condition type="elementVisible">Next renewal date</condition>
+        <condition type="dateFormat">DD MMM YYYY or similar</condition>
+        <condition type="futureDate">true</condition>
+      </expectedResult>
+    </step>
+
+    <step id="8" type="verification">
+      <action>Verify phone numbers count</action>
+      <expectedResult>
+        <condition type="textPresent">X phone number(s)</condition>
+        <condition type="numberDisplayed">1, 2, or 5 based on plan</condition>
+      </expectedResult>
+    </step>
+
+    <step id="9" type="verification">
+      <action>Verify API call for subscription data</action>
+      <target type="network">GET /api/billing/subscription</target>
+      <expectedResult>
+        <condition type="apiResponse">200 OK</condition>
+        <condition type="responseContains">planId</condition>
+        <condition type="responseContains">status</condition>
+        <condition type="responseContains">currentPeriodEnd</condition>
+      </expectedResult>
+    </step>
+
+    <step id="10" type="verification">
+      <action>Verify Manage Subscription button</action>
+      <expectedResult>
+        <condition type="elementVisible">Manage Subscription button</condition>
+        <condition type="buttonEnabled">true</condition>
+      </expectedResult>
+    </step>
+  </steps>
+
+  <teardown>
+    <step>
+      <action>No cleanup needed</action>
+    </step>
+  </teardown>
+
+  <notes>
+    <note>Subscription data comes from Stripe via backend</note>
+    <note>Status can be active, past_due, canceled, trialing</note>
+    <note>Plan tiers: Lite (EUR 19), Growth (EUR 99), Pro (EUR 249)</note>
+  </notes>
+</testFlow>

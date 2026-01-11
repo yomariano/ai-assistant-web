@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testFlow id="dev_mode_login_flow" version="1.0">
+  <metadata>
+    <name>Dev Mode Login Flow</name>
+    <description>Tests the localhost development login bypass for CI/CD and testing</description>
+    <priority>medium</priority>
+    <estimatedDuration>1m</estimatedDuration>
+    <tags>
+      <tag>authentication</tag>
+      <tag>dev-mode</tag>
+      <tag>localhost</tag>
+      <tag>testing</tag>
+    </tags>
+  </metadata>
+
+  <prerequisites>
+    <prerequisite>Running on localhost (127.0.0.1 or localhost)</prerequisite>
+    <prerequisite>DEV_MODE enabled in backend</prerequisite>
+  </prerequisites>
+
+  <testData>
+    <variable name="baseUrl" value="http://localhost:3001" />
+    <variable name="devUserId" value="dev-user-id" />
+  </testData>
+
+  <steps>
+    <step id="1" type="navigation">
+      <action>Navigate to login page on localhost</action>
+      <url>${baseUrl}/login</url>
+      <expectedResult>
+        <condition type="pageLoaded">true</condition>
+        <condition type="elementVisible">Sign in with Google button</condition>
+      </expectedResult>
+    </step>
+
+    <step id="2" type="verification">
+      <action>Verify dev login button appears on localhost</action>
+      <expectedResult>
+        <condition type="elementVisible">Localhost Only divider</condition>
+        <condition type="elementVisible">Dev Login (Bypass Auth) button</condition>
+        <condition type="buttonEnabled">Dev Login button</condition>
+      </expectedResult>
+    </step>
+
+    <step id="3" type="interaction">
+      <action>Click Dev Login button</action>
+      <target selector="button" text="Dev Login (Bypass Auth)" />
+      <expectedResult>
+        <condition type="loading">Button shows loading state</condition>
+      </expectedResult>
+    </step>
+
+    <step id="4" type="verification">
+      <action>Verify API call to dev-login endpoint</action>
+      <target type="network">GET /api/auth/dev-login</target>
+      <expectedResult>
+        <condition type="apiResponse">200 OK</condition>
+        <condition type="responseContains">token</condition>
+        <condition type="responseContains">user</condition>
+      </expectedResult>
+    </step>
+
+    <step id="5" type="verification">
+      <action>Verify redirect to dashboard</action>
+      <expectedResult>
+        <condition type="redirectTo">/dashboard</condition>
+        <condition type="authenticated">true</condition>
+      </expectedResult>
+    </step>
+
+    <step id="6" type="verification">
+      <action>Verify dev user session created</action>
+      <expectedResult>
+        <condition type="localStorageContains">token</condition>
+        <condition type="localStorageContains">user</condition>
+        <condition type="elementVisible">Dashboard content</condition>
+      </expectedResult>
+    </step>
+
+    <step id="7" type="verification">
+      <action>Verify dev login not visible on production</action>
+      <url>https://voicefleet.ai/login</url>
+      <expectedResult>
+        <condition type="elementNotVisible">Dev Login button</condition>
+        <condition type="elementNotVisible">Localhost Only divider</condition>
+      </expectedResult>
+    </step>
+  </steps>
+
+  <teardown>
+    <step>
+      <action>Logout dev user</action>
+      <target type="browser">localStorage.clear()</target>
+    </step>
+  </teardown>
+
+  <notes>
+    <note>Dev login only works on localhost/127.0.0.1</note>
+    <note>Used for CI/CD automated testing</note>
+    <note>Creates test user with full access</note>
+    <note>Never enable on production</note>
+  </notes>
+</testFlow>

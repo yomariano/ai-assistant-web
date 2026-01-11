@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testFlow id="stripe_portal_access_flow" version="1.0">
+  <metadata>
+    <name>Stripe Portal Access Flow</name>
+    <description>Tests accessing the Stripe customer portal for subscription management</description>
+    <priority>high</priority>
+    <estimatedDuration>2m</estimatedDuration>
+    <tags>
+      <tag>billing</tag>
+      <tag>stripe</tag>
+      <tag>portal</tag>
+      <tag>subscription-management</tag>
+    </tags>
+  </metadata>
+
+  <prerequisites>
+    <prerequisite>User authenticated with active Stripe subscription</prerequisite>
+  </prerequisites>
+
+  <testData>
+    <variable name="baseUrl" value="https://voicefleet.ai" />
+  </testData>
+
+  <steps>
+    <step id="1" type="navigation">
+      <action>Navigate to billing page</action>
+      <url>${baseUrl}/dashboard/billing</url>
+      <expectedResult>
+        <condition type="pageLoaded">true</condition>
+      </expectedResult>
+    </step>
+
+    <step id="2" type="verification">
+      <action>Verify Manage Subscription button exists</action>
+      <target selector="button" text="Manage Subscription" />
+      <expectedResult>
+        <condition type="elementVisible">true</condition>
+        <condition type="buttonEnabled">true</condition>
+      </expectedResult>
+    </step>
+
+    <step id="3" type="interaction">
+      <action>Click Manage Subscription button</action>
+      <target selector="button" text="Manage Subscription" />
+      <expectedResult>
+        <condition type="loading">Creating portal session...</condition>
+      </expectedResult>
+    </step>
+
+    <step id="4" type="verification">
+      <action>Verify API call to create portal session</action>
+      <target type="network">POST /api/billing/portal</target>
+      <expectedResult>
+        <condition type="apiResponse">200 OK</condition>
+        <condition type="responseContains">url</condition>
+        <condition type="urlFormat">https://billing.stripe.com/...</condition>
+      </expectedResult>
+    </step>
+
+    <step id="5" type="verification">
+      <action>Verify redirect to Stripe portal</action>
+      <expectedResult>
+        <condition type="redirectTo">billing.stripe.com</condition>
+        <condition type="newTabOrSameWindow">External navigation</condition>
+      </expectedResult>
+    </step>
+
+    <step id="6" type="verification">
+      <action>Verify Stripe portal loads correctly</action>
+      <expectedResult>
+        <condition type="pageTitle">Contains customer portal or billing</condition>
+        <condition type="elementVisible">Current subscription details</condition>
+        <condition type="elementVisible">Payment method section</condition>
+      </expectedResult>
+    </step>
+
+    <step id="7" type="verification">
+      <action>Verify portal shows correct subscription</action>
+      <expectedResult>
+        <condition type="textPresent">VoiceFleet subscription</condition>
+        <condition type="textPresent">EUR amount</condition>
+      </expectedResult>
+    </step>
+
+    <step id="8" type="verification">
+      <action>Verify portal management options</action>
+      <expectedResult>
+        <condition type="optionAvailable">Update payment method</condition>
+        <condition type="optionAvailable">View invoices</condition>
+        <condition type="optionAvailable">Cancel subscription</condition>
+        <condition type="optionAvailable">Change plan (if configured)</condition>
+      </expectedResult>
+    </step>
+
+    <step id="9" type="navigation">
+      <action>Return to VoiceFleet from portal</action>
+      <target selector="link" text="Return to VoiceFleet" />
+      <expectedResult>
+        <condition type="redirectTo">${baseUrl}/dashboard/billing</condition>
+      </expectedResult>
+    </step>
+
+    <step id="10" type="verification">
+      <action>Verify return URL works correctly</action>
+      <expectedResult>
+        <condition type="currentUrl">/dashboard/billing</condition>
+        <condition type="authenticated">true</condition>
+        <condition type="dataRefreshed">Subscription data up to date</condition>
+      </expectedResult>
+    </step>
+  </steps>
+
+  <teardown>
+    <step>
+      <action>No cleanup needed</action>
+    </step>
+  </teardown>
+
+  <notes>
+    <note>Stripe portal is hosted by Stripe</note>
+    <note>Portal session URLs expire after a short time</note>
+    <note>Return URL configured in Stripe dashboard</note>
+  </notes>
+</testFlow>

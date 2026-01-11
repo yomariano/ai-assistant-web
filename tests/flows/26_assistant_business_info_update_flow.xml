@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testFlow id="assistant_business_info_update_flow" version="1.0">
+  <metadata>
+    <name>Assistant Business Info Update Flow</name>
+    <description>Tests updating business name and description in the AI assistant configuration</description>
+    <priority>medium</priority>
+    <estimatedDuration>2m</estimatedDuration>
+    <tags>
+      <tag>assistant</tag>
+      <tag>business-info</tag>
+      <tag>configuration</tag>
+      <tag>profile</tag>
+    </tags>
+  </metadata>
+
+  <prerequisites>
+    <prerequisite>User authenticated with active subscription</prerequisite>
+  </prerequisites>
+
+  <testData>
+    <variable name="baseUrl" value="https://voicefleet.ai" />
+    <variable name="businessName" value="O'Sullivan Legal Services" />
+    <variable name="businessDescription" value="Full-service law firm specializing in family law, conveyancing, and personal injury claims in Cork and surrounding areas" />
+  </testData>
+
+  <steps>
+    <step id="1" type="navigation">
+      <action>Navigate to AI Assistant page</action>
+      <url>${baseUrl}/dashboard/assistant</url>
+      <expectedResult>
+        <condition type="pageLoaded">true</condition>
+      </expectedResult>
+    </step>
+
+    <step id="2" type="verification">
+      <action>Verify business info section exists</action>
+      <expectedResult>
+        <condition type="elementVisible">Business Information section</condition>
+        <condition type="elementVisible">Business Name input</condition>
+        <condition type="elementVisible">Business Description textarea</condition>
+      </expectedResult>
+    </step>
+
+    <step id="3" type="verification">
+      <action>Verify current values are displayed</action>
+      <expectedResult>
+        <condition type="fieldPopulated">Business Name has value</condition>
+        <condition type="fieldPopulated">Business Description has value</condition>
+      </expectedResult>
+    </step>
+
+    <step id="4" type="interaction">
+      <action>Clear and update business name</action>
+      <target selector="input[name='businessName']" />
+      <interaction>Clear field, type new value</interaction>
+      <testData>
+        <field name="businessName" value="${businessName}" />
+      </testData>
+      <expectedResult>
+        <condition type="fieldValue">${businessName}</condition>
+      </expectedResult>
+    </step>
+
+    <step id="5" type="verification">
+      <action>Verify business name validation</action>
+      <expectedResult>
+        <condition type="required">true</condition>
+        <condition type="minLength">2 characters</condition>
+        <condition type="maxLength">100 characters</condition>
+      </expectedResult>
+    </step>
+
+    <step id="6" type="interaction">
+      <action>Clear and update business description</action>
+      <target selector="textarea[name='businessDescription']" />
+      <interaction>Clear field, type new value</interaction>
+      <testData>
+        <field name="businessDescription" value="${businessDescription}" />
+      </testData>
+      <expectedResult>
+        <condition type="fieldValue">${businessDescription}</condition>
+      </expectedResult>
+    </step>
+
+    <step id="7" type="verification">
+      <action>Verify description validation</action>
+      <expectedResult>
+        <condition type="maxLength">500 characters or similar</condition>
+        <condition type="textareaRows">Expandable multiline</condition>
+      </expectedResult>
+    </step>
+
+    <step id="8" type="interaction">
+      <action>Save changes</action>
+      <target selector="button" text="Save Changes" />
+      <expectedResult>
+        <condition type="successToast">Configuration saved</condition>
+        <condition type="noErrors">true</condition>
+      </expectedResult>
+    </step>
+
+    <step id="9" type="verification">
+      <action>Verify API update request</action>
+      <target type="network">PATCH /api/assistant</target>
+      <expectedResult>
+        <condition type="requestBody">businessName: O'Sullivan Legal Services</condition>
+        <condition type="requestBody">businessDescription: contains law firm</condition>
+        <condition type="apiResponse">200 OK</condition>
+      </expectedResult>
+    </step>
+
+    <step id="10" type="verification">
+      <action>Verify changes persist after refresh</action>
+      <interaction>Refresh page</interaction>
+      <expectedResult>
+        <condition type="fieldValue" name="businessName">${businessName}</condition>
+        <condition type="fieldValue" name="businessDescription">${businessDescription}</condition>
+      </expectedResult>
+    </step>
+  </steps>
+
+  <teardown>
+    <step>
+      <action>No cleanup needed - user can update again</action>
+    </step>
+  </teardown>
+
+  <notes>
+    <note>Business info is used for prompt generation</note>
+    <note>Special characters like apostrophes should be handled</note>
+    <note>Description helps AI understand business context</note>
+  </notes>
+</testFlow>

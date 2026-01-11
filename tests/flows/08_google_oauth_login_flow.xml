@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testFlow id="google_oauth_login_flow" version="1.0">
+  <metadata>
+    <name>Google OAuth Login Flow</name>
+    <description>Tests the complete Google OAuth login process including redirect, authentication, and session creation</description>
+    <priority>critical</priority>
+    <estimatedDuration>3m</estimatedDuration>
+    <tags>
+      <tag>authentication</tag>
+      <tag>oauth</tag>
+      <tag>google</tag>
+      <tag>login</tag>
+    </tags>
+  </metadata>
+
+  <prerequisites>
+    <prerequisite>User has existing Google account</prerequisite>
+    <prerequisite>User has previously signed up with VoiceFleet</prerequisite>
+    <prerequisite>Supabase OAuth configured correctly</prerequisite>
+  </prerequisites>
+
+  <testData>
+    <variable name="testEmail" value="test.oauth@voicefleet.ai" />
+    <variable name="baseUrl" value="https://voicefleet.ai" />
+  </testData>
+
+  <steps>
+    <step id="1" type="navigation">
+      <action>Navigate to login page</action>
+      <url>${baseUrl}/login</url>
+      <expectedResult>
+        <condition type="pageTitle">Login - VoiceFleet</condition>
+        <condition type="elementVisible">Welcome heading</condition>
+        <condition type="elementVisible">Sign in with Google button</condition>
+      </expectedResult>
+    </step>
+
+    <step id="2" type="verification">
+      <action>Verify login page elements</action>
+      <expectedResult>
+        <condition type="elementVisible">Phone icon in purple circle</condition>
+        <condition type="textPresent">Sign in to your AI Assistant account</condition>
+        <condition type="buttonEnabled">Sign in with Google</condition>
+      </expectedResult>
+    </step>
+
+    <step id="3" type="interaction">
+      <action>Click Sign in with Google button</action>
+      <target selector="button" text="Sign in with Google" />
+      <expectedResult>
+        <condition type="redirectTo">Google OAuth consent screen</condition>
+        <condition type="urlContains">accounts.google.com</condition>
+      </expectedResult>
+    </step>
+
+    <step id="4" type="interaction">
+      <action>Complete Google OAuth consent</action>
+      <target type="external">Google OAuth</target>
+      <testData>
+        <field name="email" value="${testEmail}" />
+      </testData>
+      <expectedResult>
+        <condition type="redirectTo">/auth/callback</condition>
+      </expectedResult>
+    </step>
+
+    <step id="5" type="verification">
+      <action>Verify OAuth callback processing</action>
+      <url>/auth/callback</url>
+      <expectedResult>
+        <condition type="loadingIndicator">Processing authentication</condition>
+        <condition type="redirectTo">/dashboard</condition>
+      </expectedResult>
+    </step>
+
+    <step id="6" type="verification">
+      <action>Verify successful login and dashboard access</action>
+      <url>/dashboard</url>
+      <expectedResult>
+        <condition type="authenticated">true</condition>
+        <condition type="elementVisible">Dashboard content</condition>
+        <condition type="elementVisible">User welcome message</condition>
+        <condition type="localStorageKey">auth-storage</condition>
+      </expectedResult>
+    </step>
+
+    <step id="7" type="verification">
+      <action>Verify session token stored</action>
+      <expectedResult>
+        <condition type="localStorageContains">token</condition>
+        <condition type="localStorageContains">user</condition>
+        <condition type="apiHeaderPresent">Authorization: Bearer</condition>
+      </expectedResult>
+    </step>
+  </steps>
+
+  <teardown>
+    <step>
+      <action>Clear session storage</action>
+      <target type="browser">localStorage.clear()</target>
+    </step>
+  </teardown>
+
+  <notes>
+    <note>Google OAuth requires manual interaction in headed mode</note>
+    <note>Use dev login for CI/CD automation</note>
+    <note>Verify Supabase project has Google OAuth enabled</note>
+  </notes>
+</testFlow>

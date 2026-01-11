@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testFlow id="sidebar_navigation_flow" version="1.0">
+  <metadata>
+    <name>Sidebar Navigation Flow</name>
+    <description>Tests all sidebar navigation links load the correct pages</description>
+    <priority>high</priority>
+    <estimatedDuration>3m</estimatedDuration>
+    <tags>
+      <tag>navigation</tag>
+      <tag>sidebar</tag>
+      <tag>routing</tag>
+      <tag>ui</tag>
+    </tags>
+  </metadata>
+
+  <prerequisites>
+    <prerequisite>User authenticated</prerequisite>
+    <prerequisite>On dashboard or any protected route</prerequisite>
+  </prerequisites>
+
+  <testData>
+    <variable name="baseUrl" value="https://voicefleet.ai" />
+  </testData>
+
+  <steps>
+    <step id="1" type="navigation">
+      <action>Navigate to dashboard</action>
+      <url>${baseUrl}/dashboard</url>
+      <expectedResult>
+        <condition type="elementVisible">Sidebar navigation</condition>
+      </expectedResult>
+    </step>
+
+    <step id="2" type="verification">
+      <action>Verify sidebar contains all navigation items</action>
+      <expectedResult>
+        <condition type="elementVisible">Dashboard link</condition>
+        <condition type="elementVisible">AI Assistant link</condition>
+        <condition type="elementVisible">Make a Call link</condition>
+        <condition type="elementVisible">Call History link</condition>
+        <condition type="elementVisible">Billing link</condition>
+        <condition type="elementVisible">Settings link</condition>
+        <condition type="elementVisible">Notifications link</condition>
+      </expectedResult>
+    </step>
+
+    <step id="3" type="interaction">
+      <action>Click AI Assistant link</action>
+      <target selector="nav a" text="AI Assistant" />
+      <expectedResult>
+        <condition type="currentUrl">/dashboard/assistant</condition>
+        <condition type="pageTitle">AI Assistant</condition>
+        <condition type="activeNavItem">AI Assistant highlighted</condition>
+      </expectedResult>
+    </step>
+
+    <step id="4" type="interaction">
+      <action>Click Make a Call link</action>
+      <target selector="nav a" text="Make a Call" />
+      <expectedResult>
+        <condition type="currentUrl">/dashboard/call</condition>
+        <condition type="elementVisible">Call form</condition>
+        <condition type="activeNavItem">Make a Call highlighted</condition>
+      </expectedResult>
+    </step>
+
+    <step id="5" type="interaction">
+      <action>Click Call History link</action>
+      <target selector="nav a" text="Call History" />
+      <expectedResult>
+        <condition type="currentUrl">/dashboard/history</condition>
+        <condition type="elementVisible">History list</condition>
+        <condition type="activeNavItem">Call History highlighted</condition>
+      </expectedResult>
+    </step>
+
+    <step id="6" type="interaction">
+      <action>Click Billing link</action>
+      <target selector="nav a" text="Billing" />
+      <expectedResult>
+        <condition type="currentUrl">/dashboard/billing</condition>
+        <condition type="elementVisible">Subscription info</condition>
+        <condition type="activeNavItem">Billing highlighted</condition>
+      </expectedResult>
+    </step>
+
+    <step id="7" type="interaction">
+      <action>Click Settings link</action>
+      <target selector="nav a" text="Settings" />
+      <expectedResult>
+        <condition type="currentUrl">/dashboard/settings</condition>
+        <condition type="elementVisible">Profile settings</condition>
+        <condition type="activeNavItem">Settings highlighted</condition>
+      </expectedResult>
+    </step>
+
+    <step id="8" type="interaction">
+      <action>Click Notifications link</action>
+      <target selector="nav a" text="Notifications" />
+      <expectedResult>
+        <condition type="currentUrl">/dashboard/notifications</condition>
+        <condition type="elementVisible">Notification preferences</condition>
+        <condition type="activeNavItem">Notifications highlighted</condition>
+      </expectedResult>
+    </step>
+
+    <step id="9" type="interaction">
+      <action>Click Dashboard link to return</action>
+      <target selector="nav a" text="Dashboard" />
+      <expectedResult>
+        <condition type="currentUrl">/dashboard</condition>
+        <condition type="elementVisible">Stats cards</condition>
+        <condition type="activeNavItem">Dashboard highlighted</condition>
+      </expectedResult>
+    </step>
+
+    <step id="10" type="verification">
+      <action>Verify sidebar collapses on mobile</action>
+      <target type="viewport">mobile (375px)</target>
+      <expectedResult>
+        <condition type="sidebarHidden">true</condition>
+        <condition type="hamburgerMenuVisible">true</condition>
+      </expectedResult>
+    </step>
+  </steps>
+
+  <teardown>
+    <step>
+      <action>No cleanup needed</action>
+    </step>
+  </teardown>
+
+  <notes>
+    <note>Active nav item should be visually highlighted</note>
+    <note>Sidebar collapses to hamburger menu on mobile</note>
+    <note>All routes should load without errors</note>
+  </notes>
+</testFlow>

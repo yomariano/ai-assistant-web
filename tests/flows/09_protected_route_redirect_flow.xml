@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testFlow id="protected_route_redirect_flow" version="1.0">
+  <metadata>
+    <name>Protected Route Redirect Flow</name>
+    <description>Tests that unauthenticated users are redirected to login when accessing protected routes</description>
+    <priority>critical</priority>
+    <estimatedDuration>2m</estimatedDuration>
+    <tags>
+      <tag>authentication</tag>
+      <tag>security</tag>
+      <tag>redirect</tag>
+      <tag>protected-routes</tag>
+    </tags>
+  </metadata>
+
+  <prerequisites>
+    <prerequisite>User is NOT authenticated</prerequisite>
+    <prerequisite>No session tokens in storage</prerequisite>
+  </prerequisites>
+
+  <testData>
+    <variable name="baseUrl" value="https://voicefleet.ai" />
+    <variable name="protectedRoutes" value="/dashboard,/dashboard/assistant,/dashboard/billing,/dashboard/history,/dashboard/settings,/dashboard/notifications,/dashboard/call" />
+  </testData>
+
+  <steps>
+    <step id="1" type="setup">
+      <action>Ensure user is logged out</action>
+      <target type="browser">localStorage.clear(); sessionStorage.clear();</target>
+      <expectedResult>
+        <condition type="localStorage">empty</condition>
+        <condition type="sessionStorage">empty</condition>
+      </expectedResult>
+    </step>
+
+    <step id="2" type="navigation">
+      <action>Attempt to access /dashboard without auth</action>
+      <url>${baseUrl}/dashboard</url>
+      <expectedResult>
+        <condition type="redirectTo">/login</condition>
+        <condition type="sessionStorageKey">redirectAfterLogin=/dashboard</condition>
+      </expectedResult>
+    </step>
+
+    <step id="3" type="navigation">
+      <action>Attempt to access /dashboard/assistant without auth</action>
+      <url>${baseUrl}/dashboard/assistant</url>
+      <expectedResult>
+        <condition type="redirectTo">/login</condition>
+      </expectedResult>
+    </step>
+
+    <step id="4" type="navigation">
+      <action>Attempt to access /dashboard/billing without auth</action>
+      <url>${baseUrl}/dashboard/billing</url>
+      <expectedResult>
+        <condition type="redirectTo">/login</condition>
+      </expectedResult>
+    </step>
+
+    <step id="5" type="navigation">
+      <action>Attempt to access /dashboard/history without auth</action>
+      <url>${baseUrl}/dashboard/history</url>
+      <expectedResult>
+        <condition type="redirectTo">/login</condition>
+      </expectedResult>
+    </step>
+
+    <step id="6" type="navigation">
+      <action>Attempt to access /dashboard/settings without auth</action>
+      <url>${baseUrl}/dashboard/settings</url>
+      <expectedResult>
+        <condition type="redirectTo">/login</condition>
+      </expectedResult>
+    </step>
+
+    <step id="7" type="navigation">
+      <action>Attempt to access /dashboard/call without auth</action>
+      <url>${baseUrl}/dashboard/call</url>
+      <expectedResult>
+        <condition type="redirectTo">/login</condition>
+      </expectedResult>
+    </step>
+
+    <step id="8" type="verification">
+      <action>Verify login page shows correctly after redirect</action>
+      <expectedResult>
+        <condition type="currentUrl">/login</condition>
+        <condition type="elementVisible">Sign in with Google button</condition>
+        <condition type="noErrorMessages">true</condition>
+      </expectedResult>
+    </step>
+  </steps>
+
+  <teardown>
+    <step>
+      <action>Clear any stored redirect paths</action>
+      <target type="browser">sessionStorage.clear()</target>
+    </step>
+  </teardown>
+
+  <notes>
+    <note>All dashboard routes should be protected</note>
+    <note>Redirect path should be stored for post-login navigation</note>
+    <note>No error messages should appear for normal redirects</note>
+  </notes>
+</testFlow>

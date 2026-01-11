@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testFlow id="call_language_selection_flow" version="1.0">
+  <metadata>
+    <name>Call Language Selection Flow</name>
+    <description>Tests selecting different languages for outbound calls</description>
+    <priority>medium</priority>
+    <estimatedDuration>2m</estimatedDuration>
+    <tags>
+      <tag>calls</tag>
+      <tag>language</tag>
+      <tag>localization</tag>
+      <tag>multilingual</tag>
+    </tags>
+  </metadata>
+
+  <prerequisites>
+    <prerequisite>User authenticated with active subscription</prerequisite>
+  </prerequisites>
+
+  <testData>
+    <variable name="baseUrl" value="https://voicefleet.ai" />
+    <variable name="testPhoneNumber" value="+353871234567" />
+    <variable name="testMessage" value="Test message in selected language" />
+  </testData>
+
+  <steps>
+    <step id="1" type="navigation">
+      <action>Navigate to Make a Call page</action>
+      <url>${baseUrl}/dashboard/call</url>
+      <expectedResult>
+        <condition type="pageLoaded">true</condition>
+      </expectedResult>
+    </step>
+
+    <step id="2" type="verification">
+      <action>Verify language selector exists</action>
+      <target selector="select[name='language']" />
+      <expectedResult>
+        <condition type="elementVisible">Language dropdown</condition>
+        <condition type="defaultValue">English</condition>
+      </expectedResult>
+    </step>
+
+    <step id="3" type="interaction">
+      <action>Open language dropdown</action>
+      <target selector="select[name='language']" />
+      <expectedResult>
+        <condition type="dropdownOpen">true</condition>
+        <condition type="optionsVisible">true</condition>
+      </expectedResult>
+    </step>
+
+    <step id="4" type="verification">
+      <action>Verify available language options</action>
+      <expectedResult>
+        <condition type="optionAvailable">English</condition>
+        <condition type="optionAvailable">Irish (Gaeilge)</condition>
+        <condition type="optionAvailable">Spanish (if available)</condition>
+      </expectedResult>
+    </step>
+
+    <step id="5" type="interaction">
+      <action>Select Irish language</action>
+      <target selector="select[name='language']" />
+      <testData>
+        <field name="language" value="irish" />
+      </testData>
+      <expectedResult>
+        <condition type="selectedValue">irish</condition>
+        <condition type="dropdownClosed">true</condition>
+      </expectedResult>
+    </step>
+
+    <step id="6" type="interaction">
+      <action>Fill in call details and submit</action>
+      <testData>
+        <field name="phoneNumber" value="${testPhoneNumber}" />
+        <field name="message" value="${testMessage}" />
+      </testData>
+      <target selector="button" text="Make Call" />
+      <expectedResult>
+        <condition type="formSubmitted">true</condition>
+      </expectedResult>
+    </step>
+
+    <step id="7" type="verification">
+      <action>Verify language passed to API</action>
+      <target type="network">POST /api/calls</target>
+      <expectedResult>
+        <condition type="requestBody">language: irish</condition>
+        <condition type="apiResponse">200 or 201</condition>
+      </expectedResult>
+    </step>
+
+    <step id="8" type="interaction">
+      <action>Select English and submit another call</action>
+      <target selector="select[name='language']" />
+      <testData>
+        <field name="language" value="english" />
+        <field name="phoneNumber" value="+353871234568" />
+        <field name="message" value="English test message" />
+      </testData>
+      <target selector="button" text="Make Call" />
+      <expectedResult>
+        <condition type="requestBody">language: english</condition>
+      </expectedResult>
+    </step>
+
+    <step id="9" type="verification">
+      <action>Verify language preference persists during session</action>
+      <interaction>Navigate away and return</interaction>
+      <expectedResult>
+        <condition type="defaultValue">english (last selected)</condition>
+      </expectedResult>
+    </step>
+  </steps>
+
+  <teardown>
+    <step>
+      <action>No cleanup needed</action>
+    </step>
+  </teardown>
+
+  <notes>
+    <note>Language affects TTS voice and AI responses</note>
+    <note>Irish language support for local businesses</note>
+    <note>Default is English for Irish market</note>
+  </notes>
+</testFlow>
