@@ -2,7 +2,7 @@ import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import type { User } from '@/types';
 import { authApi } from './api';
-import { signInWithGoogle, signOut as supabaseSignOut, getSession } from './supabase';
+import { signInWithGoogle, signOut as supabaseSignOut, getSessionResult } from './supabase';
 import { createClient } from '@/utils/supabase/client';
 
 interface AuthState {
@@ -12,6 +12,7 @@ interface AuthState {
   isAuthenticated: boolean;
   devMode: boolean;
   hasExplicitlyLoggedOut: boolean;
+  hasScheduledSessionRetry: boolean;
 
   loginWithGoogle: () => Promise<void>;
   devLogin: () => Promise<void>;
@@ -29,6 +30,7 @@ export const useAuthStore = create<AuthState>()(
       isAuthenticated: false,
       devMode: false,
       hasExplicitlyLoggedOut: false,
+      hasScheduledSessionRetry: false,
 
       loginWithGoogle: async () => {
         set({ hasExplicitlyLoggedOut: false });
@@ -45,7 +47,8 @@ export const useAuthStore = create<AuthState>()(
             isAuthenticated: true,
             devMode: devMode,
             isLoading: false,
-            hasExplicitlyLoggedOut: false
+            hasExplicitlyLoggedOut: false,
+            hasScheduledSessionRetry: false,
           });
         } catch (error) {
           console.error('Dev login failed:', error);
@@ -58,7 +61,14 @@ export const useAuthStore = create<AuthState>()(
         if (!devMode) {
           await supabaseSignOut();
         }
-        set({ user: null, token: null, isAuthenticated: false, devMode: false, hasExplicitlyLoggedOut: true });
+        set({
+          user: null,
+          token: null,
+          isAuthenticated: false,
+          devMode: false,
+          hasExplicitlyLoggedOut: true,
+          hasScheduledSessionRetry: false,
+        });
       },
 
       setUser: (user: User) => {
@@ -68,11 +78,12 @@ export const useAuthStore = create<AuthState>()(
       checkAuth: async () => {
         console.log('[STORE] checkAuth started');
         const { hasExplicitlyLoggedOut } = get();
+        set({ isLoading: true });
 
         // If user explicitly logged out, don't auto-login
         if (hasExplicitlyLoggedOut) {
           console.log('[STORE] User has explicitly logged out, skipping auto-login');
-          set({ isLoading: false, isAuthenticated: false });
+          set({ isLoading: false, isAuthenticated: false, hasScheduledSessionRetry: false });
           return;
         }
 
@@ -92,7 +103,8 @@ export const useAuthStore = create<AuthState>()(
                 token: 'dev-mode',
                 isAuthenticated: true,
                 devMode,
-                isLoading: false
+                isLoading: false,
+                hasScheduledSessionRetry: false,
               });
               return;
             }
@@ -105,7 +117,18 @@ export const useAuthStore = create<AuthState>()(
           let session = null;
           try {
             console.log('[STORE] Checking Supabase session...');
-            session = await getSession();
+            const sessionResult = await getSessionResult({ timeoutMs: 8000 });
+            session = sessionResult.session;
+            if (sessionResult.didTimeout) {
+              console.warn('[STORE] Supabase getSession timed out; delaying unauth redirect and retrying...');
+              if (!get().hasScheduledSessionRetry) {
+                set({ hasScheduledSessionRetry: true });
+                setTimeout(() => {
+                  void get().checkAuth();
+                }, 800);
+              }
+              return;
+            }
             console.log('[STORE] Supabase session:', session ? 'exists' : 'none');
           } catch (sessionError) {
             console.error('[STORE] Failed to get Supabase session:', sessionError);
@@ -122,7 +145,8 @@ export const useAuthStore = create<AuthState>()(
                 token: session.access_token,
                 isAuthenticated: true,
                 isLoading: false,
-                devMode: false
+                devMode: false,
+                hasScheduledSessionRetry: false,
               });
               return;
             } catch (error) {
@@ -131,10 +155,10 @@ export const useAuthStore = create<AuthState>()(
           }
 
           console.log('[STORE] No auth found, setting unauthenticated');
-          set({ isLoading: false, isAuthenticated: false });
+          set({ isLoading: false, isAuthenticated: false, hasScheduledSessionRetry: false });
         } catch (error) {
           console.error('[STORE] Auth check failed:', error);
-          set({ user: null, token: null, isAuthenticated: false, isLoading: false });
+          set({ user: null, token: null, isAuthenticated: false, isLoading: false, hasScheduledSessionRetry: false });
         }
       },
     }),
@@ -159,7 +183,7 @@ if (typeof window !== 'undefined') {
       const supabase = createClient();
       supabase.auth.onAuthStateChange(async (event, session) => {
         console.log('[STORE] Auth state changed:', event);
-        if (event === 'SIGNED_IN' && session) {
+        if ((event === 'SIGNED_IN' || event === 'INITIAL_SESSION' || event === 'TOKEN_REFRESHED') && session) {
           try {
             const { user } = await authApi.me(session.access_token);
             useAuthStore.setState({
@@ -167,7 +191,8 @@ if (typeof window !== 'undefined') {
               token: session.access_token,
               isAuthenticated: true,
               devMode: false,
-              isLoading: false
+              isLoading: false,
+              hasScheduledSessionRetry: false,
             });
 
             // Check if user was trying to checkout before login
@@ -184,7 +209,8 @@ if (typeof window !== 'undefined') {
             user: null,
             token: null,
             isAuthenticated: false,
-            devMode: false
+            devMode: false,
+            hasScheduledSessionRetry: false,
           });
         }
       });

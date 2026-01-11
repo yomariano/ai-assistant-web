@@ -43,6 +43,16 @@ api.interceptors.request.use(async (config) => {
 
   // Try to get Supabase session token (with short timeout)
   try {
+    // If the request already has an Authorization header (e.g. authApi.me(token)),
+    // don't call getSession (avoids extra timeouts and work).
+    const existingAuthHeader =
+      (config.headers as Record<string, unknown> | undefined)?.Authorization ??
+      (config.headers as Record<string, unknown> | undefined)?.authorization;
+    if (existingAuthHeader) {
+      console.log('[API] Authorization already present, skipping getSession');
+      return config;
+    }
+
     console.log('[API] Getting Supabase session for auth header...');
     const session = await getSession();
     if (session?.access_token) {

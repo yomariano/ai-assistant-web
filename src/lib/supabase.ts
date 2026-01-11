@@ -1,4 +1,5 @@
 import { createClient } from '@/utils/supabase/client';
+import type { Session } from '@supabase/supabase-js';
 
 // Create singleton client instance
 let supabaseInstance: ReturnType<typeof createClient> | null = null;
@@ -60,42 +61,69 @@ export const signOut = async () => {
   console.log('[SUPABASE] signOut successful');
 };
 
-export const getSession = async () => {
+export interface GetSessionResult {
+  session: Session | null;
+  didTimeout: boolean;
+  errorMessage?: string;
+}
+
+export const getSessionResult = async (
+  { timeoutMs = 5000 }: { timeoutMs?: number } = {}
+): Promise<GetSessionResult> => {
   console.log('[SUPABASE] getSession called');
 
   const client = getSupabase();
   if (!client) {
     console.log('[SUPABASE] Client not initialized, returning null session');
-    return null;
+    return { session: null, didTimeout: false };
   }
 
-  try {
-    // Add timeout to prevent hanging forever (5s)
-    const timeoutPromise = new Promise<never>((_, reject) => {
-      setTimeout(() => reject(new Error('getSession timeout after 5s')), 5000);
-    });
+  const timeoutPromise = new Promise<{ type: 'timeout' }>((resolve) => {
+    setTimeout(() => resolve({ type: 'timeout' }), timeoutMs);
+  });
 
-    const sessionPromise = client.auth.getSession();
+  const sessionPromise = client.auth
+    .getSession()
+    .then((result) => ({ type: 'session' as const, result }))
+    .catch((error: unknown) => ({ type: 'error' as const, error }));
 
-    const { data: { session }, error } = await Promise.race([
-      sessionPromise,
-      timeoutPromise
-    ]);
+  const outcome = await Promise.race([timeoutPromise, sessionPromise]);
 
-    console.log('[SUPABASE] getSession result:', {
-      hasSession: !!session,
-      userId: session?.user?.id,
-      email: session?.user?.email,
-      expiresAt: session?.expires_at,
-      error: error?.message
-    });
-    if (error) throw error;
-    return session;
-  } catch (e) {
-    console.error('[SUPABASE] getSession exception:', e);
-    // Return null instead of throwing to allow fallback to other auth methods
-    return null;
+  if (outcome.type === 'timeout') {
+    const errorMessage = `getSession timeout after ${timeoutMs}ms`;
+    console.error('[SUPABASE] getSession exception:', new Error(errorMessage));
+    return { session: null, didTimeout: true, errorMessage };
   }
+
+  if (outcome.type === 'error') {
+    const errorMessage = outcome.error instanceof Error ? outcome.error.message : String(outcome.error);
+    console.error('[SUPABASE] getSession exception:', outcome.error);
+    return { session: null, didTimeout: false, errorMessage };
+  }
+
+  const {
+    data: { session },
+    error,
+  } = outcome.result;
+
+  console.log('[SUPABASE] getSession result:', {
+    hasSession: !!session,
+    userId: session?.user?.id,
+    email: session?.user?.email,
+    expiresAt: session?.expires_at,
+    error: error?.message,
+  });
+
+  if (error) {
+    return { session: null, didTimeout: false, errorMessage: error.message };
+  }
+
+  return { session, didTimeout: false };
+};
+
+export const getSession = async (): Promise<Session | null> => {
+  const { session } = await getSessionResult();
+  return session;
 };
 
 export const getUser = async () => {
