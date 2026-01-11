@@ -18,13 +18,17 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
   const { isAuthenticated, isLoading, checkAuth, devMode, user } = useAuthStore();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
+  // Subscription state
+  const [hasSubscription, setHasSubscription] = useState<boolean | null>(null);
+  const [subscriptionChecked, setSubscriptionChecked] = useState(false);
+
   // Onboarding state
   const [showOnboarding, setShowOnboarding] = useState(false);
   const [onboardingData, setOnboardingData] = useState<OnboardingData | null>(null);
   const [onboardingChecked, setOnboardingChecked] = useState(false);
 
   console.log('[DASHBOARD] ====== DashboardLayout render ======');
-  console.log('[DASHBOARD] State:', { isLoading, isAuthenticated, devMode, userEmail: user?.email });
+  console.log('[DASHBOARD] State:', { isLoading, isAuthenticated, devMode, userEmail: user?.email, hasSubscription });
 
   const toggleSidebar = useCallback(() => setIsSidebarOpen(prev => !prev), []);
   const closeSidebar = useCallback(() => setIsSidebarOpen(false), []);
@@ -47,11 +51,53 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
     }
   }, [isLoading, isAuthenticated, router]);
 
-  // Check onboarding status after authentication
+  // Check subscription status after authentication
+  useEffect(() => {
+    const checkSubscription = async () => {
+      console.log('[DASHBOARD] checkSubscription called:', { isAuthenticated, isLoading, subscriptionChecked, devMode });
+      if (!isAuthenticated || isLoading || subscriptionChecked) return;
+
+      // Skip subscription check in dev mode
+      if (devMode) {
+        console.log('[DASHBOARD] Dev mode - skipping subscription check');
+        setHasSubscription(true);
+        setSubscriptionChecked(true);
+        return;
+      }
+
+      try {
+        console.log('[DASHBOARD] Checking subscription status...');
+        const { subscription } = await billingApi.getSubscription();
+        console.log('[DASHBOARD] Subscription data:', subscription);
+
+        const isActive = subscription &&
+          (subscription.status === 'active' || subscription.status === 'trialing');
+
+        setHasSubscription(isActive);
+        setSubscriptionChecked(true);
+
+        if (!isActive) {
+          console.log('[DASHBOARD] No active subscription, redirecting to pricing...');
+          router.push('/#pricing');
+        }
+      } catch (error) {
+        console.error('[DASHBOARD] Failed to check subscription:', error);
+        // On error, redirect to pricing to be safe
+        setHasSubscription(false);
+        setSubscriptionChecked(true);
+        router.push('/#pricing');
+      }
+    };
+
+    checkSubscription();
+  }, [isAuthenticated, isLoading, subscriptionChecked, devMode, router]);
+
+  // Check onboarding status after authentication and subscription verification
   useEffect(() => {
     const checkOnboarding = async () => {
-      console.log('[DASHBOARD] checkOnboarding called:', { isAuthenticated, isLoading, onboardingChecked });
-      if (!isAuthenticated || isLoading || onboardingChecked) return;
+      console.log('[DASHBOARD] checkOnboarding called:', { isAuthenticated, isLoading, onboardingChecked, hasSubscription });
+      // Wait for subscription check to complete and only proceed if user has subscription
+      if (!isAuthenticated || isLoading || onboardingChecked || !hasSubscription) return;
 
       try {
         console.log('[DASHBOARD] Checking onboarding status...');
@@ -93,7 +139,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
     };
 
     checkOnboarding();
-  }, [isAuthenticated, isLoading, onboardingChecked, user]);
+  }, [isAuthenticated, isLoading, onboardingChecked, hasSubscription, user]);
 
   const handleOnboardingComplete = useCallback(async () => {
     try {
@@ -120,8 +166,9 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
     []
   );
 
-  if (isLoading) {
-    console.log('[DASHBOARD] Rendering loading spinner...');
+  // Show loading while checking auth or subscription
+  if (isLoading || (isAuthenticated && !subscriptionChecked)) {
+    console.log('[DASHBOARD] Rendering loading spinner...', { isLoading, subscriptionChecked });
     return (
       <div className="min-h-screen flex items-center justify-center bg-background">
         <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
@@ -131,6 +178,12 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
 
   if (!isAuthenticated) {
     console.log('[DASHBOARD] Not authenticated, returning null');
+    return null;
+  }
+
+  // Block access if no subscription (redirect already triggered in useEffect)
+  if (!hasSubscription) {
+    console.log('[DASHBOARD] No subscription, returning null');
     return null;
   }
 
