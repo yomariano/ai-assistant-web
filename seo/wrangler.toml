@@ -1,0 +1,88 @@
+# VoiceFleet Programmatic SEO - Cloudflare Workers
+name = "voicefleet-seo"
+main = "src/index.ts"
+compatibility_date = "2024-01-01"
+compatibility_flags = ["nodejs_compat"]
+
+# Minification
+minify = true
+
+# Routes - serve SEO pages from voicefleet.ai
+# Individual routes for each industry combo page (CF doesn't support mid-path wildcards)
+routes = [
+  { pattern = "voicefleet.ai/industries/*", zone_name = "voicefleet.ai" },
+  { pattern = "voicefleet.ai/industries", zone_name = "voicefleet.ai" },
+  { pattern = "voicefleet.ai/locations/*", zone_name = "voicefleet.ai" },
+  { pattern = "voicefleet.ai/locations", zone_name = "voicefleet.ai" },
+  { pattern = "voicefleet.ai/sitemap.xml", zone_name = "voicefleet.ai" },
+  { pattern = "voicefleet.ai/sitemaps/*", zone_name = "voicefleet.ai" },
+  { pattern = "voicefleet.ai/robots.txt", zone_name = "voicefleet.ai" },
+  { pattern = "voicefleet.ai/health", zone_name = "voicefleet.ai" },
+  { pattern = "voicefleet.ai/admin/*", zone_name = "voicefleet.ai" },
+  # Industry + location combo pages
+  { pattern = "voicefleet.ai/restaurant-voice-agent-in-*", zone_name = "voicefleet.ai" },
+  { pattern = "voicefleet.ai/restaurants-voice-agent-in-*", zone_name = "voicefleet.ai" },
+  { pattern = "voicefleet.ai/dental-clinic-voice-agent-in-*", zone_name = "voicefleet.ai" },
+  { pattern = "voicefleet.ai/dental-clinics-voice-agent-in-*", zone_name = "voicefleet.ai" },
+  { pattern = "voicefleet.ai/medical-clinic-voice-agent-in-*", zone_name = "voicefleet.ai" },
+  { pattern = "voicefleet.ai/medical-clinics-voice-agent-in-*", zone_name = "voicefleet.ai" },
+  { pattern = "voicefleet.ai/plumber-voice-agent-in-*", zone_name = "voicefleet.ai" },
+  { pattern = "voicefleet.ai/plumbers-voice-agent-in-*", zone_name = "voicefleet.ai" },
+  { pattern = "voicefleet.ai/electrician-voice-agent-in-*", zone_name = "voicefleet.ai" },
+  { pattern = "voicefleet.ai/electricians-voice-agent-in-*", zone_name = "voicefleet.ai" },
+  { pattern = "voicefleet.ai/hvac-voice-agent-in-*", zone_name = "voicefleet.ai" },
+  { pattern = "voicefleet.ai/law-firm-voice-agent-in-*", zone_name = "voicefleet.ai" },
+  { pattern = "voicefleet.ai/law-firms-voice-agent-in-*", zone_name = "voicefleet.ai" },
+  { pattern = "voicefleet.ai/accounting-firm-voice-agent-in-*", zone_name = "voicefleet.ai" },
+  { pattern = "voicefleet.ai/accounting-firms-voice-agent-in-*", zone_name = "voicefleet.ai" },
+  { pattern = "voicefleet.ai/car-dealership-voice-agent-in-*", zone_name = "voicefleet.ai" },
+  { pattern = "voicefleet.ai/car-dealerships-voice-agent-in-*", zone_name = "voicefleet.ai" },
+  { pattern = "voicefleet.ai/auto-repair-voice-agent-in-*", zone_name = "voicefleet.ai" },
+  { pattern = "voicefleet.ai/hair-salon-voice-agent-in-*", zone_name = "voicefleet.ai" },
+  { pattern = "voicefleet.ai/hair-salons-voice-agent-in-*", zone_name = "voicefleet.ai" },
+  { pattern = "voicefleet.ai/spa-voice-agent-in-*", zone_name = "voicefleet.ai" },
+  { pattern = "voicefleet.ai/spas-voice-agent-in-*", zone_name = "voicefleet.ai" },
+  { pattern = "voicefleet.ai/real-estate-voice-agent-in-*", zone_name = "voicefleet.ai" },
+  { pattern = "voicefleet.ai/property-management-voice-agent-in-*", zone_name = "voicefleet.ai" },
+  { pattern = "voicefleet.ai/hotel-voice-agent-in-*", zone_name = "voicefleet.ai" },
+  { pattern = "voicefleet.ai/hotels-voice-agent-in-*", zone_name = "voicefleet.ai" },
+  { pattern = "voicefleet.ai/fitness-center-voice-agent-in-*", zone_name = "voicefleet.ai" },
+  { pattern = "voicefleet.ai/fitness-centers-voice-agent-in-*", zone_name = "voicefleet.ai" },
+  { pattern = "voicefleet.ai/insurance-agency-voice-agent-in-*", zone_name = "voicefleet.ai" },
+  { pattern = "voicefleet.ai/insurance-agencies-voice-agent-in-*", zone_name = "voicefleet.ai" }
+]
+
+# Environment variables
+[vars]
+SITE_URL = "https://voicefleet.ai"
+APP_URL = "https://app.voicefleet.ai"
+API_URL = "https://api.voicefleet.ai"
+ENVIRONMENT = "production"
+ADMIN_SECRET = "voicefleet-seo-admin-2024"
+SEO_WORKER_SECRET = "vf-seo-0c46a1cf99a5a278a2a973e974b1bbcd"
+
+# KV Namespaces - Replace IDs after creating with:
+# wrangler kv:namespace create SEO_CACHE
+# wrangler kv:namespace create CONTENT_CACHE
+[[kv_namespaces]]
+binding = "SEO_CACHE"
+id = "e0c9d48eb905441da9c165a032b1e293"
+
+[[kv_namespaces]]
+binding = "CONTENT_CACHE"
+id = "9053889099cf4cb687d07dc87f11e8a6"
+
+# Development settings
+[dev]
+port = 8787
+local_protocol = "http"
+
+# Local testing overrides (uncomment for local dev)
+# [vars]
+# API_URL = "http://localhost:3000"
+
+# Cron trigger disabled - Cloudflare free plan limit reached
+# Use external cron service (cron-job.org, GitHub Actions, etc.) to call:
+# POST https://voicefleet.ai/admin/generate-all
+# Body: {"secret":"voicefleet-seo-admin-2024"}
+# Schedule: Daily at 2am UTC
