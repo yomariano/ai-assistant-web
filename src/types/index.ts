@@ -257,3 +257,76 @@ export interface Booking {
   createdAt: string;
   customer?: Customer;
 }
+
+// Booking Provider Types
+
+export interface BookingProvider {
+  id: string;
+  name: string;
+  description: string;
+  icon: string;
+  category: 'general' | 'restaurant' | 'salon' | 'fitness' | 'healthcare';
+  websiteUrl: string;
+  docsUrl: string;
+  authType: 'oauth2' | 'api_key' | 'basic';
+  features: {
+    availabilitySync: boolean;
+    bookingCreate: boolean;
+    bookingUpdate: boolean;
+    bookingCancel: boolean;
+    webhooks: boolean;
+  };
+  isActive: boolean;
+  isBeta: boolean;
+}
+
+export interface ProviderConnection {
+  id: string;
+  providerId: string;
+  provider?: {
+    name: string;
+    icon: string;
+    category: string;
+    authType?: string;
+  };
+  status: 'pending' | 'connected' | 'error' | 'expired' | 'disconnected';
+  errorMessage?: string;
+  externalAccountId?: string;
+  externalAccountName?: string;
+  config?: Record<string, unknown>;
+  syncEnabled: boolean;
+  syncDirection: 'inbound' | 'outbound' | 'bidirectional';
+  lastSyncAt?: string;
+  lastSyncError?: string;
+  connectedAt?: string;
+  createdAt: string;
+}
+
+export interface ProviderEventType {
+  id: string;
+  name: string;
+  duration?: number;
+  description?: string;
+  metadata?: Record<string, unknown>;
+}
+
+export interface ProviderTimeSlot {
+  startTime: string;
+  endTime?: string;
+  available: boolean;
+  eventTypeId: string;
+  metadata?: Record<string, unknown>;
+}
+
+export interface ProviderSyncLog {
+  id: string;
+  syncType: string;
+  direction: 'inbound' | 'outbound';
+  status: 'success' | 'error' | 'partial';
+  externalId?: string;
+  internalId?: string;
+  errorDetails?: Record<string, unknown>;
+  startedAt: string;
+  completedAt?: string;
+  durationMs?: number;
+}

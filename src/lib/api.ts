@@ -1,5 +1,5 @@
 import axios from 'axios';
-import type { User, SavedCall, ScheduledCall, CallHistory, UserStats, CallRequest, AssistantResponse, Voice, PhoneNumber, NotificationPreferences, EscalationSettings, TestConfig, IndustryTemplate, BookingConfig, Customer, Booking, BookingField } from '@/types';
+import type { User, SavedCall, ScheduledCall, CallHistory, UserStats, CallRequest, AssistantResponse, Voice, PhoneNumber, NotificationPreferences, EscalationSettings, TestConfig, IndustryTemplate, BookingConfig, Customer, Booking, BookingField, BookingProvider, ProviderConnection, ProviderEventType, ProviderTimeSlot, ProviderSyncLog } from '@/types';
 import { getSession } from './supabase';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
@@ -461,6 +461,112 @@ export const integrationsApi = {
   // Calendar
   getCalendarStatus: async (): Promise<{ connected: boolean; provider: string | null; calendarId: string | null }> => {
     const { data } = await api.get('/api/integrations/calendar/status');
+    return data;
+  },
+};
+
+// Booking Providers
+export const providersApi = {
+  // Provider catalog
+  getProviders: async (): Promise<{ providers: BookingProvider[] }> => {
+    const { data } = await api.get('/api/providers');
+    return data;
+  },
+
+  getProvider: async (providerId: string): Promise<{ provider: BookingProvider }> => {
+    const { data } = await api.get(`/api/providers/${providerId}`);
+    return data;
+  },
+
+  // Connections
+  getConnections: async (): Promise<{ connections: ProviderConnection[] }> => {
+    const { data } = await api.get('/api/providers/connections/list');
+    return data;
+  },
+
+  getConnection: async (connectionId: string): Promise<{ connection: ProviderConnection }> => {
+    const { data } = await api.get(`/api/providers/connections/${connectionId}`);
+    return data;
+  },
+
+  createConnection: async (params: {
+    providerId: string;
+    apiKey?: string;
+    apiSecret?: string;
+    config?: Record<string, unknown>;
+  }): Promise<{ success: boolean; connection: ProviderConnection }> => {
+    const { data } = await api.post('/api/providers/connections', params);
+    return data;
+  },
+
+  updateConnection: async (connectionId: string, updates: {
+    syncEnabled?: boolean;
+    syncDirection?: 'inbound' | 'outbound' | 'bidirectional';
+    config?: Record<string, unknown>;
+  }): Promise<{ success: boolean; connection: ProviderConnection }> => {
+    const { data } = await api.patch(`/api/providers/connections/${connectionId}`, updates);
+    return data;
+  },
+
+  deleteConnection: async (connectionId: string): Promise<{ success: boolean }> => {
+    const { data } = await api.delete(`/api/providers/connections/${connectionId}`);
+    return data;
+  },
+
+  testConnection: async (connectionId: string): Promise<{ success: boolean; error?: string; accountInfo?: { id: string; name: string; email?: string } }> => {
+    const { data } = await api.post(`/api/providers/connections/${connectionId}/test`);
+    return data;
+  },
+
+  // OAuth
+  getOAuthUrl: async (providerId: string, redirectUri: string): Promise<{ url: string; state: string }> => {
+    const { data } = await api.get(`/api/providers/${providerId}/oauth/url`, { params: { redirectUri } });
+    return data;
+  },
+
+  handleOAuthCallback: async (providerId: string, code: string, state: string, redirectUri: string): Promise<{ success: boolean; connection: ProviderConnection }> => {
+    const { data } = await api.post(`/api/providers/${providerId}/oauth/callback`, { code, state, redirectUri });
+    return data;
+  },
+
+  // Provider operations
+  getEventTypes: async (connectionId: string): Promise<{ eventTypes: ProviderEventType[] }> => {
+    const { data } = await api.get(`/api/providers/connections/${connectionId}/event-types`);
+    return data;
+  },
+
+  getAvailability: async (connectionId: string, eventTypeId: string, startDate: string, endDate: string): Promise<{ slots: ProviderTimeSlot[] }> => {
+    const { data } = await api.get(`/api/providers/connections/${connectionId}/availability`, {
+      params: { eventTypeId, startDate, endDate }
+    });
+    return data;
+  },
+
+  syncBookings: async (connectionId: string, startDate?: string, endDate?: string): Promise<{ success: boolean; bookings: unknown[]; count: number }> => {
+    const { data } = await api.post(`/api/providers/connections/${connectionId}/sync`, { startDate, endDate });
+    return data;
+  },
+
+  createExternalBooking: async (connectionId: string, params: {
+    eventTypeId: string;
+    startTime: string;
+    endTime?: string;
+    customerName: string;
+    customerEmail: string;
+    customerPhone?: string;
+    metadata?: Record<string, unknown>;
+  }): Promise<{ success: boolean; booking: unknown }> => {
+    const { data } = await api.post(`/api/providers/connections/${connectionId}/bookings`, params);
+    return data;
+  },
+
+  cancelExternalBooking: async (connectionId: string, bookingId: string, reason?: string): Promise<{ success: boolean }> => {
+    const { data } = await api.delete(`/api/providers/connections/${connectionId}/bookings/${bookingId}`, { data: { reason } });
+    return data;
+  },
+
+  getSyncLogs: async (connectionId: string, limit?: number): Promise<{ logs: ProviderSyncLog[] }> => {
+    const { data } = await api.get(`/api/providers/connections/${connectionId}/logs`, { params: { limit } });
     return data;
   },
 };
