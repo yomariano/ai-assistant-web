@@ -3,6 +3,7 @@ import { COMPARISONS } from '@/lib/marketing/comparisons';
 import { INTEGRATIONS } from '@/lib/marketing/integrations';
 
 const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://voicefleet.ai';
+const API_URL = process.env.NEXT_PUBLIC_API_URL || process.env.API_URL;
 
 interface ContentItem {
   slug: string;
@@ -24,9 +25,12 @@ interface SitemapData {
 }
 
 async function fetchSitemapData(): Promise<SitemapData | null> {
+  if (!API_URL) {
+    return null;
+  }
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/content/sitemap-data`,
+      `${API_URL}/api/content/sitemap-data`,
       { next: { revalidate: 3600 } } // Revalidate every hour
     );
 

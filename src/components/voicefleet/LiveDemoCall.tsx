@@ -29,6 +29,20 @@ type TranscriptMessage = {
   timestamp: Date;
 };
 
+function coerceTranscript(value: unknown): string | null {
+  if (typeof value === "string") return value.trim() ? value : null;
+  if (value == null) return null;
+
+  if (typeof value === "object") {
+    const maybe = value as Record<string, unknown>;
+    const text = maybe.text;
+    if (typeof text === "string" && text.trim()) return text;
+  }
+
+  const asString = String(value);
+  return asString.trim() ? asString : null;
+}
+
 type DemoScenario = {
   id: string;
   label: string;
@@ -70,6 +84,27 @@ const LANGUAGES: DemoLanguage[] = [
   { id: "de", label: "German", transcriberLanguage: "de" },
   { id: "it", label: "Italian", transcriberLanguage: "it" },
 ];
+
+function shouldHangUpForUserUtterance(languageId: DemoLanguageId, utterance: string): boolean {
+  const text = utterance.toLowerCase().trim();
+  if (!text) return false;
+
+  const patternsByLanguage: Record<DemoLanguageId, RegExp[]> = {
+    en: [
+      /\bbye\b/i,
+      /\bgoodbye\b/i,
+      /\bsee you\b/i,
+      /\bthank(s| you).*(bye|goodbye)\b/i,
+    ],
+    es: [/\bad(i|í)os\b/i, /\bhasta luego\b/i, /\bhasta pronto\b/i, /\bchao\b/i],
+    fr: [/\bau revoir\b/i, /\bà bient(ô|o)t\b/i, /\bmerci.*(au revoir|bye)\b/i],
+    de: [/\btsch(ü|u)ss\b/i, /\bauf wiedersehen\b/i, /\bbis bald\b/i],
+    it: [/\barrivederci\b/i, /\ba presto\b/i, /\bgrazie.*(ciao|arrivederci)\b/i],
+  };
+
+  const patterns = patternsByLanguage[languageId] || patternsByLanguage.en;
+  return patterns.some((re) => re.test(text));
+}
 
 const SCENARIOS: DemoScenario[] = [
   {
@@ -266,6 +301,10 @@ export default function LiveDemoCall() {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const vapiRef = useRef<any>(null);
+  const hardStopTimeoutRef = useRef<number | null>(null);
+  const hangupRequestedRef = useRef(false);
+  const languageIdRef = useRef<DemoLanguageId>("en");
+  const isAssistantSpeakingRef = useRef(false);
 
   const scenario = useMemo(() => {
     return SCENARIOS.find((s) => s.id === scenarioId) || SCENARIOS[0];
@@ -293,6 +332,14 @@ export default function LiveDemoCall() {
   }, [messages]);
 
   useEffect(() => {
+    languageIdRef.current = languageId;
+  }, [languageId]);
+
+  useEffect(() => {
+    isAssistantSpeakingRef.current = isAssistantSpeaking;
+  }, [isAssistantSpeaking]);
+
+  useEffect(() => {
     if (!open) return;
 
     const publicKey = process.env.NEXT_PUBLIC_VAPI_PUBLIC_KEY;
@@ -313,20 +360,45 @@ export default function LiveDemoCall() {
         vapi.on("call-start", () => {
           setCallStatus("connected");
           setError(null);
+
+          if (hardStopTimeoutRef.current) {
+            window.clearTimeout(hardStopTimeoutRef.current);
+            hardStopTimeoutRef.current = null;
+          }
+
+          // Hard-stop the call to avoid meeting ejection / long-running demo sessions.
+          // Give the assistant time to respond; the system prompt also asks it to wrap up.
+          hardStopTimeoutRef.current = window.setTimeout(() => {
+            if (vapiRef.current) vapiRef.current.stop();
+            setCallStatus("ended");
+          }, 90_000);
         });
 
         vapi.on("call-end", () => {
           setCallStatus("ended");
           setIsAssistantSpeaking(false);
+          isAssistantSpeakingRef.current = false;
           setVolumeLevel(0);
+          hangupRequestedRef.current = false;
+          if (hardStopTimeoutRef.current) {
+            window.clearTimeout(hardStopTimeoutRef.current);
+            hardStopTimeoutRef.current = null;
+          }
         });
 
         vapi.on("speech-start", () => {
+          isAssistantSpeakingRef.current = true;
           setIsAssistantSpeaking(true);
         });
 
         vapi.on("speech-end", () => {
+          isAssistantSpeakingRef.current = false;
           setIsAssistantSpeaking(false);
+          if (hangupRequestedRef.current && vapiRef.current) {
+            hangupRequestedRef.current = false;
+            vapiRef.current.stop();
+            setCallStatus("ended");
+          }
         });
 
         vapi.on("volume-level", (level: number) => {
@@ -337,10 +409,27 @@ export default function LiveDemoCall() {
           "message",
           (message: { type: string; role?: string; transcript?: string; transcriptType?: string }) => {
             if (message.type === "transcript" && message.transcriptType === "final" && message.transcript) {
+              const transcriptText = coerceTranscript(message.transcript);
+              if (!transcriptText) return;
               const role = message.role === "user" ? "user" : "assistant";
+
+              if (role === "user" && shouldHangUpForUserUtterance(languageIdRef.current, transcriptText)) {
+                hangupRequestedRef.current = true;
+
+                // If the assistant isn't speaking, end shortly after.
+                // If it is speaking, we'll end on the next speech-end event.
+                window.setTimeout(() => {
+                  if (hangupRequestedRef.current && !isAssistantSpeakingRef.current && vapiRef.current) {
+                    hangupRequestedRef.current = false;
+                    vapiRef.current.stop();
+                    setCallStatus("ended");
+                  }
+                }, 2_000);
+              }
+
               setMessages((prev) => [
-                ...prev,
-                { role, content: message.transcript!, timestamp: new Date() },
+                ...prev.slice(-29),
+                { role, content: transcriptText, timestamp: new Date() },
               ]);
             }
           }
@@ -372,6 +461,11 @@ export default function LiveDemoCall() {
         vapiRef.current.stop();
         vapiRef.current = null;
       }
+      hangupRequestedRef.current = false;
+      if (hardStopTimeoutRef.current) {
+        window.clearTimeout(hardStopTimeoutRef.current);
+        hardStopTimeoutRef.current = null;
+      }
     };
   }, [open]);
 
@@ -392,12 +486,17 @@ export default function LiveDemoCall() {
         firstMessage: assistantFirstMessage,
         firstMessageMode: "assistant-speaks-first",
         backgroundSound: "office",
-        maxDurationSeconds: 240,
+        maxDurationSeconds: 90,
         voice: { provider: "vapi", voiceId },
         model: {
           provider: "openai",
           model: "gpt-4o-mini",
-          messages: [{ role: "system", content: assistantSystemPrompt }],
+          messages: [
+            {
+              role: "system",
+              content: `${assistantSystemPrompt}\n\nDemo constraint:\n- This demo call is limited to 90 seconds. If time is nearly up, politely say goodbye and end the call.`,
+            },
+          ],
         },
       };
 
@@ -424,6 +523,11 @@ export default function LiveDemoCall() {
   const endCall = useCallback(() => {
     if (vapiRef.current) vapiRef.current.stop();
     setCallStatus("ended");
+    hangupRequestedRef.current = false;
+    if (hardStopTimeoutRef.current) {
+      window.clearTimeout(hardStopTimeoutRef.current);
+      hardStopTimeoutRef.current = null;
+    }
   }, []);
 
   const toggleMute = useCallback(() => {
@@ -445,6 +549,11 @@ export default function LiveDemoCall() {
         setIsAssistantSpeaking(false);
         setVolumeLevel(0);
         setCallStatus("idle");
+        hangupRequestedRef.current = false;
+        if (hardStopTimeoutRef.current) {
+          window.clearTimeout(hardStopTimeoutRef.current);
+          hardStopTimeoutRef.current = null;
+        }
       }
       setOpen(next);
     },
@@ -471,8 +580,8 @@ export default function LiveDemoCall() {
           <DialogHeader>
             <DialogTitle>Try a live demo call</DialogTitle>
             <DialogDescription>
-              Talk to an AI receptionist in your browser (microphone required). This is a demo - no real bookings are
-              created.
+              Talk to an AI receptionist in your browser (microphone required). This is a demo — no real bookings are
+              created. Calls are limited to 90 seconds and will end automatically.
             </DialogDescription>
           </DialogHeader>
 

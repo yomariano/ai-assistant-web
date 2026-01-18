@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Shield, Clock, Phone, MessageSquare, Calendar, Link2, Headphones, PhoneIncoming } from "lucide-react";
+import { ArrowRight, Shield, Clock, Phone, MessageSquare, Calendar, Link2, Headphones, PhoneIncoming, Globe2 } from "lucide-react";
 import Link from "next/link";
 import { useAuthStore } from "@/lib/store";
 import LiveDemoCall from "@/components/voicefleet/LiveDemoCall";
@@ -12,6 +12,7 @@ const HeroSection = () => {
     { icon: Shield, label: "GDPR-ready" },
     { icon: Clock, label: "Go live in < 1 hour" },
     { icon: Link2, label: "Calendar + booking integrations" },
+    { icon: Globe2, label: "Multilingual agents" },
   ];
 
   const industries = ["Restaurants", "Dentists", "Gyms", "Plumbers", "Clinics", "Salons"];
@@ -72,6 +73,9 @@ const HeroSection = () => {
               )}
               <LiveDemoCall />
             </div>
+            <p className="text-xs text-muted-foreground -mt-6 mb-8">
+              Live demo: choose an industry + voice + language (English, Spanish, French, German, Italian). Calls end automatically after 90 seconds.
+            </p>
             <p className="text-sm text-muted-foreground -mt-4 mb-10">
               Prefer a guided walkthrough?{" "}
               <a

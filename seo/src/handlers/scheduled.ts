@@ -19,6 +19,7 @@ import {
   cacheNews,
   getCachedNews,
 } from '../utils/news';
+import { isConfiguredSecret } from '../utils/config';
 
 // Cache for industry news to avoid fetching same news multiple times
 const newsCache: Map<string, NewsArticle[]> = new Map();
@@ -119,8 +120,8 @@ export async function runContentGeneration(
 
   console.log(`[Scheduled] Starting content generation at ${startedAt} (cron=${cron})`);
 
-  if (!env.SEO_WORKER_SECRET) {
-    console.error('[Scheduled] SEO_WORKER_SECRET not configured');
+  if (!isConfiguredSecret(env.SEO_WORKER_SECRET)) {
+    console.error('[Scheduled] SEO_WORKER_SECRET not configured (or still set to a placeholder)');
     const summary: GenerationRunSummary = {
       startedAt,
       endedAt: new Date().toISOString(),
@@ -321,8 +322,8 @@ export async function manualGenerateContent(
   env: Bindings,
   request: ContentRequest
 ): Promise<{ success: boolean; cacheKey: string; error?: string }> {
-  if (!env.SEO_WORKER_SECRET) {
-    return { success: false, cacheKey: '', error: 'SEO_WORKER_SECRET not configured' };
+  if (!isConfiguredSecret(env.SEO_WORKER_SECRET)) {
+    return { success: false, cacheKey: '', error: 'SEO_WORKER_SECRET not configured (or still set to a placeholder)' };
   }
 
   const cacheKey = buildCacheKey(request);

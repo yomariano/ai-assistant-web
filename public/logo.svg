@@ -8,6 +8,7 @@
 
   <!-- mark -->
   <rect x="20" y="20" width="200" height="200" rx="56" fill="url(#vf-bg)"/>
+  <rect x="30" y="30" width="180" height="180" rx="50" stroke="white" stroke-opacity="0.18" stroke-width="6"/>
   <path d="M74 84L120 156L166 84" stroke="white" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"/>
   <path d="M54 104C43 115 43 143 54 154" stroke="white" stroke-opacity="0.9" stroke-width="10" stroke-linecap="round"/>
   <path d="M186 104C197 115 197 143 186 154" stroke="white" stroke-opacity="0.9" stroke-width="10" stroke-linecap="round"/>
@@ -20,4 +21,3 @@
     </text>
   </g>
 </svg>
-

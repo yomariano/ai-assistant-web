@@ -16,11 +16,13 @@ import { scheduledHandler, manualGenerateContent, runContentGeneration } from '.
 import { INDUSTRIES } from './data/industries';
 import { COUNTRIES } from './data/locations';
 import { Bindings } from './types';
+import { isConfiguredSecret } from './utils/config';
 
 const app = new Hono<{ Bindings: Bindings }>();
 
 function isAdminAuthorized(c: Context<{ Bindings: Bindings }>, secretFromBody?: string) {
-  const adminSecret = c.env.ADMIN_SECRET || 'voicefleet-seo-admin';
+  const adminSecret = isConfiguredSecret(c.env.ADMIN_SECRET) ? c.env.ADMIN_SECRET.trim() : null;
+  if (!adminSecret) return false;
   const secretFromHeader = c.req.header('x-admin-secret');
   const secretFromQuery = c.req.query('secret');
   return secretFromHeader === adminSecret || secretFromQuery === adminSecret || secretFromBody === adminSecret;
@@ -220,6 +222,12 @@ app.get('/admin/run-status', async (c) => {
   ]);
 
   return c.json({
+    config: {
+      adminSecretConfigured: isConfiguredSecret(c.env.ADMIN_SECRET),
+      workerSecretConfigured: isConfiguredSecret(c.env.SEO_WORKER_SECRET),
+      apiUrl: c.env.API_URL,
+      siteUrl: c.env.SITE_URL,
+    },
     cursor: cursorRaw ? Number.parseInt(cursorRaw, 10) : 0,
     lastRun: lastRunRaw ? JSON.parse(lastRunRaw) : null,
   });
