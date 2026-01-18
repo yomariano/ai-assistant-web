@@ -297,6 +297,8 @@ export default function LiveDemoCall() {
   const [scenarioId, setScenarioId] = useState(SCENARIOS[0].id);
   const [voiceId, setVoiceId] = useState<VapiVoiceId>(VOICES[0].id);
   const [languageId, setLanguageId] = useState<DemoLanguageId>("en");
+  const [isCheckingAllowance, setIsCheckingAllowance] = useState(false);
+  const [isDemoBlocked, setIsDemoBlocked] = useState(false);
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -476,10 +478,36 @@ export default function LiveDemoCall() {
     }
 
     try {
+      setIsDemoBlocked(false);
       setCallStatus("connecting");
       setError(null);
       setMessages([]);
       setIsMuted(false);
+
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+      if (apiUrl) {
+        setIsCheckingAllowance(true);
+        try {
+          const res = await fetch(`${apiUrl.replace(/\/$/, "")}/api/public/live-demo/allow`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+          });
+          const data = (await res.json().catch(() => null)) as
+            | { allowed: boolean; remaining?: number; resetAt?: string }
+            | null;
+
+          if (data && data.allowed === false) {
+            setIsDemoBlocked(true);
+            setCallStatus("idle");
+            setError("Live demo limit reached (2 calls per IP). Book a demo to try a full-length call.");
+            return;
+          }
+        } catch {
+          // If the allow-check fails, don't block the demo (best-effort).
+        } finally {
+          setIsCheckingAllowance(false);
+        }
+      }
 
       const assistantConfig: Record<string, unknown> = {
         name: `VoiceFleet Demo - ${scenario.label}`,
@@ -517,6 +545,7 @@ export default function LiveDemoCall() {
       }
       setError(errorMessage);
       setCallStatus("error");
+      setIsCheckingAllowance(false);
     }
   }, [assistantFirstMessage, assistantSystemPrompt, language.transcriberLanguage, scenario.label, voiceId]);
 
@@ -549,6 +578,8 @@ export default function LiveDemoCall() {
         setIsAssistantSpeaking(false);
         setVolumeLevel(0);
         setCallStatus("idle");
+        setIsCheckingAllowance(false);
+        setIsDemoBlocked(false);
         hangupRequestedRef.current = false;
         if (hardStopTimeoutRef.current) {
           window.clearTimeout(hardStopTimeoutRef.current);
@@ -576,7 +607,7 @@ export default function LiveDemoCall() {
       </Button>
 
       <Dialog open={open} onOpenChange={handleOpenChange}>
-        <DialogContent className="max-w-2xl">
+        <DialogContent className="w-[95vw] max-w-2xl max-h-[90vh] overflow-y-auto p-4 sm:p-6">
           <DialogHeader>
             <DialogTitle>Try a live demo call</DialogTitle>
             <DialogDescription>
@@ -587,7 +618,17 @@ export default function LiveDemoCall() {
 
           {error && (
             <div className="rounded-xl border border-destructive/30 bg-destructive/10 px-4 py-3 text-sm text-destructive">
-              {error}
+              {error}{" "}
+              {isDemoBlocked && (
+                <a
+                  href="https://calendly.com/voicefleet"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline font-semibold"
+                >
+                  Book a demo
+                </a>
+              )}
             </div>
           )}
 
@@ -732,7 +773,12 @@ export default function LiveDemoCall() {
           <DialogFooter className="gap-2">
             {callStatus === "connected" || callStatus === "connecting" ? (
               <>
-                <Button variant="outline" onClick={toggleMute} disabled={callStatus !== "connected"}>
+                <Button
+                  className="w-full sm:w-auto"
+                  variant="outline"
+                  onClick={toggleMute}
+                  disabled={callStatus !== "connected"}
+                >
                   {isMuted ? (
                     <>
                       <MicOff className="w-4 h-4" />
@@ -745,15 +791,19 @@ export default function LiveDemoCall() {
                     </>
                   )}
                 </Button>
-                <Button variant="outline" onClick={endCall} className="border-destructive/30 text-destructive hover:bg-destructive/10">
+                <Button
+                  className="w-full sm:w-auto border-destructive/30 text-destructive hover:bg-destructive/10"
+                  variant="outline"
+                  onClick={endCall}
+                >
                   <PhoneOff className="w-4 h-4" />
                   End call
                 </Button>
               </>
             ) : (
-              <Button variant="hero" onClick={startCall} disabled={callStatus === "loading"}>
+              <Button className="w-full sm:w-auto" variant="hero" onClick={startCall} disabled={callStatus === "loading" || isCheckingAllowance || isDemoBlocked}>
                 <Phone className="w-4 h-4" />
-                {callStatus === "error" || callStatus === "ended" ? "Try again" : "Start demo call"}
+                {isCheckingAllowance ? "Starting..." : callStatus === "error" || callStatus === "ended" ? "Try again" : "Start demo call"}
               </Button>
             )}
           </DialogFooter>
