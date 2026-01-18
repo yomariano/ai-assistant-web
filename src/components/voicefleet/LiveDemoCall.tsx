@@ -34,8 +34,18 @@ type DemoScenario = {
   label: string;
   businessName: string;
   firstMessage: string;
+  firstMessageByLanguage?: Partial<Record<DemoLanguageId, string>>;
   systemPrompt: string;
   suggestedPhrases: string[];
+  suggestedPhrasesByLanguage?: Partial<Record<DemoLanguageId, string[]>>;
+};
+
+type DemoLanguageId = "en" | "es" | "fr" | "de" | "it";
+
+type DemoLanguage = {
+  id: DemoLanguageId;
+  label: string;
+  transcriberLanguage?: string;
 };
 
 type VapiVoiceId =
@@ -53,6 +63,14 @@ type VapiVoiceId =
   | "Leah"
   | "Tara";
 
+const LANGUAGES: DemoLanguage[] = [
+  { id: "en", label: "English", transcriberLanguage: "en" },
+  { id: "es", label: "Spanish", transcriberLanguage: "es" },
+  { id: "fr", label: "French", transcriberLanguage: "fr" },
+  { id: "de", label: "German", transcriberLanguage: "de" },
+  { id: "it", label: "Italian", transcriberLanguage: "it" },
+];
+
 const SCENARIOS: DemoScenario[] = [
   {
     id: "restaurant-reservation",
@@ -60,6 +78,12 @@ const SCENARIOS: DemoScenario[] = [
     businessName: "Harbor Bistro",
     firstMessage:
       "Hi, thanks for calling Harbor Bistro. This is the AI receptionist. How can I help today?",
+    firstMessageByLanguage: {
+      es: "Hola, gracias por llamar a Harbor Bistro. Soy la recepcionista de IA. ¿En qué puedo ayudarte hoy?",
+      fr: "Bonjour, merci d’appeler Harbor Bistro. Je suis la réceptionniste IA. Comment puis-je vous aider aujourd’hui ?",
+      de: "Hallo, danke für Ihren Anruf bei Harbor Bistro. Ich bin die KI-Rezeptionistin. Wie kann ich Ihnen heute helfen?",
+      it: "Ciao, grazie per aver chiamato Harbor Bistro. Sono la receptionist AI. Come posso aiutarti oggi?",
+    },
     systemPrompt:
       "You are the AI phone receptionist for Harbor Bistro, a busy small restaurant.\n\nGoals:\n- Help callers book or change a reservation.\n- Ask for: name, party size, date, time, and a contact number.\n- Confirm details back clearly.\n- Answer common questions (opening hours, location, dietary notes).\n\nConstraints (demo mode):\n- Do NOT claim you actually checked a real calendar or created a real reservation.\n- Instead say you are taking a reservation request for this demo and would send confirmation in the real product.\n- If the caller asks for a human, offer to take a message and summarize it.\n\nTone: friendly, concise, professional.",
     suggestedPhrases: [
@@ -67,6 +91,28 @@ const SCENARIOS: DemoScenario[] = [
       "What time do you close on Sunday?",
       "Can you note a gluten allergy on the booking?",
     ],
+    suggestedPhrasesByLanguage: {
+      es: [
+        "Hola, me gustaría reservar una mesa para 4 mañana sobre las 7.",
+        "¿A qué hora cierran el domingo?",
+        "¿Puedes anotar una alergia al gluten en la reserva?",
+      ],
+      fr: [
+        "Bonjour, je voudrais réserver une table pour 4 demain vers 19h.",
+        "À quelle heure fermez-vous le dimanche ?",
+        "Pouvez-vous noter une allergie au gluten sur la réservation ?",
+      ],
+      de: [
+        "Hallo, ich würde gerne für morgen gegen 19 Uhr einen Tisch für 4 reservieren.",
+        "Wann schließen Sie am Sonntag?",
+        "Können Sie eine Glutenallergie bei der Reservierung vermerken?",
+      ],
+      it: [
+        "Ciao, vorrei prenotare un tavolo per 4 domani verso le 19:00.",
+        "A che ora chiudete la domenica?",
+        "Puoi annotare un’allergia al glutine sulla prenotazione?",
+      ],
+    },
   },
   {
     id: "dentist-appointment",
@@ -74,6 +120,12 @@ const SCENARIOS: DemoScenario[] = [
     businessName: "BrightSmile Dental",
     firstMessage:
       "Hello, you've reached BrightSmile Dental. This is the AI receptionist. How can I help?",
+    firstMessageByLanguage: {
+      es: "Hola, has llamado a BrightSmile Dental. Soy la recepcionista de IA. ¿En qué puedo ayudarte?",
+      fr: "Bonjour, vous êtes bien chez BrightSmile Dental. Je suis la réceptionniste IA. Comment puis-je vous aider ?",
+      de: "Hallo, Sie haben BrightSmile Dental erreicht. Ich bin die KI-Rezeptionistin. Wie kann ich helfen?",
+      it: "Ciao, hai chiamato BrightSmile Dental. Sono la receptionist AI. Come posso aiutarti?",
+    },
     systemPrompt:
       "You are the AI phone receptionist for BrightSmile Dental.\n\nGoals:\n- Help callers book, reschedule, or cancel appointments.\n- Ask for: patient name, reason for visit, preferred day/time, phone number.\n- For emergencies, gather symptoms and suggest urgent escalation.\n\nConstraints (demo mode):\n- Do NOT provide medical advice beyond basic triage and escalation.\n- Do NOT claim to access patient records.\n- Do NOT claim you booked a real slot; treat it as a demo booking request.\n\nTone: calm, reassuring, professional.",
     suggestedPhrases: [
@@ -81,6 +133,28 @@ const SCENARIOS: DemoScenario[] = [
       "I need to reschedule my appointment.",
       "I have severe tooth pain - can I be seen today?",
     ],
+    suggestedPhrasesByLanguage: {
+      es: [
+        "Me gustaría reservar una limpieza la semana que viene.",
+        "Necesito reprogramar mi cita.",
+        "Tengo un dolor de muelas fuerte. ¿Pueden verme hoy?",
+      ],
+      fr: [
+        "J’aimerais prendre rendez-vous pour un détartrage la semaine prochaine.",
+        "Je dois reprogrammer mon rendez-vous.",
+        "J’ai une forte douleur dentaire. Est-ce possible aujourd’hui ?",
+      ],
+      de: [
+        "Ich möchte nächste Woche eine Zahnreinigung buchen.",
+        "Ich muss meinen Termin verschieben.",
+        "Ich habe starke Zahnschmerzen. Kann ich heute kommen?",
+      ],
+      it: [
+        "Vorrei prenotare una pulizia la prossima settimana.",
+        "Devo riprogrammare il mio appuntamento.",
+        "Ho un forte mal di denti. Posso essere visto oggi?",
+      ],
+    },
   },
   {
     id: "gym-membership",
@@ -88,6 +162,12 @@ const SCENARIOS: DemoScenario[] = [
     businessName: "Northside Fitness",
     firstMessage:
       "Hi, thanks for calling Northside Fitness. This is the AI receptionist. What can I do for you?",
+    firstMessageByLanguage: {
+      es: "Hola, gracias por llamar a Northside Fitness. Soy la recepcionista de IA. ¿En qué puedo ayudarte?",
+      fr: "Bonjour, merci d’appeler Northside Fitness. Je suis la réceptionniste IA. Comment puis-je vous aider ?",
+      de: "Hallo, danke für Ihren Anruf bei Northside Fitness. Ich bin die KI-Rezeptionistin. Wie kann ich helfen?",
+      it: "Ciao, grazie per aver chiamato Northside Fitness. Sono la receptionist AI. Come posso aiutarti?",
+    },
     systemPrompt:
       "You are the AI phone receptionist for Northside Fitness (a local gym).\n\nGoals:\n- Help callers book a class or intro session, and answer membership questions.\n- Ask for: name, class type, preferred time, and contact number.\n- Confirm details.\n\nConstraints (demo mode):\n- Do NOT claim you checked live availability.\n- Treat it as a demo booking request.\n\nTone: upbeat, helpful, concise.",
     suggestedPhrases: [
@@ -95,6 +175,28 @@ const SCENARIOS: DemoScenario[] = [
       "What are your membership prices?",
       "Do you have personal training available?",
     ],
+    suggestedPhrasesByLanguage: {
+      es: [
+        "¿Puedo reservar una clase para principiantes este fin de semana?",
+        "¿Cuáles son los precios de la membresía?",
+        "¿Tienen entrenamiento personal?",
+      ],
+      fr: [
+        "Puis-je réserver un cours débutant ce week-end ?",
+        "Quels sont vos tarifs d’abonnement ?",
+        "Proposez-vous du coaching personnel ?",
+      ],
+      de: [
+        "Kann ich dieses Wochenende einen Anfängerkurs buchen?",
+        "Wie viel kostet die Mitgliedschaft?",
+        "Bieten Sie Personal Training an?",
+      ],
+      it: [
+        "Posso prenotare una lezione per principianti questo weekend?",
+        "Quali sono i prezzi dell’abbonamento?",
+        "Offrite personal training?",
+      ],
+    },
   },
   {
     id: "plumber-callout",
@@ -102,6 +204,12 @@ const SCENARIOS: DemoScenario[] = [
     businessName: "RapidFlow Plumbing",
     firstMessage:
       "Hello, RapidFlow Plumbing. This is the AI receptionist. What's going on today?",
+    firstMessageByLanguage: {
+      es: "Hola, RapidFlow Plumbing. Soy la recepcionista de IA. ¿Qué ha pasado hoy?",
+      fr: "Bonjour, RapidFlow Plumbing. Je suis la réceptionniste IA. Que se passe-t-il aujourd’hui ?",
+      de: "Hallo, RapidFlow Plumbing. Ich bin die KI-Rezeptionistin. Was ist heute passiert?",
+      it: "Ciao, RapidFlow Plumbing. Sono la receptionist AI. Cosa succede oggi?",
+    },
     systemPrompt:
       "You are the AI phone receptionist for RapidFlow Plumbing.\n\nGoals:\n- Qualify emergency vs non-emergency.\n- Ask for: name, address/area, issue description, urgency, and callback number.\n- If urgent (active leak, no heat in winter, flooding), offer to escalate and confirm best contact method.\n\nConstraints (demo mode):\n- Do NOT claim a technician is dispatched.\n- Treat it as a demo intake; summarize details and suggest escalation.\n\nTone: direct, reassuring, efficient.",
     suggestedPhrases: [
@@ -109,6 +217,28 @@ const SCENARIOS: DemoScenario[] = [
       "My boiler stopped working - what's the next step?",
       "Can I get a rough quote for a tap replacement?",
     ],
+    suggestedPhrasesByLanguage: {
+      es: [
+        "Tengo una fuga debajo del fregadero. ¿Puede venir alguien hoy?",
+        "La caldera dejó de funcionar. ¿Cuál es el siguiente paso?",
+        "¿Me puedes dar un presupuesto aproximado para cambiar un grifo?",
+      ],
+      fr: [
+        "J’ai une fuite sous l’évier. Quelqu’un peut venir aujourd’hui ?",
+        "Ma chaudière ne fonctionne plus. Quelle est la suite ?",
+        "Pouvez-vous me donner une estimation pour remplacer un robinet ?",
+      ],
+      de: [
+        "Ich habe ein Leck unter der Küchenspüle. Kann heute jemand kommen?",
+        "Mein Boiler funktioniert nicht mehr. Was ist der nächste Schritt?",
+        "Können Sie mir einen groben Preis für den Austausch eines Wasserhahns nennen?",
+      ],
+      it: [
+        "Ho una perdita sotto il lavello. Può venire qualcuno oggi?",
+        "La caldaia ha smesso di funzionare. Qual è il prossimo passo?",
+        "Posso avere un preventivo indicativo per sostituire un rubinetto?",
+      ],
+    },
   },
 ];
 
@@ -131,6 +261,7 @@ export default function LiveDemoCall() {
   const [messages, setMessages] = useState<TranscriptMessage[]>([]);
   const [scenarioId, setScenarioId] = useState(SCENARIOS[0].id);
   const [voiceId, setVoiceId] = useState<VapiVoiceId>(VOICES[0].id);
+  const [languageId, setLanguageId] = useState<DemoLanguageId>("en");
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -139,6 +270,23 @@ export default function LiveDemoCall() {
   const scenario = useMemo(() => {
     return SCENARIOS.find((s) => s.id === scenarioId) || SCENARIOS[0];
   }, [scenarioId]);
+
+  const language = useMemo(() => {
+    return LANGUAGES.find((l) => l.id === languageId) || LANGUAGES[0];
+  }, [languageId]);
+
+  const assistantFirstMessage = useMemo(() => {
+    return scenario.firstMessageByLanguage?.[languageId] || scenario.firstMessage;
+  }, [languageId, scenario.firstMessage, scenario.firstMessageByLanguage]);
+
+  const suggestedPhrases = useMemo(() => {
+    return scenario.suggestedPhrasesByLanguage?.[languageId] || scenario.suggestedPhrases;
+  }, [languageId, scenario.suggestedPhrases, scenario.suggestedPhrasesByLanguage]);
+
+  const assistantSystemPrompt = useMemo(() => {
+    if (languageId === "en") return scenario.systemPrompt;
+    return `${scenario.systemPrompt}\n\nIMPORTANT:\n- Speak to the caller in ${language.label}.\n- Keep the same structure (collect details, confirm back).\n- If the caller switches languages, continue in ${language.label}.`;
+  }, [language.label, languageId, scenario.systemPrompt]);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -239,9 +387,9 @@ export default function LiveDemoCall() {
       setMessages([]);
       setIsMuted(false);
 
-      await vapiRef.current.start({
+      const assistantConfig: Record<string, unknown> = {
         name: `VoiceFleet Demo - ${scenario.label}`,
-        firstMessage: scenario.firstMessage,
+        firstMessage: assistantFirstMessage,
         firstMessageMode: "assistant-speaks-first",
         backgroundSound: "office",
         maxDurationSeconds: 240,
@@ -249,9 +397,18 @@ export default function LiveDemoCall() {
         model: {
           provider: "openai",
           model: "gpt-4o-mini",
-          messages: [{ role: "system", content: scenario.systemPrompt }],
+          messages: [{ role: "system", content: assistantSystemPrompt }],
         },
-      });
+      };
+
+      if (language.transcriberLanguage) {
+        assistantConfig.transcriber = {
+          provider: "deepgram",
+          language: language.transcriberLanguage,
+        };
+      }
+
+      await vapiRef.current.start(assistantConfig);
     } catch (err: unknown) {
       let errorMessage = "Failed to start the demo. Please allow microphone access and try again.";
       if (err && typeof err === "object") {
@@ -262,7 +419,7 @@ export default function LiveDemoCall() {
       setError(errorMessage);
       setCallStatus("error");
     }
-  }, [scenario.firstMessage, scenario.label, scenario.systemPrompt, voiceId]);
+  }, [assistantFirstMessage, assistantSystemPrompt, language.transcriberLanguage, scenario.label, voiceId]);
 
   const endCall = useCallback(() => {
     if (vapiRef.current) vapiRef.current.stop();
@@ -325,7 +482,7 @@ export default function LiveDemoCall() {
             </div>
           )}
 
-          <div className="grid gap-4 sm:grid-cols-2">
+          <div className="grid gap-4 sm:grid-cols-3">
             <div>
               <label className="block text-sm font-medium text-foreground mb-2">Scenario</label>
               <select
@@ -356,6 +513,23 @@ export default function LiveDemoCall() {
                   </option>
                 ))}
               </select>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-foreground mb-2">Language</label>
+              <select
+                value={languageId}
+                onChange={(e) => setLanguageId(e.target.value as DemoLanguageId)}
+                className="w-full px-4 py-3 rounded-lg border border-border bg-background text-foreground focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all"
+                disabled={callStatus === "connecting" || callStatus === "connected"}
+              >
+                {LANGUAGES.map((l) => (
+                  <option key={l.id} value={l.id}>
+                    {l.label}
+                  </option>
+                ))}
+              </select>
+              <p className="mt-2 text-xs text-muted-foreground">Use the sample phrases below for the best demo.</p>
             </div>
           </div>
 
@@ -410,7 +584,7 @@ export default function LiveDemoCall() {
             <div className="mt-4">
               <p className="text-xs font-medium text-muted-foreground mb-2">Try saying:</p>
               <div className="flex flex-wrap gap-2">
-                {scenario.suggestedPhrases.map((p) => (
+                {suggestedPhrases.map((p) => (
                   <button
                     key={p}
                     type="button"
