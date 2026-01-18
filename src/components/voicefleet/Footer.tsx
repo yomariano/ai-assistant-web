@@ -15,7 +15,7 @@ const Footer = () => {
               <span className="text-xl font-heading font-bold">VoiceFleet</span>
             </Link>
             <p className="text-sm text-primary-foreground/70 max-w-xs">
-              AI voice agents that handle calls at 80% lower cost.
+              AI voice receptionist for small businesses. Answer calls, take messages, and book appointments.
             </p>
             <a
               href="mailto:hello@voicefleet.ai"
@@ -33,6 +33,12 @@ const Footer = () => {
             </Link>
             <Link href="/for" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
               Industries
+            </Link>
+            <Link href="/connect" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
+              Integrations
+            </Link>
+            <Link href="/compare" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
+              Compare
             </Link>
             <a href="#pricing" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
               Pricing

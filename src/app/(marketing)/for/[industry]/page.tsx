@@ -44,9 +44,38 @@ export default async function UseCasePage({ params }: Props) {
     { name: page.industry_name, href: `/for/${industry}` },
   ];
 
+  const faqItems = [
+    {
+      question: `Can VoiceFleet book appointments for ${page.industry_name.toLowerCase()}?`,
+      answer:
+        "Yes. VoiceFleet can capture the caller's intent and details, then book into your calendar or booking system (or take a structured booking request, depending on your setup).",
+    },
+    {
+      question: "What happens if the AI can't handle a call?",
+      answer:
+        "You control escalation: transfer to staff, take a detailed message, or flag urgent calls for immediate attention.",
+    },
+    {
+      question: "How do I start using VoiceFleet?",
+      answer:
+        "Most teams start by forwarding their existing phone number. You then configure greeting, booking fields, and business rules in the dashboard.",
+    },
+    {
+      question: "Does it integrate with calendars and booking tools?",
+      answer:
+        "Yes. VoiceFleet supports calendar and booking integrations so availability and bookings can sync with your existing tools.",
+    },
+    {
+      question: "Is VoiceFleet suitable for small teams?",
+      answer:
+        "Yes. It's designed for SMBs that need reliable phone coverage without adding headcount, while keeping control over what the AI says and does.",
+    },
+  ];
+
   return (
     <>
       <BreadcrumbSchema items={breadcrumbs} />
+      <FAQSchema items={faqItems} />
 
       <div className="min-h-screen bg-white">
         <Breadcrumbs items={breadcrumbs} />
@@ -176,12 +205,12 @@ export default async function UseCasePage({ params }: Props) {
                           <TrendingDown className="h-5 w-5 text-red-400" />
                           <span className="text-slate-400 text-sm">Missed Calls</span>
                         </div>
-                        <div className="text-4xl font-bold text-white mb-1">23%</div>
-                        <div className="text-slate-500 text-sm">of calls go unanswered</div>
+                        <div className="text-4xl font-bold text-white mb-1">Varies</div>
+                        <div className="text-slate-500 text-sm">by call volume and staffing</div>
                         <div className="mt-3 h-2 bg-slate-700 rounded-full overflow-hidden">
-                          <div className="h-full w-[23%] bg-gradient-to-r from-red-500 to-orange-500 rounded-full" />
+                          <div className="h-full w-[55%] bg-gradient-to-r from-red-500 to-orange-500 rounded-full" />
                         </div>
-                        <p className="mt-3 text-xs text-slate-600 group-hover:text-slate-500 transition-colors">Source: SME Communications Study 2024</p>
+                        <p className="mt-3 text-xs text-slate-600 group-hover:text-slate-500 transition-colors">A common pain point for busy teams.</p>
                       </div>
 
                       <div className="bg-white/5 backdrop-blur border border-white/10 rounded-2xl p-6 group hover:bg-white/10 transition-colors">
@@ -189,12 +218,12 @@ export default async function UseCasePage({ params }: Props) {
                           <Euro className="h-5 w-5 text-red-400" />
                           <span className="text-slate-400 text-sm">Lost Revenue</span>
                         </div>
-                        <div className="text-4xl font-bold text-white mb-1">€847</div>
-                        <div className="text-slate-500 text-sm">per missed opportunity</div>
+                        <div className="text-4xl font-bold text-white mb-1">At risk</div>
+                        <div className="text-slate-500 text-sm">when callers hang up</div>
                         <div className="mt-3 h-2 bg-slate-700 rounded-full overflow-hidden">
                           <div className="h-full w-[65%] bg-gradient-to-r from-red-500 to-orange-500 rounded-full" />
                         </div>
-                        <p className="mt-3 text-xs text-slate-600 group-hover:text-slate-500 transition-colors">Source: Customer Acquisition Report</p>
+                        <p className="mt-3 text-xs text-slate-600 group-hover:text-slate-500 transition-colors">Missed calls often mean missed bookings.</p>
                       </div>
 
                       <div className="bg-white/5 backdrop-blur border border-white/10 rounded-2xl p-6 group hover:bg-white/10 transition-colors">
@@ -202,12 +231,12 @@ export default async function UseCasePage({ params }: Props) {
                           <Clock className="h-5 w-5 text-amber-400" />
                           <span className="text-slate-400 text-sm">After Hours</span>
                         </div>
-                        <div className="text-4xl font-bold text-white mb-1">34%</div>
-                        <div className="text-slate-500 text-sm">of calls outside hours</div>
+                        <div className="text-4xl font-bold text-white mb-1">Often</div>
+                        <div className="text-slate-500 text-sm">when you can't pick up</div>
                         <div className="mt-3 h-2 bg-slate-700 rounded-full overflow-hidden">
-                          <div className="h-full w-[34%] bg-gradient-to-r from-amber-500 to-yellow-500 rounded-full" />
+                          <div className="h-full w-[40%] bg-gradient-to-r from-amber-500 to-yellow-500 rounded-full" />
                         </div>
-                        <p className="mt-3 text-xs text-slate-600 group-hover:text-slate-500 transition-colors">Source: Business Calling Patterns Analysis</p>
+                        <p className="mt-3 text-xs text-slate-600 group-hover:text-slate-500 transition-colors">Capture leads even after closing time.</p>
                       </div>
 
                       <div className="bg-white/5 backdrop-blur border border-white/10 rounded-2xl p-6 group hover:bg-white/10 transition-colors">
@@ -215,12 +244,12 @@ export default async function UseCasePage({ params }: Props) {
                           <Users className="h-5 w-5 text-amber-400" />
                           <span className="text-slate-400 text-sm">Staff Cost</span>
                         </div>
-                        <div className="text-4xl font-bold text-white mb-1">€28k</div>
-                        <div className="text-slate-500 text-sm">yearly receptionist</div>
+                        <div className="text-4xl font-bold text-white mb-1">High</div>
+                        <div className="text-slate-500 text-sm">for peak coverage</div>
                         <div className="mt-3 h-2 bg-slate-700 rounded-full overflow-hidden">
                           <div className="h-full w-[80%] bg-gradient-to-r from-amber-500 to-yellow-500 rounded-full" />
                         </div>
-                        <p className="mt-3 text-xs text-slate-600 group-hover:text-slate-500 transition-colors">Source: Ireland Salary Survey 2024</p>
+                        <p className="mt-3 text-xs text-slate-600 group-hover:text-slate-500 transition-colors">Automation reduces interruptions for your team.</p>
                       </div>
                     </div>
                   </div>
@@ -444,6 +473,23 @@ export default async function UseCasePage({ params }: Props) {
             </div>
           </section>
         )}
+
+        {/* FAQ */}
+        <section className="bg-gray-50 py-16">
+          <div className="max-w-4xl mx-auto px-6">
+            <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">
+              Frequently Asked Questions
+            </h2>
+            <div className="space-y-6">
+              {faqItems.map((item) => (
+                <div key={item.question} className="bg-white rounded-2xl p-6 shadow-sm border border-gray-200">
+                  <h3 className="text-lg font-semibold text-gray-900 mb-2">{item.question}</h3>
+                  <p className="text-gray-600">{item.answer}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
 
         {/* Internal Links */}
         <InternalLinks

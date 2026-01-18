@@ -4,6 +4,10 @@ interface CardProps extends HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
 }
 
+interface CardTitleProps extends HTMLAttributes<HTMLHeadingElement> {
+  children: React.ReactNode;
+}
+
 export function Card({ className = '', children, ...props }: CardProps) {
   return (
     <div
@@ -20,6 +24,14 @@ export function CardHeader({ className = '', children, ...props }: CardProps) {
     <div className={`px-6 py-5 border-b border-border ${className}`} {...props}>
       {children}
     </div>
+  );
+}
+
+export function CardTitle({ className = '', children, ...props }: CardTitleProps) {
+  return (
+    <h3 className={`text-base font-semibold leading-none tracking-tight ${className}`} {...props}>
+      {children}
+    </h3>
   );
 }
 

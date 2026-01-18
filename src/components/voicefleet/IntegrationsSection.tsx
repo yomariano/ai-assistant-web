@@ -27,8 +27,8 @@ const FeaturesSection = () => {
     },
     {
       icon: Globe,
-      name: "Irish Phone Numbers",
-      description: "Local Dublin & regional numbers included",
+      name: "Local Phone Numbers",
+      description: "Irish numbers (Dublin & regional) included",
       badge: "All plans",
     },
     {

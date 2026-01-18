@@ -153,7 +153,7 @@ const PricingSection = () => {
 
   const includedFeatures = [
     "AI receptionist",
-    "Irish phone number",
+    "Local phone number (Ireland)",
     "Message notifications",
     "Free setup & support",
   ];

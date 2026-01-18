@@ -12,16 +12,14 @@ function LoginContent() {
   const { loginWithGoogle, devLogin, isAuthenticated, isLoading, checkAuth, token } = useAuthStore();
   const [error, setError] = useState('');
   const [isSigningIn, setIsSigningIn] = useState(false);
-  const [isLocalhost, setIsLocalhost] = useState(false);
 
   // Get the plan from URL if user came from pricing
   const selectedPlan = searchParams.get('plan');
+  const isLocalhost =
+    typeof window !== 'undefined' &&
+    (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1');
 
   useEffect(() => {
-    // Check if running on localhost
-    const hostname = window.location.hostname;
-    setIsLocalhost(hostname === 'localhost' || hostname === '127.0.0.1');
-
     // Store selected plan in sessionStorage for after OAuth redirect
     if (selectedPlan) {
       sessionStorage.setItem('selectedPlan', selectedPlan);

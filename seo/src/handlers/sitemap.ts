@@ -15,6 +15,7 @@ export async function sitemapIndexHandler(c: Context<{ Bindings: Bindings }>) {
   const siteUrl = c.env.SITE_URL || 'https://voicefleet.ai';
 
   const sitemaps = [
+    'indexes',
     'industries',
     'locations-ireland',
     'locations-uk',
@@ -47,6 +48,58 @@ export async function sitemapHandler(c: Context<{ Bindings: Bindings }>) {
   let urls: Array<{ loc: string; priority: string; changefreq: string }> = [];
 
   switch (type) {
+    case 'indexes':
+      urls = generateIndexesSitemap(siteUrl);
+      break;
+    case 'industries':
+      urls = generateIndustriesSitemap(siteUrl);
+      break;
+    case 'locations-ireland':
+      urls = generateLocationsSitemap(siteUrl, 'ireland');
+      break;
+    case 'locations-uk':
+      urls = generateLocationsSitemap(siteUrl, 'uk');
+      break;
+    case 'locations-usa':
+      urls = generateLocationsSitemap(siteUrl, 'usa');
+      break;
+    case 'industry-locations-1':
+      urls = generateIndustryLocationsSitemap(siteUrl, 0, 100);
+      break;
+    case 'industry-locations-2':
+      urls = generateIndustryLocationsSitemap(siteUrl, 100, 200);
+      break;
+    default:
+      return c.notFound();
+  }
+
+  const xml = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${urls.map(u => `  <url>
+    <loc>${u.loc}</loc>
+    <changefreq>${u.changefreq}</changefreq>
+    <priority>${u.priority}</priority>
+  </url>`).join('\n')}
+</urlset>`;
+
+  return c.text(xml, 200, {
+    'Content-Type': 'application/xml',
+    'Cache-Control': 'max-age=3600'
+  });
+}
+
+export async function sitemapHandlerWithType(
+  c: Context<{ Bindings: Bindings }>,
+  type: string
+) {
+  const siteUrl = c.env.SITE_URL || 'https://voicefleet.ai';
+
+  let urls: Array<{ loc: string; priority: string; changefreq: string }> = [];
+
+  switch (type) {
+    case 'indexes':
+      urls = generateIndexesSitemap(siteUrl);
+      break;
     case 'industries':
       urls = generateIndustriesSitemap(siteUrl);
       break;
@@ -103,6 +156,19 @@ function generateIndustriesSitemap(siteUrl: string) {
   }
 
   return urls;
+}
+
+/**
+ * Generate core index pages sitemap URLs
+ */
+function generateIndexesSitemap(siteUrl: string) {
+  return [
+    { loc: `${siteUrl}/industries`, priority: '0.9', changefreq: 'weekly' },
+    { loc: `${siteUrl}/locations`, priority: '0.9', changefreq: 'weekly' },
+    { loc: `${siteUrl}/locations/ireland`, priority: '0.7', changefreq: 'weekly' },
+    { loc: `${siteUrl}/locations/uk`, priority: '0.7', changefreq: 'weekly' },
+    { loc: `${siteUrl}/locations/usa`, priority: '0.7', changefreq: 'weekly' }
+  ];
 }
 
 /**

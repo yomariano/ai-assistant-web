@@ -1,4 +1,5 @@
 import { Check, X } from "lucide-react";
+import Link from "next/link";
 
 const ComparisonSection = () => {
   const competitors = [
@@ -59,7 +60,7 @@ const ComparisonSection = () => {
       aircall: true,
     },
     {
-      name: "Irish phone numbers",
+      name: "Local phone numbers (Ireland)",
       voicefleet: true,
       smithai: false,
       ruby: false,
@@ -202,24 +203,24 @@ const ComparisonSection = () => {
             Want a detailed comparison? Check out our blog posts
           </p>
           <div className="flex flex-wrap justify-center gap-3">
-            <a
+            <Link
               href="/blog/voicefleet-vs-smith-ai-comparison"
               className="text-sm text-primary hover:underline"
             >
               VoiceFleet vs Smith.ai →
-            </a>
-            <a
+            </Link>
+            <Link
               href="/blog/voicefleet-vs-ruby-receptionists"
               className="text-sm text-primary hover:underline"
             >
               VoiceFleet vs Ruby →
-            </a>
-            <a
+            </Link>
+            <Link
               href="/blog/best-ai-phone-answering-service-ireland"
               className="text-sm text-primary hover:underline"
             >
               Full Comparison Guide →
-            </a>
+            </Link>
           </div>
         </div>
       </div>

@@ -6,8 +6,8 @@ const SolutionSection = () => {
       icon: Phone,
       title: "Answers Every Call",
       description:
-        "Your AI receptionist picks up in under 1 second, every time. No hold music, no voicemail, no missed opportunities.",
-      features: ["24/7 availability", "Instant pickup", "Natural Irish English"],
+        "Your AI receptionist answers quickly, every time. No hold music, no voicemail, no missed opportunities.",
+      features: ["24/7 availability", "Fast pickup", "Natural, human-like voice"],
     },
     {
       icon: MessageSquare,

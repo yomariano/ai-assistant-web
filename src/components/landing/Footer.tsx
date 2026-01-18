@@ -15,10 +15,10 @@ export default function Footer() {
                             <div className="bg-orange-500 p-2 rounded-lg">
                                 <Phone className="h-5 w-5 text-white" />
                             </div>
-                            <span className="text-xl font-bold text-white">OrderBot</span>
+                            <span className="text-xl font-bold text-white">VoiceFleet</span>
                         </Link>
                         <p className="text-sm text-gray-400 max-w-xs">
-                            AI phone answering for Irish restaurants. Never miss an order again.
+                            AI voice receptionist for small businesses. Answer every call, take messages, and book appointments.
                         </p>
                         <a
                             href="mailto:hello@voicefleet.ai"
@@ -38,6 +38,21 @@ export default function Footer() {
                         </a>
                         <a href="#faq" className="text-gray-400 hover:text-white transition-colors">
                             FAQ
+                        </a>
+                        <Link href="/connect" className="text-gray-400 hover:text-white transition-colors">
+                            Integrations
+                        </Link>
+                        <Link href="/compare" className="text-gray-400 hover:text-white transition-colors">
+                            Compare
+                        </Link>
+                        <Link href="/industries" className="text-gray-400 hover:text-white transition-colors">
+                            Industries
+                        </Link>
+                        <Link href="/locations" className="text-gray-400 hover:text-white transition-colors">
+                            Locations
+                        </Link>
+                        <a href="/sitemap.xml" className="text-gray-400 hover:text-white transition-colors">
+                            Sitemap
                         </a>
                         <Link href="/privacy" className="text-gray-400 hover:text-white transition-colors">
                             Privacy

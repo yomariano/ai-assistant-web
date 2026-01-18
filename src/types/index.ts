@@ -135,11 +135,12 @@ export interface NotificationPreferences {
   sms_enabled: boolean;
   sms_number?: string;
   notify_on_call_complete: boolean;
-  notify_on_message_taken: boolean;
+  notify_on_message_taken?: boolean; // Optional for MVP - defaults to true
   notify_on_escalation: boolean;
   notify_on_voicemail: boolean;
-  business_hours_only: boolean;
-  timezone: string;
+  // Advanced fields (not shown in MVP UI, use defaults)
+  business_hours_only?: boolean;
+  timezone?: string;
 }
 
 export interface EscalationSettings {
@@ -147,16 +148,17 @@ export interface EscalationSettings {
   user_id?: string;
   transfer_enabled: boolean;
   transfer_number?: string;
-  transfer_method: 'blind_transfer' | 'warm_transfer' | 'callback' | 'sms_alert';
-  trigger_keywords: string[];
-  max_failed_attempts: number;
-  business_hours_only: boolean;
-  business_hours_start: string;
-  business_hours_end: string;
-  business_days: number[];
-  timezone: string;
-  after_hours_action: 'voicemail' | 'sms_alert' | 'callback_promise' | 'ai_only';
-  after_hours_message: string;
+  // Advanced fields (not shown in MVP UI, use defaults)
+  transfer_method?: 'blind_transfer' | 'warm_transfer' | 'callback' | 'sms_alert';
+  trigger_keywords?: string[];
+  max_failed_attempts?: number;
+  business_hours_only?: boolean;
+  business_hours_start?: string;
+  business_hours_end?: string;
+  business_days?: number[];
+  timezone?: string;
+  after_hours_action?: 'voicemail' | 'sms_alert' | 'callback_promise' | 'ai_only';
+  after_hours_message?: string;
 }
 
 export interface TestConfig {

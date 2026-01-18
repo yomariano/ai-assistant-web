@@ -1,4 +1,6 @@
 import { MetadataRoute } from 'next';
+import { COMPARISONS } from '@/lib/marketing/comparisons';
+import { INTEGRATIONS } from '@/lib/marketing/integrations';
 
 const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://voicefleet.ai';
 
@@ -98,6 +100,30 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'weekly',
       priority: 0.8,
     },
+    {
+      url: `${BASE_URL}/connect`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.7,
+    },
+    ...INTEGRATIONS.map((integration) => ({
+      url: `${BASE_URL}/connect/${integration.slug}`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly' as const,
+      priority: 0.6,
+    })),
+    {
+      url: `${BASE_URL}/compare`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.7,
+    },
+    ...COMPARISONS.map((comparison) => ({
+      url: `${BASE_URL}/compare/${comparison.slug}`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly' as const,
+      priority: 0.6,
+    })),
   ];
 
   // If no dynamic content yet, return only static pages

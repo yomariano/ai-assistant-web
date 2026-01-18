@@ -11,7 +11,7 @@ const TechnologySection = () => {
 
   const capabilities = [
     { category: "Voice", items: ["Natural language AI", "Multi-accent support", "Real-time processing"] },
-    { category: "Telephony", items: ["Irish numbers", "Call forwarding", "Voicemail"] },
+    { category: "Telephony", items: ["Local numbers (Ireland)", "Call forwarding", "Voicemail"] },
     { category: "Notifications", items: ["SMS alerts", "Email summaries", "Webhooks (Pro)"] },
   ];
 

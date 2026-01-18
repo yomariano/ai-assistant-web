@@ -275,7 +275,7 @@ export default function BillingPage() {
                         )}
                         {percentUsed >= 100 && (
                           <p className="text-xs text-rose-600 mt-2">
-                            You've reached your fair use cap. Please contact support to continue.
+                            You&apos;ve reached your fair use cap. Please contact support to continue.
                           </p>
                         )}
                       </>
@@ -290,7 +290,7 @@ export default function BillingPage() {
               <Card className="border-none shadow-sm ring-1 ring-slate-200">
                 <CardContent className="p-6">
                   <p className="text-sm text-slate-600">
-                    You're on a pay-per-call plan. Each call costs {usage.perCallRateFormatted}.
+                    You&apos;re on a pay-per-call plan. Each call costs {usage.perCallRateFormatted}.
                     Call charges are added to your monthly invoice.
                   </p>
                 </CardContent>

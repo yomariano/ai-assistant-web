@@ -3,20 +3,28 @@
  * Generates optimized landing pages for AI voice agent services
  */
 
-import { Hono } from 'hono';
+import { Hono, type Context } from 'hono';
 import { cache } from 'hono/cache';
 import { industryHandler } from './handlers/industry';
 import { industriesIndexHandler } from './handlers/industries-index';
 import { locationHandler } from './handlers/location';
+import { locationsCountryHandler, locationsIndexHandler } from './handlers/locations-index';
 import { industryLocationHandler } from './handlers/industry-location';
-import { sitemapHandler, sitemapIndexHandler } from './handlers/sitemap';
+import { sitemapHandlerWithType, sitemapIndexHandler } from './handlers/sitemap';
 import { robotsHandler } from './handlers/robots';
-import { scheduledHandler, manualGenerateContent } from './handlers/scheduled';
+import { scheduledHandler, manualGenerateContent, runContentGeneration } from './handlers/scheduled';
 import { INDUSTRIES } from './data/industries';
 import { COUNTRIES } from './data/locations';
 import { Bindings } from './types';
 
 const app = new Hono<{ Bindings: Bindings }>();
+
+function isAdminAuthorized(c: Context<{ Bindings: Bindings }>, secretFromBody?: string) {
+  const adminSecret = c.env.ADMIN_SECRET || 'voicefleet-seo-admin';
+  const secretFromHeader = c.req.header('x-admin-secret');
+  const secretFromQuery = c.req.query('secret');
+  return secretFromHeader === adminSecret || secretFromQuery === adminSecret || secretFromBody === adminSecret;
+}
 
 // Cache middleware - only for GET requests on non-admin routes
 app.use('*', async (c, next) => {
@@ -47,8 +55,7 @@ app.get('/sitemaps/:type', (c) => {
   if (type.endsWith('.xml')) {
     type = type.slice(0, -4);
   }
-  c.req.param = () => type;
-  return sitemapHandler(c);
+  return sitemapHandlerWithType(c, type);
 });
 
 // Industry index page - lists all industries
@@ -62,13 +69,12 @@ app.get('/locations/:country/:city', locationHandler);
 
 // Location index pages
 app.get('/locations/:country', (c) => {
-  // Redirect to main locations page
-  return c.redirect('/locations');
+  const countrySlug = c.req.param('country');
+  return locationsCountryHandler(c, countrySlug);
 });
 
 app.get('/locations', (c) => {
-  // Redirect to home for now
-  return c.redirect('/');
+  return locationsIndexHandler(c);
 });
 
 // Industry + Location pages: /restaurant-voice-agent-in-dublin
@@ -145,7 +151,7 @@ app.onError((err, c) => {
 
 // Admin endpoint for manual content generation
 app.post('/admin/generate', async (c) => {
-  const body = await c.req.json() as {
+  const body = await c.req.json().catch(() => ({})) as {
     type?: string;
     industry?: string;
     location?: string;
@@ -153,8 +159,7 @@ app.post('/admin/generate', async (c) => {
   };
 
   // Simple secret check
-  const adminSecret = c.env.ADMIN_SECRET || 'voicefleet-seo-admin';
-  if (body.secret !== adminSecret) {
+  if (!isAdminAuthorized(c, body.secret)) {
     return c.json({ error: 'Unauthorized' }, 401);
   }
 
@@ -190,6 +195,9 @@ app.post('/admin/generate', async (c) => {
 
 // Cache status endpoint
 app.get('/admin/cache-status', async (c) => {
+  if (!isAdminAuthorized(c)) {
+    return c.json({ error: 'Unauthorized' }, 401);
+  }
   const keys = await c.env.CONTENT_CACHE.list({ limit: 100 });
   return c.json({
     totalKeys: keys.keys.length,
@@ -200,28 +208,69 @@ app.get('/admin/cache-status', async (c) => {
   });
 });
 
+// Last run summary (requires secret via header or query param)
+app.get('/admin/run-status', async (c) => {
+  if (!isAdminAuthorized(c)) {
+    return c.json({ error: 'Unauthorized' }, 401);
+  }
+
+  const [cursorRaw, lastRunRaw] = await Promise.all([
+    c.env.SEO_CACHE.get('cron:cursor'),
+    c.env.SEO_CACHE.get('cron:last-run'),
+  ]);
+
+  return c.json({
+    cursor: cursorRaw ? Number.parseInt(cursorRaw, 10) : 0,
+    lastRun: lastRunRaw ? JSON.parse(lastRunRaw) : null,
+  });
+});
+
 // Bulk content generation endpoint
 app.post('/admin/generate-all', async (c) => {
-  const body = await c.req.json().catch(() => ({})) as { secret?: string; limit?: number };
+  const body = await c.req.json().catch(() => ({})) as {
+    secret?: string;
+    limit?: number;
+    maxAgeDays?: number;
+    maxWallTimeMs?: number;
+    runSync?: boolean;
+  };
 
   // Simple secret check
-  const adminSecret = c.env.ADMIN_SECRET || 'voicefleet-seo-admin';
-  if (body.secret !== adminSecret) {
+  if (!isAdminAuthorized(c, body.secret)) {
     return c.json({ error: 'Unauthorized' }, 401);
+  }
+
+  const maxGenerationsPerRun = typeof body.limit === 'number' && body.limit > 0 ? body.limit : undefined;
+  const contentMaxAgeDays = typeof body.maxAgeDays === 'number' && body.maxAgeDays > 0 ? body.maxAgeDays : undefined;
+  let maxWallTimeMs = typeof body.maxWallTimeMs === 'number' && body.maxWallTimeMs > 0 ? body.maxWallTimeMs : undefined;
+  if (body.runSync && maxWallTimeMs === undefined) {
+    maxWallTimeMs = 25_000;
+  }
+
+  const event = { scheduledTime: Date.now(), cron: 'manual', noRetry: true } as unknown as ScheduledEvent;
+
+  if (body.runSync) {
+    const summary = await runContentGeneration(event, c.env, c.executionCtx, {
+      maxGenerationsPerRun,
+      contentMaxAgeDays,
+      maxWallTimeMs,
+    });
+
+    return c.json({ success: true, summary });
   }
 
   // Use waitUntil to run content generation in background
   c.executionCtx.waitUntil(
-    scheduledHandler(
-      { scheduledTime: Date.now(), cron: 'manual', noRetry: true } as unknown as ScheduledEvent,
-      c.env,
-      c.executionCtx
-    )
+    runContentGeneration(event, c.env, c.executionCtx, {
+      maxGenerationsPerRun,
+      contentMaxAgeDays,
+      maxWallTimeMs,
+    })
   );
 
   return c.json({
     success: true,
-    message: 'Content generation started in background. Check /admin/cache-status for progress.',
+    message: 'Content generation started in background. Use /admin/run-status to see the last run summary.',
   });
 });
 

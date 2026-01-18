@@ -28,70 +28,48 @@ function Toggle({ enabled, onChange, disabled }: { enabled: boolean; onChange: (
   );
 }
 
-// Select Component
-function Select({
-  value,
-  onChange,
-  options,
-  disabled
-}: {
-  value: string;
-  onChange: (val: string) => void;
-  options: { value: string; label: string }[];
-  disabled?: boolean;
-}) {
-  return (
-    <select
-      value={value}
-      onChange={(e) => onChange(e.target.value)}
-      disabled={disabled}
-      className="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-sm bg-slate-50/50 disabled:opacity-50 disabled:cursor-not-allowed"
-    >
-      {options.map((opt) => (
-        <option key={opt.value} value={opt.value}>{opt.label}</option>
-      ))}
-    </select>
-  );
-}
-
 export default function NotificationsPage() {
-  // Notification Preferences State
+  // Simplified Notification Preferences State
   const [preferences, setPreferences] = useState<NotificationPreferences>({
     email_enabled: true,
     email_address: '',
     sms_enabled: false,
     sms_number: '',
     notify_on_call_complete: true,
-    notify_on_message_taken: true,
     notify_on_escalation: true,
     notify_on_voicemail: true,
-    business_hours_only: false,
-    timezone: 'Europe/Dublin',
   });
 
-  // Escalation Settings State
+  // Simplified Escalation Settings State
   const [escalation, setEscalation] = useState<EscalationSettings>({
     transfer_enabled: false,
     transfer_number: '',
-    transfer_method: 'warm_transfer',
-    trigger_keywords: ['speak to someone', 'real person', 'manager', 'human', 'complaint'],
-    max_failed_attempts: 2,
-    business_hours_only: true,
-    business_hours_start: '09:00',
-    business_hours_end: '18:00',
-    business_days: [1, 2, 3, 4, 5],
-    timezone: 'Europe/Dublin',
-    after_hours_action: 'voicemail',
-    after_hours_message: 'We are currently closed. Please leave a message and we will get back to you.',
   });
 
   const [isLoading, setIsLoading] = useState(true);
-  const [isSaving, setIsSaving] = useState(false);
+  const [isSavingPrefs, setIsSavingPrefs] = useState(false);
+  const [isSavingEscalation, setIsSavingEscalation] = useState(false);
   const [isSendingTest, setIsSendingTest] = useState<'email' | 'sms' | null>(null);
   const [success, setSuccess] = useState('');
   const [error, setError] = useState('');
 
-  // Load existing preferences
+  const getErrorMessage = (err: unknown): string | null => {
+    if (typeof err !== 'object' || err === null) return null;
+    if (!('response' in err)) return null;
+    const response = (err as { response?: unknown }).response;
+    if (typeof response !== 'object' || response === null) return null;
+    if (!('data' in response)) return null;
+    const data = (response as { data?: unknown }).data;
+    if (typeof data !== 'object' || data === null) return null;
+    if (!('error' in data)) return null;
+    const errorObj = (data as { error?: unknown }).error;
+    if (typeof errorObj !== 'object' || errorObj === null) return null;
+    if (!('message' in errorObj)) return null;
+    const message = (errorObj as { message?: unknown }).message;
+    return typeof message === 'string' ? message : null;
+  };
+
+  // Load existing settings
   useEffect(() => {
     const loadData = async () => {
       try {
@@ -117,33 +95,44 @@ export default function NotificationsPage() {
     loadData();
   }, []);
 
+  // Clear messages after delay
+  useEffect(() => {
+    if (success || error) {
+      const timer = setTimeout(() => {
+        setSuccess('');
+        setError('');
+      }, 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [success, error]);
+
   const handleSavePreferences = async () => {
-    setIsSaving(true);
+    setIsSavingPrefs(true);
     setError('');
     setSuccess('');
 
     try {
       await notificationsApi.updatePreferences(preferences);
-      setSuccess('Notification preferences saved successfully!');
-    } catch (err: any) {
-      setError(err.response?.data?.error?.message || 'Failed to save preferences');
+      setSuccess('Notification settings saved!');
+    } catch (err: unknown) {
+      setError(getErrorMessage(err) || 'Failed to save settings');
     } finally {
-      setIsSaving(false);
+      setIsSavingPrefs(false);
     }
   };
 
   const handleSaveEscalation = async () => {
-    setIsSaving(true);
+    setIsSavingEscalation(true);
     setError('');
     setSuccess('');
 
     try {
       await notificationsApi.updateEscalation(escalation);
-      setSuccess('Escalation settings saved successfully!');
-    } catch (err: any) {
-      setError(err.response?.data?.error?.message || 'Failed to save escalation settings');
+      setSuccess('Call transfer settings saved!');
+    } catch (err: unknown) {
+      setError(getErrorMessage(err) || 'Failed to save settings');
     } finally {
-      setIsSaving(false);
+      setIsSavingEscalation(false);
     }
   };
 
@@ -157,10 +146,10 @@ export default function NotificationsPage() {
       if (result.success) {
         setSuccess(`Test ${type} sent successfully!`);
       } else {
-        setError(`Failed to send test ${type}`);
+        setError(result.message || `Failed to send test ${type}`);
       }
-    } catch (err: any) {
-      setError(err.response?.data?.error?.message || `Failed to send test ${type}`);
+    } catch (err: unknown) {
+      setError(getErrorMessage(err) || `Failed to send test ${type}`);
     } finally {
       setIsSendingTest(null);
     }
@@ -175,10 +164,10 @@ export default function NotificationsPage() {
   }
 
   return (
-    <div className="max-w-4xl mx-auto space-y-10 pb-12">
+    <div className="max-w-4xl mx-auto space-y-8 pb-12">
       <div>
-        <h1 className="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">Notification Settings</h1>
-        <p className="text-slate-500 mt-2">Configure how you receive order notifications and call escalations.</p>
+        <h1 className="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">Notifications</h1>
+        <p className="text-slate-500 mt-2">Get notified when calls come in and configure call transfers.</p>
       </div>
 
       {/* Success/Error Messages */}
@@ -196,27 +185,27 @@ export default function NotificationsPage() {
         </div>
       )}
 
-      {/* Email Notifications Section */}
+      {/* Email Notifications */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <div className="lg:col-span-1">
           <div className="flex items-center gap-2 mb-2">
             <Mail className="h-5 w-5 text-primary" />
-            <h2 className="text-lg font-bold text-slate-900">Email Notifications</h2>
+            <h2 className="text-lg font-bold text-slate-900">Email</h2>
           </div>
           <p className="text-sm text-slate-500">
-            Receive order summaries and important alerts via email after each call.
+            Receive call summaries and alerts via email.
           </p>
         </div>
 
         <div className="lg:col-span-2">
           <Card className="border-none shadow-md ring-1 ring-slate-200 overflow-hidden">
             <CardContent className="p-0">
-              <div className="p-6 space-y-6">
+              <div className="p-6 space-y-5">
                 {/* Enable Email */}
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="font-semibold text-slate-900">Enable Email Notifications</p>
-                    <p className="text-sm text-slate-500">Receive emails when orders are taken</p>
+                    <p className="text-sm text-slate-500">Get emails when calls are completed</p>
                   </div>
                   <Toggle
                     enabled={preferences.email_enabled}
@@ -225,62 +214,53 @@ export default function NotificationsPage() {
                 </div>
 
                 {/* Email Address */}
-                <div className={preferences.email_enabled ? '' : 'opacity-50'}>
-                  <Input
-                    type="email"
-                    label="Email Address"
-                    value={preferences.email_address || ''}
-                    onChange={(e) => setPreferences(prev => ({ ...prev, email_address: e.target.value }))}
-                    placeholder="restaurant@example.com"
-                    disabled={!preferences.email_enabled}
-                    className="bg-slate-50/50"
-                  />
-                  <p className="text-xs text-slate-400 mt-1">Leave blank to use your account email</p>
-                </div>
-
-                {/* Notification Triggers */}
-                <div className={`space-y-4 ${preferences.email_enabled ? '' : 'opacity-50'}`}>
-                  <p className="text-sm font-semibold text-slate-700">Notify me when:</p>
-
-                  <div className="flex items-center justify-between py-2">
-                    <span className="text-sm text-slate-600">Call completed with order</span>
-                    <Toggle
-                      enabled={preferences.notify_on_call_complete}
-                      onChange={(val) => setPreferences(prev => ({ ...prev, notify_on_call_complete: val }))}
-                      disabled={!preferences.email_enabled}
+                {preferences.email_enabled && (
+                  <div>
+                    <Input
+                      type="email"
+                      label="Email Address"
+                      value={preferences.email_address || ''}
+                      onChange={(e) => setPreferences(prev => ({ ...prev, email_address: e.target.value }))}
+                      placeholder="your@email.com"
+                      className="bg-slate-50/50"
                     />
+                    <p className="text-xs text-slate-400 mt-1">Leave blank to use your account email</p>
                   </div>
+                )}
 
-                  <div className="flex items-center justify-between py-2">
-                    <span className="text-sm text-slate-600">Message taken from customer</span>
-                    <Toggle
-                      enabled={preferences.notify_on_message_taken}
-                      onChange={(val) => setPreferences(prev => ({ ...prev, notify_on_message_taken: val }))}
-                      disabled={!preferences.email_enabled}
-                    />
-                  </div>
+                {/* Notification Types */}
+                {preferences.email_enabled && (
+                  <div className="space-y-3 pt-2">
+                    <p className="text-sm font-semibold text-slate-700">Notify me when:</p>
 
-                  <div className="flex items-center justify-between py-2">
-                    <span className="text-sm text-slate-600">Call escalated to human</span>
-                    <Toggle
-                      enabled={preferences.notify_on_escalation}
-                      onChange={(val) => setPreferences(prev => ({ ...prev, notify_on_escalation: val }))}
-                      disabled={!preferences.email_enabled}
-                    />
-                  </div>
+                    <div className="flex items-center justify-between py-1">
+                      <span className="text-sm text-slate-600">Call completed</span>
+                      <Toggle
+                        enabled={preferences.notify_on_call_complete}
+                        onChange={(val) => setPreferences(prev => ({ ...prev, notify_on_call_complete: val }))}
+                      />
+                    </div>
 
-                  <div className="flex items-center justify-between py-2">
-                    <span className="text-sm text-slate-600">Voicemail received</span>
-                    <Toggle
-                      enabled={preferences.notify_on_voicemail}
-                      onChange={(val) => setPreferences(prev => ({ ...prev, notify_on_voicemail: val }))}
-                      disabled={!preferences.email_enabled}
-                    />
+                    <div className="flex items-center justify-between py-1">
+                      <span className="text-sm text-slate-600">Call transferred to human</span>
+                      <Toggle
+                        enabled={preferences.notify_on_escalation}
+                        onChange={(val) => setPreferences(prev => ({ ...prev, notify_on_escalation: val }))}
+                      />
+                    </div>
+
+                    <div className="flex items-center justify-between py-1">
+                      <span className="text-sm text-slate-600">Voicemail received</span>
+                      <Toggle
+                        enabled={preferences.notify_on_voicemail}
+                        onChange={(val) => setPreferences(prev => ({ ...prev, notify_on_voicemail: val }))}
+                      />
+                    </div>
                   </div>
-                </div>
+                )}
               </div>
 
-              <div className="bg-slate-50 px-6 py-4 flex justify-between items-center gap-3 border-t border-slate-100">
+              <div className="bg-slate-50 px-6 py-4 flex justify-between items-center border-t border-slate-100">
                 <Button
                   variant="outline"
                   size="sm"
@@ -292,11 +272,11 @@ export default function NotificationsPage() {
                   ) : (
                     <Send className="w-4 h-4 mr-2" />
                   )}
-                  Send Test Email
+                  Send Test
                 </Button>
-                <Button onClick={handleSavePreferences} isLoading={isSaving} className="shadow-lg shadow-primary/20">
+                <Button onClick={handleSavePreferences} isLoading={isSavingPrefs} className="shadow-lg shadow-primary/20">
                   <Save className="w-4 h-4 mr-2" />
-                  Save Email Settings
+                  Save
                 </Button>
               </div>
             </CardContent>
@@ -304,22 +284,22 @@ export default function NotificationsPage() {
         </div>
       </div>
 
-      {/* SMS Notifications Section */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 pt-6">
+      {/* SMS Notifications */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <div className="lg:col-span-1">
           <div className="flex items-center gap-2 mb-2">
             <MessageSquare className="h-5 w-5 text-primary" />
-            <h2 className="text-lg font-bold text-slate-900">SMS Notifications</h2>
+            <h2 className="text-lg font-bold text-slate-900">SMS</h2>
           </div>
           <p className="text-sm text-slate-500">
-            Get instant SMS alerts for urgent orders or escalations.
+            Get instant text alerts for important calls.
           </p>
         </div>
 
         <div className="lg:col-span-2">
           <Card className="border-none shadow-md ring-1 ring-slate-200 overflow-hidden">
             <CardContent className="p-0">
-              <div className="p-6 space-y-6">
+              <div className="p-6 space-y-5">
                 {/* Enable SMS */}
                 <div className="flex items-center justify-between">
                   <div>
@@ -333,34 +313,22 @@ export default function NotificationsPage() {
                 </div>
 
                 {/* Phone Number */}
-                <div className={preferences.sms_enabled ? '' : 'opacity-50'}>
-                  <Input
-                    type="tel"
-                    label="Phone Number"
-                    value={preferences.sms_number || ''}
-                    onChange={(e) => setPreferences(prev => ({ ...prev, sms_number: e.target.value }))}
-                    placeholder="+353851234567"
-                    disabled={!preferences.sms_enabled}
-                    className="bg-slate-50/50"
-                  />
-                  <p className="text-xs text-slate-400 mt-1">Use international format (e.g., +353 for Ireland)</p>
-                </div>
-
-                {/* Business Hours Only */}
-                <div className={`flex items-center justify-between py-2 ${preferences.sms_enabled ? '' : 'opacity-50'}`}>
+                {preferences.sms_enabled && (
                   <div>
-                    <p className="text-sm font-semibold text-slate-700">Business Hours Only</p>
-                    <p className="text-xs text-slate-500">Only send SMS during business hours</p>
+                    <Input
+                      type="tel"
+                      label="Phone Number"
+                      value={preferences.sms_number || ''}
+                      onChange={(e) => setPreferences(prev => ({ ...prev, sms_number: e.target.value }))}
+                      placeholder="+353851234567"
+                      className="bg-slate-50/50"
+                    />
+                    <p className="text-xs text-slate-400 mt-1">Use international format (e.g., +353 for Ireland)</p>
                   </div>
-                  <Toggle
-                    enabled={preferences.business_hours_only}
-                    onChange={(val) => setPreferences(prev => ({ ...prev, business_hours_only: val }))}
-                    disabled={!preferences.sms_enabled}
-                  />
-                </div>
+                )}
               </div>
 
-              <div className="bg-slate-50 px-6 py-4 flex justify-between items-center gap-3 border-t border-slate-100">
+              <div className="bg-slate-50 px-6 py-4 flex justify-between items-center border-t border-slate-100">
                 <Button
                   variant="outline"
                   size="sm"
@@ -372,11 +340,11 @@ export default function NotificationsPage() {
                   ) : (
                     <Send className="w-4 h-4 mr-2" />
                   )}
-                  Send Test SMS
+                  Send Test
                 </Button>
-                <Button onClick={handleSavePreferences} isLoading={isSaving} className="shadow-lg shadow-primary/20">
+                <Button onClick={handleSavePreferences} isLoading={isSavingPrefs} className="shadow-lg shadow-primary/20">
                   <Save className="w-4 h-4 mr-2" />
-                  Save SMS Settings
+                  Save
                 </Button>
               </div>
             </CardContent>
@@ -384,27 +352,27 @@ export default function NotificationsPage() {
         </div>
       </div>
 
-      {/* Call Escalation Section */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 pt-6">
+      {/* Call Transfer */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <div className="lg:col-span-1">
           <div className="flex items-center gap-2 mb-2">
             <PhoneForwarded className="h-5 w-5 text-primary" />
-            <h2 className="text-lg font-bold text-slate-900">Call Escalation</h2>
+            <h2 className="text-lg font-bold text-slate-900">Call Transfer</h2>
           </div>
           <p className="text-sm text-slate-500">
-            Configure when and how calls should be transferred to a human.
+            Allow the AI to transfer calls to you when needed.
           </p>
         </div>
 
         <div className="lg:col-span-2">
           <Card className="border-none shadow-md ring-1 ring-slate-200 overflow-hidden">
             <CardContent className="p-0">
-              <div className="p-6 space-y-6">
+              <div className="p-6 space-y-5">
                 {/* Enable Transfer */}
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="font-semibold text-slate-900">Enable Call Transfer</p>
-                    <p className="text-sm text-slate-500">Allow calls to be transferred to a human when needed</p>
+                    <p className="text-sm text-slate-500">Let AI transfer calls when a customer asks for a human</p>
                   </div>
                   <Toggle
                     enabled={escalation.transfer_enabled}
@@ -413,111 +381,25 @@ export default function NotificationsPage() {
                 </div>
 
                 {/* Transfer Number */}
-                <div className={escalation.transfer_enabled ? '' : 'opacity-50'}>
-                  <Input
-                    type="tel"
-                    label="Transfer Phone Number"
-                    value={escalation.transfer_number || ''}
-                    onChange={(e) => setEscalation(prev => ({ ...prev, transfer_number: e.target.value }))}
-                    placeholder="+353851234567"
-                    disabled={!escalation.transfer_enabled}
-                    className="bg-slate-50/50"
-                  />
-                  <p className="text-xs text-slate-400 mt-1">The number calls will be transferred to</p>
-                </div>
-
-                {/* Transfer Method */}
-                <div className={escalation.transfer_enabled ? '' : 'opacity-50'}>
-                  <label className="block text-sm font-bold text-slate-700 mb-2">Transfer Method</label>
-                  <Select
-                    value={escalation.transfer_method}
-                    onChange={(val) => setEscalation(prev => ({ ...prev, transfer_method: val as any }))}
-                    disabled={!escalation.transfer_enabled}
-                    options={[
-                      { value: 'warm_transfer', label: 'Warm Transfer - AI introduces the caller' },
-                      { value: 'blind_transfer', label: 'Blind Transfer - Direct transfer' },
-                      { value: 'callback', label: 'Callback - Take details, call back later' },
-                      { value: 'sms_alert', label: 'SMS Alert - Send alert, AI continues' },
-                    ]}
-                  />
-                </div>
-
-                {/* Business Hours */}
-                <div className={`space-y-4 ${escalation.transfer_enabled ? '' : 'opacity-50'}`}>
-                  <div className="flex items-center justify-between py-2">
-                    <div>
-                      <p className="text-sm font-semibold text-slate-700">Business Hours Only</p>
-                      <p className="text-xs text-slate-500">Only transfer during business hours</p>
-                    </div>
-                    <Toggle
-                      enabled={escalation.business_hours_only}
-                      onChange={(val) => setEscalation(prev => ({ ...prev, business_hours_only: val }))}
-                      disabled={!escalation.transfer_enabled}
+                {escalation.transfer_enabled && (
+                  <div>
+                    <Input
+                      type="tel"
+                      label="Transfer To"
+                      value={escalation.transfer_number || ''}
+                      onChange={(e) => setEscalation(prev => ({ ...prev, transfer_number: e.target.value }))}
+                      placeholder="+353851234567"
+                      className="bg-slate-50/50"
                     />
-                  </div>
-
-                  {escalation.business_hours_only && (
-                    <div className="grid grid-cols-2 gap-4">
-                      <div>
-                        <label className="block text-sm font-medium text-slate-700 mb-2">Opens</label>
-                        <input
-                          type="time"
-                          value={escalation.business_hours_start}
-                          onChange={(e) => setEscalation(prev => ({ ...prev, business_hours_start: e.target.value }))}
-                          disabled={!escalation.transfer_enabled}
-                          className="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-sm bg-slate-50/50 disabled:opacity-50"
-                        />
-                      </div>
-                      <div>
-                        <label className="block text-sm font-medium text-slate-700 mb-2">Closes</label>
-                        <input
-                          type="time"
-                          value={escalation.business_hours_end}
-                          onChange={(e) => setEscalation(prev => ({ ...prev, business_hours_end: e.target.value }))}
-                          disabled={!escalation.transfer_enabled}
-                          className="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-sm bg-slate-50/50 disabled:opacity-50"
-                        />
-                      </div>
-                    </div>
-                  )}
-                </div>
-
-                {/* After Hours Action */}
-                {escalation.business_hours_only && (
-                  <div className={escalation.transfer_enabled ? '' : 'opacity-50'}>
-                    <label className="block text-sm font-bold text-slate-700 mb-2">After Hours Behavior</label>
-                    <Select
-                      value={escalation.after_hours_action}
-                      onChange={(val) => setEscalation(prev => ({ ...prev, after_hours_action: val as any }))}
-                      disabled={!escalation.transfer_enabled}
-                      options={[
-                        { value: 'voicemail', label: 'Take voicemail message' },
-                        { value: 'sms_alert', label: 'Send SMS alert to owner' },
-                        { value: 'callback_promise', label: 'Promise to call back' },
-                        { value: 'ai_only', label: 'AI handles everything' },
-                      ]}
-                    />
-
-                    {escalation.after_hours_action === 'voicemail' && (
-                      <div className="mt-4">
-                        <label className="block text-sm font-medium text-slate-700 mb-2">After Hours Message</label>
-                        <textarea
-                          value={escalation.after_hours_message}
-                          onChange={(e) => setEscalation(prev => ({ ...prev, after_hours_message: e.target.value }))}
-                          disabled={!escalation.transfer_enabled}
-                          placeholder="We are currently closed..."
-                          className="w-full px-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all resize-none min-h-[80px] text-sm bg-slate-50/50 disabled:opacity-50"
-                        />
-                      </div>
-                    )}
+                    <p className="text-xs text-slate-400 mt-1">Calls will be transferred to this number</p>
                   </div>
                 )}
               </div>
 
-              <div className="bg-slate-50 px-6 py-4 flex justify-end gap-3 border-t border-slate-100">
-                <Button onClick={handleSaveEscalation} isLoading={isSaving} className="shadow-lg shadow-primary/20">
+              <div className="bg-slate-50 px-6 py-4 flex justify-end border-t border-slate-100">
+                <Button onClick={handleSaveEscalation} isLoading={isSavingEscalation} className="shadow-lg shadow-primary/20">
                   <Save className="w-4 h-4 mr-2" />
-                  Save Escalation Settings
+                  Save
                 </Button>
               </div>
             </CardContent>

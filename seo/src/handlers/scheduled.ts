@@ -25,7 +25,60 @@ const newsCache: Map<string, NewsArticle[]> = new Map();
 
 // Rate limiting - Claude API limits
 const DELAY_BETWEEN_REQUESTS = 500; // 500ms between API calls
-const MAX_REQUESTS_PER_RUN = 100; // Limit per cron run to avoid timeouts
+const DEFAULT_MAX_GENERATIONS_PER_RUN = 100; // Limit per run to avoid timeouts/cost
+const DEFAULT_CONTENT_MAX_AGE_DAYS = 3; // Refresh cadence (set to 1 for daily refresh)
+const DEFAULT_MAX_WALLTIME_MS = 240_000; // Default wall clock budget per run (override via env/MAX_WALLTIME_MS)
+
+type GenerationRunSummary = {
+  startedAt: string;
+  endedAt: string;
+  cron: string;
+  cursorStart: number;
+  cursorEnd: number;
+  scannedTasks: number;
+  totalTasks: number;
+  maxGenerationsPerRun: number;
+  contentMaxAgeDays: number;
+  maxWallTimeMs: number;
+  successCount: number;
+  skippedCount: number;
+  errorCount: number;
+  attemptedGenerations: number;
+  stoppedReason: 'completed' | 'max_generations' | 'max_walltime' | 'misconfigured';
+};
+
+function parsePositiveInt(value: string | undefined, fallback: number): number {
+  if (!value) return fallback;
+  const n = Number.parseInt(value, 10);
+  return Number.isFinite(n) && n > 0 ? n : fallback;
+}
+
+async function readCursor(env: Bindings): Promise<number> {
+  try {
+    const raw = await env.SEO_CACHE.get('cron:cursor');
+    if (!raw) return 0;
+    const n = Number.parseInt(raw, 10);
+    return Number.isFinite(n) && n >= 0 ? n : 0;
+  } catch {
+    return 0;
+  }
+}
+
+async function writeCursor(env: Bindings, cursor: number): Promise<void> {
+  try {
+    await env.SEO_CACHE.put('cron:cursor', String(cursor));
+  } catch {
+    // ignore
+  }
+}
+
+async function writeLastRun(env: Bindings, summary: GenerationRunSummary): Promise<void> {
+  try {
+    await env.SEO_CACHE.put('cron:last-run', JSON.stringify(summary), { expirationTtl: 86400 * 7 });
+  } catch {
+    // ignore
+  }
+}
 
 /**
  * Main scheduled handler
@@ -35,11 +88,58 @@ export async function scheduledHandler(
   env: Bindings,
   ctx: ExecutionContext
 ): Promise<void> {
-  console.log(`[Scheduled] Starting content generation at ${new Date().toISOString()}`);
+  const maxGenerationsPerRun = parsePositiveInt(env.MAX_GENERATIONS_PER_RUN, DEFAULT_MAX_GENERATIONS_PER_RUN);
+  const contentMaxAgeDays = parsePositiveInt(env.CONTENT_MAX_AGE_DAYS, DEFAULT_CONTENT_MAX_AGE_DAYS);
+  const maxWallTimeMs = parsePositiveInt(env.MAX_WALLTIME_MS, DEFAULT_MAX_WALLTIME_MS);
+
+  await runContentGeneration(event, env, ctx, {
+    maxGenerationsPerRun,
+    contentMaxAgeDays,
+    maxWallTimeMs,
+  });
+}
+
+export async function runContentGeneration(
+  event: ScheduledEvent,
+  env: Bindings,
+  ctx: ExecutionContext,
+  options?: {
+    maxGenerationsPerRun?: number;
+    contentMaxAgeDays?: number;
+    maxWallTimeMs?: number;
+  }
+): Promise<GenerationRunSummary> {
+  const startedAtMs = Date.now();
+  const startedAt = new Date(startedAtMs).toISOString();
+  const cron = event?.cron || 'unknown';
+
+  const maxGenerationsPerRun = options?.maxGenerationsPerRun ?? parsePositiveInt(env.MAX_GENERATIONS_PER_RUN, DEFAULT_MAX_GENERATIONS_PER_RUN);
+  const contentMaxAgeDays = options?.contentMaxAgeDays ?? parsePositiveInt(env.CONTENT_MAX_AGE_DAYS, DEFAULT_CONTENT_MAX_AGE_DAYS);
+  const maxWallTimeMs = options?.maxWallTimeMs ?? parsePositiveInt(env.MAX_WALLTIME_MS, DEFAULT_MAX_WALLTIME_MS);
+
+  console.log(`[Scheduled] Starting content generation at ${startedAt} (cron=${cron})`);
 
   if (!env.SEO_WORKER_SECRET) {
     console.error('[Scheduled] SEO_WORKER_SECRET not configured');
-    return;
+    const summary: GenerationRunSummary = {
+      startedAt,
+      endedAt: new Date().toISOString(),
+      cron,
+      cursorStart: 0,
+      cursorEnd: 0,
+      scannedTasks: 0,
+      totalTasks: 0,
+      maxGenerationsPerRun,
+      contentMaxAgeDays,
+      maxWallTimeMs,
+      successCount: 0,
+      skippedCount: 0,
+      errorCount: 0,
+      attemptedGenerations: 0,
+      stoppedReason: 'misconfigured',
+    };
+    await writeLastRun(env, summary);
+    return summary;
   }
 
   const tasks: ContentRequest[] = [];
@@ -97,28 +197,48 @@ export async function scheduledHandler(
     }
   }
 
-  // Limit tasks to avoid timeout
-  const tasksToProcess = tasks.slice(0, MAX_REQUESTS_PER_RUN);
+  const totalTasks = tasks.length;
+  const cursorStart = totalTasks > 0 ? (await readCursor(env)) % totalTasks : 0;
+
+  const rotatedTasks =
+    cursorStart > 0 ? tasks.slice(cursorStart).concat(tasks.slice(0, cursorStart)) : tasks;
 
   console.log(
-    `[Scheduled] Processing ${tasksToProcess.length} of ${tasks.length} total tasks`
+    `[Scheduled] Scanning ${rotatedTasks.length} tasks (cursorStart=${cursorStart}, maxGenerationsPerRun=${maxGenerationsPerRun}, contentMaxAgeDays=${contentMaxAgeDays}, maxWallTimeMs=${maxWallTimeMs})`
   );
 
   let successCount = 0;
   let errorCount = 0;
   let skippedCount = 0;
+  let scannedTasks = 0;
+  let attemptedGenerations = 0;
+  let stoppedReason: GenerationRunSummary['stoppedReason'] = 'completed';
 
-  for (const task of tasksToProcess) {
+  for (const task of rotatedTasks) {
+    scannedTasks++;
+
+    if (Date.now() - startedAtMs > maxWallTimeMs) {
+      stoppedReason = 'max_walltime';
+      break;
+    }
+
+    if (attemptedGenerations >= maxGenerationsPerRun) {
+      stoppedReason = 'max_generations';
+      break;
+    }
+
     const cacheKey = buildCacheKey(task);
 
     try {
-      // Check if content exists and is recent (less than 3 days old)
+      // Check if content exists and is recent
       const existing = await getContent(env.CONTENT_CACHE, cacheKey);
-      if (existing && isContentFresh(existing, 3)) {
+      if (existing && isContentFresh(existing, contentMaxAgeDays)) {
         console.log(`[Scheduled] Skipping ${cacheKey} - content is fresh`);
         skippedCount++;
         continue;
       }
+
+      attemptedGenerations++;
 
       // Fetch industry news if applicable
       let newsArticles: NewsArticle[] = [];
@@ -168,6 +288,30 @@ export async function scheduledHandler(
   console.log(
     `[Scheduled] Completed: ${successCount} success, ${skippedCount} skipped, ${errorCount} errors`
   );
+
+  const cursorEnd = totalTasks > 0 ? (cursorStart + scannedTasks) % totalTasks : 0;
+  await writeCursor(env, cursorEnd);
+
+  const summary: GenerationRunSummary = {
+    startedAt,
+    endedAt: new Date().toISOString(),
+    cron,
+    cursorStart,
+    cursorEnd,
+    scannedTasks,
+    totalTasks,
+    maxGenerationsPerRun,
+    contentMaxAgeDays,
+    maxWallTimeMs,
+    successCount,
+    skippedCount,
+    errorCount,
+    attemptedGenerations,
+    stoppedReason,
+  };
+
+  await writeLastRun(env, summary);
+  return summary;
 }
 
 /**

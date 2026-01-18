@@ -326,16 +326,43 @@ export const notificationsApi = {
     const { data } = await api.post('/api/notifications/test', { type });
     return data;
   },
+
+  getHistory: async (params?: {
+    limit?: number;
+    offset?: number;
+  }): Promise<{
+    notifications: Array<{
+      id: string;
+      user_id: string;
+      call_id: string | null;
+      notification_type: 'email' | 'sms';
+      event_type: 'call_complete' | 'message_taken' | 'escalation' | 'voicemail' | 'missed_call';
+      recipient: string;
+      subject?: string | null;
+      content?: string | null;
+      status: 'pending' | 'sent' | 'delivered' | 'failed';
+      error_message?: string | null;
+      sent_at?: string | null;
+      delivered_at?: string | null;
+      created_at: string;
+    }>;
+    total: number;
+    limit: number;
+    offset: number;
+  }> => {
+    const { data } = await api.get('/api/notifications/history', { params });
+    return data;
+  },
 };
 
 // Billing
 export const billingApi = {
-  getSubscription: async (): Promise<{ subscription: any; usage: any }> => {
+  getSubscription: async (): Promise<{ subscription: unknown; usage: unknown }> => {
     const { data } = await api.get('/api/billing/subscription');
     return data;
   },
 
-  getUsage: async (): Promise<{ usage: any; limits: any; percentUsed: number }> => {
+  getUsage: async (): Promise<{ usage: unknown; limits: unknown; percentUsed: number }> => {
     const { data } = await api.get('/api/billing/usage');
     return data;
   },
@@ -368,6 +395,16 @@ export const billingApi = {
 
   createPortalSession: async (): Promise<{ url: string }> => {
     const { data } = await api.post('/api/billing/portal');
+    return data;
+  },
+
+  startTrial: async (planId: 'starter' | 'growth' | 'scale'): Promise<{
+    message: string;
+    subscription: unknown;
+    trialEndsAt: string;
+    trialCalls: number;
+  }> => {
+    const { data } = await api.post('/api/billing/start-trial', { planId });
     return data;
   },
 };

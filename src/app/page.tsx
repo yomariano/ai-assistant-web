@@ -16,10 +16,13 @@ import {
   FAQSection,
   Footer,
 } from "@/components/voicefleet";
+import { FAQSchema } from "@/components/seo";
+import { HOMEPAGE_FAQS } from "@/lib/marketing/faqs";
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-background">
+      <FAQSchema items={[...HOMEPAGE_FAQS]} />
       <Header />
       <main>
         <HeroSection />

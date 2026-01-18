@@ -29,6 +29,27 @@ function CheckoutContent() {
       }
 
       try {
+        const bypassStripe =
+          typeof window !== 'undefined' &&
+          (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') &&
+          process.env.NEXT_PUBLIC_BYPASS_STRIPE === 'true';
+
+        // Localhost-only bypass: start a trial without Stripe
+        if (bypassStripe) {
+          try {
+            sessionStorage.setItem(
+              'postCheckoutSubscriptionRefresh',
+              JSON.stringify({ startedAt: Date.now(), planId })
+            );
+          } catch {
+            // ignore storage errors
+          }
+
+          await billingApi.startTrial(planId as 'starter' | 'growth' | 'scale');
+          router.push('/dashboard');
+          return;
+        }
+
         // Get the payment link from the API
         const { url } = await billingApi.getPaymentLink(planId);
 
@@ -76,7 +97,7 @@ function CheckoutContent() {
           Setting up your checkout...
         </h2>
         <p className="text-slate-500">
-          You'll be redirected to our secure payment page.
+          You&apos;ll be redirected to our secure payment page.
         </p>
       </div>
     );

@@ -27,10 +27,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 
   return {
-    title: page.meta_title || `${page.industry_name} in ${page.city_name} | OrderBot`,
-    description: page.meta_description || page.subheadline || `AI phone answering for ${page.industry_name.toLowerCase()} in ${page.city_name}, Ireland.`,
+    title: page.meta_title || `${page.industry_name} in ${page.city_name} | VoiceFleet`,
+    description: page.meta_description || page.subheadline || `AI voice receptionist for ${page.industry_name.toLowerCase()} in ${page.city_name}, Ireland. Answer calls 24/7 and book more appointments.`,
     openGraph: {
-      title: page.meta_title || `${page.industry_name} in ${page.city_name} | OrderBot`,
+      title: page.meta_title || `${page.industry_name} in ${page.city_name} | VoiceFleet`,
       description: page.meta_description || page.subheadline || undefined,
       type: "website",
       url: `/${industry}/${location}`,
@@ -130,7 +130,7 @@ export default async function ComboPage({ params }: Props) {
           <section className="py-16 max-w-7xl mx-auto px-6">
             <div className="prose prose-lg max-w-none">
               <h2 className="text-3xl font-bold text-gray-900 mb-6">
-                AI Phone Answering for {page.industry_name} in {page.city_name}
+                AI Voice Receptionist for {page.industry_name} in {page.city_name}
               </h2>
               <p className="text-gray-600 whitespace-pre-line">{page.content.intro}</p>
             </div>
@@ -142,7 +142,7 @@ export default async function ComboPage({ params }: Props) {
           <section className="bg-gray-50 py-16">
             <div className="max-w-7xl mx-auto px-6">
               <h2 className="text-3xl font-bold text-gray-900 mb-6">
-                Why {page.industry_name} in {page.city_name} Need OrderBot
+                Why {page.industry_name} in {page.city_name} Choose VoiceFleet
               </h2>
               <p className="text-gray-600 whitespace-pre-line max-w-4xl">
                 {page.content.why_need}

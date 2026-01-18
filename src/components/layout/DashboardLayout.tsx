@@ -158,7 +158,11 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
     if (isCheckoutRoute) return;
 
     console.log('[DASHBOARD] paywall=1 detected - opening onboarding paywall');
-    openPaywallOnboarding();
+    const timeoutId = window.setTimeout(() => {
+      openPaywallOnboarding();
+    }, 0);
+
+    return () => window.clearTimeout(timeoutId);
   }, [isLoading, isAuthenticated, openPaywallOnboarding, isCheckoutRoute]);
 
   // Check subscription status after authentication

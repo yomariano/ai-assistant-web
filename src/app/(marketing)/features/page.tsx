@@ -69,10 +69,10 @@ const features = [
   },
   {
     icon: Globe,
-    name: "Irish Phone Numbers",
+    name: "Local Phone Numbers",
     slug: "irish-numbers",
     description:
-      "Get a local Irish phone number included with every plan. Build trust with customers using a familiar local number.",
+      "Get a local phone number included with every plan. Irish numbers (Dublin & regional) are available.",
     highlights: ["Dublin & regional numbers", "Number porting available", "EU-based infrastructure"],
     availableOn: "All plans",
   },

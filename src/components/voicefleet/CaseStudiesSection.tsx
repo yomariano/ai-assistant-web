@@ -4,40 +4,40 @@ const CaseStudiesSection = () => {
   const caseStudies = [
     {
       icon: Stethoscope,
-      industry: "Dental Clinic, Dublin",
-      name: "Dr. Sarah Mitchell",
-      headline: "We stopped missing calls during patient appointments",
-      quote: "Before VoiceFleet, we'd miss 15-20 calls a day while treating patients. Now every call is answered, appointments are booked automatically, and patients get callbacks within minutes. Our receptionist can focus on the patients in front of her.",
+      industry: "Dental clinic",
+      name: "Practice manager",
+      headline: "We can treat patients without missing new bookings",
+      quote: "During appointments, the phone used to ring nonstop. Now VoiceFleet answers, captures the reason for the visit, and books or routes the call so we can focus on the patient in front of us.",
       stats: [
-        { value: "100%", label: "calls answered" },
-        { value: "25+", label: "bookings/week via AI" },
-        { value: "€0", label: "extra staff needed" },
+        { value: "Fewer", label: "missed calls" },
+        { value: "Faster", label: "booking flow" },
+        { value: "Less", label: "admin time" },
       ],
       color: "primary",
     },
     {
       icon: Scale,
-      industry: "Solicitors, Cork",
-      name: "O'Brien & Partners",
-      headline: "Client intake doubled without hiring",
-      quote: "As a small firm, we couldn't afford a full-time receptionist. VoiceFleet handles our calls professionally, takes detailed messages, and even does basic client intake. New clients are impressed by our responsiveness.",
+      industry: "Professional services",
+      name: "Small firm owner",
+      headline: "Calls get qualified and routed consistently",
+      quote: "VoiceFleet handles first-contact calls, captures key details, and routes urgent items to the right person. We respond faster without interrupting billable work.",
       stats: [
-        { value: "2x", label: "client inquiries handled" },
-        { value: "24/7", label: "availability" },
-        { value: "€25k", label: "saved vs receptionist" },
+        { value: "Cleaner", label: "intake notes" },
+        { value: "24/7", label: "coverage" },
+        { value: "Better", label: "first response" },
       ],
       color: "accent",
     },
     {
       icon: Wrench,
-      industry: "Plumbing Services, Galway",
-      name: "Connacht Plumbing",
-      headline: "Never miss an emergency call-out again",
-      quote: "In plumbing, a missed call can mean losing a €500 job to a competitor. VoiceFleet answers every call, gets the job details, and texts me immediately. I've picked up so much extra work since switching.",
+      industry: "Home services",
+      name: "Owner-operator",
+      headline: "Emergency calls are captured with the right details",
+      quote: "When I'm on-site, I can't answer the phone. VoiceFleet collects address, issue, urgency, and a callback number, then sends a clean summary so I can triage quickly.",
       stats: [
-        { value: "30%", label: "more jobs booked" },
-        { value: "<1 sec", label: "answer time" },
-        { value: "Nights", label: "& weekends covered" },
+        { value: "More", label: "jobs captured" },
+        { value: "Clear", label: "call summaries" },
+        { value: "After-hours", label: "coverage" },
       ],
       color: "primary",
     },
@@ -48,10 +48,13 @@ const CaseStudiesSection = () => {
       <div className="container mx-auto px-4">
         <div className="max-w-3xl mx-auto text-center mb-10 lg:mb-16">
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-heading font-bold text-foreground mb-4">
-            Trusted by <span className="text-gradient-accent">Irish Businesses</span>
+            Trusted by <span className="text-gradient-accent">SMB Teams</span>
           </h2>
           <p className="text-base lg:text-lg text-muted-foreground">
             See how businesses like yours are using VoiceFleet
+          </p>
+          <p className="mt-2 text-sm text-muted-foreground">
+            These are representative examples of common workflows and outcomes.
           </p>
         </div>
 

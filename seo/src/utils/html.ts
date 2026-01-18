@@ -74,6 +74,7 @@ function generateHeader(siteUrl: string): string {
       </a>
       <nav class="nav">
         <a href="${siteUrl}/industries">Industries</a>
+        <a href="${siteUrl}/locations">Locations</a>
         <a href="${siteUrl}/#pricing">Pricing</a>
         <a href="${siteUrl}/#demo" class="btn btn-primary">Get Demo</a>
       </nav>

@@ -56,7 +56,7 @@ const UseCasesSection = () => {
             <span className="text-gradient-primary">Every Industry</span>
           </h2>
           <p className="text-lg text-muted-foreground">
-            Irish businesses of all types trust VoiceFleet to handle their calls
+            SMBs of all types trust VoiceFleet to handle their calls
           </p>
         </div>
 
