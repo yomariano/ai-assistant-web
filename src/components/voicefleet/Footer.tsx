@@ -10,7 +10,13 @@ const Footer = () => {
           <div className="flex flex-col gap-4">
             <Link href="/" className="flex items-center gap-2">
               <div className="w-10 h-10 bg-primary-foreground/10 rounded-xl flex items-center justify-center">
-                <Phone className="w-5 h-5 text-accent" />
+                <img
+                  src="/logo-mark.svg"
+                  alt="VoiceFleet"
+                  width={24}
+                  height={24}
+                  className="w-6 h-6"
+                />
               </div>
               <span className="text-xl font-heading font-bold">VoiceFleet</span>
             </Link>

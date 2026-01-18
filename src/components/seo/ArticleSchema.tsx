@@ -38,7 +38,7 @@ export function ArticleSchema({
       name: "VoiceFleet",
       logo: {
         "@type": "ImageObject",
-        url: `${siteUrl}/logo.png`,
+        url: `${siteUrl}/logo-mark.svg`,
       },
     },
     mainEntityOfPage: {

@@ -24,6 +24,7 @@ export function ProductSchema() {
     },
     description:
       "AI Voice Agents that handle calls at 80% lower cost. Scale support without scaling headcount.",
+    image: [`${siteUrl}/logo-mark.svg`],
     featureList: [
       "AI-powered voice calls",
       "24/7 availability",

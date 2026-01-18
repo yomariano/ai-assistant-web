@@ -13,7 +13,13 @@ export default function Footer() {
                     <div className="flex flex-col gap-4">
                         <Link href="/" className="flex items-center gap-2">
                             <div className="bg-orange-500 p-2 rounded-lg">
-                                <Phone className="h-5 w-5 text-white" />
+                                <img
+                                    src="/logo-mark.svg"
+                                    alt="VoiceFleet"
+                                    width={20}
+                                    height={20}
+                                    className="h-5 w-5"
+                                />
                             </div>
                             <span className="text-xl font-bold text-white">VoiceFleet</span>
                         </Link>

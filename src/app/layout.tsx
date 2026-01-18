@@ -26,7 +26,6 @@ const siteConfig = {
   description:
     "AI Voice Agents that handle calls at 80% lower cost. Scale support without scaling headcount.",
   url: process.env.NEXT_PUBLIC_SITE_URL || "https://voicefleet.ai",
-  ogImage: "/og-image.jpg",
   twitterHandle: "@volocefleetai",
 };
 
@@ -72,10 +71,16 @@ export const metadata: Metadata = {
     description: siteConfig.description,
     images: [
       {
-        url: siteConfig.ogImage,
+        url: "/opengraph-image",
         width: 1200,
         height: 630,
-        alt: `${siteConfig.name} - AI Voice Agents`,
+        alt: `${siteConfig.name} - AI Voice Receptionist`,
+      },
+      {
+        url: "/og-square",
+        width: 1200,
+        height: 1200,
+        alt: `${siteConfig.name} - AI Voice Receptionist`,
       },
     ],
   },
@@ -85,7 +90,14 @@ export const metadata: Metadata = {
     creator: siteConfig.twitterHandle,
     title: `${siteConfig.name} - AI Voice Agents for Phone Calls`,
     description: siteConfig.description,
-    images: [siteConfig.ogImage],
+    images: [
+      {
+        url: "/twitter-image",
+        width: 1200,
+        height: 600,
+        alt: `${siteConfig.name} - AI Voice Receptionist`,
+      },
+    ],
   },
   alternates: {
     canonical: siteConfig.url,

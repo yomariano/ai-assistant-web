@@ -24,7 +24,13 @@ const Header = () => {
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2">
             <div className="w-10 h-10 bg-gradient-hero rounded-xl flex items-center justify-center shadow-md">
-              <Phone className="w-5 h-5 text-primary-foreground" />
+              <img
+                src="/logo-mark.svg"
+                alt="VoiceFleet"
+                width={24}
+                height={24}
+                className="w-6 h-6"
+              />
             </div>
             <span className="text-xl font-heading font-bold text-foreground">VoiceFleet</span>
           </Link>
