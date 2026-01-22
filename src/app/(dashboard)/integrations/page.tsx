@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useReducer } from 'react';
 import { Save, Plug, Link2, ArrowRight, CheckCircle, Calendar, Settings, XCircle } from 'lucide-react';
 import Link from 'next/link';
 import { Card, CardContent } from '@/components/ui/card';
@@ -16,93 +16,247 @@ import { ConfirmationSettings } from './components/confirmation-settings';
 
 type BookingMode = 'none' | 'external' | 'builtin';
 
+// Consolidated state for integrations page
+interface IntegrationsPageState {
+  // Data state
+  templates: IndustryTemplate[];
+  config: BookingConfig | null;
+  connections: ProviderConnection[];
+  // UI state
+  isLoading: boolean;
+  isSaving: boolean;
+  success: string;
+  error: string;
+  bookingMode: BookingMode;
+  // Form state
+  selectedTemplateId: string | null;
+  bookingFields: BookingField[];
+  verificationEnabled: boolean;
+  verificationFields: string[];
+  verificationOnFail: 'transfer_to_staff' | 'take_message' | 'retry';
+  paymentRequired: boolean;
+  paymentType: 'none' | 'card_hold' | 'deposit';
+  depositAmountCents: number;
+  smsConfirmation: boolean;
+  emailConfirmation: boolean;
+}
+
+type IntegrationsPageAction =
+  | { type: 'SET_SAVING'; payload: boolean }
+  | { type: 'SET_SUCCESS'; payload: string }
+  | { type: 'SET_ERROR'; payload: string }
+  | { type: 'SET_BOOKING_MODE'; payload: BookingMode }
+  | { type: 'SET_BOOKING_FIELDS'; payload: BookingField[] }
+  | { type: 'SET_VERIFICATION_ENABLED'; payload: boolean }
+  | { type: 'SET_VERIFICATION_FIELDS'; payload: string[] }
+  | { type: 'SET_VERIFICATION_ON_FAIL'; payload: 'transfer_to_staff' | 'take_message' | 'retry' }
+  | { type: 'SET_PAYMENT_TYPE'; payload: { type: 'none' | 'card_hold' | 'deposit'; required: boolean } }
+  | { type: 'SET_DEPOSIT_AMOUNT'; payload: number }
+  | { type: 'SET_SMS_CONFIRMATION'; payload: boolean }
+  | { type: 'SET_EMAIL_CONFIRMATION'; payload: boolean }
+  | { type: 'APPLY_TEMPLATE'; payload: {
+      templateId: string;
+      bookingFields: BookingField[];
+      verificationEnabled: boolean;
+      verificationFields: string[];
+      paymentType: 'none' | 'card_hold' | 'deposit';
+      paymentRequired: boolean;
+      depositAmountCents: number;
+      successMessage: string;
+    }}
+  | { type: 'LOAD_DATA_SUCCESS'; payload: {
+      templates: IndustryTemplate[];
+      connections: ProviderConnection[];
+      config: BookingConfig | null;
+      bookingMode: BookingMode;
+      formData?: {
+        selectedTemplateId: string | null;
+        bookingFields: BookingField[];
+        verificationEnabled: boolean;
+        verificationFields: string[];
+        verificationOnFail: 'transfer_to_staff' | 'take_message' | 'retry';
+        paymentRequired: boolean;
+        paymentType: 'none' | 'card_hold' | 'deposit';
+        depositAmountCents: number;
+        smsConfirmation: boolean;
+        emailConfirmation: boolean;
+      };
+    }};
+
+const initialState: IntegrationsPageState = {
+  templates: [],
+  config: null,
+  connections: [],
+  isLoading: true,
+  isSaving: false,
+  success: '',
+  error: '',
+  bookingMode: 'none',
+  selectedTemplateId: null,
+  bookingFields: [],
+  verificationEnabled: false,
+  verificationFields: [],
+  verificationOnFail: 'transfer_to_staff',
+  paymentRequired: false,
+  paymentType: 'none',
+  depositAmountCents: 0,
+  smsConfirmation: true,
+  emailConfirmation: false,
+};
+
+function integrationsPageReducer(state: IntegrationsPageState, action: IntegrationsPageAction): IntegrationsPageState {
+  switch (action.type) {
+    case 'SET_SAVING':
+      return { ...state, isSaving: action.payload };
+    case 'SET_SUCCESS':
+      return { ...state, success: action.payload };
+    case 'SET_ERROR':
+      return { ...state, error: action.payload };
+    case 'SET_BOOKING_MODE':
+      return { ...state, bookingMode: action.payload };
+    case 'SET_BOOKING_FIELDS':
+      return { ...state, bookingFields: action.payload };
+    case 'SET_VERIFICATION_ENABLED':
+      return { ...state, verificationEnabled: action.payload };
+    case 'SET_VERIFICATION_FIELDS':
+      return { ...state, verificationFields: action.payload };
+    case 'SET_VERIFICATION_ON_FAIL':
+      return { ...state, verificationOnFail: action.payload };
+    case 'SET_PAYMENT_TYPE':
+      return { ...state, paymentType: action.payload.type, paymentRequired: action.payload.required };
+    case 'SET_DEPOSIT_AMOUNT':
+      return { ...state, depositAmountCents: action.payload };
+    case 'SET_SMS_CONFIRMATION':
+      return { ...state, smsConfirmation: action.payload };
+    case 'SET_EMAIL_CONFIRMATION':
+      return { ...state, emailConfirmation: action.payload };
+    case 'APPLY_TEMPLATE':
+      return {
+        ...state,
+        selectedTemplateId: action.payload.templateId,
+        bookingFields: action.payload.bookingFields,
+        verificationEnabled: action.payload.verificationEnabled,
+        verificationFields: action.payload.verificationFields,
+        paymentType: action.payload.paymentType,
+        paymentRequired: action.payload.paymentRequired,
+        depositAmountCents: action.payload.depositAmountCents,
+        success: action.payload.successMessage,
+      };
+    case 'LOAD_DATA_SUCCESS':
+      return {
+        ...state,
+        isLoading: false,
+        templates: action.payload.templates,
+        connections: action.payload.connections,
+        config: action.payload.config,
+        bookingMode: action.payload.bookingMode,
+        ...(action.payload.formData || {}),
+      };
+    default:
+      return state;
+  }
+}
+
 export default function IntegrationsPage() {
-  const [templates, setTemplates] = useState<IndustryTemplate[]>([]);
-  const [config, setConfig] = useState<BookingConfig | null>(null);
-  const [connections, setConnections] = useState<ProviderConnection[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [isSaving, setIsSaving] = useState(false);
-  const [success, setSuccess] = useState('');
-  const [error, setError] = useState('');
+  const [state, dispatch] = useReducer(integrationsPageReducer, initialState);
 
-  // Booking mode - determined by what's configured
-  const [bookingMode, setBookingMode] = useState<BookingMode>('none');
-
-  // Form state for built-in booking
-  const [selectedTemplateId, setSelectedTemplateId] = useState<string | null>(null);
-  const [bookingFields, setBookingFields] = useState<BookingField[]>([]);
-  const [verificationEnabled, setVerificationEnabled] = useState(false);
-  const [verificationFields, setVerificationFields] = useState<string[]>([]);
-  const [verificationOnFail, setVerificationOnFail] = useState<'transfer_to_staff' | 'take_message' | 'retry'>('transfer_to_staff');
-  const [paymentRequired, setPaymentRequired] = useState(false);
-  const [paymentType, setPaymentType] = useState<'none' | 'card_hold' | 'deposit'>('none');
-  const [depositAmountCents, setDepositAmountCents] = useState(0);
-  const [smsConfirmation, setSmsConfirmation] = useState(true);
-  const [emailConfirmation, setEmailConfirmation] = useState(false);
+  // Destructure state for easier access
+  const {
+    templates, connections, isLoading, isSaving, success, error,
+    bookingMode, selectedTemplateId, bookingFields, verificationEnabled,
+    verificationFields, verificationOnFail, paymentRequired, paymentType,
+    depositAmountCents, smsConfirmation, emailConfirmation,
+  } = state;
 
   useEffect(() => {
+    async function fetchData() {
+      try {
+        const [templatesRes, configRes, connectionsRes] = await Promise.all([
+          integrationsApi.getTemplates(),
+          integrationsApi.getConfig(),
+          providersApi.getConnections().catch(() => ({ connections: [] }))
+        ]);
+
+        const activeConnections = (connectionsRes.connections || []).filter(
+          (c: ProviderConnection) => c.status === 'connected'
+        );
+
+        // Determine booking mode
+        let mode: BookingMode = 'none';
+        if (activeConnections.length > 0) {
+          mode = 'external';
+        } else if (configRes.exists && configRes.config?.industryTemplateId) {
+          mode = 'builtin';
+        }
+
+        let formData: {
+          selectedTemplateId: string | null;
+          bookingFields: BookingField[];
+          verificationEnabled: boolean;
+          verificationFields: string[];
+          verificationOnFail: 'transfer_to_staff' | 'take_message' | 'retry';
+          paymentRequired: boolean;
+          paymentType: 'none' | 'card_hold' | 'deposit';
+          depositAmountCents: number;
+          smsConfirmation: boolean;
+          emailConfirmation: boolean;
+        } | undefined;
+
+        if (configRes.exists && configRes.config) {
+          formData = {
+            selectedTemplateId: configRes.config.industryTemplateId,
+            bookingFields: configRes.config.bookingFields || [],
+            verificationEnabled: configRes.config.verificationEnabled,
+            verificationFields: configRes.config.verificationFields || [],
+            verificationOnFail: configRes.config.verificationOnFail,
+            paymentRequired: configRes.config.paymentRequired,
+            paymentType: configRes.config.paymentType,
+            depositAmountCents: configRes.config.depositAmountCents,
+            smsConfirmation: configRes.config.smsConfirmation,
+            emailConfirmation: configRes.config.emailConfirmation,
+          };
+        }
+
+        // Single dispatch for all data - reduces re-renders from 13+ to 1
+        dispatch({
+          type: 'LOAD_DATA_SUCCESS',
+          payload: {
+            templates: templatesRes.templates || [],
+            connections: activeConnections,
+            config: configRes.exists && configRes.config ? configRes.config : null,
+            bookingMode: mode,
+            formData,
+          },
+        });
+      } catch (err) {
+        console.error('Failed to fetch integrations data:', err);
+        dispatch({ type: 'SET_ERROR', payload: 'Failed to load integrations configuration' });
+      }
+    }
+
     fetchData();
   }, []);
 
-  async function fetchData() {
-    try {
-      const [templatesRes, configRes, connectionsRes] = await Promise.all([
-        integrationsApi.getTemplates(),
-        integrationsApi.getConfig(),
-        providersApi.getConnections().catch(() => ({ connections: [] }))
-      ]);
-
-      setTemplates(templatesRes.templates || []);
-      const activeConnections = (connectionsRes.connections || []).filter(
-        (c: ProviderConnection) => c.status === 'connected'
-      );
-      setConnections(activeConnections);
-
-      // Determine booking mode
-      if (activeConnections.length > 0) {
-        setBookingMode('external');
-      } else if (configRes.exists && configRes.config?.industryTemplateId) {
-        setBookingMode('builtin');
-      } else {
-        setBookingMode('none');
-      }
-
-      if (configRes.exists && configRes.config) {
-        setConfig(configRes.config);
-        setSelectedTemplateId(configRes.config.industryTemplateId);
-        setBookingFields(configRes.config.bookingFields || []);
-        setVerificationEnabled(configRes.config.verificationEnabled);
-        setVerificationFields(configRes.config.verificationFields || []);
-        setVerificationOnFail(configRes.config.verificationOnFail);
-        setPaymentRequired(configRes.config.paymentRequired);
-        setPaymentType(configRes.config.paymentType);
-        setDepositAmountCents(configRes.config.depositAmountCents);
-        setSmsConfirmation(configRes.config.smsConfirmation);
-        setEmailConfirmation(configRes.config.emailConfirmation);
-      }
-    } catch (err) {
-      console.error('Failed to fetch integrations data:', err);
-      setError('Failed to load integrations configuration');
-    } finally {
-      setIsLoading(false);
-    }
-  }
-
   const handleTemplateSelect = useCallback((template: IndustryTemplate) => {
-    setSelectedTemplateId(template.id);
-    setBookingFields(template.defaultFields);
-    setVerificationEnabled(template.defaultVerification?.enabled || false);
-    setVerificationFields(template.defaultVerification?.fields || []);
-    setPaymentType(template.defaultPayment?.type || 'none');
-    setPaymentRequired(template.defaultPayment?.type !== 'none');
-    setDepositAmountCents(template.defaultPayment?.amount || 0);
-    setSuccess(`Applied "${template.name}" template. Customize the settings below.`);
+    dispatch({
+      type: 'APPLY_TEMPLATE',
+      payload: {
+        templateId: template.id,
+        bookingFields: template.defaultFields,
+        verificationEnabled: template.defaultVerification?.enabled || false,
+        verificationFields: template.defaultVerification?.fields || [],
+        paymentType: template.defaultPayment?.type || 'none',
+        paymentRequired: template.defaultPayment?.type !== 'none',
+        depositAmountCents: template.defaultPayment?.amount || 0,
+        successMessage: `Applied "${template.name}" template. Customize the settings below.`,
+      },
+    });
   }, []);
 
-  const handleSave = async () => {
-    setIsSaving(true);
-    setError('');
-    setSuccess('');
+  const handleSave = useCallback(async () => {
+    dispatch({ type: 'SET_SAVING', payload: true });
+    dispatch({ type: 'SET_ERROR', payload: '' });
+    dispatch({ type: 'SET_SUCCESS', payload: '' });
 
     try {
       await integrationsApi.saveConfig({
@@ -117,18 +271,18 @@ export default function IntegrationsPage() {
         smsConfirmation,
         emailConfirmation
       });
-      setSuccess('Booking configuration saved successfully!');
-      setBookingMode('builtin');
+      dispatch({ type: 'SET_SUCCESS', payload: 'Booking configuration saved successfully!' });
+      dispatch({ type: 'SET_BOOKING_MODE', payload: 'builtin' });
     } catch {
-      setError('Failed to save configuration. Please try again.');
+      dispatch({ type: 'SET_ERROR', payload: 'Failed to save configuration. Please try again.' });
     } finally {
-      setIsSaving(false);
+      dispatch({ type: 'SET_SAVING', payload: false });
     }
-  };
+  }, [selectedTemplateId, bookingFields, verificationEnabled, verificationFields, verificationOnFail, paymentRequired, paymentType, depositAmountCents, smsConfirmation, emailConfirmation]);
 
-  const handleSwitchToBuiltin = () => {
-    setBookingMode('builtin');
-  };
+  const handleSwitchToBuiltin = useCallback(() => {
+    dispatch({ type: 'SET_BOOKING_MODE', payload: 'builtin' });
+  }, []);
 
   if (isLoading) {
     return (
@@ -153,7 +307,7 @@ export default function IntegrationsPage() {
         <div className="bg-emerald-50 border border-emerald-100 text-emerald-700 p-4 rounded-xl flex items-center gap-3 animate-in fade-in slide-in-from-top-2">
           <CheckCircle className="h-5 w-5 text-emerald-500 flex-shrink-0" />
           <p className="text-sm font-semibold">{success}</p>
-          <button onClick={() => setSuccess('')} className="ml-auto text-emerald-500 hover:text-emerald-700">
+          <button onClick={() => dispatch({ type: 'SET_SUCCESS', payload: '' })} className="ml-auto text-emerald-500 hover:text-emerald-700">
             <XCircle className="h-4 w-4" />
           </button>
         </div>
@@ -163,7 +317,7 @@ export default function IntegrationsPage() {
         <div className="bg-rose-50 border border-rose-100 text-rose-700 p-4 rounded-xl flex items-center gap-3 animate-in fade-in slide-in-from-top-2">
           <div className="h-2 w-2 rounded-full bg-rose-500" />
           <p className="text-sm font-semibold">{error}</p>
-          <button onClick={() => setError('')} className="ml-auto text-rose-500 hover:text-rose-700">
+          <button onClick={() => dispatch({ type: 'SET_ERROR', payload: '' })} className="ml-auto text-rose-500 hover:text-rose-700">
             <XCircle className="h-4 w-4" />
           </button>
         </div>
@@ -311,7 +465,7 @@ export default function IntegrationsPage() {
           {selectedTemplateId && (
             <BookingFieldsEditor
               fields={bookingFields}
-              onFieldsChange={setBookingFields}
+              onFieldsChange={(fields) => dispatch({ type: 'SET_BOOKING_FIELDS', payload: fields })}
             />
           )}
 
@@ -321,9 +475,9 @@ export default function IntegrationsPage() {
               enabled={verificationEnabled}
               fields={verificationFields}
               onFail={verificationOnFail}
-              onEnabledChange={setVerificationEnabled}
-              onFieldsChange={setVerificationFields}
-              onFailChange={setVerificationOnFail}
+              onEnabledChange={(enabled) => dispatch({ type: 'SET_VERIFICATION_ENABLED', payload: enabled })}
+              onFieldsChange={(fields) => dispatch({ type: 'SET_VERIFICATION_FIELDS', payload: fields })}
+              onFailChange={(onFail) => dispatch({ type: 'SET_VERIFICATION_ON_FAIL', payload: onFail })}
             />
           )}
 
@@ -332,11 +486,8 @@ export default function IntegrationsPage() {
             <PaymentSettings
               paymentType={paymentType}
               depositAmountCents={depositAmountCents}
-              onPaymentTypeChange={(type) => {
-                setPaymentType(type);
-                setPaymentRequired(type !== 'none');
-              }}
-              onDepositAmountChange={setDepositAmountCents}
+              onPaymentTypeChange={(type) => dispatch({ type: 'SET_PAYMENT_TYPE', payload: { type, required: type !== 'none' } })}
+              onDepositAmountChange={(amount) => dispatch({ type: 'SET_DEPOSIT_AMOUNT', payload: amount })}
             />
           )}
 
@@ -348,8 +499,8 @@ export default function IntegrationsPage() {
             <ConfirmationSettings
               smsEnabled={smsConfirmation}
               emailEnabled={emailConfirmation}
-              onSmsChange={setSmsConfirmation}
-              onEmailChange={setEmailConfirmation}
+              onSmsChange={(enabled) => dispatch({ type: 'SET_SMS_CONFIRMATION', payload: enabled })}
+              onEmailChange={(enabled) => dispatch({ type: 'SET_EMAIL_CONFIRMATION', payload: enabled })}
             />
           )}
 
