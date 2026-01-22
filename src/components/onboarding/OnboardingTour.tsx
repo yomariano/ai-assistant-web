@@ -12,7 +12,9 @@ import {
   WelcomeStep,
   PhoneNumberStep,
   CallForwardingStep,
-  AssistantConfigStep,
+  TemplateSelectionStep,
+  BusinessDetailsStep,
+  IntegrationStep,
   TestCallStep,
   CompletionStep,
 } from "./steps";
@@ -50,6 +52,7 @@ export function OnboardingTour({
   const [currentStep, setCurrentStep] = useState(1);
   const [stepsCompleted, setStepsCompleted] = useState<string[]>([]);
   const [selectedProvider, setSelectedProvider] = useState<string | null>(null);
+  const [selectedTemplate, setSelectedTemplate] = useState<string | null>(null);
   const [testCallMade, setTestCallMade] = useState(false);
   const [isRefreshingSubscription, setIsRefreshingSubscription] = useState(false);
 
@@ -68,8 +71,8 @@ export function OnboardingTour({
   }, [stepsCompleted, selectedProvider, testCallMade, onProgressUpdate]);
 
   const stepTitles = requiresSubscription
-    ? ["Plan", "Welcome", "Phone Number", "Call Forwarding", "AI Setup", "Test Call", "Complete"]
-    : ["Welcome", "Phone Number", "Call Forwarding", "AI Setup", "Test Call", "Complete"];
+    ? ["Plan", "Welcome", "Phone Number", "Call Forwarding", "Industry", "Business", "Integration", "Test Call", "Complete"]
+    : ["Welcome", "Phone Number", "Call Forwarding", "Industry", "Business", "Integration", "Test Call", "Complete"];
 
   const totalSteps = stepTitles.length;
 
@@ -109,15 +112,13 @@ export function OnboardingTour({
     setSelectedProvider(providerId);
   }, []);
 
+  const handleTemplateSelect = useCallback((templateId: string) => {
+    setSelectedTemplate(templateId);
+  }, []);
+
   const handleTestCallMade = useCallback(() => {
     setTestCallMade(true);
   }, []);
-
-  const handleConfigureNow = useCallback(() => {
-    // Close modal and navigate to assistant config
-    onOpenChange(false);
-    router.push("/assistant");
-  }, [onOpenChange, router]);
 
   const handleComplete = useCallback(() => {
     markStepComplete("Complete");
@@ -180,14 +181,27 @@ export function OnboardingTour({
             />
           )}
           {currentStep === 4 + offset && (
-            <AssistantConfigStep
-              hasExistingAssistant={data.hasExistingAssistant}
+            <TemplateSelectionStep
+              selectedTemplate={selectedTemplate}
+              onSelect={handleTemplateSelect}
               onNext={nextStep}
               onBack={prevStep}
-              onConfigureNow={handleConfigureNow}
             />
           )}
-          {currentStep === 5 + offset && (
+          {currentStep === 5 + offset && selectedTemplate && (
+            <BusinessDetailsStep
+              templateId={selectedTemplate}
+              onComplete={nextStep}
+              onBack={prevStep}
+            />
+          )}
+          {currentStep === 6 + offset && (
+            <IntegrationStep
+              onNext={nextStep}
+              onBack={prevStep}
+            />
+          )}
+          {currentStep === 7 + offset && (
             <TestCallStep
               voicefleetNumber={voicefleetNumber}
               onTestCallMade={handleTestCallMade}
@@ -195,7 +209,7 @@ export function OnboardingTour({
               onBack={prevStep}
             />
           )}
-          {currentStep === 6 + offset && <CompletionStep onComplete={handleComplete} />}
+          {currentStep === 8 + offset && <CompletionStep onComplete={handleComplete} />}
         </div>
       </DialogContent>
     </Dialog>

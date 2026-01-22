@@ -3,5 +3,8 @@ export { WelcomeStep } from './WelcomeStep';
 export { PhoneNumberStep } from './PhoneNumberStep';
 export { CallForwardingStep } from './CallForwardingStep';
 export { AssistantConfigStep } from './AssistantConfigStep';
+export { TemplateSelectionStep } from './TemplateSelectionStep';
+export { BusinessDetailsStep } from './BusinessDetailsStep';
+export { IntegrationStep } from './IntegrationStep';
 export { TestCallStep } from './TestCallStep';
 export { CompletionStep } from './CompletionStep';
