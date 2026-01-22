@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, Suspense } from 'react';
+import { useState, useEffect, Suspense, useRef } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Phone } from 'lucide-react';
 import { useAuthStore } from '@/lib/store';
@@ -9,15 +9,22 @@ import Button from '@/components/ui/button';
 function LoginContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const { loginWithGoogle, devLogin, isAuthenticated, isLoading, checkAuth, token } = useAuthStore();
+  const { loginWithGoogle, devLogin, isAuthenticated, isLoading, token, devMode } = useAuthStore();
+  // Get checkAuth with a stable reference to avoid infinite loops
+  const checkAuth = useAuthStore((state) => state.checkAuth);
   const [error, setError] = useState('');
   const [isSigningIn, setIsSigningIn] = useState(false);
+  const hasCheckedAuth = useRef(false);
 
   // Get the plan from URL if user came from pricing
   const selectedPlan = searchParams.get('plan');
-  const isLocalhost =
+  // Show dev login on localhost OR dev tunnel
+  const isDevEnvironment =
     typeof window !== 'undefined' &&
-    (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1');
+    (window.location.hostname === 'localhost' ||
+     window.location.hostname === '127.0.0.1' ||
+     window.location.hostname === 'dev-app.voicefleet.ai' ||
+     window.location.hostname.includes('dev-'));
 
   useEffect(() => {
     // Store selected plan in sessionStorage for after OAuth redirect
@@ -25,7 +32,11 @@ function LoginContent() {
       sessionStorage.setItem('selectedPlan', selectedPlan);
     }
 
-    checkAuth();
+    // Only check auth once on mount
+    if (!hasCheckedAuth.current) {
+      hasCheckedAuth.current = true;
+      checkAuth();
+    }
   }, [checkAuth, selectedPlan]);
 
   useEffect(() => {
@@ -36,6 +47,15 @@ function LoginContent() {
         if (redirectPath) {
           sessionStorage.removeItem('redirectAfterLogin');
           router.push(redirectPath);
+          return;
+        }
+
+        // In dev mode, skip Stripe payment flow entirely - go straight to dashboard
+        if (devMode || isDevEnvironment) {
+          console.log('[LOGIN] Dev mode - skipping Stripe redirect, going to dashboard');
+          sessionStorage.removeItem('selectedPlan');
+          sessionStorage.removeItem('pendingPaymentLink');
+          router.push('/dashboard');
           return;
         }
 
@@ -82,7 +102,7 @@ function LoginContent() {
     };
 
     handlePostAuthRedirect();
-  }, [isLoading, isAuthenticated, router, selectedPlan, token]);
+  }, [isLoading, isAuthenticated, router, selectedPlan, token, devMode, isDevEnvironment]);
 
   const handleGoogleSignIn = async () => {
     setError('');
@@ -171,14 +191,14 @@ function LoginContent() {
             Sign in with Google
           </Button>
 
-          {isLocalhost && (
+          {isDevEnvironment && (
             <>
               <div className="relative">
                 <div className="absolute inset-0 flex items-center">
                   <div className="w-full border-t border-gray-300" />
                 </div>
                 <div className="relative flex justify-center text-sm">
-                  <span className="px-2 bg-white text-gray-500">Localhost Only</span>
+                  <span className="px-2 bg-white text-gray-500">Development Only</span>
                 </div>
               </div>
 

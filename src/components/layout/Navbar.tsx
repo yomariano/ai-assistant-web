@@ -1,5 +1,6 @@
 'use client';
 
+import { memo } from 'react';
 import { Menu, Bell, Search, User } from 'lucide-react';
 import { useAuthStore } from '@/lib/store';
 import Button from '@/components/ui/button';
@@ -8,7 +9,7 @@ interface NavbarProps {
     onMenuClick?: () => void;
 }
 
-export default function Navbar({ onMenuClick }: NavbarProps) {
+const Navbar = memo(function Navbar({ onMenuClick }: NavbarProps) {
     const { user } = useAuthStore();
 
     return (
@@ -52,4 +53,6 @@ export default function Navbar({ onMenuClick }: NavbarProps) {
             </div>
         </header>
     );
-}
+});
+
+export default Navbar;

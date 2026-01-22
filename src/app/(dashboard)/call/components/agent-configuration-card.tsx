@@ -1,10 +1,11 @@
 'use client';
 
+import { memo } from 'react';
 import Input from '@/components/ui/input';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { useCallFormStore } from '@/lib/store';
 
-export const AgentConfigurationCard = () => {
+export const AgentConfigurationCard = memo(function AgentConfigurationCard() {
   const phoneNumber = useCallFormStore((s) => s.phoneNumber);
   const contactName = useCallFormStore((s) => s.contactName);
   const message = useCallFormStore((s) => s.message);
@@ -51,7 +52,7 @@ export const AgentConfigurationCard = () => {
       </CardContent>
     </Card>
   );
-};
+});
 
 
 

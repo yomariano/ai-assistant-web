@@ -18,7 +18,7 @@ import {
   MessageSquare,
   Plug
 } from 'lucide-react';
-import { useAuthStore } from '@/lib/store';
+import { useAuthStore, useBillingStore, getPlanDisplayName, getPlanBadgeColor } from '@/lib/store';
 
 const navItems = [
   { href: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
@@ -39,6 +39,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
   const pathname = usePathname();
   const router = useRouter();
   const { user, logout } = useAuthStore();
+  const subscription = useBillingStore((state) => state.subscription);
   const [isCollapsed, setIsCollapsed] = useState(false);
 
   const handleLogout = async () => {
@@ -117,6 +118,33 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
 
         {/* User & Settings Section */}
         <div className="border-t border-white/10 p-4 space-y-2">
+          {/* Subscription Plan Badge */}
+          {subscription && (
+            <Link
+              href="/billing"
+              className={`flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors group ${
+                isCollapsed ? 'justify-center' : ''
+              } hover:bg-white/5`}
+            >
+              <div className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-md ${getPlanBadgeColor(subscription.plan_id)}`}>
+                <CreditCard className="h-3.5 w-3.5 text-white" />
+              </div>
+              {!isCollapsed && (
+                <div className="flex flex-col overflow-hidden">
+                  <span className="text-xs text-slate-400">Current Plan</span>
+                  <span className="text-sm font-medium text-white truncate">
+                    {getPlanDisplayName(subscription.plan_id)}
+                  </span>
+                </div>
+              )}
+              {isCollapsed && (
+                <div className="absolute left-16 z-50 hidden rounded-md bg-slate-800 px-2 py-1 text-xs text-white group-hover:block whitespace-nowrap">
+                  {getPlanDisplayName(subscription.plan_id)} Plan
+                </div>
+              )}
+            </Link>
+          )}
+
           <button
             onClick={handleLogout}
             className="flex w-full items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:bg-rose-500/10 hover:text-rose-500 transition-colors group"

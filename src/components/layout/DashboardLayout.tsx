@@ -1,8 +1,8 @@
 'use client';
 
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback, useRef } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
-import { useAuthStore } from '@/lib/store';
+import { useAuthStore, useBillingStore } from '@/lib/store';
 import Sidebar from './Sidebar';
 import Navbar from './Navbar';
 import DevUserSwitcher from '@/components/dev/DevUserSwitcher';
@@ -16,7 +16,11 @@ interface DashboardLayoutProps {
 export default function DashboardLayout({ children }: DashboardLayoutProps) {
   const router = useRouter();
   const pathname = usePathname();
-  const { isAuthenticated, isLoading, checkAuth, devMode, user } = useAuthStore();
+  const { isAuthenticated, isLoading, devMode, user } = useAuthStore();
+  // Get checkAuth with a stable reference to avoid infinite loops
+  const checkAuth = useAuthStore((state) => state.checkAuth);
+  const setSubscriptionStore = useBillingStore((state) => state.setSubscription);
+  const hasCheckedAuth = useRef(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   // Subscription state
@@ -102,6 +106,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
           setSubscriptionChecked(true);
 
           if (isActive) {
+            setSubscriptionStore(subscription);
             try {
               window.sessionStorage.removeItem('postCheckoutSubscriptionRefresh');
             } catch {
@@ -131,8 +136,12 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
   const closeSidebar = useCallback(() => setIsSidebarOpen(false), []);
 
   useEffect(() => {
-    console.log('[DASHBOARD] useEffect - calling checkAuth()');
-    checkAuth();
+    // Only check auth once on mount
+    if (!hasCheckedAuth.current) {
+      hasCheckedAuth.current = true;
+      console.log('[DASHBOARD] useEffect - calling checkAuth()');
+      checkAuth();
+    }
   }, [checkAuth]);
 
   useEffect(() => {
@@ -171,14 +180,6 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
       console.log('[DASHBOARD] checkSubscription called:', { isAuthenticated, isLoading, subscriptionChecked, devMode });
       if (!isAuthenticated || isLoading || subscriptionChecked) return;
 
-      // Skip subscription check in dev mode
-      if (devMode) {
-        console.log('[DASHBOARD] Dev mode - skipping subscription check');
-        setHasSubscription(true);
-        setSubscriptionChecked(true);
-        return;
-      }
-
       try {
         console.log('[DASHBOARD] Checking subscription status...');
         // API returns subscription fields at the top-level (not nested under `subscription`).
@@ -196,8 +197,23 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
         const isActive = subscription &&
           (subscription.status === 'active' || subscription.status === 'trialing');
 
+        // In dev mode, always allow access but still store subscription if available
+        if (devMode) {
+          console.log('[DASHBOARD] Dev mode - allowing access');
+          setHasSubscription(true);
+          setSubscriptionChecked(true);
+          if (subscription) {
+            setSubscriptionStore(subscription);
+          }
+          return;
+        }
+
         setHasSubscription(isActive);
         setSubscriptionChecked(true);
+
+        if (isActive) {
+          setSubscriptionStore(subscription);
+        }
 
         if (!isActive) {
           if (!isCheckoutRoute) {
@@ -207,6 +223,13 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
         }
       } catch (error) {
         console.error('[DASHBOARD] Failed to check subscription:', error);
+        // In dev mode, allow access even on error
+        if (devMode) {
+          console.log('[DASHBOARD] Dev mode - allowing access despite error');
+          setHasSubscription(true);
+          setSubscriptionChecked(true);
+          return;
+        }
         // On error, open onboarding paywall (safer than bouncing to landing)
         setHasSubscription(false);
         setSubscriptionChecked(true);

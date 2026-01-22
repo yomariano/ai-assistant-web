@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { format } from 'date-fns';
 import { callsApi, savedCallsApi, scheduledCallsApi } from '@/lib/api';
 import { useCallFormStore } from '@/lib/store';
@@ -23,7 +23,7 @@ export default function CallPage() {
 
   const minScheduleDate = useMemo(() => new Date().toISOString().split('T')[0], []);
 
-  const handleCall = async () => {
+  const handleCall = useCallback(async () => {
     const { phoneNumber, message } = useCallFormStore.getState();
     if (!phoneNumber.trim() || !message.trim()) return;
 
@@ -46,9 +46,9 @@ export default function CallPage() {
     } finally {
       setIsCallingLoading(false);
     }
-  };
+  }, [reset]);
 
-  const handleSave = async () => {
+  const handleSave = useCallback(async () => {
     if (!saveName.trim()) return;
 
     setIsSaveLoading(true);
@@ -71,9 +71,9 @@ export default function CallPage() {
     } finally {
       setIsSaveLoading(false);
     }
-  };
+  }, [saveName]);
 
-  const handleSchedule = async () => {
+  const handleSchedule = useCallback(async () => {
     if (!scheduleDate || !scheduleTime) return;
 
     setIsSaveLoading(true);
@@ -98,7 +98,7 @@ export default function CallPage() {
     } finally {
       setIsSaveLoading(false);
     }
-  };
+  }, [scheduleDate, scheduleTime]);
 
   return (
     <div className="max-w-4xl mx-auto space-y-10 pb-12">

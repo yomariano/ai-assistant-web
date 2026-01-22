@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Check, Zap, Rocket, Crown } from "lucide-react";
 import { useAuthStore } from "@/lib/store";
@@ -26,12 +26,19 @@ const getPaymentLinks = () => {
 
 const PricingSection = () => {
   const paymentLinks = getPaymentLinks();
-  const { isAuthenticated, token, checkAuth } = useAuthStore();
+  const { isAuthenticated, token } = useAuthStore();
+  // Get checkAuth with a stable reference to avoid infinite loops
+  const checkAuth = useAuthStore((state) => state.checkAuth);
   const [authChecked, setAuthChecked] = useState(false);
   const [redirectingPlan, setRedirectingPlan] = useState<string | null>(null);
+  const hasCheckedAuth = useRef(false);
 
   useEffect(() => {
-    checkAuth().then(() => setAuthChecked(true));
+    // Only check auth once on mount
+    if (!hasCheckedAuth.current) {
+      hasCheckedAuth.current = true;
+      checkAuth().then(() => setAuthChecked(true));
+    }
   }, [checkAuth]);
 
   const handleGetStarted = async (planId: string) => {
