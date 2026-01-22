@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useReducer } from 'react';
 import { useRouter } from 'next/navigation';
 import { Bot, Save, RefreshCw, Phone } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
@@ -16,39 +16,141 @@ import { PromptTemplateSelector } from '@/components/assistant/PromptTemplateSel
 import type { PromptTemplate } from '@/lib/content/prompt-templates';
 import type { TestConfig } from '@/types';
 
+// Consolidated state for assistant page
+interface AssistantPageState {
+  // Data state
+  assistant: Assistant | null;
+  voices: Voice[];
+  phoneNumbers: PhoneNumber[];
+  planId: string;
+  stats: { calls: number; minutes: number } | null;
+  limits: { minutesIncluded: number; maxMinutesPerCall: number } | null;
+  testConfig: TestConfig | null;
+  // UI state
+  isLoading: boolean;
+  isSaving: boolean;
+  success: string;
+  error: string;
+  isTestModalOpen: boolean;
+  // Form state
+  businessName: string;
+  businessDescription: string;
+  greetingName: string;
+  selectedVoice: string;
+  firstMessage: string;
+  systemPrompt: string;
+  selectedTemplateId: string | undefined;
+}
+
+type AssistantPageAction =
+  | { type: 'SET_LOADING'; payload: boolean }
+  | { type: 'SET_SAVING'; payload: boolean }
+  | { type: 'SET_SUCCESS'; payload: string }
+  | { type: 'SET_ERROR'; payload: string }
+  | { type: 'SET_TEST_MODAL_OPEN'; payload: boolean }
+  | { type: 'SET_SELECTED_VOICE'; payload: string }
+  | { type: 'UPDATE_FORM'; payload: Partial<Pick<AssistantPageState, 'businessName' | 'businessDescription' | 'greetingName' | 'firstMessage' | 'systemPrompt' | 'selectedTemplateId'>> }
+  | { type: 'LOAD_DATA_SUCCESS'; payload: {
+      assistant: Assistant | null;
+      voices: Voice[];
+      phoneNumbers: PhoneNumber[];
+      planId: string;
+      stats: { calls: number; minutes: number } | null;
+      limits: { minutesIncluded: number; maxMinutesPerCall: number } | null;
+      testConfig: TestConfig | null;
+      formData?: {
+        businessName: string;
+        businessDescription: string;
+        greetingName: string;
+        selectedVoice: string;
+        firstMessage: string;
+        systemPrompt: string;
+      };
+    }};
+
+const initialState: AssistantPageState = {
+  assistant: null,
+  voices: [],
+  phoneNumbers: [],
+  planId: 'starter',
+  stats: null,
+  limits: null,
+  testConfig: null,
+  isLoading: true,
+  isSaving: false,
+  success: '',
+  error: '',
+  isTestModalOpen: false,
+  businessName: '',
+  businessDescription: '',
+  greetingName: '',
+  selectedVoice: '',
+  firstMessage: '',
+  systemPrompt: '',
+  selectedTemplateId: undefined,
+};
+
+function assistantPageReducer(state: AssistantPageState, action: AssistantPageAction): AssistantPageState {
+  switch (action.type) {
+    case 'SET_LOADING':
+      return { ...state, isLoading: action.payload };
+    case 'SET_SAVING':
+      return { ...state, isSaving: action.payload };
+    case 'SET_SUCCESS':
+      return { ...state, success: action.payload };
+    case 'SET_ERROR':
+      return { ...state, error: action.payload };
+    case 'SET_TEST_MODAL_OPEN':
+      return { ...state, isTestModalOpen: action.payload };
+    case 'SET_SELECTED_VOICE':
+      return { ...state, selectedVoice: action.payload };
+    case 'UPDATE_FORM':
+      return { ...state, ...action.payload };
+    case 'LOAD_DATA_SUCCESS':
+      return {
+        ...state,
+        isLoading: false,
+        assistant: action.payload.assistant,
+        voices: action.payload.voices,
+        phoneNumbers: action.payload.phoneNumbers,
+        planId: action.payload.planId,
+        stats: action.payload.stats,
+        limits: action.payload.limits,
+        testConfig: action.payload.testConfig,
+        ...(action.payload.formData || {}),
+      };
+    default:
+      return state;
+  }
+}
+
 export default function AssistantPage() {
   const router = useRouter();
-  const [assistant, setAssistant] = useState<Assistant | null>(null);
-  const [voices, setVoices] = useState<Voice[]>([]);
-  const [phoneNumbers, setPhoneNumbers] = useState<PhoneNumber[]>([]);
-  const [planId, setPlanId] = useState<string>('starter');
-  const [isLoading, setIsLoading] = useState(true);
-  const [isSaving, setIsSaving] = useState(false);
-  const [success, setSuccess] = useState('');
-  const [error, setError] = useState('');
-  const [stats, setStats] = useState<{ calls: number; minutes: number } | null>(null);
-  const [limits, setLimits] = useState<{ minutesIncluded: number; maxMinutesPerCall: number } | null>(null);
+  const [state, dispatch] = useReducer(assistantPageReducer, initialState);
 
-  // Form state
-  const [businessName, setBusinessName] = useState('');
-  const [businessDescription, setBusinessDescription] = useState('');
-  const [greetingName, setGreetingName] = useState('');
-  const [selectedVoice, setSelectedVoice] = useState('');
-  const [firstMessage, setFirstMessage] = useState('');
-  const [systemPrompt, setSystemPrompt] = useState('');
-  const [selectedTemplateId, setSelectedTemplateId] = useState<string | undefined>();
-
-  // Test modal state
-  const [isTestModalOpen, setIsTestModalOpen] = useState(false);
-  const [testConfig, setTestConfig] = useState<TestConfig | null>(null);
+  // Destructure state for easier access
+  const {
+    assistant, voices, phoneNumbers, planId, stats, limits, testConfig,
+    isLoading, isSaving, success, error, isTestModalOpen,
+    businessName, businessDescription, greetingName, selectedVoice,
+    firstMessage, systemPrompt, selectedTemplateId,
+  } = state;
 
   // Handle template selection
   const handleTemplateSelect = useCallback((template: PromptTemplate) => {
-    setSelectedTemplateId(template.id);
-    setGreetingName(template.suggestedAssistantName);
-    setFirstMessage(template.firstMessage);
-    setSystemPrompt(template.systemPrompt);
-    setSuccess(`Applied "${template.name}" template. Customize the placeholders in curly braces with your business information.`);
+    dispatch({
+      type: 'UPDATE_FORM',
+      payload: {
+        selectedTemplateId: template.id,
+        greetingName: template.suggestedAssistantName,
+        firstMessage: template.firstMessage,
+        systemPrompt: template.systemPrompt,
+      },
+    });
+    dispatch({
+      type: 'SET_SUCCESS',
+      payload: `Applied "${template.name}" template. Customize the placeholders in curly braces with your business information.`,
+    });
   }, []);
 
   const minutesUsed = stats?.minutes ?? 0;
@@ -64,57 +166,75 @@ export default function AssistantPage() {
   );
 
   useEffect(() => {
+    async function fetchData() {
+      try {
+        const [assistantRes, voicesRes, phoneRes, statsRes] = await Promise.all([
+          assistantApi.get(),
+          assistantApi.getVoices(),
+          billingApi.getPhoneNumbers(),
+          assistantApi.getStats()
+        ]);
+
+        let testConfigData: TestConfig | null = null;
+        let formData: {
+          businessName: string;
+          businessDescription: string;
+          greetingName: string;
+          selectedVoice: string;
+          firstMessage: string;
+          systemPrompt: string;
+        } | undefined;
+
+        if (assistantRes.exists && assistantRes.assistant) {
+          formData = {
+            businessName: assistantRes.assistant.business.name || '',
+            businessDescription: assistantRes.assistant.business.description || '',
+            greetingName: assistantRes.assistant.business.greetingName || '',
+            selectedVoice: assistantRes.assistant.voice.id || '',
+            firstMessage: assistantRes.assistant.firstMessage || '',
+            systemPrompt: assistantRes.assistant.systemPrompt || '',
+          };
+
+          // Fetch test config if assistant exists
+          try {
+            testConfigData = await assistantApi.getTestConfig();
+          } catch (testErr) {
+            console.warn('Failed to fetch test config:', testErr);
+          }
+        }
+
+        // Single dispatch for all data - reduces re-renders from 8-13 to 1
+        dispatch({
+          type: 'LOAD_DATA_SUCCESS',
+          payload: {
+            assistant: assistantRes.exists && assistantRes.assistant ? assistantRes.assistant : null,
+            voices: voicesRes.voices || [],
+            phoneNumbers: phoneRes.numbers || [],
+            planId: voicesRes.planId || 'starter',
+            stats: statsRes.thisMonth || null,
+            limits: statsRes.limits || null,
+            testConfig: testConfigData,
+            formData,
+          },
+        });
+      } catch (err) {
+        console.error('Failed to fetch assistant data:', err);
+        dispatch({ type: 'SET_ERROR', payload: 'Failed to load assistant configuration' });
+        dispatch({ type: 'SET_LOADING', payload: false });
+      }
+    }
+
     fetchData();
   }, []);
 
-  async function fetchData() {
-    try {
-      const [assistantRes, voicesRes, phoneRes, statsRes] = await Promise.all([
-        assistantApi.get(),
-        assistantApi.getVoices(),
-        billingApi.getPhoneNumbers(),
-        assistantApi.getStats()
-      ]);
-
-      if (assistantRes.exists && assistantRes.assistant) {
-        setAssistant(assistantRes.assistant);
-        setBusinessName(assistantRes.assistant.business.name || '');
-        setBusinessDescription(assistantRes.assistant.business.description || '');
-        setGreetingName(assistantRes.assistant.business.greetingName || '');
-        setSelectedVoice(assistantRes.assistant.voice.id || '');
-        setFirstMessage(assistantRes.assistant.firstMessage || '');
-        setSystemPrompt(assistantRes.assistant.systemPrompt || '');
-
-        // Fetch test config if assistant exists
-        try {
-          const testConfigRes = await assistantApi.getTestConfig();
-          setTestConfig(testConfigRes);
-        } catch (testErr) {
-          console.warn('Failed to fetch test config:', testErr);
-        }
-      }
-
-      setVoices(voicesRes.voices || []);
-      setPlanId(voicesRes.planId || 'starter');
-      setPhoneNumbers(phoneRes.numbers || []);
-      setStats(statsRes.thisMonth || null);
-      setLimits(statsRes.limits || null);
-    } catch (err) {
-      console.error('Failed to fetch assistant data:', err);
-      setError('Failed to load assistant configuration');
-    } finally {
-      setIsLoading(false);
-    }
-  }
-
   const onSelectVoice = useCallback((voiceId: string) => {
-    setSelectedVoice(voiceId);
+    dispatch({ type: 'SET_SELECTED_VOICE', payload: voiceId });
   }, []);
 
-  const handleSave = async () => {
-    setIsSaving(true);
-    setError('');
-    setSuccess('');
+  const handleSave = useCallback(async () => {
+    dispatch({ type: 'SET_SAVING', payload: true });
+    dispatch({ type: 'SET_ERROR', payload: '' });
+    dispatch({ type: 'SET_SUCCESS', payload: '' });
 
     try {
       const voice = voices.find(v => v.id === selectedVoice);
@@ -127,26 +247,26 @@ export default function AssistantPage() {
         firstMessage,
         systemPrompt
       });
-      setSuccess('Assistant configuration saved successfully!');
+      dispatch({ type: 'SET_SUCCESS', payload: 'Assistant configuration saved successfully!' });
     } catch {
-      setError('Failed to save configuration. Please try again.');
+      dispatch({ type: 'SET_ERROR', payload: 'Failed to save configuration. Please try again.' });
     } finally {
-      setIsSaving(false);
+      dispatch({ type: 'SET_SAVING', payload: false });
     }
-  };
+  }, [voices, selectedVoice, businessName, businessDescription, greetingName, firstMessage, systemPrompt]);
 
-  const handleRegeneratePrompt = async () => {
+  const handleRegeneratePrompt = useCallback(async () => {
     try {
       const { systemPrompt: newPrompt } = await assistantApi.regeneratePrompt(
         businessName,
         businessDescription,
         greetingName
       );
-      setSystemPrompt(newPrompt);
+      dispatch({ type: 'UPDATE_FORM', payload: { systemPrompt: newPrompt } });
     } catch {
-      setError('Failed to regenerate prompt');
+      dispatch({ type: 'SET_ERROR', payload: 'Failed to regenerate prompt' });
     }
-  };
+  }, [businessName, businessDescription, greetingName]);
 
   if (isLoading) {
     return (
@@ -191,7 +311,7 @@ export default function AssistantPage() {
         </div>
         {testConfig && (
           <Button
-            onClick={() => setIsTestModalOpen(true)}
+            onClick={() => dispatch({ type: 'SET_TEST_MODAL_OPEN', payload: true })}
             variant="outline"
             className="shrink-0"
           >
@@ -244,7 +364,7 @@ export default function AssistantPage() {
               <Input
                 label="Business Name"
                 value={businessName}
-                onChange={(e) => setBusinessName(e.target.value)}
+                onChange={(e) => dispatch({ type: 'UPDATE_FORM', payload: { businessName: e.target.value } })}
                 placeholder="Acme Inc."
                 className="bg-slate-50/50"
               />
@@ -256,7 +376,7 @@ export default function AssistantPage() {
                 <textarea
                   className="w-full px-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all resize-none min-h-[100px] text-sm bg-slate-50/50"
                   value={businessDescription}
-                  onChange={(e) => setBusinessDescription(e.target.value)}
+                  onChange={(e) => dispatch({ type: 'UPDATE_FORM', payload: { businessDescription: e.target.value } })}
                   placeholder="Describe what your business does..."
                 />
               </div>
@@ -264,7 +384,7 @@ export default function AssistantPage() {
               <Input
                 label="Assistant Name"
                 value={greetingName}
-                onChange={(e) => setGreetingName(e.target.value)}
+                onChange={(e) => dispatch({ type: 'UPDATE_FORM', payload: { greetingName: e.target.value } })}
                 placeholder="Sarah"
                 helperText="The name your AI uses to introduce itself"
                 className="bg-slate-50/50"
@@ -291,7 +411,7 @@ export default function AssistantPage() {
               <textarea
                 className="w-full px-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all resize-none min-h-[100px] text-sm bg-slate-50/50"
                 value={firstMessage}
-                onChange={(e) => setFirstMessage(e.target.value)}
+                onChange={(e) => dispatch({ type: 'UPDATE_FORM', payload: { firstMessage: e.target.value } })}
                 placeholder="Hi! Thank you for calling. How can I help you today?"
               />
             </CardContent>
@@ -323,7 +443,7 @@ export default function AssistantPage() {
               <textarea
                 className="w-full px-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all resize-none min-h-[200px] text-sm bg-slate-50/50 font-mono"
                 value={systemPrompt}
-                onChange={(e) => setSystemPrompt(e.target.value)}
+                onChange={(e) => dispatch({ type: 'UPDATE_FORM', payload: { systemPrompt: e.target.value } })}
                 placeholder="You are a helpful AI assistant..."
               />
             </CardContent>
@@ -343,7 +463,7 @@ export default function AssistantPage() {
       {testConfig && (
         <TestAgentModal
           isOpen={isTestModalOpen}
-          onClose={() => setIsTestModalOpen(false)}
+          onClose={() => dispatch({ type: 'SET_TEST_MODAL_OPEN', payload: false })}
           vapiAssistantId={testConfig.vapiAssistantId}
           assistantName={testConfig.assistantName}
         />

@@ -101,10 +101,11 @@ export function TestAgentModal({
         // Extract meaningful error message from VAPI error object
         let errorMessage = 'An error occurred during the call';
         if (err && typeof err === 'object') {
-          const vapiError = err as { message?: string; error?: { message?: string; statusCode?: number }; type?: string };
-          if (vapiError.error?.message) {
+          const vapiError = err as { message?: unknown; error?: { message?: unknown; statusCode?: number }; type?: string };
+          // Ensure we only use string messages, not objects
+          if (vapiError.error?.message && typeof vapiError.error.message === 'string') {
             errorMessage = vapiError.error.message;
-          } else if (vapiError.message) {
+          } else if (vapiError.message && typeof vapiError.message === 'string') {
             errorMessage = vapiError.message;
           } else if (vapiError.type === 'start-method-error') {
             errorMessage = 'Failed to start call. The assistant may not be configured for web calls.';
@@ -147,13 +148,13 @@ export function TestAgentModal({
       await vapiRef.current.start(vapiAssistantId);
     } catch (err: unknown) {
       console.error('[TestAgent] Failed to start call:', err);
-      // Extract meaningful error message
+      // Extract meaningful error message - ensure we only use strings
       let errorMessage = 'Failed to start call. Please check your microphone permissions.';
       if (err && typeof err === 'object') {
-        const error = err as { message?: string; error?: { message?: string } };
-        if (error.error?.message) {
+        const error = err as { message?: unknown; error?: { message?: unknown } };
+        if (error.error?.message && typeof error.error.message === 'string') {
           errorMessage = error.error.message;
-        } else if (error.message) {
+        } else if (error.message && typeof error.message === 'string') {
           errorMessage = error.message;
         }
       }
