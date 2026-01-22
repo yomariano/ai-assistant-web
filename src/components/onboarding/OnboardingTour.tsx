@@ -137,7 +137,7 @@ export function OnboardingTour({
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent
-        className="max-w-lg max-h-[90vh] overflow-y-auto"
+        className="max-w-lg max-h-[90vh] overflow-y-auto overflow-x-hidden"
         showCloseButton={currentStep > 1}
       >
         {/* Progress indicator */}

@@ -31,34 +31,34 @@ export function OnboardingProgress({
       </div>
 
       {/* Step indicators (for larger screens) */}
-      <div className="hidden md:flex items-center justify-between">
+      <div className="hidden md:flex items-center justify-between gap-1 overflow-hidden">
         {steps.map((step, index) => {
           const stepNumber = index + 1;
           const isActive = stepNumber === currentStep;
           const isCompleted = step.completed;
 
           return (
-            <div key={index} className="flex items-center flex-1">
-              <div className="flex flex-col items-center">
+            <div key={index} className="flex items-center flex-1 min-w-0">
+              <div className="flex flex-col items-center min-w-0">
                 <div
                   className={cn(
-                    "w-8 h-8 rounded-full flex items-center justify-center text-xs font-semibold transition-all duration-300",
+                    "w-7 h-7 rounded-full flex items-center justify-center text-xs font-semibold transition-all duration-300 shrink-0",
                     isCompleted
                       ? "bg-accent text-accent-foreground"
                       : isActive
-                      ? "bg-primary text-primary-foreground ring-4 ring-primary/20"
+                      ? "bg-primary text-primary-foreground ring-2 ring-primary/20"
                       : "bg-muted text-muted-foreground"
                   )}
                 >
                   {isCompleted ? (
-                    <Check className="w-4 h-4" />
+                    <Check className="w-3.5 h-3.5" />
                   ) : (
                     stepNumber
                   )}
                 </div>
                 <span
                   className={cn(
-                    "mt-2 text-xs text-center max-w-[80px]",
+                    "mt-1 text-[10px] text-center max-w-[60px] truncate leading-tight",
                     isActive ? "text-foreground font-medium" : "text-muted-foreground"
                   )}
                 >
@@ -68,7 +68,7 @@ export function OnboardingProgress({
               {index < steps.length - 1 && (
                 <div
                   className={cn(
-                    "flex-1 h-0.5 mx-2",
+                    "flex-1 h-0.5 mx-1 min-w-[8px]",
                     isCompleted ? "bg-accent" : "bg-muted"
                   )}
                 />

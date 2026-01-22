@@ -52,11 +52,11 @@ export function PhoneNumberStep({ phoneNumbers, onNext, onBack }: PhoneNumberSte
         {phoneNumbers.map((phone, index) => (
           <div
             key={index}
-            className="flex items-center justify-between p-4 bg-muted/50 rounded-xl border border-border"
+            className="flex items-center justify-between gap-2 p-4 bg-muted/50 rounded-xl border border-border"
           >
-            <div>
+            <div className="min-w-0 flex-1">
               <p className="text-xs text-muted-foreground mb-1">{phone.label}</p>
-              <p className="text-lg font-mono font-semibold text-foreground">
+              <p className="text-base sm:text-lg font-mono font-semibold text-foreground truncate">
                 {formatPhoneNumber(phone.number)}
               </p>
             </div>
@@ -69,12 +69,12 @@ export function PhoneNumberStep({ phoneNumbers, onNext, onBack }: PhoneNumberSte
               {copiedIndex === index ? (
                 <>
                   <Check className="w-4 h-4 mr-1 text-accent" />
-                  Copied
+                  <span className="hidden sm:inline">Copied</span>
                 </>
               ) : (
                 <>
                   <Copy className="w-4 h-4 mr-1" />
-                  Copy
+                  <span className="hidden sm:inline">Copy</span>
                 </>
               )}
             </Button>
@@ -94,13 +94,13 @@ export function PhoneNumberStep({ phoneNumbers, onNext, onBack }: PhoneNumberSte
       </div>
 
       {/* Actions */}
-      <div className="flex flex-col sm:flex-row gap-3">
-        <Button variant="outline" onClick={onBack} className="sm:flex-1">
+      <div className="flex gap-3">
+        <Button variant="outline" onClick={onBack} className="flex-1">
           Back
         </Button>
-        <Button variant="hero" onClick={onNext} className="sm:flex-1">
-          Continue to Call Forwarding
-          <ExternalLink className="w-4 h-4 ml-1" />
+        <Button variant="hero" onClick={onNext} className="flex-1">
+          <span className="truncate">Continue to Call Forwarding</span>
+          <ExternalLink className="w-4 h-4 ml-1 shrink-0" />
         </Button>
       </div>
     </div>
