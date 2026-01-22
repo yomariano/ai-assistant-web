@@ -502,6 +502,97 @@ export const integrationsApi = {
   },
 };
 
+// Templates
+export interface AssistantTemplate {
+  id: string;
+  name: string;
+  description: string;
+  icon: string;
+}
+
+export interface TemplatePreview {
+  firstMessage: string;
+  systemPromptPreview: string;
+  systemPromptFull: string;
+  voice: { provider: string; voiceId: string };
+  suggestedEscalation: {
+    triggerKeywords: string[];
+    afterHoursMessage: string;
+  };
+}
+
+export const templatesApi = {
+  list: async (): Promise<{ success: boolean; templates: AssistantTemplate[] }> => {
+    const { data } = await api.get('/api/templates');
+    return data;
+  },
+
+  get: async (templateId: string): Promise<{ success: boolean; template: AssistantTemplate & { defaultSettings: Record<string, string>; sampleFirstMessage: string } }> => {
+    const { data } = await api.get(`/api/templates/${templateId}`);
+    return data;
+  },
+
+  preview: async (templateId: string, config: {
+    businessName: string;
+    businessDescription?: string;
+    greetingName?: string;
+    voiceId?: string;
+    voiceProvider?: string;
+  }): Promise<{ success: boolean; preview: TemplatePreview }> => {
+    const { data } = await api.post(`/api/templates/${templateId}/preview`, config);
+    return data;
+  },
+};
+
+// Onboarding
+export interface QuickSetupParams {
+  templateId: string;
+  businessName: string;
+  businessDescription?: string;
+  greetingName?: string;
+  voiceId?: string;
+  voiceProvider?: string;
+  customizePrompt?: boolean;
+  customPrompt?: string;
+}
+
+export interface OnboardingStatusResponse {
+  success: boolean;
+  onboardingCompleted: boolean;
+  progress: number;
+  steps: {
+    accountCreated: boolean;
+    assistantConfigured: boolean;
+    phoneNumberAssigned: boolean;
+    bookingProviderConnected: boolean;
+    firstCallMade: boolean;
+  };
+  assistant: { id: string; businessName: string; templateId: string } | null;
+  phoneNumber: string | null;
+}
+
+export const onboardingApi = {
+  quickSetup: async (params: QuickSetupParams): Promise<{
+    success: boolean;
+    message: string;
+    assistant: { id: string; businessName: string; templateId: string; firstMessage: string; voiceId: string };
+    nextSteps: string[];
+  }> => {
+    const { data } = await api.post('/api/onboarding/quick-setup', params);
+    return data;
+  },
+
+  getStatus: async (): Promise<OnboardingStatusResponse> => {
+    const { data } = await api.get('/api/onboarding/status');
+    return data;
+  },
+
+  skip: async (): Promise<{ success: boolean; message: string }> => {
+    const { data } = await api.post('/api/onboarding/skip');
+    return data;
+  },
+};
+
 // Booking Providers
 export const providersApi = {
   // Provider catalog

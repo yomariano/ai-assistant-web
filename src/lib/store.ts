@@ -259,3 +259,47 @@ export const useCallFormStore = create<CallFormState>((set) => ({
     language: 'en',
   }),
 }));
+
+// Billing/Subscription state
+interface Subscription {
+  plan_id: string;
+  status: string;
+  current_period_start?: string;
+  current_period_end?: string;
+  cancel_at_period_end?: boolean;
+}
+
+interface BillingState {
+  subscription: Subscription | null;
+  isLoading: boolean;
+  setSubscription: (subscription: Subscription | null) => void;
+  setLoading: (isLoading: boolean) => void;
+  clear: () => void;
+}
+
+const planDetails: Record<string, { name: string; color: string }> = {
+  starter: { name: 'Lite', color: 'bg-slate-600' },
+  growth: { name: 'Growth', color: 'bg-indigo-600' },
+  scale: { name: 'Pro', color: 'bg-violet-600' },
+};
+
+export const useBillingStore = create<BillingState>((set) => ({
+  subscription: null,
+  isLoading: false,
+
+  setSubscription: (subscription) => set({ subscription, isLoading: false }),
+  setLoading: (isLoading) => set({ isLoading }),
+  clear: () => set({ subscription: null, isLoading: false }),
+}));
+
+// Helper to get plan display name
+export const getPlanDisplayName = (planId: string | undefined): string => {
+  if (!planId) return 'Free';
+  return planDetails[planId]?.name || planId;
+};
+
+// Helper to get plan badge color
+export const getPlanBadgeColor = (planId: string | undefined): string => {
+  if (!planId) return 'bg-slate-500';
+  return planDetails[planId]?.color || 'bg-slate-600';
+};

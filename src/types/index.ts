@@ -64,6 +64,11 @@ export interface Voice {
   id: string;
   name: string;
   provider: string;
+  gender?: string;
+  accent?: string;
+  age?: string;
+  useCase?: string;
+  description?: string;
   preview?: string;
 }
 
