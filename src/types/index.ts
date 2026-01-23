@@ -39,6 +39,12 @@ export interface CallHistory {
   durationSeconds?: number;
   createdAt: string;
   endedAt?: string;
+  // Vapi call details
+  transcript?: string;
+  summary?: string;
+  recordingUrl?: string;
+  endedReason?: string;
+  costCents?: number;
 }
 
 export interface UserStats {
