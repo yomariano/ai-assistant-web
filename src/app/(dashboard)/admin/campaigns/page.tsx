@@ -298,7 +298,7 @@ function TriggersTab({
                     Run
                   </Button>
                   <Button
-                    variant={trigger.is_active ? 'outline' : 'primary'}
+                    variant={trigger.is_active ? 'outline' : 'default'}
                     size="sm"
                     onClick={() => onToggle(trigger.id, trigger.is_active)}
                     isLoading={togglingTrigger === trigger.id}
@@ -424,7 +424,7 @@ function CampaignsTab({ campaigns, onRefresh }: CampaignsTabProps) {
                   <div className="flex items-center gap-2">
                     {campaign.status === 'draft' && (
                       <Button
-                        variant="primary"
+                        variant="default"
                         size="sm"
                         onClick={() => handleSendCampaign(campaign.id)}
                         isLoading={sendingCampaign === campaign.id}
