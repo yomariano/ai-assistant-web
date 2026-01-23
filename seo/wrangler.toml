@@ -18,7 +18,11 @@ routes = [
   { pattern = "voicefleet.ai/sitemaps/*", zone_name = "voicefleet.ai" },
   { pattern = "voicefleet.ai/robots.txt", zone_name = "voicefleet.ai" },
   { pattern = "voicefleet.ai/health", zone_name = "voicefleet.ai" },
-  { pattern = "voicefleet.ai/admin/*", zone_name = "voicefleet.ai" },
+  # Only catch SEO-specific admin routes, let /admin/campaigns go to Next.js
+  { pattern = "voicefleet.ai/admin/generate", zone_name = "voicefleet.ai" },
+  { pattern = "voicefleet.ai/admin/generate-all", zone_name = "voicefleet.ai" },
+  { pattern = "voicefleet.ai/admin/cache-status", zone_name = "voicefleet.ai" },
+  { pattern = "voicefleet.ai/admin/run-status", zone_name = "voicefleet.ai" },
   # Industry + location combo pages
   { pattern = "voicefleet.ai/restaurant-voice-agent-in-*", zone_name = "voicefleet.ai" },
   { pattern = "voicefleet.ai/restaurants-voice-agent-in-*", zone_name = "voicefleet.ai" },
