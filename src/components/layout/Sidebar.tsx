@@ -16,9 +16,12 @@ import {
   CreditCard,
   Bell,
   MessageSquare,
-  Plug
+  Plug,
+  Mail,
+  Shield
 } from 'lucide-react';
 import { useAuthStore, useBillingStore, getPlanDisplayName, getPlanBadgeColor } from '@/lib/store';
+import { adminApi } from '@/lib/api';
 
 const navItems = [
   { href: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
@@ -28,6 +31,10 @@ const navItems = [
   { href: '/notifications', label: 'Notifications', icon: Bell },
   { href: '/billing', label: 'Billing', icon: CreditCard },
   { href: '/settings', label: 'Settings', icon: Settings },
+];
+
+const adminNavItems = [
+  { href: '/admin/campaigns', label: 'Email Campaigns', icon: Mail },
 ];
 
 interface SidebarProps {
@@ -41,6 +48,14 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
   const { user, logout } = useAuthStore();
   const subscription = useBillingStore((state) => state.subscription);
   const [isCollapsed, setIsCollapsed] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
+
+  // Check admin status on mount
+  useEffect(() => {
+    adminApi.checkStatus()
+      .then(({ isAdmin }) => setIsAdmin(isAdmin))
+      .catch(() => setIsAdmin(false));
+  }, []);
 
   const handleLogout = async () => {
     await logout();
@@ -114,6 +129,46 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
               </Link>
             );
           })}
+
+          {/* Admin Section */}
+          {isAdmin && (
+            <>
+              <div className={`mt-4 mb-2 ${isCollapsed ? 'px-3' : 'px-3'}`}>
+                {!isCollapsed && (
+                  <div className="flex items-center gap-2 text-xs font-semibold text-slate-500 uppercase tracking-wider">
+                    <Shield className="h-3 w-3" />
+                    Admin
+                  </div>
+                )}
+                {isCollapsed && (
+                  <div className="h-px bg-white/10" />
+                )}
+              </div>
+              {adminNavItems.map((item) => {
+                const isActive = pathname === item.href || pathname.startsWith(item.href);
+                const Icon = item.icon;
+
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className={`flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 group ${isActive
+                        ? 'bg-violet-600 text-white shadow-lg shadow-violet-600/20'
+                        : 'hover:bg-white/5 hover:text-white'
+                      }`}
+                  >
+                    <Icon className={`h-5 w-5 shrink-0 ${isActive ? '' : 'text-slate-400 group-hover:text-white'}`} />
+                    {!isCollapsed && <span className="font-medium">{item.label}</span>}
+                    {isCollapsed && (
+                      <div className="absolute left-16 z-50 hidden rounded-md bg-slate-800 px-2 py-1 text-xs text-white group-hover:block whitespace-nowrap">
+                        {item.label}
+                      </div>
+                    )}
+                  </Link>
+                );
+              })}
+            </>
+          )}
         </nav>
 
         {/* User & Settings Section */}

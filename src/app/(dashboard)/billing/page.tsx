@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { CreditCard, ExternalLink, Phone, TrendingUp, AlertCircle, Euro } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import Button from '@/components/ui/button';
-import { billingApi } from '@/lib/api';
+import { billingApi, emailApi } from '@/lib/api';
 
 interface UsageData {
   callsMade: number;
@@ -37,6 +37,8 @@ export default function BillingPage() {
 
   useEffect(() => {
     fetchData();
+    // Track pricing page view for abandoned upgrade triggers
+    emailApi.trackEvent('pricing_view');
   }, []);
 
   async function fetchData() {

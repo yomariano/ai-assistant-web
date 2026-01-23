@@ -593,6 +593,183 @@ export const onboardingApi = {
   },
 };
 
+// Email / Event Tracking
+export const emailApi = {
+  trackEvent: async (eventType: string, eventData?: Record<string, unknown>, pageUrl?: string): Promise<{ success: boolean; eventId?: string }> => {
+    try {
+      const { data } = await api.post('/api/email/track-event', {
+        eventType,
+        eventData,
+        pageUrl: pageUrl || (typeof window !== 'undefined' ? window.location.href : undefined),
+        referrer: typeof document !== 'undefined' ? document.referrer : undefined,
+      });
+      return data;
+    } catch {
+      // Silently fail - event tracking should not break the app
+      console.warn('[API] Event tracking failed');
+      return { success: false };
+    }
+  },
+};
+
+// Admin API (for email campaigns panel)
+export interface EmailTemplate {
+  id: string;
+  name: string;
+  subject: string;
+  html_content: string;
+  text_content?: string;
+  variables: string[];
+  category: string;
+  is_active: boolean;
+}
+
+export interface AutomatedTrigger {
+  id: string;
+  name: string;
+  description?: string;
+  template_id: string;
+  trigger_type: string;
+  condition_json: Record<string, unknown>;
+  discount_code?: string;
+  discount_percent?: number;
+  cooldown_days?: number;
+  max_sends_per_user?: number;
+  priority: number;
+  is_active: boolean;
+}
+
+export interface EmailCampaign {
+  id: string;
+  name: string;
+  description?: string;
+  template_id: string;
+  subject_override?: string;
+  segment_json: Record<string, unknown>;
+  scheduled_at?: string;
+  status: 'draft' | 'scheduled' | 'sending' | 'sent' | 'cancelled';
+  sent_at?: string;
+  total_recipients: number;
+  emails_sent: number;
+  emails_opened: number;
+  emails_clicked: number;
+  template?: EmailTemplate;
+}
+
+export interface CampaignAnalytics {
+  campaign: { id: string; name: string; status: string; sentAt?: string };
+  stats: { total: number; sent: number; failed: number; opened: number; clicked: number; pending: number };
+  rates: { deliveryRate: string; openRate: string; clickRate: string };
+}
+
+export const adminApi = {
+  // Check admin status
+  checkStatus: async (): Promise<{ isAdmin: boolean }> => {
+    try {
+      const { data } = await api.get('/api/admin/status');
+      return data;
+    } catch {
+      return { isAdmin: false };
+    }
+  },
+
+  // Templates
+  getTemplates: async (category?: string): Promise<{ templates: EmailTemplate[] }> => {
+    const { data } = await api.get('/api/admin/templates', { params: { category } });
+    return data;
+  },
+
+  getTemplate: async (id: string): Promise<{ template: EmailTemplate }> => {
+    const { data } = await api.get(`/api/admin/templates/${id}`);
+    return data;
+  },
+
+  updateTemplate: async (id: string, template: Partial<EmailTemplate>): Promise<{ template: EmailTemplate }> => {
+    const { data } = await api.put(`/api/admin/templates/${id}`, template);
+    return data;
+  },
+
+  // Triggers
+  getTriggers: async (): Promise<{ triggers: AutomatedTrigger[] }> => {
+    const { data } = await api.get('/api/admin/triggers');
+    return data;
+  },
+
+  getTrigger: async (id: string): Promise<{ trigger: AutomatedTrigger }> => {
+    const { data } = await api.get(`/api/admin/triggers/${id}`);
+    return data;
+  },
+
+  updateTrigger: async (id: string, updates: Partial<AutomatedTrigger>): Promise<{ trigger: AutomatedTrigger }> => {
+    const { data } = await api.patch(`/api/admin/triggers/${id}`, updates);
+    return data;
+  },
+
+  toggleTrigger: async (id: string, active: boolean): Promise<{ trigger: AutomatedTrigger }> => {
+    const { data } = await api.post(`/api/admin/triggers/${id}/toggle`, { active });
+    return data;
+  },
+
+  runTriggers: async (): Promise<{ message: string; results: { sent: number; skipped: number; errors: number } }> => {
+    const { data } = await api.post('/api/admin/triggers/run');
+    return data;
+  },
+
+  runSingleTrigger: async (id: string): Promise<{ message: string; results: unknown }> => {
+    const { data } = await api.post(`/api/admin/triggers/${id}/run`);
+    return data;
+  },
+
+  // Campaigns
+  getCampaigns: async (status?: string, limit?: number): Promise<{ campaigns: EmailCampaign[] }> => {
+    const { data } = await api.get('/api/admin/campaigns', { params: { status, limit } });
+    return data;
+  },
+
+  getCampaign: async (id: string): Promise<{ campaign: EmailCampaign }> => {
+    const { data } = await api.get(`/api/admin/campaigns/${id}`);
+    return data;
+  },
+
+  createCampaign: async (campaign: {
+    name: string;
+    description?: string;
+    templateId: string;
+    subjectOverride?: string;
+    segmentJson?: Record<string, unknown>;
+    scheduledAt?: string;
+  }): Promise<{ campaign: EmailCampaign }> => {
+    const { data } = await api.post('/api/admin/campaigns', campaign);
+    return data;
+  },
+
+  updateCampaignStatus: async (id: string, status: string): Promise<{ campaign: EmailCampaign }> => {
+    const { data } = await api.patch(`/api/admin/campaigns/${id}`, { status });
+    return data;
+  },
+
+  previewCampaignRecipients: async (id: string): Promise<{ count: number; preview: Array<{ id: string; email: string; fullName?: string; planId?: string }> }> => {
+    const { data } = await api.get(`/api/admin/campaigns/${id}/preview`);
+    return data;
+  },
+
+  sendCampaign: async (id: string, options?: { batchSize?: number; delayMs?: number }): Promise<{ message: string; results: { campaignId: string; totalRecipients: number; sent: number; failed: number } }> => {
+    const { data } = await api.post(`/api/admin/campaigns/${id}/send`, options);
+    return data;
+  },
+
+  getCampaignAnalytics: async (id: string): Promise<CampaignAnalytics> => {
+    const { data } = await api.get(`/api/admin/campaigns/${id}/analytics`);
+    return data;
+  },
+
+  // Segments
+  previewSegment: async (segmentJson: Record<string, unknown>): Promise<{ count: number; preview: Array<{ id: string; email: string; fullName?: string; planId?: string }> }> => {
+    const { data } = await api.post('/api/admin/segments/preview', segmentJson);
+    return data;
+  },
+};
+
 // Booking Providers
 export const providersApi = {
   // Provider catalog
