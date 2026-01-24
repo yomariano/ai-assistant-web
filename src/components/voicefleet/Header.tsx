@@ -23,14 +23,11 @@ const Header = () => {
         <div className="flex items-center justify-between h-16 lg:h-20">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2">
-            <div className="w-10 h-10 bg-gradient-hero rounded-xl flex items-center justify-center shadow-md">
-              <img
-                src="/logo-mark.svg"
-                alt="VoiceFleet"
-                width={24}
-                height={24}
-                className="w-6 h-6"
-              />
+            <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-emerald-500 rounded-xl flex items-center justify-center shadow-md">
+              <svg width="24" height="24" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M166 172L256 318L346 172" stroke="white" strokeWidth="52" strokeLinecap="round" strokeLinejoin="round" />
+                <circle cx="256" cy="356" r="14" fill="white" fillOpacity="0.9" />
+              </svg>
             </div>
             <span className="text-xl font-heading font-bold text-foreground">VoiceFleet</span>
           </Link>

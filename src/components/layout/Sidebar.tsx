@@ -87,8 +87,11 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
         {/* Logo Section */}
         <div className="flex h-16 items-center justify-between border-b border-white/10 px-6">
           <Link href="/dashboard" className="flex items-center gap-3 overflow-hidden">
-            <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-primary">
-              <Phone className="h-5 w-5 text-white" />
+            <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-blue-600 to-emerald-500">
+              <svg width="20" height="20" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M166 172L256 318L346 172" stroke="white" strokeWidth="52" strokeLinecap="round" strokeLinejoin="round" />
+                <circle cx="256" cy="356" r="14" fill="white" fillOpacity="0.9" />
+              </svg>
             </div>
             {!isCollapsed && (
               <span className="text-lg font-bold text-white whitespace-nowrap">
