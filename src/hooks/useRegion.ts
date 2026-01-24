@@ -92,9 +92,9 @@ export function useRegion(): UseRegionReturn {
         currencySymbol: '$',
         telephonyProvider: 'telnyx',
         plans: [
-          { id: 'starter', price: 29, formattedPrice: '$29', monthlyMinutes: 100, paymentLink: null },
-          { id: 'growth', price: 79, formattedPrice: '$79', monthlyMinutes: 300, paymentLink: null },
-          { id: 'scale', price: 199, formattedPrice: '$199', monthlyMinutes: 1000, paymentLink: null },
+          { id: 'starter', price: 49, formattedPrice: '$49', monthlyMinutes: 100, paymentLink: null },
+          { id: 'growth', price: 199, formattedPrice: '$199', monthlyMinutes: 500, paymentLink: null },
+          { id: 'pro', price: 599, formattedPrice: '$599', monthlyMinutes: 1500, paymentLink: null },
         ],
       };
       setData(fallbackData);
@@ -166,9 +166,9 @@ export async function getRegionFromServer(): Promise<RegionData> {
       currencySymbol: '$',
       telephonyProvider: 'telnyx',
       plans: [
-        { id: 'starter', price: 29, formattedPrice: '$29', monthlyMinutes: 100, paymentLink: null },
-        { id: 'growth', price: 79, formattedPrice: '$79', monthlyMinutes: 300, paymentLink: null },
-        { id: 'scale', price: 199, formattedPrice: '$199', monthlyMinutes: 1000, paymentLink: null },
+        { id: 'starter', price: 49, formattedPrice: '$49', monthlyMinutes: 100, paymentLink: null },
+        { id: 'growth', price: 199, formattedPrice: '$199', monthlyMinutes: 500, paymentLink: null },
+        { id: 'pro', price: 599, formattedPrice: '$599', monthlyMinutes: 1500, paymentLink: null },
       ],
     };
   }

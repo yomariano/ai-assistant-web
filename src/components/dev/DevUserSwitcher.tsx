@@ -71,7 +71,7 @@ export default function DevUserSwitcher() {
   const planColors: Record<string, string> = {
     starter: 'bg-slate-500',
     growth: 'bg-indigo-500',
-    scale: 'bg-violet-500',
+    pro: 'bg-violet-500',
   };
 
   const currentUser = users.find(u => u.isCurrent);

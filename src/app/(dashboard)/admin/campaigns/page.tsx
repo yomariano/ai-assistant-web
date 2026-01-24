@@ -645,7 +645,7 @@ function CreateCampaignModal({ onClose, onCreated }: CreateCampaignModalProps) {
           <div>
             <label className="block text-sm font-medium text-slate-700 mb-1">Target Plans</label>
             <div className="flex gap-2">
-              {['starter', 'growth', 'scale'].map(plan => (
+              {['starter', 'growth', 'pro'].map(plan => (
                 <label key={plan} className="flex items-center gap-2">
                   <input
                     type="checkbox"

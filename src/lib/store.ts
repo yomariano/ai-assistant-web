@@ -278,9 +278,9 @@ interface BillingState {
 }
 
 const planDetails: Record<string, { name: string; color: string }> = {
-  starter: { name: 'Lite', color: 'bg-slate-600' },
+  starter: { name: 'Starter', color: 'bg-slate-600' },
   growth: { name: 'Growth', color: 'bg-indigo-600' },
-  scale: { name: 'Pro', color: 'bg-violet-600' },
+  pro: { name: 'Pro', color: 'bg-violet-600' },
 };
 
 export const useBillingStore = create<BillingState>((set) => ({

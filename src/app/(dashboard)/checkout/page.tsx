@@ -22,7 +22,7 @@ function CheckoutContent() {
       }
 
       // Validate plan ID
-      if (!['starter', 'growth', 'scale'].includes(planId)) {
+      if (!['starter', 'growth', 'pro'].includes(planId)) {
         setError('Invalid plan selected. Please choose a valid plan.');
         setIsLoading(false);
         return;
@@ -45,7 +45,7 @@ function CheckoutContent() {
             // ignore storage errors
           }
 
-          await billingApi.startTrial(planId as 'starter' | 'growth' | 'scale');
+          await billingApi.startTrial(planId as 'starter' | 'growth' | 'pro');
           router.push('/dashboard');
           return;
         }

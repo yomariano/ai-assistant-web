@@ -398,7 +398,7 @@ export const billingApi = {
     return data;
   },
 
-  startTrial: async (planId: 'starter' | 'growth' | 'scale'): Promise<{
+  startTrial: async (planId: 'starter' | 'growth' | 'pro'): Promise<{
     message: string;
     subscription: unknown;
     trialEndsAt: string;
