@@ -4,7 +4,7 @@ import { CheckCircle2, CreditCard, RefreshCw } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
-export type PlanId = "starter" | "growth" | "scale";
+export type PlanId = "starter" | "growth" | "pro";
 
 interface PaywallStepProps {
   hasSubscription: boolean;
@@ -21,9 +21,9 @@ const plans: Array<{
   subtitle: string;
   highlight?: boolean;
 }> = [
-  { id: "starter", name: "Lite", price: "€19/mo", subtitle: "+ €0.95/call" },
-  { id: "growth", name: "Growth", price: "€99/mo", subtitle: "+ €0.45/call", highlight: true },
-  { id: "scale", name: "Pro", price: "€249/mo", subtitle: "1500 calls included" },
+  { id: "starter", name: "Starter", price: "€49/mo", subtitle: "100 calls/month" },
+  { id: "growth", name: "Growth", price: "€199/mo", subtitle: "500 calls/month", highlight: true },
+  { id: "pro", name: "Pro", price: "€599/mo", subtitle: "1500 + 200 outbound calls" },
 ];
 
 export function PaywallStep({

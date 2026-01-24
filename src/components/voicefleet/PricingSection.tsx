@@ -13,14 +13,14 @@ const getPaymentLinks = () => {
     return {
       starter: process.env.NEXT_PUBLIC_STRIPE_LIVE_LINK_STARTER,
       growth: process.env.NEXT_PUBLIC_STRIPE_LIVE_LINK_GROWTH,
-      scale: process.env.NEXT_PUBLIC_STRIPE_LIVE_LINK_SCALE,
+      pro: process.env.NEXT_PUBLIC_STRIPE_LIVE_LINK_PRO,
     };
   }
 
   return {
     starter: process.env.NEXT_PUBLIC_STRIPE_TEST_LINK_STARTER,
     growth: process.env.NEXT_PUBLIC_STRIPE_TEST_LINK_GROWTH,
-    scale: process.env.NEXT_PUBLIC_STRIPE_TEST_LINK_SCALE,
+    pro: process.env.NEXT_PUBLIC_STRIPE_TEST_LINK_PRO,
   };
 };
 
@@ -98,62 +98,63 @@ const PricingSection = () => {
   const tiers = [
     {
       icon: Zap,
-      name: "Lite",
+      name: "Starter",
       planId: "starter",
-      price: 19,
-      perCall: 0.95,
-      description: "Perfect for solo practitioners",
-      volume: "< 100 calls/month",
+      price: 49,
+      callsIncluded: 100,
+      description: "Perfect for solo businesses",
+      volume: "100 calls/month",
       features: [
-        "1 phone number",
-        "Pay per call",
-        "24/7 call answering",
+        "100 inbound calls/month",
+        "Google Calendar integration",
+        "Email notifications",
+        "24/7 AI call answering",
         "Message taking",
-        "SMS notifications",
         "Custom greeting",
+        "5-day free trial",
       ],
-      cta: "Get Started",
+      cta: "Start Free Trial",
       popular: false,
     },
     {
       icon: Rocket,
       name: "Growth",
       planId: "growth",
-      price: 99,
-      perCall: 0.45,
-      description: "For busy small businesses",
-      volume: "100-400 calls/month",
+      price: 199,
+      callsIncluded: 500,
+      description: "For growing businesses",
+      volume: "500 calls/month",
       features: [
-        "2 phone numbers",
-        "Lower per-call rate",
-        "Appointment booking",
-        "SMS + Email notifications",
-        "Calendar integration",
-        "Analytics dashboard",
-        "FAQ handling",
+        "500 inbound calls/month",
+        "Google + Outlook Calendar",
+        "Customer SMS confirmations",
+        "SMS reminders (24h before)",
+        "Email + SMS notifications",
+        "Business hours support",
+        "5-day free trial",
       ],
-      cta: "Get Started",
+      cta: "Start Free Trial",
       popular: true,
     },
     {
       icon: Crown,
       name: "Pro",
-      planId: "scale",
-      price: 249,
-      perCall: null,
-      description: "For multi-location businesses",
-      volume: "400+ calls/month",
+      planId: "pro",
+      price: 599,
+      callsIncluded: 1500,
+      outboundCalls: 200,
+      description: "For high-volume businesses",
+      volume: "1500+ calls/month",
       features: [
-        "5 phone numbers",
-        "Unlimited calls*",
-        "Full feature set",
-        "Multi-location support",
-        "Priority 24/7 support",
-        "Advanced analytics",
-        "Custom integrations",
-        "Dedicated account manager",
+        "1,500 inbound calls/month",
+        "200 outbound reminder calls",
+        "Multi-staff calendar",
+        "AI voice reminders",
+        "Webhook notifications",
+        "24/7 priority support",
+        "5-day free trial",
       ],
-      cta: "Get Started",
+      cta: "Start Free Trial",
       popular: false,
     },
   ];
@@ -220,15 +221,10 @@ const PricingSection = () => {
                     </span>
                     <span className="text-muted-foreground">/month</span>
                   </div>
-                  {tier.perCall !== null ? (
-                    <p className="text-sm text-muted-foreground mt-1">
-                      + &euro;{tier.perCall.toFixed(2)} per call
-                    </p>
-                  ) : (
-                    <p className="text-sm text-accent font-medium mt-1">
-                      Unlimited calls included*
-                    </p>
-                  )}
+                  <p className="text-sm text-accent font-medium mt-1">
+                    {tier.callsIncluded} calls included
+                    {tier.outboundCalls && ` + ${tier.outboundCalls} outbound`}
+                  </p>
                 </div>
 
                 <p className="text-xs font-medium text-primary mb-4 bg-primary/5 py-1 px-2 rounded inline-block">
@@ -268,7 +264,7 @@ const PricingSection = () => {
 
         <div className="text-center mb-8">
           <p className="text-xs text-muted-foreground">
-            * Fair use policy: 1,500 calls/month cap on Pro plan
+            All plans include a 5-day free trial. No credit card required to start.
           </p>
         </div>
 

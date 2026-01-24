@@ -83,9 +83,9 @@ export default function BillingPage() {
   };
 
   const planDetails: Record<string, { name: string; price: string; perCall: string; color: string }> = {
-    starter: { name: 'Lite', price: '€19/mo', perCall: '+ €0.95/call', color: 'bg-slate-100 text-slate-700' },
-    growth: { name: 'Growth', price: '€99/mo', perCall: '+ €0.45/call', color: 'bg-indigo-100 text-indigo-700' },
-    scale: { name: 'Pro', price: '€249/mo', perCall: '1500 calls included', color: 'bg-violet-100 text-violet-700' }
+    starter: { name: 'Starter', price: '€49/mo', perCall: '100 inbound calls/month', color: 'bg-slate-100 text-slate-700' },
+    growth: { name: 'Growth', price: '€199/mo', perCall: '500 inbound calls/month', color: 'bg-indigo-100 text-indigo-700' },
+    pro: { name: 'Pro', price: '€599/mo', perCall: '1500 inbound + 200 outbound calls/month', color: 'bg-violet-100 text-violet-700' },
   };
 
   if (isLoading) {

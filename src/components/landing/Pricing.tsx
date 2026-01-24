@@ -17,18 +17,18 @@ interface TierData {
 
 const tiers: TierData[] = [
     {
-        name: 'Lite',
+        name: 'Starter',
         id: 'tier-starter',
         href: '/register',
-        price: '€19',
-        description: 'Start automating your calls with pay-as-you-go pricing.',
-        perfectFor: 'Perfect for: Getting started',
+        price: '€49',
+        description: 'Perfect for solo businesses getting started with AI.',
+        perfectFor: 'Perfect for: Solo businesses',
         features: [
-            '€0.95 per call',
-            '1 phone number',
-            'AI voice assistant',
-            'Call scheduling',
+            '100 inbound calls/month',
+            'Google Calendar integration',
             'Email notifications',
+            '24/7 AI call answering',
+            '5-day free trial',
         ],
         mostPopular: false,
         cta: 'Start Free Trial',
@@ -37,16 +37,15 @@ const tiers: TierData[] = [
         name: 'Growth',
         id: 'tier-growth',
         href: '/register',
-        price: '€99',
-        description: 'Scale your operations with lower per-call rates.',
+        price: '€199',
+        description: 'For growing businesses with SMS notifications.',
         perfectFor: 'Perfect for: Growing businesses',
         features: [
-            '€0.45 per call',
-            '2 phone numbers',
-            'Priority support',
-            'Call analytics',
-            'Webhook integrations',
-            'Custom voice settings',
+            '500 inbound calls/month',
+            'Google + Outlook Calendar',
+            'SMS confirmations & reminders',
+            'Business hours support',
+            '5-day free trial',
         ],
         mostPopular: true,
         cta: 'Start Free Trial',
@@ -55,17 +54,16 @@ const tiers: TierData[] = [
         name: 'Pro',
         id: 'tier-pro',
         href: '/register',
-        price: '€249',
-        description: 'For high-volume operations with predictable costs.',
-        perfectFor: 'Perfect for: Enterprises',
+        price: '€599',
+        description: 'For high-volume businesses with outbound reminders.',
+        perfectFor: 'Perfect for: High-volume businesses',
         features: [
-            '1,500 calls included',
-            '5 phone numbers',
-            'Dedicated support',
-            'Advanced analytics',
-            'Custom integrations',
-            'SLA guarantee',
-            'Account manager',
+            '1,500 inbound calls/month',
+            '200 outbound reminder calls',
+            'Multi-staff calendar',
+            'AI voice reminders',
+            '24/7 priority support',
+            '5-day free trial',
         ],
         mostPopular: false,
         cta: 'Start Free Trial',
@@ -182,7 +180,7 @@ export default function Pricing() {
 
                 <div className="mt-12 text-center">
                     <p className="text-sm text-gray-500">
-                        All plans include: <span className="font-medium">3 free trial calls</span> • Cancel anytime • GDPR compliant
+                        All plans include: <span className="font-medium">5-day free trial</span> • Cancel anytime • GDPR compliant
                     </p>
                 </div>
             </div>

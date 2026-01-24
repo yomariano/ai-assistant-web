@@ -250,7 +250,7 @@ export default function FeaturesPage() {
 
             <div className="grid md:grid-cols-4 gap-6 max-w-5xl mx-auto mb-12">
               <div className="bg-card rounded-xl border border-border p-6 text-center">
-                <div className="text-4xl font-heading font-bold text-primary mb-2">€19</div>
+                <div className="text-4xl font-heading font-bold text-primary mb-2">€49</div>
                 <p className="text-muted-foreground">Starting price per month</p>
               </div>
               <div className="bg-card rounded-xl border border-border p-6 text-center">
