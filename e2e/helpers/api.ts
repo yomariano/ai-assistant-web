@@ -26,7 +26,7 @@ interface DevLoginResponse {
 /**
  * Login as a specific dev user plan
  */
-export async function loginAsDevUser(plan: 'starter' | 'growth' | 'scale'): Promise<DevLoginResponse> {
+export async function loginAsDevUser(plan: 'starter' | 'growth' | 'pro'): Promise<DevLoginResponse> {
   const response = await fetch(`${API_URL}/api/auth/dev-login?plan=${plan}`);
   if (!response.ok) {
     throw new Error(`Failed to login as ${plan}: ${response.statusText}`);
@@ -99,7 +99,7 @@ export async function getAssistant(): Promise<{ exists: boolean; assistant: any 
  */
 export async function simulateCheckoutCompleted(options: {
   userId: string;
-  planId: 'starter' | 'growth' | 'scale';
+  planId: 'starter' | 'growth' | 'pro';
   customerId?: string;
   subscriptionId?: string;
 }): Promise<void> {

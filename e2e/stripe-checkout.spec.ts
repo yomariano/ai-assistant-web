@@ -1,18 +1,18 @@
 import { test, expect } from '@playwright/test';
 
 const API_URL = 'http://localhost:3000';
-// Stripe payment links for each plan (EUR - Ireland/EU)
+// Stripe payment links for each plan (EUR - Ireland/EU) - VoiceFleet Jan 2026
 const STRIPE_PAYMENT_LINKS = {
-  starter: 'https://buy.stripe.com/test_6oUaEWeLs9gO8fCgqMfQI07',
-  growth: 'https://buy.stripe.com/test_28E6oG0UC78G53qb6sfQI08',
-  scale: 'https://buy.stripe.com/test_00w4gyfPw64C53q4I4fQI09',
+  starter: 'https://buy.stripe.com/test_8x2fZgbzggJganK7UgfQI0m',
+  growth: 'https://buy.stripe.com/test_3cI5kC46O9gOeE06QcfQI0n',
+  pro: 'https://buy.stripe.com/test_dRmeVcgTAboW67u2zWfQI0o',
 };
-// Expected phone numbers per plan (OrderBot.ie Pricing Jan 2026)
-// Lite: 1 phone | Growth: 2 phones | Pro: 5 phones
+// Expected phone numbers per plan (VoiceFleet Pricing Jan 2026)
+// All plans: 1 phone
 const PLAN_PHONE_LIMITS = {
-  starter: 1,  // Lite
-  growth: 2,   // Growth
-  scale: 5,    // Pro
+  starter: 1,  // Starter: €49
+  growth: 1,   // Growth: €199
+  pro: 1,      // Pro: €599
 };
 const TEST_USER_ID = '00000000-0000-0000-0000-000000000099'; // Must be valid UUID for database
 
@@ -262,7 +262,7 @@ test.describe('Real Stripe Checkout Flow', () => {
   });
 
   test('Scale plan checkout with real Stripe payment', async ({ page, request }) => {
-    const checkoutUrl = `${STRIPE_PAYMENT_LINKS.scale}?client_reference_id=${TEST_USER_ID}`;
+    const checkoutUrl = `${STRIPE_PAYMENT_LINKS.pro}?client_reference_id=${TEST_USER_ID}`;
     await page.goto(checkoutUrl);
     await completeStripeCheckout(page);
 
@@ -270,14 +270,14 @@ test.describe('Real Stripe Checkout Flow', () => {
     const subscription = await waitForSubscription(page, request, TEST_USER_ID);
     expect(subscription).not.toBeNull();
     expect(subscription.status).toBe('active');
-    expect(subscription.plan_id).toBe('scale');
+    expect(subscription.plan_id).toBe('pro');
     console.log('Subscription verified:', subscription.plan_id, subscription.status);
 
     // Wait for phone numbers (Scale gets at least 5)
-    const phoneNumbers = await waitForPhoneNumbers(page, request, TEST_USER_ID, PLAN_PHONE_LIMITS.scale, 30);
+    const phoneNumbers = await waitForPhoneNumbers(page, request, TEST_USER_ID, PLAN_PHONE_LIMITS.pro, 30);
     expect(phoneNumbers).not.toBeNull();
-    expect(phoneNumbers.numbers.length).toBeGreaterThanOrEqual(PLAN_PHONE_LIMITS.scale);
-    console.log('Phone provisioning verified:', phoneNumbers.numbers.length, 'numbers (expected at least', PLAN_PHONE_LIMITS.scale, ')');
+    expect(phoneNumbers.numbers.length).toBeGreaterThanOrEqual(PLAN_PHONE_LIMITS.pro);
+    console.log('Phone provisioning verified:', phoneNumbers.numbers.length, 'numbers (expected at least', PLAN_PHONE_LIMITS.pro, ')');
 
     // VERIFY DB STATE DIRECTLY
     const dbState = await getDbState(request, TEST_USER_ID);
@@ -292,7 +292,7 @@ test.describe('Real Stripe Checkout Flow', () => {
       hasUser: true,
       hasSubscription: true,
       subscriptionStatus: 'active',
-      planId: 'scale',
+      planId: 'pro',
       hasAssistant: true,
       hasStripeCustomerId: true,
       hasStripeSubscriptionId: true,
@@ -301,7 +301,7 @@ test.describe('Real Stripe Checkout Flow', () => {
     if (!dbCheck.passed) {
       console.error('DB verification failures:', dbCheck.failures);
     }
-    expect(dbState.phoneNumbers.activeCount).toBeGreaterThanOrEqual(PLAN_PHONE_LIMITS.scale);
+    expect(dbState.phoneNumbers.activeCount).toBeGreaterThanOrEqual(PLAN_PHONE_LIMITS.pro);
     console.log('✓ Scale plan DB state verified successfully');
   });
 });
@@ -509,7 +509,7 @@ test.describe('Plan Upgrade/Downgrade Flow', () => {
     console.log('✓ DB state verified: downgraded to starter, 1 phone released');
   });
 
-  test('upgrade from starter to scale adds more phone numbers', async ({ page, request }) => {
+  test('upgrade from starter to pro adds more phone numbers', async ({ page, request }) => {
     // Step 1: Create starter subscription via simulation
     const simulateResponse = await request.post(`${API_URL}/api/billing/test/simulate-checkout`, {
       data: {
@@ -534,21 +534,21 @@ test.describe('Plan Upgrade/Downgrade Flow', () => {
       data: {
         userId: TEST_USER_ID,
         oldPlanId: 'starter',
-        newPlanId: 'scale'
+        newPlanId: 'pro'
       }
     });
     expect(upgradeResponse.ok()).toBe(true);
     const upgradeResult = await upgradeResponse.json();
     console.log('Upgrade result:', upgradeResult);
     expect(upgradeResult.result.action).toBe('upgrade');
-    expect(upgradeResult.result.added).toBe(PLAN_PHONE_LIMITS.scale - PLAN_PHONE_LIMITS.starter); // 5 - 1 = 4 added
+    expect(upgradeResult.result.added).toBe(PLAN_PHONE_LIMITS.pro - PLAN_PHONE_LIMITS.starter); // 5 - 1 = 4 added
 
-    // Step 3: Verify scale has 5 phones
+    // Step 3: Verify pro has 5 phones
     const phonesAfterResponse = await request.get(`${API_URL}/api/billing/phone-numbers`, {
       headers: { 'Cookie': cookie }
     });
     const phonesAfter = await phonesAfterResponse.json();
-    expect(phonesAfter.numbers.length).toBe(PLAN_PHONE_LIMITS.scale);
+    expect(phonesAfter.numbers.length).toBe(PLAN_PHONE_LIMITS.pro);
     console.log(`Pro plan: ${phonesAfter.numbers.length} phone numbers`);
 
     // Verify plan changed
@@ -556,16 +556,16 @@ test.describe('Plan Upgrade/Downgrade Flow', () => {
       headers: { 'Cookie': cookie }
     });
     const subData = await subResponse.json();
-    expect(subData.plan_id).toBe('scale');
+    expect(subData.plan_id).toBe('pro');
 
     // VERIFY DB STATE DIRECTLY
     const dbState = await getDbState(request, TEST_USER_ID);
     const dbCheck = verifyDbState(dbState, {
       hasSubscription: true,
-      planId: 'scale',
-      activePhoneCount: PLAN_PHONE_LIMITS.scale,
+      planId: 'pro',
+      activePhoneCount: PLAN_PHONE_LIMITS.pro,
     });
     expect(dbCheck.passed).toBe(true);
-    console.log('✓ DB state verified: upgraded to scale with 5 phones');
+    console.log('✓ DB state verified: upgraded to pro with 5 phones');
   });
 });

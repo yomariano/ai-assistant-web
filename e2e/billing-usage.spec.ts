@@ -1,28 +1,28 @@
 /**
  * Billing & Usage E2E Tests
  *
- * Tests for OrderBot pay-per-call billing model:
- * - Lite: €19/mo + €0.95/call
- * - Growth: €99/mo + €0.45/call
- * - Pro: €249/mo + €0/call (1500 fair use cap)
+ * Tests for VoiceFleet calls-included billing model:
+ * - Starter: €49/mo 100 calls
+ * - Growth: €199/mo 500 calls
+ * - Pro: €599/mo 1500 inbound + 200 outbound
  */
 
 import { test, expect, TEST_USERS, PLAN_LIMITS } from './fixtures/test-fixtures';
 
 const API_URL = process.env.E2E_API_URL || 'http://localhost:3000';
 
-// Per-call rates in cents
+// Per-call rates in cents (all 0 - calls included in plan)
 const PER_CALL_RATES = {
-  starter: 95,   // €0.95
-  growth: 45,    // €0.45
-  scale: 0       // €0 (included)
+  starter: 0,   // €0 (100 calls included)
+  growth: 0,    // €0 (500 calls included)
+  pro: 0        // €0 (1500 calls included)
 };
 
-// Fair use caps
+// Fair use caps (calls included)
 const FAIR_USE_CAPS = {
-  starter: null,  // Unlimited (pay per call)
-  growth: null,   // Unlimited (pay per call)
-  scale: 1500     // 1500 calls/month
+  starter: 100,   // 100 calls/month
+  growth: 500,    // 500 calls/month
+  pro: 1500       // 1500 calls/month
 };
 
 test.describe('Usage Tracking API', () => {
@@ -43,7 +43,7 @@ test.describe('Usage Tracking API', () => {
     expect(usage).toHaveProperty('totalChargesCents');
     expect(usage).toHaveProperty('perCallRateCents');
     expect(usage.perCallRateCents).toBe(PER_CALL_RATES.starter);
-    expect(usage.fairUseCap).toBeNull(); // Starter has no cap
+    expect(usage.fairUseCap).toBe(FAIR_USE_CAPS.starter);
   });
 
   test('GET /api/billing/usage returns usage summary for growth plan', async ({ api }) => {
@@ -55,25 +55,25 @@ test.describe('Usage Tracking API', () => {
     const usage = await response.json();
 
     expect(usage.perCallRateCents).toBe(PER_CALL_RATES.growth);
-    expect(usage.fairUseCap).toBeNull(); // Growth has no cap
+    expect(usage.fairUseCap).toBe(FAIR_USE_CAPS.growth);
   });
 
-  test('GET /api/billing/usage returns usage summary for scale plan with cap', async ({ api }) => {
-    await api.loginAsDevUser('scale');
+  test('GET /api/billing/usage returns usage summary for pro plan with cap', async ({ api }) => {
+    await api.loginAsDevUser('pro');
 
     const response = await fetch(`${API_URL}/api/billing/usage`);
     expect(response.ok).toBe(true);
 
     const usage = await response.json();
 
-    expect(usage.perCallRateCents).toBe(PER_CALL_RATES.scale);
-    expect(usage.fairUseCap).toBe(FAIR_USE_CAPS.scale);
+    expect(usage.perCallRateCents).toBe(PER_CALL_RATES.pro);
+    expect(usage.fairUseCap).toBe(FAIR_USE_CAPS.pro);
     expect(usage).toHaveProperty('callsRemaining');
   });
 });
 
-test.describe('Per-Call Billing', () => {
-  test('starter plan charges €0.95 per call', async ({ api }) => {
+test.describe('Calls Included Billing', () => {
+  test('starter plan includes 100 calls', async ({ api }) => {
     await api.loginAsDevUser('starter');
 
     // Get initial usage
@@ -93,17 +93,17 @@ test.describe('Per-Call Billing', () => {
       })
     });
 
-    // If simulate endpoint exists, verify charges
+    // If simulate endpoint exists, verify no additional charges
     if (simulateResponse.ok) {
       const afterResponse = await fetch(`${API_URL}/api/billing/usage`);
       const afterUsage = await afterResponse.json();
 
       expect(afterUsage.callsMade).toBe(initialCalls + 1);
-      expect(afterUsage.totalChargesCents).toBe(initialCharges + PER_CALL_RATES.starter);
+      expect(afterUsage.totalChargesCents).toBe(initialCharges); // No additional charges
     }
   });
 
-  test('growth plan charges €0.45 per call', async ({ api }) => {
+  test('growth plan includes 500 calls', async ({ api }) => {
     await api.loginAsDevUser('growth');
 
     // Get initial usage
@@ -128,12 +128,12 @@ test.describe('Per-Call Billing', () => {
       const afterUsage = await afterResponse.json();
 
       expect(afterUsage.callsMade).toBe(initialCalls + 1);
-      expect(afterUsage.totalChargesCents).toBe(initialCharges + PER_CALL_RATES.growth);
+      expect(afterUsage.totalChargesCents).toBe(initialCharges); // No additional charges
     }
   });
 
-  test('scale plan does not charge per call', async ({ api }) => {
-    await api.loginAsDevUser('scale');
+  test('pro plan includes 1500 calls', async ({ api }) => {
+    await api.loginAsDevUser('pro');
 
     // Get initial usage
     const beforeResponse = await fetch(`${API_URL}/api/billing/usage`);
@@ -146,8 +146,8 @@ test.describe('Per-Call Billing', () => {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        userId: TEST_USERS.scale,
-        planId: 'scale',
+        userId: TEST_USERS.pro,
+        planId: 'pro',
         vapiCostCents: 50
       })
     });
@@ -163,8 +163,8 @@ test.describe('Per-Call Billing', () => {
 });
 
 test.describe('Fair Use Cap Enforcement', () => {
-  test('scale plan allows calls within 1500 cap', async ({ api }) => {
-    await api.loginAsDevUser('scale');
+  test('pro plan allows calls within 1500 cap', async ({ api }) => {
+    await api.loginAsDevUser('pro');
 
     // Check if call is allowed
     const response = await fetch(`${API_URL}/api/billing/can-make-call`);
@@ -177,7 +177,7 @@ test.describe('Fair Use Cap Enforcement', () => {
     }
   });
 
-  test('starter plan has unlimited calls (pay per call)', async ({ api }) => {
+  test('starter plan allows calls within 100 cap', async ({ api }) => {
     await api.loginAsDevUser('starter');
 
     const response = await fetch(`${API_URL}/api/billing/can-make-call`);
@@ -186,12 +186,12 @@ test.describe('Fair Use Cap Enforcement', () => {
       const result = await response.json();
 
       expect(result.allowed).toBe(true);
-      expect(result.reason).toBe('pay_per_call');
-      expect(result.callsRemaining).toBeNull(); // null = unlimited
+      expect(result.reason).toBe('within_cap');
+      expect(result.callsRemaining).toBeDefined();
     }
   });
 
-  test('growth plan has unlimited calls (pay per call)', async ({ api }) => {
+  test('growth plan allows calls within 500 cap', async ({ api }) => {
     await api.loginAsDevUser('growth');
 
     const response = await fetch(`${API_URL}/api/billing/can-make-call`);
@@ -200,8 +200,8 @@ test.describe('Fair Use Cap Enforcement', () => {
       const result = await response.json();
 
       expect(result.allowed).toBe(true);
-      expect(result.reason).toBe('pay_per_call');
-      expect(result.callsRemaining).toBeNull();
+      expect(result.reason).toBe('within_cap');
+      expect(result.callsRemaining).toBeDefined();
     }
   });
 });
@@ -258,29 +258,29 @@ test.describe('Billing Dashboard UI', () => {
     }
   });
 
-  test('shows per-call rate for starter plan', async ({ page, api }) => {
+  test('shows calls included for starter plan', async ({ page, api }) => {
     await api.loginAsDevUser('starter');
     await page.goto('/billing');
 
     await page.waitForSelector('text=Billing', { timeout: 10000 });
 
-    // Look for €0.95 rate display
-    const rateText = page.locator('text=€0.95');
-    if (await rateText.isVisible()) {
-      expect(await rateText.isVisible()).toBe(true);
+    // Look for 100 calls display
+    const callsText = page.locator('text=/100.*calls|calls.*100/i');
+    if (await callsText.count() > 0) {
+      expect(await callsText.first().isVisible()).toBe(true);
     }
   });
 
-  test('shows unlimited for scale plan', async ({ page, api }) => {
-    await api.loginAsDevUser('scale');
+  test('shows calls included for pro plan', async ({ page, api }) => {
+    await api.loginAsDevUser('pro');
     await page.goto('/billing');
 
     await page.waitForSelector('text=Billing', { timeout: 10000 });
 
-    // Scale plan should show unlimited or included
-    const includedText = page.locator('text=/unlimited|included/i');
-    if (await includedText.count() > 0) {
-      expect(await includedText.first().isVisible()).toBe(true);
+    // Pro plan should show 1500 calls or similar
+    const callsText = page.locator('text=/1500|1,500/i');
+    if (await callsText.count() > 0) {
+      expect(await callsText.first().isVisible()).toBe(true);
     }
   });
 });
@@ -293,18 +293,18 @@ test.describe('Phone Number Limits by Plan', () => {
     expect(limit).toBe(PLAN_LIMITS.starter.phoneNumbers);
   });
 
-  test('growth plan allows 2 phone numbers', async ({ api }) => {
+  test('growth plan allows 1 phone number', async ({ api }) => {
     await api.loginAsDevUser('growth');
 
     const { limit } = await api.getPhoneNumbers();
     expect(limit).toBe(PLAN_LIMITS.growth.phoneNumbers);
   });
 
-  test('scale plan allows 5 phone numbers', async ({ api }) => {
-    await api.loginAsDevUser('scale');
+  test('pro plan allows 1 phone number', async ({ api }) => {
+    await api.loginAsDevUser('pro');
 
     const { limit } = await api.getPhoneNumbers();
-    expect(limit).toBe(PLAN_LIMITS.scale.phoneNumbers);
+    expect(limit).toBe(PLAN_LIMITS.pro.phoneNumbers);
   });
 });
 
@@ -345,32 +345,32 @@ test.describe('Vapi Webhook Cost Tracking', () => {
 });
 
 test.describe('Plan Pricing Display', () => {
-  test('pricing page shows correct OrderBot prices', async ({ page }) => {
+  test('pricing page shows correct VoiceFleet prices', async ({ page }) => {
     await page.goto('/pricing');
 
     // Wait for pricing to load
-    await page.waitForSelector('text=/€19|€99|€249/');
+    await page.waitForSelector('text=/€49|€199|€599/');
 
     // Verify all three plans are displayed
-    const litePrice = page.locator('text=€19');
-    const growthPrice = page.locator('text=€99');
-    const proPrice = page.locator('text=€249');
+    const starterPrice = page.locator('text=€49');
+    const growthPrice = page.locator('text=€199');
+    const proPrice = page.locator('text=€599');
 
-    expect(await litePrice.count()).toBeGreaterThan(0);
+    expect(await starterPrice.count()).toBeGreaterThan(0);
     expect(await growthPrice.count()).toBeGreaterThan(0);
     expect(await proPrice.count()).toBeGreaterThan(0);
   });
 
-  test('pricing page shows per-call rates', async ({ page }) => {
+  test('pricing page shows calls included', async ({ page }) => {
     await page.goto('/pricing');
 
-    await page.waitForSelector('text=/€0\\.95|€0\\.45/');
+    await page.waitForSelector('text=/100.*calls|calls.*100/i');
 
-    // Verify per-call rates are shown
-    const starterRate = page.locator('text=€0.95');
-    const growthRate = page.locator('text=€0.45');
+    // Verify calls are shown for each plan
+    const starterCalls = page.locator('text=/100.*calls/i');
+    const growthCalls = page.locator('text=/500.*calls/i');
 
-    expect(await starterRate.count()).toBeGreaterThan(0);
-    expect(await growthRate.count()).toBeGreaterThan(0);
+    expect(await starterCalls.count()).toBeGreaterThan(0);
+    expect(await growthCalls.count()).toBeGreaterThan(0);
   });
 });

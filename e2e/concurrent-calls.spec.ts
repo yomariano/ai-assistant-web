@@ -74,12 +74,12 @@ test.describe('Concurrent Call Limits by Plan', () => {
     console.log('Growth plan: 3 concurrent calls allowed');
   });
 
-  test('scale plan has 10 concurrent call limit', async ({ request }) => {
-    await setupUserWithSubscription(request, TEST_USER_ID, 'scale');
+  test('pro plan has 10 concurrent call limit', async ({ request }) => {
+    await setupUserWithSubscription(request, TEST_USER_ID, 'pro');
 
     const activeCallsInfo = await getActiveCalls(request, TEST_USER_ID);
     expect(activeCallsInfo.maxConcurrentCalls).toBe(10);
-    console.log('Scale plan: 10 concurrent calls allowed');
+    console.log('Pro plan: 10 concurrent calls allowed');
   });
 });
 

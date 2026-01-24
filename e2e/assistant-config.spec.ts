@@ -209,8 +209,8 @@ test.describe('Voice Selection by Plan', () => {
     console.log('Growth plan has', growthData.voices.length, 'voices');
   });
 
-  test('scale plan has maximum voice options', async ({ request }) => {
-    await setupUserWithSubscription(request, TEST_USER_ID, 'scale');
+  test('pro plan has maximum voice options', async ({ request }) => {
+    await setupUserWithSubscription(request, TEST_USER_ID, 'pro');
     const cookie = await getAuthCookie(request, TEST_USER_ID);
 
     const response = await request.get(`${API_URL}/api/assistant/voices`, {
@@ -218,12 +218,12 @@ test.describe('Voice Selection by Plan', () => {
     });
 
     expect(response.ok()).toBe(true);
-    const scaleData = await response.json();
-    console.log('Scale plan voices:', scaleData.voices?.length);
+    const proData = await response.json();
+    console.log('Pro plan voices:', proData.voices?.length);
 
-    // Scale should have all voices including ElevenLabs
-    expect(scaleData.voices.length).toBeGreaterThanOrEqual(5);
-    console.log('Scale plan has', scaleData.voices.length, 'voices');
+    // Pro should have all voices including ElevenLabs
+    expect(proData.voices.length).toBeGreaterThanOrEqual(5);
+    console.log('Pro plan has', proData.voices.length, 'voices');
   });
 
   test('can update voice for starter plan with valid voice', async ({ request }) => {

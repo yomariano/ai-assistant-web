@@ -1,21 +1,21 @@
 /**
  * EUR Checkout E2E Tests
  *
- * Tests for OrderBot EUR pricing and checkout flow:
- * - Lite: €19/mo + €0.95/call
- * - Growth: €99/mo + €0.45/call
- * - Pro: €249/mo + €0/call (1500 fair use cap)
+ * Tests for VoiceFleet EUR pricing and checkout flow:
+ * - Starter: €49/mo 100 calls
+ * - Growth: €199/mo 500 calls
+ * - Pro: €599/mo 1500 inbound + 200 outbound
  */
 
 import { test, expect, TEST_USERS, PLAN_LIMITS } from './fixtures/test-fixtures';
 
 const API_URL = process.env.E2E_API_URL || 'http://localhost:3000';
 
-// OrderBot EUR Pricing
+// VoiceFleet EUR Pricing
 const EUR_PRICING = {
-  starter: { price: 19, perCall: 0.95, name: 'Lite' },
-  growth: { price: 99, perCall: 0.45, name: 'Growth' },
-  scale: { price: 249, perCall: 0, name: 'Pro', callsCap: 1500 },
+  starter: { price: 49, callsIncluded: 100, name: 'Starter' },
+  growth: { price: 199, callsIncluded: 500, name: 'Growth' },
+  pro: { price: 599, callsIncluded: 1500, outboundCalls: 200, name: 'Pro' },
 };
 
 test.describe('EUR Region Detection', () => {
@@ -42,28 +42,24 @@ test.describe('EUR Region Detection', () => {
     expect(data.region).toBe('US');
   });
 
-  test('EUR region includes OrderBot pricing', async ({ request }) => {
+  test('EUR region includes VoiceFleet pricing', async ({ request }) => {
     const response = await request.get(`${API_URL}/api/billing/region?region=IE`);
     const data = await response.json();
 
     expect(data.plans).toHaveLength(3);
 
-    // Verify Lite plan
-    const lite = data.plans.find((p: any) => p.id === 'starter');
-    expect(lite.price).toBe(EUR_PRICING.starter.price);
-    expect(lite.perCallPrice).toBe(EUR_PRICING.starter.perCall);
-    expect(lite.formattedPrice).toBe('€19');
+    // Verify Starter plan
+    const starter = data.plans.find((p: any) => p.id === 'starter');
+    expect(starter.price).toBe(EUR_PRICING.starter.price);
+    expect(starter.formattedPrice).toBe('€49');
 
     // Verify Growth plan
     const growth = data.plans.find((p: any) => p.id === 'growth');
     expect(growth.price).toBe(EUR_PRICING.growth.price);
-    expect(growth.perCallPrice).toBe(EUR_PRICING.growth.perCall);
 
     // Verify Pro plan
-    const pro = data.plans.find((p: any) => p.id === 'scale');
-    expect(pro.price).toBe(EUR_PRICING.scale.price);
-    expect(pro.perCallPrice).toBe(EUR_PRICING.scale.perCall);
-    expect(pro.callsCap).toBe(EUR_PRICING.scale.callsCap);
+    const pro = data.plans.find((p: any) => p.id === 'pro');
+    expect(pro.price).toBe(EUR_PRICING.pro.price);
   });
 });
 
@@ -101,11 +97,11 @@ test.describe('EUR Payment Links', () => {
     }
   });
 
-  test('GET /api/billing/payment-link/scale returns EUR link for IE region', async ({ request, api }) => {
+  test('GET /api/billing/payment-link/pro returns EUR link for IE region', async ({ request, api }) => {
     await api.resetTestUser(TEST_USERS.fresh);
     await api.loginAsUser(TEST_USERS.fresh);
 
-    const response = await request.get(`${API_URL}/api/billing/payment-link/scale?region=IE`);
+    const response = await request.get(`${API_URL}/api/billing/payment-link/pro?region=IE`);
 
     if (response.ok()) {
       const data = await response.json();
@@ -140,7 +136,7 @@ test.describe('EUR Checkout Simulation', () => {
       await api.resetTestUser(TEST_USERS.fresh);
       await api.simulateCheckoutCompleted({
         userId: TEST_USERS.fresh,
-        planId: planId as 'starter' | 'growth' | 'scale',
+        planId: planId as 'starter' | 'growth' | 'pro',
       });
 
       const { limit } = await api.getPhoneNumbers();
@@ -155,34 +151,34 @@ test.describe('EUR Pricing UI', () => {
     await page.goto('/pricing');
 
     // Wait for pricing to load
-    await page.waitForSelector('text=/€19|€99|€249/', { timeout: 10000 });
+    await page.waitForSelector('text=/€49|€199|€599/', { timeout: 10000 });
 
     // Verify EUR prices are displayed
-    await expect(page.locator('text=€19')).toBeVisible();
-    await expect(page.locator('text=€99')).toBeVisible();
-    await expect(page.locator('text=€249')).toBeVisible();
+    await expect(page.locator('text=€49')).toBeVisible();
+    await expect(page.locator('text=€199')).toBeVisible();
+    await expect(page.locator('text=€599')).toBeVisible();
   });
 
-  test('pricing page shows per-call rates', async ({ page }) => {
+  test('pricing page shows calls included', async ({ page }) => {
     await page.goto('/pricing');
 
-    await page.waitForSelector('text=/€0\\.95|€0\\.45/', { timeout: 10000 });
+    await page.waitForSelector('text=/100.*calls|calls.*100/i', { timeout: 10000 });
 
-    // Verify per-call rates
-    const liteRate = page.locator('text=€0.95');
-    const growthRate = page.locator('text=€0.45');
+    // Verify calls are shown for each plan
+    const starterCalls = page.locator('text=/100.*calls/i');
+    const growthCalls = page.locator('text=/500.*calls/i');
 
-    expect(await liteRate.count()).toBeGreaterThan(0);
-    expect(await growthRate.count()).toBeGreaterThan(0);
+    expect(await starterCalls.count()).toBeGreaterThan(0);
+    expect(await growthCalls.count()).toBeGreaterThan(0);
   });
 
   test('pricing page shows plan names', async ({ page }) => {
     await page.goto('/pricing');
 
-    await page.waitForSelector('text=/Lite|Growth|Pro/', { timeout: 10000 });
+    await page.waitForSelector('text=/Starter|Growth|Pro/', { timeout: 10000 });
 
     // Verify plan names
-    await expect(page.locator('text=Lite').first()).toBeVisible();
+    await expect(page.locator('text=Starter').first()).toBeVisible();
     await expect(page.locator('text=Growth').first()).toBeVisible();
     await expect(page.locator('text=Pro').first()).toBeVisible();
   });
@@ -211,7 +207,7 @@ test.describe('EUR Subscription Webhook', () => {
 });
 
 test.describe('EUR Usage Tracking', () => {
-  test('EUR subscription tracks per-call charges correctly', async ({ api }) => {
+  test('EUR subscription tracks calls correctly', async ({ api }) => {
     await api.loginAsDevUser('starter');
 
     const response = await fetch(`${API_URL}/api/billing/usage`);
@@ -219,21 +215,23 @@ test.describe('EUR Usage Tracking', () => {
 
     const usage = await response.json();
 
-    // Starter plan should have €0.95 per call rate (95 cents)
-    expect(usage.perCallRateCents).toBe(95);
+    // All plans now have 0 per-call rate (calls included)
+    expect(usage.perCallRateCents).toBe(0);
+    expect(usage.fairUseCap).toBe(100); // Starter: 100 calls
   });
 
-  test('Growth plan has €0.45 per call rate', async ({ api }) => {
+  test('Growth plan has 500 calls included', async ({ api }) => {
     await api.loginAsDevUser('growth');
 
     const response = await fetch(`${API_URL}/api/billing/usage`);
     const usage = await response.json();
 
-    expect(usage.perCallRateCents).toBe(45);
+    expect(usage.perCallRateCents).toBe(0);
+    expect(usage.fairUseCap).toBe(500);
   });
 
-  test('Pro plan has €0 per call (unlimited)', async ({ api }) => {
-    await api.loginAsDevUser('scale');
+  test('Pro plan has 1500 calls included', async ({ api }) => {
+    await api.loginAsDevUser('pro');
 
     const response = await fetch(`${API_URL}/api/billing/usage`);
     const usage = await response.json();

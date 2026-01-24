@@ -68,20 +68,20 @@ test.describe('Phone Number Limits by Plan', () => {
     console.log('Starter plan: 1 phone number provisioned');
   });
 
-  test('growth plan allows 2 phone numbers', async ({ request }) => {
+  test('growth plan allows 1 phone number', async ({ request }) => {
     await setupUserWithSubscription(request, TEST_USER_ID, 'growth');
 
     const dbState = await getDbState(request, TEST_USER_ID);
-    expect(dbState.phoneNumbers.activeCount).toBe(2);
-    console.log('Growth plan: 2 phone numbers provisioned');
+    expect(dbState.phoneNumbers.activeCount).toBe(1);
+    console.log('Growth plan: 1 phone number provisioned');
   });
 
-  test('scale plan allows 5 phone numbers', async ({ request }) => {
-    await setupUserWithSubscription(request, TEST_USER_ID, 'scale');
+  test('pro plan allows 1 phone number', async ({ request }) => {
+    await setupUserWithSubscription(request, TEST_USER_ID, 'pro');
 
     const dbState = await getDbState(request, TEST_USER_ID);
-    expect(dbState.phoneNumbers.activeCount).toBe(5);
-    console.log('Scale plan: 5 phone numbers provisioned');
+    expect(dbState.phoneNumbers.activeCount).toBe(1);
+    console.log('Pro plan: 1 phone number provisioned');
   });
 });
 
@@ -97,12 +97,12 @@ test.describe('Adding Phone Numbers', () => {
   test('can add phone number within plan limit', async ({ request }) => {
     await setupUserWithSubscription(request, TEST_USER_ID, 'growth');
 
-    // Growth gets 2 numbers. Remove one first to test adding.
+    // All plans now have 1 phone. Remove it first to test adding.
     await removePhoneNumber(request, TEST_USER_ID);
 
     let dbState = await getDbState(request, TEST_USER_ID);
     const countBefore = dbState.phoneNumbers.activeCount;
-    expect(countBefore).toBe(1);
+    expect(countBefore).toBe(0);
 
     // Add one back
     const response = await addPhoneNumber(request, TEST_USER_ID, {
@@ -116,7 +116,7 @@ test.describe('Adding Phone Numbers', () => {
     expect(data.phone.phone_number).toBe('+15559998888');
 
     dbState = await getDbState(request, TEST_USER_ID);
-    expect(dbState.phoneNumbers.activeCount).toBe(2);
+    expect(dbState.phoneNumbers.activeCount).toBe(1);
     console.log('Phone number added successfully');
   });
 
@@ -190,7 +190,7 @@ test.describe('Removing Phone Numbers', () => {
 
   test('can remove phone number by phone number', async ({ request }) => {
     let dbState = await getDbState(request, TEST_USER_ID);
-    const phoneToRemove = dbState.phoneNumbers.active[1];
+    const phoneToRemove = dbState.phoneNumbers.active[0];
 
     const response = await removePhoneNumber(request, TEST_USER_ID, {
       phoneNumber: phoneToRemove.phone_number
@@ -200,24 +200,23 @@ test.describe('Removing Phone Numbers', () => {
     console.log('Phone removed by number:', phoneToRemove.phone_number);
   });
 
-  test('removing without params removes a phone', async ({ request }) => {
+  test('removing without params removes the phone', async ({ request }) => {
     let dbState = await getDbState(request, TEST_USER_ID);
-    const initialCount = dbState.phoneNumbers.activeCount;
+    expect(dbState.phoneNumbers.activeCount).toBe(1);
 
     await removePhoneNumber(request, TEST_USER_ID);
 
     dbState = await getDbState(request, TEST_USER_ID);
-    expect(dbState.phoneNumbers.activeCount).toBe(initialCount - 1);
-    console.log('Phone removed:', initialCount, '->', dbState.phoneNumbers.activeCount);
+    expect(dbState.phoneNumbers.activeCount).toBe(0);
+    console.log('Phone removed: 1 -> 0');
   });
 
   test('released phones are tracked separately', async ({ request }) => {
     await removePhoneNumber(request, TEST_USER_ID);
-    await removePhoneNumber(request, TEST_USER_ID);
 
     const dbState = await getDbState(request, TEST_USER_ID);
-    expect(dbState.phoneNumbers.activeCount).toBe(1);
-    expect(dbState.phoneNumbers.releasedCount).toBe(2);
+    expect(dbState.phoneNumbers.activeCount).toBe(0);
+    expect(dbState.phoneNumbers.releasedCount).toBe(1);
     console.log('Released phones tracked:', dbState.phoneNumbers.releasedCount);
   });
 });
@@ -232,11 +231,11 @@ test.describe('Plan Upgrades and Phone Numbers', () => {
     await setupUserWithSubscription(request, TEST_USER_ID, 'starter');
   });
 
-  test('upgrade from starter to growth adds 1 phone', async ({ request }) => {
+  test('upgrade from starter to growth maintains 1 phone', async ({ request }) => {
     let dbState = await getDbState(request, TEST_USER_ID);
     expect(dbState.phoneNumbers.activeCount).toBe(1);
 
-    // Simulate upgrade
+    // Simulate upgrade (both plans have 1 phone now)
     await request.post(`${API_URL}/api/billing/test/simulate-plan-change`, {
       data: {
         userId: TEST_USER_ID,
@@ -246,11 +245,11 @@ test.describe('Plan Upgrades and Phone Numbers', () => {
     });
 
     dbState = await getDbState(request, TEST_USER_ID);
-    expect(dbState.phoneNumbers.activeCount).toBe(2);
-    console.log('Upgrade added phones: 1 -> 2');
+    expect(dbState.phoneNumbers.activeCount).toBe(1);
+    console.log('Upgrade maintains phones: 1 -> 1');
   });
 
-  test('upgrade from growth to scale adds 3 phones', async ({ request }) => {
+  test('upgrade from growth to pro maintains 1 phone', async ({ request }) => {
     // First upgrade to growth
     await request.post(`${API_URL}/api/billing/test/simulate-plan-change`, {
       data: {
@@ -261,20 +260,20 @@ test.describe('Plan Upgrades and Phone Numbers', () => {
     });
 
     let dbState = await getDbState(request, TEST_USER_ID);
-    expect(dbState.phoneNumbers.activeCount).toBe(2);
+    expect(dbState.phoneNumbers.activeCount).toBe(1);
 
-    // Then upgrade to scale
+    // Then upgrade to pro
     await request.post(`${API_URL}/api/billing/test/simulate-plan-change`, {
       data: {
         userId: TEST_USER_ID,
         oldPlanId: 'growth',
-        newPlanId: 'scale'
+        newPlanId: 'pro'
       }
     });
 
     dbState = await getDbState(request, TEST_USER_ID);
-    expect(dbState.phoneNumbers.activeCount).toBe(5);
-    console.log('Upgrade added phones: 2 -> 5');
+    expect(dbState.phoneNumbers.activeCount).toBe(1);
+    console.log('Upgrade maintains phones: 1 -> 1');
   });
 });
 
@@ -288,11 +287,11 @@ test.describe('Plan Downgrades and Phone Numbers', () => {
     await setupUserWithSubscription(request, TEST_USER_ID, 'growth');
   });
 
-  test('downgrade from growth to starter releases 1 phone', async ({ request }) => {
+  test('downgrade from growth to starter maintains 1 phone', async ({ request }) => {
     let dbState = await getDbState(request, TEST_USER_ID);
-    expect(dbState.phoneNumbers.activeCount).toBe(2);
+    expect(dbState.phoneNumbers.activeCount).toBe(1);
 
-    // Simulate downgrade
+    // Simulate downgrade (both plans have 1 phone now)
     await request.post(`${API_URL}/api/billing/test/simulate-plan-change`, {
       data: {
         userId: TEST_USER_ID,
@@ -303,15 +302,14 @@ test.describe('Plan Downgrades and Phone Numbers', () => {
 
     dbState = await getDbState(request, TEST_USER_ID);
     expect(dbState.phoneNumbers.activeCount).toBe(1);
-    expect(dbState.phoneNumbers.releasedCount).toBe(1);
-    console.log('Downgrade released phones: 2 -> 1');
+    console.log('Downgrade maintains phone: 1 -> 1');
   });
 
-  test('downgrade releases newest phones first', async ({ request }) => {
+  test('phone is retained on downgrade', async ({ request }) => {
     let dbState = await getDbState(request, TEST_USER_ID);
-    const oldestPhone = dbState.phoneNumbers.active[0];
+    const phoneBeforeDowngrade = dbState.phoneNumbers.active[0];
 
-    // Downgrade to starter (keeps 1 phone)
+    // Downgrade to starter (both have 1 phone)
     await request.post(`${API_URL}/api/billing/test/simulate-plan-change`, {
       data: {
         userId: TEST_USER_ID,
@@ -321,11 +319,11 @@ test.describe('Plan Downgrades and Phone Numbers', () => {
     });
 
     dbState = await getDbState(request, TEST_USER_ID);
-    const remainingPhone = dbState.phoneNumbers.active[0];
+    const phoneAfterDowngrade = dbState.phoneNumbers.active[0];
 
-    // The oldest phone should be kept
-    expect(remainingPhone.id).toBe(oldestPhone.id);
-    console.log('Oldest phone retained on downgrade');
+    // Same phone should be retained
+    expect(phoneAfterDowngrade.id).toBe(phoneBeforeDowngrade.id);
+    console.log('Phone retained on downgrade');
   });
 });
 
@@ -350,14 +348,14 @@ test.describe('Phone Numbers API Endpoint', () => {
     const data = await response.json();
 
     expect(data.numbers).toBeDefined();
-    expect(data.count).toBe(2);
-    expect(data.maxAllowed).toBe(2);
+    expect(data.count).toBe(1);
+    expect(data.maxAllowed).toBe(1);
     expect(data.canAddMore).toBe(false);
     console.log('Phone numbers endpoint returned:', data.count, 'numbers');
   });
 
   test('phone-numbers shows canAddMore correctly', async ({ request }) => {
-    // Remove one phone to make room
+    // Remove phone to make room
     await removePhoneNumber(request, TEST_USER_ID);
 
     const cookie = await getAuthCookie(request, TEST_USER_ID);
@@ -366,7 +364,7 @@ test.describe('Phone Numbers API Endpoint', () => {
     });
 
     const data = await response.json();
-    expect(data.count).toBe(2);
+    expect(data.count).toBe(0);
     expect(data.canAddMore).toBe(true);
     console.log('canAddMore is true when under limit');
   });
@@ -391,12 +389,12 @@ test.describe('Phone Numbers API Endpoint', () => {
 test.describe('Cancellation and Phone Numbers', () => {
   test.beforeEach(async ({ request }) => {
     await createTestUser(request, TEST_USER_ID);
-    await setupUserWithSubscription(request, TEST_USER_ID, 'scale');
+    await setupUserWithSubscription(request, TEST_USER_ID, 'pro');
   });
 
   test('cancellation releases all phone numbers', async ({ request }) => {
     let dbState = await getDbState(request, TEST_USER_ID);
-    expect(dbState.phoneNumbers.activeCount).toBe(5);
+    expect(dbState.phoneNumbers.activeCount).toBe(1);
 
     // Cancel subscription
     await request.post(`${API_URL}/api/billing/test/simulate-cancellation`, {

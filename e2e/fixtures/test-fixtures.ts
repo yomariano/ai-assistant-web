@@ -5,23 +5,23 @@ import * as api from '../helpers/api';
 export const TEST_USERS = {
   starter: '00000000-0000-0000-0000-000000000001',
   growth: '00000000-0000-0000-0000-000000000002',
-  scale: '00000000-0000-0000-0000-000000000003',
+  pro: '00000000-0000-0000-0000-000000000003',
   // Fresh user for new subscription tests
   fresh: '00000000-0000-0000-0000-000000000099',
 };
 
 // Plan limits for verification
-// OrderBot.ie Pricing (January 2026) - Pay per call model
+// VoiceFleet Pricing (January 2026) - Calls included model
 export const PLAN_LIMITS = {
-  starter: { phoneNumbers: 1, perCallPrice: 0.95 },  // Lite: €19/mo + €0.95/call
-  growth: { phoneNumbers: 2, perCallPrice: 0.45 },   // Growth: €99/mo + €0.45/call
-  scale: { phoneNumbers: 5, perCallPrice: 0 },       // Pro: €249/mo unlimited (1500 cap)
+  starter: { phoneNumbers: 1, callsIncluded: 100 },   // Starter: €49/mo 100 calls
+  growth: { phoneNumbers: 1, callsIncluded: 500 },    // Growth: €199/mo 500 calls
+  pro: { phoneNumbers: 1, callsIncluded: 1500, outboundCalls: 200 },  // Pro: €599/mo 1500 inbound + 200 outbound
 };
 
 // Extended test fixture with helpers
 export const test = base.extend<{
   api: typeof api;
-  testUser: { id: string; plan: 'starter' | 'growth' | 'scale' };
+  testUser: { id: string; plan: 'starter' | 'growth' | 'pro' };
 }>({
   // Expose API helpers to tests
   api: async ({}, use) => {
@@ -39,7 +39,7 @@ export { expect };
 /**
  * Helper to login via UI
  */
-export async function loginViaUI(page: any, plan: 'starter' | 'growth' | 'scale' = 'starter') {
+export async function loginViaUI(page: any, plan: 'starter' | 'growth' | 'pro' = 'starter') {
   // In dev mode, we can directly navigate to dashboard
   // The dev login will happen automatically
   await api.loginAsDevUser(plan);

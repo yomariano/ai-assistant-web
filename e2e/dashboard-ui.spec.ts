@@ -148,13 +148,13 @@ test.describe('Dashboard Data by Plan', () => {
     });
     const data = await response.json();
 
-    // Growth: 2 phones, more minutes
-    expect(data.planLimits.phoneNumbers).toBe(2);
+    // Growth: 1 phone, 500 calls
+    expect(data.planLimits.phoneNumbers).toBe(1);
     console.log('Growth limits:', data.planLimits);
   });
 
-  test('scale plan shows correct limits', async ({ request }) => {
-    await setupUserWithSubscription(request, TEST_USER_ID, 'scale');
+  test('pro plan shows correct limits', async ({ request }) => {
+    await setupUserWithSubscription(request, TEST_USER_ID, 'pro');
     const cookie = await getAuthCookie(request, TEST_USER_ID);
 
     const response = await request.get(`${API_URL}/api/billing/usage`, {
@@ -162,9 +162,9 @@ test.describe('Dashboard Data by Plan', () => {
     });
     const data = await response.json();
 
-    // Scale: 5 phones, maximum minutes
-    expect(data.planLimits.phoneNumbers).toBe(5);
-    console.log('Scale limits:', data.planLimits);
+    // Pro: 1 phone, 1500 calls + 200 outbound
+    expect(data.planLimits.phoneNumbers).toBe(1);
+    console.log('Pro limits:', data.planLimits);
   });
 });
 
