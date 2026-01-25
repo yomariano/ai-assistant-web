@@ -16,6 +16,7 @@ export function ConnectProviderModal({ provider, onClose, onSuccess }: ConnectPr
   const [apiKey, setApiKey] = useState('');
   const [apiSecret, setApiSecret] = useState('');
   const [companyLogin, setCompanyLogin] = useState('');
+  const [serverDomain, setServerDomain] = useState('simplybook.me');
   const [restaurantId, setRestaurantId] = useState('');
   const [siteId, setSiteId] = useState('');
   const [isConnecting, setIsConnecting] = useState(false);
@@ -36,8 +37,9 @@ export function ConnectProviderModal({ provider, onClose, onSuccess }: ConnectPr
       // Build config based on provider
       const config: Record<string, unknown> = {};
 
-      if (provider.id === 'simplybook' && companyLogin) {
-        config.companyLogin = companyLogin;
+      if (provider.id === 'simplybook') {
+        if (companyLogin) config.companyLogin = companyLogin;
+        if (serverDomain) config.serverDomain = serverDomain;
       }
       if (provider.id === 'thefork' && restaurantId) {
         config.restaurantId = restaurantId;
@@ -89,6 +91,23 @@ export function ConnectProviderModal({ provider, onClose, onSuccess }: ConnectPr
           <div className="space-y-3">
             <div>
               <label className="block text-sm font-medium text-slate-700 mb-1">
+                Server Region <span className="text-rose-500">*</span>
+              </label>
+              <select
+                value={serverDomain}
+                onChange={(e) => setServerDomain(e.target.value)}
+                className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
+              >
+                <option value="simplybook.me">simplybook.me (US/Default)</option>
+                <option value="simplybook.it">simplybook.it (Italy/EU)</option>
+                <option value="simplybook.asia">simplybook.asia (Asia)</option>
+              </select>
+              <p className="mt-1 text-xs text-slate-500">
+                Check Settings → Custom Features → API for your &quot;JSON RPC API Endpoint&quot;
+              </p>
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-slate-700 mb-1">
                 Company Login <span className="text-rose-500">*</span>
               </label>
               <input
@@ -99,13 +118,7 @@ export function ConnectProviderModal({ provider, onClose, onSuccess }: ConnectPr
                 className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
               />
               <p className="mt-1 text-xs text-slate-500">
-                Your SimplyBook.me company login (e.g., &quot;voicefleet&quot; from voicefleet.simplybook.me)
-              </p>
-            </div>
-            <div className="p-2 bg-amber-50 border border-amber-200 rounded-lg">
-              <p className="text-xs text-amber-800">
-                <strong>Note:</strong> Use the <strong>JSON-RPC API key</strong> from Settings → Custom Features → API.
-                The API key field above should contain this key. The Secret Key is optional.
+                Your SimplyBook company login (e.g., &quot;voicefleet&quot;)
               </p>
             </div>
           </div>
