@@ -823,6 +823,16 @@ export const providersApi = {
     return data;
   },
 
+  setPrimary: async (connectionId: string): Promise<{ success: boolean; connection: ProviderConnection }> => {
+    const { data } = await api.post(`/api/providers/connections/${connectionId}/set-primary`);
+    return data;
+  },
+
+  getPrimaryConnection: async (): Promise<{ connection: ProviderConnection | null }> => {
+    const { data } = await api.get('/api/providers/connections/primary');
+    return data;
+  },
+
   // OAuth
   getOAuthUrl: async (providerId: string, redirectUri: string): Promise<{ url: string; state: string }> => {
     const { data } = await api.get(`/api/providers/${providerId}/oauth/url`, { params: { redirectUri } });

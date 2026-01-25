@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Calendar, CalendarCheck, Square, BookOpen, UtensilsCrossed, Dumbbell, CheckCircle, XCircle, AlertCircle, Clock, RefreshCw, Trash2, Settings, ChevronDown, ChevronUp } from 'lucide-react';
+import { Calendar, CalendarCheck, Square, BookOpen, UtensilsCrossed, Dumbbell, CheckCircle, XCircle, AlertCircle, Clock, RefreshCw, Trash2, Settings, ChevronDown, ChevronUp, Star } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import Button from '@/components/ui/button';
 import type { ProviderConnection } from '@/types';
@@ -29,12 +29,15 @@ interface ConnectionCardProps {
   onDisconnect: () => void;
   onTest: () => void;
   onSync: () => void;
+  onSetPrimary?: () => void;
+  hasMultipleConnections?: boolean;
 }
 
-export function ConnectionCard({ connection, onDisconnect, onTest, onSync }: ConnectionCardProps) {
+export function ConnectionCard({ connection, onDisconnect, onTest, onSync, onSetPrimary, hasMultipleConnections }: ConnectionCardProps) {
   const [expanded, setExpanded] = useState(false);
   const [isTestingConnection, setIsTestingConnection] = useState(false);
   const [isSyncing, setIsSyncing] = useState(false);
+  const [isSettingPrimary, setIsSettingPrimary] = useState(false);
 
   const IconComponent = connection.provider?.icon
     ? PROVIDER_ICONS[connection.provider.icon] || Calendar
@@ -61,6 +64,16 @@ export function ConnectionCard({ connection, onDisconnect, onTest, onSync }: Con
     }
   };
 
+  const handleSetPrimary = async () => {
+    if (!onSetPrimary) return;
+    setIsSettingPrimary(true);
+    try {
+      await onSetPrimary();
+    } finally {
+      setIsSettingPrimary(false);
+    }
+  };
+
   return (
     <Card className="border-none shadow-md ring-1 ring-slate-200">
       <CardContent className="p-5">
@@ -76,6 +89,12 @@ export function ConnectionCard({ connection, onDisconnect, onTest, onSync }: Con
                   <StatusIcon className="w-3 h-3" />
                   {statusConfig.label}
                 </span>
+                {connection.isPrimary && (
+                  <span className="inline-flex items-center gap-1 px-2 py-0.5 text-xs font-medium rounded-full bg-primary/10 text-primary">
+                    <Star className="w-3 h-3 fill-current" />
+                    Primary
+                  </span>
+                )}
               </div>
               {connection.externalAccountName && (
                 <p className="text-sm text-slate-500 mt-0.5">{connection.externalAccountName}</p>
@@ -163,15 +182,29 @@ export function ConnectionCard({ connection, onDisconnect, onTest, onSync }: Con
 
             {/* Actions */}
             <div className="flex items-center justify-between pt-2">
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => {}}
-                className="text-slate-600"
-              >
-                <Settings className="w-4 h-4 mr-1" />
-                Configure
-              </Button>
+              <div className="flex items-center gap-2">
+                {connection.status === 'connected' && hasMultipleConnections && !connection.isPrimary && onSetPrimary && (
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={handleSetPrimary}
+                    isLoading={isSettingPrimary}
+                    className="text-primary hover:bg-primary/5 hover:border-primary/30"
+                  >
+                    <Star className="w-4 h-4 mr-1" />
+                    Set as Primary
+                  </Button>
+                )}
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => {}}
+                  className="text-slate-600"
+                >
+                  <Settings className="w-4 h-4 mr-1" />
+                  Configure
+                </Button>
+              </div>
               <Button
                 variant="outline"
                 size="sm"

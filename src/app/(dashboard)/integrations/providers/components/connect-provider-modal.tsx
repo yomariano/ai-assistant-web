@@ -86,20 +86,28 @@ export function ConnectProviderModal({ provider, onClose, onSuccess }: ConnectPr
     switch (provider.id) {
       case 'simplybook':
         return (
-          <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1">
-              Company Login <span className="text-rose-500">*</span>
-            </label>
-            <input
-              type="text"
-              value={companyLogin}
-              onChange={(e) => setCompanyLogin(e.target.value)}
-              placeholder="your-company-login"
-              className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
-            />
-            <p className="mt-1 text-xs text-slate-500">
-              Your SimplyBook.me company login (found in your admin URL)
-            </p>
+          <div className="space-y-3">
+            <div>
+              <label className="block text-sm font-medium text-slate-700 mb-1">
+                Company Login <span className="text-rose-500">*</span>
+              </label>
+              <input
+                type="text"
+                value={companyLogin}
+                onChange={(e) => setCompanyLogin(e.target.value)}
+                placeholder="your-company-login"
+                className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
+              />
+              <p className="mt-1 text-xs text-slate-500">
+                Your SimplyBook.me company login (e.g., &quot;voicefleet&quot; from voicefleet.simplybook.me)
+              </p>
+            </div>
+            <div className="p-2 bg-amber-50 border border-amber-200 rounded-lg">
+              <p className="text-xs text-amber-800">
+                <strong>Note:</strong> Use the <strong>JSON-RPC API key</strong> from Settings → Custom Features → API.
+                The API key field above should contain this key. The Secret Key is optional.
+              </p>
+            </div>
           </div>
         );
       case 'thefork':
@@ -210,16 +218,16 @@ export function ConnectProviderModal({ provider, onClose, onSuccess }: ConnectPr
               </div>
 
               {/* Optional API Secret for some providers */}
-              {['square'].includes(provider.id) && (
+              {['square', 'simplybook'].includes(provider.id) && (
                 <div>
                   <label className="block text-sm font-medium text-slate-700 mb-1">
-                    API Secret (optional)
+                    Secret Key {provider.id === 'square' ? '(optional)' : '(optional - for REST API)'}
                   </label>
                   <input
                     type="password"
                     value={apiSecret}
                     onChange={(e) => setApiSecret(e.target.value)}
-                    placeholder="Enter your API secret"
+                    placeholder={provider.id === 'simplybook' ? 'Enter your secret key (if using REST API)' : 'Enter your API secret'}
                     className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
                   />
                 </div>

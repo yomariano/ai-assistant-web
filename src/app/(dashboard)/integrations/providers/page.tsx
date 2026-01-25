@@ -92,6 +92,17 @@ export default function ProvidersPage() {
     }
   }, []);
 
+  const handleSetPrimary = useCallback(async (connectionId: string) => {
+    try {
+      await providersApi.setPrimary(connectionId);
+      setSuccess('Primary provider updated! The AI assistant will now use this provider for bookings.');
+      await fetchData();
+    } catch (err) {
+      console.error('Failed to set primary:', err);
+      setError('Failed to set primary provider');
+    }
+  }, []);
+
   // Get connected provider IDs
   const connectedProviderIds = new Set(connections.map(c => c.providerId));
 
@@ -143,7 +154,14 @@ export default function ProvidersPage() {
       {/* Connected Providers */}
       {connections.length > 0 && (
         <section>
-          <h2 className="text-lg font-semibold text-slate-900 mb-4">Connected Providers</h2>
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-lg font-semibold text-slate-900">Connected Providers</h2>
+            {connections.filter(c => c.status === 'connected').length > 1 && (
+              <p className="text-sm text-slate-500">
+                The primary provider is used by the AI assistant for bookings
+              </p>
+            )}
+          </div>
           <div className="space-y-4">
             {connections.map(connection => (
               <ConnectionCard
@@ -152,6 +170,8 @@ export default function ProvidersPage() {
                 onDisconnect={() => handleDisconnect(connection.id)}
                 onTest={() => handleTestConnection(connection.id)}
                 onSync={() => handleSync(connection.id)}
+                onSetPrimary={() => handleSetPrimary(connection.id)}
+                hasMultipleConnections={connections.filter(c => c.status === 'connected').length > 1}
               />
             ))}
           </div>

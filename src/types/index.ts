@@ -303,6 +303,7 @@ export interface ProviderConnection {
     authType?: string;
   };
   status: 'pending' | 'connected' | 'error' | 'expired' | 'disconnected';
+  isPrimary?: boolean;
   errorMessage?: string;
   externalAccountId?: string;
   externalAccountName?: string;
