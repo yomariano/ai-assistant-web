@@ -13,12 +13,14 @@ interface BusinessDetailsStepProps {
   templateId: string;
   onComplete: () => void;
   onBack: () => void;
+  onAssistantCreated?: () => void;
 }
 
 export function BusinessDetailsStep({
   templateId,
   onComplete,
   onBack,
+  onAssistantCreated,
 }: BusinessDetailsStepProps) {
   const [businessName, setBusinessName] = useState("");
   const [businessDescription, setBusinessDescription] = useState("");
@@ -83,6 +85,8 @@ export function BusinessDetailsStep({
 
       if (response.success) {
         setSuccess(true);
+        // Notify that assistant was created (to prevent going back)
+        onAssistantCreated?.();
         // Wait a moment to show success state
         setTimeout(() => {
           onComplete();

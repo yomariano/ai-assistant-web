@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Check, Loader2, ExternalLink, ArrowRight, Key, CheckCircle2 } from "lucide-react";
+import { Check, Loader2, ExternalLink, ArrowRight, Key, CheckCircle2, Calendar, BookOpen, UtensilsCrossed, Dumbbell, CalendarCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -9,10 +9,52 @@ import { cn } from "@/lib/utils";
 import { providersApi } from "@/lib/api";
 import type { BookingProvider, ProviderConnection } from "@/types";
 
+// Map icon names from database to actual Lucide icons or emojis
+const PROVIDER_ICONS: Record<string, string> = {
+  // Calendar providers
+  google_calendar: "📅",
+  calendly: "📆",
+  calcom: "📅",
+  // Square
+  square: "🟦",
+  // Restaurant providers
+  thefork: "🍴",
+  opentable: "🍽️",
+  resy: "🍷",
+  // Other providers
+  simplybook: "📋",
+  mindbody: "💪",
+  // Fallback based on icon name in database
+  Calendar: "📅",
+  CalendarCheck: "📆",
+  BookOpen: "📋",
+  UtensilsCrossed: "🍴",
+  Dumbbell: "💪",
+  Square: "🟦",
+};
+
+function getProviderIcon(provider: BookingProvider): string {
+  // First check by provider ID
+  if (PROVIDER_ICONS[provider.id]) {
+    return PROVIDER_ICONS[provider.id];
+  }
+  // Then check by icon name from database
+  if (provider.icon && PROVIDER_ICONS[provider.icon]) {
+    return PROVIDER_ICONS[provider.icon];
+  }
+  // Fallback to the icon field if it's already an emoji
+  if (provider.icon && /\p{Emoji}/u.test(provider.icon)) {
+    return provider.icon;
+  }
+  // Default calendar icon
+  return "📅";
+}
+
 interface IntegrationStepProps {
   onNext: () => void;
   onBack: () => void;
   onIntegrationConnected?: (connectionId: string) => void;
+  canGoBack?: boolean;
 }
 
 type ViewState = "select" | "connect" | "success";
@@ -21,6 +63,7 @@ export function IntegrationStep({
   onNext,
   onBack,
   onIntegrationConnected,
+  canGoBack = true,
 }: IntegrationStepProps) {
   const [providers, setProviders] = useState<BookingProvider[]>([]);
   const [existingConnections, setExistingConnections] = useState<ProviderConnection[]>([]);
@@ -185,7 +228,7 @@ export function IntegrationStep({
 
         <div className="p-4 bg-accent/10 rounded-lg border border-accent/20 mb-6">
           <div className="flex items-center gap-3">
-            <div className="text-3xl">{selectedProvider.icon}</div>
+            <div className="text-3xl">{getProviderIcon(selectedProvider)}</div>
             <div>
               <p className="font-medium text-foreground">{selectedProvider.name}</p>
               {connectedAccount && (
@@ -222,7 +265,7 @@ export function IntegrationStep({
     return (
       <div className="py-4">
         <div className="text-center mb-6">
-          <div className="text-4xl mb-3">{selectedProvider.icon}</div>
+          <div className="text-4xl mb-3">{getProviderIcon(selectedProvider)}</div>
           <h2 className="text-xl font-heading font-bold text-foreground mb-2">
             Connect {selectedProvider.name}
           </h2>
@@ -312,7 +355,7 @@ export function IntegrationStep({
       </div>
 
       {/* Provider grid */}
-      <div className="grid grid-cols-2 gap-3 mb-6 max-h-[280px] overflow-y-auto pr-1">
+      <div className="grid grid-cols-2 gap-3 mb-4">
         {providers.map((provider) => {
           const isConnected = existingConnections.some(
             c => c.providerId === provider.id && c.status === "connected"
@@ -346,7 +389,7 @@ export function IntegrationStep({
                   </span>
                 </div>
               )}
-              <div className="text-2xl mb-2">{provider.icon}</div>
+              <div className="text-2xl mb-2">{getProviderIcon(provider)}</div>
               <h3 className="font-semibold text-foreground text-sm mb-1">
                 {provider.name}
               </h3>
@@ -368,10 +411,12 @@ export function IntegrationStep({
 
       {/* Actions */}
       <div className="flex gap-3">
-        <Button variant="outline" onClick={onBack} className="flex-1">
-          Back
-        </Button>
-        <Button variant="ghost" onClick={handleSkip} className="flex-1">
+        {canGoBack && (
+          <Button variant="outline" onClick={onBack} className="flex-1">
+            Back
+          </Button>
+        )}
+        <Button variant="ghost" onClick={handleSkip} className={canGoBack ? "flex-1" : "w-full"}>
           Skip for now
         </Button>
       </div>

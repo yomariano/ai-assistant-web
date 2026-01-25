@@ -55,6 +55,7 @@ export function OnboardingTour({
   const [selectedTemplate, setSelectedTemplate] = useState<string | null>(null);
   const [testCallMade, setTestCallMade] = useState(false);
   const [isRefreshingSubscription, setIsRefreshingSubscription] = useState(false);
+  const [assistantCreated, setAssistantCreated] = useState(false);
 
   const voicefleetNumber = data.phoneNumbers[0]?.number || "+353 1 234 5678";
 
@@ -120,6 +121,10 @@ export function OnboardingTour({
     setTestCallMade(true);
   }, []);
 
+  const handleAssistantCreated = useCallback(() => {
+    setAssistantCreated(true);
+  }, []);
+
   const handleComplete = useCallback(() => {
     markStepComplete("Complete");
     onComplete();
@@ -137,7 +142,7 @@ export function OnboardingTour({
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent
-        className="max-w-lg max-h-[90vh] overflow-y-auto overflow-x-hidden"
+        className="max-w-lg"
         showCloseButton={currentStep > 1}
       >
         {/* Progress indicator */}
@@ -193,12 +198,14 @@ export function OnboardingTour({
               templateId={selectedTemplate}
               onComplete={nextStep}
               onBack={prevStep}
+              onAssistantCreated={handleAssistantCreated}
             />
           )}
           {currentStep === 6 + offset && (
             <IntegrationStep
               onNext={nextStep}
               onBack={prevStep}
+              canGoBack={!assistantCreated}
             />
           )}
           {currentStep === 7 + offset && (
@@ -207,6 +214,7 @@ export function OnboardingTour({
               onTestCallMade={handleTestCallMade}
               onNext={nextStep}
               onBack={prevStep}
+              canGoBack={!assistantCreated}
             />
           )}
           {currentStep === 8 + offset && <CompletionStep onComplete={handleComplete} />}

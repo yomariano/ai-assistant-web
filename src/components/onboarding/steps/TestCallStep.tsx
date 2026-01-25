@@ -9,6 +9,7 @@ interface TestCallStepProps {
   onTestCallMade: () => void;
   onNext: () => void;
   onBack: () => void;
+  canGoBack?: boolean;
 }
 
 export function TestCallStep({
@@ -16,6 +17,7 @@ export function TestCallStep({
   onTestCallMade,
   onNext,
   onBack,
+  canGoBack = true,
 }: TestCallStepProps) {
   const [testStatus, setTestStatus] = useState<"idle" | "testing" | "success" | "skipped">("idle");
 
@@ -117,10 +119,12 @@ export function TestCallStep({
         </Button>
 
         <div className="flex gap-3">
-          <Button variant="outline" onClick={onBack} className="flex-1">
-            Back
-          </Button>
-          <Button variant="ghost" onClick={handleSkip} className="flex-1">
+          {canGoBack && (
+            <Button variant="outline" onClick={onBack} className="flex-1">
+              Back
+            </Button>
+          )}
+          <Button variant="ghost" onClick={handleSkip} className={canGoBack ? "flex-1" : "w-full"}>
             Skip Test Call
           </Button>
         </div>
