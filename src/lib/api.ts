@@ -41,7 +41,7 @@ api.interceptors.request.use(async (config) => {
     }
   }
 
-  // Try to get Supabase session token (with short timeout)
+  // Try to get auth token - prefer stored token, fallback to Supabase session
   try {
     // If the request already has an Authorization header (e.g. authApi.me(token)),
     // don't call getSession (avoids extra timeouts and work).
@@ -53,6 +53,22 @@ api.interceptors.request.use(async (config) => {
       return config;
     }
 
+    // First, try to get token from auth store (faster, no async)
+    const storedAuth = localStorage.getItem('auth-storage');
+    if (storedAuth) {
+      try {
+        const { state } = JSON.parse(storedAuth);
+        if (state?.token && state.token !== 'dev-mode' && state.isAuthenticated) {
+          config.headers.Authorization = `Bearer ${state.token}`;
+          console.log('[API] Added stored auth token to request');
+          return config;
+        }
+      } catch {
+        // Ignore parse errors
+      }
+    }
+
+    // Fallback: get fresh session from Supabase
     console.log('[API] Getting Supabase session for auth header...');
     const session = await getSession();
     if (session?.access_token) {
@@ -92,7 +108,23 @@ api.interceptors.response.use(
           return Promise.reject(error);
         }
       }
+
+      // Prevent redirect loop: check if we've redirected recently
+      const lastRedirect = sessionStorage.getItem('auth-redirect-time');
+      const now = Date.now();
+      if (lastRedirect && now - parseInt(lastRedirect) < 5000) {
+        console.log('[API] 401 error - skipping redirect (too recent)');
+        return Promise.reject(error);
+      }
+
+      // Don't redirect if already on login page
+      if (window.location.pathname === '/login') {
+        console.log('[API] 401 error - already on login page');
+        return Promise.reject(error);
+      }
+
       console.log('[API] 401 error, redirecting to login');
+      sessionStorage.setItem('auth-redirect-time', now.toString());
       localStorage.removeItem('auth-storage');
       window.location.href = '/login';
     }
