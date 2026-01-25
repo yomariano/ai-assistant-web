@@ -4,6 +4,7 @@ import { useEffect, useState, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Check, Zap, Rocket, Crown } from "lucide-react";
 import { useAuthStore } from "@/lib/store";
+import { signInWithGoogle } from "@/lib/supabase";
 
 // Get payment links based on stripe mode
 const getPaymentLinks = () => {
@@ -42,11 +43,18 @@ const PricingSection = () => {
   }, [checkAuth]);
 
   const handleGetStarted = async (planId: string) => {
-    // If user is not authenticated, redirect to login with plan
+    // If user is not authenticated, go directly to Google OAuth
     if (!isAuthenticated) {
       // Store the selected plan for after login
       sessionStorage.setItem('selectedPlan', planId);
-      window.location.href = `/login?plan=${planId}`;
+      setRedirectingPlan(planId);
+      try {
+        await signInWithGoogle();
+        // OAuth will redirect, so we don't need to handle success here
+      } catch (error) {
+        console.error("Failed to start Google OAuth:", error);
+        setRedirectingPlan(null);
+      }
       return;
     }
 

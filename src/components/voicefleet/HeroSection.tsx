@@ -1,13 +1,28 @@
 "use client";
 
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Shield, Clock, Phone, MessageSquare, Calendar, Link2, Headphones, PhoneIncoming, Globe2 } from "lucide-react";
+import { ArrowRight, Shield, Clock, Phone, MessageSquare, Calendar, Link2, Headphones, PhoneIncoming, Globe2, Loader2 } from "lucide-react";
 import Link from "next/link";
 import { useAuthStore } from "@/lib/store";
+import { signInWithGoogle } from "@/lib/supabase";
 import LiveDemoCall from "@/components/voicefleet/LiveDemoCall";
 
 const HeroSection = () => {
   const { isAuthenticated } = useAuthStore();
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleStartTrial = async () => {
+    setIsLoading(true);
+    try {
+      await signInWithGoogle();
+      // OAuth will redirect, so we don't need to handle success here
+    } catch (error) {
+      console.error("Failed to start Google OAuth:", error);
+      setIsLoading(false);
+    }
+  };
+
   const trustBadges = [
     { icon: Shield, label: "GDPR-ready" },
     { icon: Clock, label: "Go live in < 1 hour" },
@@ -64,12 +79,19 @@ const HeroSection = () => {
                   </Button>
                 </Link>
               ) : (
-                <Link href="/login?plan=starter">
-                  <Button variant="hero" size="xl">
-                    Start Free Trial
-                    <ArrowRight className="w-5 h-5" />
-                  </Button>
-                </Link>
+                <Button variant="hero" size="xl" onClick={handleStartTrial} disabled={isLoading}>
+                  {isLoading ? (
+                    <>
+                      <Loader2 className="w-5 h-5 animate-spin" />
+                      Connecting...
+                    </>
+                  ) : (
+                    <>
+                      Start Free Trial
+                      <ArrowRight className="w-5 h-5" />
+                    </>
+                  )}
+                </Button>
               )}
               <LiveDemoCall />
             </div>
