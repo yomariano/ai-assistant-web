@@ -62,11 +62,9 @@ SITE_URL = "https://voicefleet.ai"
 APP_URL = "https://app.voicefleet.ai"
 API_URL = "https://api.voicefleet.ai"
 ENVIRONMENT = "production"
-# Do NOT commit real secrets. Set these via Cloudflare dashboard or:
+# Secrets are set via wrangler secret put (not in this file):
 # - wrangler secret put ADMIN_SECRET
 # - wrangler secret put SEO_WORKER_SECRET
-ADMIN_SECRET = "REPLACE_ME"
-SEO_WORKER_SECRET = "REPLACE_ME"
 
 # KV Namespaces - Replace IDs after creating with:
 # wrangler kv:namespace create SEO_CACHE
@@ -89,7 +87,7 @@ local_protocol = "http"
 # API_URL = "http://localhost:3000"
 
 # Cron trigger disabled - Cloudflare free plan limit reached
-# Use external cron service (cron-job.org, GitHub Actions, etc.) to call:
+# Use an external scheduler (cron-job.org, GitHub Actions, etc.) to call:
 # POST https://voicefleet.ai/admin/generate-all
 # Body: {"secret":"<ADMIN_SECRET>"}
 # Schedule: Daily at 2am UTC
