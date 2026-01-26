@@ -16,7 +16,7 @@ interface DashboardLayoutProps {
 export default function DashboardLayout({ children }: DashboardLayoutProps) {
   const router = useRouter();
   const pathname = usePathname();
-  const { isAuthenticated, isLoading, devMode, user } = useAuthStore();
+  const { isAuthenticated, isLoading, devMode, user, isHydrated } = useAuthStore();
   // Get checkAuth with a stable reference to avoid infinite loops
   const checkAuth = useAuthStore((state) => state.checkAuth);
   const setSubscriptionStore = useBillingStore((state) => state.setSubscription);
@@ -136,16 +136,24 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
   const closeSidebar = useCallback(() => setIsSidebarOpen(false), []);
 
   useEffect(() => {
-    // Only check auth once on mount
+    // Wait for Zustand to hydrate from localStorage before checking auth
+    // This prevents race conditions where API calls fire before token is available
+    if (!isHydrated) {
+      console.log('[DASHBOARD] Waiting for store hydration...');
+      return;
+    }
+    // Only check auth once after hydration
     if (!hasCheckedAuth.current) {
       hasCheckedAuth.current = true;
       console.log('[DASHBOARD] useEffect - calling checkAuth()');
       checkAuth();
     }
-  }, [checkAuth]);
+  }, [checkAuth, isHydrated]);
 
   useEffect(() => {
-    console.log('[DASHBOARD] useEffect - auth state changed:', { isLoading, isAuthenticated });
+    console.log('[DASHBOARD] useEffect - auth state changed:', { isHydrated, isLoading, isAuthenticated });
+    // Wait for hydration before redirecting - ensures we have the real auth state
+    if (!isHydrated) return;
     if (!isLoading && !isAuthenticated) {
       // Store the intended destination if coming from checkout
       const currentPath = window.location.pathname + window.location.search;
@@ -155,7 +163,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
       console.log('[DASHBOARD] Not authenticated, redirecting to landing page');
       router.push('/');
     }
-  }, [isLoading, isAuthenticated, router]);
+  }, [isHydrated, isLoading, isAuthenticated, router]);
 
   useEffect(() => {
     // Allow other pages (billing/assistant/etc.) to send the user to the in-dashboard paywall.
@@ -177,8 +185,9 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
   // Check subscription status after authentication
   useEffect(() => {
     const checkSubscription = async () => {
-      console.log('[DASHBOARD] checkSubscription called:', { isAuthenticated, isLoading, subscriptionChecked, devMode });
-      if (!isAuthenticated || isLoading || subscriptionChecked) return;
+      console.log('[DASHBOARD] checkSubscription called:', { isHydrated, isAuthenticated, isLoading, subscriptionChecked, devMode });
+      // Wait for hydration to ensure token is available in localStorage for API calls
+      if (!isHydrated || !isAuthenticated || isLoading || subscriptionChecked) return;
 
       try {
         console.log('[DASHBOARD] Checking subscription status...');
@@ -240,14 +249,14 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
     };
 
     checkSubscription();
-  }, [isAuthenticated, isLoading, subscriptionChecked, devMode, openPaywallOnboarding, isCheckoutRoute]);
+  }, [isHydrated, isAuthenticated, isLoading, subscriptionChecked, devMode, openPaywallOnboarding, isCheckoutRoute]);
 
   // Check onboarding status after authentication and subscription verification
   useEffect(() => {
     const checkOnboarding = async () => {
-      console.log('[DASHBOARD] checkOnboarding called:', { isAuthenticated, isLoading, onboardingChecked, hasSubscription });
-      // Wait for subscription check to complete and only proceed if user has subscription
-      if (!isAuthenticated || isLoading || onboardingChecked || !hasSubscription) return;
+      console.log('[DASHBOARD] checkOnboarding called:', { isHydrated, isAuthenticated, isLoading, onboardingChecked, hasSubscription });
+      // Wait for hydration and subscription check to complete, only proceed if user has subscription
+      if (!isHydrated || !isAuthenticated || isLoading || onboardingChecked || !hasSubscription) return;
 
       try {
         console.log('[DASHBOARD] Checking onboarding status...');
@@ -315,7 +324,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
     };
 
     checkOnboarding();
-  }, [isAuthenticated, isLoading, onboardingChecked, hasSubscription, user]);
+  }, [isHydrated, isAuthenticated, isLoading, onboardingChecked, hasSubscription, user]);
 
   const handleOnboardingComplete = useCallback(async () => {
     try {
@@ -342,9 +351,9 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
     []
   );
 
-  // Show loading while checking auth or subscription
-  if (isLoading || (isAuthenticated && !subscriptionChecked)) {
-    console.log('[DASHBOARD] Rendering loading spinner...', { isLoading, subscriptionChecked });
+  // Show loading while hydrating, checking auth, or checking subscription
+  if (!isHydrated || isLoading || (isAuthenticated && !subscriptionChecked)) {
+    console.log('[DASHBOARD] Rendering loading spinner...', { isHydrated, isLoading, subscriptionChecked });
     return (
       <div className="min-h-screen flex items-center justify-center bg-background">
         <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
