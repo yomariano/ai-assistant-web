@@ -13,6 +13,7 @@ import {
   generateHeroSection,
   generateStatsSection,
   generateDefinitionSection,
+  generateIntroductionSection,
   generateBenefitsSection,
   generateHowItWorksSection,
   generatePainPointsSection,
@@ -37,6 +38,13 @@ export async function industryHandler(c: Context<{ Bindings: Bindings }>) {
   // Try to get AI-generated content from cache
   const cacheKey = `content:industry:${industrySlug}`;
   const content = await getContent(c.env.CONTENT_CACHE, cacheKey);
+
+  c.header('X-VoiceFleet-SEO', '1');
+  c.header('X-VoiceFleet-SEO-Content', content ? 'ai' : 'fallback');
+  c.header('X-VoiceFleet-SEO-Cache-Key', cacheKey);
+  if (content?.generatedAt) {
+    c.header('X-VoiceFleet-SEO-Generated-At', content.generatedAt);
+  }
 
   // Generate page content
   const pageContent = content
@@ -90,6 +98,11 @@ function renderWithAIContent(
     generateDefinitionSection({
       definition: content.definition,
       quickAnswer: content.quickAnswer
+    }),
+
+    generateIntroductionSection({
+      introduction: content.introduction,
+      generatedAt: content.generatedAt
     }),
 
     // Key Stats

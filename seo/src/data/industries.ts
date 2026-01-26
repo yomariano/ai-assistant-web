@@ -1,6 +1,6 @@
 /**
  * VoiceFleet SEO - Industry Data
- * 18 B2B industries optimized for AI voice agent positioning
+ * 17 B2B industries optimized for AI voice agent positioning
  */
 
 import { Industry } from '../types';

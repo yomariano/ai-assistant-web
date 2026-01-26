@@ -20,6 +20,8 @@ export function generateBaseHtml(options: {
     `<script type="application/ld+json">${s}</script>`
   ).join('\n    ') || '';
 
+  const ogImageUrl = `${options.siteUrl}/logo-mark.png`;
+
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,6 +29,8 @@ export function generateBaseHtml(options: {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>${escapeHtml(options.title)}</title>
   <meta name="description" content="${escapeHtml(options.description)}">
+  <meta name="robots" content="index, follow">
+  <meta name="googlebot" content="index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1">
   <link rel="canonical" href="${options.canonicalUrl}">
 
   <!-- Open Graph -->
@@ -35,11 +39,18 @@ export function generateBaseHtml(options: {
   <meta property="og:description" content="${escapeHtml(options.description)}">
   <meta property="og:url" content="${options.canonicalUrl}">
   <meta property="og:site_name" content="VoiceFleet">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:image" content="${ogImageUrl}">
+  <meta property="og:image:alt" content="VoiceFleet">
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@voicefleetai">
+  <meta name="twitter:creator" content="@voicefleetai">
   <meta name="twitter:title" content="${escapeHtml(options.title)}">
   <meta name="twitter:description" content="${escapeHtml(options.description)}">
+  <meta name="twitter:image" content="${ogImageUrl}">
+  <meta name="twitter:image:alt" content="VoiceFleet">
 
   <!-- Favicon -->
   <link rel="icon" href="${options.siteUrl}/favicon.ico">
@@ -171,6 +182,29 @@ export function generateDefinitionSection(options: {
       </div>
       <div class="quick-answer">
         <p>${escapeHtml(options.quickAnswer)}</p>
+      </div>
+    </div>
+  </section>`;
+}
+
+/**
+ * Generate introduction section (for E-E-A-T / information gain)
+ */
+export function generateIntroductionSection(options: {
+  introduction: string;
+  generatedAt?: string;
+}): string {
+  const formatted = options.generatedAt ? formatHumanDate(options.generatedAt) : null;
+  const lastUpdated = formatted && options.generatedAt
+    ? `<p class="last-updated">Last updated <time datetime="${escapeHtml(options.generatedAt)}">${escapeHtml(formatted)}</time></p>`
+    : '';
+
+  return `
+  <section class="introduction">
+    <div class="container">
+      <div class="intro-box">
+        ${lastUpdated}
+        <p>${escapeHtml(options.introduction)}</p>
       </div>
     </div>
   </section>`;
@@ -432,6 +466,11 @@ function getBaseStyles(): string {
     .definition-box { background: #e0f2fe; border-left: 4px solid #3b82f6; padding: 20px; border-radius: 8px; margin-bottom: 20px; }
     .quick-answer { font-size: 1.1rem; color: #374151; }
 
+    /* Introduction */
+    .introduction { padding: 10px 0 60px; }
+    .intro-box { max-width: 800px; margin: 0 auto; font-size: 1.05rem; color: #374151; }
+    .last-updated { font-size: 0.9rem; color: #6b7280; margin-bottom: 10px; }
+
     /* Benefits */
     .benefits { padding: 60px 0; }
     .benefits h2 { text-align: center; margin-bottom: 40px; }
@@ -502,4 +541,14 @@ function getBaseStyles(): string {
       .nav { display: none; }
     }
   `;
+}
+
+function formatHumanDate(iso: string): string | null {
+  const date = new Date(iso);
+  if (Number.isNaN(date.getTime())) return null;
+  try {
+    return date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+  } catch {
+    return iso.split('T')[0] || null;
+  }
 }

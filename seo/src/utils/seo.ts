@@ -13,7 +13,7 @@ export function generateOrganizationSchema(): object {
     '@type': 'Organization',
     name: 'VoiceFleet',
     url: 'https://voicefleet.ai',
-    logo: 'https://voicefleet.ai/logo.png',
+    logo: 'https://voicefleet.ai/logo-mark.png',
     description: 'AI voice agents that automate business phone calls 24/7',
     sameAs: [
       'https://twitter.com/voicefleet',
@@ -144,7 +144,7 @@ export function generateArticleSchema(options: {
       name: 'VoiceFleet',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://voicefleet.ai/logo.png'
+        url: 'https://voicefleet.ai/logo-mark.png'
       }
     }
   };

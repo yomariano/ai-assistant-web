@@ -5,7 +5,7 @@ A Cloudflare Worker-based programmatic SEO system that generates AI-optimized la
 ## Overview
 
 This SEO system creates dynamically generated, AI-optimized landing pages for:
-- **18 B2B industry verticals** (restaurants, dental clinics, plumbers, etc.)
+- **17 B2B industry verticals** (restaurants, dental clinics, plumbers, etc.)
 - **34 geographic locations** across Ireland, UK, and USA
 - **Industry + Location combinations** (e.g., "Restaurant Voice Agent in Dublin")
 
@@ -63,7 +63,7 @@ seo/
     ├── types.ts               # TypeScript interfaces
     │
     ├── data/
-    │   ├── industries.ts      # 18 B2B industry definitions
+    │   ├── industries.ts      # 17 B2B industry definitions
     │   └── locations.ts       # IE/UK/US city data
     │
     ├── handlers/
@@ -94,7 +94,7 @@ seo/
 | Industry Sitemap | `/sitemaps/industries.xml` | All industry pages |
 | Location Sitemaps | `/sitemaps/locations-ireland.xml` | Country-specific |
 
-## Industries Covered (18 Total)
+## Industries Covered (17 Total)
 
 | Category | Industries |
 |----------|------------|
@@ -299,9 +299,9 @@ wrangler secret put SEO_WORKER_SECRET
 
 ### Generation Priority
 
-1. **Priority 1**: All 18 industry pages
-2. **Priority 2**: Top 34 location pages (IE + UK + US)
-3. **Priority 3**: Top industry-location combinations (10 industries x 6 cities = 60)
+1. **Priority 1**: All industry pages
+2. **Priority 2**: All location pages (IE + UK + US)
+3. **Priority 3**: Industry-location combinations (defaults to first 200 to align with sitemap coverage; configurable via `COMBO_GENERATION_LIMIT`)
 
 ### Rate Limiting
 
@@ -392,7 +392,7 @@ Update `wrangler.toml` with the returned namespace IDs.
 
 | Type | Count |
 |------|-------|
-| Industry pages | 18 |
+| Industry pages | 17 |
 | Location pages | 34 |
 | Industry-location combos | ~200 (top combos) |
 | **Total** | **~250 pages** |

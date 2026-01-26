@@ -11,9 +11,11 @@ export type Bindings = {
   API_URL: string;
   SEO_WORKER_SECRET: string;
   ADMIN_SECRET: string;
+  ENVIRONMENT?: string;
   CONTENT_MAX_AGE_DAYS?: string;
   MAX_GENERATIONS_PER_RUN?: string;
   MAX_WALLTIME_MS?: string;
+  COMBO_GENERATION_LIMIT?: string;
 };
 
 // Industry definition with VoiceFleet-specific fields

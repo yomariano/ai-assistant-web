@@ -5,7 +5,7 @@
  */
 
 import { INDUSTRIES, getIndustrySlugs } from '../data/industries';
-import { COUNTRIES, getAllCities } from '../data/locations';
+import { getAllCities } from '../data/locations';
 import { Bindings, ContentRequest, NewsArticle } from '../types';
 import {
   generateContent,
@@ -29,6 +29,7 @@ const DELAY_BETWEEN_REQUESTS = 500; // 500ms between API calls
 const DEFAULT_MAX_GENERATIONS_PER_RUN = 100; // Limit per run to avoid timeouts/cost
 const DEFAULT_CONTENT_MAX_AGE_DAYS = 3; // Refresh cadence (set to 1 for daily refresh)
 const DEFAULT_MAX_WALLTIME_MS = 240_000; // Default wall clock budget per run (override via env/MAX_WALLTIME_MS)
+const DEFAULT_COMBO_GENERATION_LIMIT = 200; // Default number of combo pages to include in the task list (align with sitemap coverage)
 
 type GenerationRunSummary = {
   startedAt: string;
@@ -145,7 +146,7 @@ export async function runContentGeneration(
 
   const tasks: ContentRequest[] = [];
 
-  // Priority 1: All industry pages (18 items)
+  // Priority 1: All industry pages
   const industrySlugs = getIndustrySlugs();
   for (const slug of industrySlugs) {
     const industry = INDUSTRIES[slug];
@@ -159,33 +160,25 @@ export async function runContentGeneration(
     });
   }
 
-  // Priority 2: Top locations (34 items - Ireland, UK, US)
-  const topCities: Array<{ city: string; country: string; slug: string }> = [];
-  for (const countrySlug of ['ireland', 'uk', 'usa']) {
-    const country = COUNTRIES[countrySlug];
-    if (country) {
-      for (const city of country.cities.slice(0, 12)) {
-        topCities.push({
-          city: city.name,
-          country: country.name,
-          slug: city.slug,
-        });
-      }
-    }
-  }
-
-  for (const loc of topCities) {
+  // Priority 2: All location pages (34 cities - Ireland, UK, USA)
+  const allCities = getAllCities();
+  for (const city of allCities) {
     tasks.push({
       type: 'location',
-      location: { city: loc.city, country: loc.country },
+      location: { city: city.name, country: city.country },
     });
   }
 
-  // Priority 3: Top industry + location combos (60 items)
-  const topIndustries = industrySlugs.slice(0, 10);
-  for (const industrySlug of topIndustries) {
+  // Priority 3: Industry + location combos (default: first 200 combos by deterministic ordering)
+  // This is intentionally aligned with sitemap coverage so the URLs we surface get unique AI content.
+  const comboLimit = parsePositiveInt(env.COMBO_GENERATION_LIMIT, DEFAULT_COMBO_GENERATION_LIMIT);
+  const maxComboTasks = Math.min(comboLimit, industrySlugs.length * allCities.length);
+
+  let comboCount = 0;
+  for (const industrySlug of industrySlugs) {
     const industry = INDUSTRIES[industrySlug];
-    for (const loc of topCities.slice(0, 6)) {
+    for (const city of allCities) {
+      if (comboCount >= maxComboTasks) break;
       tasks.push({
         type: 'industry-location',
         industry: {
@@ -193,9 +186,11 @@ export async function runContentGeneration(
           namePlural: industry.namePlural,
           slug: industry.slug,
         },
-        location: { city: loc.city, country: loc.country },
+        location: { city: city.name, country: city.country },
       });
+      comboCount++;
     }
+    if (comboCount >= maxComboTasks) break;
   }
 
   const totalTasks = tasks.length;
