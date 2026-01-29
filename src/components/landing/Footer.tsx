@@ -27,10 +27,10 @@ export default function Footer() {
                             AI voice receptionist for small businesses. Answer every call, take messages, and book appointments.
                         </p>
                         <a
-                            href="mailto:hello@voicefleet.ai"
+                            href="mailto:support@voicefleet.ai"
                             className="text-sm text-gray-400 hover:text-white transition-colors"
                         >
-                            hello@voicefleet.ai
+                            support@voicefleet.ai
                         </a>
                     </div>
 

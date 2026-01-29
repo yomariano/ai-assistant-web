@@ -8,7 +8,7 @@ export const metadata = {
 
 export default function TermsOfService() {
     return (
-        <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 py-16 px-6">
+        <div className="min-h-screen bg-gradient-dark py-16 px-6">
             <div className="mx-auto max-w-3xl">
                 <Link href="/" className="inline-flex items-center gap-2 text-y2k-cyan hover:text-white transition-colors mb-8">
                     <ArrowLeft className="h-4 w-4" />

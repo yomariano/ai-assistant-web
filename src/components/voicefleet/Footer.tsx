@@ -24,11 +24,11 @@ const Footer = () => {
               AI voice receptionist for small businesses. Answer calls, take messages, and book appointments.
             </p>
             <a
-              href="mailto:hello@voicefleet.ai"
+              href="mailto:support@voicefleet.ai"
               className="flex items-center gap-2 text-sm text-primary-foreground/70 hover:text-primary-foreground transition-colors"
             >
               <Mail className="w-4 h-4" />
-              hello@voicefleet.ai
+              support@voicefleet.ai
             </a>
           </div>
 

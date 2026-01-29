@@ -94,10 +94,10 @@ export default function FAQ() {
                         </div>
                         <p className="mt-2">
                             <a
-                                href="mailto:hello@voicefleet.ai"
+                                href="mailto:support@voicefleet.ai"
                                 className="text-orange-600 font-semibold hover:text-orange-700 transition-colors"
                             >
-                                Email us at hello@voicefleet.ai
+                                Email us at support@voicefleet.ai
                             </a>
                             <span className="text-gray-500"> or call </span>
                             <a
