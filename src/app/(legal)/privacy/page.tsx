@@ -8,20 +8,20 @@ export const metadata = {
 
 export default function PrivacyPolicy() {
     return (
-        <div className="min-h-screen bg-gradient-dark py-16 px-6">
+        <div className="min-h-screen bg-white py-16 px-6">
             <div className="mx-auto max-w-3xl">
-                <Link href="/" className="inline-flex items-center gap-2 text-y2k-cyan hover:text-white transition-colors mb-8">
+                <Link href="/" className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors mb-8">
                     <ArrowLeft className="h-4 w-4" />
                     Back to Home
                 </Link>
-                
-                <div className="glass-card rounded-2xl p-8 lg:p-12">
-                    <h1 className="font-display text-3xl font-bold text-white mb-2">Privacy Policy</h1>
-                    <p className="text-y2k-silver text-sm mb-8">Last updated: December 2024</p>
-                    
-                    <div className="space-y-6 text-y2k-chrome text-sm leading-relaxed">
+
+                <div className="bg-gray-50 rounded-2xl p-8 lg:p-12 border border-gray-200">
+                    <h1 className="font-display text-3xl font-bold text-gray-900 mb-2">Privacy Policy</h1>
+                    <p className="text-gray-500 text-sm mb-8">Last updated: December 2024</p>
+
+                    <div className="space-y-6 text-gray-600 text-sm leading-relaxed">
                         <section>
-                            <h2 className="font-display text-lg font-bold text-white mb-3">1. Information We Collect</h2>
+                            <h2 className="font-display text-lg font-bold text-gray-900 mb-3">1. Information We Collect</h2>
                             <ul className="list-disc pl-6 space-y-1">
                                 <li>Account information (email, name)</li>
                                 <li>Payment information (processed securely by Stripe)</li>
@@ -31,7 +31,7 @@ export default function PrivacyPolicy() {
                         </section>
 
                         <section>
-                            <h2 className="font-display text-lg font-bold text-white mb-3">2. How We Use Your Information</h2>
+                            <h2 className="font-display text-lg font-bold text-gray-900 mb-3">2. How We Use Your Information</h2>
                             <ul className="list-disc pl-6 space-y-1">
                                 <li>To provide and improve our services</li>
                                 <li>To process payments</li>
@@ -41,27 +41,27 @@ export default function PrivacyPolicy() {
                         </section>
 
                         <section>
-                            <h2 className="font-display text-lg font-bold text-white mb-3">3. Data Retention</h2>
+                            <h2 className="font-display text-lg font-bold text-gray-900 mb-3">3. Data Retention</h2>
                             <p>We retain call logs and account data for as long as your account is active and as required by law. You may request deletion of your data by contacting us.</p>
                         </section>
 
                         <section>
-                            <h2 className="font-display text-lg font-bold text-white mb-3">4. Data Security</h2>
+                            <h2 className="font-display text-lg font-bold text-gray-900 mb-3">4. Data Security</h2>
                             <p>We use industry-standard security measures including encryption in transit and at rest. However, no method of transmission over the Internet is 100% secure.</p>
                         </section>
 
                         <section>
-                            <h2 className="font-display text-lg font-bold text-white mb-3">5. Third-Party Services</h2>
+                            <h2 className="font-display text-lg font-bold text-gray-900 mb-3">5. Third-Party Services</h2>
                             <p>We use third-party services including Stripe (payments), Supabase (database), and VAPI (voice AI). These services have their own privacy policies.</p>
                         </section>
 
                         <section>
-                            <h2 className="font-display text-lg font-bold text-white mb-3">6. Your Rights</h2>
+                            <h2 className="font-display text-lg font-bold text-gray-900 mb-3">6. Your Rights</h2>
                             <p>You have the right to access, correct, or delete your personal data. Contact us at privacy@voicefleet.ai to exercise these rights.</p>
                         </section>
 
                         <section>
-                            <h2 className="font-display text-lg font-bold text-white mb-3">7. Contact</h2>
+                            <h2 className="font-display text-lg font-bold text-gray-900 mb-3">7. Contact</h2>
                             <p>For privacy questions, contact us at privacy@voicefleet.ai</p>
                         </section>
                     </div>
