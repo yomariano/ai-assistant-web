@@ -82,40 +82,10 @@ export const useAuthStore = create<AuthState>()(
         const { hasExplicitlyLoggedOut } = get();
         set({ isLoading: true });
 
-        // If user explicitly logged out, don't auto-login
-        if (hasExplicitlyLoggedOut) {
-          console.log('[STORE] User has explicitly logged out, skipping auto-login');
-          set({ isLoading: false, isAuthenticated: false, hasScheduledSessionRetry: false });
-          return;
-        }
-
         try {
-          // Check for dev mode FIRST (faster, no Supabase dependency)
-          try {
-            console.log('[STORE] Checking dev mode config...');
-            const config = await authApi.getConfig();
-            console.log('[STORE] Dev mode config:', config);
-            if (config.devMode) {
-              // Try dev login
-              console.log('[STORE] Dev mode enabled, attempting dev login...');
-              const { user, devMode } = await authApi.devLogin();
-              console.log('[STORE] Dev login successful:', user?.email);
-              set({
-                user,
-                token: 'dev-mode',
-                isAuthenticated: true,
-                devMode,
-                isLoading: false,
-                hasScheduledSessionRetry: false,
-              });
-              return;
-            }
-          } catch (error) {
-            console.error('[STORE] Config/dev-login failed:', error);
-            // Continue to Supabase auth
-          }
-
-          // Try Supabase session (only if dev mode is not enabled)
+          // Check for Supabase session FIRST - if user has a valid session, use it
+          // This handles the race condition where hasExplicitlyLoggedOut might be stale
+          // after a successful OAuth login
           let session = null;
           try {
             console.log('[STORE] Checking Supabase session...');
@@ -136,8 +106,9 @@ export const useAuthStore = create<AuthState>()(
             console.error('[STORE] Failed to get Supabase session:', sessionError);
           }
 
+          // If we have a valid session, authenticate the user
+          // This takes precedence over hasExplicitlyLoggedOut since the user actively logged in
           if (session?.access_token) {
-            // Get user profile from our backend
             try {
               console.log('[STORE] Calling /api/auth/me...');
               const { user } = await authApi.me(session.access_token);
@@ -149,11 +120,44 @@ export const useAuthStore = create<AuthState>()(
                 isLoading: false,
                 devMode: false,
                 hasScheduledSessionRetry: false,
+                hasExplicitlyLoggedOut: false, // Clear stale logout flag since user is now logged in
               });
               return;
             } catch (error) {
               console.error('[STORE] Failed to get user profile:', error);
+              // Continue to check other auth methods
             }
+          }
+
+          // No valid Supabase session - now check if user explicitly logged out
+          // Only skip auto-login if there's no session AND user explicitly logged out
+          if (hasExplicitlyLoggedOut) {
+            console.log('[STORE] User has explicitly logged out and no active session, skipping auto-login');
+            set({ isLoading: false, isAuthenticated: false, hasScheduledSessionRetry: false });
+            return;
+          }
+
+          // Check for dev mode (fallback when no Supabase session)
+          try {
+            console.log('[STORE] Checking dev mode config...');
+            const config = await authApi.getConfig();
+            console.log('[STORE] Dev mode config:', config);
+            if (config.devMode) {
+              console.log('[STORE] Dev mode enabled, attempting dev login...');
+              const { user, devMode } = await authApi.devLogin();
+              console.log('[STORE] Dev login successful:', user?.email);
+              set({
+                user,
+                token: 'dev-mode',
+                isAuthenticated: true,
+                devMode,
+                isLoading: false,
+                hasScheduledSessionRetry: false,
+              });
+              return;
+            }
+          } catch (error) {
+            console.error('[STORE] Config/dev-login failed:', error);
           }
 
           console.log('[STORE] No auth found, setting unauthenticated');
@@ -202,6 +206,7 @@ if (typeof window !== 'undefined') {
               devMode: false,
               isLoading: false,
               hasScheduledSessionRetry: false,
+              hasExplicitlyLoggedOut: false, // Clear stale logout flag since user is now logged in
             });
 
             // Check if user was trying to checkout before login
@@ -220,6 +225,7 @@ if (typeof window !== 'undefined') {
             isAuthenticated: false,
             devMode: false,
             hasScheduledSessionRetry: false,
+            hasExplicitlyLoggedOut: true, // Mark as logged out to prevent auto-login
           });
         }
       });
