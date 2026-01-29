@@ -45,17 +45,21 @@ interface SidebarProps {
 export default function Sidebar({ isOpen, onClose }: SidebarProps) {
   const pathname = usePathname();
   const router = useRouter();
-  const { user, logout } = useAuthStore();
+  const { user, logout, isAuthenticated, isLoading } = useAuthStore();
   const subscription = useBillingStore((state) => state.subscription);
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
 
-  // Check admin status on mount
+  // Check admin status only after authentication is complete
   useEffect(() => {
+    // Wait for auth to settle before making API calls
+    if (isLoading || !isAuthenticated) {
+      return;
+    }
     adminApi.checkStatus()
       .then(({ isAdmin }) => setIsAdmin(isAdmin))
       .catch(() => setIsAdmin(false));
-  }, []);
+  }, [isAuthenticated, isLoading]);
 
   const handleLogout = async () => {
     await logout();
