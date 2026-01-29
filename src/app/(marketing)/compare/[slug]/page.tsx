@@ -7,7 +7,7 @@ import Breadcrumbs from "@/components/marketing/Breadcrumbs";
 import CTASection from "@/components/marketing/CTASection";
 import { FAQSchema, BreadcrumbSchema } from "@/components/seo";
 import { generatePageMetadata } from "@/lib/seo/metadata";
-import { COMPARISONS, getComparison } from "@/lib/marketing/comparisons";
+import { getComparisonPage, getComparisonSlugs } from "@/lib/content/comparisons";
 import { Check, X } from "lucide-react";
 
 interface Props {
@@ -17,12 +17,13 @@ interface Props {
 export const revalidate = 3600;
 
 export async function generateStaticParams() {
-  return COMPARISONS.map((p) => ({ slug: p.slug }));
+  const slugs = await getComparisonSlugs();
+  return slugs.map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const page = getComparison(slug);
+  const page = await getComparisonPage(slug);
   if (!page) return {};
 
   return generatePageMetadata({
@@ -34,7 +35,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function ComparePage({ params }: Props) {
   const { slug } = await params;
-  const page = getComparison(slug);
+  const page = await getComparisonPage(slug);
   if (!page) notFound();
 
   const breadcrumbs = [
@@ -149,4 +150,3 @@ export default async function ComparePage({ params }: Props) {
     </>
   );
 }
-

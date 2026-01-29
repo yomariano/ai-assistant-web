@@ -1,4 +1,4 @@
-import { Phone, Zap, ClipboardList, MessageSquare, CheckCircle } from 'lucide-react';
+import { Phone, Zap, ClipboardList, Mail, CheckCircle } from 'lucide-react';
 
 const steps = [
     {
@@ -21,9 +21,9 @@ const steps = [
     },
     {
         step: 4,
-        icon: MessageSquare,
-        title: "You Get SMS",
-        description: "Full order details sent to your phone instantly"
+        icon: Mail,
+        title: "You Get Notified",
+        description: "Full order details sent to your email instantly"
     },
     {
         step: 5,

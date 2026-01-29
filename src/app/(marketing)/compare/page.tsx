@@ -5,7 +5,7 @@ import Header from "@/components/voicefleet/Header";
 import Footer from "@/components/voicefleet/Footer";
 import Breadcrumbs from "@/components/marketing/Breadcrumbs";
 import CTASection from "@/components/marketing/CTASection";
-import { COMPARISONS } from "@/lib/marketing/comparisons";
+import { getComparisonPages } from "@/lib/content/comparisons";
 import { Scale } from "lucide-react";
 
 export const revalidate = 3600;
@@ -17,7 +17,9 @@ export const metadata: Metadata = generatePageMetadata({
   path: "/compare",
 });
 
-export default function CompareIndexPage() {
+export default async function CompareIndexPage() {
+  const comparisons = await getComparisonPages();
+
   const breadcrumbs = [
     { name: "Home", href: "/" },
     { name: "Compare", href: "/compare" },
@@ -62,23 +64,29 @@ export default function CompareIndexPage() {
 
         <section className="py-16">
           <div className="max-w-7xl mx-auto px-6">
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {COMPARISONS.map((p) => (
-                <Link
-                  key={p.slug}
-                  href={`/compare/${p.slug}`}
-                  className="group rounded-2xl border border-gray-200 p-6 hover:border-slate-300 hover:shadow-lg transition-all bg-white"
-                >
-                  <h2 className="text-xl font-semibold text-gray-900">
-                    {p.title}
-                  </h2>
-                  <p className="mt-3 text-gray-600">{p.description}</p>
-                  <p className="mt-4 text-slate-900 font-semibold">
-                    Read comparison
-                  </p>
-                </Link>
-              ))}
-            </div>
+            {comparisons.length > 0 ? (
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {comparisons.map((p) => (
+                  <Link
+                    key={p.slug}
+                    href={`/compare/${p.slug}`}
+                    className="group rounded-2xl border border-gray-200 p-6 hover:border-slate-300 hover:shadow-lg transition-all bg-white"
+                  >
+                    <h2 className="text-xl font-semibold text-gray-900">
+                      {p.title}
+                    </h2>
+                    <p className="mt-3 text-gray-600">{p.description}</p>
+                    <p className="mt-4 text-slate-900 font-semibold">
+                      Read comparison
+                    </p>
+                  </Link>
+                ))}
+              </div>
+            ) : (
+              <div className="text-center py-12">
+                <p className="text-gray-500">No comparisons available yet.</p>
+              </div>
+            )}
           </div>
         </section>
 
@@ -88,4 +96,3 @@ export default function CompareIndexPage() {
     </>
   );
 }
-

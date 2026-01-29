@@ -28,7 +28,7 @@ const features = [
     {
         icon: Bell,
         title: "Sends Notifications",
-        description: "Instant SMS to you AND the customer. Nothing falls through cracks.",
+        description: "Instant email notifications to you. Nothing falls through cracks.",
         color: "pink"
     },
     {

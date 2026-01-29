@@ -24,7 +24,7 @@ export default function Hero() {
 
                     {/* Subheadline */}
                     <p className="mt-6 text-lg lg:text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
-                        OrderBot answers every call, takes orders, and sends you a text.
+                        OrderBot answers every call, takes orders, and notifies you instantly.
                         24/7. No staff needed. Never miss an order again.
                     </p>
 
@@ -106,7 +106,7 @@ export default function Hero() {
                                                 <CheckCircle className="h-5 w-5 text-green-400" />
                                             </div>
                                             <div>
-                                                <p className="text-white font-medium">Order taken + SMS sent</p>
+                                                <p className="text-white font-medium">Order taken + Email sent</p>
                                                 <p className="text-gray-400 text-sm">You get notified instantly</p>
                                             </div>
                                         </div>

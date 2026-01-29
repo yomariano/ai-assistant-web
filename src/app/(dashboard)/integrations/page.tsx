@@ -37,7 +37,6 @@ interface IntegrationsPageState {
   paymentRequired: boolean;
   paymentType: 'none' | 'card_hold' | 'deposit';
   depositAmountCents: number;
-  smsConfirmation: boolean;
   emailConfirmation: boolean;
 }
 
@@ -52,7 +51,6 @@ type IntegrationsPageAction =
   | { type: 'SET_VERIFICATION_ON_FAIL'; payload: 'transfer_to_staff' | 'take_message' | 'retry' }
   | { type: 'SET_PAYMENT_TYPE'; payload: { type: 'none' | 'card_hold' | 'deposit'; required: boolean } }
   | { type: 'SET_DEPOSIT_AMOUNT'; payload: number }
-  | { type: 'SET_SMS_CONFIRMATION'; payload: boolean }
   | { type: 'SET_EMAIL_CONFIRMATION'; payload: boolean }
   | { type: 'APPLY_TEMPLATE'; payload: {
       templateId: string;
@@ -78,7 +76,6 @@ type IntegrationsPageAction =
         paymentRequired: boolean;
         paymentType: 'none' | 'card_hold' | 'deposit';
         depositAmountCents: number;
-        smsConfirmation: boolean;
         emailConfirmation: boolean;
       };
     }};
@@ -100,7 +97,6 @@ const initialState: IntegrationsPageState = {
   paymentRequired: false,
   paymentType: 'none',
   depositAmountCents: 0,
-  smsConfirmation: true,
   emailConfirmation: false,
 };
 
@@ -126,8 +122,6 @@ function integrationsPageReducer(state: IntegrationsPageState, action: Integrati
       return { ...state, paymentType: action.payload.type, paymentRequired: action.payload.required };
     case 'SET_DEPOSIT_AMOUNT':
       return { ...state, depositAmountCents: action.payload };
-    case 'SET_SMS_CONFIRMATION':
-      return { ...state, smsConfirmation: action.payload };
     case 'SET_EMAIL_CONFIRMATION':
       return { ...state, emailConfirmation: action.payload };
     case 'APPLY_TEMPLATE':
@@ -165,7 +159,7 @@ export default function IntegrationsPage() {
     templates, connections, isLoading, isSaving, success, error,
     bookingMode, selectedTemplateId, bookingFields, verificationEnabled,
     verificationFields, verificationOnFail, paymentRequired, paymentType,
-    depositAmountCents, smsConfirmation, emailConfirmation,
+    depositAmountCents, emailConfirmation,
   } = state;
 
   useEffect(() => {
@@ -212,7 +206,6 @@ export default function IntegrationsPage() {
             paymentRequired: configRes.config.paymentRequired,
             paymentType: configRes.config.paymentType,
             depositAmountCents: configRes.config.depositAmountCents,
-            smsConfirmation: configRes.config.smsConfirmation,
             emailConfirmation: configRes.config.emailConfirmation,
           };
         }
@@ -268,7 +261,6 @@ export default function IntegrationsPage() {
         paymentRequired,
         paymentType,
         depositAmountCents,
-        smsConfirmation,
         emailConfirmation
       });
       dispatch({ type: 'SET_SUCCESS', payload: 'Booking configuration saved successfully!' });
@@ -278,7 +270,7 @@ export default function IntegrationsPage() {
     } finally {
       dispatch({ type: 'SET_SAVING', payload: false });
     }
-  }, [selectedTemplateId, bookingFields, verificationEnabled, verificationFields, verificationOnFail, paymentRequired, paymentType, depositAmountCents, smsConfirmation, emailConfirmation]);
+  }, [selectedTemplateId, bookingFields, verificationEnabled, verificationFields, verificationOnFail, paymentRequired, paymentType, depositAmountCents, emailConfirmation]);
 
   const handleSwitchToBuiltin = useCallback(() => {
     dispatch({ type: 'SET_BOOKING_MODE', payload: 'builtin' });
@@ -497,9 +489,7 @@ export default function IntegrationsPage() {
           {/* Confirmation Settings */}
           {selectedTemplateId && (
             <ConfirmationSettings
-              smsEnabled={smsConfirmation}
               emailEnabled={emailConfirmation}
-              onSmsChange={(enabled) => dispatch({ type: 'SET_SMS_CONFIRMATION', payload: enabled })}
               onEmailChange={(enabled) => dispatch({ type: 'SET_EMAIL_CONFIRMATION', payload: enabled })}
             />
           )}

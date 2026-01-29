@@ -14,7 +14,7 @@ const faqs = [
     },
     {
         question: "How do I get notified of orders?",
-        answer: "Instant notifications via SMS, email, or both—your choice. You'll receive the order details, customer phone number, and delivery/pickup time within seconds of the call ending. Many owners set up a dedicated tablet in the kitchen that pings for every new order."
+        answer: "Instant email notifications with full order details, customer phone number, and delivery/pickup time within seconds of the call ending. Many owners set up a dedicated tablet in the kitchen that pings for every new order."
     },
     {
         question: "Can it handle complex orders?",

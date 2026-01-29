@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Save, Mail, MessageSquare, PhoneForwarded, Send, Loader2 } from 'lucide-react';
+import { Save, Mail, PhoneForwarded, Send, Loader2 } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import Button from '@/components/ui/button';
 import Input from '@/components/ui/input';
@@ -33,8 +33,6 @@ export default function NotificationsPage() {
   const [preferences, setPreferences] = useState<NotificationPreferences>({
     email_enabled: true,
     email_address: '',
-    sms_enabled: false,
-    sms_number: '',
     notify_on_call_complete: true,
     notify_on_escalation: true,
     notify_on_voicemail: true,
@@ -49,7 +47,7 @@ export default function NotificationsPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [isSavingPrefs, setIsSavingPrefs] = useState(false);
   const [isSavingEscalation, setIsSavingEscalation] = useState(false);
-  const [isSendingTest, setIsSendingTest] = useState<'email' | 'sms' | null>(null);
+  const [isSendingTest, setIsSendingTest] = useState(false);
   const [success, setSuccess] = useState('');
   const [error, setError] = useState('');
 
@@ -136,22 +134,22 @@ export default function NotificationsPage() {
     }
   };
 
-  const handleSendTest = async (type: 'email' | 'sms') => {
-    setIsSendingTest(type);
+  const handleSendTest = async () => {
+    setIsSendingTest(true);
     setError('');
     setSuccess('');
 
     try {
-      const result = await notificationsApi.sendTest(type);
+      const result = await notificationsApi.sendTest();
       if (result.success) {
-        setSuccess(`Test ${type} sent successfully!`);
+        setSuccess('Test email sent successfully!');
       } else {
-        setError(result.message || `Failed to send test ${type}`);
+        setError(result.message || 'Failed to send test email');
       }
     } catch (err: unknown) {
-      setError(getErrorMessage(err) || `Failed to send test ${type}`);
+      setError(getErrorMessage(err) || 'Failed to send test email');
     } finally {
-      setIsSendingTest(null);
+      setIsSendingTest(false);
     }
   };
 
@@ -264,78 +262,10 @@ export default function NotificationsPage() {
                 <Button
                   variant="outline"
                   size="sm"
-                  onClick={() => handleSendTest('email')}
-                  disabled={!preferences.email_enabled || isSendingTest === 'email'}
+                  onClick={() => handleSendTest()}
+                  disabled={!preferences.email_enabled || isSendingTest}
                 >
-                  {isSendingTest === 'email' ? (
-                    <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                  ) : (
-                    <Send className="w-4 h-4 mr-2" />
-                  )}
-                  Send Test
-                </Button>
-                <Button onClick={handleSavePreferences} isLoading={isSavingPrefs} className="shadow-lg shadow-primary/20">
-                  <Save className="w-4 h-4 mr-2" />
-                  Save
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-      </div>
-
-      {/* SMS Notifications */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <div className="lg:col-span-1">
-          <div className="flex items-center gap-2 mb-2">
-            <MessageSquare className="h-5 w-5 text-primary" />
-            <h2 className="text-lg font-bold text-slate-900">SMS</h2>
-          </div>
-          <p className="text-sm text-slate-500">
-            Get instant text alerts for important calls.
-          </p>
-        </div>
-
-        <div className="lg:col-span-2">
-          <Card className="border-none shadow-md ring-1 ring-slate-200 overflow-hidden">
-            <CardContent className="p-0">
-              <div className="p-6 space-y-5">
-                {/* Enable SMS */}
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="font-semibold text-slate-900">Enable SMS Notifications</p>
-                    <p className="text-sm text-slate-500">Receive text messages for urgent alerts</p>
-                  </div>
-                  <Toggle
-                    enabled={preferences.sms_enabled}
-                    onChange={(val) => setPreferences(prev => ({ ...prev, sms_enabled: val }))}
-                  />
-                </div>
-
-                {/* Phone Number */}
-                {preferences.sms_enabled && (
-                  <div>
-                    <Input
-                      type="tel"
-                      label="Phone Number"
-                      value={preferences.sms_number || ''}
-                      onChange={(e) => setPreferences(prev => ({ ...prev, sms_number: e.target.value }))}
-                      placeholder="+353851234567"
-                      className="bg-slate-50/50"
-                    />
-                    <p className="text-xs text-slate-400 mt-1">Use international format (e.g., +353 for Ireland)</p>
-                  </div>
-                )}
-              </div>
-
-              <div className="bg-slate-50 px-6 py-4 flex justify-between items-center border-t border-slate-100">
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => handleSendTest('sms')}
-                  disabled={!preferences.sms_enabled || !preferences.sms_number || isSendingTest === 'sms'}
-                >
-                  {isSendingTest === 'sms' ? (
+                  {isSendingTest ? (
                     <Loader2 className="w-4 h-4 mr-2 animate-spin" />
                   ) : (
                     <Send className="w-4 h-4 mr-2" />

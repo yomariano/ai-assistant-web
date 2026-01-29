@@ -143,8 +143,6 @@ export interface NotificationPreferences {
   user_id?: string;
   email_enabled: boolean;
   email_address?: string;
-  sms_enabled: boolean;
-  sms_number?: string;
   notify_on_call_complete: boolean;
   notify_on_message_taken?: boolean; // Optional for MVP - defaults to true
   notify_on_escalation: boolean;
@@ -160,7 +158,7 @@ export interface EscalationSettings {
   transfer_enabled: boolean;
   transfer_number?: string;
   // Advanced fields (not shown in MVP UI, use defaults)
-  transfer_method?: 'blind_transfer' | 'warm_transfer' | 'callback' | 'sms_alert';
+  transfer_method?: 'blind_transfer' | 'warm_transfer' | 'callback';
   trigger_keywords?: string[];
   max_failed_attempts?: number;
   business_hours_only?: boolean;
@@ -168,7 +166,7 @@ export interface EscalationSettings {
   business_hours_end?: string;
   business_days?: number[];
   timezone?: string;
-  after_hours_action?: 'voicemail' | 'sms_alert' | 'callback_promise' | 'ai_only';
+  after_hours_action?: 'voicemail' | 'callback_promise' | 'ai_only';
   after_hours_message?: string;
 }
 
@@ -224,7 +222,6 @@ export interface BookingConfig {
   calendarProvider: string | null;
   calendarId: string | null;
   calendarConnected: boolean;
-  smsConfirmation: boolean;
   emailConfirmation: boolean;
   confirmationTemplate: string | null;
   isActive: boolean;

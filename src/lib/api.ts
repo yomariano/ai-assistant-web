@@ -354,8 +354,8 @@ export const notificationsApi = {
     return data;
   },
 
-  sendTest: async (type: 'email' | 'sms'): Promise<{ success: boolean; message: string; messageId?: string }> => {
-    const { data } = await api.post('/api/notifications/test', { type });
+  sendTest: async (): Promise<{ success: boolean; message: string; messageId?: string }> => {
+    const { data } = await api.post('/api/notifications/test', {});
     return data;
   },
 
@@ -367,7 +367,7 @@ export const notificationsApi = {
       id: string;
       user_id: string;
       call_id: string | null;
-      notification_type: 'email' | 'sms';
+      notification_type: 'email';
       event_type: 'call_complete' | 'message_taken' | 'escalation' | 'voicemail' | 'missed_call';
       recipient: string;
       subject?: string | null;
