@@ -206,6 +206,7 @@ export default function IntegrationsPage() {
             paymentRequired: configRes.config.paymentRequired,
             paymentType: configRes.config.paymentType,
             depositAmountCents: configRes.config.depositAmountCents,
+            smsConfirmation: configRes.config.smsConfirmation,
             emailConfirmation: configRes.config.emailConfirmation,
           };
         }
