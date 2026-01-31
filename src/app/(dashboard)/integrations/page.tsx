@@ -192,7 +192,6 @@ export default function IntegrationsPage() {
           paymentRequired: boolean;
           paymentType: 'none' | 'card_hold' | 'deposit';
           depositAmountCents: number;
-          smsConfirmation: boolean;
           emailConfirmation: boolean;
         } | undefined;
 
@@ -206,7 +205,6 @@ export default function IntegrationsPage() {
             paymentRequired: configRes.config.paymentRequired,
             paymentType: configRes.config.paymentType,
             depositAmountCents: configRes.config.depositAmountCents,
-            smsConfirmation: configRes.config.smsConfirmation,
             emailConfirmation: configRes.config.emailConfirmation,
           };
         }
