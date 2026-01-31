@@ -1,5 +1,4 @@
 import { MetadataRoute } from 'next';
-import { COMPARISONS } from '@/lib/marketing/comparisons';
 import { INTEGRATIONS } from '@/lib/marketing/integrations';
 
 const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://voicefleet.ai';
@@ -22,6 +21,7 @@ interface SitemapData {
   locations: ContentItem[];
   features: ContentItem[];
   combos: ComboItem[];
+  comparisons: ContentItem[];
 }
 
 async function fetchSitemapData(): Promise<SitemapData | null> {
@@ -122,12 +122,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'weekly',
       priority: 0.7,
     },
-    ...COMPARISONS.map((comparison) => ({
-      url: `${BASE_URL}/compare/${comparison.slug}`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly' as const,
-      priority: 0.6,
-    })),
   ];
 
   // If no dynamic content yet, return only static pages
@@ -175,5 +169,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.7,
   }));
 
-  return [...staticPages, ...blogPosts, ...useCases, ...locations, ...features, ...combos];
+  // Dynamic comparison pages
+  const comparisons: MetadataRoute.Sitemap = (content.comparisons || []).map((page) => ({
+    url: `${BASE_URL}/compare/${page.slug}`,
+    lastModified: new Date(page.updated_at),
+    changeFrequency: 'monthly',
+    priority: 0.6,
+  }));
+
+  return [...staticPages, ...blogPosts, ...useCases, ...locations, ...features, ...combos, ...comparisons];
 }
