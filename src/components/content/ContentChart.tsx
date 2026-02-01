@@ -128,8 +128,8 @@ export function ContentChart({ config, className = '' }: ContentChartProps) {
         // Radar chart expects different data structure
         const radarData = data.map(d => ({
           feature: d.name || d.feature,
-          voicefleet: d.voicefleet || d.value,
-          alternative: d.alternative || 0
+          voicefleet: Number(d.voicefleet) || d.value,
+          alternative: Number(d.alternative) || 0
         }));
 
         return (
