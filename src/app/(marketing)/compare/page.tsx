@@ -8,7 +8,9 @@ import CTASection from "@/components/marketing/CTASection";
 import { getComparisonPages } from "@/lib/content/comparisons";
 import { Scale } from "lucide-react";
 
-export const revalidate = 3600;
+// Force dynamic rendering to avoid stale cache issues
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
 export const metadata: Metadata = generatePageMetadata({
   title: "Compare - VoiceFleet Alternatives",

@@ -125,7 +125,7 @@ export async function getComparisonPages(): Promise<ComparisonPage[]> {
 
   try {
     const res = await fetch(`${API_URL}/api/content/comparisons`, {
-      next: { revalidate: 3600 }, // Cache for 1 hour
+      cache: 'no-store', // Always fetch fresh data
     });
 
     if (res.ok) {
