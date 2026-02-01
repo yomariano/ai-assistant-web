@@ -12,6 +12,45 @@ export const supabaseServer = createClient(supabaseUrl, supabaseAnonKey, {
   },
 });
 
+// Rich content types for blog posts
+export interface ChartConfig {
+  id: string;
+  type: 'bar' | 'line' | 'pie' | 'radar';
+  title: string;
+  data: Array<{ name: string; value: number; [key: string]: string | number }>;
+  xAxisLabel?: string;
+  yAxisLabel?: string;
+  source?: string;
+  sourceId?: number;
+}
+
+export interface Statistic {
+  id?: string;
+  value: string;
+  label: string;
+  context: string;
+  sourceId?: number;
+  highlight?: boolean;
+}
+
+export interface Source {
+  id: number;
+  title: string;
+  url: string;
+  author?: string;
+  publishedDate?: string;
+  accessedDate?: string;
+  type?: 'report' | 'article' | 'study' | 'website';
+}
+
+export interface ExpertQuote {
+  id?: string;
+  quote: string;
+  author: string;
+  title?: string;
+  sourceId?: number;
+}
+
 // Content type interfaces
 export interface BlogPost {
   id: string;
@@ -34,6 +73,11 @@ export interface BlogPost {
   og_image_url: string | null;
   canonical_url: string | null;
   no_index: boolean;
+  // Rich content fields
+  chart_data?: ChartConfig[];
+  statistics?: Statistic[];
+  sources?: Source[];
+  expert_quotes?: ExpertQuote[];
 }
 
 export interface UseCasePage {

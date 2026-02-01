@@ -8,6 +8,56 @@ import type { ComparisonPage, ComparisonFaqItem } from "@/lib/marketing/comparis
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 /**
+ * Rich content types
+ */
+export interface ChartConfig {
+  id: string;
+  type: 'bar' | 'line' | 'pie' | 'radar';
+  title: string;
+  data: Array<{ name: string; value: number; [key: string]: string | number }>;
+  xAxisLabel?: string;
+  yAxisLabel?: string;
+  source?: string;
+  sourceId?: number;
+}
+
+export interface Statistic {
+  id?: string;
+  value: string;
+  label: string;
+  context: string;
+  sourceId?: number;
+  highlight?: boolean;
+}
+
+export interface Source {
+  id: number;
+  title: string;
+  url: string;
+  author?: string;
+  publishedDate?: string;
+  accessedDate?: string;
+  type?: 'report' | 'article' | 'study' | 'website';
+}
+
+export interface PricingData {
+  voicefleet: {
+    min: number;
+    max: number;
+    currency: string;
+    period: string;
+  };
+  alternative: {
+    min: number | null;
+    max: number | null;
+    currency: string;
+    period: string;
+    notes?: string;
+    sourceId?: number;
+  };
+}
+
+/**
  * API response type for comparison pages
  */
 export interface ComparisonPageResponse {
@@ -28,6 +78,7 @@ export interface ComparisonPageResponse {
     voicefleet: string;
     alternative: string;
     winner: string;
+    sourceId?: number;
   }[];
   faq: ComparisonFaqItem[];
   detailed_comparison?: string;
@@ -37,6 +88,11 @@ export interface ComparisonPageResponse {
   published_at?: string;
   created_at: string;
   updated_at: string;
+  // Rich content fields
+  chart_data?: ChartConfig[];
+  statistics?: Statistic[];
+  sources?: Source[];
+  pricing_data?: PricingData;
 }
 
 /**
