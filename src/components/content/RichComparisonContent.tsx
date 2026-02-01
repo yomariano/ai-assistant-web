@@ -1,8 +1,9 @@
 'use client';
 
+import { useMemo } from 'react';
 import { ContentChart, ChartConfig } from './ContentChart';
 import { StatCallout, Statistic } from './StatCallout';
-import { SourcesList, Source, InlineCitation } from './SourceCitation';
+import { SourcesList, Source } from './SourceCitation';
 import { InteractiveTable, FeatureComparison } from './InteractiveTable';
 
 export interface PricingData {
@@ -64,7 +65,160 @@ export function RichComparisonContent({ page, className = '' }: RichComparisonCo
     pricing_data
   } = page;
 
-  // Process source citations in text: [SOURCE:id]
+  // Convert markdown to Medium-style HTML (same as RichBlogContent)
+  const convertMarkdownToHtml = (markdown: string): string => {
+    let html = markdown;
+
+    // Normalize line breaks
+    html = html.replace(/\r\n/g, '\n');
+
+    // Add proper line breaks before headers that are inline with text
+    html = html.replace(/([.!?:])(\s*)(#{1,3}\s)/g, '$1\n\n$3');
+    html = html.replace(/([a-zA-Z0-9])(\s*)(#{1,3}\s)/g, '$1\n\n$3');
+
+    // Split into lines
+    const lines = html.split('\n');
+    const output: string[] = [];
+    let inList = false;
+    let listType: 'ul' | 'ol' | null = null;
+    let paragraphBuffer: string[] = [];
+
+    const flushParagraph = () => {
+      if (paragraphBuffer.length > 0) {
+        const text = paragraphBuffer.join(' ').trim();
+        if (text) {
+          output.push(`<p class="text-xl text-gray-700 leading-[1.9] mb-8" style="font-family: Georgia, 'Times New Roman', serif;">${processInline(text)}</p>`);
+        }
+        paragraphBuffer = [];
+      }
+    };
+
+    const closeList = () => {
+      if (inList) {
+        output.push(listType === 'ol' ? '</ol>' : '</ul>');
+        inList = false;
+        listType = null;
+      }
+    };
+
+    for (let i = 0; i < lines.length; i++) {
+      const line = lines[i];
+      const trimmed = line.trim();
+
+      // Empty line - flush paragraph
+      if (!trimmed) {
+        flushParagraph();
+        closeList();
+        continue;
+      }
+
+      // H2 headers
+      if (trimmed.startsWith('## ')) {
+        flushParagraph();
+        closeList();
+        const text = trimmed.slice(3).trim();
+        output.push(`<h2 class="text-3xl font-bold text-gray-900 mt-16 mb-6 tracking-tight" style="font-family: system-ui, -apple-system, sans-serif;">${processInline(text)}</h2>`);
+        continue;
+      }
+
+      // H3 headers
+      if (trimmed.startsWith('### ')) {
+        flushParagraph();
+        closeList();
+        const text = trimmed.slice(4).trim();
+        output.push(`<h3 class="text-2xl font-bold text-gray-900 mt-12 mb-4" style="font-family: system-ui, -apple-system, sans-serif;">${processInline(text)}</h3>`);
+        continue;
+      }
+
+      // H4 headers
+      if (trimmed.startsWith('#### ')) {
+        flushParagraph();
+        closeList();
+        const text = trimmed.slice(5).trim();
+        output.push(`<h4 class="text-xl font-bold text-gray-900 mt-10 mb-3" style="font-family: system-ui, -apple-system, sans-serif;">${processInline(text)}</h4>`);
+        continue;
+      }
+
+      // Bullet lists
+      if (trimmed.startsWith('- ') || trimmed.startsWith('* ')) {
+        flushParagraph();
+        if (!inList || listType !== 'ul') {
+          closeList();
+          output.push('<ul class="my-8 ml-6 space-y-4">');
+          inList = true;
+          listType = 'ul';
+        }
+        const text = trimmed.slice(2).trim();
+        output.push(`<li class="text-xl text-gray-700 leading-relaxed pl-2 list-disc" style="font-family: Georgia, 'Times New Roman', serif;">${processInline(text)}</li>`);
+        continue;
+      }
+
+      // Numbered lists
+      const numberedMatch = trimmed.match(/^(\d+)\.\s+(.*)$/);
+      if (numberedMatch) {
+        flushParagraph();
+        if (!inList || listType !== 'ol') {
+          closeList();
+          output.push('<ol class="my-8 ml-6 space-y-4 list-decimal">');
+          inList = true;
+          listType = 'ol';
+        }
+        output.push(`<li class="text-xl text-gray-700 leading-relaxed pl-2" style="font-family: Georgia, 'Times New Roman', serif;">${processInline(numberedMatch[2])}</li>`);
+        continue;
+      }
+
+      // Blockquotes
+      if (trimmed.startsWith('> ')) {
+        flushParagraph();
+        closeList();
+        const text = trimmed.slice(2).trim();
+        output.push(`<blockquote class="my-10 pl-6 border-l-4 border-indigo-500 italic text-xl text-gray-600" style="font-family: Georgia, 'Times New Roman', serif;">${processInline(text)}</blockquote>`);
+        continue;
+      }
+
+      // Horizontal rule
+      if (trimmed === '---' || trimmed === '***') {
+        flushParagraph();
+        closeList();
+        output.push('<hr class="my-12 border-t border-gray-200" />');
+        continue;
+      }
+
+      // Regular text - add to paragraph buffer
+      closeList();
+      paragraphBuffer.push(trimmed);
+    }
+
+    // Flush remaining content
+    flushParagraph();
+    closeList();
+
+    return output.join('\n');
+  };
+
+  // Process inline markdown (bold, italic, links, code) and source citations
+  const processInline = (text: string): string => {
+    return text
+      // Source citations [SOURCE:id] -> superscript
+      .replace(/\[SOURCE:(\d+)\]/g, (_, id) => {
+        const source = sources.find(s => s.id === parseInt(id, 10));
+        return source
+          ? `<sup class="text-indigo-600 cursor-help text-sm ml-0.5" title="${source.title}">[${id}]</sup>`
+          : '';
+      })
+      // Bold + italic
+      .replace(/\*\*\*(.*?)\*\*\*/g, '<strong class="font-bold"><em>$1</em></strong>')
+      // Bold
+      .replace(/\*\*(.*?)\*\*/g, '<strong class="font-bold text-gray-900">$1</strong>')
+      // Italic
+      .replace(/(?<!\*)\*([^*]+)\*(?!\*)/g, '<em class="italic">$1</em>')
+      // Links
+      .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" class="text-indigo-600 hover:text-indigo-800 underline decoration-indigo-300 underline-offset-2 transition-colors" target="_blank" rel="noopener noreferrer">$1</a>')
+      // Inline code
+      .replace(/`([^`]+)`/g, '<code class="bg-gray-100 px-2 py-1 rounded text-lg font-mono text-indigo-700">$1</code>');
+  };
+
+  // Process simple source citations for non-markdown content
   const processSourceCitations = (text: string): React.ReactNode[] => {
     const parts: React.ReactNode[] = [];
     const sourcePattern = /\[SOURCE:(\d+)\]/g;
@@ -80,9 +234,14 @@ export function RichComparisonContent({ page, className = '' }: RichComparisonCo
       }
 
       const sourceId = parseInt(match[1], 10);
-      parts.push(
-        <InlineCitation key={`source-${match.index}`} sourceId={sourceId} sources={sources} />
-      );
+      const source = sources.find(s => s.id === sourceId);
+      if (source) {
+        parts.push(
+          <sup key={`source-${match.index}`} className="text-indigo-600 cursor-help text-sm ml-0.5" title={source.title}>
+            [{sourceId}]
+          </sup>
+        );
+      }
 
       lastIndex = match.index + match[0].length;
     }
@@ -95,6 +254,17 @@ export function RichComparisonContent({ page, className = '' }: RichComparisonCo
 
     return parts.length > 0 ? parts : [text];
   };
+
+  // Process detailed comparison content
+  const detailedComparisonHtml = useMemo(() => {
+    if (!detailed_comparison) return '';
+
+    // Clean up any remaining markers
+    let processed = convertMarkdownToHtml(detailed_comparison);
+    processed = processed.replace(/\[[A-Z]+:[^\]]*\]/g, '');
+
+    return processed;
+  }, [detailed_comparison, sources]);
 
   // Find pricing chart if available
   const pricingChart = chart_data.find(c => c.id === 'pricing-comparison');
@@ -201,10 +371,7 @@ export function RichComparisonContent({ page, className = '' }: RichComparisonCo
           <ContentChart config={pricingChart} />
           {pricing_data?.alternative?.notes && (
             <p className="text-sm text-gray-500 mt-2 text-center">
-              {pricing_data.alternative.notes}
-              {pricing_data.alternative.sourceId && (
-                <InlineCitation sourceId={pricing_data.alternative.sourceId} sources={sources} />
-              )}
+              {processSourceCitations(pricing_data.alternative.notes)}
             </p>
           )}
         </section>
@@ -228,17 +395,14 @@ export function RichComparisonContent({ page, className = '' }: RichComparisonCo
         </section>
       ))}
 
-      {/* Detailed Comparison */}
+      {/* Detailed Comparison - Medium Style */}
       {detailed_comparison && (
         <section className="mb-12">
           <h2 className="text-2xl font-bold text-gray-900 mb-6">Detailed Analysis</h2>
-          <div className="prose prose-lg max-w-none">
-            {detailed_comparison.split('\n\n').map((paragraph, index) => (
-              <p key={index} className="text-gray-700 leading-relaxed mb-4">
-                {processSourceCitations(paragraph)}
-              </p>
-            ))}
-          </div>
+          <div
+            className="blog-content"
+            dangerouslySetInnerHTML={{ __html: detailedComparisonHtml }}
+          />
         </section>
       )}
 
@@ -262,7 +426,7 @@ export function RichComparisonContent({ page, className = '' }: RichComparisonCo
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                   </svg>
                 </summary>
-                <div className="px-6 pb-4 text-gray-700">
+                <div className="px-6 pb-4 text-gray-700 leading-relaxed">
                   {processSourceCitations(item.answer)}
                 </div>
               </details>
