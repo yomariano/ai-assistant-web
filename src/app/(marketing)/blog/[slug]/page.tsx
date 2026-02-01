@@ -13,20 +13,15 @@ import Image from "next/image";
 import Link from "next/link";
 import { Calendar, Clock, ArrowLeft, Tag } from "lucide-react";
 
-// Helper to check if post has rich content
-function hasRichContent(post: Awaited<ReturnType<typeof getBlogPost>>): boolean {
-  if (!post) return false;
-  return !!(
-    (post.chart_data && post.chart_data.length > 0) ||
-    (post.statistics && post.statistics.length > 0) ||
-    (post.sources && post.sources.length > 0) ||
-    (post.expert_quotes && post.expert_quotes.length > 0)
-  );
-}
-
 interface Props {
   params: Promise<{ slug: string }>;
 }
+
+// Allow dynamic params for posts not in generateStaticParams (posts created after build)
+export const dynamicParams = true;
+
+// Revalidate every hour as fallback (on-demand revalidation is primary)
+export const revalidate = 3600;
 
 export async function generateStaticParams() {
   const slugs = await getBlogPostSlugs();
@@ -151,48 +146,24 @@ export default async function BlogPostPage({ params }: Props) {
             </div>
           )}
 
-          {/* Content - Use RichBlogContent for posts with charts/stats, otherwise standard HTML */}
-          {hasRichContent(post) ? (
-            <RichBlogContent
-              post={{
-                id: post.id,
-                title: post.title,
-                slug: post.slug,
-                content: post.content,
-                excerpt: post.excerpt || undefined,
-                category: post.category || undefined,
-                tags: post.tags || undefined,
-                author_name: post.author_name,
-                published_at: post.published_at || undefined,
-                chart_data: post.chart_data,
-                statistics: post.statistics,
-                sources: post.sources,
-                expert_quotes: post.expert_quotes,
-              }}
-              className="prose-headings:font-bold prose-headings:text-foreground"
-            />
-          ) : (
-            <div
-              className="prose prose-lg max-w-none
-                prose-headings:font-bold prose-headings:text-foreground prose-headings:mt-10 prose-headings:mb-4
-                prose-h2:text-2xl prose-h2:border-b prose-h2:border-border prose-h2:pb-3
-                prose-h3:text-xl prose-h3:text-primary
-                prose-p:text-muted-foreground prose-p:leading-relaxed prose-p:mb-6
-                prose-a:text-primary prose-a:font-semibold prose-a:no-underline hover:prose-a:underline
-                prose-strong:text-foreground prose-strong:font-bold
-                prose-ul:my-6 prose-ul:space-y-2
-                prose-li:text-muted-foreground prose-li:leading-relaxed
-                prose-table:my-8 prose-table:w-full prose-table:border-collapse prose-table:rounded-xl prose-table:overflow-hidden
-                prose-th:bg-primary prose-th:text-primary-foreground prose-th:font-semibold prose-th:text-left prose-th:px-4 prose-th:py-3
-                prose-td:px-4 prose-td:py-3 prose-td:border-b prose-td:border-border
-                prose-tr:even:bg-muted/50
-                [&_table]:shadow-lg [&_table]:rounded-xl [&_table]:overflow-hidden [&_table]:border [&_table]:border-border
-                [&_thead]:bg-gradient-to-r [&_thead]:from-indigo-600 [&_thead]:to-purple-600
-                [&_thead_th]:text-white [&_thead_th]:font-semibold
-                [&_tbody_tr:hover]:bg-muted/70 [&_tbody_tr]:transition-colors"
-              dangerouslySetInnerHTML={{ __html: post.content }}
-            />
-          )}
+          {/* Content - Medium-style typography with markdown conversion */}
+          <RichBlogContent
+            post={{
+              id: post.id,
+              title: post.title,
+              slug: post.slug,
+              content: post.content,
+              excerpt: post.excerpt || undefined,
+              category: post.category || undefined,
+              tags: post.tags || undefined,
+              author_name: post.author_name,
+              published_at: post.published_at || undefined,
+              chart_data: post.chart_data,
+              statistics: post.statistics,
+              sources: post.sources,
+              expert_quotes: post.expert_quotes,
+            }}
+          />
 
           {/* Tags */}
           {post.tags && post.tags.length > 0 && (

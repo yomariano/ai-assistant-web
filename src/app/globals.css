@@ -409,3 +409,38 @@
   line-height: 1.8;
   color: hsl(var(--muted-foreground));
 }
+
+/* Medium-style Blog Content */
+.blog-content {
+  font-family: Georgia, 'Times New Roman', serif;
+}
+
+.blog-content p.blog-first-para::first-letter {
+  font-size: 4rem;
+  font-weight: 700;
+  float: left;
+  line-height: 0.8;
+  margin-right: 0.75rem;
+  margin-top: 0.5rem;
+  color: #4f46e5;
+  font-family: Georgia, 'Times New Roman', serif;
+}
+
+.blog-content h2,
+.blog-content h3,
+.blog-content h4 {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.blog-content blockquote {
+  font-family: Georgia, 'Times New Roman', serif;
+}
+
+.blog-content a {
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.blog-content a:hover {
+  text-decoration-thickness: 2px;
+}

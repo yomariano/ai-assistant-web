@@ -4,7 +4,7 @@ import { useMemo } from 'react';
 import { ContentChart, ChartConfig } from './ContentChart';
 import { StatCallout, Statistic } from './StatCallout';
 import { ExpertQuote, Quote } from './ExpertQuote';
-import { InlineCitation, SourcesList, Source } from './SourceCitation';
+import { SourcesList, Source } from './SourceCitation';
 
 export interface BlogPost {
   id: string;
@@ -29,254 +29,287 @@ interface RichBlogContentProps {
 }
 
 /**
- * Parses markdown content and inserts rich content components at marker positions
- * Markers: [CHART:id], [STAT:id], [QUOTE:id], [SOURCE:id]
+ * Renders blog content with Medium-style typography
+ * Converts markdown to styled HTML and renders rich components
  */
 export function RichBlogContent({ post, className = '' }: RichBlogContentProps) {
   const { content, chart_data = [], statistics = [], sources = [], expert_quotes = [] } = post;
 
-  // Create lookup maps for faster access
+  // Create lookup maps for rich content
   const chartMap = useMemo(() => new Map(chart_data.map(c => [c.id, c])), [chart_data]);
-  const statMap = useMemo(() => new Map(statistics.map(s => [s.id, s])), [statistics]);
-  const quoteMap = useMemo(() => new Map(expert_quotes.map(q => [q.id, q])), [expert_quotes]);
+  const statMap = useMemo(() => new Map(statistics.map(s => [s.id || `stat-${statistics.indexOf(s)}`, s])), [statistics]);
+  const quoteMap = useMemo(() => new Map(expert_quotes.map(q => [q.id || `quote-${expert_quotes.indexOf(q)}`, q])), [expert_quotes]);
 
-  // Parse content and split into segments
-  const segments = useMemo(() => {
-    const result: Array<{ type: 'text' | 'chart' | 'stat' | 'quote'; content: string; data?: ChartConfig | Statistic | Quote }> = [];
+  // Process the content
+  const processedContent = useMemo(() => {
+    // First, extract and replace markers with placeholders
+    const markers: Array<{ placeholder: string; type: string; id: string }> = [];
+    let processed = content;
 
-    // Pattern to match all markers
-    const markerPattern = /\[(CHART|STAT|QUOTE):([^\]]+)\]/g;
-
-    let lastIndex = 0;
+    // Find all markers: [CHART:id], [STAT:id], [QUOTE:id], [SOURCE:id]
+    const markerPattern = /\[(CHART|STAT|QUOTE|SOURCE):([^\]]+)\]/g;
     let match;
+    let markerIndex = 0;
 
     while ((match = markerPattern.exec(content)) !== null) {
-      // Add text before the marker
-      if (match.index > lastIndex) {
-        result.push({
-          type: 'text',
-          content: content.slice(lastIndex, match.index)
-        });
-      }
-
-      const markerType = match[1].toLowerCase() as 'chart' | 'stat' | 'quote';
-      const markerId = match[2];
-
-      // Find the corresponding data
-      let data;
-      switch (markerType) {
-        case 'chart':
-          data = chartMap.get(markerId);
-          break;
-        case 'stat':
-          data = statMap.get(markerId);
-          break;
-        case 'quote':
-          data = quoteMap.get(markerId);
-          break;
-      }
-
-      if (data) {
-        result.push({
-          type: markerType,
-          content: markerId,
-          data
-        });
-      }
-
-      lastIndex = match.index + match[0].length;
-    }
-
-    // Add remaining text
-    if (lastIndex < content.length) {
-      result.push({
-        type: 'text',
-        content: content.slice(lastIndex)
+      const placeholder = `___MARKER_${markerIndex}___`;
+      markers.push({
+        placeholder,
+        type: match[1].toUpperCase(),
+        id: match[2]
       });
+      processed = processed.replace(match[0], placeholder);
+      markerIndex++;
     }
 
-    return result;
-  }, [content, chartMap, statMap, quoteMap]);
+    // Convert markdown to HTML
+    processed = convertMarkdownToHtml(processed);
 
-  // Process source citations in text: [SOURCE:id]
-  const processSourceCitations = (text: string): React.ReactNode[] => {
-    const parts: React.ReactNode[] = [];
-    const sourcePattern = /\[SOURCE:(\d+)\]/g;
+    // Clean up any remaining markers that weren't in our pattern (malformed ones)
+    processed = processed.replace(/\[[A-Z]+:[^\]]*\]/g, '');
 
-    let lastIndex = 0;
-    let match;
+    return { html: processed, markers };
+  }, [content]);
 
-    while ((match = sourcePattern.exec(text)) !== null) {
-      // Add text before citation
-      if (match.index > lastIndex) {
-        parts.push(
-          <span key={`text-${lastIndex}`} dangerouslySetInnerHTML={{ __html: convertMarkdownToHtml(text.slice(lastIndex, match.index)) }} />
-        );
-      }
-
-      const sourceId = parseInt(match[1], 10);
-      parts.push(
-        <InlineCitation key={`source-${match.index}`} sourceId={sourceId} sources={sources} />
-      );
-
-      lastIndex = match.index + match[0].length;
-    }
-
-    // Add remaining text
-    if (lastIndex < text.length) {
-      parts.push(
-        <span key={`text-${lastIndex}`} dangerouslySetInnerHTML={{ __html: convertMarkdownToHtml(text.slice(lastIndex)) }} />
-      );
-    }
-
-    return parts;
-  };
-
-  // Robust markdown to HTML converter
-  const convertMarkdownToHtml = (markdown: string): string => {
+  // Convert markdown to Medium-style HTML
+  function convertMarkdownToHtml(markdown: string): string {
     let html = markdown;
 
-    // Step 1: Normalize - add line breaks before headers that are inline
-    html = html.replace(/([.!?])\s*(#{2,3}\s)/g, '$1\n\n$2');
-    html = html.replace(/([a-z])\s*(#{2,3}\s)/gi, '$1\n\n$2');
+    // Normalize line breaks
+    html = html.replace(/\r\n/g, '\n');
 
-    // Step 2: Split into lines for processing
+    // Add proper line breaks before headers that are inline with text
+    html = html.replace(/([.!?:])(\s*)(#{1,3}\s)/g, '$1\n\n$3');
+    html = html.replace(/([a-zA-Z0-9])(\s*)(#{1,3}\s)/g, '$1\n\n$3');
+
+    // Split into lines
     const lines = html.split('\n');
-    const processedLines: string[] = [];
+    const output: string[] = [];
     let inList = false;
+    let listType: 'ul' | 'ol' | null = null;
+    let paragraphBuffer: string[] = [];
+    let isFirstParagraph = true;
 
-    for (const line of lines) {
-      const trimmedLine = line.trim();
-
-      if (!trimmedLine) {
-        if (inList) {
-          processedLines.push('</ul>');
-          inList = false;
+    const flushParagraph = () => {
+      if (paragraphBuffer.length > 0) {
+        const text = paragraphBuffer.join(' ').trim();
+        if (text) {
+          // First paragraph gets drop cap styling
+          if (isFirstParagraph) {
+            output.push(`<p class="blog-first-para text-xl text-gray-700 leading-[1.9] mb-8" style="font-family: Georgia, 'Times New Roman', serif;">${processInline(text)}</p>`);
+            isFirstParagraph = false;
+          } else {
+            output.push(`<p class="text-xl text-gray-700 leading-[1.9] mb-8" style="font-family: Georgia, 'Times New Roman', serif;">${processInline(text)}</p>`);
+          }
         }
-        processedLines.push('');
+        paragraphBuffer = [];
+      }
+    };
+
+    const closeList = () => {
+      if (inList) {
+        output.push(listType === 'ol' ? '</ol>' : '</ul>');
+        inList = false;
+        listType = null;
+      }
+    };
+
+    for (let i = 0; i < lines.length; i++) {
+      const line = lines[i];
+      const trimmed = line.trim();
+
+      // Empty line - flush paragraph
+      if (!trimmed) {
+        flushParagraph();
+        closeList();
         continue;
       }
 
-      // Headers
-      if (trimmedLine.startsWith('### ')) {
-        if (inList) {
-          processedLines.push('</ul>');
-          inList = false;
-        }
-        const headerText = trimmedLine.slice(4);
-        processedLines.push(`<h3 class="text-xl font-bold text-gray-900 mt-10 mb-4">${processInlineMarkdown(headerText)}</h3>`);
+      // H2 headers
+      if (trimmed.startsWith('## ')) {
+        flushParagraph();
+        closeList();
+        const text = trimmed.slice(3).trim();
+        output.push(`<h2 class="text-3xl font-bold text-gray-900 mt-16 mb-6 tracking-tight" style="font-family: system-ui, -apple-system, sans-serif;">${processInline(text)}</h2>`);
         continue;
       }
 
-      if (trimmedLine.startsWith('## ')) {
-        if (inList) {
-          processedLines.push('</ul>');
-          inList = false;
-        }
-        const headerText = trimmedLine.slice(3);
-        processedLines.push(`<h2 class="text-2xl font-bold text-gray-900 mt-12 mb-5 pb-3 border-b border-gray-200">${processInlineMarkdown(headerText)}</h2>`);
+      // H3 headers
+      if (trimmed.startsWith('### ')) {
+        flushParagraph();
+        closeList();
+        const text = trimmed.slice(4).trim();
+        output.push(`<h3 class="text-2xl font-bold text-gray-900 mt-12 mb-4" style="font-family: system-ui, -apple-system, sans-serif;">${processInline(text)}</h3>`);
+        continue;
+      }
+
+      // H4 headers
+      if (trimmed.startsWith('#### ')) {
+        flushParagraph();
+        closeList();
+        const text = trimmed.slice(5).trim();
+        output.push(`<h4 class="text-xl font-bold text-gray-900 mt-10 mb-3" style="font-family: system-ui, -apple-system, sans-serif;">${processInline(text)}</h4>`);
         continue;
       }
 
       // Bullet lists
-      if (trimmedLine.startsWith('- ') || trimmedLine.startsWith('* ')) {
-        if (!inList) {
-          processedLines.push('<ul class="my-6 space-y-2 list-disc list-inside">');
+      if (trimmed.startsWith('- ') || trimmed.startsWith('* ')) {
+        flushParagraph();
+        if (!inList || listType !== 'ul') {
+          closeList();
+          output.push('<ul class="my-8 ml-6 space-y-4">');
           inList = true;
+          listType = 'ul';
         }
-        const listItemText = trimmedLine.slice(2);
-        processedLines.push(`<li class="text-gray-700 leading-relaxed">${processInlineMarkdown(listItemText)}</li>`);
+        const text = trimmed.slice(2).trim();
+        output.push(`<li class="text-xl text-gray-700 leading-relaxed pl-2 list-disc" style="font-family: Georgia, 'Times New Roman', serif;">${processInline(text)}</li>`);
         continue;
       }
 
       // Numbered lists
-      const numberedMatch = trimmedLine.match(/^(\d+)\.\s+(.*)$/);
+      const numberedMatch = trimmed.match(/^(\d+)\.\s+(.*)$/);
       if (numberedMatch) {
-        if (!inList) {
-          processedLines.push('<ol class="my-6 space-y-2 list-decimal list-inside">');
+        flushParagraph();
+        if (!inList || listType !== 'ol') {
+          closeList();
+          output.push('<ol class="my-8 ml-6 space-y-4 list-decimal">');
           inList = true;
+          listType = 'ol';
         }
-        processedLines.push(`<li class="text-gray-700 leading-relaxed">${processInlineMarkdown(numberedMatch[2])}</li>`);
+        output.push(`<li class="text-xl text-gray-700 leading-relaxed pl-2" style="font-family: Georgia, 'Times New Roman', serif;">${processInline(numberedMatch[2])}</li>`);
         continue;
       }
 
-      // Close list if we're not continuing one
-      if (inList) {
-        processedLines.push('</ul>');
-        inList = false;
+      // Blockquotes
+      if (trimmed.startsWith('> ')) {
+        flushParagraph();
+        closeList();
+        const text = trimmed.slice(2).trim();
+        output.push(`<blockquote class="my-10 pl-6 border-l-4 border-indigo-500 italic text-xl text-gray-600" style="font-family: Georgia, 'Times New Roman', serif;">${processInline(text)}</blockquote>`);
+        continue;
       }
 
-      // Regular paragraph
-      processedLines.push(`<p class="my-5 text-gray-700 leading-relaxed text-lg">${processInlineMarkdown(trimmedLine)}</p>`);
+      // Horizontal rule
+      if (trimmed === '---' || trimmed === '***') {
+        flushParagraph();
+        closeList();
+        output.push('<hr class="my-12 border-t border-gray-200" />');
+        continue;
+      }
+
+      // Regular text - add to paragraph buffer
+      closeList();
+      paragraphBuffer.push(trimmed);
     }
 
-    // Close any open list
-    if (inList) {
-      processedLines.push('</ul>');
-    }
+    // Flush remaining content
+    flushParagraph();
+    closeList();
 
-    return processedLines.join('\n');
-  };
+    return output.join('\n');
+  }
 
   // Process inline markdown (bold, italic, links, code)
-  const processInlineMarkdown = (text: string): string => {
+  function processInline(text: string): string {
     return text
-      // Bold and italic combined
+      // Bold + italic
       .replace(/\*\*\*(.*?)\*\*\*/g, '<strong class="font-bold"><em>$1</em></strong>')
       // Bold
-      .replace(/\*\*(.*?)\*\*/g, '<strong class="font-semibold text-gray-900">$1</strong>')
+      .replace(/\*\*(.*?)\*\*/g, '<strong class="font-bold text-gray-900">$1</strong>')
       // Italic
-      .replace(/\*(.*?)\*/g, '<em class="italic">$1</em>')
+      .replace(/(?<!\*)\*([^*]+)\*(?!\*)/g, '<em class="italic">$1</em>')
       // Links
-      .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" class="text-indigo-600 hover:text-indigo-800 underline font-medium" target="_blank" rel="noopener noreferrer">$1</a>')
+      .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" class="text-indigo-600 hover:text-indigo-800 underline decoration-indigo-300 underline-offset-2 transition-colors" target="_blank" rel="noopener noreferrer">$1</a>')
       // Inline code
-      .replace(/`([^`]+)`/g, '<code class="bg-gray-100 px-2 py-0.5 rounded text-sm font-mono text-gray-800">$1</code>');
+      .replace(/`([^`]+)`/g, '<code class="bg-gray-100 px-2 py-1 rounded text-lg font-mono text-indigo-700">$1</code>');
+  }
+
+  // Render the content with markers replaced by components
+  const renderContent = () => {
+    const { html, markers } = processedContent;
+
+    // If no markers, just return the HTML
+    if (markers.length === 0) {
+      return <div dangerouslySetInnerHTML={{ __html: html }} />;
+    }
+
+    // Split by markers and interleave with components
+    const parts: React.ReactNode[] = [];
+    let remaining = html;
+    let partIndex = 0;
+
+    for (const marker of markers) {
+      const splitIndex = remaining.indexOf(marker.placeholder);
+      if (splitIndex === -1) continue;
+
+      // Add HTML before marker
+      const before = remaining.slice(0, splitIndex);
+      if (before) {
+        parts.push(<div key={`html-${partIndex}`} dangerouslySetInnerHTML={{ __html: before }} />);
+      }
+
+      // Add component for marker
+      switch (marker.type) {
+        case 'CHART': {
+          const chart = chartMap.get(marker.id);
+          if (chart) {
+            parts.push(<ContentChart key={`chart-${partIndex}`} config={chart} />);
+          }
+          break;
+        }
+        case 'STAT': {
+          const stat = statMap.get(marker.id);
+          if (stat) {
+            parts.push(<StatCallout key={`stat-${partIndex}`} stat={stat} sources={sources} />);
+          }
+          break;
+        }
+        case 'QUOTE': {
+          const quote = quoteMap.get(marker.id);
+          if (quote) {
+            parts.push(<ExpertQuote key={`quote-${partIndex}`} quote={quote} sources={sources} variant="highlight" />);
+          }
+          break;
+        }
+        case 'SOURCE': {
+          // Inline source citation - just show as superscript number
+          const sourceId = parseInt(marker.id, 10);
+          const source = sources.find(s => s.id === sourceId);
+          if (source) {
+            parts.push(
+              <sup key={`source-${partIndex}`} className="text-indigo-600 cursor-help text-sm ml-0.5" title={source.title}>
+                [{marker.id}]
+              </sup>
+            );
+          }
+          break;
+        }
+      }
+
+      remaining = remaining.slice(splitIndex + marker.placeholder.length);
+      partIndex++;
+    }
+
+    // Add remaining HTML
+    if (remaining) {
+      parts.push(<div key={`html-${partIndex}`} dangerouslySetInnerHTML={{ __html: remaining }} />);
+    }
+
+    return <>{parts}</>;
   };
 
   return (
-    <article className={`prose prose-lg max-w-none ${className}`}>
-      {segments.map((segment, index) => {
-        switch (segment.type) {
-          case 'chart':
-            return (
-              <ContentChart
-                key={`chart-${index}`}
-                config={segment.data as ChartConfig}
-              />
-            );
-
-          case 'stat':
-            return (
-              <StatCallout
-                key={`stat-${index}`}
-                stat={segment.data as Statistic}
-                sources={sources}
-              />
-            );
-
-          case 'quote':
-            return (
-              <ExpertQuote
-                key={`quote-${index}`}
-                quote={segment.data as Quote}
-                sources={sources}
-                variant="highlight"
-              />
-            );
-
-          case 'text':
-          default:
-            return (
-              <div key={`text-${index}`}>
-                {processSourceCitations(segment.content)}
-              </div>
-            );
-        }
-      })}
+    <article className={`max-w-none ${className}`}>
+      {/* Main content */}
+      <div className="blog-content">
+        {renderContent()}
+      </div>
 
       {/* Sources list at the bottom */}
       {sources.length > 0 && (
-        <SourcesList sources={sources} />
+        <div className="mt-16 pt-8 border-t border-gray-200">
+          <SourcesList sources={sources} />
+        </div>
       )}
     </article>
   );

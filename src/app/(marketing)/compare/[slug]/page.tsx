@@ -28,6 +28,9 @@ interface Props {
 
 export const revalidate = 3600;
 
+// Allow dynamic params for pages not in generateStaticParams (pages created after build)
+export const dynamicParams = true;
+
 export async function generateStaticParams() {
   const slugs = await getComparisonSlugs();
   return slugs.map((slug) => ({ slug }));
