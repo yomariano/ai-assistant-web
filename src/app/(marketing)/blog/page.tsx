@@ -14,8 +14,9 @@ export const metadata: Metadata = generatePageMetadata({
   path: "/blog",
 });
 
-// Revalidate every hour as fallback (on-demand revalidation is primary)
-export const revalidate = 3600;
+// Force dynamic rendering to avoid stale cache issues
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
 export default async function BlogPage() {
   const posts = await getBlogPosts({ limit: 20 });

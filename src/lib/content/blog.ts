@@ -22,7 +22,7 @@ export async function getBlogPosts(options?: {
     if (options?.offset) params.set("offset", String(options.offset));
 
     const res = await fetch(`${API_URL}/api/content/blog?${params}`, {
-      next: { revalidate: 3600 },
+      cache: 'no-store', // Always fetch fresh data
     });
 
     if (res.ok) {
