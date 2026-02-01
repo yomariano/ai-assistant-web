@@ -132,28 +132,105 @@ export function RichBlogContent({ post, className = '' }: RichBlogContentProps) 
     return parts;
   };
 
-  // Simple markdown to HTML converter
+  // Robust markdown to HTML converter
   const convertMarkdownToHtml = (markdown: string): string => {
-    return markdown
+    let html = markdown;
+
+    // Step 1: Normalize - add line breaks before headers that are inline
+    html = html.replace(/([.!?])\s*(#{2,3}\s)/g, '$1\n\n$2');
+    html = html.replace(/([a-z])\s*(#{2,3}\s)/gi, '$1\n\n$2');
+
+    // Step 2: Split into lines for processing
+    const lines = html.split('\n');
+    const processedLines: string[] = [];
+    let inList = false;
+
+    for (const line of lines) {
+      const trimmedLine = line.trim();
+
+      if (!trimmedLine) {
+        if (inList) {
+          processedLines.push('</ul>');
+          inList = false;
+        }
+        processedLines.push('');
+        continue;
+      }
+
       // Headers
-      .replace(/^### (.*$)/gm, '<h3 class="text-xl font-semibold text-gray-900 mt-8 mb-4">$1</h3>')
-      .replace(/^## (.*$)/gm, '<h2 class="text-2xl font-bold text-gray-900 mt-10 mb-5">$1</h2>')
-      // Bold and italic
-      .replace(/\*\*\*(.*?)\*\*\*/g, '<strong><em>$1</em></strong>')
-      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-      .replace(/\*(.*?)\*/g, '<em>$1</em>')
+      if (trimmedLine.startsWith('### ')) {
+        if (inList) {
+          processedLines.push('</ul>');
+          inList = false;
+        }
+        const headerText = trimmedLine.slice(4);
+        processedLines.push(`<h3 class="text-xl font-bold text-gray-900 mt-10 mb-4">${processInlineMarkdown(headerText)}</h3>`);
+        continue;
+      }
+
+      if (trimmedLine.startsWith('## ')) {
+        if (inList) {
+          processedLines.push('</ul>');
+          inList = false;
+        }
+        const headerText = trimmedLine.slice(3);
+        processedLines.push(`<h2 class="text-2xl font-bold text-gray-900 mt-12 mb-5 pb-3 border-b border-gray-200">${processInlineMarkdown(headerText)}</h2>`);
+        continue;
+      }
+
+      // Bullet lists
+      if (trimmedLine.startsWith('- ') || trimmedLine.startsWith('* ')) {
+        if (!inList) {
+          processedLines.push('<ul class="my-6 space-y-2 list-disc list-inside">');
+          inList = true;
+        }
+        const listItemText = trimmedLine.slice(2);
+        processedLines.push(`<li class="text-gray-700 leading-relaxed">${processInlineMarkdown(listItemText)}</li>`);
+        continue;
+      }
+
+      // Numbered lists
+      const numberedMatch = trimmedLine.match(/^(\d+)\.\s+(.*)$/);
+      if (numberedMatch) {
+        if (!inList) {
+          processedLines.push('<ol class="my-6 space-y-2 list-decimal list-inside">');
+          inList = true;
+        }
+        processedLines.push(`<li class="text-gray-700 leading-relaxed">${processInlineMarkdown(numberedMatch[2])}</li>`);
+        continue;
+      }
+
+      // Close list if we're not continuing one
+      if (inList) {
+        processedLines.push('</ul>');
+        inList = false;
+      }
+
+      // Regular paragraph
+      processedLines.push(`<p class="my-5 text-gray-700 leading-relaxed text-lg">${processInlineMarkdown(trimmedLine)}</p>`);
+    }
+
+    // Close any open list
+    if (inList) {
+      processedLines.push('</ul>');
+    }
+
+    return processedLines.join('\n');
+  };
+
+  // Process inline markdown (bold, italic, links, code)
+  const processInlineMarkdown = (text: string): string => {
+    return text
+      // Bold and italic combined
+      .replace(/\*\*\*(.*?)\*\*\*/g, '<strong class="font-bold"><em>$1</em></strong>')
+      // Bold
+      .replace(/\*\*(.*?)\*\*/g, '<strong class="font-semibold text-gray-900">$1</strong>')
+      // Italic
+      .replace(/\*(.*?)\*/g, '<em class="italic">$1</em>')
       // Links
-      .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" class="text-blue-600 hover:text-blue-800 underline" target="_blank" rel="noopener noreferrer">$1</a>')
+      .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" class="text-indigo-600 hover:text-indigo-800 underline font-medium" target="_blank" rel="noopener noreferrer">$1</a>')
       // Inline code
-      .replace(/`([^`]+)`/g, '<code class="bg-gray-100 px-1.5 py-0.5 rounded text-sm">$1</code>')
-      // Lists
-      .replace(/^\- (.*$)/gm, '<li class="ml-4">$1</li>')
-      .replace(/^(\d+)\. (.*$)/gm, '<li class="ml-4">$2</li>')
-      // Paragraphs (wrap lines not already wrapped)
-      .replace(/^(?!<[hlo])(.*\S.*)$/gm, '<p class="my-4 text-gray-700 leading-relaxed">$1</p>')
-      // Clean up extra paragraph tags around block elements
-      .replace(/<p class="[^"]*"><(h[23]|ul|ol|li)/g, '<$1')
-      .replace(/<\/(h[23]|ul|ol|li)><\/p>/g, '</$1>');
+      .replace(/`([^`]+)`/g, '<code class="bg-gray-100 px-2 py-0.5 rounded text-sm font-mono text-gray-800">$1</code>');
   };
 
   return (
