@@ -332,7 +332,7 @@ const VOICES: DemoVoice[] = [
   { id: "Elliot", label: "Elliot (conversational)", provider: "vapi" },
   { id: "Cole", label: "Cole (professional)", provider: "vapi" },
   { id: "Paige", label: "Paige (clear)", provider: "vapi" },
-  { id: "JNcXxzrlvFDXcrGo2b47", label: "Custom (Irish)", provider: "11labs" },
+  { id: "JNcXxzrlvFDXcrGo2b47", label: "Custom (Argentine)", provider: "11labs" },
 ];
 
 export default function LiveDemoCall() {
@@ -565,7 +565,13 @@ export default function LiveDemoCall() {
         backgroundSound: "office",
         maxDurationSeconds: 90,
         voice: selectedVoice.provider === "11labs"
-          ? { provider: "11labs", voiceId: selectedVoice.id }
+          ? {
+              provider: "11labs",
+              voiceId: selectedVoice.id,
+              model: "eleven_multilingual_v2",
+              stability: 0.5,
+              similarityBoost: 0.75,
+            }
           : { provider: "vapi", voiceId: selectedVoice.id },
         model: {
           provider: "openai",
