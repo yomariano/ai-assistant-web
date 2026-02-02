@@ -5,7 +5,9 @@
 
 import type { ComparisonPage, ComparisonFaqItem } from "@/lib/marketing/comparisons";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
+// Use server-side env var (runtime) with fallback to NEXT_PUBLIC_ (build-time)
+// Server components can access non-NEXT_PUBLIC_ vars at runtime
+const API_URL = process.env.API_URL || process.env.NEXT_PUBLIC_API_URL;
 
 /**
  * Rich content types

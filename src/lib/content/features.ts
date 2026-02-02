@@ -1,9 +1,10 @@
 import type { FeaturePage } from "../supabase-server";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
+// Use server-side env var (runtime) with fallback to NEXT_PUBLIC_ (build-time)
+const API_URL = process.env.API_URL || process.env.NEXT_PUBLIC_API_URL;
 
 if (!API_URL) {
-  console.warn('[features] NEXT_PUBLIC_API_URL is not set - content API calls will fail');
+  console.warn('[features] Neither API_URL nor NEXT_PUBLIC_API_URL is set');
 }
 
 export async function getFeaturePages(): Promise<FeaturePage[]> {

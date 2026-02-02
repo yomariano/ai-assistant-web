@@ -1,9 +1,11 @@
 import type { BlogPost } from "../supabase-server";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
+// Use server-side env var (runtime) with fallback to NEXT_PUBLIC_ (build-time)
+// Server components can access non-NEXT_PUBLIC_ vars at runtime
+const API_URL = process.env.API_URL || process.env.NEXT_PUBLIC_API_URL;
 
 if (!API_URL) {
-  console.warn('[blog] NEXT_PUBLIC_API_URL is not set - content API calls will fail');
+  console.warn('[blog] Neither API_URL nor NEXT_PUBLIC_API_URL is set - content API calls will fail');
 }
 
 export async function getBlogPosts(options?: {

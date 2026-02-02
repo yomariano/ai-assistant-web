@@ -2,7 +2,8 @@ import { MetadataRoute } from 'next';
 import { INTEGRATIONS } from '@/lib/marketing/integrations';
 
 const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://voicefleet.ai';
-const API_URL = process.env.NEXT_PUBLIC_API_URL || process.env.API_URL;
+// Use server-side env var (runtime) with fallback to NEXT_PUBLIC_ (build-time)
+const API_URL = process.env.API_URL || process.env.NEXT_PUBLIC_API_URL;
 
 interface ContentItem {
   slug: string;
