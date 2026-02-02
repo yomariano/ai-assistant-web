@@ -349,6 +349,7 @@ export default function LiveDemoCall() {
   const [languageId, setLanguageId] = useState<DemoLanguageId>("en");
   const [isCheckingAllowance, setIsCheckingAllowance] = useState(false);
   const [isDemoBlocked, setIsDemoBlocked] = useState(false);
+  const [bypassCode, setBypassCode] = useState("");
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -541,9 +542,10 @@ export default function LiveDemoCall() {
           const res = await fetch(`${apiUrl.replace(/\/$/, "")}/api/public/live-demo/allow`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ bypassCode: bypassCode.trim() || undefined }),
           });
           const data = (await res.json().catch(() => null)) as
-            | { allowed: boolean; remaining?: number; resetAt?: string }
+            | { allowed: boolean; remaining?: number; resetAt?: string; bypassed?: boolean }
             | null;
 
           if (data && data.allowed === false) {
@@ -605,7 +607,7 @@ export default function LiveDemoCall() {
       setCallStatus("error");
       setIsCheckingAllowance(false);
     }
-  }, [assistantFirstMessage, assistantSystemPrompt, language.transcriberLanguage, scenario.label, selectedVoice]);
+  }, [assistantFirstMessage, assistantSystemPrompt, bypassCode, language.transcriberLanguage, scenario.label, selectedVoice]);
 
   const endCall = useCallback(() => {
     if (vapiRef.current) vapiRef.current.stop();
@@ -638,6 +640,7 @@ export default function LiveDemoCall() {
         setCallStatus("idle");
         setIsCheckingAllowance(false);
         setIsDemoBlocked(false);
+        setBypassCode("");
         hangupRequestedRef.current = false;
         if (hardStopTimeoutRef.current) {
           window.clearTimeout(hardStopTimeoutRef.current);
@@ -687,6 +690,26 @@ export default function LiveDemoCall() {
                   Book a demo
                 </a>
               )}
+            </div>
+          )}
+
+          {isDemoBlocked && (
+            <div className="flex items-center gap-2">
+              <input
+                type="text"
+                value={bypassCode}
+                onChange={(e) => setBypassCode(e.target.value.toUpperCase())}
+                placeholder="Enter access code"
+                className="flex-1 px-4 py-2 rounded-lg border border-border bg-background text-foreground text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none"
+              />
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={startCall}
+                disabled={!bypassCode.trim()}
+              >
+                Try Code
+              </Button>
             </div>
           )}
 
