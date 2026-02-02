@@ -5,9 +5,14 @@
 
 import type { ComparisonPage, ComparisonFaqItem } from "@/lib/marketing/comparisons";
 
-// Use server-side env var (runtime) with fallback to NEXT_PUBLIC_ (build-time)
-// Server components can access non-NEXT_PUBLIC_ vars at runtime
-const API_URL = process.env.API_URL || process.env.NEXT_PUBLIC_API_URL;
+/**
+ * Get API URL at request time (not module load time)
+ * This is critical for Next.js standalone builds where env vars
+ * need to be read fresh on each request
+ */
+function getApiUrl(): string | undefined {
+  return process.env.API_URL || process.env.NEXT_PUBLIC_API_URL;
+}
 
 /**
  * Rich content types
@@ -120,14 +125,15 @@ function transformToComparisonPage(data: ComparisonPageResponse): ComparisonPage
  * @returns Array of comparison pages for listing
  */
 export async function getComparisonPages(): Promise<ComparisonPage[]> {
-  if (!API_URL) {
-    console.warn("[comparisons] NEXT_PUBLIC_API_URL not set");
+  const apiUrl = getApiUrl();
+  if (!apiUrl) {
+    console.warn("[comparisons] API_URL not configured");
     return [];
   }
 
   try {
-    const res = await fetch(`${API_URL}/api/content/comparisons`, {
-      cache: 'no-store', // Always fetch fresh data
+    const res = await fetch(`${apiUrl}/api/content/comparisons`, {
+      cache: 'no-store',
     });
 
     if (res.ok) {
@@ -151,14 +157,15 @@ export async function getComparisonPages(): Promise<ComparisonPage[]> {
 export async function getComparisonPage(
   slug: string
 ): Promise<ComparisonPage | null> {
-  if (!API_URL) {
-    console.warn("[comparisons] NEXT_PUBLIC_API_URL not set");
+  const apiUrl = getApiUrl();
+  if (!apiUrl) {
+    console.warn("[comparisons] API_URL not configured");
     return null;
   }
 
   try {
-    const res = await fetch(`${API_URL}/api/content/comparisons/${slug}`, {
-      next: { revalidate: 3600 },
+    const res = await fetch(`${apiUrl}/api/content/comparisons/${slug}`, {
+      cache: 'no-store',
     });
 
     if (res.ok) {
@@ -183,14 +190,15 @@ export async function getComparisonPage(
  * @returns Array of slugs
  */
 export async function getComparisonSlugs(): Promise<string[]> {
-  if (!API_URL) {
-    console.warn("[comparisons] NEXT_PUBLIC_API_URL not set");
+  const apiUrl = getApiUrl();
+  if (!apiUrl) {
+    console.warn("[comparisons] API_URL not configured");
     return [];
   }
 
   try {
-    const res = await fetch(`${API_URL}/api/content/comparisons`, {
-      next: { revalidate: 3600 },
+    const res = await fetch(`${apiUrl}/api/content/comparisons`, {
+      cache: 'no-store',
     });
 
     if (res.ok) {
@@ -214,14 +222,15 @@ export async function getComparisonSlugs(): Promise<string[]> {
 export async function getComparisonPageFull(
   slug: string
 ): Promise<ComparisonPageResponse | null> {
-  if (!API_URL) {
-    console.warn("[comparisons] NEXT_PUBLIC_API_URL not set");
+  const apiUrl = getApiUrl();
+  if (!apiUrl) {
+    console.warn("[comparisons] API_URL not configured");
     return null;
   }
 
   try {
-    const res = await fetch(`${API_URL}/api/content/comparisons/${slug}`, {
-      next: { revalidate: 3600 },
+    const res = await fetch(`${apiUrl}/api/content/comparisons/${slug}`, {
+      cache: 'no-store',
     });
 
     if (res.ok) {

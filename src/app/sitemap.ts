@@ -2,8 +2,13 @@ import { MetadataRoute } from 'next';
 import { INTEGRATIONS } from '@/lib/marketing/integrations';
 
 const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://voicefleet.ai';
-// Use server-side env var (runtime) with fallback to NEXT_PUBLIC_ (build-time)
-const API_URL = process.env.API_URL || process.env.NEXT_PUBLIC_API_URL;
+
+/**
+ * Get API URL at request time (not module load time)
+ */
+function getApiUrl(): string | undefined {
+  return process.env.API_URL || process.env.NEXT_PUBLIC_API_URL;
+}
 
 interface ContentItem {
   slug: string;
@@ -26,13 +31,15 @@ interface SitemapData {
 }
 
 async function fetchSitemapData(): Promise<SitemapData | null> {
-  if (!API_URL) {
+  const apiUrl = getApiUrl();
+  if (!apiUrl) {
+    console.warn('[sitemap] API_URL not configured');
     return null;
   }
   try {
     const response = await fetch(
-      `${API_URL}/api/content/sitemap-data`,
-      { next: { revalidate: 3600 } } // Revalidate every hour
+      `${apiUrl}/api/content/sitemap-data`,
+      { cache: 'no-store' }
     );
 
     if (!response.ok) {

@@ -1,18 +1,22 @@
 import type { FeaturePage } from "../supabase-server";
 
-// Use server-side env var (runtime) with fallback to NEXT_PUBLIC_ (build-time)
-const API_URL = process.env.API_URL || process.env.NEXT_PUBLIC_API_URL;
-
-if (!API_URL) {
-  console.warn('[features] Neither API_URL nor NEXT_PUBLIC_API_URL is set');
+/**
+ * Get API URL at request time (not module load time)
+ */
+function getApiUrl(): string | undefined {
+  return process.env.API_URL || process.env.NEXT_PUBLIC_API_URL;
 }
 
 export async function getFeaturePages(): Promise<FeaturePage[]> {
-  if (!API_URL) return [];
+  const apiUrl = getApiUrl();
+  if (!apiUrl) {
+    console.warn('[features] API_URL not configured');
+    return [];
+  }
 
   try {
-    const res = await fetch(`${API_URL}/api/content/features`, {
-      next: { revalidate: 3600 },
+    const res = await fetch(`${apiUrl}/api/content/features`, {
+      cache: 'no-store',
     });
 
     if (res.ok) {
@@ -28,11 +32,15 @@ export async function getFeaturePages(): Promise<FeaturePage[]> {
 }
 
 export async function getFeaturePage(slug: string): Promise<FeaturePage | null> {
-  if (!API_URL) return null;
+  const apiUrl = getApiUrl();
+  if (!apiUrl) {
+    console.warn('[features] API_URL not configured');
+    return null;
+  }
 
   try {
-    const res = await fetch(`${API_URL}/api/content/features/${slug}`, {
-      next: { revalidate: 3600 },
+    const res = await fetch(`${apiUrl}/api/content/features/${slug}`, {
+      cache: 'no-store',
     });
 
     if (res.ok) {
@@ -52,11 +60,15 @@ export async function getFeaturePage(slug: string): Promise<FeaturePage | null> 
 }
 
 export async function getFeatureSlugs(): Promise<string[]> {
-  if (!API_URL) return [];
+  const apiUrl = getApiUrl();
+  if (!apiUrl) {
+    console.warn('[features] API_URL not configured');
+    return [];
+  }
 
   try {
-    const res = await fetch(`${API_URL}/api/content/sitemap-data`, {
-      next: { revalidate: 3600 },
+    const res = await fetch(`${apiUrl}/api/content/sitemap-data`, {
+      cache: 'no-store',
     });
 
     if (res.ok) {
@@ -75,13 +87,16 @@ export async function getFeatureSlugs(): Promise<string[]> {
 export async function getRelatedFeatures(
   slugs: string[]
 ): Promise<Pick<FeaturePage, "slug" | "feature_name" | "headline">[]> {
-  if (!API_URL || !slugs.length) return [];
+  const apiUrl = getApiUrl();
+  if (!apiUrl || !slugs.length) {
+    return [];
+  }
 
   try {
     const res = await fetch(
-      `${API_URL}/api/content/features/by-slugs?slugs=${slugs.join(",")}`,
+      `${apiUrl}/api/content/features/by-slugs?slugs=${slugs.join(",")}`,
       {
-        next: { revalidate: 3600 },
+        cache: 'no-store',
       }
     );
 

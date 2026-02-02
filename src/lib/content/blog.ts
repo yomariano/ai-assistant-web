@@ -1,11 +1,12 @@
 import type { BlogPost } from "../supabase-server";
 
-// Use server-side env var (runtime) with fallback to NEXT_PUBLIC_ (build-time)
-// Server components can access non-NEXT_PUBLIC_ vars at runtime
-const API_URL = process.env.API_URL || process.env.NEXT_PUBLIC_API_URL;
-
-if (!API_URL) {
-  console.warn('[blog] Neither API_URL nor NEXT_PUBLIC_API_URL is set - content API calls will fail');
+/**
+ * Get API URL at request time (not module load time)
+ * This is critical for Next.js standalone builds where env vars
+ * need to be read fresh on each request
+ */
+function getApiUrl(): string | undefined {
+  return process.env.API_URL || process.env.NEXT_PUBLIC_API_URL;
 }
 
 export async function getBlogPosts(options?: {
@@ -14,7 +15,11 @@ export async function getBlogPosts(options?: {
   limit?: number;
   offset?: number;
 }): Promise<BlogPost[]> {
-  if (!API_URL) return [];
+  const apiUrl = getApiUrl();
+  if (!apiUrl) {
+    console.warn('[blog] API_URL not configured');
+    return [];
+  }
 
   try {
     const params = new URLSearchParams();
@@ -23,8 +28,8 @@ export async function getBlogPosts(options?: {
     if (options?.limit) params.set("limit", String(options.limit));
     if (options?.offset) params.set("offset", String(options.offset));
 
-    const res = await fetch(`${API_URL}/api/content/blog?${params}`, {
-      cache: 'no-store', // Always fetch fresh data
+    const res = await fetch(`${apiUrl}/api/content/blog?${params}`, {
+      cache: 'no-store',
     });
 
     if (res.ok) {
@@ -40,11 +45,15 @@ export async function getBlogPosts(options?: {
 }
 
 export async function getBlogPost(slug: string): Promise<BlogPost | null> {
-  if (!API_URL) return null;
+  const apiUrl = getApiUrl();
+  if (!apiUrl) {
+    console.warn('[blog] API_URL not configured');
+    return null;
+  }
 
   try {
-    const res = await fetch(`${API_URL}/api/content/blog/${slug}`, {
-      next: { revalidate: 3600 },
+    const res = await fetch(`${apiUrl}/api/content/blog/${slug}`, {
+      cache: 'no-store',
     });
 
     if (res.ok) {
@@ -64,11 +73,15 @@ export async function getBlogPost(slug: string): Promise<BlogPost | null> {
 }
 
 export async function getBlogPostSlugs(): Promise<string[]> {
-  if (!API_URL) return [];
+  const apiUrl = getApiUrl();
+  if (!apiUrl) {
+    console.warn('[blog] API_URL not configured');
+    return [];
+  }
 
   try {
-    const res = await fetch(`${API_URL}/api/content/sitemap-data`, {
-      next: { revalidate: 3600 },
+    const res = await fetch(`${apiUrl}/api/content/sitemap-data`, {
+      cache: 'no-store',
     });
 
     if (res.ok) {
@@ -90,7 +103,11 @@ export async function getRelatedPosts(
   tags?: string[] | null,
   limit = 3
 ): Promise<BlogPost[]> {
-  if (!API_URL) return [];
+  const apiUrl = getApiUrl();
+  if (!apiUrl) {
+    console.warn('[blog] API_URL not configured');
+    return [];
+  }
 
   try {
     const params = new URLSearchParams();
@@ -98,8 +115,8 @@ export async function getRelatedPosts(
     params.set("limit", String(limit));
     if (category) params.set("category", category);
 
-    const res = await fetch(`${API_URL}/api/content/blog/related?${params}`, {
-      next: { revalidate: 3600 },
+    const res = await fetch(`${apiUrl}/api/content/blog/related?${params}`, {
+      cache: 'no-store',
     });
 
     if (res.ok) {

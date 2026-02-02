@@ -1,10 +1,10 @@
 import type { ComboPage } from "../supabase-server";
 
-// Use server-side env var (runtime) with fallback to NEXT_PUBLIC_ (build-time)
-const API_URL = process.env.API_URL || process.env.NEXT_PUBLIC_API_URL;
-
-if (!API_URL) {
-  console.warn('[combo] Neither API_URL nor NEXT_PUBLIC_API_URL is set');
+/**
+ * Get API URL at request time (not module load time)
+ */
+function getApiUrl(): string | undefined {
+  return process.env.API_URL || process.env.NEXT_PUBLIC_API_URL;
 }
 
 export interface ComboPageSummary {
@@ -26,7 +26,11 @@ export async function getComboPages(options?: {
   limit?: number;
   offset?: number;
 }): Promise<ComboPageSummary[]> {
-  if (!API_URL) return [];
+  const apiUrl = getApiUrl();
+  if (!apiUrl) {
+    console.warn('[combo] API_URL not configured');
+    return [];
+  }
 
   const { location, industry, limit = 100, offset = 0 } = options || {};
 
@@ -38,8 +42,8 @@ export async function getComboPages(options?: {
     params.append("offset", offset.toString());
 
     const queryString = params.toString() ? `?${params.toString()}` : "";
-    const res = await fetch(`${API_URL}/api/content/combo${queryString}`, {
-      next: { revalidate: 3600 },
+    const res = await fetch(`${apiUrl}/api/content/combo${queryString}`, {
+      cache: 'no-store',
     });
 
     if (res.ok) {
@@ -58,13 +62,17 @@ export async function getComboPage(
   industry: string,
   location: string
 ): Promise<ComboPage | null> {
-  if (!API_URL) return null;
+  const apiUrl = getApiUrl();
+  if (!apiUrl) {
+    console.warn('[combo] API_URL not configured');
+    return null;
+  }
 
   try {
     const res = await fetch(
-      `${API_URL}/api/content/combo/${industry}/${location}`,
+      `${apiUrl}/api/content/combo/${industry}/${location}`,
       {
-        next: { revalidate: 3600 },
+        cache: 'no-store',
       }
     );
 
@@ -87,11 +95,15 @@ export async function getComboPage(
 export async function getComboSlugs(): Promise<
   { industry: string; location: string }[]
 > {
-  if (!API_URL) return [];
+  const apiUrl = getApiUrl();
+  if (!apiUrl) {
+    console.warn('[combo] API_URL not configured');
+    return [];
+  }
 
   try {
-    const res = await fetch(`${API_URL}/api/content/sitemap-data`, {
-      next: { revalidate: 3600 },
+    const res = await fetch(`${apiUrl}/api/content/sitemap-data`, {
+      cache: 'no-store',
     });
 
     if (res.ok) {
@@ -117,7 +129,11 @@ export async function getRelatedCombos(
   currentLocation: string,
   limit: number = 6
 ): Promise<ComboPageSummary[]> {
-  if (!API_URL) return [];
+  const apiUrl = getApiUrl();
+  if (!apiUrl) {
+    console.warn('[combo] API_URL not configured');
+    return [];
+  }
 
   try {
     const params = new URLSearchParams();
@@ -125,8 +141,8 @@ export async function getRelatedCombos(
     params.set("location", currentLocation);
     params.set("limit", String(limit));
 
-    const res = await fetch(`${API_URL}/api/content/combo/related?${params}`, {
-      next: { revalidate: 3600 },
+    const res = await fetch(`${apiUrl}/api/content/combo/related?${params}`, {
+      cache: 'no-store',
     });
 
     if (res.ok) {

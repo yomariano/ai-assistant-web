@@ -1,19 +1,23 @@
 import type { LocationPage } from "../supabase-server";
 
-// Use server-side env var (runtime) with fallback to NEXT_PUBLIC_ (build-time)
-const API_URL = process.env.API_URL || process.env.NEXT_PUBLIC_API_URL;
-
-if (!API_URL) {
-  console.warn('[locations] Neither API_URL nor NEXT_PUBLIC_API_URL is set');
+/**
+ * Get API URL at request time (not module load time)
+ */
+function getApiUrl(): string | undefined {
+  return process.env.API_URL || process.env.NEXT_PUBLIC_API_URL;
 }
 
 export async function getLocationPages(state?: string): Promise<LocationPage[]> {
-  if (!API_URL) return [];
+  const apiUrl = getApiUrl();
+  if (!apiUrl) {
+    console.warn('[locations] API_URL not configured');
+    return [];
+  }
 
   try {
     const params = state ? `?state=${state}` : "";
-    const res = await fetch(`${API_URL}/api/content/locations${params}`, {
-      next: { revalidate: 3600 },
+    const res = await fetch(`${apiUrl}/api/content/locations${params}`, {
+      cache: 'no-store',
     });
 
     if (res.ok) {
@@ -29,11 +33,15 @@ export async function getLocationPages(state?: string): Promise<LocationPage[]> 
 }
 
 export async function getLocationPage(slug: string): Promise<LocationPage | null> {
-  if (!API_URL) return null;
+  const apiUrl = getApiUrl();
+  if (!apiUrl) {
+    console.warn('[locations] API_URL not configured');
+    return null;
+  }
 
   try {
-    const res = await fetch(`${API_URL}/api/content/locations/${slug}`, {
-      next: { revalidate: 3600 },
+    const res = await fetch(`${apiUrl}/api/content/locations/${slug}`, {
+      cache: 'no-store',
     });
 
     if (res.ok) {
@@ -53,11 +61,15 @@ export async function getLocationPage(slug: string): Promise<LocationPage | null
 }
 
 export async function getLocationSlugs(): Promise<string[]> {
-  if (!API_URL) return [];
+  const apiUrl = getApiUrl();
+  if (!apiUrl) {
+    console.warn('[locations] API_URL not configured');
+    return [];
+  }
 
   try {
-    const res = await fetch(`${API_URL}/api/content/sitemap-data`, {
-      next: { revalidate: 3600 },
+    const res = await fetch(`${apiUrl}/api/content/sitemap-data`, {
+      cache: 'no-store',
     });
 
     if (res.ok) {
@@ -76,13 +88,16 @@ export async function getLocationSlugs(): Promise<string[]> {
 export async function getNearbyLocations(
   slugs: string[]
 ): Promise<Pick<LocationPage, "slug" | "city_name" | "state_code">[]> {
-  if (!API_URL || !slugs.length) return [];
+  const apiUrl = getApiUrl();
+  if (!apiUrl || !slugs.length) {
+    return [];
+  }
 
   try {
     const res = await fetch(
-      `${API_URL}/api/content/locations/nearby?slugs=${slugs.join(",")}`,
+      `${apiUrl}/api/content/locations/nearby?slugs=${slugs.join(",")}`,
       {
-        next: { revalidate: 3600 },
+        cache: 'no-store',
       }
     );
 

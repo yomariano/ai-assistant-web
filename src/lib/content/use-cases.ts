@@ -1,18 +1,22 @@
 import type { UseCasePage } from "../supabase-server";
 
-// Use server-side env var (runtime) with fallback to NEXT_PUBLIC_ (build-time)
-const API_URL = process.env.API_URL || process.env.NEXT_PUBLIC_API_URL;
-
-if (!API_URL) {
-  console.warn('[use-cases] Neither API_URL nor NEXT_PUBLIC_API_URL is set');
+/**
+ * Get API URL at request time (not module load time)
+ */
+function getApiUrl(): string | undefined {
+  return process.env.API_URL || process.env.NEXT_PUBLIC_API_URL;
 }
 
 export async function getUseCasePages(): Promise<UseCasePage[]> {
-  if (!API_URL) return [];
+  const apiUrl = getApiUrl();
+  if (!apiUrl) {
+    console.warn('[use-cases] API_URL not configured');
+    return [];
+  }
 
   try {
-    const res = await fetch(`${API_URL}/api/content/use-cases`, {
-      next: { revalidate: 3600 },
+    const res = await fetch(`${apiUrl}/api/content/use-cases`, {
+      cache: 'no-store',
     });
 
     if (res.ok) {
@@ -28,11 +32,15 @@ export async function getUseCasePages(): Promise<UseCasePage[]> {
 }
 
 export async function getUseCasePage(slug: string): Promise<UseCasePage | null> {
-  if (!API_URL) return null;
+  const apiUrl = getApiUrl();
+  if (!apiUrl) {
+    console.warn('[use-cases] API_URL not configured');
+    return null;
+  }
 
   try {
-    const res = await fetch(`${API_URL}/api/content/use-cases/${slug}`, {
-      next: { revalidate: 3600 },
+    const res = await fetch(`${apiUrl}/api/content/use-cases/${slug}`, {
+      cache: 'no-store',
     });
 
     if (res.ok) {
@@ -52,11 +60,15 @@ export async function getUseCasePage(slug: string): Promise<UseCasePage | null> 
 }
 
 export async function getUseCaseSlugs(): Promise<string[]> {
-  if (!API_URL) return [];
+  const apiUrl = getApiUrl();
+  if (!apiUrl) {
+    console.warn('[use-cases] API_URL not configured');
+    return [];
+  }
 
   try {
-    const res = await fetch(`${API_URL}/api/content/sitemap-data`, {
-      next: { revalidate: 3600 },
+    const res = await fetch(`${apiUrl}/api/content/sitemap-data`, {
+      cache: 'no-store',
     });
 
     if (res.ok) {
