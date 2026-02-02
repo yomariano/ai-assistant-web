@@ -77,6 +77,12 @@ type VapiVoiceId =
   | "Leah"
   | "Tara";
 
+type DemoVoice = {
+  id: string;
+  label: string;
+  provider: "vapi" | "11labs";
+};
+
 const LANGUAGES: DemoLanguage[] = [
   { id: "en", label: "English", transcriberLanguage: "en" },
   { id: "es", label: "Spanish", transcriberLanguage: "es" },
@@ -275,15 +281,58 @@ const SCENARIOS: DemoScenario[] = [
       ],
     },
   },
+  {
+    id: "beauty-salon",
+    label: "Beauty salon / spa",
+    businessName: "Glow Beauty Studio",
+    firstMessage:
+      "Hi, thanks for calling Glow Beauty Studio. This is the AI receptionist. How can I help you today?",
+    firstMessageByLanguage: {
+      es: "Hola, gracias por llamar a Glow Beauty Studio. Soy la recepcionista de IA. ¿En qué puedo ayudarte hoy?",
+      fr: "Bonjour, merci d'appeler Glow Beauty Studio. Je suis la réceptionniste IA. Comment puis-je vous aider aujourd'hui ?",
+      de: "Hallo, danke für Ihren Anruf bei Glow Beauty Studio. Ich bin die KI-Rezeptionistin. Wie kann ich Ihnen heute helfen?",
+      it: "Ciao, grazie per aver chiamato Glow Beauty Studio. Sono la receptionist AI. Come posso aiutarti oggi?",
+    },
+    systemPrompt:
+      "You are the AI phone receptionist for Glow Beauty Studio, a popular beauty salon and spa.\n\nGoals:\n- Help callers book appointments for haircuts, coloring, facials, manicures, pedicures, waxing, and other beauty services.\n- Ask for: name, service type, preferred stylist or therapist (if any), date, time, and contact number.\n- Answer common questions about services, pricing ranges, and opening hours.\n- Confirm all details back clearly.\n\nConstraints (demo mode):\n- Do NOT claim you actually checked a real calendar or created a real booking.\n- Instead say you are taking a booking request for this demo and would send confirmation in the real product.\n- If the caller asks for a specific stylist, note it down but don't guarantee availability.\n- If the caller asks for a human, offer to take a message and summarize it.\n\nTone: warm, friendly, and pampering. Make callers feel relaxed and excited about their upcoming appointment.",
+    suggestedPhrases: [
+      "I'd like to book a haircut and blowdry for Saturday.",
+      "Do you have availability for a manicure and pedicure tomorrow?",
+      "How much is a full set of lash extensions?",
+    ],
+    suggestedPhrasesByLanguage: {
+      es: [
+        "Me gustaría reservar un corte de pelo y peinado para el sábado.",
+        "¿Tienen disponibilidad para manicura y pedicura mañana?",
+        "¿Cuánto cuesta un set completo de extensiones de pestañas?",
+      ],
+      fr: [
+        "J'aimerais réserver une coupe et un brushing pour samedi.",
+        "Avez-vous des disponibilités pour une manucure et pédicure demain ?",
+        "Combien coûte une pose complète d'extensions de cils ?",
+      ],
+      de: [
+        "Ich möchte für Samstag einen Haarschnitt mit Föhnen buchen.",
+        "Haben Sie morgen noch Termine für Maniküre und Pediküre frei?",
+        "Wie viel kostet ein komplettes Set Wimpernverlängerungen?",
+      ],
+      it: [
+        "Vorrei prenotare un taglio e piega per sabato.",
+        "Avete disponibilità per manicure e pedicure domani?",
+        "Quanto costa un set completo di extension ciglia?",
+      ],
+    },
+  },
 ];
 
-const VOICES: Array<{ id: VapiVoiceId; label: string }> = [
-  { id: "Savannah", label: "Savannah (friendly)" },
-  { id: "Rohan", label: "Rohan (warm)" },
-  { id: "Lily", label: "Lily (natural)" },
-  { id: "Elliot", label: "Elliot (conversational)" },
-  { id: "Cole", label: "Cole (professional)" },
-  { id: "Paige", label: "Paige (clear)" },
+const VOICES: DemoVoice[] = [
+  { id: "Savannah", label: "Savannah (friendly)", provider: "vapi" },
+  { id: "Rohan", label: "Rohan (warm)", provider: "vapi" },
+  { id: "Lily", label: "Lily (natural)", provider: "vapi" },
+  { id: "Elliot", label: "Elliot (conversational)", provider: "vapi" },
+  { id: "Cole", label: "Cole (professional)", provider: "vapi" },
+  { id: "Paige", label: "Paige (clear)", provider: "vapi" },
+  { id: "JNcXxzrlvFDXcrGo2b47", label: "Custom (Irish)", provider: "11labs" },
 ];
 
 export default function LiveDemoCall() {
@@ -295,7 +344,7 @@ export default function LiveDemoCall() {
   const [volumeLevel, setVolumeLevel] = useState(0);
   const [messages, setMessages] = useState<TranscriptMessage[]>([]);
   const [scenarioId, setScenarioId] = useState(SCENARIOS[0].id);
-  const [voiceId, setVoiceId] = useState<VapiVoiceId>(VOICES[0].id);
+  const [selectedVoice, setSelectedVoice] = useState<DemoVoice>(VOICES[0]);
   const [languageId, setLanguageId] = useState<DemoLanguageId>("en");
   const [isCheckingAllowance, setIsCheckingAllowance] = useState(false);
   const [isDemoBlocked, setIsDemoBlocked] = useState(false);
@@ -515,7 +564,9 @@ export default function LiveDemoCall() {
         firstMessageMode: "assistant-speaks-first",
         backgroundSound: "office",
         maxDurationSeconds: 90,
-        voice: { provider: "vapi", voiceId },
+        voice: selectedVoice.provider === "11labs"
+          ? { provider: "11labs", voiceId: selectedVoice.id }
+          : { provider: "vapi", voiceId: selectedVoice.id },
         model: {
           provider: "openai",
           model: "gpt-4o-mini",
@@ -547,7 +598,7 @@ export default function LiveDemoCall() {
       setCallStatus("error");
       setIsCheckingAllowance(false);
     }
-  }, [assistantFirstMessage, assistantSystemPrompt, language.transcriberLanguage, scenario.label, voiceId]);
+  }, [assistantFirstMessage, assistantSystemPrompt, language.transcriberLanguage, scenario.label, selectedVoice]);
 
   const endCall = useCallback(() => {
     if (vapiRef.current) vapiRef.current.stop();
@@ -652,8 +703,11 @@ export default function LiveDemoCall() {
             <div>
               <label className="block text-sm font-medium text-foreground mb-2">Voice</label>
               <select
-                value={voiceId}
-                onChange={(e) => setVoiceId(e.target.value as VapiVoiceId)}
+                value={selectedVoice.id}
+                onChange={(e) => {
+                  const voice = VOICES.find((v) => v.id === e.target.value);
+                  if (voice) setSelectedVoice(voice);
+                }}
                 className="w-full px-4 py-3 rounded-lg border border-border bg-background text-foreground focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all"
                 disabled={callStatus === "connecting" || callStatus === "connected"}
               >
