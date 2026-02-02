@@ -333,6 +333,7 @@ const VOICES: DemoVoice[] = [
   { id: "Cole", label: "Cole (professional)", provider: "vapi" },
   { id: "Paige", label: "Paige (clear)", provider: "vapi" },
   { id: "JNcXxzrlvFDXcrGo2b47", label: "Custom (Argentine)", provider: "11labs" },
+  { id: "t6WJWTYTryhcQnrBHdCr", label: "Custom (Irish)", provider: "11labs" },
 ];
 
 export default function LiveDemoCall() {
