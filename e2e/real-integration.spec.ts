@@ -1,10 +1,10 @@
 /**
  * REAL INTEGRATION TEST
  *
- * This test uses REAL Stripe, Telnyx, and Vapi APIs.
+ * This test uses REAL Stripe and Vapi APIs.
  * It will:
  * - Charge a real credit card (test mode)
- * - Purchase a real phone number from Telnyx
+ * - Provision a real phone number
  * - Create a real assistant in Vapi
  * - Assign the phone number to the assistant
  *
@@ -73,7 +73,7 @@ test.describe('Real Integration Test - Full Flow', () => {
     await realCleanup(request, REAL_TEST_USER_ID);
   });
 
-  test('Complete flow: Stripe checkout -> Real Telnyx number -> Vapi assignment', async ({ page, request }) => {
+  test('Complete flow: Stripe checkout -> Real phone number -> Vapi assignment', async ({ page, request }) => {
     test.setTimeout(180000); // 3 minutes for full flow
 
     // ========================================
@@ -149,7 +149,7 @@ test.describe('Real Integration Test - Full Flow', () => {
     // ========================================
     // STEP 4: Trigger REAL provisioning
     // ========================================
-    console.log('\n=== STEP 4: Real Telnyx/Vapi Provisioning ===');
+    console.log('\n=== STEP 4: Real Phone Number Provisioning ===');
 
     const provisionResult = await triggerRealProvisioning(request, REAL_TEST_USER_ID, 'starter');
     console.log('Provisioning result:', JSON.stringify(provisionResult, null, 2));
@@ -160,13 +160,11 @@ test.describe('Real Integration Test - Full Flow', () => {
 
     const provisionedNumber = provisionResult.result.numbers[0];
     expect(provisionedNumber.phoneNumber).toMatch(/^\+1\d{10}$/);
-    expect(provisionedNumber.telnyxId).toBeDefined();
     expect(provisionedNumber.vapiId).toBeDefined();
     expect(provisionedNumber.assistantId).toBeDefined();
 
     console.log('REAL phone number provisioned:', {
       phoneNumber: provisionedNumber.phoneNumber,
-      telnyxId: provisionedNumber.telnyxId,
       vapiId: provisionedNumber.vapiId
     });
 
@@ -191,7 +189,6 @@ test.describe('Real Integration Test - Full Flow', () => {
     expect(dbState.phoneNumbers.activeCount).toBe(1);
     const phone = dbState.phoneNumbers.active[0];
     expect(phone.phone_number).toBe(provisionedNumber.phoneNumber);
-    expect(phone.telnyx_id).not.toContain('mock');
     expect(phone.vapi_id).not.toContain('mock');
     expect(phone.assistant_id).toBe(dbState.assistant.id);
 
@@ -199,7 +196,6 @@ test.describe('Real Integration Test - Full Flow', () => {
       subscription: dbState.subscription.plan_id,
       assistantVapiId: dbState.assistant.vapi_assistant_id,
       phoneNumber: phone.phone_number,
-      phoneTelnyxId: phone.telnyx_id,
       phoneVapiId: phone.vapi_id
     });
 

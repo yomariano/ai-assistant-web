@@ -90,7 +90,7 @@ export function useRegion(): UseRegionReturn {
         regionName: 'United States',
         currency: 'USD',
         currencySymbol: '$',
-        telephonyProvider: 'telnyx',
+        telephonyProvider: 'vapi',
         plans: [
           { id: 'starter', price: 49, formattedPrice: '$49', monthlyMinutes: 100, paymentLink: null },
           { id: 'growth', price: 199, formattedPrice: '$199', monthlyMinutes: 500, paymentLink: null },
@@ -164,7 +164,7 @@ export async function getRegionFromServer(): Promise<RegionData> {
       regionName: 'United States',
       currency: 'USD',
       currencySymbol: '$',
-      telephonyProvider: 'telnyx',
+      telephonyProvider: 'vapi',
       plans: [
         { id: 'starter', price: 49, formattedPrice: '$49', monthlyMinutes: 100, paymentLink: null },
         { id: 'growth', price: 199, formattedPrice: '$199', monthlyMinutes: 500, paymentLink: null },
