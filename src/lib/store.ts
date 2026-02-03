@@ -284,10 +284,18 @@ interface Subscription {
   cancel_at_period_end?: boolean;
 }
 
+interface UsageData {
+  callsMade: number;
+  callsRemaining: number | null;
+  fairUseCap: number | null;
+}
+
 interface BillingState {
   subscription: Subscription | null;
+  usage: UsageData | null;
   isLoading: boolean;
   setSubscription: (subscription: Subscription | null) => void;
+  setUsage: (usage: UsageData | null) => void;
   setLoading: (isLoading: boolean) => void;
   clear: () => void;
 }
@@ -300,11 +308,13 @@ const planDetails: Record<string, { name: string; color: string }> = {
 
 export const useBillingStore = create<BillingState>((set) => ({
   subscription: null,
+  usage: null,
   isLoading: false,
 
   setSubscription: (subscription) => set({ subscription, isLoading: false }),
+  setUsage: (usage) => set({ usage }),
   setLoading: (isLoading) => set({ isLoading }),
-  clear: () => set({ subscription: null, isLoading: false }),
+  clear: () => set({ subscription: null, usage: null, isLoading: false }),
 }));
 
 // Helper to get plan display name

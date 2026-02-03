@@ -47,6 +47,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
   const router = useRouter();
   const { user, logout, isAuthenticated, isLoading } = useAuthStore();
   const subscription = useBillingStore((state) => state.subscription);
+  const usage = useBillingStore((state) => state.usage);
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
 
@@ -180,6 +181,53 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
 
         {/* User & Settings Section */}
         <div className="border-t border-white/10 p-4 space-y-2">
+          {/* Calls Remaining */}
+          {subscription && usage && usage.fairUseCap && (
+            <Link
+              href="/billing"
+              className={`flex items-center gap-3 px-3 py-2 rounded-lg transition-colors group ${
+                isCollapsed ? 'justify-center' : ''
+              } hover:bg-white/5`}
+            >
+              <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-slate-700">
+                <Phone className="h-3.5 w-3.5 text-slate-300" />
+              </div>
+              {!isCollapsed && (
+                <div className="flex flex-col overflow-hidden flex-1">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs text-slate-400">Calls remaining</span>
+                    <span className={`text-xs font-medium ${
+                      (usage.callsRemaining ?? 0) === 0
+                        ? 'text-rose-400'
+                        : (usage.callsRemaining ?? 0) <= Math.round(usage.fairUseCap * 0.2)
+                          ? 'text-amber-400'
+                          : 'text-emerald-400'
+                    }`}>
+                      {usage.callsRemaining ?? 0}/{usage.fairUseCap}
+                    </span>
+                  </div>
+                  <div className="mt-1 h-1.5 w-full rounded-full bg-slate-700 overflow-hidden">
+                    <div
+                      className={`h-full rounded-full transition-all ${
+                        (usage.callsRemaining ?? 0) === 0
+                          ? 'bg-rose-500'
+                          : (usage.callsRemaining ?? 0) <= Math.round(usage.fairUseCap * 0.2)
+                            ? 'bg-amber-500'
+                            : 'bg-emerald-500'
+                      }`}
+                      style={{ width: `${Math.round(((usage.callsRemaining ?? 0) / usage.fairUseCap) * 100)}%` }}
+                    />
+                  </div>
+                </div>
+              )}
+              {isCollapsed && (
+                <div className="absolute left-16 z-50 hidden rounded-md bg-slate-800 px-2 py-1 text-xs text-white group-hover:block whitespace-nowrap">
+                  {usage.callsRemaining ?? 0}/{usage.fairUseCap} calls remaining
+                </div>
+              )}
+            </Link>
+          )}
+
           {/* Subscription Plan Badge */}
           {subscription && (
             <Link

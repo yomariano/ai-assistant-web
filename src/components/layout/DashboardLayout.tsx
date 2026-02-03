@@ -20,6 +20,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
   // Get checkAuth with a stable reference to avoid infinite loops
   const checkAuth = useAuthStore((state) => state.checkAuth);
   const setSubscriptionStore = useBillingStore((state) => state.setSubscription);
+  const setUsageStore = useBillingStore((state) => state.setUsage);
   const hasCheckedAuth = useRef(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
@@ -213,6 +214,19 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
           setSubscriptionChecked(true);
           if (subscription) {
             setSubscriptionStore(subscription);
+            billingApi.getUsage()
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              .then((usageData: any) => {
+                setUsageStore({
+                  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+                  callsMade: usageData.callsMade ?? 0,
+                  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+                  callsRemaining: usageData.callsRemaining ?? null,
+                  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+                  fairUseCap: usageData.fairUseCap ?? null,
+                });
+              })
+              .catch((err: unknown) => console.error('[DASHBOARD] Failed to fetch usage:', err));
           }
           return;
         }
@@ -222,6 +236,20 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
 
         if (isActive) {
           setSubscriptionStore(subscription);
+          // Fetch usage data for sidebar display
+          billingApi.getUsage()
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            .then((usageData: any) => {
+              setUsageStore({
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+                callsMade: usageData.callsMade ?? 0,
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+                callsRemaining: usageData.callsRemaining ?? null,
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+                fairUseCap: usageData.fairUseCap ?? null,
+              });
+            })
+            .catch((err: unknown) => console.error('[DASHBOARD] Failed to fetch usage:', err));
         }
 
         if (!isActive) {
