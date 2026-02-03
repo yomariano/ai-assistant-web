@@ -39,7 +39,7 @@ export default function Footer() {
                         <a href="#features" className="text-gray-400 hover:text-white transition-colors">
                             Features
                         </a>
-                        <a href="#pricing" className="text-gray-400 hover:text-white transition-colors">
+                        <a href="/#pricing" className="text-gray-400 hover:text-white transition-colors">
                             Pricing
                         </a>
                         <a href="#faq" className="text-gray-400 hover:text-white transition-colors">

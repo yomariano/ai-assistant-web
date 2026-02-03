@@ -46,7 +46,7 @@ const Footer = () => {
             <Link href="/compare" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
               Compare
             </Link>
-            <a href="#pricing" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
+            <a href="/#pricing" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
               Pricing
             </a>
             <Link href="/blog" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
