@@ -2,12 +2,27 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { CreditCard, ExternalLink, Phone, TrendingUp, AlertCircle, Euro } from 'lucide-react';
+import { CreditCard, ExternalLink, TrendingUp, AlertCircle, DollarSign, Clock } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import Button from '@/components/ui/button';
 import { billingApi, emailApi } from '@/lib/api';
 
+type Region = 'EU' | 'AR';
+
 interface UsageData {
+  // Minute-based data (Feb 2026)
+  minutesUsed: number;
+  minutesIncluded: number;
+  minutesRemaining: number;
+  overageMinutes: number;
+  overageChargesCents: number;
+  overageChargesFormatted: string;
+  perMinuteRateCents: number;
+  perMinuteRateFormatted: string;
+  // Regional info
+  region?: Region;
+  currency?: string;
+  // Legacy call-based data
   callsMade: number;
   totalChargesCents: number;
   totalChargesFormatted: string;
@@ -26,7 +41,23 @@ interface SubscriptionData {
   current_period_start: string;
   current_period_end: string;
   cancel_at_period_end: boolean;
+  region?: Region;
+  currency?: string;
 }
+
+// Regional plan details
+const REGIONAL_PLAN_DETAILS: Record<Region, Record<string, { name: string; price: string; included: string; overage: string; color: string }>> = {
+  EU: {
+    starter: { name: 'Starter', price: '€99/mo', included: '500 minutes/month (~200 calls)', overage: '€0.20/min overage', color: 'bg-slate-100 text-slate-700' },
+    growth: { name: 'Growth', price: '€299/mo', included: '1,000 minutes/month (~400 calls)', overage: '€0.30/min overage', color: 'bg-indigo-100 text-indigo-700' },
+    pro: { name: 'Pro', price: '€599/mo', included: '2,000 minutes/month (~800 calls)', overage: '€0.30/min overage', color: 'bg-violet-100 text-violet-700' },
+  },
+  AR: {
+    starter: { name: 'Starter', price: '$49/mo', included: '250 minutes/month (~100 calls)', overage: '$0.20/min overage', color: 'bg-slate-100 text-slate-700' },
+    growth: { name: 'Growth', price: '$149/mo', included: '500 minutes/month (~200 calls)', overage: '$0.30/min overage', color: 'bg-indigo-100 text-indigo-700' },
+    pro: { name: 'Pro', price: '$299/mo', included: '1,000 minutes/month (~400 calls)', overage: '$0.30/min overage', color: 'bg-violet-100 text-violet-700' },
+  },
+};
 
 export default function BillingPage() {
   const router = useRouter();
@@ -82,11 +113,10 @@ export default function BillingPage() {
     });
   };
 
-  const planDetails: Record<string, { name: string; price: string; perCall: string; color: string }> = {
-    starter: { name: 'Starter', price: '€49/mo', perCall: '100 inbound calls/month', color: 'bg-slate-100 text-slate-700' },
-    growth: { name: 'Growth', price: '€199/mo', perCall: '500 inbound calls/month', color: 'bg-indigo-100 text-indigo-700' },
-    pro: { name: 'Pro', price: '€599/mo', perCall: '1500 inbound + 200 outbound calls/month', color: 'bg-violet-100 text-violet-700' },
-  };
+  // Get region from subscription, default to EU
+  const region: Region = (subscription?.region as Region) || 'EU';
+  const planDetails = REGIONAL_PLAN_DETAILS[region];
+  const currencySymbol = region === 'AR' ? '$' : '€';
 
   if (isLoading) {
     return (
@@ -135,7 +165,10 @@ export default function BillingPage() {
                         {planDetails[subscription.plan_id]?.price || 'Custom'}
                       </p>
                       <p className="text-sm text-slate-500">
-                        {planDetails[subscription.plan_id]?.perCall}
+                        {planDetails[subscription.plan_id]?.included}
+                      </p>
+                      <p className="text-xs text-slate-400 mt-0.5">
+                        {planDetails[subscription.plan_id]?.overage}
                       </p>
                     </div>
                     <p className="text-sm text-slate-500">
@@ -206,13 +239,13 @@ export default function BillingPage() {
                 <CardContent className="pt-5">
                   <div className="flex items-center gap-3">
                     <div className="p-2 bg-emerald-50 text-emerald-600 rounded-lg">
-                      <Phone className="w-5 h-5" />
+                      <Clock className="w-5 h-5" />
                     </div>
                     <div>
-                      <p className="text-xs text-slate-500 font-medium">Calls Made</p>
+                      <p className="text-xs text-slate-500 font-medium">Minutes Used</p>
                       <p className="text-xl font-bold text-slate-900">
-                        {usage.callsMade}
-                        {usage.fairUseCap && <span className="text-sm font-normal text-slate-500"> / {usage.fairUseCap}</span>}
+                        {usage.minutesUsed?.toFixed(0) || 0}
+                        <span className="text-sm font-normal text-slate-500"> / {usage.minutesIncluded || 500}</span>
                       </p>
                     </div>
                   </div>
@@ -223,11 +256,11 @@ export default function BillingPage() {
                 <CardContent className="pt-5">
                   <div className="flex items-center gap-3">
                     <div className="p-2 bg-indigo-50 text-indigo-600 rounded-lg">
-                      <Euro className="w-5 h-5" />
+                      <DollarSign className="w-5 h-5" />
                     </div>
                     <div>
-                      <p className="text-xs text-slate-500 font-medium">Call Charges</p>
-                      <p className="text-xl font-bold text-slate-900">{usage.totalChargesFormatted}</p>
+                      <p className="text-xs text-slate-500 font-medium">Overage Charges</p>
+                      <p className="text-xl font-bold text-slate-900">{usage.overageChargesFormatted || `${currencySymbol}0.00`}</p>
                     </div>
                   </div>
                 </CardContent>
@@ -240,24 +273,26 @@ export default function BillingPage() {
                       <TrendingUp className="w-5 h-5" />
                     </div>
                     <div>
-                      <p className="text-xs text-slate-500 font-medium">Per Call Rate</p>
-                      <p className="text-xl font-bold text-slate-900">{usage.perCallRateFormatted}</p>
+                      <p className="text-xs text-slate-500 font-medium">Overage Rate</p>
+                      <p className="text-xl font-bold text-slate-900">{usage.perMinuteRateFormatted || `${currencySymbol}0.20/min`}</p>
                     </div>
                   </div>
                 </CardContent>
               </Card>
             </div>
 
-            {/* Usage Bar - only show for plans with fair use cap */}
-            {usage.fairUseCap && (
+            {/* Minutes Usage Bar */}
+            {usage.minutesIncluded && (
               <Card className="border-none shadow-sm ring-1 ring-slate-200">
                 <CardContent className="p-6">
                   {(() => {
-                    const percentUsed = (usage.callsMade / usage.fairUseCap) * 100;
+                    const minutesUsed = usage.minutesUsed || 0;
+                    const minutesIncluded = usage.minutesIncluded || 500;
+                    const percentUsed = (minutesUsed / minutesIncluded) * 100;
                     return (
                       <>
                         <div className="flex items-center justify-between mb-2">
-                          <span className="text-sm font-medium text-slate-700">Fair Use Cap</span>
+                          <span className="text-sm font-medium text-slate-700">Minutes Usage</span>
                           <span className="text-sm font-bold text-slate-900">{percentUsed.toFixed(0)}%</span>
                         </div>
                         <div className="h-3 bg-slate-100 rounded-full overflow-hidden">
@@ -272,12 +307,12 @@ export default function BillingPage() {
                         </div>
                         {percentUsed >= 80 && percentUsed < 100 && (
                           <p className="text-xs text-amber-600 mt-2">
-                            Approaching your fair use cap of {usage.fairUseCap} calls.
+                            Approaching your included minutes. {(minutesIncluded - minutesUsed).toFixed(0)} minutes remaining.
                           </p>
                         )}
                         {percentUsed >= 100 && (
                           <p className="text-xs text-rose-600 mt-2">
-                            You&apos;ve reached your fair use cap. Please contact support to continue.
+                            You&apos;ve used all included minutes. Additional minutes are charged at {usage.perMinuteRateFormatted || `${currencySymbol}0.20`}/min.
                           </p>
                         )}
                       </>
@@ -287,13 +322,14 @@ export default function BillingPage() {
               </Card>
             )}
 
-            {/* Pay-per-call info for plans without cap */}
-            {!usage.fairUseCap && usage.perCallRateCents > 0 && (
+            {/* Overage info when over limit */}
+            {usage.overageMinutes > 0 && (
               <Card className="border-none shadow-sm ring-1 ring-slate-200">
                 <CardContent className="p-6">
                   <p className="text-sm text-slate-600">
-                    You&apos;re on a pay-per-call plan. Each call costs {usage.perCallRateFormatted}.
-                    Call charges are added to your monthly invoice.
+                    <span className="font-semibold text-amber-600">{usage.overageMinutes.toFixed(1)} overage minutes</span> this period.
+                    Current overage charges: <span className="font-semibold">{usage.overageChargesFormatted}</span>.
+                    Rate: {usage.perMinuteRateFormatted}/min.
                   </p>
                 </CardContent>
               </Card>

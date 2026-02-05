@@ -2,31 +2,93 @@
 
 import { useEffect, useState, useRef } from "react";
 import { Button } from "@/components/ui/button";
-import { Check, Zap, Rocket, Crown, Gift, Clock, Shield, Phone, Sparkles } from "lucide-react";
+import { Check, Zap, Rocket, Crown, Gift, Clock, Shield, Phone, Sparkles, Globe } from "lucide-react";
 import { useAuthStore } from "@/lib/store";
 import { signInWithGoogle } from "@/lib/supabase";
 
-// Get payment links based on stripe mode
-const getPaymentLinks = () => {
+type Region = 'EU' | 'AR';
+
+// Get payment links based on stripe mode, billing period, and region
+const getPaymentLinks = (isAnnual: boolean = false, region: Region = 'EU') => {
   const isLiveMode = process.env.NEXT_PUBLIC_STRIPE_MODE === "live";
 
-  if (isLiveMode) {
-    return {
-      starter: process.env.NEXT_PUBLIC_STRIPE_LIVE_LINK_STARTER,
-      growth: process.env.NEXT_PUBLIC_STRIPE_LIVE_LINK_GROWTH,
-      pro: process.env.NEXT_PUBLIC_STRIPE_LIVE_LINK_PRO,
+  // Argentina (USD) links
+  if (region === 'AR') {
+    if (isAnnual) {
+      return isLiveMode ? {
+        starter: process.env.NEXT_PUBLIC_STRIPE_LIVE_LINK_STARTER_ANNUAL_AR,
+        growth: process.env.NEXT_PUBLIC_STRIPE_LIVE_LINK_GROWTH_ANNUAL_AR,
+        pro: process.env.NEXT_PUBLIC_STRIPE_LIVE_LINK_PRO_ANNUAL_AR,
+      } : {
+        starter: process.env.NEXT_PUBLIC_STRIPE_TEST_LINK_STARTER_ANNUAL_AR,
+        growth: process.env.NEXT_PUBLIC_STRIPE_TEST_LINK_GROWTH_ANNUAL_AR,
+        pro: process.env.NEXT_PUBLIC_STRIPE_TEST_LINK_PRO_ANNUAL_AR,
+      };
+    }
+    return isLiveMode ? {
+      starter: process.env.NEXT_PUBLIC_STRIPE_LIVE_LINK_STARTER_AR,
+      growth: process.env.NEXT_PUBLIC_STRIPE_LIVE_LINK_GROWTH_AR,
+      pro: process.env.NEXT_PUBLIC_STRIPE_LIVE_LINK_PRO_AR,
+    } : {
+      starter: process.env.NEXT_PUBLIC_STRIPE_TEST_LINK_STARTER_AR,
+      growth: process.env.NEXT_PUBLIC_STRIPE_TEST_LINK_GROWTH_AR,
+      pro: process.env.NEXT_PUBLIC_STRIPE_TEST_LINK_PRO_AR,
     };
   }
 
-  return {
-    starter: process.env.NEXT_PUBLIC_STRIPE_TEST_LINK_STARTER,
-    growth: process.env.NEXT_PUBLIC_STRIPE_TEST_LINK_GROWTH,
-    pro: process.env.NEXT_PUBLIC_STRIPE_TEST_LINK_PRO,
+  // Ireland/Europe (EUR) links - default
+  if (isAnnual) {
+    return isLiveMode ? {
+      starter: process.env.NEXT_PUBLIC_STRIPE_LIVE_LINK_STARTER_ANNUAL,
+      growth: process.env.NEXT_PUBLIC_STRIPE_LIVE_LINK_GROWTH_ANNUAL,
+      pro: process.env.NEXT_PUBLIC_STRIPE_LIVE_LINK_PRO_ANNUAL,
+    } : {
+      starter: process.env.NEXT_PUBLIC_STRIPE_TEST_LINK_STARTER_ANNUAL,
+      growth: process.env.NEXT_PUBLIC_STRIPE_TEST_LINK_GROWTH_ANNUAL,
+      pro: process.env.NEXT_PUBLIC_STRIPE_TEST_LINK_PRO_ANNUAL,
+    };
+  }
+
+  return isLiveMode ? {
+    starter: process.env.NEXT_PUBLIC_STRIPE_LIVE_LINK_STARTER_V3,
+    growth: process.env.NEXT_PUBLIC_STRIPE_LIVE_LINK_GROWTH_V3,
+    pro: process.env.NEXT_PUBLIC_STRIPE_LIVE_LINK_PRO_V3,
+  } : {
+    starter: process.env.NEXT_PUBLIC_STRIPE_TEST_LINK_STARTER_V3,
+    growth: process.env.NEXT_PUBLIC_STRIPE_TEST_LINK_GROWTH_V3,
+    pro: process.env.NEXT_PUBLIC_STRIPE_TEST_LINK_PRO_V3,
   };
 };
 
+// Regional pricing configuration
+const REGIONAL_PRICING = {
+  EU: {
+    currency: '€',
+    currencyCode: 'EUR',
+    label: 'Ireland / Europe',
+    flag: '🇮🇪',
+    starter: { monthly: 99, annual: 999, minutes: 500, calls: '~200', overage: '€0.20' },
+    growth: { monthly: 299, annual: 2999, minutes: 1000, calls: '~400', overage: '€0.30' },
+    pro: { monthly: 599, annual: 5999, minutes: 2000, calls: '~800', overage: '€0.30' },
+    phoneNumber: 'Irish phone number',
+  },
+  AR: {
+    currency: '$',
+    currencyCode: 'USD',
+    label: 'Argentina',
+    flag: '🇦🇷',
+    starter: { monthly: 49, annual: 499, minutes: 250, calls: '~100', overage: '$0.20' },
+    growth: { monthly: 149, annual: 1499, minutes: 500, calls: '~200', overage: '$0.30' },
+    pro: { monthly: 299, annual: 2999, minutes: 1000, calls: '~400', overage: '$0.30' },
+    phoneNumber: 'Argentine phone number',
+  },
+};
+
 const PricingSection = () => {
-  const paymentLinks = getPaymentLinks();
+  const [isAnnual, setIsAnnual] = useState(false);
+  const [region, setRegion] = useState<Region>('EU');
+  const paymentLinks = getPaymentLinks(isAnnual, region);
+  const pricing = REGIONAL_PRICING[region];
   const { isAuthenticated, token } = useAuthStore();
   // Get checkAuth with a stable reference to avoid infinite loops
   const checkAuth = useAuthStore((state) => state.checkAuth);
@@ -40,6 +102,20 @@ const PricingSection = () => {
       hasCheckedAuth.current = true;
       checkAuth().then(() => setAuthChecked(true));
     }
+
+    // Detect user's region based on timezone/locale
+    const detectRegion = () => {
+      try {
+        const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        // Argentina timezone
+        if (timezone.includes('Buenos_Aires') || timezone.includes('Argentina')) {
+          setRegion('AR');
+        }
+      } catch (e) {
+        // Fallback to EU
+      }
+    };
+    detectRegion();
   }, [checkAuth]);
 
   const handleGetStarted = async (planId: string) => {
@@ -103,23 +179,30 @@ const PricingSection = () => {
     }
   };
 
+  // Generate tiers based on selected region
   const tiers = [
     {
       icon: Zap,
       name: "Starter",
       planId: "starter",
-      price: 49,
-      callsIncluded: 100,
+      monthlyPrice: pricing.starter.monthly,
+      annualPrice: pricing.starter.annual,
+      minutesIncluded: pricing.starter.minutes,
+      estimatedCalls: pricing.starter.calls,
+      parallelCalls: 1,
+      perMinuteRate: pricing.starter.overage,
       description: "Perfect for solo businesses",
-      volume: "100 calls/month",
+      volume: `${pricing.starter.minutes.toLocaleString()} min/month`,
       highlight: null,
       features: [
-        { text: "100 inbound calls/month", highlight: false },
-        { text: "Google Calendar sync", highlight: false },
-        { text: "24/7 AI call answering", highlight: true },
-        { text: "Smart message taking", highlight: false },
-        { text: "Custom voice greeting", highlight: false },
-        { text: "Email notifications", highlight: false },
+        { text: `${pricing.starter.minutes.toLocaleString()} minutes/month (${pricing.starter.calls} calls)`, highlight: true },
+        { text: "1 parallel call", highlight: false },
+        { text: "24/7 AI receptionist", highlight: false },
+        { text: "Appointment booking", highlight: false },
+        { text: "Emergency flagging", highlight: false },
+        { text: "Calendar integration", highlight: false },
+        { text: "7-day call recordings", highlight: false },
+        { text: "Email support", highlight: false },
       ],
       cta: "Start 5-Day Free Trial",
       popular: false,
@@ -128,18 +211,24 @@ const PricingSection = () => {
       icon: Rocket,
       name: "Growth",
       planId: "growth",
-      price: 199,
-      callsIncluded: 500,
+      monthlyPrice: pricing.growth.monthly,
+      annualPrice: pricing.growth.annual,
+      minutesIncluded: pricing.growth.minutes,
+      estimatedCalls: pricing.growth.calls,
+      parallelCalls: 3,
+      perMinuteRate: pricing.growth.overage,
       description: "For growing businesses",
-      volume: "500 calls/month",
+      volume: `${pricing.growth.minutes.toLocaleString()} min/month`,
       highlight: "Best Value",
       features: [
-        { text: "500 inbound calls/month", highlight: false },
-        { text: "Google + Outlook Calendar", highlight: true },
-        { text: "24/7 AI call answering", highlight: false },
-        { text: "Email notifications", highlight: false },
-        { text: "Smart message taking", highlight: false },
-        { text: "Business hours support", highlight: false },
+        { text: `${pricing.growth.minutes.toLocaleString()} minutes/month (${pricing.growth.calls} calls)`, highlight: true },
+        { text: "3 parallel calls", highlight: true },
+        { text: "24/7 AI receptionist", highlight: false },
+        { text: "Appointment booking", highlight: false },
+        { text: "Custom voice & scripts", highlight: true },
+        { text: "Transfer to human", highlight: true },
+        { text: "30-day call recordings", highlight: false },
+        { text: "Priority support", highlight: false },
       ],
       cta: "Start 5-Day Free Trial",
       popular: true,
@@ -148,19 +237,24 @@ const PricingSection = () => {
       icon: Crown,
       name: "Pro",
       planId: "pro",
-      price: 599,
-      callsIncluded: 1500,
-      outboundCalls: 200,
+      monthlyPrice: pricing.pro.monthly,
+      annualPrice: pricing.pro.annual,
+      minutesIncluded: pricing.pro.minutes,
+      estimatedCalls: pricing.pro.calls,
+      parallelCalls: 5,
+      perMinuteRate: pricing.pro.overage,
       description: "For high-volume businesses",
-      volume: "1500+ calls/month",
+      volume: `${pricing.pro.minutes.toLocaleString()} min/month`,
       highlight: "Full Power",
       features: [
-        { text: "1,500 inbound calls/month", highlight: false },
-        { text: "200 AI voice reminder calls", highlight: true },
-        { text: "Multi-staff calendar", highlight: true },
-        { text: "Webhook integrations", highlight: true },
-        { text: "24/7 priority support", highlight: false },
-        { text: "Dedicated account manager", highlight: false },
+        { text: `${pricing.pro.minutes.toLocaleString()} minutes/month (${pricing.pro.calls} calls)`, highlight: true },
+        { text: "5 parallel calls", highlight: true },
+        { text: "24/7 AI receptionist", highlight: false },
+        { text: "Custom voice & scripts", highlight: false },
+        { text: "Transfer to human", highlight: false },
+        { text: "90-day call recordings", highlight: true },
+        { text: "Early access to features", highlight: true },
+        { text: "Dedicated support", highlight: true },
       ],
       cta: "Start 5-Day Free Trial",
       popular: false,
@@ -171,7 +265,7 @@ const PricingSection = () => {
     { icon: Gift, text: "Full access to all features" },
     { icon: Shield, text: "No credit card required" },
     { icon: Clock, text: "Cancel anytime, no questions" },
-    { icon: Phone, text: "Your own Irish phone number" },
+    { icon: Phone, text: `Your own ${pricing.phoneNumber}` },
   ];
 
   return (
@@ -215,6 +309,54 @@ const PricingSection = () => {
             No hidden fees. No contracts. Pay only for what you use.
             <span className="font-semibold text-foreground"> Cancel anytime.</span>
           </p>
+
+          {/* Billing Toggle */}
+          <div className="flex justify-center mt-6">
+            <div className="bg-muted rounded-full p-1 flex">
+              <button
+                className={`px-4 py-2 rounded-full text-sm font-medium transition ${
+                  !isAnnual ? 'bg-primary text-white shadow-sm' : 'text-muted-foreground hover:text-foreground'
+                }`}
+                onClick={() => setIsAnnual(false)}
+              >
+                Monthly
+              </button>
+              <button
+                className={`px-4 py-2 rounded-full text-sm font-medium transition ${
+                  isAnnual ? 'bg-primary text-white shadow-sm' : 'text-muted-foreground hover:text-foreground'
+                }`}
+                onClick={() => setIsAnnual(true)}
+              >
+                Annual <span className="text-accent font-semibold">(Save 16%)</span>
+              </button>
+            </div>
+          </div>
+
+          {/* Region Selector */}
+          <div className="flex justify-center mt-4">
+            <div className="flex items-center gap-2 text-sm">
+              <Globe className="w-4 h-4 text-muted-foreground" />
+              <span className="text-muted-foreground">Pricing for:</span>
+              <div className="bg-muted rounded-lg p-0.5 flex">
+                <button
+                  className={`px-3 py-1.5 rounded-md text-xs font-medium transition flex items-center gap-1.5 ${
+                    region === 'EU' ? 'bg-background text-foreground shadow-sm' : 'text-muted-foreground hover:text-foreground'
+                  }`}
+                  onClick={() => setRegion('EU')}
+                >
+                  <span>🇮🇪</span> Ireland
+                </button>
+                <button
+                  className={`px-3 py-1.5 rounded-md text-xs font-medium transition flex items-center gap-1.5 ${
+                    region === 'AR' ? 'bg-background text-foreground shadow-sm' : 'text-muted-foreground hover:text-foreground'
+                  }`}
+                  onClick={() => setRegion('AR')}
+                >
+                  <span>🇦🇷</span> Argentina
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
 
         <div className="grid lg:grid-cols-3 gap-6 lg:gap-8 mb-10">
@@ -262,13 +404,15 @@ const PricingSection = () => {
                 <div className="mb-5">
                   <div className="flex items-baseline gap-1">
                     <span className="text-4xl font-heading font-bold text-foreground">
-                      &euro;{tier.price}
+                      {pricing.currency}{isAnnual ? tier.annualPrice.toLocaleString() : tier.monthlyPrice}
                     </span>
-                    <span className="text-muted-foreground">/month</span>
+                    <span className="text-muted-foreground">/{isAnnual ? 'year' : 'month'}</span>
                   </div>
                   <p className="text-sm text-accent font-semibold mt-1">
-                    {tier.callsIncluded} calls included
-                    {tier.outboundCalls && ` + ${tier.outboundCalls} outbound`}
+                    {tier.minutesIncluded.toLocaleString()} minutes included ({tier.estimatedCalls} calls)
+                  </p>
+                  <p className="text-xs text-muted-foreground mt-0.5">
+                    {tier.perMinuteRate}/min overage
                   </p>
                 </div>
 
@@ -364,7 +508,7 @@ const PricingSection = () => {
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
             {[
-              { icon: Phone, text: "Irish phone number" },
+              { icon: Phone, text: pricing.phoneNumber },
               { icon: Sparkles, text: "AI receptionist" },
               { icon: Clock, text: "24/7 availability" },
               { icon: Shield, text: "Free setup & support" },
