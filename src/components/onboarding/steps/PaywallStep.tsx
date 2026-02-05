@@ -21,9 +21,9 @@ const plans: Array<{
   subtitle: string;
   highlight?: boolean;
 }> = [
-  { id: "starter", name: "Starter", price: "€49/mo", subtitle: "100 calls/month" },
-  { id: "growth", name: "Growth", price: "€199/mo", subtitle: "500 calls/month", highlight: true },
-  { id: "pro", name: "Pro", price: "€599/mo", subtitle: "1500 + 200 outbound calls" },
+  { id: "starter", name: "Starter", price: "€99/mo", subtitle: "500 minutes/month (~200 calls)" },
+  { id: "growth", name: "Growth", price: "€299/mo", subtitle: "1,000 minutes/month (~400 calls)", highlight: true },
+  { id: "pro", name: "Pro", price: "€599/mo", subtitle: "2,000 minutes/month (~800 calls)" },
 ];
 
 export function PaywallStep({
@@ -121,6 +121,8 @@ export function PaywallStep({
 }
 
 export default PaywallStep;
+
+
 
 
 
