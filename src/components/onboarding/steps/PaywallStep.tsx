@@ -60,8 +60,8 @@ export function PaywallStep({
   const plans = regionPlans && regionPlans.length > 0
     ? regionPlans.map((rp, index) => {
         const planId = rp.id as PlanId;
-        // Use region-specific minutes from rp.monthlyMinutes (e.g., AR=250, EU=500 for starter)
-        const minutes = rp.monthlyMinutes;
+        // Use region-specific minutes - API may return as monthlyMinutes or minutesIncluded
+        const minutes = rp.monthlyMinutes || (rp as any).minutesIncluded || minutesPerPlan[planId]?.minutes || 500;
         const estimatedCalls = `~${Math.round(minutes / 2.5)}`;
         return {
           id: planId,

@@ -12,7 +12,16 @@ interface Plan {
   id: string;
   price: number;
   formattedPrice: string;
-  monthlyMinutes: number;
+  monthlyMinutes: number;  // mapped from API's minutesIncluded
+  paymentLink: string | null;
+}
+
+// API response plan structure (differs from our Plan interface)
+interface ApiPlan {
+  id: string;
+  price: number;
+  formattedPrice: string;
+  minutesIncluded: number;  // API uses this name
   paymentLink: string | null;
 }
 
@@ -72,7 +81,19 @@ export function useRegion(): UseRegionReturn {
         throw new Error('Failed to detect region');
       }
 
-      const regionData: RegionData = await response.json();
+      const apiResponse = await response.json();
+
+      // Map API response to our interface (API uses minutesIncluded, we use monthlyMinutes)
+      const regionData: RegionData = {
+        ...apiResponse,
+        plans: apiResponse.plans.map((p: ApiPlan) => ({
+          id: p.id,
+          price: p.price,
+          formattedPrice: p.formattedPrice,
+          monthlyMinutes: p.minutesIncluded,  // Map API field name
+          paymentLink: p.paymentLink,
+        })),
+      };
 
       // Update cache
       cachedData = regionData;
