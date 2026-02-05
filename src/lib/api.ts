@@ -84,6 +84,12 @@ api.interceptors.request.use(async (config) => {
   return config;
 });
 
+// Endpoints where 401 should NOT trigger a redirect (they handle errors gracefully)
+const SILENT_401_ENDPOINTS = [
+  '/api/admin/status',
+  '/api/auth/me',
+];
+
 // Response interceptor to handle auth errors
 api.interceptors.response.use(
   (response) => {
@@ -99,6 +105,13 @@ api.interceptors.response.use(
     });
 
     if (error.response?.status === 401) {
+      // Don't redirect for endpoints that handle 401 gracefully
+      const isSilent401 = SILENT_401_ENDPOINTS.some(ep => error.config?.url?.includes(ep));
+      if (isSilent401) {
+        console.log('[API] 401 error on silent endpoint, not redirecting:', error.config?.url);
+        return Promise.reject(error);
+      }
+
       // Check if in dev mode before redirecting
       const storedAuth = localStorage.getItem('auth-storage');
       if (storedAuth) {

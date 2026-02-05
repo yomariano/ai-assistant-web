@@ -217,6 +217,27 @@ if (typeof window !== 'undefined') {
             }
           } catch (error) {
             console.error('Failed to get user after sign in:', error);
+            // User has valid Supabase session but doesn't exist in our database
+            // This can happen if user was deleted. Clear auth state and redirect.
+            console.log('[STORE] User not found in database, clearing auth state');
+            useAuthStore.setState({
+              user: null,
+              token: null,
+              isAuthenticated: false,
+              devMode: false,
+              isLoading: false,
+              hasScheduledSessionRetry: false,
+            });
+            // Sign out of Supabase to clear the invalid session
+            try {
+              await supabase.auth.signOut();
+            } catch (signOutError) {
+              console.error('[STORE] Failed to sign out:', signOutError);
+            }
+            // Clear localStorage to prevent stale state
+            localStorage.removeItem('auth-storage');
+            // Redirect to home page
+            window.location.href = '/';
           }
         } else if (event === 'SIGNED_OUT') {
           useAuthStore.setState({
@@ -282,9 +303,25 @@ interface Subscription {
   current_period_start?: string;
   current_period_end?: string;
   cancel_at_period_end?: boolean;
+  region?: 'EU' | 'AR';
+  currency?: 'EUR' | 'USD';
 }
 
 interface UsageData {
+  // Regional info
+  region?: 'EU' | 'AR';
+  currency?: 'EUR' | 'USD';
+  currencySymbol?: string;
+  // Minute-based data (Feb 2026)
+  minutesUsed: number;
+  minutesIncluded: number;
+  minutesRemaining: number;
+  overageMinutes: number;
+  overageChargesCents: number;
+  overageChargesFormatted: string;
+  perMinuteRateCents: number;
+  perMinuteRateFormatted: string;
+  // Legacy call-based data (backwards compat)
   callsMade: number;
   callsRemaining: number | null;
   fairUseCap: number | null;
