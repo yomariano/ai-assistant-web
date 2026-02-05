@@ -58,7 +58,10 @@ api.interceptors.request.use(async (config) => {
     if (storedAuth) {
       try {
         const { state } = JSON.parse(storedAuth);
-        if (state?.token && state.token !== 'dev-mode' && state.isAuthenticated) {
+        // Note: `isAuthenticated` is not persisted in `auth-storage` (token is enough),
+        // so don't depend on it here or we'll skip using a valid stored token and
+        // fall back to Supabase `getSession()` (which can intermittently time out).
+        if (state?.token && state.token !== 'dev-mode') {
           config.headers.Authorization = `Bearer ${state.token}`;
           console.log('[API] Added stored auth token to request');
           return config;

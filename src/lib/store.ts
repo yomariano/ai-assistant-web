@@ -14,6 +14,7 @@ interface AuthState {
   hasExplicitlyLoggedOut: boolean;
   hasScheduledSessionRetry: boolean;
   isHydrated: boolean; // True when Zustand has finished rehydrating from localStorage
+  setHydrated: (hydrated: boolean) => void;
 
   loginWithGoogle: () => Promise<void>;
   devLogin: () => Promise<void>;
@@ -33,6 +34,7 @@ export const useAuthStore = create<AuthState>()(
       hasExplicitlyLoggedOut: false,
       hasScheduledSessionRetry: false,
       isHydrated: false,
+      setHydrated: (hydrated: boolean) => set({ isHydrated: hydrated }),
 
       loginWithGoogle: async () => {
         set({ hasExplicitlyLoggedOut: false });
@@ -178,7 +180,7 @@ export const useAuthStore = create<AuthState>()(
       onRehydrateStorage: () => (state) => {
         // Called when rehydration from localStorage is complete
         if (state) {
-          state.isHydrated = true;
+          state.setHydrated(true);
           console.log('[STORE] Hydration complete');
         }
       },
