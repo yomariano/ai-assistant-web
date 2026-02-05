@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import {
@@ -50,13 +50,26 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
   const usage = useBillingStore((state) => state.usage);
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
+  const adminCheckDoneRef = useRef(false);
 
-  // Check admin status only after authentication is complete
+  // Check admin status only once after authentication is complete
   useEffect(() => {
     // Wait for auth to settle before making API calls
     if (isLoading || !isAuthenticated) {
+      // Reset the check flag if user logs out
+      if (!isAuthenticated && !isLoading) {
+        adminCheckDoneRef.current = false;
+        setIsAdmin(false);
+      }
       return;
     }
+
+    // Only check once per authentication session
+    if (adminCheckDoneRef.current) {
+      return;
+    }
+
+    adminCheckDoneRef.current = true;
     adminApi.checkStatus()
       .then(({ isAdmin }) => setIsAdmin(isAdmin))
       .catch(() => setIsAdmin(false));
@@ -181,8 +194,8 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
 
         {/* User & Settings Section */}
         <div className="border-t border-white/10 p-4 space-y-2">
-          {/* Calls Remaining */}
-          {subscription && usage && usage.fairUseCap && (
+          {/* Minutes Remaining */}
+          {subscription && usage && usage.minutesIncluded && (
             <Link
               href="/billing"
               className={`flex items-center gap-3 px-3 py-2 rounded-lg transition-colors group ${
@@ -195,34 +208,34 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
               {!isCollapsed && (
                 <div className="flex flex-col overflow-hidden flex-1">
                   <div className="flex items-center justify-between">
-                    <span className="text-xs text-slate-400">Calls remaining</span>
+                    <span className="text-xs text-slate-400">Minutes remaining</span>
                     <span className={`text-xs font-medium ${
-                      (usage.callsRemaining ?? 0) === 0
+                      (usage.minutesRemaining ?? 0) === 0
                         ? 'text-rose-400'
-                        : (usage.callsRemaining ?? 0) <= Math.round(usage.fairUseCap * 0.2)
+                        : (usage.minutesRemaining ?? 0) <= Math.round(usage.minutesIncluded * 0.2)
                           ? 'text-amber-400'
                           : 'text-emerald-400'
                     }`}>
-                      {usage.callsRemaining ?? 0}/{usage.fairUseCap}
+                      {Math.round(usage.minutesRemaining ?? 0)}/{usage.minutesIncluded}
                     </span>
                   </div>
                   <div className="mt-1 h-1.5 w-full rounded-full bg-slate-700 overflow-hidden">
                     <div
                       className={`h-full rounded-full transition-all ${
-                        (usage.callsRemaining ?? 0) === 0
+                        (usage.minutesRemaining ?? 0) === 0
                           ? 'bg-rose-500'
-                          : (usage.callsRemaining ?? 0) <= Math.round(usage.fairUseCap * 0.2)
+                          : (usage.minutesRemaining ?? 0) <= Math.round(usage.minutesIncluded * 0.2)
                             ? 'bg-amber-500'
                             : 'bg-emerald-500'
                       }`}
-                      style={{ width: `${Math.round(((usage.callsRemaining ?? 0) / usage.fairUseCap) * 100)}%` }}
+                      style={{ width: `${Math.round(((usage.minutesRemaining ?? 0) / usage.minutesIncluded) * 100)}%` }}
                     />
                   </div>
                 </div>
               )}
               {isCollapsed && (
                 <div className="absolute left-16 z-50 hidden rounded-md bg-slate-800 px-2 py-1 text-xs text-white group-hover:block whitespace-nowrap">
-                  {usage.callsRemaining ?? 0}/{usage.fairUseCap} calls remaining
+                  {Math.round(usage.minutesRemaining ?? 0)}/{usage.minutesIncluded} minutes remaining
                 </div>
               )}
             </Link>

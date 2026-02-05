@@ -1,10 +1,18 @@
 "use client";
 
-import { CheckCircle2, CreditCard, RefreshCw } from "lucide-react";
+import { CheckCircle2, CreditCard, RefreshCw, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 export type PlanId = "starter" | "growth" | "pro";
+
+export interface RegionPlan {
+  id: string;
+  price: number;
+  formattedPrice: string;
+  monthlyMinutes: number;
+  paymentLink: string | null;
+}
 
 interface PaywallStepProps {
   hasSubscription: boolean;
@@ -12,9 +20,14 @@ interface PaywallStepProps {
   onSelectPlan: (planId: PlanId) => void;
   onRefresh: () => void;
   onContinue: () => void;
+  // Region-based pricing (optional - falls back to default if not provided)
+  regionPlans?: RegionPlan[];
+  currencySymbol?: string;
+  isLoadingRegion?: boolean;
 }
 
-const plans: Array<{
+// Default EU plans (fallback if region detection fails or not provided)
+const defaultPlans: Array<{
   id: PlanId;
   name: string;
   price: string;
@@ -26,13 +39,37 @@ const plans: Array<{
   { id: "pro", name: "Pro", price: "€599/mo", subtitle: "2,000 minutes/month (~800 calls)" },
 ];
 
+// Minutes per plan (for subtitle)
+const minutesPerPlan: Record<PlanId, { minutes: number; calls: string }> = {
+  starter: { minutes: 500, calls: "~200" },
+  growth: { minutes: 1000, calls: "~400" },
+  pro: { minutes: 2000, calls: "~800" },
+};
+
 export function PaywallStep({
   hasSubscription,
   isRefreshing,
   onSelectPlan,
   onRefresh,
   onContinue,
+  regionPlans,
+  currencySymbol = "€",
+  isLoadingRegion = false,
 }: PaywallStepProps) {
+  // Build plans from region data or use defaults
+  const plans = regionPlans && regionPlans.length > 0
+    ? regionPlans.map((rp, index) => {
+        const planId = rp.id as PlanId;
+        const planInfo = minutesPerPlan[planId] || { minutes: rp.monthlyMinutes, calls: `~${Math.round(rp.monthlyMinutes / 2.5)}` };
+        return {
+          id: planId,
+          name: planId.charAt(0).toUpperCase() + planId.slice(1),
+          price: `${rp.formattedPrice}/mo`,
+          subtitle: `${planInfo.minutes.toLocaleString()} minutes/month (${planInfo.calls} calls)`,
+          highlight: planId === "growth",
+        };
+      })
+    : defaultPlans;
   return (
     <div className="py-2">
       <div className="text-center mb-6">
@@ -45,39 +82,46 @@ export function PaywallStep({
         </p>
       </div>
 
-      <div className="grid gap-3 mb-5">
-        {plans.map((plan) => (
-          <button
-            key={plan.id}
-            type="button"
-            onClick={() => onSelectPlan(plan.id)}
-            className={cn(
-              "w-full text-left rounded-xl border p-4 transition-all",
-              "hover:border-primary/50 hover:bg-primary/5",
-              plan.highlight ? "border-primary/30 bg-primary/5" : "border-border bg-background"
-            )}
-            disabled={hasSubscription}
-          >
-            <div className="flex items-center justify-between gap-4">
-              <div>
-                <div className="flex items-center gap-2">
-                  <span className="font-semibold text-foreground">{plan.name}</span>
-                  {plan.highlight && (
-                    <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-primary/10 text-primary">
-                      Recommended
-                    </span>
-                  )}
+      {isLoadingRegion ? (
+        <div className="flex items-center justify-center py-8 mb-5">
+          <Loader2 className="w-6 h-6 animate-spin text-muted-foreground" />
+          <span className="ml-2 text-muted-foreground">Loading pricing...</span>
+        </div>
+      ) : (
+        <div className="grid gap-3 mb-5">
+          {plans.map((plan) => (
+            <button
+              key={plan.id}
+              type="button"
+              onClick={() => onSelectPlan(plan.id)}
+              className={cn(
+                "w-full text-left rounded-xl border p-4 transition-all",
+                "hover:border-primary/50 hover:bg-primary/5",
+                plan.highlight ? "border-primary/30 bg-primary/5" : "border-border bg-background"
+              )}
+              disabled={hasSubscription}
+            >
+              <div className="flex items-center justify-between gap-4">
+                <div>
+                  <div className="flex items-center gap-2">
+                    <span className="font-semibold text-foreground">{plan.name}</span>
+                    {plan.highlight && (
+                      <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-primary/10 text-primary">
+                        Recommended
+                      </span>
+                    )}
+                  </div>
+                  <p className="text-sm text-muted-foreground">{plan.subtitle}</p>
                 </div>
-                <p className="text-sm text-muted-foreground">{plan.subtitle}</p>
+                <div className="text-right">
+                  <p className="font-bold text-foreground">{plan.price}</p>
+                  <p className="text-xs text-muted-foreground">Billed monthly</p>
+                </div>
               </div>
-              <div className="text-right">
-                <p className="font-bold text-foreground">{plan.price}</p>
-                <p className="text-xs text-muted-foreground">Billed monthly</p>
-              </div>
-            </div>
-          </button>
-        ))}
-      </div>
+            </button>
+          ))}
+        </div>
+      )}
 
       {hasSubscription ? (
         <div className="p-4 rounded-xl border border-emerald-200 bg-emerald-50 mb-5 flex items-start gap-3">

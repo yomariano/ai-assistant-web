@@ -19,6 +19,7 @@ import {
   CompletionStep,
 } from "./steps";
 import type { PlanId } from "./steps/PaywallStep";
+import { useRegion } from "@/hooks/useRegion";
 
 export interface OnboardingData {
   userId: string;
@@ -56,6 +57,9 @@ export function OnboardingTour({
   const [testCallMade, setTestCallMade] = useState(false);
   const [isRefreshingSubscription, setIsRefreshingSubscription] = useState(false);
   const [assistantCreated, setAssistantCreated] = useState(false);
+
+  // Get region-based pricing
+  const { plans: regionPlans, currencySymbol, loading: isLoadingRegion, region } = useRegion();
 
   const voicefleetNumber = data.phoneNumbers[0]?.number || "+353 1 234 5678";
 
@@ -165,6 +169,9 @@ export function OnboardingTour({
               onSelectPlan={handleSelectPlan}
               onRefresh={handleRefreshSubscription}
               onContinue={nextStep}
+              regionPlans={regionPlans}
+              currencySymbol={currencySymbol || "€"}
+              isLoadingRegion={isLoadingRegion}
             />
           )}
           {currentStep === 1 + offset && (
