@@ -217,14 +217,8 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
             billingApi.getUsage()
               // eslint-disable-next-line @typescript-eslint/no-explicit-any
               .then((usageData: any) => {
-                setUsageStore({
-                  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-                  callsMade: usageData.callsMade ?? 0,
-                  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-                  callsRemaining: usageData.callsRemaining ?? null,
-                  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-                  fairUseCap: usageData.fairUseCap ?? null,
-                });
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+                setUsageStore(usageData);
               })
               .catch((err: unknown) => console.error('[DASHBOARD] Failed to fetch usage:', err));
           }
@@ -240,14 +234,8 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
           billingApi.getUsage()
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             .then((usageData: any) => {
-              setUsageStore({
-                // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-                callsMade: usageData.callsMade ?? 0,
-                // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-                callsRemaining: usageData.callsRemaining ?? null,
-                // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-                fairUseCap: usageData.fairUseCap ?? null,
-              });
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+              setUsageStore(usageData);
             })
             .catch((err: unknown) => console.error('[DASHBOARD] Failed to fetch usage:', err));
         }

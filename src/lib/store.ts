@@ -315,18 +315,18 @@ interface UsageData {
   currency?: 'EUR' | 'USD';
   currencySymbol?: string;
   // Minute-based data (Feb 2026)
-  minutesUsed: number;
-  minutesIncluded: number;
-  minutesRemaining: number;
-  overageMinutes: number;
-  overageChargesCents: number;
-  overageChargesFormatted: string;
-  perMinuteRateCents: number;
-  perMinuteRateFormatted: string;
+  minutesUsed?: number;
+  minutesIncluded?: number;
+  minutesRemaining?: number;
+  overageMinutes?: number;
+  overageChargesCents?: number;
+  overageChargesFormatted?: string;
+  perMinuteRateCents?: number;
+  perMinuteRateFormatted?: string;
   // Legacy call-based data (backwards compat)
-  callsMade: number;
-  callsRemaining: number | null;
-  fairUseCap: number | null;
+  callsMade?: number;
+  callsRemaining?: number | null;
+  fairUseCap?: number | null;
 }
 
 interface BillingState {
