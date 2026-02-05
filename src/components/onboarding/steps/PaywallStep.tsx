@@ -60,12 +60,14 @@ export function PaywallStep({
   const plans = regionPlans && regionPlans.length > 0
     ? regionPlans.map((rp, index) => {
         const planId = rp.id as PlanId;
-        const planInfo = minutesPerPlan[planId] || { minutes: rp.monthlyMinutes, calls: `~${Math.round(rp.monthlyMinutes / 2.5)}` };
+        // Use region-specific minutes from rp.monthlyMinutes (e.g., AR=250, EU=500 for starter)
+        const minutes = rp.monthlyMinutes;
+        const estimatedCalls = `~${Math.round(minutes / 2.5)}`;
         return {
           id: planId,
           name: planId.charAt(0).toUpperCase() + planId.slice(1),
           price: `${rp.formattedPrice}/mo`,
-          subtitle: `${planInfo.minutes.toLocaleString()} minutes/month (${planInfo.calls} calls)`,
+          subtitle: `${minutes.toLocaleString()} minutes/month (${estimatedCalls} calls)`,
           highlight: planId === "growth",
         };
       })
