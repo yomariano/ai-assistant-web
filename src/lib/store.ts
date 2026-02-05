@@ -12,7 +12,8 @@ interface AuthState {
   isAuthenticated: boolean;
   devMode: boolean;
   hasExplicitlyLoggedOut: boolean;
-  hasScheduledSessionRetry: boolean;
+  sessionRetryCount: number;
+  authError: string | null;
   isHydrated: boolean; // True when Zustand has finished rehydrating from localStorage
   setHydrated: (hydrated: boolean) => void;
 
@@ -21,6 +22,7 @@ interface AuthState {
   logout: () => Promise<void>;
   setUser: (user: User) => void;
   checkAuth: () => Promise<void>;
+  retryAuth: () => Promise<void>;
 }
 
 export const useAuthStore = create<AuthState>()(
@@ -32,7 +34,8 @@ export const useAuthStore = create<AuthState>()(
       isAuthenticated: false,
       devMode: false,
       hasExplicitlyLoggedOut: false,
-      hasScheduledSessionRetry: false,
+      sessionRetryCount: 0,
+      authError: null,
       isHydrated: false,
       setHydrated: (hydrated: boolean) => set({ isHydrated: hydrated }),
 
@@ -52,7 +55,7 @@ export const useAuthStore = create<AuthState>()(
             devMode: devMode,
             isLoading: false,
             hasExplicitlyLoggedOut: false,
-            hasScheduledSessionRetry: false,
+            sessionRetryCount: 0,
           });
         } catch (error) {
           console.error('Dev login failed:', error);
@@ -71,7 +74,7 @@ export const useAuthStore = create<AuthState>()(
           isAuthenticated: false,
           devMode: false,
           hasExplicitlyLoggedOut: true,
-          hasScheduledSessionRetry: false,
+          sessionRetryCount: 0,
         });
       },
 
@@ -94,13 +97,24 @@ export const useAuthStore = create<AuthState>()(
             const sessionResult = await getSessionResult({ timeoutMs: 8000 });
             session = sessionResult.session;
             if (sessionResult.didTimeout) {
-              console.warn('[STORE] Supabase getSession timed out; delaying unauth redirect and retrying...');
-              if (!get().hasScheduledSessionRetry) {
-                set({ hasScheduledSessionRetry: true });
+              const retryCount = get().sessionRetryCount;
+              const MAX_SESSION_RETRIES = 2;
+              if (retryCount < MAX_SESSION_RETRIES) {
+                const delay = 1000 * Math.pow(2, retryCount); // 1s, 2s
+                console.warn(`[STORE] Supabase getSession timed out; retry ${retryCount + 1}/${MAX_SESSION_RETRIES} in ${delay}ms...`);
+                set({ sessionRetryCount: retryCount + 1 });
                 setTimeout(() => {
                   void get().checkAuth();
-                }, 800);
+                }, delay);
+                return;
               }
+              console.error('[STORE] Supabase session timed out after', MAX_SESSION_RETRIES, 'retries — giving up');
+              set({
+                isLoading: false,
+                isAuthenticated: false,
+                sessionRetryCount: 0,
+                authError: 'Unable to connect to the authentication service. Please check your connection and try again.',
+              });
               return;
             }
             console.log('[STORE] Supabase session:', session ? 'exists' : 'none');
@@ -121,7 +135,8 @@ export const useAuthStore = create<AuthState>()(
                 isAuthenticated: true,
                 isLoading: false,
                 devMode: false,
-                hasScheduledSessionRetry: false,
+                sessionRetryCount: 0,
+                authError: null,
                 hasExplicitlyLoggedOut: false, // Clear stale logout flag since user is now logged in
               });
               return;
@@ -135,7 +150,7 @@ export const useAuthStore = create<AuthState>()(
           // Only skip auto-login if there's no session AND user explicitly logged out
           if (hasExplicitlyLoggedOut) {
             console.log('[STORE] User has explicitly logged out and no active session, skipping auto-login');
-            set({ isLoading: false, isAuthenticated: false, hasScheduledSessionRetry: false });
+            set({ isLoading: false, isAuthenticated: false, sessionRetryCount: 0 });
             return;
           }
 
@@ -154,7 +169,7 @@ export const useAuthStore = create<AuthState>()(
                 isAuthenticated: true,
                 devMode,
                 isLoading: false,
-                hasScheduledSessionRetry: false,
+                sessionRetryCount: 0,
               });
               return;
             }
@@ -163,11 +178,16 @@ export const useAuthStore = create<AuthState>()(
           }
 
           console.log('[STORE] No auth found, setting unauthenticated');
-          set({ isLoading: false, isAuthenticated: false, hasScheduledSessionRetry: false });
+          set({ isLoading: false, isAuthenticated: false, sessionRetryCount: 0 });
         } catch (error) {
           console.error('[STORE] Auth check failed:', error);
-          set({ user: null, token: null, isAuthenticated: false, isLoading: false, hasScheduledSessionRetry: false });
+          set({ user: null, token: null, isAuthenticated: false, isLoading: false, sessionRetryCount: 0 });
         }
+      },
+
+      retryAuth: async () => {
+        set({ sessionRetryCount: 0, authError: null, isLoading: true });
+        await get().checkAuth();
       },
     }),
     {
@@ -207,7 +227,8 @@ if (typeof window !== 'undefined') {
               isAuthenticated: true,
               devMode: false,
               isLoading: false,
-              hasScheduledSessionRetry: false,
+              sessionRetryCount: 0,
+              authError: null,
               hasExplicitlyLoggedOut: false, // Clear stale logout flag since user is now logged in
             });
 
@@ -228,7 +249,7 @@ if (typeof window !== 'undefined') {
               isAuthenticated: false,
               devMode: false,
               isLoading: false,
-              hasScheduledSessionRetry: false,
+              sessionRetryCount: 0,
             });
             // Sign out of Supabase to clear the invalid session
             try {
@@ -247,7 +268,7 @@ if (typeof window !== 'undefined') {
             token: null,
             isAuthenticated: false,
             devMode: false,
-            hasScheduledSessionRetry: false,
+            sessionRetryCount: 0,
             hasExplicitlyLoggedOut: true, // Mark as logged out to prevent auto-login
           });
         }
