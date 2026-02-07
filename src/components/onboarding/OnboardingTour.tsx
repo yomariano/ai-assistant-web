@@ -151,7 +151,7 @@ export function OnboardingTour({
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent
-        className="max-w-lg"
+        className="max-w-xl"
         showCloseButton={currentStep > 1}
       >
         {/* Progress indicator */}
@@ -166,7 +166,7 @@ export function OnboardingTour({
         )}
 
         {/* Step content */}
-        <div className="min-h-[300px]">
+        <div className="min-h-[300px] min-w-0">
           {requiresSubscription && currentStep === 1 && (
             <PaywallStep
               hasSubscription={hasSubscription}

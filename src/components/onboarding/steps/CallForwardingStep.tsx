@@ -228,6 +228,7 @@ export function CallForwardingStep({
                 <Button
                   variant="ghost"
                   size="sm"
+                  className="shrink-0"
                   onClick={() => copyCode(allCallsOption.activateCode)}
                 >
                   {copiedCode === allCallsOption.activateCode ? (
@@ -243,7 +244,7 @@ export function CallForwardingStep({
                   )}
                 </Button>
               </div>
-              <code className="text-lg font-mono font-bold text-foreground block mb-3">
+              <code className="text-lg font-mono font-bold text-foreground block mb-3 break-all">
                 {generateActivationCode(allCallsOption.activateCode, voicefleetNumber)}
               </code>
               <p className="text-sm text-muted-foreground">
@@ -259,6 +260,7 @@ export function CallForwardingStep({
                 <Button
                   variant="ghost"
                   size="sm"
+                  className="shrink-0"
                   onClick={() => copyCode(allCallsOption.deactivateCode)}
                 >
                   {copiedCode === allCallsOption.deactivateCode ? (
@@ -274,7 +276,7 @@ export function CallForwardingStep({
                   )}
                 </Button>
               </div>
-              <code className="text-base font-mono text-foreground">
+              <code className="text-base font-mono text-foreground break-all">
                 {allCallsOption.deactivateCode}
               </code>
             </div>

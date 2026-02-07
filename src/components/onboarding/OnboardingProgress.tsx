@@ -31,7 +31,7 @@ export function OnboardingProgress({
       </div>
 
       {/* Step indicators (for larger screens) */}
-      <div className="hidden md:flex items-center justify-between gap-1 overflow-hidden">
+      <div className="hidden md:flex items-center justify-between gap-1 min-w-0">
         {steps.map((step, index) => {
           const stepNumber = index + 1;
           const isActive = stepNumber === currentStep;
