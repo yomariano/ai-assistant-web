@@ -245,7 +245,7 @@ export default function BillingPage() {
                       <p className="text-xs text-slate-500 font-medium">Minutes Used</p>
                       <p className="text-xl font-bold text-slate-900">
                         {usage.minutesUsed?.toFixed(0) || 0}
-                        <span className="text-sm font-normal text-slate-500"> / {usage.minutesIncluded || 500}</span>
+                        <span className="text-sm font-normal text-slate-500"> / {usage.minutesIncluded || '—'}</span>
                       </p>
                     </div>
                   </div>
@@ -287,7 +287,7 @@ export default function BillingPage() {
                 <CardContent className="p-6">
                   {(() => {
                     const minutesUsed = usage.minutesUsed || 0;
-                    const minutesIncluded = usage.minutesIncluded || 500;
+                    const minutesIncluded = usage.minutesIncluded || 250;
                     const percentUsed = (minutesUsed / minutesIncluded) * 100;
                     return (
                       <>
