@@ -4,9 +4,12 @@ import { Button } from "@/components/ui/button";
 import { Phone, Menu, X } from "lucide-react";
 import { useState } from "react";
 import Link from "next/link";
+import { useRegion } from "@/hooks/useRegion";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { region } = useRegion();
+  const countryLabel = region === "AR" ? "Argentina" : "Ireland";
 
   const navLinks = [
     { label: "Features", href: "/features" },
@@ -29,7 +32,12 @@ const Header = () => {
                 <circle cx="256" cy="356" r="14" fill="white" fillOpacity="0.9" />
               </svg>
             </div>
-            <span className="text-xl font-heading font-bold text-foreground">VoiceFleet</span>
+            <div className="flex items-center gap-2">
+              <span className="text-xl font-heading font-bold text-foreground">VoiceFleet</span>
+              <span className="rounded-full bg-muted px-2 py-0.5 text-[11px] font-semibold text-muted-foreground">
+                {countryLabel}
+              </span>
+            </div>
           </Link>
 
           {/* Desktop Navigation */}

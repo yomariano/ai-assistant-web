@@ -22,6 +22,7 @@ import {
 } from 'lucide-react';
 import { useAuthStore, useBillingStore, getPlanDisplayName, getPlanBadgeColor } from '@/lib/store';
 import { adminApi } from '@/lib/api';
+import { useRegion } from '@/hooks/useRegion';
 
 const navItems = [
   { href: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
@@ -46,6 +47,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
   const pathname = usePathname();
   const router = useRouter();
   const { user, logout, isAuthenticated, isLoading } = useAuthStore();
+  const { region } = useRegion();
   const subscription = useBillingStore((state) => state.subscription);
   const usage = useBillingStore((state) => state.usage);
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -86,6 +88,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
   }, [pathname, onClose]);
 
   const sidebarWidth = isCollapsed ? 'w-20' : 'w-64';
+  const countryLabel = region === 'AR' ? 'Argentina' : 'Ireland';
 
   return (
     <>
@@ -112,9 +115,14 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
               </svg>
             </div>
             {!isCollapsed && (
-              <span className="text-lg font-bold text-white whitespace-nowrap">
-                VoiceFleet
-              </span>
+              <div className="flex items-center gap-2">
+                <span className="text-lg font-bold text-white whitespace-nowrap">
+                  VoiceFleet
+                </span>
+                <span className="rounded-full bg-white/10 px-2 py-0.5 text-[10px] font-semibold text-emerald-300 whitespace-nowrap">
+                  {countryLabel}
+                </span>
+              </div>
             )}
           </Link>
           <button
