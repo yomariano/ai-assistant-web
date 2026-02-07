@@ -14,6 +14,7 @@ interface BusinessDetailsStepProps {
   onComplete: () => void;
   onBack: () => void;
   onAssistantCreated?: () => void;
+  region?: string;
 }
 
 export function BusinessDetailsStep({
@@ -21,6 +22,7 @@ export function BusinessDetailsStep({
   onComplete,
   onBack,
   onAssistantCreated,
+  region = "IE",
 }: BusinessDetailsStepProps) {
   const [businessName, setBusinessName] = useState("");
   const [businessDescription, setBusinessDescription] = useState("");
@@ -34,6 +36,7 @@ export function BusinessDetailsStep({
   } | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
+  const isSpanish = region === "AR";
 
   // Load preview when business name changes (debounced)
   useEffect(() => {
@@ -49,6 +52,8 @@ export function BusinessDetailsStep({
           businessName: businessName.trim(),
           businessDescription: businessDescription.trim() || undefined,
           greetingName: greetingName.trim() || undefined,
+          region,
+          locale: isSpanish ? "es-AR" : undefined,
         });
         if (response.success) {
           setPreview({
@@ -64,7 +69,7 @@ export function BusinessDetailsStep({
     }, 500);
 
     return () => clearTimeout(timer);
-  }, [businessName, businessDescription, greetingName, templateId]);
+  }, [businessName, businessDescription, greetingName, templateId, region, isSpanish]);
 
   const handleSubmit = async () => {
     if (!businessName.trim()) {
@@ -81,6 +86,8 @@ export function BusinessDetailsStep({
         businessName: businessName.trim(),
         businessDescription: businessDescription.trim() || undefined,
         greetingName: greetingName.trim() || undefined,
+        region,
+        locale: isSpanish ? "es-AR" : undefined,
       });
 
       if (response.success) {

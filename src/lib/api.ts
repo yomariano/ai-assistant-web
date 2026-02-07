@@ -570,13 +570,13 @@ export interface TemplatePreview {
 }
 
 export const templatesApi = {
-  list: async (): Promise<{ success: boolean; templates: AssistantTemplate[] }> => {
-    const { data } = await api.get('/api/templates');
+  list: async (params?: { region?: string; locale?: string }): Promise<{ success: boolean; templates: AssistantTemplate[] }> => {
+    const { data } = await api.get('/api/templates', { params });
     return data;
   },
 
-  get: async (templateId: string): Promise<{ success: boolean; template: AssistantTemplate & { defaultSettings: Record<string, string>; sampleFirstMessage: string } }> => {
-    const { data } = await api.get(`/api/templates/${templateId}`);
+  get: async (templateId: string, params?: { region?: string; locale?: string }): Promise<{ success: boolean; template: AssistantTemplate & { defaultSettings: Record<string, string>; sampleFirstMessage: string } }> => {
+    const { data } = await api.get(`/api/templates/${templateId}`, { params });
     return data;
   },
 
@@ -586,6 +586,8 @@ export const templatesApi = {
     greetingName?: string;
     voiceId?: string;
     voiceProvider?: string;
+    region?: string;
+    locale?: string;
   }): Promise<{ success: boolean; preview: TemplatePreview }> => {
     const { data } = await api.post(`/api/templates/${templateId}/preview`, config);
     return data;
@@ -600,6 +602,8 @@ export interface QuickSetupParams {
   greetingName?: string;
   voiceId?: string;
   voiceProvider?: string;
+  region?: string;
+  locale?: string;
   customizePrompt?: boolean;
   customPrompt?: string;
 }

@@ -11,6 +11,7 @@ interface TemplateSelectionStepProps {
   onSelect: (templateId: string) => void;
   onNext: () => void;
   onBack: () => void;
+  region?: string;
 }
 
 export function TemplateSelectionStep({
@@ -18,15 +19,20 @@ export function TemplateSelectionStep({
   onSelect,
   onNext,
   onBack,
+  region = "IE",
 }: TemplateSelectionStepProps) {
   const [templates, setTemplates] = useState<AssistantTemplate[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const isSpanish = region === "AR";
 
   useEffect(() => {
     async function loadTemplates() {
       try {
-        const response = await templatesApi.list();
+        const response = await templatesApi.list({
+          region,
+          locale: isSpanish ? "es-AR" : undefined,
+        });
         if (response.success) {
           setTemplates(response.templates);
         }
@@ -38,7 +44,7 @@ export function TemplateSelectionStep({
       }
     }
     loadTemplates();
-  }, []);
+  }, [region, isSpanish]);
 
   if (loading) {
     return (
@@ -61,10 +67,12 @@ export function TemplateSelectionStep({
     <div className="py-4">
       <div className="text-center mb-6">
         <h2 className="text-xl font-heading font-bold text-foreground mb-2">
-          What type of business do you have?
+          {isSpanish ? "Que tipo de negocio tenes?" : "What type of business do you have?"}
         </h2>
         <p className="text-muted-foreground text-sm">
-          Select your industry and we&apos;ll set up your AI assistant with the right scripts and behaviors
+          {isSpanish
+            ? "Elegí tu rubro y configuramos tu asistente con guiones y comportamientos adecuados."
+            : "Select your industry and we&apos;ll set up your AI assistant with the right scripts and behaviors"}
         </p>
       </div>
 
@@ -104,9 +112,12 @@ export function TemplateSelectionStep({
       {selectedTemplate && (
         <div className="p-3 bg-accent/10 rounded-lg border border-accent/20 mb-4">
           <p className="text-sm text-muted-foreground">
-            <span className="font-medium text-foreground">Great choice!</span>{" "}
-            Your AI will be pre-configured with industry-specific conversation flows,
-            common scenarios, and professional responses.
+            <span className="font-medium text-foreground">
+              {isSpanish ? "Excelente eleccion!" : "Great choice!"}
+            </span>{" "}
+            {isSpanish
+              ? "Tu asistente quedara preconfigurado con flujos de conversacion del rubro, escenarios comunes y respuestas profesionales."
+              : "Your AI will be pre-configured with industry-specific conversation flows, common scenarios, and professional responses."}
           </p>
         </div>
       )}
@@ -114,7 +125,7 @@ export function TemplateSelectionStep({
       {/* Actions */}
       <div className="flex gap-3">
         <Button variant="outline" onClick={onBack} className="flex-1">
-          Back
+          {isSpanish ? "Atras" : "Back"}
         </Button>
         <Button
           variant="hero"
@@ -122,7 +133,7 @@ export function TemplateSelectionStep({
           disabled={!selectedTemplate}
           className="flex-1"
         >
-          Continue
+          {isSpanish ? "Continuar" : "Continue"}
         </Button>
       </div>
     </div>

@@ -204,6 +204,7 @@ export function OnboardingTour({
               onSelect={handleTemplateSelect}
               onNext={nextStep}
               onBack={prevStep}
+              region={phoneRegion}
             />
           )}
           {currentStep === 5 + offset && selectedTemplate && (
@@ -212,6 +213,7 @@ export function OnboardingTour({
               onComplete={nextStep}
               onBack={prevStep}
               onAssistantCreated={handleAssistantCreated}
+              region={phoneRegion}
             />
           )}
           {currentStep === 6 + offset && (
