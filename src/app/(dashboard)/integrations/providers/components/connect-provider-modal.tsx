@@ -44,6 +44,9 @@ export function ConnectProviderModal({ provider, onClose, onSuccess }: ConnectPr
       if (provider.id === 'thefork' && restaurantId) {
         config.restaurantId = restaurantId;
       }
+      if (provider.id === 'meitre' && restaurantId) {
+        config.restaurantId = restaurantId;
+      }
       if (provider.id === 'mindbody' && siteId) {
         config.siteId = siteId;
       }
@@ -138,6 +141,24 @@ export function ConnectProviderModal({ provider, onClose, onSuccess }: ConnectPr
             />
             <p className="mt-1 text-xs text-slate-500">
               Your TheFork restaurant ID
+            </p>
+          </div>
+        );
+      case 'meitre':
+        return (
+          <div>
+            <label className="block text-sm font-medium text-slate-700 mb-1">
+              Restaurant ID <span className="text-rose-500">*</span>
+            </label>
+            <input
+              type="text"
+              value={restaurantId}
+              onChange={(e) => setRestaurantId(e.target.value)}
+              placeholder="your-restaurant-id"
+              className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
+            />
+            <p className="mt-1 text-xs text-slate-500">
+              Your Meitre restaurant ID (found in your Meitre dashboard settings)
             </p>
           </div>
         );
