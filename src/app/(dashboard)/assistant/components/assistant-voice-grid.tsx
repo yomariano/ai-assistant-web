@@ -11,12 +11,12 @@ export interface AssistantVoiceGridProps {
   onSelectVoice: (voiceId: string) => void;
 }
 
-// Extract short name from full ElevenLabs name (e.g., "Sarah - Mature, Reassuring" -> "Sarah")
+// Extract short name from full voice label (e.g., "Sarah - Mature, Reassuring" -> "Sarah")
 function getShortName(fullName: string): string {
   return fullName.split(' - ')[0] || fullName;
 }
 
-// Extract description from full ElevenLabs name (e.g., "Sarah - Mature, Reassuring" -> "Mature, Reassuring")
+// Extract description from full voice label (e.g., "Sarah - Mature, Reassuring" -> "Mature, Reassuring")
 function getDescription(fullName: string): string {
   const parts = fullName.split(' - ');
   return parts[1] || '';
@@ -47,7 +47,7 @@ export const AssistantVoiceGrid = memo(function AssistantVoiceGrid({
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
       <div className="lg:col-span-1">
         <h2 className="text-lg font-bold text-slate-900">Voice</h2>
-        <p className="text-sm text-slate-500 mt-1">Choose from {voices.length} premium ElevenLabs voices.</p>
+        <p className="text-sm text-slate-500 mt-1">Choose from {voices.length} premium voices.</p>
       </div>
 
       <div className="lg:col-span-2">
