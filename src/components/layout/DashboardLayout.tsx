@@ -34,6 +34,10 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
   const [onboardingData, setOnboardingData] = useState<OnboardingData | null>(null);
   const [onboardingChecked, setOnboardingChecked] = useState(false);
 
+  // Provisioning failure state
+  const [provisioningFailed, setProvisioningFailed] = useState(false);
+  const [provisioningError, setProvisioningError] = useState<string | null>(null);
+
   const openPaywallOnboarding = useCallback(() => {
     setOnboardingData({
       userId: user?.id || '',
@@ -299,10 +303,21 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
               })
             );
           } else {
-            // No active numbers yet. Try to show a real reserved pool number (VoIPCloud IE flow)
-            // so we don't display a fake placeholder while provisioning finishes.
+            // No active numbers yet. Check provisioning status.
             try {
               const provisioning = await billingApi.getProvisioningStatus();
+
+              // Check if provisioning has failed
+              if (provisioning?.hasFailed) {
+                console.log('[DASHBOARD] Provisioning failed:', provisioning.provisioning);
+                const errorMessage = (provisioning.provisioning as { error_message?: string })?.error_message || 'Phone number provisioning failed';
+                setProvisioningFailed(true);
+                setProvisioningError(errorMessage);
+                setOnboardingChecked(true);
+                return; // Don't proceed to onboarding
+              }
+
+              // Try to show a real reserved pool number (VoIPCloud IE flow)
               if (provisioning?.reserved?.phone_number) {
                 onboardingPhoneNumbers = [
                   {
@@ -439,6 +454,76 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
             onRefreshSubscription={refreshSubscription}
           />
         )}
+      </div>
+    );
+  }
+
+  // Show provisioning failure screen
+  if (provisioningFailed) {
+    const isInsufficientFunds = provisioningError?.toLowerCase().includes('insufficient funds');
+    console.log('[DASHBOARD] Provisioning failed - showing error screen');
+    return (
+      <div className="flex min-h-screen bg-background text-foreground">
+        <Sidebar isOpen={isSidebarOpen} onClose={closeSidebar} />
+        <div className="flex flex-1 flex-col overflow-hidden">
+          <Navbar onMenuClick={toggleSidebar} />
+          <main className="flex-1 overflow-y-auto px-4 py-8 lg:px-8">
+            <div className="mx-auto max-w-2xl">
+              <div className="rounded-2xl border border-amber-200 bg-amber-50 p-8 text-center">
+                <div className="mx-auto mb-4 h-16 w-16 rounded-full bg-amber-100 flex items-center justify-center">
+                  <svg className="h-8 w-8 text-amber-600" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z" />
+                  </svg>
+                </div>
+                <h1 className="text-2xl font-bold tracking-tight text-amber-900">Setting Up Your Phone Number</h1>
+                <p className="mt-3 text-amber-800">
+                  We encountered an issue while provisioning your phone number. Our team has been notified and is working to resolve this.
+                </p>
+                {isInsufficientFunds && (
+                  <p className="mt-2 text-sm text-amber-700">
+                    This is a temporary service issue on our end. No action is required from you.
+                  </p>
+                )}
+                <div className="mt-6 p-4 bg-white rounded-lg border border-amber-200">
+                  <h3 className="font-semibold text-amber-900">What happens next?</h3>
+                  <ul className="mt-2 text-sm text-amber-800 text-left space-y-2">
+                    <li className="flex items-start gap-2">
+                      <span className="text-amber-600">•</span>
+                      Your subscription is active and you will not be charged until your number is ready
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-amber-600">•</span>
+                      We&apos;ll email you as soon as your phone number is assigned
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-amber-600">•</span>
+                      This usually resolves within 24 hours
+                    </li>
+                  </ul>
+                </div>
+                <div className="mt-6 flex flex-col sm:flex-row gap-3 justify-center">
+                  <button
+                    onClick={() => {
+                      setProvisioningFailed(false);
+                      setProvisioningError(null);
+                      setOnboardingChecked(false);
+                    }}
+                    className="inline-flex items-center justify-center px-4 py-2 rounded-lg bg-amber-600 text-white hover:bg-amber-700 transition-colors font-medium"
+                  >
+                    Check Again
+                  </button>
+                  <a
+                    href="mailto:support@voicefleet.ai"
+                    className="inline-flex items-center justify-center px-4 py-2 rounded-lg border border-amber-300 text-amber-700 hover:bg-amber-100 transition-colors font-medium"
+                  >
+                    Contact Support
+                  </a>
+                </div>
+              </div>
+            </div>
+          </main>
+        </div>
+        {devMode && <DevUserSwitcher />}
       </div>
     );
   }
