@@ -9,6 +9,7 @@ import { useRegion } from "@/hooks/useRegion";
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { region } = useRegion();
+  const isArgentina = region === "AR";
   const countryLabel = region === "AR" ? "Argentina" : "Ireland";
 
   const navLinks = [
@@ -32,9 +33,20 @@ const Header = () => {
                 <circle cx="256" cy="356" r="14" fill="white" fillOpacity="0.9" />
               </svg>
             </div>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2.5">
               <span className="text-xl font-heading font-bold text-foreground">VoiceFleet</span>
-              <span className="rounded-full bg-muted px-2 py-0.5 text-[11px] font-semibold text-muted-foreground">
+              <span
+                className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[10px] font-semibold leading-none transition-colors ${
+                  isArgentina
+                    ? "border-sky-200 bg-sky-50 text-sky-700"
+                    : "border-emerald-200 bg-emerald-50 text-emerald-700"
+                }`}
+              >
+                <span
+                  className={`h-1.5 w-1.5 rounded-full ${
+                    isArgentina ? "bg-sky-500" : "bg-emerald-500"
+                  }`}
+                />
                 {countryLabel}
               </span>
             </div>

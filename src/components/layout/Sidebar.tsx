@@ -88,6 +88,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
   }, [pathname, onClose]);
 
   const sidebarWidth = isCollapsed ? 'w-20' : 'w-64';
+  const isArgentina = region === 'AR';
   const countryLabel = region === 'AR' ? 'Argentina' : 'Ireland';
 
   return (
@@ -115,11 +116,22 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
               </svg>
             </div>
             {!isCollapsed && (
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2.5">
                 <span className="text-lg font-bold text-white whitespace-nowrap">
                   VoiceFleet
                 </span>
-                <span className="rounded-full bg-white/10 px-2 py-0.5 text-[10px] font-semibold text-emerald-300 whitespace-nowrap">
+                <span
+                  className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[10px] font-semibold leading-none whitespace-nowrap ${
+                    isArgentina
+                      ? 'border-sky-400/40 bg-sky-400/15 text-sky-200'
+                      : 'border-emerald-400/40 bg-emerald-400/15 text-emerald-200'
+                  }`}
+                >
+                  <span
+                    className={`h-1.5 w-1.5 rounded-full ${
+                      isArgentina ? 'bg-sky-300' : 'bg-emerald-300'
+                    }`}
+                  />
                   {countryLabel}
                 </span>
               </div>
