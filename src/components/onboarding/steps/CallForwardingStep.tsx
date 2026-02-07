@@ -14,9 +14,9 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
-  callForwardingProviders,
-  providerCategories,
   generateActivationCode,
+  getProviderCategoriesForRegion,
+  getProviderByIdAllRegions,
   type CallForwardingProvider,
 } from "@/lib/content/call-forwarding";
 
@@ -25,6 +25,7 @@ interface CallForwardingStepProps {
   onProviderSelect: (providerId: string) => void;
   onNext: () => void;
   onBack: () => void;
+  region?: string;
 }
 
 type ViewState = "categories" | "providers" | "instructions";
@@ -41,7 +42,9 @@ export function CallForwardingStep({
   onProviderSelect,
   onNext,
   onBack,
+  region = 'IE',
 }: CallForwardingStepProps) {
+  const regionCategories = getProviderCategoriesForRegion(region);
   const [view, setView] = useState<ViewState>("categories");
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [selectedProvider, setSelectedProvider] = useState<CallForwardingProvider | null>(null);
@@ -96,7 +99,7 @@ export function CallForwardingStep({
         </div>
 
         <div className="space-y-3 mb-6">
-          {providerCategories.map((category) => {
+          {regionCategories.map((category) => {
             const Icon = categoryIcons[category.id as keyof typeof categoryIcons] || Phone;
             return (
               <button
@@ -131,9 +134,9 @@ export function CallForwardingStep({
 
   // Providers view
   if (view === "providers" && selectedCategory) {
-    const category = providerCategories.find((c) => c.id === selectedCategory);
+    const category = regionCategories.find((c) => c.id === selectedCategory);
     const providers = category?.providers
-      .map((id) => callForwardingProviders.find((p) => p.id === id))
+      .map((id) => getProviderByIdAllRegions(id))
       .filter(Boolean) as CallForwardingProvider[];
 
     return (

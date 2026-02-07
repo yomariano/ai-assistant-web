@@ -63,6 +63,11 @@ export function OnboardingTour({
 
   const voicefleetNumber = data.phoneNumbers[0]?.number || "+353 1 234 5678";
 
+  // Detect region from phone number prefix for call forwarding providers
+  const phoneRegion = voicefleetNumber.replace(/\s/g, '').startsWith('+54') ? 'AR'
+    : voicefleetNumber.replace(/\s/g, '').startsWith('+353') ? 'IE'
+    : region || 'IE';
+
   const markStepComplete = useCallback((stepName: string) => {
     setStepsCompleted((prev) => {
       if (prev.includes(stepName)) return prev;
@@ -190,6 +195,7 @@ export function OnboardingTour({
               onProviderSelect={handleProviderSelect}
               onNext={nextStep}
               onBack={prevStep}
+              region={phoneRegion}
             />
           )}
           {currentStep === 4 + offset && (

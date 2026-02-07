@@ -1,8 +1,10 @@
 /**
- * Call Forwarding Instructions for Irish Telecom Providers
+ * Call Forwarding Instructions by Region
  *
  * This data is used in the onboarding flow to help users set up
  * call forwarding from their existing phone to their VoiceFleet number.
+ *
+ * Supported regions: IE (Ireland), AR (Argentina)
  */
 
 export interface CallForwardingOption {
@@ -654,6 +656,335 @@ export const callForwardingProviders: CallForwardingProvider[] = [
     ],
   },
 ];
+
+// ============================================
+// ARGENTINE PROVIDERS
+// ============================================
+
+export const callForwardingProvidersAR: CallForwardingProvider[] = [
+  // ============================================
+  // MOBILE NETWORK OPERATORS (MNOs)
+  // ============================================
+  {
+    id: 'personal-ar',
+    name: 'Personal',
+    type: 'mobile',
+    options: [
+      {
+        type: 'all',
+        label: 'Desviar Todas las Llamadas',
+        activateCode: '**21*{number}#',
+        deactivateCode: '##21#',
+        description: 'Todas las llamadas entrantes se desviarán a tu número VoiceFleet',
+      },
+      {
+        type: 'busy',
+        label: 'Desviar si Ocupado',
+        activateCode: '**67*{number}#',
+        deactivateCode: '##67#',
+        description: 'Las llamadas se desvían solo cuando tu línea está ocupada',
+      },
+      {
+        type: 'no_answer',
+        label: 'Desviar si No Contesta',
+        activateCode: '**61*{number}*11*20#',
+        deactivateCode: '##61#',
+        description: 'Las llamadas se desvían después de 20 segundos sin respuesta',
+      },
+      {
+        type: 'unreachable',
+        label: 'Desviar si Apagado',
+        activateCode: '**62*{number}#',
+        deactivateCode: '##62#',
+        description: 'Las llamadas se desvían cuando tu teléfono está apagado o sin señal',
+      },
+    ],
+    notes: [
+      'Reemplazá {number} con tu número VoiceFleet incluyendo el código de país (ej: +54...)',
+      'Marcá el código directamente desde la app de teléfono',
+      'Vas a escuchar un tono de confirmación cuando se active',
+    ],
+    supportUrl: 'https://www.personal.com.ar/ayuda',
+    supportPhone: '*111',
+  },
+  {
+    id: 'movistar-ar',
+    name: 'Movistar',
+    type: 'mobile',
+    options: [
+      {
+        type: 'all',
+        label: 'Desviar Todas las Llamadas',
+        activateCode: '**21*{number}#',
+        deactivateCode: '##21#',
+        description: 'Todas las llamadas entrantes se desviarán a tu número VoiceFleet',
+      },
+      {
+        type: 'busy',
+        label: 'Desviar si Ocupado',
+        activateCode: '**67*{number}#',
+        deactivateCode: '##67#',
+        description: 'Las llamadas se desvían solo cuando tu línea está ocupada',
+      },
+      {
+        type: 'no_answer',
+        label: 'Desviar si No Contesta',
+        activateCode: '**61*{number}*11*20#',
+        deactivateCode: '##61#',
+        description: 'Las llamadas se desvían después de 20 segundos sin respuesta',
+      },
+      {
+        type: 'unreachable',
+        label: 'Desviar si Apagado',
+        activateCode: '**62*{number}#',
+        deactivateCode: '##62#',
+        description: 'Las llamadas se desvían cuando tu teléfono está apagado o sin señal',
+      },
+    ],
+    notes: [
+      'Reemplazá {number} con tu número VoiceFleet incluyendo el código de país',
+      'También podés configurar el desvío desde la app Mi Movistar',
+      'Pueden aplicar cargos por desvío de llamadas según tu plan',
+    ],
+    supportUrl: 'https://www.movistar.com.ar/ayuda',
+    supportPhone: '*611',
+  },
+  {
+    id: 'claro-ar',
+    name: 'Claro',
+    type: 'mobile',
+    options: [
+      {
+        type: 'all',
+        label: 'Desviar Todas las Llamadas',
+        activateCode: '**21*{number}#',
+        deactivateCode: '##21#',
+        description: 'Todas las llamadas entrantes se desviarán a tu número VoiceFleet',
+      },
+      {
+        type: 'busy',
+        label: 'Desviar si Ocupado',
+        activateCode: '**67*{number}#',
+        deactivateCode: '##67#',
+        description: 'Las llamadas se desvían solo cuando tu línea está ocupada',
+      },
+      {
+        type: 'no_answer',
+        label: 'Desviar si No Contesta',
+        activateCode: '**61*{number}*11*20#',
+        deactivateCode: '##61#',
+        description: 'Las llamadas se desvían después de 20 segundos sin respuesta',
+      },
+      {
+        type: 'unreachable',
+        label: 'Desviar si Apagado',
+        activateCode: '**62*{number}#',
+        deactivateCode: '##62#',
+        description: 'Las llamadas se desvían cuando tu teléfono está apagado o sin señal',
+      },
+    ],
+    notes: [
+      'Reemplazá {number} con tu número VoiceFleet incluyendo el código de país',
+      'También podés configurar desde la app Mi Claro',
+      'Aplican códigos GSM estándar para desvío de llamadas',
+    ],
+    supportUrl: 'https://www.claro.com.ar/personas/ayuda/',
+    supportPhone: '*611',
+  },
+
+  // ============================================
+  // MOBILE VIRTUAL NETWORK OPERATORS (MVNOs)
+  // ============================================
+  {
+    id: 'tuenti-ar',
+    name: 'Tuenti',
+    type: 'mobile',
+    network: 'Movistar',
+    options: [
+      {
+        type: 'all',
+        label: 'Desviar Todas las Llamadas',
+        activateCode: '**21*{number}#',
+        deactivateCode: '##21#',
+        description: 'Todas las llamadas entrantes se desviarán a tu número VoiceFleet',
+      },
+      {
+        type: 'busy',
+        label: 'Desviar si Ocupado',
+        activateCode: '**67*{number}#',
+        deactivateCode: '##67#',
+        description: 'Las llamadas se desvían solo cuando tu línea está ocupada',
+      },
+      {
+        type: 'no_answer',
+        label: 'Desviar si No Contesta',
+        activateCode: '**61*{number}*11*20#',
+        deactivateCode: '##61#',
+        description: 'Las llamadas se desvían después de 20 segundos sin respuesta',
+      },
+      {
+        type: 'unreachable',
+        label: 'Desviar si Apagado',
+        activateCode: '**62*{number}#',
+        deactivateCode: '##62#',
+        description: 'Las llamadas se desvían cuando tu teléfono está apagado o sin señal',
+      },
+    ],
+    notes: [
+      'Tuenti usa la red de Movistar - aplican los mismos códigos',
+      'Reemplazá {number} con tu número VoiceFleet incluyendo el código de país',
+      'Gestioná el desvío desde la app de Tuenti o marcando los códigos',
+    ],
+    supportUrl: 'https://www.tuenti.com.ar/ayuda',
+  },
+
+  // ============================================
+  // LANDLINE PROVIDERS
+  // ============================================
+  {
+    id: 'telecom-landline-ar',
+    name: 'Telecom Argentina (Línea Fija)',
+    type: 'landline',
+    options: [
+      {
+        type: 'all',
+        label: 'Desviar Todas las Llamadas',
+        activateCode: '*72{number}',
+        deactivateCode: '*73',
+        description: 'Todas las llamadas entrantes se desviarán a tu número VoiceFleet',
+      },
+    ],
+    notes: [
+      'Levantá el tubo, esperá el tono, marcá *72 seguido del número VoiceFleet',
+      'Esperá el tono de confirmación antes de colgar',
+      'Para desactivar, levantá el tubo y marcá *73',
+      'Puede requerir activación previa — llamá al 114',
+    ],
+    supportPhone: '114',
+  },
+  {
+    id: 'movistar-landline-ar',
+    name: 'Movistar Línea Fija',
+    type: 'landline',
+    options: [
+      {
+        type: 'all',
+        label: 'Desviar Todas las Llamadas',
+        activateCode: 'Contactar soporte',
+        deactivateCode: 'Contactar soporte',
+        description: 'El desvío de llamadas debe configurarse a través del soporte al cliente',
+      },
+    ],
+    notes: [
+      'El desvío en líneas fijas de Movistar requiere contactar al servicio al cliente',
+      'Llamá al *611 para solicitar la activación del desvío',
+      'Puede aplicar un cargo mensual por esta función',
+    ],
+    supportPhone: '*611',
+  },
+
+  // ============================================
+  // BUSINESS / VoIP PROVIDERS
+  // ============================================
+  {
+    id: 'generic-voip-ar',
+    name: 'VoIP / Telefonía IP',
+    type: 'voip',
+    options: [
+      {
+        type: 'all',
+        label: 'Desviar Todas las Llamadas',
+        activateCode: 'Ver panel de administración',
+        deactivateCode: 'Ver panel de administración',
+        description: 'Configurá el desvío desde el panel de administración de tu proveedor VoIP',
+      },
+    ],
+    notes: [
+      'La mayoría de los sistemas VoIP tienen un portal web para configurar desvío de llamadas',
+      'Buscá "Desvío de llamadas" o "Enrutamiento" en la configuración',
+      'Puede que necesites acceso de administrador para configurar las reglas de desvío',
+    ],
+  },
+  {
+    id: 'generic-pbx-ar',
+    name: 'Central Telefónica (PBX)',
+    type: 'business',
+    options: [
+      {
+        type: 'all',
+        label: 'Desviar Todas las Llamadas',
+        activateCode: 'Varía según el sistema',
+        deactivateCode: 'Varía según el sistema',
+        description: 'La configuración depende de tu sistema PBX específico',
+      },
+    ],
+    notes: [
+      'Contactá a tu administrador de IT o proveedor de telefonía',
+      'Vas a necesitar agregar VoiceFleet como destino de desvío externo',
+      'Considerá usar desvío por "no contesta" para mantener tu recepcionista actual',
+      'Podemos ayudarte a configurar — escribinos a support@voicefleet.ai',
+    ],
+  },
+];
+
+/**
+ * All providers combined (for lookup by ID)
+ */
+const allProviders = [...callForwardingProviders, ...callForwardingProvidersAR];
+
+/**
+ * Provider categories by region
+ */
+export const providerCategoriesByRegion: Record<string, typeof providerCategories> = {
+  IE: providerCategories,
+  AR: [
+    {
+      id: 'mobile',
+      title: 'Celulares',
+      description: 'Operadores móviles argentinos',
+      providers: ['personal-ar', 'movistar-ar', 'claro-ar'],
+    },
+    {
+      id: 'mvno',
+      title: 'Celulares Virtuales',
+      description: 'Operadores virtuales que usan redes principales',
+      providers: ['tuenti-ar'],
+    },
+    {
+      id: 'landline',
+      title: 'Línea Fija',
+      description: 'Telefonía fija tradicional',
+      providers: ['telecom-landline-ar', 'movistar-landline-ar'],
+    },
+    {
+      id: 'business',
+      title: 'Empresa / VoIP',
+      description: 'Sistemas telefónicos empresariales y VoIP',
+      providers: ['generic-voip-ar', 'generic-pbx-ar'],
+    },
+  ],
+};
+
+/**
+ * Get provider categories for a specific region (defaults to IE)
+ */
+export function getProviderCategoriesForRegion(region: string) {
+  return providerCategoriesByRegion[region] || providerCategories;
+}
+
+/**
+ * Get all providers for a specific region
+ */
+export function getProvidersForRegion(region: string): CallForwardingProvider[] {
+  return region === 'AR' ? callForwardingProvidersAR : callForwardingProviders;
+}
+
+/**
+ * Get provider by ID (searches all regions)
+ */
+export function getProviderByIdAllRegions(id: string): CallForwardingProvider | undefined {
+  return allProviders.find(p => p.id === id);
+}
 
 /**
  * Get providers by type
