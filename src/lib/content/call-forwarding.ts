@@ -928,65 +928,6 @@ export const callForwardingProvidersAR: CallForwardingProvider[] = [
 ];
 
 /**
- * All providers combined (for lookup by ID)
- */
-const allProviders = [...callForwardingProviders, ...callForwardingProvidersAR];
-
-/**
- * Provider categories by region
- */
-export const providerCategoriesByRegion: Record<string, typeof providerCategories> = {
-  IE: providerCategories,
-  AR: [
-    {
-      id: 'mobile',
-      title: 'Celulares',
-      description: 'Operadores móviles argentinos',
-      providers: ['personal-ar', 'movistar-ar', 'claro-ar'],
-    },
-    {
-      id: 'mvno',
-      title: 'Celulares Virtuales',
-      description: 'Operadores virtuales que usan redes principales',
-      providers: ['tuenti-ar'],
-    },
-    {
-      id: 'landline',
-      title: 'Línea Fija',
-      description: 'Telefonía fija tradicional',
-      providers: ['telecom-landline-ar', 'movistar-landline-ar'],
-    },
-    {
-      id: 'business',
-      title: 'Empresa / VoIP',
-      description: 'Sistemas telefónicos empresariales y VoIP',
-      providers: ['generic-voip-ar', 'generic-pbx-ar'],
-    },
-  ],
-};
-
-/**
- * Get provider categories for a specific region (defaults to IE)
- */
-export function getProviderCategoriesForRegion(region: string) {
-  return providerCategoriesByRegion[region] || providerCategories;
-}
-
-/**
- * Get all providers for a specific region
- */
-export function getProvidersForRegion(region: string): CallForwardingProvider[] {
-  return region === 'AR' ? callForwardingProvidersAR : callForwardingProviders;
-}
-
-/**
- * Get provider by ID (searches all regions)
- */
-export function getProviderByIdAllRegions(id: string): CallForwardingProvider | undefined {
-  return allProviders.find(p => p.id === id);
-}
-
-/**
  * Get providers by type
  */
 export function getProvidersByType(type: CallForwardingProvider['type']): CallForwardingProvider[] {
@@ -1057,5 +998,64 @@ export const providerCategories = [
     providers: ['blueface', 'magnet-business', 'generic-voip', 'generic-pbx'],
   },
 ];
+
+/**
+ * All providers combined (for lookup by ID)
+ */
+const allProviders = [...callForwardingProviders, ...callForwardingProvidersAR];
+
+/**
+ * Provider categories by region
+ */
+export const providerCategoriesByRegion: Record<string, typeof providerCategories> = {
+  IE: providerCategories,
+  AR: [
+    {
+      id: 'mobile',
+      title: 'Celulares',
+      description: 'Operadores móviles argentinos',
+      providers: ['personal-ar', 'movistar-ar', 'claro-ar'],
+    },
+    {
+      id: 'mvno',
+      title: 'Celulares Virtuales',
+      description: 'Operadores virtuales que usan redes principales',
+      providers: ['tuenti-ar'],
+    },
+    {
+      id: 'landline',
+      title: 'Línea Fija',
+      description: 'Telefonía fija tradicional',
+      providers: ['telecom-landline-ar', 'movistar-landline-ar'],
+    },
+    {
+      id: 'business',
+      title: 'Empresa / VoIP',
+      description: 'Sistemas telefónicos empresariales y VoIP',
+      providers: ['generic-voip-ar', 'generic-pbx-ar'],
+    },
+  ],
+};
+
+/**
+ * Get provider categories for a specific region (defaults to IE)
+ */
+export function getProviderCategoriesForRegion(region: string) {
+  return providerCategoriesByRegion[region] || providerCategories;
+}
+
+/**
+ * Get all providers for a specific region
+ */
+export function getProvidersForRegion(region: string): CallForwardingProvider[] {
+  return region === 'AR' ? callForwardingProvidersAR : callForwardingProviders;
+}
+
+/**
+ * Get provider by ID (searches all regions)
+ */
+export function getProviderByIdAllRegions(id: string): CallForwardingProvider | undefined {
+  return allProviders.find(p => p.id === id);
+}
 
 export default callForwardingProviders;
