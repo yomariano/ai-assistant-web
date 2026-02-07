@@ -319,7 +319,8 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
           if (onboardingPhoneNumbers.length === 0) {
             // Check if this is an AR user with pending provisioning
             try {
-              const provisioningStatus = await billingApi.getProvisioningStatus();
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              const provisioningStatus: any = await billingApi.getProvisioningStatus();
               if (provisioningStatus?.provisioning?.region === 'AR' &&
                   ['pending', 'failed', 'processing'].includes(provisioningStatus?.provisioning?.status)) {
                 // AR user with pending provisioning - show pending state instead of demo number
