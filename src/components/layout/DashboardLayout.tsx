@@ -317,7 +317,22 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
           }
 
           if (onboardingPhoneNumbers.length === 0) {
-            onboardingPhoneNumbers = [{ number: '+353 1 234 5678', label: 'Primary (Demo)' }];
+            // Check if this is an AR user with pending provisioning
+            try {
+              const provisioningStatus = await billingApi.getProvisioningStatus();
+              if (provisioningStatus?.provisioning?.region === 'AR' &&
+                  ['pending', 'failed', 'processing'].includes(provisioningStatus?.provisioning?.status)) {
+                // AR user with pending provisioning - show pending state instead of demo number
+                onboardingPhoneNumbers = [{
+                  number: 'PENDING',
+                  label: 'Argentina number being set up...'
+                }];
+              } else {
+                onboardingPhoneNumbers = [{ number: '+353 1 234 5678', label: 'Primary (Demo)' }];
+              }
+            } catch {
+              onboardingPhoneNumbers = [{ number: '+353 1 234 5678', label: 'Primary (Demo)' }];
+            }
           }
 
           const data: OnboardingData = {
