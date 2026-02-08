@@ -81,7 +81,15 @@ type DemoVoice = {
   id: string;
   label: string;
   provider: "vapi" | "11labs";
+  defaultLanguageId?: DemoLanguageId;
+  enforceLanguage?: "en" | "es" | "fr" | "de" | "it";
+  model?: "eleven_turbo_v2_5" | "eleven_multilingual_v2";
 };
+
+const DEFAULT_ARGENTINA_DEMO_VOICE_ID =
+  process.env.NEXT_PUBLIC_DEMO_ARGENTINA_VOICE_ID || "1709f1e8-d660-4e22-b253-158ccf68bf0a";
+const DEFAULT_IRISH_DEMO_VOICE_ID =
+  process.env.NEXT_PUBLIC_DEMO_IRISH_VOICE_ID || "f1dbef4d-b259-4549-90d0-912478492273";
 
 const LANGUAGES: DemoLanguage[] = [
   { id: "en", label: "English", transcriberLanguage: "en" },
@@ -332,8 +340,22 @@ const VOICES: DemoVoice[] = [
   { id: "Elliot", label: "Elliot (conversational)", provider: "vapi" },
   { id: "Cole", label: "Cole (professional)", provider: "vapi" },
   { id: "Paige", label: "Paige (clear)", provider: "vapi" },
-  { id: "JNcXxzrlvFDXcrGo2b47", label: "Custom (Argentine)", provider: "11labs" },
-  { id: "t6WJWTYTryhcQnrBHdCr", label: "Custom (Irish)", provider: "11labs" },
+  {
+    id: DEFAULT_ARGENTINA_DEMO_VOICE_ID,
+    label: "Custom (Argentine)",
+    provider: "11labs",
+    defaultLanguageId: "es",
+    enforceLanguage: "es",
+    model: "eleven_turbo_v2_5",
+  },
+  {
+    id: DEFAULT_IRISH_DEMO_VOICE_ID,
+    label: "Custom (Irish)",
+    provider: "11labs",
+    defaultLanguageId: "en",
+    enforceLanguage: "en",
+    model: "eleven_turbo_v2_5",
+  },
 ];
 
 export default function LiveDemoCall() {
@@ -377,8 +399,15 @@ export default function LiveDemoCall() {
 
   const assistantSystemPrompt = useMemo(() => {
     if (languageId === "en") return scenario.systemPrompt;
-    return `${scenario.systemPrompt}\n\nIMPORTANT:\n- Speak to the caller in ${language.label}.\n- Keep the same structure (collect details, confirm back).\n- If the caller switches languages, continue in ${language.label}.`;
-  }, [language.label, languageId, scenario.systemPrompt]);
+    const basePrompt = `${scenario.systemPrompt}\n\nIMPORTANT:\n- Speak to the caller in ${language.label}.\n- Keep the same structure (collect details, confirm back).\n- If the caller switches languages, continue in ${language.label}.`;
+    if (languageId !== "es") return basePrompt;
+
+    const argentineStylePrompt = selectedVoice.id === DEFAULT_ARGENTINA_DEMO_VOICE_ID
+      ? "\n- Use neutral Argentinian (Rioplatense) Spanish with natural voseo (e.g., queres/tenes)."
+      : "";
+
+    return `${basePrompt}\n- Keep a natural LATAM Spanish delivery and avoid English phrasing.${argentineStylePrompt}`;
+  }, [language.label, languageId, scenario.systemPrompt, selectedVoice.id]);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -571,9 +600,11 @@ export default function LiveDemoCall() {
           ? {
               provider: "11labs",
               voiceId: selectedVoice.id,
-              model: "eleven_multilingual_v2",
-              stability: 0.5,
-              similarityBoost: 0.75,
+              model: selectedVoice.model || "eleven_turbo_v2_5",
+              language: selectedVoice.enforceLanguage || languageId,
+              stability: 0.55,
+              similarityBoost: 0.8,
+              optimizeStreamingLatency: 2,
             }
           : { provider: "vapi", voiceId: selectedVoice.id },
         model: {
@@ -607,7 +638,7 @@ export default function LiveDemoCall() {
       setCallStatus("error");
       setIsCheckingAllowance(false);
     }
-  }, [assistantFirstMessage, assistantSystemPrompt, bypassCode, language.transcriberLanguage, scenario.label, selectedVoice]);
+  }, [assistantFirstMessage, assistantSystemPrompt, bypassCode, language.transcriberLanguage, languageId, scenario.label, selectedVoice]);
 
   const endCall = useCallback(() => {
     if (vapiRef.current) vapiRef.current.stop();
@@ -736,7 +767,12 @@ export default function LiveDemoCall() {
                 value={selectedVoice.id}
                 onChange={(e) => {
                   const voice = VOICES.find((v) => v.id === e.target.value);
-                  if (voice) setSelectedVoice(voice);
+                  if (voice) {
+                    setSelectedVoice(voice);
+                    if (voice.defaultLanguageId && voice.defaultLanguageId !== languageId) {
+                      setLanguageId(voice.defaultLanguageId);
+                    }
+                  }
                 }}
                 className="w-full px-4 py-3 rounded-lg border border-border bg-background text-foreground focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all"
                 disabled={callStatus === "connecting" || callStatus === "connected"}
