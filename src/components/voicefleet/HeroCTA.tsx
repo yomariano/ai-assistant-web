@@ -1,11 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Loader2 } from "lucide-react";
 import Link from "next/link";
-import { useAuthStore } from "@/lib/store";
-import { signInWithGoogle } from "@/lib/supabase";
 import dynamic from "next/dynamic";
 
 const LiveDemoCall = dynamic(
@@ -14,12 +12,24 @@ const LiveDemoCall = dynamic(
 );
 
 const HeroCTA = () => {
-  const { isAuthenticated } = useAuthStore();
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+
+  // Lazy-check auth after hydration to avoid pulling Supabase into the initial bundle
+  useEffect(() => {
+    import("@/lib/store").then(({ useAuthStore }) => {
+      setIsAuthenticated(useAuthStore.getState().isAuthenticated);
+      // Subscribe to future changes
+      return useAuthStore.subscribe((state) => {
+        setIsAuthenticated(state.isAuthenticated);
+      });
+    });
+  }, []);
 
   const handleStartTrial = async () => {
     setIsLoading(true);
     try {
+      const { signInWithGoogle } = await import("@/lib/supabase");
       await signInWithGoogle();
     } catch (error) {
       console.error("Failed to start Google OAuth:", error);
