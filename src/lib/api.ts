@@ -317,7 +317,7 @@ export const assistantApi = {
     businessName?: string;
     businessDescription?: string;
     greetingName?: string;
-  }): Promise<{ success: boolean; assistant: AssistantResponse['assistant'] }> => {
+  }): Promise<{ success: boolean; assistant: AssistantResponse['assistant']; warning?: string }> => {
     const { data } = await api.patch('/api/assistant', updates);
     return data;
   },

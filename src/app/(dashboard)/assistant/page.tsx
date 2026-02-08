@@ -245,7 +245,7 @@ export default function AssistantPage() {
 
     try {
       const voice = voices.find(v => v.id === selectedVoice);
-      await assistantApi.update({
+      const result = await assistantApi.update({
         businessName,
         businessDescription,
         greetingName,
@@ -254,9 +254,15 @@ export default function AssistantPage() {
         firstMessage,
         systemPrompt
       });
-      dispatch({ type: 'SET_SUCCESS', payload: 'Assistant configuration saved successfully!' });
-    } catch {
-      dispatch({ type: 'SET_ERROR', payload: 'Failed to save configuration. Please try again.' });
+      if (result.warning) {
+        dispatch({ type: 'SET_ERROR', payload: result.warning });
+      } else {
+        dispatch({ type: 'SET_SUCCESS', payload: 'Assistant configuration saved successfully!' });
+      }
+    } catch (err: unknown) {
+      const axiosErr = err as { response?: { data?: { error?: { message?: string } } } };
+      const msg = axiosErr?.response?.data?.error?.message || 'Failed to save configuration. Please try again.';
+      dispatch({ type: 'SET_ERROR', payload: msg });
     } finally {
       dispatch({ type: 'SET_SAVING', payload: false });
     }
