@@ -186,11 +186,18 @@ export default function AssistantPage() {
         } | undefined;
 
         if (assistantRes.exists && assistantRes.assistant) {
+          const availableVoices = voicesRes.voices || [];
+          const assistantVoiceId = assistantRes.assistant.voice.id || '';
+          const hasAssistantVoice = availableVoices.some((voice) => voice.id === assistantVoiceId);
+          const resolvedVoiceId = hasAssistantVoice
+            ? assistantVoiceId
+            : (availableVoices[0]?.id || '');
+
           formData = {
             businessName: assistantRes.assistant.business.name || '',
             businessDescription: assistantRes.assistant.business.description || '',
             greetingName: assistantRes.assistant.business.greetingName || '',
-            selectedVoice: assistantRes.assistant.voice.id || '',
+            selectedVoice: resolvedVoiceId,
             firstMessage: assistantRes.assistant.firstMessage || '',
             systemPrompt: assistantRes.assistant.systemPrompt || '',
           };
