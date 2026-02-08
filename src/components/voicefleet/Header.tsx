@@ -8,7 +8,7 @@ import { useRegion } from "@/hooks/useRegion";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { region } = useRegion();
+  const { region, loading: regionLoading } = useRegion();
   const isArgentina = region === "AR";
   const countryLabel = region === "AR" ? "Argentina" : "Ireland";
 
@@ -35,20 +35,22 @@ const Header = () => {
             </div>
             <div className="flex items-center gap-2.5">
               <span className="text-xl font-heading font-bold text-foreground">VoiceFleet</span>
-              <span
-                className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[10px] font-semibold leading-none transition-colors ${
-                  isArgentina
-                    ? "border-sky-200 bg-sky-50 text-sky-700"
-                    : "border-emerald-200 bg-emerald-50 text-emerald-700"
-                }`}
-              >
+              {!regionLoading && (
                 <span
-                  className={`h-1.5 w-1.5 rounded-full ${
-                    isArgentina ? "bg-sky-500" : "bg-emerald-500"
+                  className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[10px] font-semibold leading-none transition-colors ${
+                    isArgentina
+                      ? "border-sky-200 bg-sky-50 text-sky-700"
+                      : "border-emerald-200 bg-emerald-50 text-emerald-700"
                   }`}
-                />
-                {countryLabel}
-              </span>
+                >
+                  <span
+                    className={`h-1.5 w-1.5 rounded-full ${
+                      isArgentina ? "bg-sky-500" : "bg-emerald-500"
+                    }`}
+                  />
+                  {countryLabel}
+                </span>
+              )}
             </div>
           </Link>
 

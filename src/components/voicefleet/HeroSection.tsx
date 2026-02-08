@@ -1,49 +1,28 @@
-"use client";
+import { Shield, Clock, Phone, MessageSquare, Calendar, Link2, Headphones, PhoneIncoming, Globe2 } from "lucide-react";
+import HeroCTA from "@/components/voicefleet/HeroCTA";
 
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { ArrowRight, Shield, Clock, Phone, MessageSquare, Calendar, Link2, Headphones, PhoneIncoming, Globe2, Loader2 } from "lucide-react";
-import Link from "next/link";
-import { useAuthStore } from "@/lib/store";
-import { signInWithGoogle } from "@/lib/supabase";
-import LiveDemoCall from "@/components/voicefleet/LiveDemoCall";
+const trustBadges = [
+  { icon: Shield, label: "GDPR-ready" },
+  { icon: Clock, label: "Go live in < 1 hour" },
+  { icon: Link2, label: "Calendar + booking integrations" },
+  { icon: Globe2, label: "Multilingual agents" },
+];
+
+const industries = ["Restaurants", "Dentists", "Gyms", "Plumbers", "Clinics", "Salons"];
+const integrations = [
+  "Google Calendar",
+  "Outlook",
+  "Calendly",
+  "Cal.com",
+  "Square Appointments",
+  "SimplyBook.me",
+  "Mindbody (beta)",
+  "TheFork (beta)",
+  "OpenTable (beta)",
+  "Resy (beta)",
+];
 
 const HeroSection = () => {
-  const { isAuthenticated } = useAuthStore();
-  const [isLoading, setIsLoading] = useState(false);
-
-  const handleStartTrial = async () => {
-    setIsLoading(true);
-    try {
-      await signInWithGoogle();
-      // OAuth will redirect, so we don't need to handle success here
-    } catch (error) {
-      console.error("Failed to start Google OAuth:", error);
-      setIsLoading(false);
-    }
-  };
-
-  const trustBadges = [
-    { icon: Shield, label: "GDPR-ready" },
-    { icon: Clock, label: "Go live in < 1 hour" },
-    { icon: Link2, label: "Calendar + booking integrations" },
-    { icon: Globe2, label: "Multilingual agents" },
-  ];
-
-  const industries = ["Restaurants", "Dentists", "Gyms", "Plumbers", "Clinics", "Salons"];
-  const integrations = [
-    "Google Calendar",
-    "Outlook",
-    "Calendly",
-    "Cal.com",
-    "Square Appointments",
-    "SimplyBook.me",
-    "Mindbody (beta)",
-    "TheFork (beta)",
-    "OpenTable (beta)",
-    "Resy (beta)",
-  ];
-
   return (
     <section className="relative min-h-screen pt-20 lg:pt-24 overflow-hidden">
       {/* Background */}
@@ -59,57 +38,18 @@ const HeroSection = () => {
               <span className="text-sm font-medium text-accent">24/7 AI voice receptionist for SMBs</span>
             </div>
 
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-heading font-extrabold text-foreground leading-tight mb-6 animate-fade-up stagger-1">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-heading font-extrabold text-foreground leading-tight mb-6">
               Answer Every Call.{" "}
               <span className="text-gradient-primary">Book More Appointments.</span>{" "}
               With an AI Voice Receptionist.
             </h1>
 
-            <p className="text-base sm:text-lg lg:text-xl text-muted-foreground mb-8 leading-relaxed animate-fade-up stagger-2">
+            <p className="text-base sm:text-lg lg:text-xl text-muted-foreground mb-8 leading-relaxed">
               Forward your existing number to VoiceFleet. We answer calls, capture intent + details, and book appointments or reservations into your calendar/booking system.
               We also escalate urgent calls to your team and send instant summaries.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 mb-10 animate-fade-up stagger-3">
-              {isAuthenticated ? (
-                <Link href="/dashboard">
-                  <Button variant="hero" size="xl">
-                    Go to Dashboard
-                    <ArrowRight className="w-5 h-5" />
-                  </Button>
-                </Link>
-              ) : (
-                <Button variant="hero" size="xl" onClick={handleStartTrial} disabled={isLoading}>
-                  {isLoading ? (
-                    <>
-                      <Loader2 className="w-5 h-5 animate-spin" />
-                      Connecting...
-                    </>
-                  ) : (
-                    <>
-                      Start Free Trial
-                      <ArrowRight className="w-5 h-5" />
-                    </>
-                  )}
-                </Button>
-              )}
-              <LiveDemoCall />
-            </div>
-            <p className="text-xs text-muted-foreground -mt-6 mb-8">
-              Live demo: choose an industry + voice + language (English, Spanish, French, German, Italian). Calls end automatically after 90 seconds.
-            </p>
-            <p className="text-sm text-muted-foreground -mt-4 mb-10">
-              Prefer a guided walkthrough?{" "}
-              <a
-                href="https://calendly.com/voicefleet"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-foreground font-semibold hover:underline"
-              >
-                Book a demo
-              </a>
-              .
-            </p>
+            <HeroCTA />
 
             {/* Trust Badges */}
             <div className="flex flex-wrap gap-4 animate-fade-up stagger-4">
