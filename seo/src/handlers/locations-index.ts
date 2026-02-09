@@ -23,7 +23,7 @@ export async function locationsIndexHandler(c: Context<{ Bindings: Bindings }>) 
       <section class="country-section">
         <div class="country-header">
           <h2><a href="${siteUrl}/locations/${country.slug}">${escapeHtml(country.name)}</a></h2>
-          <p>${escapeHtml(country.phoneFormat)} local numbers • ${country.cities.length} cities</p>
+          <p>${escapeHtml(country.phoneFormat)} local numbers &middot; ${country.cities.length} cities</p>
         </div>
         <div class="city-pills">${cityLinks}</div>
       </section>
@@ -53,17 +53,62 @@ export async function locationsIndexHandler(c: Context<{ Bindings: Bindings }>) 
     </section>
 
     <style>
-      .hero-small { padding: 50px 0; }
-      .locations-list { padding: 60px 0; }
-      .country-section { padding: 22px; border: 1px solid #e5e7eb; border-radius: 14px; background: #fff; margin-bottom: 18px; }
-      .country-header { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 14px; }
-      .country-header h2 { margin: 0; font-size: 1.25rem; }
-      .country-header a { color: #1a1a2e; text-decoration: none; }
-      .country-header a:hover { text-decoration: underline; }
-      .country-header p { margin: 0; color: #666; font-size: 0.95rem; }
+      .hero-small { padding: 56px 0 44px; border-bottom: 0; }
+      .hero-small h1 { margin-bottom: 12px; }
+      .hero-small p { max-width: 760px; }
+      .locations-list { padding: 44px 0 64px; }
+      .country-section {
+        padding: 24px;
+        border: 1px solid var(--border);
+        border-radius: 18px;
+        background: var(--card);
+        box-shadow: var(--shadow-sm);
+        margin-bottom: 16px;
+      }
+      .country-header {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-bottom: 16px;
+      }
+      .country-header h2 { margin: 0; font-size: 1.3rem; }
+      .country-header a {
+        color: var(--foreground);
+        text-decoration: none;
+        font-weight: 700;
+      }
+      .country-header a:hover { color: var(--primary); }
+      .country-header p {
+        margin: 0;
+        color: var(--muted-foreground);
+        font-size: 0.9rem;
+        font-weight: 600;
+      }
       .city-pills { display: flex; flex-wrap: wrap; gap: 10px; }
-      .city-pill { display: inline-flex; padding: 8px 12px; border: 1px solid #e5e7eb; border-radius: 999px; color: #1a1a2e; text-decoration: none; font-size: 0.95rem; }
-      .city-pill:hover { border-color: #3b82f6; box-shadow: 0 2px 10px rgba(59, 130, 246, 0.08); }
+      .city-pill {
+        display: inline-flex;
+        align-items: center;
+        padding: 8px 14px;
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        color: var(--foreground);
+        background: #f8faff;
+        text-decoration: none;
+        font-size: 0.9rem;
+        font-weight: 600;
+      }
+      .city-pill:hover {
+        border-color: #b8c9ee;
+        background: #eef4ff;
+        box-shadow: var(--shadow-sm);
+        transform: translateY(-1px);
+      }
+      @media (max-width: 768px) {
+        .hero-small { padding: 48px 0 38px; }
+        .country-section { padding: 20px; border-radius: 16px; }
+      }
     </style>
   `;
 
@@ -100,7 +145,7 @@ export async function locationsCountryHandler(
   const cityCards = country.cities.map((city) => `
     <a class="city-card" href="${siteUrl}/locations/${country.slug}/${city.slug}">
       <div class="city-name">${escapeHtml(city.name)}</div>
-      <div class="city-meta">${escapeHtml(city.region || country.name)} • pop. ${city.population.toLocaleString()}</div>
+      <div class="city-meta">${escapeHtml(city.region || country.name)} &middot; pop. ${city.population.toLocaleString()}</div>
     </a>
   `).join('');
 
@@ -131,20 +176,30 @@ export async function locationsCountryHandler(
     </section>
 
     <style>
-      .hero-small { padding: 50px 0; }
-      .country-cities { padding: 60px 0; }
+      .hero-small { padding: 56px 0 44px; border-bottom: 0; }
+      .hero-small p { max-width: 720px; }
+      .country-cities { padding: 44px 0 64px; }
       .city-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
       .city-card {
         display: block;
-        padding: 16px;
-        background: #fff;
-        border: 1px solid #e5e7eb;
-        border-radius: 12px;
+        padding: 18px;
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        box-shadow: var(--shadow-sm);
         text-decoration: none;
       }
-      .city-card:hover { border-color: #3b82f6; box-shadow: 0 4px 12px rgba(59, 130, 246, 0.08); }
-      .city-name { color: #1a1a2e; font-weight: 700; margin-bottom: 4px; }
-      .city-meta { color: #666; font-size: 0.9rem; }
+      .city-card:hover {
+        border-color: #b8c9ee;
+        box-shadow: var(--shadow-md);
+        transform: translateY(-1px);
+      }
+      .city-name { color: var(--foreground); font-weight: 700; margin-bottom: 4px; font-size: 1rem; }
+      .city-meta { color: var(--muted-foreground); font-size: 0.88rem; }
+      @media (max-width: 768px) {
+        .hero-small { padding: 48px 0 38px; }
+        .city-grid { grid-template-columns: 1fr; }
+      }
     </style>
   `;
 
@@ -168,3 +223,4 @@ export async function locationsCountryHandler(
 
   return c.html(html);
 }
+
