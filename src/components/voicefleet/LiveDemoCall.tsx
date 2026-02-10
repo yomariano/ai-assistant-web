@@ -43,6 +43,26 @@ function coerceTranscript(value: unknown): string | null {
   return asString.trim() ? asString : null;
 }
 
+/**
+ * Safely extract a string error message from an unknown value.
+ * Handles cases where Vapi returns error objects like {type, msg, details}
+ * instead of plain strings, preventing React error #31.
+ */
+function safeErrorMessage(value: unknown, fallback: string): string {
+  if (typeof value === "string" && value.trim()) return value;
+  if (value == null) return fallback;
+
+  if (typeof value === "object") {
+    const obj = value as Record<string, unknown>;
+    // Try common error message properties
+    if (typeof obj.msg === "string" && obj.msg.trim()) return obj.msg;
+    if (typeof obj.message === "string" && obj.message.trim()) return obj.message;
+    if (typeof obj.error === "string" && obj.error.trim()) return obj.error;
+  }
+
+  return fallback;
+}
+
 type DemoScenario = {
   id: string;
   label: string;
@@ -534,15 +554,25 @@ export default function LiveDemoCall() {
         );
 
         vapi.on("error", (err: unknown) => {
-          let errorMessage = "An error occurred during the demo call.";
+          const fallback = "An error occurred during the demo call.";
+          let errorMessage = fallback;
+
           if (err && typeof err === "object") {
-            const vapiError = err as { message?: string; error?: { message?: string }; type?: string };
-            if (vapiError.error?.message) errorMessage = vapiError.error.message;
-            else if (vapiError.message) errorMessage = vapiError.message;
-            else if (vapiError.type === "start-method-error") {
+            const vapiError = err as Record<string, unknown>;
+
+            // Handle nested error object
+            if (vapiError.error && typeof vapiError.error === "object") {
+              errorMessage = safeErrorMessage(
+                (vapiError.error as Record<string, unknown>).message,
+                fallback
+              );
+            } else if (vapiError.message !== undefined) {
+              errorMessage = safeErrorMessage(vapiError.message, fallback);
+            } else if (vapiError.type === "start-method-error") {
               errorMessage = "Failed to start the demo call. Check microphone permissions and try again.";
             }
           }
+
           setError(errorMessage);
           setCallStatus("error");
         });
@@ -620,6 +650,8 @@ export default function LiveDemoCall() {
               language: selectedVoice.enforceLanguage || languageId,
               stability: 0.55,
               similarityBoost: 0.8,
+              style: 0,
+              useSpeakerBoost: true,
               optimizeStreamingLatency: 2,
             }
           : { provider: "vapi", voiceId: selectedVoice.id },
@@ -638,18 +670,28 @@ export default function LiveDemoCall() {
       if (language.transcriberLanguage) {
         assistantConfig.transcriber = {
           provider: "deepgram",
+          model: "nova-2",
           language: language.transcriberLanguage,
         };
       }
 
       await vapiRef.current.start(assistantConfig);
     } catch (err: unknown) {
-      let errorMessage = "Failed to start the demo. Please allow microphone access and try again.";
+      const fallback = "Failed to start the demo. Please allow microphone access and try again.";
+      let errorMessage = fallback;
+
       if (err && typeof err === "object") {
-        const e = err as { message?: string; error?: { message?: string } };
-        if (e.error?.message) errorMessage = e.error.message;
-        else if (e.message) errorMessage = e.message;
+        const e = err as Record<string, unknown>;
+        if (e.error && typeof e.error === "object") {
+          errorMessage = safeErrorMessage(
+            (e.error as Record<string, unknown>).message,
+            fallback
+          );
+        } else if (e.message !== undefined) {
+          errorMessage = safeErrorMessage(e.message, fallback);
+        }
       }
+
       setError(errorMessage);
       setCallStatus("error");
       setIsCheckingAllowance(false);
