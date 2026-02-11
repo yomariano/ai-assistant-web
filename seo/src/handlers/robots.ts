@@ -9,13 +9,18 @@ import { Bindings } from '../types';
 export async function robotsHandler(c: Context<{ Bindings: Bindings }>) {
   const siteUrl = c.env.SITE_URL || 'https://voicefleet.ai';
 
-  const robots = `# VoiceFleet.ai SEO Pages
-# Optimized for 2026 GEO - AI crawlers welcomed
-
-User-agent: *
+  const robots = `User-agent: *
 Allow: /
+Disallow: /admin/
+Disallow: /api/
+Disallow: /dashboard/
+Disallow: /call/
+Disallow: /agenda/
+Disallow: /scheduled/
+Disallow: /history/
+Disallow: /settings/
+Disallow: /auth/
 
-# AI Bots - EXPLICITLY ALLOWED for GEO
 User-agent: GPTBot
 Allow: /
 
@@ -37,15 +42,7 @@ Allow: /
 User-agent: Anthropic-AI
 Allow: /
 
-# Disallow admin routes
-Disallow: /admin/
-Disallow: /api/
-
-# Sitemaps
 Sitemap: ${siteUrl}/sitemap.xml
-
-# Crawl delay to be respectful
-Crawl-delay: 1
 `;
 
   return c.text(robots, 200, {
