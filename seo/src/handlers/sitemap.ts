@@ -1,12 +1,34 @@
 /**
  * VoiceFleet SEO - Sitemap Handlers
- * Generates XML sitemaps for all SEO pages
+ * Generates XML sitemaps for all SEO pages + blog, comparisons, and static pages
  */
 
 import { Context } from 'hono';
 import { Bindings } from '../types';
 import { INDUSTRIES, getIndustrySlugs } from '../data/industries';
 import { COUNTRIES, getAllCities } from '../data/locations';
+
+interface ContentItem {
+  slug: string;
+  updated_at: string;
+}
+
+interface SitemapApiData {
+  blogPosts: ContentItem[];
+  comparisons: ContentItem[];
+}
+
+async function fetchSitemapApiData(apiUrl: string): Promise<SitemapApiData | null> {
+  try {
+    const response = await fetch(`${apiUrl}/api/content/sitemap-data`, {
+      headers: { 'Accept': 'application/json' },
+    });
+    if (!response.ok) return null;
+    return response.json();
+  } catch {
+    return null;
+  }
+}
 
 /**
  * Sitemap index handler - lists all sub-sitemaps
@@ -15,6 +37,9 @@ export async function sitemapIndexHandler(c: Context<{ Bindings: Bindings }>) {
   const siteUrl = c.env.SITE_URL || 'https://voicefleet.ai';
 
   const sitemaps = [
+    'static',
+    'blog',
+    'comparisons',
     'indexes',
     'industries',
     'locations-ireland',
@@ -93,10 +118,20 @@ export async function sitemapHandlerWithType(
   type: string
 ) {
   const siteUrl = c.env.SITE_URL || 'https://voicefleet.ai';
+  const apiUrl = c.env.API_URL || 'https://api.voicefleet.ai';
 
-  let urls: Array<{ loc: string; priority: string; changefreq: string }> = [];
+  let urls: Array<{ loc: string; priority: string; changefreq: string; lastmod?: string }> = [];
 
   switch (type) {
+    case 'static':
+      urls = generateStaticSitemap(siteUrl);
+      break;
+    case 'blog':
+      urls = await generateBlogSitemap(siteUrl, apiUrl);
+      break;
+    case 'comparisons':
+      urls = await generateComparisonsSitemap(siteUrl, apiUrl);
+      break;
     case 'indexes':
       urls = generateIndexesSitemap(siteUrl);
       break;
@@ -125,7 +160,7 @@ export async function sitemapHandlerWithType(
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${urls.map(u => `  <url>
-    <loc>${u.loc}</loc>
+    <loc>${u.loc}</loc>${u.lastmod ? `\n    <lastmod>${u.lastmod}</lastmod>` : ''}
     <changefreq>${u.changefreq}</changefreq>
     <priority>${u.priority}</priority>
   </url>`).join('\n')}
@@ -217,4 +252,49 @@ function generateIndustryLocationsSitemap(siteUrl: string, offset: number, limit
   }
 
   return urls;
+}
+
+/**
+ * Generate static pages sitemap (homepage, features, blog listing, etc.)
+ */
+function generateStaticSitemap(siteUrl: string) {
+  return [
+    { loc: siteUrl, priority: '1.0', changefreq: 'weekly' },
+    { loc: `${siteUrl}/features`, priority: '0.8', changefreq: 'weekly' },
+    { loc: `${siteUrl}/blog`, priority: '0.8', changefreq: 'daily' },
+    { loc: `${siteUrl}/compare`, priority: '0.7', changefreq: 'weekly' },
+    { loc: `${siteUrl}/connect`, priority: '0.7', changefreq: 'weekly' },
+    { loc: `${siteUrl}/privacy`, priority: '0.3', changefreq: 'yearly' },
+    { loc: `${siteUrl}/terms`, priority: '0.3', changefreq: 'yearly' },
+  ];
+}
+
+/**
+ * Generate blog posts sitemap (fetched from API)
+ */
+async function generateBlogSitemap(siteUrl: string, apiUrl: string) {
+  const data = await fetchSitemapApiData(apiUrl);
+  if (!data?.blogPosts?.length) return [];
+
+  return data.blogPosts.map(post => ({
+    loc: `${siteUrl}/blog/${post.slug}`,
+    lastmod: post.updated_at ? new Date(post.updated_at).toISOString().split('T')[0] : undefined,
+    priority: '0.7',
+    changefreq: 'weekly',
+  }));
+}
+
+/**
+ * Generate comparison pages sitemap (fetched from API)
+ */
+async function generateComparisonsSitemap(siteUrl: string, apiUrl: string) {
+  const data = await fetchSitemapApiData(apiUrl);
+  if (!data?.comparisons?.length) return [];
+
+  return data.comparisons.map(page => ({
+    loc: `${siteUrl}/compare/${page.slug}`,
+    lastmod: page.updated_at ? new Date(page.updated_at).toISOString().split('T')[0] : undefined,
+    priority: '0.6',
+    changefreq: 'monthly',
+  }));
 }
