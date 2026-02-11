@@ -8,6 +8,8 @@ import { BreadcrumbSchema, FAQSchema } from "@/components/seo";
 import Breadcrumbs from "@/components/marketing/Breadcrumbs";
 import CTASection from "@/components/marketing/CTASection";
 import InternalLinks from "@/components/marketing/InternalLinks";
+import Header from "@/components/voicefleet/Header";
+import Footer from "@/components/voicefleet/Footer";
 import { Check, AlertTriangle, Sparkles, TrendingDown, TrendingUp, Phone, Clock, Euro, Users } from "lucide-react";
 
 interface Props {
@@ -77,11 +79,13 @@ export default async function UseCasePage({ params }: Props) {
       <BreadcrumbSchema items={breadcrumbs} />
       <FAQSchema items={faqItems} />
 
-      <div className="min-h-screen bg-white">
-        <Breadcrumbs items={breadcrumbs} />
+      <div className="min-h-screen bg-background">
+        <Header />
+        <main className="pt-16 lg:pt-20">
+          <Breadcrumbs items={breadcrumbs} />
 
-        {/* Hero Section */}
-        <section className="bg-gradient-to-br from-indigo-600 to-purple-700 py-20">
+          {/* Hero Section */}
+          <section className="bg-gradient-to-br from-blue-600 to-emerald-500 py-20">
           <div className="max-w-7xl mx-auto px-6">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div className="text-white">
@@ -326,7 +330,7 @@ export default async function UseCasePage({ params }: Props) {
                       <div className="mt-6 pt-6 border-t border-emerald-100">
                         <p className="text-slate-500 text-sm mb-3">Learn more about our solution:</p>
                         <div className="flex flex-wrap gap-3">
-                          <Link href="/#pricing" className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-50 text-emerald-700 rounded-lg text-sm font-medium hover:bg-emerald-100 transition-colors">
+                          <Link href="/pricing" className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-50 text-emerald-700 rounded-lg text-sm font-medium hover:bg-emerald-100 transition-colors">
                             <Euro className="h-4 w-4" />
                             <span>View Pricing</span>
                           </Link>
@@ -357,7 +361,7 @@ export default async function UseCasePage({ params }: Props) {
                         <p className="mt-3 text-xs text-slate-400">VoiceFleet AI guarantee</p>
                       </div>
 
-                      <Link href="/#pricing" className="bg-white rounded-2xl p-6 shadow-lg shadow-emerald-100 border border-emerald-100 hover:shadow-xl hover:shadow-emerald-200 hover:border-emerald-300 transition-all group">
+                      <Link href="/pricing" className="bg-white rounded-2xl p-6 shadow-lg shadow-emerald-100 border border-emerald-100 hover:shadow-xl hover:shadow-emerald-200 hover:border-emerald-300 transition-all group">
                         <div className="flex items-center gap-2 mb-2">
                           <TrendingUp className="h-5 w-5 text-emerald-600" />
                           <span className="text-slate-500 text-sm">Cost Savings</span>
@@ -491,16 +495,18 @@ export default async function UseCasePage({ params }: Props) {
           </div>
         </section>
 
-        {/* Internal Links */}
-        <InternalLinks
-          relatedFeatures={page.related_features}
-          relatedLocations={page.related_locations}
-        />
+          {/* Internal Links */}
+          <InternalLinks
+            relatedFeatures={page.related_features}
+            relatedLocations={page.related_locations}
+          />
 
-        <CTASection
-          title={`Ready to transform your ${page.industry_name.toLowerCase()} operations?`}
-          description="Start your free trial today and see how AI voice agents can help."
-        />
+          <CTASection
+            title={`Ready to transform your ${page.industry_name.toLowerCase()} operations?`}
+            description="Start your free trial today and see how AI voice agents can help."
+          />
+        </main>
+        <Footer />
       </div>
     </>
   );
