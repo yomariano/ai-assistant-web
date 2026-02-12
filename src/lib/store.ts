@@ -2,8 +2,12 @@ import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import type { User } from '@/types';
 import { authApi } from './api';
-import { signInWithGoogle, signOut as supabaseSignOut, getSessionResult } from './supabase';
-import { createClient } from '@/utils/supabase/client';
+import {
+  signInWithGoogle,
+  signOut as supabaseSignOut,
+  getSessionResult,
+  supabase as supabaseClient,
+} from './supabase';
 
 interface AuthState {
   user: User | null;
@@ -97,6 +101,43 @@ export const useAuthStore = create<AuthState>()(
             const sessionResult = await getSessionResult({ timeoutMs: 10000 });
             session = sessionResult.session;
             if (sessionResult.didTimeout) {
+              // Supabase getSession can occasionally hang in the browser.
+              // If we already have a persisted token, try that before marking auth as failed.
+              try {
+                const storedAuth = localStorage.getItem('auth-storage');
+                if (storedAuth) {
+                  const { state } = JSON.parse(storedAuth) as {
+                    state?: { token?: string; devMode?: boolean };
+                  };
+                  const persistedToken =
+                    state?.token && state.token !== 'dev-mode' ? state.token : null;
+                  if (persistedToken) {
+                    console.log('[STORE] getSession timed out, trying persisted token fallback...');
+                    const { user } = await authApi.me(persistedToken);
+                    set({
+                      user,
+                      token: persistedToken,
+                      isAuthenticated: true,
+                      isLoading: false,
+                      devMode: false,
+                      sessionRetryCount: 0,
+                      authError: null,
+                      hasExplicitlyLoggedOut: false,
+                    });
+                    return;
+                  }
+                }
+              } catch (fallbackError) {
+                console.warn('[STORE] Persisted-token auth fallback failed:', fallbackError);
+              }
+
+              const currentState = get();
+              if (currentState.isAuthenticated && currentState.token) {
+                console.log('[STORE] Session timed out, but auth state is already valid; keeping current state');
+                set({ isLoading: false, sessionRetryCount: 0, authError: null });
+                return;
+              }
+
               const retryCount = get().sessionRetryCount;
               const MAX_SESSION_RETRIES = 2;
               if (retryCount < MAX_SESSION_RETRIES) {
@@ -211,12 +252,8 @@ export const useAuthStore = create<AuthState>()(
 // Listen for Supabase auth changes
 if (typeof window !== 'undefined') {
   try {
-    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-    const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-
-    if (supabaseUrl && supabaseKey) {
-      const supabase = createClient();
-      supabase.auth.onAuthStateChange(async (event, session) => {
+    if (supabaseClient) {
+      supabaseClient.auth.onAuthStateChange(async (event, session) => {
         console.log('[STORE] Auth state changed:', event);
         if ((event === 'SIGNED_IN' || event === 'INITIAL_SESSION' || event === 'TOKEN_REFRESHED') && session) {
           try {
@@ -239,28 +276,45 @@ if (typeof window !== 'undefined') {
               window.location.href = redirectPath;
             }
           } catch (error) {
+            const status =
+              typeof error === 'object' &&
+              error !== null &&
+              'response' in error &&
+              typeof (error as { response?: unknown }).response === 'object'
+                ? (error as { response?: { status?: number } }).response?.status
+                : undefined;
+
             console.error('Failed to get user after sign in:', error);
-            // User has valid Supabase session but doesn't exist in our database
-            // This can happen if user was deleted. Clear auth state and redirect.
-            console.log('[STORE] User not found in database, clearing auth state');
-            useAuthStore.setState({
-              user: null,
-              token: null,
-              isAuthenticated: false,
-              devMode: false,
-              isLoading: false,
-              sessionRetryCount: 0,
-            });
-            // Sign out of Supabase to clear the invalid session
-            try {
-              await supabase.auth.signOut();
-            } catch (signOutError) {
-              console.error('[STORE] Failed to sign out:', signOutError);
+
+            // Hard-fail only on clear auth failures.
+            if (status === 401 || status === 404) {
+              console.log('[STORE] Invalid session/user after sign in, clearing auth state');
+              useAuthStore.setState({
+                user: null,
+                token: null,
+                isAuthenticated: false,
+                devMode: false,
+                isLoading: false,
+                sessionRetryCount: 0,
+              });
+              // Sign out of Supabase to clear the invalid session
+              try {
+                await supabaseClient?.auth.signOut();
+              } catch (signOutError) {
+                console.error('[STORE] Failed to sign out:', signOutError);
+              }
+              // Clear localStorage to prevent stale state
+              localStorage.removeItem('auth-storage');
+              // Redirect to home page
+              window.location.href = '/';
+              return;
             }
-            // Clear localStorage to prevent stale state
-            localStorage.removeItem('auth-storage');
-            // Redirect to home page
-            window.location.href = '/';
+
+            // For transient failures (5xx/network/race), keep session and retry auth check.
+            console.warn('[STORE] Temporary profile fetch failure after sign in, retrying checkAuth');
+            setTimeout(() => {
+              void useAuthStore.getState().checkAuth();
+            }, 750);
           }
         } else if (event === 'SIGNED_OUT') {
           useAuthStore.setState({

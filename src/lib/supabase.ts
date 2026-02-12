@@ -3,6 +3,8 @@ import type { Session } from '@supabase/supabase-js';
 
 // Create singleton client instance
 let supabaseInstance: ReturnType<typeof createClient> | null = null;
+type GetSessionResponse = Awaited<ReturnType<ReturnType<typeof createClient>['auth']['getSession']>>;
+let sessionRequestInFlight: Promise<GetSessionResponse> | null = null;
 
 function getSupabase() {
   if (!supabaseInstance) {
@@ -82,14 +84,23 @@ export const getSessionResult = async (
     setTimeout(() => resolve({ type: 'timeout' }), timeoutMs);
   });
 
-  const sessionPromise = client.auth
-    .getSession()
+  if (!sessionRequestInFlight) {
+    sessionRequestInFlight = client.auth
+      .getSession()
+      .finally(() => {
+        sessionRequestInFlight = null;
+      });
+  }
+
+  const sessionPromise = sessionRequestInFlight
     .then((result) => ({ type: 'session' as const, result }))
     .catch((error: unknown) => ({ type: 'error' as const, error }));
 
   const outcome = await Promise.race([timeoutPromise, sessionPromise]);
 
   if (outcome.type === 'timeout') {
+    // Clear deduped request so the next call can retry with a fresh `getSession` attempt.
+    sessionRequestInFlight = null;
     const errorMessage = `getSession timeout after ${timeoutMs}ms`;
     console.error('[SUPABASE] getSession exception:', new Error(errorMessage));
     return { session: null, didTimeout: true, errorMessage };
