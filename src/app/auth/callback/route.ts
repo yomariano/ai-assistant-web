@@ -16,6 +16,9 @@ export async function GET(request: NextRequest) {
   if (!next.startsWith('/')) {
     next = '/dashboard';
   }
+  // Add fresh_auth param to indicate we just completed OAuth - dashboard will wait for session
+  const separator = next.includes('?') ? '&' : '?';
+  next = `${next}${separator}fresh_auth=1`;
 
   console.log('[AUTH CALLBACK] Code present:', !!code);
   console.log('[AUTH CALLBACK] Error:', error);

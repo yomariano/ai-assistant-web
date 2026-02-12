@@ -147,8 +147,29 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
     // Only check auth once after hydration
     if (!hasCheckedAuth.current) {
       hasCheckedAuth.current = true;
-      console.log('[DASHBOARD] useEffect - calling checkAuth()');
-      checkAuth();
+
+      // Check if we're coming from a fresh OAuth callback
+      const urlParams = new URLSearchParams(window.location.search);
+      const isFreshAuth = urlParams.get('fresh_auth') === '1';
+
+      if (isFreshAuth) {
+        // Remove the fresh_auth param from URL to prevent issues on refresh
+        urlParams.delete('fresh_auth');
+        const newUrl = urlParams.toString()
+          ? `${window.location.pathname}?${urlParams.toString()}`
+          : window.location.pathname;
+        window.history.replaceState({}, '', newUrl);
+
+        // Wait 1.5s for Supabase session to fully establish after OAuth callback
+        console.log('[DASHBOARD] Fresh OAuth detected - waiting 1.5s for session...');
+        setTimeout(() => {
+          console.log('[DASHBOARD] Calling checkAuth() after OAuth delay');
+          checkAuth();
+        }, 1500);
+      } else {
+        console.log('[DASHBOARD] useEffect - calling checkAuth()');
+        checkAuth();
+      }
     }
   }, [checkAuth, isHydrated]);
 

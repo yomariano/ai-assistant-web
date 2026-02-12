@@ -94,7 +94,7 @@ export const useAuthStore = create<AuthState>()(
           let session = null;
           try {
             console.log('[STORE] Checking Supabase session...');
-            const sessionResult = await getSessionResult({ timeoutMs: 8000 });
+            const sessionResult = await getSessionResult({ timeoutMs: 10000 });
             session = sessionResult.session;
             if (sessionResult.didTimeout) {
               const retryCount = get().sessionRetryCount;
