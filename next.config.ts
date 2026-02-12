@@ -86,12 +86,11 @@ const nextConfig: NextConfig = {
   // Redirects for SEO
   async redirects() {
     return [
-      // Example: Redirect old URLs to new ones
-      // {
-      //   source: '/old-page',
-      //   destination: '/new-page',
-      //   permanent: true, // 301 redirect
-      // },
+      {
+        source: "/pricing",
+        destination: "/#pricing",
+        permanent: true,
+      },
     ];
   },
 };
