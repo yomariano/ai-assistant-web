@@ -207,7 +207,7 @@ function renderFallbackContent(
       },
       {
         question: 'How much does VoiceFleet cost?',
-        answer: `VoiceFleet starts at ${country.currency === 'EUR' ? '€49' : country.currency === 'GBP' ? '£49' : '$49'}/month. Pricing scales based on call volume. All plans include a free trial.`
+        answer: `VoiceFleet starts at ${country.currency === 'EUR' ? '€99' : country.currency === 'GBP' ? '£99' : '$49'}/month. 500 minutes included. All plans include a free trial.`
       },
       {
         question: 'How long does setup take?',

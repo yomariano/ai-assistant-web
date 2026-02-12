@@ -235,7 +235,7 @@ function renderFallbackContent(
     generateFAQSection([
       {
         question: `How much does VoiceFleet cost for ${industry.name.toLowerCase()}?`,
-        answer: `VoiceFleet starts at $49/month for small ${industry.name.toLowerCase()} businesses. Pricing scales based on call volume and features needed. All plans include a free trial.`
+        answer: `VoiceFleet starts at €99/month for small ${industry.name.toLowerCase()} businesses. 500 minutes included. All plans include a free trial.`
       },
       {
         question: `Can VoiceFleet integrate with my ${industry.name.toLowerCase()} software?`,

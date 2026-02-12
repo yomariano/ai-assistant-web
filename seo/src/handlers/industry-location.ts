@@ -254,7 +254,7 @@ function renderFallbackContent(
     generateFAQSection([
       {
         question: `How much does VoiceFleet cost for ${industry.name.toLowerCase()} in ${city.name}?`,
-        answer: `VoiceFleet starts at ${country.currency === 'EUR' ? '€49' : country.currency === 'GBP' ? '£49' : '$49'}/month for ${industry.name.toLowerCase()} in ${city.name}. All plans include a free trial.`
+        answer: `VoiceFleet starts at ${country.currency === 'EUR' ? '€99' : country.currency === 'GBP' ? '£99' : '$49'}/month for ${industry.name.toLowerCase()} in ${city.name}. All plans include a free trial.`
       },
       {
         question: `Can I get a local ${city.name} phone number?`,

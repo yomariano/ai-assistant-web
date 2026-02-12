@@ -104,18 +104,18 @@ export function useRegion(): UseRegionReturn {
       console.error('Error fetching region:', err);
       setError(err instanceof Error ? err.message : 'Unknown error');
 
-      // Fallback to US pricing
+      // Fallback to EU pricing (Feb 2026)
       const fallbackData: RegionData = {
         detected: false,
-        region: 'US',
-        regionName: 'United States',
-        currency: 'USD',
-        currencySymbol: '$',
-        telephonyProvider: 'vapi',
+        region: 'EU',
+        regionName: 'Europe',
+        currency: 'EUR',
+        currencySymbol: '€',
+        telephonyProvider: 'voipcloud',
         plans: [
-          { id: 'starter', price: 49, formattedPrice: '$49', monthlyMinutes: 100, paymentLink: null },
-          { id: 'growth', price: 199, formattedPrice: '$199', monthlyMinutes: 500, paymentLink: null },
-          { id: 'pro', price: 599, formattedPrice: '$599', monthlyMinutes: 1500, paymentLink: null },
+          { id: 'starter', price: 99, formattedPrice: '€99', monthlyMinutes: 500, paymentLink: null },
+          { id: 'growth', price: 299, formattedPrice: '€299', monthlyMinutes: 1000, paymentLink: null },
+          { id: 'pro', price: 599, formattedPrice: '€599', monthlyMinutes: 2000, paymentLink: null },
         ],
       };
       setData(fallbackData);
@@ -178,18 +178,18 @@ export async function getRegionFromServer(): Promise<RegionData> {
 
     return response.json();
   } catch {
-    // Fallback to US
+    // Fallback to EU (Feb 2026 pricing)
     return {
       detected: false,
-      region: 'US',
-      regionName: 'United States',
-      currency: 'USD',
-      currencySymbol: '$',
-      telephonyProvider: 'vapi',
+      region: 'EU',
+      regionName: 'Europe',
+      currency: 'EUR',
+      currencySymbol: '€',
+      telephonyProvider: 'voipcloud',
       plans: [
-        { id: 'starter', price: 49, formattedPrice: '$49', monthlyMinutes: 100, paymentLink: null },
-        { id: 'growth', price: 199, formattedPrice: '$199', monthlyMinutes: 500, paymentLink: null },
-        { id: 'pro', price: 599, formattedPrice: '$599', monthlyMinutes: 1500, paymentLink: null },
+        { id: 'starter', price: 99, formattedPrice: '€99', monthlyMinutes: 500, paymentLink: null },
+        { id: 'growth', price: 299, formattedPrice: '€299', monthlyMinutes: 1000, paymentLink: null },
+        { id: 'pro', price: 599, formattedPrice: '€599', monthlyMinutes: 2000, paymentLink: null },
       ],
     };
   }

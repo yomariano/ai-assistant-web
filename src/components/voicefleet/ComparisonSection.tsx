@@ -13,7 +13,7 @@ const ComparisonSection = () => {
   const features = [
     {
       name: "Starting price",
-      voicefleet: "€49/mo",
+      voicefleet: "€99/mo",
       smithai: "$140/mo",
       ruby: "$230/mo",
       dialpad: "$15/user/mo",

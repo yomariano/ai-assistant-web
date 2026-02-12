@@ -250,7 +250,7 @@ export default function FeaturesPage() {
 
             <div className="grid md:grid-cols-4 gap-6 max-w-5xl mx-auto mb-12">
               <div className="bg-card rounded-xl border border-border p-6 text-center">
-                <div className="text-4xl font-heading font-bold text-primary mb-2">€49</div>
+                <div className="text-4xl font-heading font-bold text-primary mb-2">€99</div>
                 <p className="text-muted-foreground">Starting price per month</p>
               </div>
               <div className="bg-card rounded-xl border border-border p-6 text-center">
@@ -269,7 +269,7 @@ export default function FeaturesPage() {
 
             <div className="text-center">
               <Link
-                href="/#pricing"
+                href="/pricing"
                 className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground font-semibold rounded-xl hover:bg-primary/90 transition-colors"
               >
                 Compare Plans & Pricing
