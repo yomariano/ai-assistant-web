@@ -27,7 +27,7 @@ export default function PricingPage() {
   return (
     <>
       <BreadcrumbSchema items={breadcrumbs} />
-      <FAQSchema items={PRICING_FAQS} />
+      <FAQSchema items={[...PRICING_FAQS]} />
 
       <Header />
       <div className="min-h-screen bg-background">
