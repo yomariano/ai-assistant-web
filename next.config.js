@@ -5,6 +5,80 @@ const nextConfig = {
     // Keep console.error for diagnosing real issues.
     removeConsole: process.env.NODE_ENV === "production" ? { exclude: ["error"] } : false,
   },
+
+  // Redirect bare industry slugs to /for/[industry] pages
+  // Users expect /restaurants/ and /dental/ to work
+  async redirects() {
+    return [
+      // Common industry shortcuts
+      {
+        source: '/restaurants',
+        destination: '/for/restaurants',
+        permanent: true,
+      },
+      {
+        source: '/dental',
+        destination: '/for/dental-clinics',
+        permanent: true,
+      },
+      {
+        source: '/dental-clinics',
+        destination: '/for/dental-clinics',
+        permanent: true,
+      },
+      // Other popular industries
+      {
+        source: '/plumbers',
+        destination: '/for/plumbers',
+        permanent: true,
+      },
+      {
+        source: '/electricians',
+        destination: '/for/electricians',
+        permanent: true,
+      },
+      {
+        source: '/hotels',
+        destination: '/for/hotels',
+        permanent: true,
+      },
+      {
+        source: '/salons',
+        destination: '/for/hair-salons',
+        permanent: true,
+      },
+      {
+        source: '/hair-salons',
+        destination: '/for/hair-salons',
+        permanent: true,
+      },
+      {
+        source: '/spas',
+        destination: '/for/spas',
+        permanent: true,
+      },
+      {
+        source: '/real-estate',
+        destination: '/for/real-estate',
+        permanent: true,
+      },
+      {
+        source: '/hvac',
+        destination: '/for/hvac',
+        permanent: true,
+      },
+      {
+        source: '/medical-clinics',
+        destination: '/for/medical-clinics',
+        permanent: true,
+      },
+      {
+        source: '/law-firms',
+        destination: '/for/law-firms',
+        permanent: true,
+      },
+    ];
+  },
 };
 
 module.exports = nextConfig;
