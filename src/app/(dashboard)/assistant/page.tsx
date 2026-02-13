@@ -13,7 +13,7 @@ import { AssistantPhoneNumbers } from './components/assistant-phone-numbers';
 import { AssistantVoiceGrid } from './components/assistant-voice-grid';
 import { TestAgentModal } from './components/test-agent-modal';
 import { PromptTemplateSelector } from '@/components/assistant/PromptTemplateSelector';
-import type { PromptTemplate } from '@/lib/content/prompt-templates';
+import type { SelectedTemplateData } from '@/components/assistant/PromptTemplateSelector';
 import type { TestConfig } from '@/types';
 
 // Consolidated state for assistant page
@@ -137,19 +137,19 @@ export default function AssistantPage() {
   } = state;
 
   // Handle template selection
-  const handleTemplateSelect = useCallback((template: PromptTemplate) => {
+  const handleTemplateSelect = useCallback((template: SelectedTemplateData) => {
     dispatch({
       type: 'UPDATE_FORM',
       payload: {
         selectedTemplateId: template.id,
-        greetingName: template.suggestedAssistantName,
+        ...(template.suggestedAssistantName ? { greetingName: template.suggestedAssistantName } : {}),
         firstMessage: template.firstMessage,
         systemPrompt: template.systemPrompt,
       },
     });
     dispatch({
       type: 'SET_SUCCESS',
-      payload: `Applied "${template.name}" template. Customize the placeholders in curly braces with your business information.`,
+      payload: `Applied "${template.name}" template with security rules and speech patterns.`,
     });
   }, []);
 
@@ -358,6 +358,8 @@ export default function AssistantPage() {
           <PromptTemplateSelector
             onSelectTemplate={handleTemplateSelect}
             currentTemplateId={selectedTemplateId}
+            businessName={businessName}
+            businessDescription={businessDescription}
           />
         </CardContent>
       </Card>

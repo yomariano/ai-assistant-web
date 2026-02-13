@@ -1,17 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
-  Building2,
-  Stethoscope,
-  Scale,
-  Wrench,
-  UtensilsCrossed,
-  Home,
   Check,
   ChevronRight,
   Sparkles,
-  type LucideIcon,
+  Loader2,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -21,44 +15,107 @@ import {
   DialogTitle,
   DialogDescription,
 } from "@/components/ui/dialog";
-import {
-  promptTemplates,
-  type PromptTemplate,
-} from "@/lib/content/prompt-templates";
+import { templatesApi } from "@/lib/api";
+import type { AssistantTemplate, TemplatePreview } from "@/lib/api";
 
-const iconMap: Record<string, LucideIcon> = {
-  Building2,
-  Stethoscope,
-  Scale,
-  Wrench,
-  UtensilsCrossed,
-  Home,
-};
+export interface SelectedTemplateData {
+  id: string;
+  name: string;
+  firstMessage: string;
+  systemPrompt: string;
+  suggestedAssistantName?: string;
+}
 
 interface PromptTemplateSelectorProps {
-  onSelectTemplate: (template: PromptTemplate) => void;
+  onSelectTemplate: (template: SelectedTemplateData) => void;
   currentTemplateId?: string;
+  businessName?: string;
+  businessDescription?: string;
 }
 
 export function PromptTemplateSelector({
   onSelectTemplate,
   currentTemplateId,
+  businessName,
+  businessDescription,
 }: PromptTemplateSelectorProps) {
-  const [selectedTemplate, setSelectedTemplate] = useState<PromptTemplate | null>(null);
+  const [templates, setTemplates] = useState<AssistantTemplate[]>([]);
+  const [isLoadingTemplates, setIsLoadingTemplates] = useState(true);
+  const [selectedTemplate, setSelectedTemplate] = useState<AssistantTemplate | null>(null);
+  const [preview, setPreview] = useState<TemplatePreview | null>(null);
+  const [isLoadingPreview, setIsLoadingPreview] = useState(false);
   const [showPreview, setShowPreview] = useState(false);
+  const [templateDetails, setTemplateDetails] = useState<{
+    defaultSettings?: { greetingName?: string };
+  } | null>(null);
 
-  const handleTemplateClick = (template: PromptTemplate) => {
+  // Fetch templates from API on mount
+  useEffect(() => {
+    async function loadTemplates() {
+      try {
+        const res = await templatesApi.list();
+        setTemplates(res.templates || []);
+      } catch (err) {
+        console.error("Failed to load templates:", err);
+      } finally {
+        setIsLoadingTemplates(false);
+      }
+    }
+    loadTemplates();
+  }, []);
+
+  const handleTemplateClick = async (template: AssistantTemplate) => {
     setSelectedTemplate(template);
     setShowPreview(true);
+    setIsLoadingPreview(true);
+    setPreview(null);
+
+    try {
+      // Fetch both template details (for suggestedAssistantName) and preview in parallel
+      const [detailRes, previewRes] = await Promise.all([
+        templatesApi.get(template.id),
+        templatesApi.preview(template.id, {
+          businessName: businessName || "Your Business",
+          businessDescription: businessDescription || "",
+        }),
+      ]);
+      setTemplateDetails(detailRes.template);
+      setPreview(previewRes.preview);
+    } catch (err) {
+      console.error("Failed to load template preview:", err);
+    } finally {
+      setIsLoadingPreview(false);
+    }
   };
 
   const handleUseTemplate = () => {
-    if (selectedTemplate) {
-      onSelectTemplate(selectedTemplate);
+    if (selectedTemplate && preview) {
+      onSelectTemplate({
+        id: selectedTemplate.id,
+        name: selectedTemplate.name,
+        firstMessage: preview.firstMessage,
+        systemPrompt: preview.systemPromptFull,
+        suggestedAssistantName: templateDetails?.defaultSettings?.greetingName,
+      });
       setShowPreview(false);
       setSelectedTemplate(null);
+      setPreview(null);
+      setTemplateDetails(null);
     }
   };
+
+  if (isLoadingTemplates) {
+    return (
+      <div className="flex items-center gap-2 py-8 justify-center text-muted-foreground">
+        <Loader2 className="w-4 h-4 animate-spin" />
+        <span className="text-sm">Loading templates...</span>
+      </div>
+    );
+  }
+
+  if (templates.length === 0) {
+    return null;
+  }
 
   return (
     <div className="space-y-4">
@@ -70,13 +127,12 @@ export function PromptTemplateSelector({
       </div>
       <p className="text-sm text-muted-foreground mb-4">
         Choose an industry template to quickly configure your AI receptionist
-        with best practices for your business type.
+        with best practices, security rules, and natural speech patterns.
       </p>
 
       {/* Template Grid */}
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-        {promptTemplates.map((template) => {
-          const Icon = iconMap[template.icon] || Building2;
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+        {templates.map((template) => {
           const isSelected = currentTemplateId === template.id;
 
           return (
@@ -97,8 +153,8 @@ export function PromptTemplateSelector({
                   <Check className="w-4 h-4 text-primary" />
                 </div>
               )}
-              <div className="w-10 h-10 rounded-lg bg-muted flex items-center justify-center mb-3">
-                <Icon className="w-5 h-5 text-muted-foreground" />
+              <div className="text-2xl mb-3">
+                {template.icon}
               </div>
               <h4 className="font-medium text-foreground text-sm mb-1">
                 {template.name}
@@ -118,14 +174,9 @@ export function PromptTemplateSelector({
             <>
               <DialogHeader>
                 <div className="flex items-center gap-3">
-                  {(() => {
-                    const Icon = iconMap[selectedTemplate.icon] || Building2;
-                    return (
-                      <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
-                        <Icon className="w-6 h-6 text-primary" />
-                      </div>
-                    );
-                  })()}
+                  <div className="text-3xl">
+                    {selectedTemplate.icon}
+                  </div>
                   <div>
                     <DialogTitle className="text-xl">
                       {selectedTemplate.name}
@@ -137,76 +188,71 @@ export function PromptTemplateSelector({
                 </div>
               </DialogHeader>
 
-              <div className="space-y-6 mt-4">
-                {/* Guidelines */}
-                <div>
-                  <h4 className="font-semibold text-foreground text-sm mb-2">
-                    Key Guidelines
-                  </h4>
-                  <ul className="space-y-1">
-                    {selectedTemplate.guidelines.map((guideline, i) => (
-                      <li
-                        key={i}
-                        className="text-sm text-muted-foreground flex items-start gap-2"
-                      >
-                        <ChevronRight className="w-4 h-4 mt-0.5 text-primary shrink-0" />
-                        {guideline}
-                      </li>
-                    ))}
-                  </ul>
+              {isLoadingPreview ? (
+                <div className="flex items-center justify-center py-12">
+                  <Loader2 className="w-6 h-6 animate-spin text-primary" />
+                  <span className="ml-2 text-sm text-muted-foreground">
+                    Generating preview{businessName ? ` for ${businessName}` : ""}...
+                  </span>
                 </div>
+              ) : preview ? (
+                <div className="space-y-6 mt-4">
+                  {/* What's Included */}
+                  <div>
+                    <h4 className="font-semibold text-foreground text-sm mb-2">
+                      What&apos;s Included
+                    </h4>
+                    <ul className="space-y-1">
+                      {[
+                        "Industry-specific conversation flows",
+                        "Security rules (injection protection, impersonation defense)",
+                        "Natural speech patterns (dates, times, phone numbers)",
+                        "Conversation rules (concise responses, info-gathering-first)",
+                        "Personalized with your business name",
+                      ].map((item, i) => (
+                        <li
+                          key={i}
+                          className="text-sm text-muted-foreground flex items-start gap-2"
+                        >
+                          <ChevronRight className="w-4 h-4 mt-0.5 text-primary shrink-0" />
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
 
-                {/* Sample Greeting */}
-                <div>
-                  <h4 className="font-semibold text-foreground text-sm mb-2">
-                    Sample Greeting
-                  </h4>
-                  <div className="bg-muted/50 rounded-lg p-3 border border-border">
-                    <p className="text-sm text-muted-foreground italic">
-                      &ldquo;{selectedTemplate.firstMessage}&rdquo;
+                  {/* Sample Greeting */}
+                  <div>
+                    <h4 className="font-semibold text-foreground text-sm mb-2">
+                      Greeting
+                    </h4>
+                    <div className="bg-muted/50 rounded-lg p-3 border border-border">
+                      <p className="text-sm text-muted-foreground italic">
+                        &ldquo;{preview.firstMessage}&rdquo;
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* System Prompt Preview */}
+                  <div>
+                    <h4 className="font-semibold text-foreground text-sm mb-2">
+                      System Prompt Preview
+                    </h4>
+                    <div className="bg-muted/50 rounded-lg p-3 border border-border max-h-48 overflow-y-auto">
+                      <pre className="text-xs text-muted-foreground whitespace-pre-wrap font-mono">
+                        {preview.systemPromptPreview}
+                      </pre>
+                    </div>
+                    <p className="text-xs text-muted-foreground mt-1">
+                      Showing first 500 characters. Full prompt ({preview.systemPromptFull.length.toLocaleString()} chars) will be applied on use.
                     </p>
                   </div>
                 </div>
-
-                {/* Suggested Name */}
-                <div>
-                  <h4 className="font-semibold text-foreground text-sm mb-2">
-                    Suggested Assistant Name
-                  </h4>
-                  <p className="text-sm text-muted-foreground">
-                    {selectedTemplate.suggestedAssistantName}
-                  </p>
+              ) : (
+                <div className="py-8 text-center text-sm text-muted-foreground">
+                  Failed to load preview. Please try again.
                 </div>
-
-                {/* Placeholders to fill */}
-                <div>
-                  <h4 className="font-semibold text-foreground text-sm mb-2">
-                    Information You&apos;ll Provide
-                  </h4>
-                  <div className="flex flex-wrap gap-2">
-                    {selectedTemplate.placeholders.map((placeholder) => (
-                      <span
-                        key={placeholder.key}
-                        className="px-2 py-1 bg-primary/10 text-primary text-xs rounded-md"
-                      >
-                        {placeholder.label}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                {/* System Prompt Preview */}
-                <div>
-                  <h4 className="font-semibold text-foreground text-sm mb-2">
-                    System Prompt Preview
-                  </h4>
-                  <div className="bg-muted/50 rounded-lg p-3 border border-border max-h-48 overflow-y-auto">
-                    <pre className="text-xs text-muted-foreground whitespace-pre-wrap font-mono">
-                      {selectedTemplate.systemPrompt}
-                    </pre>
-                  </div>
-                </div>
-              </div>
+              )}
 
               {/* Actions */}
               <div className="flex gap-3 mt-6">
@@ -221,6 +267,7 @@ export function PromptTemplateSelector({
                   variant="hero"
                   onClick={handleUseTemplate}
                   className="flex-1"
+                  disabled={isLoadingPreview || !preview}
                 >
                   <Sparkles className="w-4 h-4 mr-2" />
                   Use This Template
