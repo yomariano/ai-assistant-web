@@ -1,6 +1,16 @@
 import dynamic from "next/dynamic";
+import { Metadata } from "next";
 import { FAQSchema, OrganizationSchema, ProductSchema } from "@/components/seo";
 import { HOMEPAGE_FAQS } from "@/lib/marketing/faqs";
+
+export const metadata: Metadata = {
+  alternates: {
+    languages: {
+      "es-AR": "/es/",
+      en: "/",
+    },
+  },
+};
 
 // Above-fold components: load immediately for fast LCP
 import Header from "@/components/voicefleet/Header";

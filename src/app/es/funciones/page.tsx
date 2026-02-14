@@ -3,8 +3,8 @@ import Link from "next/link";
 import { generatePageMetadata } from "@/lib/seo/metadata";
 import Breadcrumbs from "@/components/marketing/Breadcrumbs";
 import CTASection from "@/components/marketing/CTASection";
-import Header from "@/components/voicefleet/Header";
-import Footer from "@/components/voicefleet/Footer";
+import HeaderES from "@/components/voicefleet/HeaderES";
+import FooterES from "@/components/voicefleet/FooterES";
 import {
   Phone,
   Clock,
@@ -25,140 +25,143 @@ export const revalidate = 3600;
 
 export const metadata: Metadata = {
   ...generatePageMetadata({
-    title: "Features - AI Voice Assistant Capabilities",
+    title: "Funciones - Capacidades del Asistente de Voz IA",
     description:
-      "Explore VoiceFleet's powerful AI voice agent features: 24/7 availability, multi-language support, call scheduling, analytics, and more.",
-    path: "/features",
+      "Explorá las funciones de VoiceFleet: disponibilidad 24/7, soporte multilingüe, agenda de turnos, analíticas y más.",
+    path: "/es/funciones",
   }),
   alternates: {
-    canonical: "https://voicefleet.ai/features",
+    canonical: "https://voicefleet.ai/es/funciones",
     languages: {
       "es-AR": "/es/funciones",
       en: "/features",
     },
+  },
+  openGraph: {
+    locale: "es_AR",
   },
 };
 
 const features = [
   {
     icon: Phone,
-    name: "AI Call Handling",
+    name: "Atención de Llamadas IA",
     slug: "ai-call-handling",
     description:
-      "Natural conversations powered by advanced AI. Take orders, book reservations, and answer customer questions automatically.",
-    highlights: ["Natural language understanding", "Order taking & reservations", "Custom greeting for your business"],
-    availableOn: "All plans",
+      "Conversaciones naturales con IA avanzada. Tomá pedidos, reservá turnos y respondé preguntas de clientes automáticamente.",
+    highlights: ["Comprensión de lenguaje natural", "Toma de pedidos y reservas", "Saludo personalizado para tu negocio"],
+    availableOn: "Todos los planes",
   },
   {
     icon: Clock,
-    name: "24/7 Availability",
+    name: "Disponibilidad 24/7",
     slug: "24-7-availability",
     description:
-      "Never miss a call again. Your AI assistant works around the clock, even on holidays and weekends.",
-    highlights: ["No overtime costs", "After-hours coverage", "Instant response every time"],
-    availableOn: "All plans",
+      "Nunca más pierdas una llamada. Tu asistente IA trabaja las 24 horas, incluso feriados y fines de semana.",
+    highlights: ["Sin costos de horas extra", "Cobertura fuera de horario", "Respuesta instantánea siempre"],
+    availableOn: "Todos los planes",
   },
   {
     icon: Calendar,
-    name: "Calendar Integration",
+    name: "Integración con Calendario",
     slug: "calendar-integration",
     description:
-      "Automatically book appointments based on your availability. Sync with Google Calendar, Outlook, and more.",
-    highlights: ["Real-time availability", "Automated booking confirmations", "Reminder notifications"],
-    availableOn: "Growth & Pro",
+      "Agendá turnos automáticamente según tu disponibilidad. Sincronizá con Google Calendar, Outlook y más.",
+    highlights: ["Disponibilidad en tiempo real", "Confirmaciones automáticas", "Recordatorios"],
+    availableOn: "Growth y Pro",
   },
   {
     icon: MessageSquare,
-    name: "SMS & Email Notifications",
+    name: "Notificaciones SMS y Email",
     slug: "notifications",
     description:
-      "Get instant alerts for every call. Receive order details, booking confirmations, and call summaries.",
-    highlights: ["Real-time SMS alerts", "Email summaries", "Order/booking details"],
-    availableOn: "All plans (Email on Growth+)",
+      "Recibí alertas instantáneas por cada llamada. Detalles de pedidos, confirmaciones de turnos y resúmenes de llamadas.",
+    highlights: ["Alertas SMS en tiempo real", "Resúmenes por email", "Detalles de pedidos/turnos"],
+    availableOn: "Todos los planes (Email en Growth+)",
   },
   {
     icon: Globe,
-    name: "Local Phone Numbers",
-    slug: "irish-numbers",
+    name: "Números Telefónicos Locales",
+    slug: "local-numbers",
     description:
-      "Get a local phone number included with every plan. Irish numbers (Dublin & regional) are available.",
-    highlights: ["Dublin & regional numbers", "Number porting available", "EU-based infrastructure"],
-    availableOn: "All plans",
+      "Obtené un número local incluido en cada plan. Números argentinos disponibles.",
+    highlights: ["Números argentinos", "Portabilidad numérica disponible", "Infraestructura confiable"],
+    availableOn: "Todos los planes",
   },
   {
     icon: BarChart3,
-    name: "Analytics Dashboard",
+    name: "Panel de Analíticas",
     slug: "analytics",
     description:
-      "Track call volumes, peak hours, popular orders, and more. Data-driven insights to optimize your business.",
-    highlights: ["Call volume tracking", "Peak hours analysis", "Order trends"],
-    availableOn: "Growth & Pro",
+      "Seguí volúmenes de llamadas, horarios pico, pedidos populares y más. Datos para optimizar tu negocio.",
+    highlights: ["Seguimiento de volumen de llamadas", "Análisis de horarios pico", "Tendencias de pedidos"],
+    availableOn: "Growth y Pro",
   },
   {
     icon: Shield,
-    name: "GDPR Compliant",
+    name: "Seguridad Empresarial",
     slug: "security",
     description:
-      "Your data stays in Europe. Fully GDPR compliant with EU data residency and enterprise-grade security.",
-    highlights: ["EU data centres", "Data encryption", "GDPR compliant"],
-    availableOn: "All plans",
+      "Tus datos están protegidos con seguridad de nivel empresarial y encriptación de extremo a extremo.",
+    highlights: ["Centros de datos seguros", "Encriptación de datos", "Cumplimiento normativo"],
+    availableOn: "Todos los planes",
   },
   {
     icon: Zap,
-    name: "Instant Setup",
+    name: "Configuración Instantánea",
     slug: "instant-setup",
     description:
-      "Go live in under an hour. No technical skills required. Just tell us about your business and we handle the rest.",
-    highlights: ["Free setup included", "No IT required", "Ready in < 1 hour"],
-    availableOn: "All plans",
+      "Activá en menos de una hora. Sin conocimientos técnicos. Solo contanos sobre tu negocio y nosotros nos encargamos.",
+    highlights: ["Setup gratuito incluido", "Sin necesidad de IT", "Listo en menos de 1 hora"],
+    availableOn: "Todos los planes",
   },
   {
     icon: Users,
-    name: "Multi-Location Support",
+    name: "Soporte Multi-Sucursal",
     slug: "multi-location",
     description:
-      "Manage multiple business locations from one dashboard. Each location gets its own phone number and settings.",
-    highlights: ["Up to 5 phone numbers", "Per-location analytics", "Centralized management"],
-    availableOn: "Pro only",
+      "Gestioná múltiples sucursales desde un solo panel. Cada sucursal tiene su propio número y configuración.",
+    highlights: ["Hasta 5 números telefónicos", "Analíticas por sucursal", "Gestión centralizada"],
+    availableOn: "Solo Pro",
   },
   {
     icon: Settings,
-    name: "Order & Reservation Management",
+    name: "Gestión de Pedidos y Reservas",
     slug: "order-management",
     description:
-      "AI handles orders and reservations seamlessly. Customers can place orders, book tables, or schedule appointments.",
-    highlights: ["Order taking", "Table reservations", "Appointment booking"],
-    availableOn: "All plans",
+      "La IA maneja pedidos y reservas sin problemas. Los clientes pueden hacer pedidos, reservar mesas o agendar turnos.",
+    highlights: ["Toma de pedidos", "Reservas de mesas", "Agenda de turnos"],
+    availableOn: "Todos los planes",
   },
   {
     icon: Headphones,
-    name: "Priority Support",
+    name: "Soporte Prioritario",
     slug: "priority-support",
     description:
-      "Get help when you need it. Business hours support on all plans, with 24/7 priority support on Pro.",
-    highlights: ["Business hours support", "24/7 on Pro plan", "Dedicated account manager"],
-    availableOn: "All plans (24/7 on Pro)",
+      "Obtené ayuda cuando la necesites. Soporte en horario laboral en todos los planes, con soporte 24/7 en Pro.",
+    highlights: ["Soporte en horario laboral", "24/7 en plan Pro", "Account manager dedicado"],
+    availableOn: "Todos los planes (24/7 en Pro)",
   },
   {
     icon: Bell,
-    name: "Smart Call Routing",
+    name: "Enrutamiento Inteligente",
     slug: "smart-routing",
     description:
-      "AI knows when to handle calls and when to transfer to staff. Set rules for urgent matters or VIP customers.",
-    highlights: ["Automatic escalation", "Staff transfer option", "Voicemail fallback"],
-    availableOn: "All plans",
+      "La IA sabe cuándo atender llamadas y cuándo transferir al personal. Configurá reglas para urgencias o clientes VIP.",
+    highlights: ["Escalación automática", "Opción de transferencia", "Buzón de respaldo"],
+    availableOn: "Todos los planes",
   },
 ];
 
-export default function FeaturesPage() {
+export default function FuncionesPage() {
   const breadcrumbs = [
-    { name: "Home", href: "/" },
-    { name: "Features", href: "/features" },
+    { name: "Inicio", href: "/es/" },
+    { name: "Funciones", href: "/es/funciones" },
   ];
 
   return (
     <div className="min-h-screen bg-background">
-      <Header />
+      <HeaderES />
 
       <main className="pt-20">
         <Breadcrumbs items={breadcrumbs} />
@@ -167,10 +170,10 @@ export default function FeaturesPage() {
         <section className="py-16 lg:py-24 bg-gradient-hero">
           <div className="container mx-auto px-4 text-center">
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-bold text-primary-foreground mb-4">
-              Powerful AI Voice Features
+              Funciones Potentes de Voz IA
             </h1>
             <p className="text-lg lg:text-xl text-primary-foreground/80 max-w-2xl mx-auto">
-              Everything you need to automate phone calls and save hours every week.
+              Todo lo que necesitás para automatizar llamadas telefónicas y ahorrar horas cada semana.
             </p>
           </div>
         </section>
@@ -182,22 +185,22 @@ export default function FeaturesPage() {
             <div className="flex flex-wrap justify-center gap-4 mb-10">
               <div className="flex items-center gap-2">
                 <span className="w-3 h-3 rounded-full bg-accent/30" />
-                <span className="text-sm text-muted-foreground">All plans</span>
+                <span className="text-sm text-muted-foreground">Todos los planes</span>
               </div>
               <div className="flex items-center gap-2">
                 <span className="w-3 h-3 rounded-full bg-blue-200" />
-                <span className="text-sm text-muted-foreground">Growth & Pro</span>
+                <span className="text-sm text-muted-foreground">Growth y Pro</span>
               </div>
               <div className="flex items-center gap-2">
                 <span className="w-3 h-3 rounded-full bg-amber-200" />
-                <span className="text-sm text-muted-foreground">Pro only</span>
+                <span className="text-sm text-muted-foreground">Solo Pro</span>
               </div>
             </div>
 
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
               {features.map((feature) => {
                 const Icon = feature.icon;
-                const isPro = feature.availableOn.includes("Pro only");
+                const isPro = feature.availableOn.includes("Solo Pro");
                 const isGrowth = feature.availableOn.includes("Growth");
                 return (
                   <article
@@ -250,38 +253,38 @@ export default function FeaturesPage() {
           <div className="container mx-auto px-4">
             <div className="max-w-3xl mx-auto text-center mb-12">
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-heading font-bold text-foreground mb-4">
-                Why Choose VoiceFleet?
+                ¿Por Qué Elegir VoiceFleet?
               </h2>
               <p className="text-lg text-muted-foreground">
-                See how our AI voice agents compare to traditional solutions
+                Mirá cómo nuestros agentes de voz IA se comparan con soluciones tradicionales
               </p>
             </div>
 
             <div className="grid md:grid-cols-4 gap-6 max-w-5xl mx-auto mb-12">
               <div className="bg-card rounded-xl border border-border p-6 text-center">
-                <div className="text-4xl font-heading font-bold text-primary mb-2">€99</div>
-                <p className="text-muted-foreground">Starting price per month</p>
+                <div className="text-4xl font-heading font-bold text-primary mb-2">$49</div>
+                <p className="text-muted-foreground">Precio inicial por mes</p>
               </div>
               <div className="bg-card rounded-xl border border-border p-6 text-center">
                 <div className="text-4xl font-heading font-bold text-accent mb-2">24/7</div>
-                <p className="text-muted-foreground">Availability without overtime</p>
+                <p className="text-muted-foreground">Disponibilidad sin horas extra</p>
               </div>
               <div className="bg-card rounded-xl border border-border p-6 text-center">
                 <div className="text-4xl font-heading font-bold text-primary mb-2">&lt;1hr</div>
-                <p className="text-muted-foreground">Setup time to go live</p>
+                <p className="text-muted-foreground">Tiempo de configuración</p>
               </div>
               <div className="bg-card rounded-xl border border-border p-6 text-center">
                 <div className="text-4xl font-heading font-bold text-accent mb-2">100%</div>
-                <p className="text-muted-foreground">GDPR compliant</p>
+                <p className="text-muted-foreground">Seguridad empresarial</p>
               </div>
             </div>
 
             <div className="text-center">
               <Link
-                href="/pricing"
+                href="/es/precios"
                 className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground font-semibold rounded-xl hover:bg-primary/90 transition-colors"
               >
-                Compare Plans & Pricing
+                Comparar Planes y Precios
                 <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
@@ -290,12 +293,15 @@ export default function FeaturesPage() {
 
         {/* CTA */}
         <CTASection
-          title="Ready to experience these features?"
-          description="Start your free trial and see the power of AI voice assistants."
+          title="¿Listo para experimentar estas funciones?"
+          description="Empezá tu prueba gratuita y descubrí el poder de los asistentes de voz IA."
+          primaryButtonText="Reservá una Demo"
+          secondaryButtonText="Ver Precios"
+          secondaryButtonHref="/es/precios"
         />
       </main>
 
-      <Footer />
+      <FooterES />
     </div>
   );
 }
