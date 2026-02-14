@@ -1,5 +1,5 @@
 import dynamic from "next/dynamic";
-import { FAQSchema } from "@/components/seo";
+import { FAQSchema, OrganizationSchema, ProductSchema } from "@/components/seo";
 import { HOMEPAGE_FAQS } from "@/lib/marketing/faqs";
 
 // Above-fold components: load immediately for fast LCP
@@ -25,6 +25,8 @@ const Footer = dynamic(() => import("@/components/voicefleet/Footer"));
 export default function Home() {
   return (
     <div className="min-h-screen bg-background">
+      <OrganizationSchema />
+      <ProductSchema />
       <FAQSchema items={[...HOMEPAGE_FAQS]} />
       <Header />
       <main>

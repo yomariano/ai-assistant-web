@@ -19,11 +19,11 @@ const industries = [
   { id: "custom", name: "Custom / Other", avgCalls: 200, avgCostPerCall: 2.50, automatable: 60 },
 ];
 
-// VoiceFleet pricing plans
+// VoiceFleet pricing plans (minute-based, EU pricing)
 const plans = [
-  { id: "lite", name: "Lite", monthlyFee: 19, perCallCost: 0.95, maxCalls: 100, icon: Zap },
-  { id: "growth", name: "Growth", monthlyFee: 99, perCallCost: 0.45, maxCalls: 400, icon: Rocket },
-  { id: "pro", name: "Pro", monthlyFee: 249, perCallCost: 0, maxCalls: 1500, icon: Crown },
+  { id: "starter", name: "Starter", monthlyFee: 99, includedMinutes: 500, overagePerMin: 0.20, icon: Zap },
+  { id: "growth", name: "Growth", monthlyFee: 299, includedMinutes: 1000, overagePerMin: 0.30, icon: Rocket },
+  { id: "pro", name: "Pro", monthlyFee: 599, includedMinutes: 2000, overagePerMin: 0.30, icon: Crown },
 ];
 
 const ROICalculator = () => {
@@ -32,22 +32,21 @@ const ROICalculator = () => {
   const [costPerCall, setCostPerCall] = useState(industries[0].avgCostPerCall);
   const [automatable, setAutomatable] = useState(industries[0].automatable);
   const [isCustom, setIsCustom] = useState(false);
+  const industrySelectId = "roi-industry";
+  const callVolumeInputId = "roi-monthly-calls";
+  const costPerCallInputId = "roi-cost-per-call";
+  const automatableInputId = "roi-automatable";
 
   // Calculate costs and savings for each plan
   const planCalculations = useMemo(() => {
     const automatableCalls = Math.round(callVolume * (automatable / 100));
     const currentMonthlyCost = automatableCalls * costPerCall;
+    // Assume ~2.5 min avg per call for minute-based calculation
+    const estimatedMinutes = automatableCalls * 2.5;
 
     return plans.map(plan => {
-      let voicefleetCost: number;
-
-      if (plan.id === "pro") {
-        // Pro is unlimited (up to 1500 cap)
-        voicefleetCost = plan.monthlyFee;
-      } else {
-        // Lite and Growth have per-call costs
-        voicefleetCost = plan.monthlyFee + (automatableCalls * plan.perCallCost);
-      }
+      const overageMinutes = Math.max(0, estimatedMinutes - plan.includedMinutes);
+      const voicefleetCost = plan.monthlyFee + (overageMinutes * plan.overagePerMin);
 
       const monthlySavings = currentMonthlyCost - voicefleetCost;
       const yearlySavings = monthlySavings * 12;
@@ -55,11 +54,11 @@ const ROICalculator = () => {
         ? ((currentMonthlyCost - voicefleetCost) / currentMonthlyCost) * 100
         : 0;
 
-      // Determine if this plan is recommended based on call volume
+      // Determine if this plan is recommended based on estimated minutes
       let isRecommended = false;
-      if (automatableCalls <= 100 && plan.id === "lite") isRecommended = true;
-      else if (automatableCalls > 100 && automatableCalls <= 400 && plan.id === "growth") isRecommended = true;
-      else if (automatableCalls > 400 && plan.id === "pro") isRecommended = true;
+      if (estimatedMinutes <= 500 && plan.id === "starter") isRecommended = true;
+      else if (estimatedMinutes > 500 && estimatedMinutes <= 1000 && plan.id === "growth") isRecommended = true;
+      else if (estimatedMinutes > 1000 && plan.id === "pro") isRecommended = true;
 
       // Check if savings are positive (plan makes sense)
       const makesSense = monthlySavings > 0;
@@ -123,11 +122,17 @@ const ROICalculator = () => {
             <div className="p-5 sm:p-8 lg:p-10 space-y-6 border-b border-border">
               {/* Industry Dropdown */}
               <div>
-                <label className="flex items-center gap-2 text-sm font-semibold text-foreground mb-3">
+                <label
+                  htmlFor={industrySelectId}
+                  className="flex items-center gap-2 text-sm font-semibold text-foreground mb-3"
+                >
                   <Building2 className="w-4 h-4 text-primary" />
                   Select Your Industry
                 </label>
                 <select
+                  id={industrySelectId}
+                  name="industry"
+                  aria-label="Select your industry"
                   value={selectedIndustry.id}
                   onChange={(e) => handleIndustryChange(e.target.value)}
                   className="w-full px-4 py-3 bg-muted border border-border rounded-xl text-foreground font-medium focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all cursor-pointer"
@@ -149,10 +154,13 @@ const ROICalculator = () => {
               <div className="grid sm:grid-cols-3 gap-6">
                 {/* Monthly Calls */}
                 <div>
-                  <label className="block text-sm font-semibold text-foreground mb-3">
+                  <label htmlFor={callVolumeInputId} className="block text-sm font-semibold text-foreground mb-3">
                     Monthly Calls: <span className="text-primary">{callVolume}</span>
                   </label>
                   <input
+                    id={callVolumeInputId}
+                    name="monthlyCalls"
+                    aria-label="Monthly calls"
                     type="range"
                     min="50"
                     max="800"
@@ -172,10 +180,13 @@ const ROICalculator = () => {
 
                 {/* Cost Per Call */}
                 <div>
-                  <label className="block text-sm font-semibold text-foreground mb-3">
+                  <label htmlFor={costPerCallInputId} className="block text-sm font-semibold text-foreground mb-3">
                     Cost Per Call: <span className="text-primary">€{costPerCall.toFixed(2)}</span>
                   </label>
                   <input
+                    id={costPerCallInputId}
+                    name="costPerCall"
+                    aria-label="Cost per call"
                     type="range"
                     min="1"
                     max="6"
@@ -195,10 +206,13 @@ const ROICalculator = () => {
 
                 {/* Automatable % */}
                 <div>
-                  <label className="block text-sm font-semibold text-foreground mb-3">
+                  <label htmlFor={automatableInputId} className="block text-sm font-semibold text-foreground mb-3">
                     Automatable: <span className="text-primary">{automatable}%</span>
                   </label>
                   <input
+                    id={automatableInputId}
+                    name="automatableCalls"
+                    aria-label="Percentage of calls that can be automated"
                     type="range"
                     min="30"
                     max="90"
@@ -276,7 +290,7 @@ const ROICalculator = () => {
                           €{plan.voicefleetCost}/mo
                         </p>
                         <p className={`text-xs ${isBest ? "text-primary-foreground/60" : "text-muted-foreground"}`}>
-                          €{plan.monthlyFee} + {plan.perCallCost > 0 ? `€${plan.perCallCost}/call` : "unlimited"}
+                          {plan.includedMinutes} min included
                         </p>
                       </div>
 

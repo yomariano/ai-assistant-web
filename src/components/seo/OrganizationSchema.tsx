@@ -8,16 +8,26 @@ export function OrganizationSchema() {
     "@type": "Organization",
     name: "VoiceFleet",
     url: siteUrl,
-    logo: `${siteUrl}/logo.png`,
+    logo: `${siteUrl}/logo-mark.svg`,
     description:
-      "AI Voice Agents that handle calls at 80% lower cost. Scale support without scaling headcount.",
+      "AI voice receptionist for small businesses. Answer calls, take messages, and book appointments 24/7.",
+    email: "support@voicefleet.ai",
+    foundingDate: "2025",
     sameAs: [
       "https://twitter.com/voicefleetai",
       "https://linkedin.com/company/voicefleet",
     ],
+    address: {
+      "@type": "PostalAddress",
+      addressCountry: "IE",
+    },
+    areaServed: [
+      { "@type": "Country", name: "Ireland" },
+      { "@type": "Country", name: "Argentina" },
+    ],
     contactPoint: {
       "@type": "ContactPoint",
-      email: "support@voicefleet.ai",
+      url: `${siteUrl}/#demo`,
       contactType: "customer service",
     },
   };
