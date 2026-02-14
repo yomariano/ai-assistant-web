@@ -152,6 +152,18 @@ export interface NotificationPreferences {
   timezone?: string;
 }
 
+// AI Schedule day configuration
+export interface AIScheduleDay {
+  allDay?: boolean;
+  start?: string;  // HH:MM format
+  end?: string;    // HH:MM format
+}
+
+// AI Schedule - maps day number (1-7, Mon-Sun) to configuration
+export interface AISchedule {
+  [day: string]: AIScheduleDay;
+}
+
 export interface EscalationSettings {
   id?: string;
   user_id?: string;
@@ -168,6 +180,8 @@ export interface EscalationSettings {
   timezone?: string;
   after_hours_action?: 'voicemail' | 'callback_promise' | 'ai_only';
   after_hours_message?: string;
+  // AI Receptionist Schedule (Growth/Pro only)
+  ai_schedule?: AISchedule | null;
 }
 
 export interface TestConfig {

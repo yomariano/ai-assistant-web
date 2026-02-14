@@ -18,7 +18,8 @@ import {
   MessageSquare,
   Plug,
   Mail,
-  Shield
+  Shield,
+  Clock
 } from 'lucide-react';
 import { useAuthStore, useBillingStore, getPlanDisplayName, getPlanBadgeColor } from '@/lib/store';
 import { adminApi } from '@/lib/api';
@@ -30,6 +31,7 @@ const navItems = [
   { href: '/integrations', label: 'Integrations', icon: Plug },
   { href: '/history', label: 'Call History', icon: Phone },
   { href: '/notifications', label: 'Notifications', icon: Bell },
+  { href: '/settings/ai-schedule', label: 'AI Schedule', icon: Clock },
   { href: '/billing', label: 'Billing', icon: CreditCard },
   { href: '/settings', label: 'Settings', icon: Settings },
 ];
