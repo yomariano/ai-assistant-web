@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Loader2 } from "lucide-react";
 import Link from "next/link";
 import dynamic from "next/dynamic";
+import { trackEvent } from "@/lib/umami";
 
 const LiveDemoCall = dynamic(
   () => import("@/components/voicefleet/LiveDemoCall"),
@@ -26,6 +27,7 @@ const HeroCTAES = () => {
 
   const handleStartTrial = async () => {
     setIsLoading(true);
+    trackEvent("cta_click", { location: "hero_es", label: "start_free_trial" });
     try {
       const { signInWithGoogle } = await import("@/lib/supabase");
       await signInWithGoogle();

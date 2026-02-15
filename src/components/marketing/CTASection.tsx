@@ -37,6 +37,8 @@ export default function CTASection({
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center px-8 py-4 bg-white text-primary rounded-xl font-semibold hover:bg-white/90 transition-colors shadow-lg hover:shadow-xl"
+              data-umami-event="cta_click"
+              data-umami-event-location="cta_section"
             >
               {primaryButtonText}
             </a>
@@ -44,6 +46,8 @@ export default function CTASection({
             <Link
               href={primaryButtonHref}
               className="inline-flex items-center justify-center px-8 py-4 bg-white text-primary rounded-xl font-semibold hover:bg-white/90 transition-colors shadow-lg hover:shadow-xl"
+              data-umami-event="cta_click"
+              data-umami-event-location="cta_section"
             >
               {primaryButtonText}
             </Link>

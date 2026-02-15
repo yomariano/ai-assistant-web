@@ -33,6 +33,8 @@ export default function Hero() {
                         <Link
                             href="/register"
                             className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-lg bg-orange-500 px-8 py-4 text-base font-semibold text-white hover:bg-orange-600 transition-colors shadow-lg shadow-orange-500/25"
+                            data-umami-event="cta_click"
+                            data-umami-event-location="hero"
                         >
                             Start Free Trial
                             <ArrowRight className="h-5 w-5" />

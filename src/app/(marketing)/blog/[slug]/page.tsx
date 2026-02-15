@@ -2,7 +2,8 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getBlogPost, getBlogPostSlugs } from "@/lib/content/blog";
 import { generateBlogMetadata } from "@/lib/seo/metadata";
-import { ArticleSchema, BreadcrumbSchema } from "@/components/seo";
+import { ArticleSchema, BreadcrumbSchema, FAQSchema } from "@/components/seo";
+import { BLOG_FAQS } from "@/lib/marketing/faqs";
 import Header from "@/components/voicefleet/Header";
 import Footer from "@/components/voicefleet/Footer";
 import AuthorCard from "@/components/marketing/AuthorCard";
@@ -61,13 +62,14 @@ export default async function BlogPostPage({ params }: Props) {
       <ArticleSchema
         title={post.title}
         description={post.excerpt || ""}
-        image={post.featured_image_url || `${siteUrl}/og-image.jpg`}
+        image={post.featured_image_url || `${siteUrl}/opengraph-image`}
         datePublished={post.published_at || post.created_at}
         dateModified={post.updated_at}
         author={post.author_name}
         url={`${siteUrl}/blog/${slug}`}
       />
       <BreadcrumbSchema items={breadcrumbs} />
+      <FAQSchema items={[...BLOG_FAQS]} />
 
       <div className="min-h-screen bg-background">
         <Header />
@@ -197,7 +199,7 @@ export default async function BlogPostPage({ params }: Props) {
                 Start Free Trial
               </Link>
               <Link
-                href="/#pricing"
+                href="/pricing"
                 className="inline-flex items-center px-6 py-3 bg-white text-indigo-600 font-semibold rounded-lg hover:bg-indigo-50 transition-colors border border-indigo-200"
               >
                 View Pricing

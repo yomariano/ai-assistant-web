@@ -5,6 +5,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { Phone } from 'lucide-react';
 import { useAuthStore } from '@/lib/store';
 import Button from '@/components/ui/button';
+import { trackEvent } from '@/lib/umami';
 
 function LoginContent() {
   const router = useRouter();
@@ -107,6 +108,7 @@ function LoginContent() {
   const handleGoogleSignIn = async () => {
     setError('');
     setIsSigningIn(true);
+    trackEvent("login_started", { method: "google", plan: selectedPlan || "none" });
 
     try {
       await loginWithGoogle();

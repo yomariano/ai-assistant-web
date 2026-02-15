@@ -4,7 +4,7 @@ import type { BlogPost, FeaturePage, LocationPage, UseCasePage } from "@/lib/sup
 const BASE_URL =
   process.env.NEXT_PUBLIC_SITE_URL || "https://voicefleet.ai";
 const SITE_NAME = "VoiceFleet";
-const DEFAULT_OG_IMAGE = `${BASE_URL}/og-image.jpg`;
+const DEFAULT_OG_IMAGE = `${BASE_URL}/opengraph-image`;
 const TWITTER_HANDLE = "@voicefleetai";
 
 interface GenerateMetadataOptions {

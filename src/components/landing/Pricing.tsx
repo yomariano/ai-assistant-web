@@ -170,6 +170,9 @@ export default function Pricing() {
                             <Link
                                 href={tier.href}
                                 className={getButtonClass(tier.mostPopular)}
+                                data-umami-event="cta_click"
+                                data-umami-event-location="pricing"
+                                data-umami-event-plan={tier.name.toLowerCase()}
                             >
                                 {tier.cta}
                             </Link>

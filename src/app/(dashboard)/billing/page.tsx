@@ -6,6 +6,7 @@ import { CreditCard, ExternalLink, TrendingUp, AlertCircle, DollarSign, Clock } 
 import { Card, CardContent } from '@/components/ui/card';
 import Button from '@/components/ui/button';
 import { billingApi, emailApi } from '@/lib/api';
+import { trackEvent } from '@/lib/umami';
 
 type Region = 'EU' | 'AR';
 
@@ -70,6 +71,7 @@ export default function BillingPage() {
     fetchData();
     // Track pricing page view for abandoned upgrade triggers
     emailApi.trackEvent('pricing_view');
+    trackEvent("billing_viewed");
   }, []);
 
   async function fetchData() {

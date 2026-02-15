@@ -12,6 +12,7 @@ import {
   Volume2,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { trackEvent } from "@/lib/umami";
 import {
   Dialog,
   DialogContent,
@@ -610,6 +611,8 @@ export default function LiveDemoCall() {
       setMessages([]);
       setIsMuted(false);
 
+      trackEvent("demo_call_started", { scenario: scenario.id, voice: selectedVoice.label, language: languageId });
+
       const apiUrl = process.env.NEXT_PUBLIC_API_URL;
       if (apiUrl) {
         setIsCheckingAllowance(true);
@@ -751,7 +754,7 @@ export default function LiveDemoCall() {
 
   return (
     <>
-      <Button variant="outline" size="xl" onClick={() => setOpen(true)}>
+      <Button variant="outline" size="xl" onClick={() => { setOpen(true); trackEvent("demo_opened", { location: "hero" }); }}>
         <Sparkles className="w-5 h-5" />
         Try Live Demo
       </Button>

@@ -28,6 +28,15 @@ const siteConfig = {
   url: process.env.NEXT_PUBLIC_SITE_URL || "https://voicefleet.ai",
   twitterHandle: "@voicefleetai",
 };
+const umamiScriptUrl = process.env.NEXT_PUBLIC_UMAMI_SCRIPT_URL ?? "";
+const umamiWebsiteId = process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID ?? "";
+const shouldLoadUmami =
+  process.env.NEXT_PUBLIC_UMAMI_ENABLED === "true" &&
+  umamiScriptUrl.startsWith("https://") &&
+  umamiWebsiteId.length > 0;
+
+const gaId = process.env.NEXT_PUBLIC_GA_ID ?? "";
+const shouldLoadGA = gaId.startsWith("G-") && gaId.length > 0;
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
@@ -74,26 +83,6 @@ export const metadata: Metadata = {
     siteName: siteConfig.name,
     title: `${siteConfig.name} - AI Voice Agents for Phone Calls`,
     description: siteConfig.description,
-    images: [
-      {
-        url: "/twitter-image",
-        width: 1200,
-        height: 600,
-        alt: `${siteConfig.name} - AI Voice Receptionist`,
-      },
-      {
-        url: "/og-square",
-        width: 1200,
-        height: 1200,
-        alt: `${siteConfig.name} - AI Voice Receptionist`,
-      },
-      {
-        url: "/og-story",
-        width: 1080,
-        height: 1920,
-        alt: `${siteConfig.name} - AI Voice Receptionist`,
-      },
-    ],
   },
   twitter: {
     card: "summary_large_image",
@@ -101,14 +90,6 @@ export const metadata: Metadata = {
     creator: siteConfig.twitterHandle,
     title: `${siteConfig.name} - AI Voice Agents for Phone Calls`,
     description: siteConfig.description,
-    images: [
-      {
-        url: "/twitter-image",
-        width: 1200,
-        height: 600,
-        alt: `${siteConfig.name} - AI Voice Receptionist`,
-      },
-    ],
   },
   alternates: {
     canonical: siteConfig.url,
@@ -140,12 +121,23 @@ export default function RootLayout({
         className={`${inter.variable} ${jetbrainsMono.variable} ${plusJakartaSans.variable} antialiased`}
       >
         {children}
-        {process.env.NEXT_PUBLIC_UMAMI_SCRIPT_URL && process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID && (
+        {shouldLoadUmami && (
           <Script
-            src={process.env.NEXT_PUBLIC_UMAMI_SCRIPT_URL}
-            data-website-id={process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID}
+            src={umamiScriptUrl}
+            data-website-id={umamiWebsiteId}
             strategy="afterInteractive"
           />
+        )}
+        {shouldLoadGA && (
+          <>
+            <Script
+              src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}
+              strategy="afterInteractive"
+            />
+            <Script id="ga4-init" strategy="afterInteractive">
+              {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${gaId}');`}
+            </Script>
+          </>
         )}
       </body>
     </html>

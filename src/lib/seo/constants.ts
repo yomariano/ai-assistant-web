@@ -1,7 +1,7 @@
 export const SEO_CONFIG = {
   siteName: "VoiceFleet",
   siteUrl: process.env.NEXT_PUBLIC_SITE_URL || "https://voicefleet.ai",
-  defaultOgImage: "/og-image.jpg",
+  defaultOgImage: "/opengraph-image",
   twitterHandle: "@voicefleetai",
   defaultDescription:
     "AI Voice Agents that handle calls at 80% lower cost. Scale support without scaling headcount.",

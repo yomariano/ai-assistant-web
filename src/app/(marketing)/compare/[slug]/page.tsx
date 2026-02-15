@@ -111,12 +111,16 @@ export default async function ComparePage({ params }: Props) {
                 <Link
                   href="/login?plan=starter"
                   className="inline-flex items-center justify-center px-8 py-4 bg-white text-slate-900 rounded-lg font-semibold hover:bg-slate-50 transition-colors shadow-lg"
+                  data-umami-event="cta_click"
+                  data-umami-event-location="compare"
                 >
                   Start Free Trial
                 </Link>
                 <Link
                   href="/#demo"
                   className="inline-flex items-center justify-center px-8 py-4 border-2 border-white text-white rounded-lg font-semibold hover:bg-white/10 transition-colors"
+                  data-umami-event="cta_click"
+                  data-umami-event-location="compare_demo"
                 >
                   Try the Live Demo
                 </Link>

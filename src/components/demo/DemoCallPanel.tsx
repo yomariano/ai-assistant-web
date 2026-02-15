@@ -17,6 +17,7 @@ import {
   Volume2,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { trackEvent } from "@/lib/umami";
 import type {
   Booking,
   CallStatus,
@@ -405,6 +406,8 @@ export default function DemoCallPanel({
       setError(null);
       setMessages([]);
       setIsMuted(false);
+
+      trackEvent("demo_call_started", { scenario: scenario.id, voice: selectedVoice.label, language: languageId, type: "booking" });
 
       // Rate limit check
       const apiUrl = process.env.NEXT_PUBLIC_API_URL;

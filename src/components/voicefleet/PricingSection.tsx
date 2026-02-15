@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Check, Zap, Rocket, Crown, Gift, Clock, Shield, Phone, Sparkles, Globe } from "lucide-react";
 import { useAuthStore } from "@/lib/store";
 import { signInWithGoogle } from "@/lib/supabase";
+import { trackEvent } from "@/lib/umami";
 
 type Region = 'EU' | 'AR';
 
@@ -119,6 +120,8 @@ const PricingSection = () => {
   }, [checkAuth]);
 
   const handleGetStarted = async (planId: string) => {
+    trackEvent("plan_selected", { plan: planId, region, billing: isAnnual ? "annual" : "monthly" });
+
     // If user is not authenticated, go directly to Google OAuth
     if (!isAuthenticated) {
       // Store the selected plan for after login
@@ -317,7 +320,7 @@ const PricingSection = () => {
                 className={`px-4 py-2 rounded-full text-sm font-medium transition ${
                   !isAnnual ? 'bg-primary text-white shadow-sm' : 'text-muted-foreground hover:text-foreground'
                 }`}
-                onClick={() => setIsAnnual(false)}
+                onClick={() => { setIsAnnual(false); trackEvent("billing_toggle", { period: "monthly" }); }}
               >
                 Monthly
               </button>
@@ -325,7 +328,7 @@ const PricingSection = () => {
                 className={`px-4 py-2 rounded-full text-sm font-medium transition ${
                   isAnnual ? 'bg-primary text-white shadow-sm' : 'text-muted-foreground hover:text-foreground'
                 }`}
-                onClick={() => setIsAnnual(true)}
+                onClick={() => { setIsAnnual(true); trackEvent("billing_toggle", { period: "annual" }); }}
               >
                 Annual <span className="text-accent font-semibold">(Save 16%)</span>
               </button>
@@ -342,7 +345,7 @@ const PricingSection = () => {
                   className={`px-3 py-1.5 rounded-md text-xs font-medium transition flex items-center gap-1.5 ${
                     region === 'EU' ? 'bg-background text-foreground shadow-sm' : 'text-muted-foreground hover:text-foreground'
                   }`}
-                  onClick={() => setRegion('EU')}
+                  onClick={() => { setRegion('EU'); trackEvent("region_toggle", { region: "EU" }); }}
                 >
                   <span>🇮🇪</span> Ireland
                 </button>
@@ -350,7 +353,7 @@ const PricingSection = () => {
                   className={`px-3 py-1.5 rounded-md text-xs font-medium transition flex items-center gap-1.5 ${
                     region === 'AR' ? 'bg-background text-foreground shadow-sm' : 'text-muted-foreground hover:text-foreground'
                   }`}
-                  onClick={() => setRegion('AR')}
+                  onClick={() => { setRegion('AR'); trackEvent("region_toggle", { region: "AR" }); }}
                 >
                   <span>🇦🇷</span> Argentina
                 </button>

@@ -4,6 +4,7 @@ import { useEffect, useState, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { Loader2, AlertCircle } from 'lucide-react';
 import { billingApi } from '@/lib/api';
+import { trackEvent } from '@/lib/umami';
 
 function CheckoutContent() {
   const searchParams = useSearchParams();
@@ -20,6 +21,8 @@ function CheckoutContent() {
         setIsLoading(false);
         return;
       }
+
+      trackEvent("checkout_started", { plan: planId });
 
       // Validate plan ID
       if (!['starter', 'growth', 'pro'].includes(planId)) {

@@ -17,6 +17,7 @@ import DemoCallPanel from "./DemoCallPanel";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, ArrowRight, Phone } from "lucide-react";
 import Link from "next/link";
+import { trackEvent } from "@/lib/umami";
 
 export default function DemoPage() {
   const [step, setStep] = useState<DemoStep>(1);
@@ -48,6 +49,7 @@ export default function DemoPage() {
       setAvailability(getIndustryDefaults(id, weekDays));
       setBookings([]);
       setStep(2);
+      trackEvent("demo_industry_selected", { industry: id });
     },
     [weekDays]
   );
@@ -268,7 +270,7 @@ export default function DemoPage() {
             Get your AI receptionist live in under 5 minutes. No credit card required for the trial.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <Link href="/pricing">
+            <Link href="/pricing" data-umami-event="cta_click" data-umami-event-location="demo_bottom">
               <Button variant="hero" size="lg">
                 Start Free Trial <ArrowRight className="w-4 h-4" />
               </Button>

@@ -24,7 +24,7 @@ export default function LandingNavbar() {
                     <Link href="#comparison" className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">
                         Compare
                     </Link>
-                    <Link href="/#pricing" className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">
+                    <Link href="/pricing" className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">
                         Pricing
                     </Link>
                     <Link href="#faq" className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">
@@ -39,6 +39,8 @@ export default function LandingNavbar() {
                     <Link
                         href="/register"
                         className="rounded-lg bg-orange-500 px-4 py-2 text-sm font-medium text-white hover:bg-orange-600 transition-colors"
+                        data-umami-event="cta_click"
+                        data-umami-event-location="navbar"
                     >
                         Start Free Trial
                     </Link>
