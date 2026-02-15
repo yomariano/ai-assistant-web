@@ -1,0 +1,713 @@
+"use client";
+
+import {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
+import {
+  CheckCircle2,
+  Copy,
+  Mic,
+  MicOff,
+  Phone,
+  PhoneOff,
+  Volume2,
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import type {
+  Booking,
+  CallStatus,
+  DemoLanguageId,
+  DemoScenario,
+  TranscriptMessage,
+} from "@/lib/demo/types";
+import { DEMO_LANGUAGES, formatDate } from "@/lib/demo/calendar-utils";
+
+function coerceTranscript(value: unknown): string | null {
+  if (typeof value === "string") return value.trim() ? value : null;
+  if (value == null) return null;
+  if (typeof value === "object") {
+    const maybe = value as Record<string, unknown>;
+    if (typeof maybe.text === "string" && maybe.text.trim()) return maybe.text;
+  }
+  const asString = String(value);
+  return asString.trim() ? asString : null;
+}
+
+function safeErrorMessage(value: unknown, fallback: string): string {
+  if (typeof value === "string" && value.trim()) return value;
+  if (value == null) return fallback;
+  if (typeof value === "object") {
+    const obj = value as Record<string, unknown>;
+    if (typeof obj.msg === "string" && obj.msg.trim()) return obj.msg;
+    if (typeof obj.message === "string" && obj.message.trim()) return obj.message;
+    if (typeof obj.error === "string" && obj.error.trim()) return obj.error;
+  }
+  return fallback;
+}
+
+function shouldHangUpForUserUtterance(languageId: DemoLanguageId, utterance: string): boolean {
+  const text = utterance.toLowerCase().trim();
+  if (!text) return false;
+  const patternsByLanguage: Record<DemoLanguageId, RegExp[]> = {
+    en: [/\bbye\b/i, /\bgoodbye\b/i, /\bsee you\b/i, /\bthank(s| you).*(bye|goodbye)\b/i],
+    es: [/\bad(i|í)os\b/i, /\bhasta luego\b/i, /\bhasta pronto\b/i, /\bchao\b/i],
+    fr: [/\bau revoir\b/i, /\bà bient(ô|o)t\b/i, /\bmerci.*(au revoir|bye)\b/i],
+    de: [/\btsch(ü|u)ss\b/i, /\bauf wiedersehen\b/i, /\bbis bald\b/i],
+    it: [/\barrivederci\b/i, /\ba presto\b/i, /\bgrazie.*(ciao|arrivederci)\b/i],
+  };
+  const patterns = patternsByLanguage[languageId] || patternsByLanguage.en;
+  return patterns.some((re) => re.test(text));
+}
+
+type DemoCallPanelProps = {
+  scenario: DemoScenario;
+  demoSessionId: string;
+  languageId: DemoLanguageId;
+  onLanguageChange: (id: DemoLanguageId) => void;
+  onBookingCreated: (booking: Booking) => void;
+  onHighlightDate: (date: string | null) => void;
+};
+
+export default function DemoCallPanel({
+  scenario,
+  demoSessionId,
+  languageId,
+  onLanguageChange,
+  onBookingCreated,
+  onHighlightDate,
+}: DemoCallPanelProps) {
+  const [callStatus, setCallStatus] = useState<CallStatus>("idle");
+  const [error, setError] = useState<string | null>(null);
+  const [isMuted, setIsMuted] = useState(false);
+  const [isAssistantSpeaking, setIsAssistantSpeaking] = useState(false);
+  const [volumeLevel, setVolumeLevel] = useState(0);
+  const [messages, setMessages] = useState<TranscriptMessage[]>([]);
+  const [isDemoBlocked, setIsDemoBlocked] = useState(false);
+  const [bypassCode, setBypassCode] = useState("");
+  const [isCheckingAllowance, setIsCheckingAllowance] = useState(false);
+
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const vapiRef = useRef<any>(null);
+  const hardStopTimeoutRef = useRef<number | null>(null);
+  const hangupRequestedRef = useRef(false);
+  const languageIdRef = useRef<DemoLanguageId>(languageId);
+  const isAssistantSpeakingRef = useRef(false);
+
+  const language = useMemo(
+    () => DEMO_LANGUAGES.find((l) => l.id === languageId) || DEMO_LANGUAGES[0],
+    [languageId]
+  );
+
+  const assistantFirstMessage = useMemo(
+    () => scenario.firstMessageByLanguage?.[languageId] || scenario.firstMessage,
+    [languageId, scenario]
+  );
+
+  const suggestedPhrases = useMemo(
+    () => scenario.suggestedPhrasesByLanguage?.[languageId] || scenario.suggestedPhrases,
+    [languageId, scenario]
+  );
+
+  const assistantSystemPrompt = useMemo(() => {
+    const todayStr = formatDate(new Date());
+    const toolInstructions = `\n\nToday's date is ${todayStr}. Use the check_availability tool to check actual appointment availability on any date. Use create_booking to confirm appointments. Always check availability before confirming a booking.`;
+    const base = scenario.systemPrompt + toolInstructions;
+    if (languageId === "en") return base;
+    return `${base}\n\nIMPORTANT:\n- Speak to the caller in ${language.label}.\n- Keep the same structure (collect details, confirm back).\n- If the caller switches languages, continue in ${language.label}.`;
+  }, [language.label, languageId, scenario.systemPrompt]);
+
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
+
+  useEffect(() => {
+    languageIdRef.current = languageId;
+  }, [languageId]);
+
+  useEffect(() => {
+    isAssistantSpeakingRef.current = isAssistantSpeaking;
+  }, [isAssistantSpeaking]);
+
+  // Initialize Vapi SDK
+  useEffect(() => {
+    const publicKey = process.env.NEXT_PUBLIC_VAPI_PUBLIC_KEY;
+    if (!publicKey) {
+      setCallStatus("error");
+      setError("Live demo is not configured (missing Vapi public key).");
+      return;
+    }
+
+    setCallStatus("loading");
+    setError(null);
+
+    import("@vapi-ai/web")
+      .then(({ default: Vapi }) => {
+        const vapi = new Vapi(publicKey);
+        vapiRef.current = vapi;
+
+        vapi.on("call-start", () => {
+          setCallStatus("connected");
+          setError(null);
+          if (hardStopTimeoutRef.current) {
+            window.clearTimeout(hardStopTimeoutRef.current);
+          }
+          hardStopTimeoutRef.current = window.setTimeout(() => {
+            if (vapiRef.current) vapiRef.current.stop();
+            setCallStatus("ended");
+          }, 90_000);
+        });
+
+        vapi.on("call-end", () => {
+          setCallStatus("ended");
+          setIsAssistantSpeaking(false);
+          isAssistantSpeakingRef.current = false;
+          setVolumeLevel(0);
+          hangupRequestedRef.current = false;
+          onHighlightDate(null);
+          if (hardStopTimeoutRef.current) {
+            window.clearTimeout(hardStopTimeoutRef.current);
+            hardStopTimeoutRef.current = null;
+          }
+        });
+
+        vapi.on("speech-start", () => {
+          isAssistantSpeakingRef.current = true;
+          setIsAssistantSpeaking(true);
+        });
+
+        vapi.on("speech-end", () => {
+          isAssistantSpeakingRef.current = false;
+          setIsAssistantSpeaking(false);
+          if (hangupRequestedRef.current && vapiRef.current) {
+            hangupRequestedRef.current = false;
+            vapiRef.current.stop();
+            setCallStatus("ended");
+          }
+        });
+
+        vapi.on("volume-level", (level: number) => {
+          setVolumeLevel(level);
+        });
+
+        vapi.on("message", (message: Record<string, unknown>) => {
+          // Handle transcript messages
+          if (
+            message.type === "transcript" &&
+            message.transcriptType === "final" &&
+            message.transcript
+          ) {
+            const transcriptText = coerceTranscript(message.transcript);
+            if (!transcriptText) return;
+            const role = message.role === "user" ? "user" : "assistant";
+
+            if (role === "user" && shouldHangUpForUserUtterance(languageIdRef.current, transcriptText)) {
+              hangupRequestedRef.current = true;
+              window.setTimeout(() => {
+                if (hangupRequestedRef.current && !isAssistantSpeakingRef.current && vapiRef.current) {
+                  hangupRequestedRef.current = false;
+                  vapiRef.current.stop();
+                  setCallStatus("ended");
+                }
+              }, 2_000);
+            }
+
+            setMessages((prev) => [
+              ...prev.slice(-29),
+              { role, content: transcriptText, timestamp: new Date() },
+            ]);
+          }
+
+          // Handle tool-calls event — highlight calendar + optimistic booking
+          if (message.type === "tool-calls") {
+            const toolCalls = message.toolCalls as Array<{
+              function?: { name?: string; arguments?: unknown };
+            }> | undefined;
+            if (toolCalls) {
+              for (const tc of toolCalls) {
+                const args =
+                  typeof tc.function?.arguments === "string"
+                    ? JSON.parse(tc.function.arguments)
+                    : tc.function?.arguments || {};
+
+                if (tc.function?.name === "check_availability") {
+                  if (args.date) onHighlightDate(args.date);
+                }
+
+                // Optimistic booking: add to calendar from tool call args.
+                // If tool-calls-result also fires with data, bookingMap
+                // deduplicates by slot key so no visual double-up.
+                if (tc.function?.name === "create_booking" && args.date && args.time) {
+                  onBookingCreated({
+                    date: args.date,
+                    time: args.time,
+                    customerName: args.customerName || "Guest",
+                    service: args.service,
+                    notes: args.notes,
+                    createdAt: Date.now(),
+                  });
+                }
+              }
+            }
+          }
+
+          // Handle tool-calls-result event — add booking to calendar in real-time
+          if (message.type === "tool-calls-result") {
+            onHighlightDate(null);
+            const results = message.toolCallResult as Array<{
+              result?: string;
+            }> | undefined;
+            // Also check message.results (Vapi can send in either format)
+            const resultArray = results || (message.results as Array<{ result?: string }> | undefined);
+            if (resultArray) {
+              for (const r of resultArray) {
+                try {
+                  const parsed = typeof r.result === "string" ? JSON.parse(r.result) : r.result;
+                  if (parsed?.success && parsed?.booking) {
+                    onBookingCreated(parsed.booking as Booking);
+                  }
+                } catch {
+                  // ignore parse errors
+                }
+              }
+            }
+          }
+        });
+
+        vapi.on("error", (err: unknown) => {
+          const fallback = "An error occurred during the demo call.";
+          let errorMessage = fallback;
+          if (err && typeof err === "object") {
+            const vapiError = err as Record<string, unknown>;
+            if (vapiError.error && typeof vapiError.error === "object") {
+              errorMessage = safeErrorMessage(
+                (vapiError.error as Record<string, unknown>).message,
+                fallback
+              );
+            } else if (vapiError.message !== undefined) {
+              errorMessage = safeErrorMessage(vapiError.message, fallback);
+            } else if (vapiError.type === "start-method-error") {
+              errorMessage = "Failed to start the demo call. Check microphone permissions and try again.";
+            }
+          }
+          setError(errorMessage);
+          setCallStatus("error");
+        });
+
+        setCallStatus("idle");
+      })
+      .catch(() => {
+        setCallStatus("error");
+        setError("Failed to load the live demo. Please refresh and try again.");
+      });
+
+    return () => {
+      if (vapiRef.current) {
+        vapiRef.current.stop();
+        vapiRef.current = null;
+      }
+      hangupRequestedRef.current = false;
+      if (hardStopTimeoutRef.current) {
+        window.clearTimeout(hardStopTimeoutRef.current);
+        hardStopTimeoutRef.current = null;
+      }
+    };
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const startCall = useCallback(async () => {
+    if (!vapiRef.current) {
+      setError("Live demo is still loading. Please try again.");
+      return;
+    }
+
+    try {
+      setIsDemoBlocked(false);
+      setCallStatus("connecting");
+      setError(null);
+      setMessages([]);
+      setIsMuted(false);
+
+      // Rate limit check
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+      if (apiUrl) {
+        setIsCheckingAllowance(true);
+        try {
+          const res = await fetch(
+            `${apiUrl.replace(/\/$/, "")}/api/public/live-demo/allow`,
+            {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ bypassCode: bypassCode.trim() || undefined }),
+            }
+          );
+          const data = (await res.json().catch(() => null)) as {
+            allowed: boolean;
+          } | null;
+          if (data && data.allowed === false) {
+            setIsDemoBlocked(true);
+            setCallStatus("idle");
+            setError("Live demo limit reached (2 calls per IP). Book a demo to try a full-length call.");
+            return;
+          }
+        } catch {
+          // best-effort
+        } finally {
+          setIsCheckingAllowance(false);
+        }
+      }
+
+      const toolServerUrl = apiUrl
+        ? `${apiUrl.replace(/\/$/, "")}/api/public/demo-tools`
+        : "";
+
+      const assistantConfig: Record<string, unknown> = {
+        name: `VoiceFleet Demo - ${scenario.label}`,
+        firstMessage: assistantFirstMessage,
+        firstMessageMode: "assistant-speaks-first",
+        backgroundSound: "office",
+        maxDurationSeconds: 90,
+        clientMessages: [
+          "transcript",
+          "hang",
+          "tool-calls",
+          "tool-calls-result",
+          "speech-update",
+          "metadata",
+          "conversation-update",
+        ],
+        voice: { provider: "vapi", voiceId: "Savannah" },
+        model: {
+          provider: "openai",
+          model: "gpt-4o-mini",
+          messages: [
+            {
+              role: "system",
+              content: `${assistantSystemPrompt}\n\nDemo constraint:\n- This demo call is limited to 90 seconds. If time is nearly up, politely say goodbye.`,
+            },
+          ],
+          tools: [
+            {
+              type: "function",
+              function: {
+                name: "check_availability",
+                description:
+                  "Check available appointment time slots on a given date. Returns a list of available times.",
+                parameters: {
+                  type: "object",
+                  properties: {
+                    date: {
+                      type: "string",
+                      description: "The date to check in YYYY-MM-DD format",
+                    },
+                  },
+                  required: ["date"],
+                },
+              },
+              server: { url: toolServerUrl },
+            },
+            {
+              type: "function",
+              function: {
+                name: "create_booking",
+                description:
+                  "Create a booking/appointment at a specific date and time. Returns a confirmation number.",
+                parameters: {
+                  type: "object",
+                  properties: {
+                    date: {
+                      type: "string",
+                      description: "Booking date in YYYY-MM-DD format",
+                    },
+                    time: {
+                      type: "string",
+                      description: "Booking time in HH:MM format (24h)",
+                    },
+                    customerName: {
+                      type: "string",
+                      description: "Name of the customer",
+                    },
+                    service: {
+                      type: "string",
+                      description: "Type of service or appointment",
+                    },
+                    notes: {
+                      type: "string",
+                      description: "Additional notes (e.g. allergies, preferences)",
+                    },
+                  },
+                  required: ["date", "time", "customerName"],
+                },
+              },
+              server: { url: toolServerUrl },
+            },
+          ],
+        },
+        metadata: {
+          demoSessionId,
+        },
+      };
+
+      if (language.transcriberLanguage) {
+        assistantConfig.transcriber = {
+          provider: "deepgram",
+          model: "nova-2",
+          language: language.transcriberLanguage,
+        };
+      }
+
+      await vapiRef.current.start(assistantConfig);
+    } catch (err: unknown) {
+      const fallback = "Failed to start the demo. Please allow microphone access and try again.";
+      let errorMessage = fallback;
+      if (err && typeof err === "object") {
+        const e = err as Record<string, unknown>;
+        if (e.error && typeof e.error === "object") {
+          errorMessage = safeErrorMessage(
+            (e.error as Record<string, unknown>).message,
+            fallback
+          );
+        } else if (e.message !== undefined) {
+          errorMessage = safeErrorMessage(e.message, fallback);
+        }
+      }
+      setError(errorMessage);
+      setCallStatus("error");
+      setIsCheckingAllowance(false);
+    }
+  }, [
+    assistantFirstMessage,
+    assistantSystemPrompt,
+    bypassCode,
+    demoSessionId,
+    language.transcriberLanguage,
+    scenario.label,
+  ]);
+
+  const endCall = useCallback(() => {
+    if (vapiRef.current) vapiRef.current.stop();
+    setCallStatus("ended");
+    hangupRequestedRef.current = false;
+    onHighlightDate(null);
+    if (hardStopTimeoutRef.current) {
+      window.clearTimeout(hardStopTimeoutRef.current);
+      hardStopTimeoutRef.current = null;
+    }
+  }, [onHighlightDate]);
+
+  const toggleMute = useCallback(() => {
+    if (!vapiRef.current) return;
+    const newMuted = !isMuted;
+    vapiRef.current.setMuted(newMuted);
+    setIsMuted(newMuted);
+  }, [isMuted]);
+
+  const copyPhrase = useCallback(async (text: string) => {
+    try {
+      await navigator.clipboard.writeText(text);
+    } catch {
+      // no-op
+    }
+  }, []);
+
+  return (
+    <div className="flex flex-col gap-4">
+      {/* Scenario + Language header */}
+      <div className="flex items-center justify-between gap-3">
+        <div className="flex items-center gap-2">
+          <span className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+            {scenario.businessName}
+          </span>
+        </div>
+        <select
+          value={languageId}
+          onChange={(e) => onLanguageChange(e.target.value as DemoLanguageId)}
+          className="px-3 py-1.5 rounded-lg border border-border bg-background text-foreground text-xs focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none"
+          disabled={callStatus === "connecting" || callStatus === "connected"}
+        >
+          {DEMO_LANGUAGES.map((l) => (
+            <option key={l.id} value={l.id}>
+              {l.label}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      {/* Error */}
+      {error && (
+        <div className="rounded-xl border border-destructive/30 bg-destructive/10 px-4 py-3 text-sm text-destructive">
+          {error}{" "}
+          {isDemoBlocked && (
+            <a
+              href="https://calendly.com/voicefleet"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline font-semibold"
+            >
+              Book a demo
+            </a>
+          )}
+        </div>
+      )}
+
+      {isDemoBlocked && (
+        <div className="flex items-center gap-2">
+          <input
+            type="text"
+            value={bypassCode}
+            onChange={(e) => setBypassCode(e.target.value.toUpperCase())}
+            placeholder="Enter access code"
+            className="flex-1 px-4 py-2 rounded-lg border border-border bg-background text-foreground text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none"
+          />
+          <Button variant="outline" size="sm" onClick={startCall} disabled={!bypassCode.trim()}>
+            Try Code
+          </Button>
+        </div>
+      )}
+
+      {/* Call status bar */}
+      <div className="rounded-2xl border border-border bg-muted/30 p-4">
+        <div className="flex items-center justify-between gap-4">
+          <div className="flex items-center gap-3">
+            <div
+              className={`w-11 h-11 rounded-xl flex items-center justify-center border ${
+                callStatus === "connected"
+                  ? "bg-accent/10 border-accent/20"
+                  : callStatus === "connecting"
+                  ? "bg-primary/10 border-primary/20"
+                  : "bg-background border-border"
+              }`}
+            >
+              {callStatus === "connected" ? (
+                <Mic className={`w-5 h-5 ${isAssistantSpeaking ? "text-accent" : "text-muted-foreground"}`} />
+              ) : callStatus === "connecting" ? (
+                <Phone className="w-5 h-5 text-primary" />
+              ) : callStatus === "ended" ? (
+                <PhoneOff className="w-5 h-5 text-muted-foreground" />
+              ) : (
+                <Phone className="w-5 h-5 text-muted-foreground" />
+              )}
+            </div>
+            <div>
+              <p className="text-sm font-semibold text-foreground">
+                {callStatus === "loading" && "Loading voice system..."}
+                {callStatus === "idle" && "Ready"}
+                {callStatus === "connecting" && "Connecting..."}
+                {callStatus === "connected" && (isAssistantSpeaking ? "Assistant speaking..." : "Listening...")}
+                {callStatus === "ended" && "Call ended"}
+                {callStatus === "error" && "Call failed"}
+              </p>
+              <p className="text-xs text-muted-foreground">
+                {scenario.businessName} demo receptionist
+              </p>
+            </div>
+          </div>
+          {callStatus === "connected" && (
+            <div className="flex items-center gap-2">
+              <Volume2 className="w-4 h-4 text-muted-foreground" />
+              <div className="w-20 h-2 bg-border rounded-full overflow-hidden">
+                <div
+                  className="h-full bg-accent transition-all"
+                  style={{ width: `${Math.min(Math.max(volumeLevel * 100, 0), 100)}%` }}
+                />
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* Suggested phrases */}
+      <div>
+        <p className="text-xs font-medium text-muted-foreground mb-2">Try saying:</p>
+        <div className="flex flex-wrap gap-2">
+          {suggestedPhrases.map((p) => (
+            <button
+              key={p}
+              type="button"
+              onClick={() => copyPhrase(p)}
+              className="inline-flex items-center gap-1.5 rounded-full border border-border bg-background px-3 py-1.5 text-xs text-muted-foreground hover:text-foreground hover:border-primary/30 transition-colors"
+            >
+              <Copy className="w-3 h-3" />
+              {p}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Transcript */}
+      {messages.length > 0 && (
+        <div className="max-h-48 overflow-y-auto rounded-2xl border border-border bg-background p-4">
+          <div className="flex items-center gap-2 mb-3">
+            <CheckCircle2 className="w-4 h-4 text-muted-foreground" />
+            <span className="text-xs font-medium text-muted-foreground uppercase tracking-wide">
+              Transcript
+            </span>
+          </div>
+          <div className="space-y-3">
+            {messages.map((m, idx) => (
+              <div key={idx} className="text-sm">
+                <span className="font-semibold text-foreground">
+                  {m.role === "user" ? "You" : "Receptionist"}:
+                </span>{" "}
+                <span className="text-muted-foreground">{m.content}</span>
+              </div>
+            ))}
+            <div ref={messagesEndRef} />
+          </div>
+        </div>
+      )}
+
+      {/* Call controls */}
+      <div className="flex gap-2">
+        {callStatus === "connected" || callStatus === "connecting" ? (
+          <>
+            <Button
+              className="flex-1"
+              variant="outline"
+              onClick={toggleMute}
+              disabled={callStatus !== "connected"}
+            >
+              {isMuted ? (
+                <>
+                  <MicOff className="w-4 h-4" /> Unmute
+                </>
+              ) : (
+                <>
+                  <Mic className="w-4 h-4" /> Mute
+                </>
+              )}
+            </Button>
+            <Button
+              className="flex-1 border-destructive/30 text-destructive hover:bg-destructive/10"
+              variant="outline"
+              onClick={endCall}
+            >
+              <PhoneOff className="w-4 h-4" /> End call
+            </Button>
+          </>
+        ) : (
+          <Button
+            className="w-full"
+            variant="hero"
+            onClick={startCall}
+            disabled={callStatus === "loading" || isCheckingAllowance || isDemoBlocked}
+          >
+            <Phone className="w-4 h-4" />
+            {isCheckingAllowance
+              ? "Starting..."
+              : callStatus === "error" || callStatus === "ended"
+              ? "Try again"
+              : "Start demo call"}
+          </Button>
+        )}
+      </div>
+
+      <p className="text-xs text-muted-foreground">
+        Tip: if your mic is blocked, click the lock icon in your browser address bar and allow microphone access.
+      </p>
+    </div>
+  );
+}

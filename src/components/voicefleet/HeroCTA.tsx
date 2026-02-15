@@ -66,6 +66,7 @@ const HeroCTA = () => {
       </div>
       <p className="text-xs text-muted-foreground -mt-6 mb-8">
         Live demo: choose an industry + voice + language (English, Spanish, French, German, Italian). Calls end automatically after 90 seconds.
+        {" "}Or <Link href="/demo" className="text-foreground font-semibold hover:underline">try the interactive booking demo</Link>.
       </p>
       <p className="text-sm text-muted-foreground -mt-4 mb-10">
         Prefer a guided walkthrough?{" "}
