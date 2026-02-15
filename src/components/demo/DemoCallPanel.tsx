@@ -115,7 +115,7 @@ export default function DemoCallPanel({
 
   const assistantSystemPrompt = useMemo(() => {
     const todayStr = formatDate(new Date());
-    const toolInstructions = `\n\nToday's date is ${todayStr}. Use the check_availability tool to check actual appointment availability on any date. Use create_booking to confirm appointments. Always check availability before confirming a booking.`;
+    const toolInstructions = `\n\nToday's date is ${todayStr}. Use the check_availability tool to check actual appointment availability. You can call it without a date to get a summary of ALL dates that have availability, or with a specific date (YYYY-MM-DD) for detailed time slots. Use create_booking to confirm appointments. Always check availability before confirming a booking.\n\nWhen the caller says "tomorrow", "this week", "next Monday", etc., convert it to the correct YYYY-MM-DD date. If you're unsure which dates are available, call check_availability without a date first to see the overview.`;
     const base = scenario.systemPrompt + toolInstructions;
     if (languageId === "en") return base;
     return `${base}\n\nIMPORTANT:\n- Speak to the caller in ${language.label}.\n- Keep the same structure (collect details, confirm back).\n- If the caller switches languages, continue in ${language.label}.`;
@@ -395,16 +395,16 @@ export default function DemoCallPanel({
               function: {
                 name: "check_availability",
                 description:
-                  "Check available appointment time slots on a given date. Returns a list of available times.",
+                  "Check available appointment time slots. If called without a date, returns a summary of ALL dates that have availability. If called with a specific date, returns the detailed time slots for that day.",
                 parameters: {
                   type: "object",
                   properties: {
                     date: {
                       type: "string",
-                      description: "The date to check in YYYY-MM-DD format",
+                      description: "Optional. The date to check in YYYY-MM-DD format. Omit to get an overview of all dates with availability.",
                     },
                   },
-                  required: ["date"],
+                  required: [],
                 },
               },
               server: { url: toolServerUrl },
