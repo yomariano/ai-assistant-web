@@ -26,6 +26,50 @@ import type {
 } from "@/lib/demo/types";
 import { DEMO_LANGUAGES, formatDate } from "@/lib/demo/calendar-utils";
 
+type DemoVoice = {
+  id: string;
+  label: string;
+  provider: "vapi" | "11labs";
+  defaultLanguageId?: DemoLanguageId;
+  enforceLanguage?: string;
+  model?: string;
+};
+
+const DEFAULT_ARGENTINA_VOICE_ID =
+  process.env.NEXT_PUBLIC_DEMO_ARGENTINA_VOICE_ID || "1709f1e8-d660-4e22-b253-158ccf68bf0a";
+
+const DEMO_VOICES: DemoVoice[] = [
+  { id: "Elliot", label: "Elliot (conversational)", provider: "vapi" },
+  { id: "Savannah", label: "Savannah (friendly)", provider: "vapi" },
+  { id: "Rohan", label: "Rohan (warm)", provider: "vapi" },
+  { id: "Lily", label: "Lily (natural)", provider: "vapi" },
+  { id: "Cole", label: "Cole (professional)", provider: "vapi" },
+  {
+    id: DEFAULT_ARGENTINA_VOICE_ID,
+    label: "Valentina (Argentina)",
+    provider: "11labs",
+    defaultLanguageId: "es",
+    enforceLanguage: "es",
+    model: "eleven_turbo_v2_5",
+  },
+  {
+    id: "ErXwobaYiN019PkySvjV",
+    label: "Antoni (Argentina)",
+    provider: "11labs",
+    defaultLanguageId: "es",
+    enforceLanguage: "es",
+    model: "eleven_turbo_v2_5",
+  },
+  {
+    id: "TxGEqnHWrfWFTfGW9XjX",
+    label: "Josh (Argentina)",
+    provider: "11labs",
+    defaultLanguageId: "es",
+    enforceLanguage: "es",
+    model: "eleven_turbo_v2_5",
+  },
+];
+
 function coerceTranscript(value: unknown): string | null {
   if (typeof value === "string") return value.trim() ? value : null;
   if (value == null) return null;
@@ -82,6 +126,7 @@ export default function DemoCallPanel({
   onBookingCreated,
   onHighlightDate,
 }: DemoCallPanelProps) {
+  const [selectedVoice, setSelectedVoice] = useState<DemoVoice>(DEMO_VOICES[0]);
   const [callStatus, setCallStatus] = useState<CallStatus>("idle");
   const [error, setError] = useState<string | null>(null);
   const [isMuted, setIsMuted] = useState(false);
@@ -409,7 +454,19 @@ export default function DemoCallPanel({
           "metadata",
           "conversation-update",
         ],
-        voice: { provider: "vapi", voiceId: "Savannah" },
+        voice: selectedVoice.provider === "11labs"
+          ? {
+              provider: "11labs",
+              voiceId: selectedVoice.id,
+              model: selectedVoice.model || "eleven_turbo_v2_5",
+              language: selectedVoice.enforceLanguage || languageId,
+              stability: 0.55,
+              similarityBoost: 0.8,
+              style: 0,
+              useSpeakerBoost: true,
+              optimizeStreamingLatency: 2,
+            }
+          : { provider: "vapi", voiceId: selectedVoice.id },
         model: {
           provider: "openai",
           model: "gpt-4o-mini",
@@ -514,7 +571,9 @@ export default function DemoCallPanel({
     bypassCode,
     demoSessionId,
     language.transcriberLanguage,
+    languageId,
     scenario.label,
+    selectedVoice,
   ]);
 
   const endCall = useCallback(() => {
@@ -545,25 +604,53 @@ export default function DemoCallPanel({
 
   return (
     <div className="flex flex-col gap-4">
-      {/* Scenario + Language header */}
-      <div className="flex items-center justify-between gap-3">
-        <div className="flex items-center gap-2">
-          <span className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-            {scenario.businessName}
-          </span>
+      {/* Scenario header */}
+      <div className="flex items-center gap-2">
+        <span className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+          {scenario.businessName}
+        </span>
+      </div>
+
+      {/* Voice + Language pickers */}
+      <div className="grid grid-cols-2 gap-2">
+        <div>
+          <label className="block text-[11px] font-medium text-muted-foreground mb-1">Voice</label>
+          <select
+            value={selectedVoice.id}
+            onChange={(e) => {
+              const voice = DEMO_VOICES.find((v) => v.id === e.target.value);
+              if (voice) {
+                setSelectedVoice(voice);
+                if (voice.defaultLanguageId && voice.defaultLanguageId !== languageId) {
+                  onLanguageChange(voice.defaultLanguageId);
+                }
+              }
+            }}
+            className="w-full px-3 py-1.5 rounded-lg border border-border bg-background text-foreground text-xs focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none"
+            disabled={callStatus === "connecting" || callStatus === "connected"}
+          >
+            {DEMO_VOICES.map((v) => (
+              <option key={v.id} value={v.id}>
+                {v.label}
+              </option>
+            ))}
+          </select>
         </div>
-        <select
-          value={languageId}
-          onChange={(e) => onLanguageChange(e.target.value as DemoLanguageId)}
-          className="px-3 py-1.5 rounded-lg border border-border bg-background text-foreground text-xs focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none"
-          disabled={callStatus === "connecting" || callStatus === "connected"}
-        >
-          {DEMO_LANGUAGES.map((l) => (
-            <option key={l.id} value={l.id}>
-              {l.label}
-            </option>
-          ))}
-        </select>
+        <div>
+          <label className="block text-[11px] font-medium text-muted-foreground mb-1">Language</label>
+          <select
+            value={languageId}
+            onChange={(e) => onLanguageChange(e.target.value as DemoLanguageId)}
+            className="w-full px-3 py-1.5 rounded-lg border border-border bg-background text-foreground text-xs focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none"
+            disabled={callStatus === "connecting" || callStatus === "connected" || !!selectedVoice.enforceLanguage}
+          >
+            {DEMO_LANGUAGES.map((l) => (
+              <option key={l.id} value={l.id}>
+                {l.label}
+              </option>
+            ))}
+          </select>
+        </div>
       </div>
 
       {/* Error */}
