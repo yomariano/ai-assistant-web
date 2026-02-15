@@ -598,8 +598,44 @@ export const INDUSTRIES: Record<string, Industry> = {
 // Get all industry slugs
 export const getIndustrySlugs = (): string[] => Object.keys(INDUSTRIES);
 
-// Get industry by slug
-export const getIndustry = (slug: string): Industry | null => INDUSTRIES[slug] || null;
+// Common slug aliases — maps alternate/colloquial names to canonical slugs
+const INDUSTRY_ALIASES: Record<string, string> = {
+  "dentists": "dental-clinics",
+  "dentist": "dental-clinics",
+  "dental": "dental-clinics",
+  "salons": "hair-salons",
+  "salon": "hair-salons",
+  "hairdressers": "hair-salons",
+  "hairdresser": "hair-salons",
+  "barbers": "hair-salons",
+  "barber": "hair-salons",
+  "doctors": "medical-clinics",
+  "doctor": "medical-clinics",
+  "clinics": "medical-clinics",
+  "clinic": "medical-clinics",
+  "gyms": "fitness-centers",
+  "gym": "fitness-centers",
+  "fitness": "fitness-centers",
+  "lawyers": "law-firms",
+  "lawyer": "law-firms",
+  "attorneys": "law-firms",
+  "attorney": "law-firms",
+  "accountants": "accounting-firms",
+  "accountant": "accounting-firms",
+  "hotels": "hotels",
+  "hotel": "hotels",
+  "dealerships": "car-dealerships",
+  "dealership": "car-dealerships",
+  "mechanics": "auto-repair",
+  "mechanic": "auto-repair",
+  "insurance": "insurance-agencies",
+  "realtors": "real-estate",
+  "realtor": "real-estate",
+};
+
+// Get industry by slug (checks canonical slugs first, then aliases)
+export const getIndustry = (slug: string): Industry | null =>
+  INDUSTRIES[slug] || INDUSTRIES[INDUSTRY_ALIASES[slug]] || null;
 
 // Get related industries
 export const getRelatedIndustries = (slug: string): Industry[] => {

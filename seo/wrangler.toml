@@ -53,7 +53,24 @@ routes = [
   { pattern = "voicefleet.ai/fitness-center-voice-agent-in-*", zone_name = "voicefleet.ai" },
   { pattern = "voicefleet.ai/fitness-centers-voice-agent-in-*", zone_name = "voicefleet.ai" },
   { pattern = "voicefleet.ai/insurance-agency-voice-agent-in-*", zone_name = "voicefleet.ai" },
-  { pattern = "voicefleet.ai/insurance-agencies-voice-agent-in-*", zone_name = "voicefleet.ai" }
+  { pattern = "voicefleet.ai/insurance-agencies-voice-agent-in-*", zone_name = "voicefleet.ai" },
+  # Common alias routes — redirect common search terms to canonical pages
+  { pattern = "voicefleet.ai/dentist-voice-agent-in-*", zone_name = "voicefleet.ai" },
+  { pattern = "voicefleet.ai/dentists-voice-agent-in-*", zone_name = "voicefleet.ai" },
+  { pattern = "voicefleet.ai/salon-voice-agent-in-*", zone_name = "voicefleet.ai" },
+  { pattern = "voicefleet.ai/salons-voice-agent-in-*", zone_name = "voicefleet.ai" },
+  { pattern = "voicefleet.ai/doctor-voice-agent-in-*", zone_name = "voicefleet.ai" },
+  { pattern = "voicefleet.ai/doctors-voice-agent-in-*", zone_name = "voicefleet.ai" },
+  { pattern = "voicefleet.ai/clinic-voice-agent-in-*", zone_name = "voicefleet.ai" },
+  { pattern = "voicefleet.ai/clinics-voice-agent-in-*", zone_name = "voicefleet.ai" },
+  { pattern = "voicefleet.ai/gym-voice-agent-in-*", zone_name = "voicefleet.ai" },
+  { pattern = "voicefleet.ai/gyms-voice-agent-in-*", zone_name = "voicefleet.ai" },
+  { pattern = "voicefleet.ai/lawyer-voice-agent-in-*", zone_name = "voicefleet.ai" },
+  { pattern = "voicefleet.ai/lawyers-voice-agent-in-*", zone_name = "voicefleet.ai" },
+  { pattern = "voicefleet.ai/mechanic-voice-agent-in-*", zone_name = "voicefleet.ai" },
+  { pattern = "voicefleet.ai/mechanics-voice-agent-in-*", zone_name = "voicefleet.ai" },
+  { pattern = "voicefleet.ai/realtor-voice-agent-in-*", zone_name = "voicefleet.ai" },
+  { pattern = "voicefleet.ai/realtors-voice-agent-in-*", zone_name = "voicefleet.ai" }
 ]
 
 # Environment variables

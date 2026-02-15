@@ -37,15 +37,12 @@ export async function industryLocationHandler(
   industrySlug: string,
   locationSlug: string
 ) {
-  // Handle singular/plural forms (e.g., "restaurant" -> "restaurants", or "restaurants" -> "restaurant")
+  // Resolve industry slug: direct match, singular/plural, or alias
   let industry = getIndustry(industrySlug);
 
-  // Try adding 's' for plural form
   if (!industry && !industrySlug.endsWith('s')) {
     industry = getIndustry(industrySlug + 's');
   }
-
-  // Try removing 's' for singular form
   if (!industry && industrySlug.endsWith('s')) {
     industry = getIndustry(industrySlug.slice(0, -1));
   }
@@ -59,21 +56,44 @@ export async function industryLocationHandler(
   const siteUrl = c.env.SITE_URL || 'https://voicefleet.ai';
   const appUrl = c.env.APP_URL || 'https://app.voicefleet.ai';
 
+  // 301 redirect if the URL slug doesn't match the canonical industry slug
+  // e.g. /dentists-voice-agent-in-cork -> /dental-clinics-voice-agent-in-cork
+  if (industrySlug !== industry.slug) {
+    const canonicalUrl = `${siteUrl}/${industry.slug}-voice-agent-in-${city.slug}`;
+    return c.redirect(canonicalUrl, 301);
+  }
+
   // Try to get AI-generated content from cache
   const cacheKey = `content:combo:${industry.slug}:${city.slug}`;
-  const content = await getContent(c.env.CONTENT_CACHE, cacheKey);
+  let content: GeneratedContent | null = null;
+  try {
+    content = await getContent(c.env.CONTENT_CACHE, cacheKey);
+  } catch (e) {
+    console.error(`[SEO] Failed to parse cached content for ${cacheKey}:`, e);
+  }
 
   c.header('X-VoiceFleet-SEO', '1');
-  c.header('X-VoiceFleet-SEO-Content', content ? 'ai' : 'fallback');
   c.header('X-VoiceFleet-SEO-Cache-Key', cacheKey);
   if (content?.generatedAt) {
     c.header('X-VoiceFleet-SEO-Generated-At', content.generatedAt);
   }
 
-  // Generate page content
-  const pageContent = content
-    ? renderWithAIContent(industry, city, country, content, siteUrl, appUrl)
-    : renderFallbackContent(industry, city, country, siteUrl, appUrl);
+  // Generate page content — fall back to template if AI content is incomplete/corrupt
+  let pageContent: string;
+  let contentSource = 'fallback';
+  if (content) {
+    try {
+      pageContent = renderWithAIContent(industry, city, country, content, siteUrl, appUrl);
+      contentSource = 'ai';
+    } catch (e) {
+      console.error(`[SEO] Corrupt AI content for ${cacheKey}, falling back to template:`, e);
+      pageContent = renderFallbackContent(industry, city, country, siteUrl, appUrl);
+      contentSource = 'fallback-after-error';
+    }
+  } else {
+    pageContent = renderFallbackContent(industry, city, country, siteUrl, appUrl);
+  }
+  c.header('X-VoiceFleet-SEO-Content', contentSource);
 
   // Generate schemas
   const pageUrl = `${siteUrl}/${industry.slug}-voice-agent-in-${city.slug}`;
