@@ -1,12 +1,8 @@
 import { Metadata } from "next";
-import dynamic from "next/dynamic";
 import { generatePageMetadata } from "@/lib/seo/metadata";
 import Header from "@/components/voicefleet/Header";
 import Footer from "@/components/voicefleet/Footer";
-
-const DemoPage = dynamic(() => import("@/components/demo/DemoPage"), {
-  ssr: false,
-});
+import DemoPage from "@/components/demo/DemoPage";
 
 export const metadata: Metadata = {
   ...generatePageMetadata({

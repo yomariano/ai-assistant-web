@@ -264,20 +264,20 @@ export default function DemoPage() {
             Get your AI receptionist live in under 5 minutes. No credit card required for the trial.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <Button variant="hero" size="lg" asChild>
-              <Link href="/pricing">
+            <Link href="/pricing">
+              <Button variant="hero" size="lg">
                 Start Free Trial <ArrowRight className="w-4 h-4" />
-              </Link>
-            </Button>
-            <Button variant="outline" size="lg" asChild>
-              <a
-                href="https://calendly.com/voicefleet"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              </Button>
+            </Link>
+            <a
+              href="https://calendly.com/voicefleet"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Button variant="outline" size="lg">
                 Book a Guided Demo
-              </a>
-            </Button>
+              </Button>
+            </a>
           </div>
         </div>
       </div>
