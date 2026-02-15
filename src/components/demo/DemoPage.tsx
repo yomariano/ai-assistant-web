@@ -245,6 +245,7 @@ export default function DemoPage() {
                   <DemoCallPanel
                     scenario={scenario}
                     demoSessionId={demoSessionId}
+                    availability={availability}
                     languageId={languageId}
                     onLanguageChange={setLanguageId}
                     onBookingCreated={handleBookingCreated}

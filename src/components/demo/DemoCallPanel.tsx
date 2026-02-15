@@ -66,6 +66,7 @@ function shouldHangUpForUserUtterance(languageId: DemoLanguageId, utterance: str
 type DemoCallPanelProps = {
   scenario: DemoScenario;
   demoSessionId: string;
+  availability: Record<string, boolean>;
   languageId: DemoLanguageId;
   onLanguageChange: (id: DemoLanguageId) => void;
   onBookingCreated: (booking: Booking) => void;
@@ -75,6 +76,7 @@ type DemoCallPanelProps = {
 export default function DemoCallPanel({
   scenario,
   demoSessionId,
+  availability,
   languageId,
   onLanguageChange,
   onBookingCreated,
@@ -114,17 +116,37 @@ export default function DemoCallPanel({
     [languageId, scenario]
   );
 
+  const availabilitySummary = useMemo(() => {
+    const DAY_NAMES = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    // Group available slots by date
+    const byDate: Record<string, string[]> = {};
+    for (const [key, avail] of Object.entries(availability)) {
+      if (!avail) continue;
+      const [date, time] = key.split("_");
+      if (!byDate[date]) byDate[date] = [];
+      byDate[date].push(time);
+    }
+    const dates = Object.keys(byDate).sort();
+    if (dates.length === 0) return "No availability configured.";
+    return dates.map((date) => {
+      const d = new Date(date + "T12:00:00");
+      const dayName = DAY_NAMES[d.getDay()];
+      const slots = byDate[date].sort();
+      return `- ${dayName} ${date}: ${slots.join(", ")}`;
+    }).join("\n");
+  }, [availability]);
+
   const assistantSystemPrompt = useMemo(() => {
     const now = new Date();
     const todayStr = formatDate(now);
     const dayName = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"][now.getDay()];
     const monthName = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"][now.getMonth()];
     const todayFull = `${dayName}, ${monthName} ${now.getDate()}, ${now.getFullYear()} (${todayStr})`;
-    const toolInstructions = `\n\nToday is ${todayFull}. Use the check_availability tool to check actual appointment availability. You can call it without a date to get a summary of ALL dates that have availability, or with a specific date (YYYY-MM-DD) for detailed time slots. Use create_booking to confirm appointments. Always check availability before confirming a booking.\n\nWhen the caller says "tomorrow", "this week", "next Monday", etc., convert it to the correct YYYY-MM-DD date relative to today. If you're unsure which dates are available, call check_availability without a date first to see the overview.`;
+    const toolInstructions = `\n\nToday is ${todayFull}.\n\nHere are the ACTUAL available appointment slots:\n${availabilitySummary}\n\nUse this information to answer availability questions. Use the create_booking tool to confirm appointments (required parameters: date in YYYY-MM-DD, time in HH:MM 24h format, customerName). You may also use check_availability to verify slots before booking.\n\nWhen the caller asks about a date, refer to the availability list above. If a time slot is listed, it IS available. Only say "no availability" if the date/time is genuinely NOT in the list above.`;
     const base = scenario.systemPrompt + toolInstructions;
     if (languageId === "en") return base;
     return `${base}\n\nIMPORTANT:\n- Speak to the caller in ${language.label}.\n- Keep the same structure (collect details, confirm back).\n- If the caller switches languages, continue in ${language.label}.`;
-  }, [language.label, languageId, scenario.systemPrompt]);
+  }, [availabilitySummary, language.label, languageId, scenario.systemPrompt]);
 
   useEffect(() => {
     const container = transcriptContainerRef.current;
