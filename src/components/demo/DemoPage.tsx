@@ -14,6 +14,7 @@ import DemoSteps from "./DemoSteps";
 import IndustryPicker from "./IndustryPicker";
 import WeeklyCalendar from "./WeeklyCalendar";
 import DemoCallPanel from "./DemoCallPanel";
+import LiveBookings from "./LiveBookings";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, ArrowRight, Phone } from "lucide-react";
 import Link from "next/link";
@@ -231,8 +232,8 @@ export default function DemoPage() {
               </div>
 
               <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
-                {/* Calendar: 3/5 width on desktop */}
-                <div className="lg:col-span-3">
+                {/* Calendar + Live Bookings: 3/5 width on desktop */}
+                <div className="lg:col-span-3 space-y-6">
                   <WeeklyCalendar
                     weekDays={weekDays}
                     availability={availability}
@@ -240,6 +241,7 @@ export default function DemoPage() {
                     mode="call"
                     highlightDate={highlightDate ?? undefined}
                   />
+                  <LiveBookings bookings={bookings} />
                 </div>
 
                 {/* Call Panel: 2/5 width on desktop */}
