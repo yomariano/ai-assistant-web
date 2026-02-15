@@ -365,7 +365,7 @@ export default function DemoCallPanel({
       }
 
       const toolServerUrl = apiUrl
-        ? `${apiUrl.replace(/\/$/, "")}/api/public/demo-tools`
+        ? `${apiUrl.replace(/\/$/, "")}/api/public/demo-tools?sid=${encodeURIComponent(demoSessionId)}`
         : "";
 
       const assistantConfig: Record<string, unknown> = {

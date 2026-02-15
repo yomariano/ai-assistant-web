@@ -95,7 +95,7 @@ export default function DemoPage() {
 
     if (apiUrl) {
       try {
-        await fetch(`${apiUrl.replace(/\/$/, "")}/api/public/demo-tools/session`, {
+        const res = await fetch(`${apiUrl.replace(/\/$/, "")}/api/public/demo-tools/session`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -105,8 +105,11 @@ export default function DemoPage() {
             businessName: scenario.businessName,
           }),
         });
-      } catch {
-        // best-effort — the session store is on the same API server
+        if (!res.ok) {
+          console.error("[Demo] Session creation failed:", res.status, await res.text().catch(() => ""));
+        }
+      } catch (err) {
+        console.error("[Demo] Session creation error:", err);
       }
     }
 
