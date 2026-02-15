@@ -90,6 +90,7 @@ export default function DemoCallPanel({
   const [bypassCode, setBypassCode] = useState("");
   const [isCheckingAllowance, setIsCheckingAllowance] = useState(false);
 
+  const transcriptContainerRef = useRef<HTMLDivElement>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const vapiRef = useRef<any>(null);
@@ -126,7 +127,10 @@ export default function DemoCallPanel({
   }, [language.label, languageId, scenario.systemPrompt]);
 
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    const container = transcriptContainerRef.current;
+    if (container) {
+      container.scrollTop = container.scrollHeight;
+    }
   }, [messages]);
 
   useEffect(() => {
@@ -643,7 +647,7 @@ export default function DemoCallPanel({
 
       {/* Transcript */}
       {messages.length > 0 && (
-        <div className="max-h-48 overflow-y-auto rounded-2xl border border-border bg-background p-4">
+        <div ref={transcriptContainerRef} className="max-h-48 overflow-y-auto rounded-2xl border border-border bg-background p-4">
           <div className="flex items-center gap-2 mb-3">
             <CheckCircle2 className="w-4 h-4 text-muted-foreground" />
             <span className="text-xs font-medium text-muted-foreground uppercase tracking-wide">
