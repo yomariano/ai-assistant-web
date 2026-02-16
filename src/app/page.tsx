@@ -33,6 +33,7 @@ export const metadata: Metadata = {
 // Above-fold components: load immediately for fast LCP
 import Header from "@/components/voicefleet/Header";
 import HeroSection from "@/components/voicefleet/HeroSection";
+import IntegrationBrandsCarousel from "@/components/voicefleet/IntegrationBrandsCarousel";
 import MetricsBar from "@/components/voicefleet/MetricsBar";
 
 // Below-fold components: lazy load for smaller initial bundle
@@ -80,6 +81,7 @@ export default function Home() {
       <Header />
       <main>
         <HeroSection />
+        <IntegrationBrandsCarousel />
         <MetricsBar />
         <ProblemSection />
         <SolutionSection />

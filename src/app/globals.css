@@ -19,9 +19,9 @@
   --secondary-foreground: 222 47% 11%;
 
   --muted: 210 20% 94%;
-  --muted-foreground: 215 16% 47%;
+  --muted-foreground: 215 16% 40%;
 
-  --accent: 160 84% 39%;
+  --accent: 160 84% 27%;
   --accent-foreground: 0 0% 100%;
 
   --destructive: 0 84% 60%;
@@ -35,7 +35,7 @@
 
   /* Custom tokens */
   --gradient-hero: linear-gradient(135deg, hsl(224 82% 40%) 0%, hsl(224 82% 30%) 100%);
-  --gradient-accent: linear-gradient(135deg, hsl(160 84% 39%) 0%, hsl(160 84% 32%) 100%);
+  --gradient-accent: linear-gradient(135deg, hsl(160 84% 27%) 0%, hsl(160 84% 22%) 100%);
   --gradient-subtle: linear-gradient(180deg, hsl(210 20% 98%) 0%, hsl(210 20% 95%) 100%);
   --gradient-dark: linear-gradient(135deg, hsl(222 47% 11%) 0%, hsl(224 50% 18%) 100%);
 
@@ -43,7 +43,7 @@
   --shadow-md: 0 4px 6px -1px hsl(224 82% 40% / 0.08), 0 2px 4px -2px hsl(224 82% 40% / 0.05);
   --shadow-lg: 0 10px 15px -3px hsl(224 82% 40% / 0.08), 0 4px 6px -4px hsl(224 82% 40% / 0.05);
   --shadow-xl: 0 20px 25px -5px hsl(224 82% 40% / 0.1), 0 8px 10px -6px hsl(224 82% 40% / 0.08);
-  --shadow-glow: 0 0 40px hsl(160 84% 39% / 0.25);
+  --shadow-glow: 0 0 40px hsl(160 84% 27% / 0.25);
 
   --font-heading: var(--font-plus-jakarta), 'Plus Jakarta Sans', sans-serif;
   --font-body: var(--font-inter), 'Inter', sans-serif;
@@ -58,7 +58,7 @@
   --sidebar-ring: 217.2 91.2% 59.8%;
 
   --chart-1: hsl(224 82% 40%);
-  --chart-2: hsl(160 84% 39%);
+  --chart-2: hsl(160 84% 27%);
   --chart-3: hsl(210 20% 94%);
   --chart-4: hsl(215 16% 47%);
   --chart-5: hsl(224 82% 50%);
@@ -241,6 +241,17 @@
     animation: countUp 1s ease-out forwards;
   }
 
+  .integration-marquee-track {
+    display: flex;
+    width: max-content;
+    animation: integrationMarquee 36s linear infinite;
+    will-change: transform;
+  }
+
+  .integration-marquee:hover .integration-marquee-track {
+    animation-play-state: paused;
+  }
+
   .stagger-1 { animation-delay: 0.1s; }
   .stagger-2 { animation-delay: 0.2s; }
   .stagger-3 { animation-delay: 0.3s; }
@@ -311,6 +322,17 @@
 @keyframes countUp {
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes integrationMarquee {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-50%, 0, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .integration-marquee-track {
+    animation: none;
+  }
 }
 
 @keyframes accordion-down {
