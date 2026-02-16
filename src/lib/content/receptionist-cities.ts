@@ -1,5 +1,5 @@
 /**
- * City data for /ai-receptionist-[city] landing pages.
+ * City data for /ai-receptionist/[city] landing pages.
  * Source: seo/src/data/locations.ts — 34 cities across Ireland, UK, USA.
  */
 

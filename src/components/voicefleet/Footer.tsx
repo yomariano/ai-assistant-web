@@ -67,22 +67,22 @@ const Footer = () => {
                 Top Cities
               </p>
               <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm">
-                <Link href="/ai-receptionist-dublin" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
+                <Link href="/ai-receptionist/dublin" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
                   Dublin
                 </Link>
-                <Link href="/ai-receptionist-london" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
+                <Link href="/ai-receptionist/london" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
                   London
                 </Link>
-                <Link href="/ai-receptionist-new-york" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
+                <Link href="/ai-receptionist/new-york" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
                   New York
                 </Link>
-                <Link href="/ai-receptionist-cork" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
+                <Link href="/ai-receptionist/cork" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
                   Cork
                 </Link>
-                <Link href="/ai-receptionist-manchester" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
+                <Link href="/ai-receptionist/manchester" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
                   Manchester
                 </Link>
-                <Link href="/ai-receptionist-miami" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
+                <Link href="/ai-receptionist/miami" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
                   Miami
                 </Link>
               </div>

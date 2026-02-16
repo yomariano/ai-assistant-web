@@ -152,7 +152,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
     // City landing pages
     ...getReceptionistCitySlugs().map((slug) => ({
-      url: `${BASE_URL}/ai-receptionist-${slug}`,
+      url: `${BASE_URL}/ai-receptionist/${slug}`,
       lastModified: new Date(),
       changeFrequency: 'monthly' as const,
       priority: 0.7,

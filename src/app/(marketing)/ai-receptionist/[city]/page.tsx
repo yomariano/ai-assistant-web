@@ -49,10 +49,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title,
       description,
       type: "website",
-      url: `/ai-receptionist-${slug}`,
+      url: `/ai-receptionist/${slug}`,
     },
     alternates: {
-      canonical: `/ai-receptionist-${slug}`,
+      canonical: `/ai-receptionist/${slug}`,
     },
   };
 }
@@ -121,7 +121,7 @@ export default async function CityPage({ params }: Props) {
   const breadcrumbs = [
     { name: "Home", href: "/" },
     { name: "AI Receptionist", href: "/features" },
-    { name: city.name, href: `/ai-receptionist-${slug}` },
+    { name: city.name, href: `/ai-receptionist/${slug}` },
   ];
 
   return (
@@ -266,7 +266,7 @@ export default async function CityPage({ params }: Props) {
                       return (
                         <li key={s}>
                           <Link
-                            href={`/ai-receptionist-${s}`}
+                            href={`/ai-receptionist/${s}`}
                             className="text-blue-600 hover:underline"
                           >
                             AI Receptionist {c.name}
