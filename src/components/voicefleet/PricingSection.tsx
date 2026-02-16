@@ -6,6 +6,7 @@ import { Check, Zap, Rocket, Crown, Gift, Clock, Shield, Phone, Sparkles, Globe 
 import { useAuthStore } from "@/lib/store";
 import { signInWithGoogle } from "@/lib/supabase";
 import { trackEvent } from "@/lib/umami";
+import { useRegion } from "@/hooks/useRegion";
 
 type Region = 'EU' | 'AR';
 
@@ -87,7 +88,8 @@ const REGIONAL_PRICING = {
 
 const PricingSection = () => {
   const [isAnnual, setIsAnnual] = useState(false);
-  const [region, setRegion] = useState<Region>('EU');
+  const { region: detectedRegion } = useRegion();
+  const region: Region = detectedRegion === 'AR' ? 'AR' : 'EU';
   const paymentLinks = getPaymentLinks(isAnnual, region);
   const pricing = REGIONAL_PRICING[region];
   const { isAuthenticated, token } = useAuthStore();
@@ -103,20 +105,6 @@ const PricingSection = () => {
       hasCheckedAuth.current = true;
       checkAuth().then(() => setAuthChecked(true));
     }
-
-    // Detect user's region based on timezone/locale
-    const detectRegion = () => {
-      try {
-        const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-        // Argentina timezone
-        if (timezone.includes('Buenos_Aires') || timezone.includes('Argentina')) {
-          setRegion('AR');
-        }
-      } catch (e) {
-        // Fallback to EU
-      }
-    };
-    detectRegion();
   }, [checkAuth]);
 
   const handleGetStarted = async (planId: string) => {
@@ -335,29 +323,11 @@ const PricingSection = () => {
             </div>
           </div>
 
-          {/* Region Selector */}
+          {/* Region indicator */}
           <div className="flex justify-center mt-4">
-            <div className="flex items-center gap-2 text-sm">
-              <Globe className="w-4 h-4 text-muted-foreground" />
-              <span className="text-muted-foreground">Pricing for:</span>
-              <div className="bg-muted rounded-lg p-0.5 flex">
-                <button
-                  className={`px-3 py-1.5 rounded-md text-xs font-medium transition flex items-center gap-1.5 ${
-                    region === 'EU' ? 'bg-background text-foreground shadow-sm' : 'text-muted-foreground hover:text-foreground'
-                  }`}
-                  onClick={() => { setRegion('EU'); trackEvent("region_toggle", { region: "EU" }); }}
-                >
-                  <span>🇮🇪</span> Ireland
-                </button>
-                <button
-                  className={`px-3 py-1.5 rounded-md text-xs font-medium transition flex items-center gap-1.5 ${
-                    region === 'AR' ? 'bg-background text-foreground shadow-sm' : 'text-muted-foreground hover:text-foreground'
-                  }`}
-                  onClick={() => { setRegion('AR'); trackEvent("region_toggle", { region: "AR" }); }}
-                >
-                  <span>🇦🇷</span> Argentina
-                </button>
-              </div>
+            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+              <Globe className="w-4 h-4" />
+              <span>Pricing for {pricing.label}</span>
             </div>
           </div>
         </div>
