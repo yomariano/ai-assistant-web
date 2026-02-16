@@ -1,11 +1,12 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Phone, Menu, X, Sparkles } from "lucide-react";
+import { Phone, Menu, X, Sparkles, Loader2 } from "lucide-react";
 import { useState } from "react";
 import Link from "next/link";
 import dynamic from "next/dynamic";
 import { useRegion } from "@/hooks/useRegion";
+import { trackEvent } from "@/lib/umami";
 
 const LiveDemoCall = dynamic(
   () => import("@/components/voicefleet/LiveDemoCall"),
@@ -14,7 +15,21 @@ const LiveDemoCall = dynamic(
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isTrialLoading, setIsTrialLoading] = useState(false);
   const { region, loading: regionLoading } = useRegion();
+
+  const handleStartTrial = async () => {
+    setIsTrialLoading(true);
+    trackEvent("cta_click", { location: "header", label: "start_free_trial" });
+    sessionStorage.setItem("selectedPlan", "starter");
+    try {
+      const { signInWithGoogle } = await import("@/lib/supabase");
+      await signInWithGoogle();
+    } catch (error) {
+      console.error("Failed to start Google OAuth:", error);
+      setIsTrialLoading(false);
+    }
+  };
   const isArgentina = region === "AR";
   const countryLabel = region === "AR" ? "Argentina" : "Ireland";
 
@@ -94,9 +109,14 @@ const Header = () => {
                 </button>
               }
             />
-            <Link href="/login?plan=starter" className="text-sm font-semibold text-accent hover:text-accent/80 transition-colors">
+            <button
+              onClick={handleStartTrial}
+              disabled={isTrialLoading}
+              className="text-sm font-semibold text-accent hover:text-accent/80 transition-colors inline-flex items-center gap-1.5 disabled:opacity-50"
+            >
+              {isTrialLoading ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : null}
               Start Free Trial
-            </Link>
+            </button>
             <a
               href="https://calendly.com/voicefleet"
               target="_blank"
@@ -152,13 +172,16 @@ const Header = () => {
                     </button>
                   }
                 />
-                <Link
-                  href="/login?plan=starter"
-                  className="block text-center text-base font-semibold text-accent hover:text-accent/80 transition-colors py-2"
-                  onClick={() => setIsMenuOpen(false)}
+                <button
+                  onClick={() => {
+                    setIsMenuOpen(false);
+                    handleStartTrial();
+                  }}
+                  disabled={isTrialLoading}
+                  className="block w-full text-center text-base font-semibold text-accent hover:text-accent/80 transition-colors py-2 disabled:opacity-50"
                 >
-                  Start Free Trial
-                </Link>
+                  {isTrialLoading ? "Connecting..." : "Start Free Trial"}
+                </button>
                 <a
                   href="https://calendly.com/voicefleet"
                   target="_blank"
