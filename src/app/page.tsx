@@ -1,6 +1,6 @@
 import dynamic from "next/dynamic";
 import { Metadata } from "next";
-import { FAQSchema, OrganizationSchema, ProductSchema, WebSiteSchema } from "@/components/seo";
+import { FAQSchema, OrganizationSchema, ProductSchema, WebSiteSchema, HowToSchema } from "@/components/seo";
 import { HOMEPAGE_FAQS } from "@/lib/marketing/faqs";
 import { generatePageMetadata } from "@/lib/seo/metadata";
 import CROWidgets from "@/components/marketing/CROWidgets";
@@ -8,7 +8,7 @@ import CROWidgets from "@/components/marketing/CROWidgets";
 const homepageMetadata = generatePageMetadata({
   title: "AI Voice Receptionist for Small Businesses | VoiceFleet",
   description:
-    "VoiceFleet answers business calls 24/7, captures caller intent, books appointments, and routes urgent calls to your team.",
+    "VoiceFleet is an AI voice receptionist starting at \u20ac99/mo with a 5-day free trial. Answers calls 24/7, books appointments, takes messages, and routes urgent calls. EU data residency, setup in under 1 hour.",
   path: "/",
   keywords: [
     "ai voice receptionist",
@@ -57,6 +57,26 @@ export default function Home() {
       <OrganizationSchema />
       <ProductSchema />
       <FAQSchema items={[...HOMEPAGE_FAQS]} />
+      <HowToSchema
+        name="How to Set Up VoiceFleet AI Voice Receptionist"
+        description="Get your AI voice receptionist live in under 1 hour with these 3 simple steps. No technical skills required."
+        totalTime="PT1H"
+        steps={[
+          {
+            name: "Sign Up & Configure",
+            text: "Create your VoiceFleet account, choose a plan starting at \u20ac99/mo, and configure your AI receptionist with your business name, greeting, and call-handling rules.",
+            url: "/login?plan=starter",
+          },
+          {
+            name: "Forward Your Number",
+            text: "Enable call forwarding from your existing business phone number to your new VoiceFleet number. Most providers support this in a few minutes.",
+          },
+          {
+            name: "Go Live",
+            text: "Your AI receptionist is now answering calls 24/7 \u2014 booking appointments, taking messages, and routing urgent calls to your team with instant notifications.",
+          },
+        ]}
+      />
       <Header />
       <main>
         <HeroSection />

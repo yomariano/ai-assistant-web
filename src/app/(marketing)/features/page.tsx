@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import Link from "next/link";
 import { generatePageMetadata } from "@/lib/seo/metadata";
+import { BreadcrumbSchema } from "@/components/seo";
 import Breadcrumbs from "@/components/marketing/Breadcrumbs";
 import CTASection from "@/components/marketing/CTASection";
 import Header from "@/components/voicefleet/Header";
@@ -27,7 +28,7 @@ export const metadata: Metadata = {
   ...generatePageMetadata({
     title: "Features - AI Voice Assistant Capabilities",
     description:
-      "Explore VoiceFleet's powerful AI voice agent features: 24/7 availability, multi-language support, call scheduling, analytics, and more.",
+      "VoiceFleet AI voice receptionist features: 24/7 call answering, calendar integration, SMS/email notifications, multilingual support, smart routing, and analytics. From \u20ac99/mo, setup in under 1 hour.",
     path: "/features",
   }),
   alternates: {
@@ -158,6 +159,7 @@ export default function FeaturesPage() {
 
   return (
     <div className="min-h-screen bg-background">
+      <BreadcrumbSchema items={breadcrumbs} />
       <Header />
 
       <main className="pt-20">
@@ -169,6 +171,9 @@ export default function FeaturesPage() {
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-bold text-primary-foreground mb-4">
               Powerful AI Voice Features
             </h1>
+            <p className="text-sm sm:text-base text-primary-foreground/70 max-w-2xl mx-auto mb-4">
+              VoiceFleet provides AI call handling, 24/7 availability, calendar and booking integrations, SMS and email notifications, multilingual support, and smart call routing. No-code setup in under 1 hour, starting at &euro;99/mo with a 5-day free trial.
+            </p>
             <p className="text-lg lg:text-xl text-primary-foreground/80 max-w-2xl mx-auto">
               Everything you need to automate phone calls and save hours every week.
             </p>

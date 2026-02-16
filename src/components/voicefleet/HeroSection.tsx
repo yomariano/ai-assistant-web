@@ -1,9 +1,10 @@
 import { Shield, Clock, Phone, MessageSquare, Calendar, Link2, Headphones, PhoneIncoming, Globe2 } from "lucide-react";
 import HeroCTA from "@/components/voicefleet/HeroCTA";
+import Link from "next/link";
 
 const trustBadges = [
-  { icon: Shield, label: "GDPR-ready" },
-  { icon: Clock, label: "Go live in < 1 hour" },
+  { icon: Shield, label: "EU data residency options" },
+  { icon: Clock, label: "Setup support included" },
   { icon: Link2, label: "Calendar + booking integrations" },
   { icon: Globe2, label: "Multilingual agents" },
 ];
@@ -44,9 +45,28 @@ const HeroSection = () => {
               With an AI Voice Receptionist.
             </h1>
 
+            <p className="text-sm sm:text-base text-foreground/80 mb-4 leading-relaxed font-medium">
+              VoiceFleet is an AI voice receptionist for small businesses, starting at &euro;99/mo with a 5-day free trial. It answers calls 24/7, books appointments, takes messages, and routes urgent calls — with no-code setup in under 1 hour and EU data residency.
+            </p>
+
             <p className="text-base sm:text-lg lg:text-xl text-muted-foreground mb-8 leading-relaxed">
               Forward your existing number to VoiceFleet. We answer calls, capture intent + details, and book appointments or reservations into your calendar/booking system.
               We also escalate urgent calls to your team and send instant summaries.
+            </p>
+
+            <p className="text-sm text-muted-foreground mb-8">
+              Explore by use case:{" "}
+              <Link href="/for" className="text-foreground font-semibold hover:underline">
+                Industries
+              </Link>
+              {" · "}
+              <Link href="/connect" className="text-foreground font-semibold hover:underline">
+                Integrations
+              </Link>
+              {" · "}
+              <Link href="/compare" className="text-foreground font-semibold hover:underline">
+                Comparisons
+              </Link>
             </p>
 
             <HeroCTA />
@@ -67,11 +87,11 @@ const HeroSection = () => {
             {/* Social Proof */}
             <div className="mt-10 pt-10 border-t border-border animate-fade-up stagger-5">
               <p className="text-sm text-muted-foreground mb-3">Built for teams that rely on phone calls</p>
-              <div className="flex flex-wrap items-center gap-2 opacity-70 mb-5">
+              <div className="flex flex-wrap items-center gap-2 mb-5">
                 {industries.map((industry) => (
                   <div
                     key={industry}
-                    className="h-7 px-3 bg-muted rounded flex items-center justify-center text-xs font-medium text-muted-foreground"
+                    className="h-7 px-3 bg-card border border-border rounded flex items-center justify-center text-xs font-medium text-foreground/80"
                   >
                     {industry}
                   </div>
@@ -79,11 +99,11 @@ const HeroSection = () => {
               </div>
 
               <p className="text-sm text-muted-foreground mb-3">Integrates with</p>
-              <div className="flex flex-wrap items-center gap-2 opacity-70">
+              <div className="flex flex-wrap items-center gap-2">
                 {integrations.map((integration) => (
                   <div
                     key={integration}
-                    className="h-7 px-3 bg-muted rounded flex items-center justify-center text-xs font-medium text-muted-foreground"
+                    className="h-7 px-3 bg-card border border-border rounded flex items-center justify-center text-xs font-medium text-foreground/80"
                   >
                     {integration}
                   </div>
@@ -177,7 +197,7 @@ const HeroSection = () => {
                   <Phone className="w-5 h-5 text-accent" />
                 </div>
                 <div>
-                  <p className="text-xs text-muted-foreground">Calls This Month (example)</p>
+                  <p className="text-xs text-foreground/70">Calls This Month (example)</p>
                   <p className="text-lg font-bold text-foreground">1,247</p>
                 </div>
               </div>
@@ -206,11 +226,11 @@ const DashboardStat = ({
 }) => (
   <div className={`bg-muted/50 rounded-xl p-3 sm:p-4 ${className}`}>
     <div className="flex items-center gap-2 mb-2">
-      <Icon className="w-4 h-4 text-muted-foreground" />
-      <span className="text-xs text-muted-foreground">{label}</span>
+      <Icon className="w-4 h-4 text-foreground/60" />
+      <span className="text-xs text-foreground/70">{label}</span>
     </div>
     <p className="text-2xl font-bold text-foreground">{value}</p>
-    <p className={`text-xs font-medium ${positive ? 'text-accent' : 'text-muted-foreground'}`}>
+    <p className={`text-xs font-medium ${positive ? 'text-accent' : 'text-foreground/70'}`}>
       {trend}
     </p>
   </div>

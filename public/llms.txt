@@ -2,18 +2,76 @@
 
 Last updated: 2026-02-16
 
-> VoiceFleet is an AI voice receptionist for small businesses. It answers calls, captures caller intent, books appointments, and routes urgent calls.
+> VoiceFleet is an AI voice receptionist for small businesses. It answers phone calls 24/7, books appointments, takes messages, captures caller intent, routes urgent calls, and sends instant notifications. Starting at EUR 99/month with a 5-day free trial.
 
-## Quick facts
+## Pricing
 
-- Website: https://voicefleet.ai
-- Product category: AI voice receptionist SaaS
-- Main markets: Ireland (EUR pricing) and Argentina (USD pricing)
-- Supported call languages shown on site: English, Spanish, French, German, Italian
-- Trial: 5-day free trial, no credit card required
-- Contact: support@voicefleet.ai
+| Plan | Monthly | Annual (save 16%) | Included Minutes | Parallel Calls | Key Features |
+|------|---------|-------------------|------------------|----------------|--------------|
+| Starter | EUR 99 | EUR 83/mo | 500 | 1 | AI call answering, local number, SMS notifications, 7-day recordings |
+| Growth | EUR 299 | EUR 251/mo | 1,000 | 3 | Custom voice, email notifications, calendar integrations, AI schedule, 30-day recordings |
+| Pro | EUR 599 | EUR 503/mo | 2,000 | 5 | Multi-location, priority support, 90-day recordings, dedicated account manager |
 
-## Key links
+- Overage: EUR 0.20-0.30 per minute depending on plan
+- No setup fees, no contracts, cancel anytime
+- 5-day free trial on every plan, no credit card required
+- Argentina pricing available in USD
+
+## Core Features
+
+1. **AI Call Handling** - Natural language conversations, order taking, reservation booking, FAQ answering
+2. **24/7 Availability** - Always-on, no overtime, instant response on every call
+3. **Calendar Integration** - Google Calendar, Outlook, Calendly, Cal.com, Square Appointments, SimplyBook.me
+4. **Booking Integrations** - Mindbody (beta), TheFork (beta), OpenTable (beta), Resy (beta)
+5. **SMS & Email Notifications** - Real-time alerts for every call with summaries and action items
+6. **Smart Call Routing** - Automatic escalation to staff for urgent matters, VIP rules, voicemail fallback
+7. **Multilingual** - English, Spanish, French, German, Italian
+8. **Analytics Dashboard** - Call volumes, peak hours, booking trends (Growth & Pro)
+9. **AI Schedule** - Configure when AI answers vs forwards to humans (Growth & Pro)
+10. **Local Phone Numbers** - Irish (Dublin & regional), US, and Argentina numbers included
+11. **Multi-Location Support** - Up to 5 numbers per account (Pro)
+12. **Instant Setup** - Go live in under 1 hour, no technical skills required
+
+## Industries Served
+
+- **Dental Practices** - Appointment booking, patient intake, insurance questions, emergency routing
+- **Restaurants** - Reservations, takeaway orders, menu questions, opening hours
+- **Professional Services** - Client intake, call qualification, appointment scheduling, message taking
+- **Home Services** - Emergency dispatch, job details capture, after-hours coverage
+- **Gyms & Fitness** - Class bookings, membership enquiries, schedule information
+- **Salons & Spas** - Appointment booking, service questions, availability checks
+- **Medical Clinics** - Patient scheduling, triage routing, prescription enquiries
+- **Property Management** - Maintenance requests, tenant enquiries, emergency routing
+
+## How It Works
+
+1. Sign up and configure your AI receptionist (business name, greeting, call rules)
+2. Forward your existing phone number to VoiceFleet
+3. AI answers calls 24/7 - books appointments, takes messages, routes urgent calls
+
+Setup takes under 1 hour. No code required.
+
+## Security & Compliance
+
+- GDPR-ready with EU data residency options
+- Data stored in EU (Ireland and Frankfurt data centres)
+- End-to-end encryption for call data
+- SOC 2 Type II compliant infrastructure
+- DPA (Data Processing Agreement) available on request
+- Call recordings stored with configurable retention (7/30/90 days by plan)
+
+## Competitor Comparison Summary
+
+| Feature | VoiceFleet | Traditional Voicemail | Answering Services | Smith.ai | Ruby |
+|---------|------------|----------------------|--------------------|----------|------|
+| Starting Price | EUR 99/mo | Free (phone plan) | EUR 200-500+/mo | $292.50/mo (30 calls) | $235/mo (50 min) |
+| 24/7 Coverage | Yes | Yes (records only) | Often limited hours | Business hours + AI | Business hours |
+| Booking Integration | Yes | No | Rarely | Limited | No |
+| Per-Call Fees | No | No | Often yes | Yes | Yes |
+| Setup Time | <1 hour | Instant | 1-2 weeks | 1-2 days | 1-2 days |
+| EU Data Residency | Yes | Varies | Rarely | No | No |
+
+## Key Links
 
 - Homepage: https://voicefleet.ai
 - Pricing: https://voicefleet.ai/pricing
@@ -26,7 +84,14 @@ Last updated: 2026-02-16
 - Spanish homepage: https://voicefleet.ai/es/
 - Full LLM context: https://voicefleet.ai/llms-full.txt
 
+## Contact
+
+- Website: https://voicefleet.ai
+- Email: support@voicefleet.ai
+- Product category: AI voice receptionist SaaS
+- Main markets: Ireland (EUR), Argentina (USD)
+
 ## Notes
 
-- For current plan details, always prefer https://voicefleet.ai/pricing.
-- For legal terms, see https://voicefleet.ai/terms and https://voicefleet.ai/privacy.
+- For current plan details, always prefer https://voicefleet.ai/pricing
+- For legal terms, see https://voicefleet.ai/terms and https://voicefleet.ai/privacy

@@ -94,6 +94,9 @@ const Header = () => {
                 </button>
               }
             />
+            <Link href="/login?plan=starter" className="text-sm font-semibold text-accent hover:text-accent/80 transition-colors">
+              Start Free Trial
+            </Link>
             <a
               href="https://calendly.com/voicefleet"
               target="_blank"
@@ -149,6 +152,13 @@ const Header = () => {
                     </button>
                   }
                 />
+                <Link
+                  href="/login?plan=starter"
+                  className="block text-center text-base font-semibold text-accent hover:text-accent/80 transition-colors py-2"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Start Free Trial
+                </Link>
                 <a
                   href="https://calendly.com/voicefleet"
                   target="_blank"

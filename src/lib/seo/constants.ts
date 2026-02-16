@@ -4,7 +4,7 @@ export const SEO_CONFIG = {
   defaultOgImage: "/opengraph-image",
   twitterHandle: "@voicefleetai",
   defaultDescription:
-    "AI Voice Agents that handle calls at 80% lower cost. Scale support without scaling headcount.",
+    "VoiceFleet is an AI voice receptionist starting at \u20ac99/mo. Answers calls 24/7, books appointments, takes messages, sends notifications. EU data residency, setup in under 1 hour, 5-day free trial.",
   defaultKeywords: [
     "AI voice assistant",
     "automated phone calls",

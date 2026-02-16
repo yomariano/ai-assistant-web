@@ -45,6 +45,16 @@ export default function robots(): MetadataRoute.Robots {
         allow: '/',
         disallow: DISALLOWED_PATHS,
       },
+      {
+        userAgent: 'Claude-Web',
+        allow: '/',
+        disallow: DISALLOWED_PATHS,
+      },
+      {
+        userAgent: 'PerplexityBot',
+        allow: '/',
+        disallow: DISALLOWED_PATHS,
+      },
     ],
     sitemap: `${BASE_URL}/sitemap.xml`,
   };

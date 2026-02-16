@@ -83,16 +83,6 @@ const nextConfig: NextConfig = {
     ];
   },
 
-  // Redirects for SEO
-  async redirects() {
-    return [
-      {
-        source: "/pricing",
-        destination: "/#pricing",
-        permanent: true,
-      },
-    ];
-  },
 };
 
 export default nextConfig;

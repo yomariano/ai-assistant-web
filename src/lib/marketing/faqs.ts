@@ -39,6 +39,41 @@ export const HOMEPAGE_FAQS = [
     answer:
       "You can cancel anytime. If VoiceFleet isn't a fit, you can stop forwarding calls and close your account.",
   },
+  {
+    question: "How much does an AI receptionist cost?",
+    answer:
+      "VoiceFleet AI receptionist plans start at \u20ac99/month (Starter, 500 minutes), \u20ac299/month (Growth, 1,000 minutes), and \u20ac599/month (Pro, 2,000 minutes). Annual billing saves 16%. Every plan includes a 5-day free trial, 24/7 AI call answering, and a local business phone number. No setup fees or contracts.",
+  },
+  {
+    question: "What is an AI voice receptionist?",
+    answer:
+      "An AI voice receptionist is software that answers phone calls using conversational AI. Instead of voicemail or hold music, callers speak naturally and the AI handles requests \u2014 booking appointments, taking messages, answering FAQs, and routing urgent calls to staff. VoiceFleet is an AI voice receptionist built for small businesses like dental practices, restaurants, and service companies.",
+  },
+  {
+    question: "Can an AI receptionist replace a human receptionist?",
+    answer:
+      "An AI receptionist handles routine calls like appointment booking, message-taking, and FAQ answers 24/7 without breaks or overtime. It works best as a complement to human staff \u2014 answering after-hours calls, handling overflow during busy periods, and freeing front-desk staff for in-person tasks. VoiceFleet escalates complex calls to your team automatically.",
+  },
+  {
+    question: "Does VoiceFleet work for restaurants?",
+    answer:
+      "Yes. VoiceFleet handles reservation bookings, takeaway orders, menu questions, and opening-hours enquiries for restaurants. It integrates with booking systems like TheFork, OpenTable, and Resy (beta), and sends instant order summaries to your team via SMS or email.",
+  },
+  {
+    question: "Does VoiceFleet work for dental practices?",
+    answer:
+      "Yes. VoiceFleet books dental appointments, captures patient details and reason for visit, answers common questions about services and insurance, and routes urgent calls to staff. It integrates with calendar systems so patients get confirmed bookings without phone tag.",
+  },
+  {
+    question: "How does VoiceFleet compare to Smith.ai?",
+    answer:
+      "VoiceFleet is an AI-first voice receptionist starting at \u20ac99/month with unlimited calls within your minutes allocation. Smith.ai uses human receptionists with AI assistance, starting at higher price points. VoiceFleet offers 24/7 coverage without per-call fees, EU data residency, and calendar integrations. Smith.ai may be better if you need live human agents for complex legal or medical intake.",
+  },
+  {
+    question: "Is VoiceFleet available in Ireland?",
+    answer:
+      "Yes. VoiceFleet is built for Irish businesses and provides local Irish phone numbers (Dublin and regional). Pricing is in EUR, data is stored in the EU (Ireland and Frankfurt), and the AI handles Irish accents and local business norms. VoiceFleet also serves businesses in Argentina with USD pricing.",
+  },
 ] as const;
 
 export const BLOG_FAQS = [

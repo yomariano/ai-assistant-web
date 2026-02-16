@@ -6,3 +6,4 @@ export { LocalBusinessSchema } from "./LocalBusinessSchema";
 export { FAQSchema } from "./FAQSchema";
 export { BreadcrumbSchema } from "./BreadcrumbSchema";
 export { WebSiteSchema } from "./WebSiteSchema";
+export { HowToSchema } from "./HowToSchema";

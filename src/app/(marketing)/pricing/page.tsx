@@ -41,6 +41,11 @@ export default function PricingPage() {
       <Header />
       <div className="min-h-screen bg-background">
         <Breadcrumbs items={breadcrumbs} />
+        <div className="container mx-auto px-4 pt-24 pb-4 max-w-3xl text-center">
+          <p className="text-sm sm:text-base text-foreground/80 leading-relaxed">
+            VoiceFleet offers three AI voice receptionist plans: Starter at &euro;99/mo (500 minutes), Growth at &euro;299/mo (1,000 minutes), and Pro at &euro;599/mo (2,000 minutes). Annual billing saves 16%. Every plan includes a 5-day free trial, a local phone number, and 24/7 AI call answering. No setup fees, no contracts.
+          </p>
+        </div>
         <PricingSection />
         <FAQSection />
         <CTASection />

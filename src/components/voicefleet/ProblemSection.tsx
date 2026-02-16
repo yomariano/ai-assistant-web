@@ -7,24 +7,24 @@ const ProblemSection = () => {
       title: "Missed Calls Lead to Lost Revenue",
       description:
         "When calls arrive during appointments or on-site work, many prospects move to the next business instead of waiting for a callback.",
-      stat: "High",
-      statLabel: "risk of lead leakage",
+      stat: "62%",
+      statLabel: "of callers won't leave a voicemail",
     },
     {
       icon: Clock,
       title: "After-Hours Demand",
       description:
         "Evening and weekend callers still expect answers. If the line goes to voicemail, those bookings are often delayed or lost.",
-      stat: "Frequent",
-      statLabel: "after-hours opportunities",
+      stat: "40%+",
+      statLabel: "of calls arrive outside business hours",
     },
     {
       icon: Wallet,
       title: "Front-Desk Overhead",
       description:
         "Hiring and scheduling phone coverage adds fixed overhead, while call volume changes throughout the week.",
-      stat: "Fixed",
-      statLabel: "cost even during quiet periods",
+      stat: "\u20ac30K+",
+      statLabel: "annual receptionist cost vs \u20ac99/mo",
     },
   ];
 
@@ -33,11 +33,11 @@ const ProblemSection = () => {
       <div className="container mx-auto px-4">
         <div className="max-w-3xl mx-auto text-center mb-16">
           <h2 className="text-3xl lg:text-4xl font-heading font-bold text-foreground mb-4">
-            Every Missed Call Is{" "}
-            <span className="text-gradient-primary">A Missed Opportunity</span>
+            Stop Losing Revenue to{" "}
+            <span className="text-gradient-primary">Missed Calls</span>
           </h2>
           <p className="text-lg text-muted-foreground">
-            Many service businesses lose high-intent demand when calls are missed or delayed
+            Small businesses lose thousands in revenue each year from calls that go unanswered or hit voicemail
           </p>
         </div>
 
