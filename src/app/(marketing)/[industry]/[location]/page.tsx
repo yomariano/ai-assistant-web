@@ -6,6 +6,7 @@ import { getComboPage, getComboSlugs, getComboPages } from "@/lib/content/combo"
 import { BreadcrumbSchema } from "@/components/seo";
 import Breadcrumbs from "@/components/marketing/Breadcrumbs";
 import CTASection from "@/components/marketing/CTASection";
+import MidPageCTA from "@/components/marketing/MidPageCTA";
 import Footer from "@/components/landing/Footer";
 import { MapPin, Building2, Check, ChevronRight, Quote } from "lucide-react";
 
@@ -173,6 +174,8 @@ export default async function ComboPage({ params }: Props) {
             </div>
           </section>
         )}
+
+        <MidPageCTA />
 
         {/* Benefits */}
         {page.content.benefits && page.content.benefits.length > 0 && (

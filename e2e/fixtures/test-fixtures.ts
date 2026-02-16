@@ -11,11 +11,11 @@ export const TEST_USERS = {
 };
 
 // Plan limits for verification
-// VoiceFleet Pricing (January 2026) - Calls included model
+// VoiceFleet Pricing - Minutes included model
 export const PLAN_LIMITS = {
-  starter: { phoneNumbers: 1, callsIncluded: 100 },   // Starter: €49/mo 100 calls
-  growth: { phoneNumbers: 1, callsIncluded: 500 },    // Growth: €199/mo 500 calls
-  pro: { phoneNumbers: 1, callsIncluded: 1500, outboundCalls: 200 },  // Pro: €599/mo 1500 inbound + 200 outbound
+  starter: { phoneNumbers: 1, callsIncluded: 100 },   // Starter: €99/mo 500 minutes
+  growth: { phoneNumbers: 1, callsIncluded: 500 },    // Growth: €299/mo 1000 minutes
+  pro: { phoneNumbers: 1, callsIncluded: 1500, outboundCalls: 200 },  // Pro: €599/mo 2000 minutes
 };
 
 // Extended test fixture with helpers

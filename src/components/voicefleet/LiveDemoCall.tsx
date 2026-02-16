@@ -395,7 +395,11 @@ const VOICES: DemoVoice[] = [
   },
 ];
 
-export default function LiveDemoCall() {
+interface LiveDemoCallProps {
+  trigger?: React.ReactNode;
+}
+
+export default function LiveDemoCall({ trigger }: LiveDemoCallProps) {
   const [open, setOpen] = useState(false);
   const [callStatus, setCallStatus] = useState<CallStatus>("idle");
   const [error, setError] = useState<string | null>(null);
@@ -754,10 +758,21 @@ export default function LiveDemoCall() {
 
   return (
     <>
-      <Button variant="outline" size="xl" onClick={() => { setOpen(true); trackEvent("demo_opened", { location: "hero" }); }}>
-        <Sparkles className="w-5 h-5" />
-        Try Live Demo
-      </Button>
+      {trigger ? (
+        <div
+          role="button"
+          tabIndex={0}
+          onClick={() => { setOpen(true); trackEvent("demo_opened", { location: "trigger" }); }}
+          onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { setOpen(true); trackEvent("demo_opened", { location: "trigger" }); } }}
+        >
+          {trigger}
+        </div>
+      ) : (
+        <Button variant="outline" size="xl" onClick={() => { setOpen(true); trackEvent("demo_opened", { location: "hero" }); }}>
+          <Sparkles className="w-5 h-5" />
+          Try Live Demo
+        </Button>
+      )}
 
       <Dialog open={open} onOpenChange={handleOpenChange}>
         <DialogContent className="w-[95vw] max-w-2xl max-h-[90vh] overflow-y-auto p-4 sm:p-6">

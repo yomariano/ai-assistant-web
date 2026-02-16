@@ -7,6 +7,7 @@ import { generateLocationMetadata } from "@/lib/seo/metadata";
 import { LocalBusinessSchema, BreadcrumbSchema } from "@/components/seo";
 import Breadcrumbs from "@/components/marketing/Breadcrumbs";
 import CTASection from "@/components/marketing/CTASection";
+import MidPageCTA from "@/components/marketing/MidPageCTA";
 import { MapPin, Check } from "lucide-react";
 
 interface Props {
@@ -137,6 +138,8 @@ export default async function LocationPage({ params }: Props) {
             </div>
           </section>
         )}
+
+        <MidPageCTA />
 
         {/* Local Benefits */}
         {page.local_benefits && page.local_benefits.length > 0 && (

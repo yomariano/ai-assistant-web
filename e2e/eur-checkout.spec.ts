@@ -2,9 +2,9 @@
  * EUR Checkout E2E Tests
  *
  * Tests for VoiceFleet EUR pricing and checkout flow:
- * - Starter: €49/mo 100 calls
- * - Growth: €199/mo 500 calls
- * - Pro: €599/mo 1500 inbound + 200 outbound
+ * - Starter: €99/mo 500 minutes
+ * - Growth: €299/mo 1000 minutes
+ * - Pro: €599/mo 2000 minutes
  */
 
 import { test, expect, TEST_USERS, PLAN_LIMITS } from './fixtures/test-fixtures';
@@ -13,9 +13,9 @@ const API_URL = process.env.E2E_API_URL || 'http://localhost:3000';
 
 // VoiceFleet EUR Pricing
 const EUR_PRICING = {
-  starter: { price: 49, callsIncluded: 100, name: 'Starter' },
-  growth: { price: 199, callsIncluded: 500, name: 'Growth' },
-  pro: { price: 599, callsIncluded: 1500, outboundCalls: 200, name: 'Pro' },
+  starter: { price: 99, minutesIncluded: 500, name: 'Starter' },
+  growth: { price: 299, minutesIncluded: 1000, name: 'Growth' },
+  pro: { price: 599, minutesIncluded: 2000, name: 'Pro' },
 };
 
 test.describe('EUR Region Detection', () => {
@@ -51,7 +51,7 @@ test.describe('EUR Region Detection', () => {
     // Verify Starter plan
     const starter = data.plans.find((p: any) => p.id === 'starter');
     expect(starter.price).toBe(EUR_PRICING.starter.price);
-    expect(starter.formattedPrice).toBe('€49');
+    expect(starter.formattedPrice).toBe('€99');
 
     // Verify Growth plan
     const growth = data.plans.find((p: any) => p.id === 'growth');
@@ -151,25 +151,25 @@ test.describe('EUR Pricing UI', () => {
     await page.goto('/pricing');
 
     // Wait for pricing to load
-    await page.waitForSelector('text=/€49|€199|€599/', { timeout: 10000 });
+    await page.waitForSelector('text=/€99|€299|€599/', { timeout: 10000 });
 
     // Verify EUR prices are displayed
-    await expect(page.locator('text=€49')).toBeVisible();
-    await expect(page.locator('text=€199')).toBeVisible();
+    await expect(page.locator('text=€99')).toBeVisible();
+    await expect(page.locator('text=€299')).toBeVisible();
     await expect(page.locator('text=€599')).toBeVisible();
   });
 
-  test('pricing page shows calls included', async ({ page }) => {
+  test('pricing page shows minutes included', async ({ page }) => {
     await page.goto('/pricing');
 
-    await page.waitForSelector('text=/100.*calls|calls.*100/i', { timeout: 10000 });
+    await page.waitForSelector('text=/500.*minute|minute.*500/i', { timeout: 10000 });
 
-    // Verify calls are shown for each plan
-    const starterCalls = page.locator('text=/100.*calls/i');
-    const growthCalls = page.locator('text=/500.*calls/i');
+    // Verify minutes are shown for each plan
+    const starterMinutes = page.locator('text=/500.*minute/i');
+    const growthMinutes = page.locator('text=/1,?000.*minute/i');
 
-    expect(await starterCalls.count()).toBeGreaterThan(0);
-    expect(await growthCalls.count()).toBeGreaterThan(0);
+    expect(await starterMinutes.count()).toBeGreaterThan(0);
+    expect(await growthMinutes.count()).toBeGreaterThan(0);
   });
 
   test('pricing page shows plan names', async ({ page }) => {

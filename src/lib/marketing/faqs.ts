@@ -60,7 +60,7 @@ export const BLOG_FAQS = [
   {
     question: "How much does an AI receptionist cost compared to hiring a human?",
     answer:
-      "An AI receptionist like VoiceFleet costs \u20ac99\u2013199/month (\u20ac1,188\u20132,388/year). A human receptionist in Ireland costs approximately \u20ac56,000/year fully loaded. That\u2019s over 95% cheaper while providing 24/7 coverage with no sick days or holidays.",
+      "An AI receptionist like VoiceFleet costs \u20ac99\u2013299/month (\u20ac1,188\u20133,588/year). A human receptionist in Ireland costs approximately \u20ac56,000/year fully loaded. That\u2019s over 95% cheaper while providing 24/7 coverage with no sick days or holidays.",
   },
 ] as const;
 
@@ -73,7 +73,7 @@ export const PRICING_FAQS = [
   {
     question: "How much does an AI receptionist cost compared to hiring a human?",
     answer:
-      "An AI receptionist like VoiceFleet costs \u20ac99\u2013199/month (\u20ac1,188\u20132,388/year). A human receptionist in Ireland costs approximately \u20ac56,000/year fully loaded with PRSI and benefits. That\u2019s over 95% cheaper while providing 24/7 coverage with no sick days or holidays.",
+      "An AI receptionist like VoiceFleet costs \u20ac99\u2013299/month (\u20ac1,188\u20133,588/year). A human receptionist in Ireland costs approximately \u20ac56,000/year fully loaded with PRSI and benefits. That\u2019s over 95% cheaper while providing 24/7 coverage with no sick days or holidays.",
   },
   {
     question: "Is there a free trial?",

@@ -8,6 +8,7 @@ import { BreadcrumbSchema, FAQSchema } from "@/components/seo";
 import Breadcrumbs from "@/components/marketing/Breadcrumbs";
 import CTASection from "@/components/marketing/CTASection";
 import InternalLinks from "@/components/marketing/InternalLinks";
+import MidPageCTA from "@/components/marketing/MidPageCTA";
 import Header from "@/components/voicefleet/Header";
 import Footer from "@/components/voicefleet/Footer";
 import { Check, AlertTriangle, Sparkles, TrendingDown, TrendingUp, Phone, Clock, Euro, Users } from "lucide-react";
@@ -435,6 +436,8 @@ export default async function UseCasePage({ params }: Props) {
             </div>
           </section>
         )}
+
+        <MidPageCTA />
 
         {/* Use Cases */}
         {page.use_cases && page.use_cases.length > 0 && (

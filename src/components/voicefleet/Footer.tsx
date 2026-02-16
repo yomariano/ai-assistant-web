@@ -33,31 +33,60 @@ const Footer = () => {
           </div>
 
           {/* Links */}
-          <div className="flex flex-wrap gap-x-8 gap-y-4 text-sm">
-            <Link href="/features" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
-              Features
-            </Link>
-            <Link href="/for" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
-              Industries
-            </Link>
-            <Link href="/connect" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
-              Integrations
-            </Link>
-            <Link href="/compare" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
-              Compare
-            </Link>
-            <a href="/#pricing" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
-              Pricing
-            </a>
-            <Link href="/blog" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
-              Blog
-            </Link>
-            <Link href="/privacy" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
-              Privacy
-            </Link>
-            <Link href="/terms" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
-              Terms
-            </Link>
+          <div className="flex flex-col gap-6">
+            <div className="flex flex-wrap gap-x-8 gap-y-4 text-sm">
+              <Link href="/features" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
+                Features
+              </Link>
+              <Link href="/for" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
+                Industries
+              </Link>
+              <Link href="/connect" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
+                Integrations
+              </Link>
+              <Link href="/compare" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
+                Compare
+              </Link>
+              <a href="/#pricing" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
+                Pricing
+              </a>
+              <Link href="/blog" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
+                Blog
+              </Link>
+              <Link href="/privacy" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
+                Privacy
+              </Link>
+              <Link href="/terms" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
+                Terms
+              </Link>
+            </div>
+
+            {/* Top Cities */}
+            <div>
+              <p className="text-xs font-semibold text-primary-foreground/50 uppercase tracking-wider mb-2">
+                Top Cities
+              </p>
+              <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm">
+                <Link href="/ai-receptionist-dublin" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
+                  Dublin
+                </Link>
+                <Link href="/ai-receptionist-london" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
+                  London
+                </Link>
+                <Link href="/ai-receptionist-new-york" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
+                  New York
+                </Link>
+                <Link href="/ai-receptionist-cork" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
+                  Cork
+                </Link>
+                <Link href="/ai-receptionist-manchester" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
+                  Manchester
+                </Link>
+                <Link href="/ai-receptionist-miami" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
+                  Miami
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
 

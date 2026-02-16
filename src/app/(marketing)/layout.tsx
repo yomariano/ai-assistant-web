@@ -1,4 +1,5 @@
 import { OrganizationSchema, ProductSchema } from "@/components/seo";
+import CROWidgets from "@/components/marketing/CROWidgets";
 
 export default function MarketingLayout({
   children,
@@ -10,6 +11,7 @@ export default function MarketingLayout({
       <OrganizationSchema />
       <ProductSchema />
       {children}
+      <CROWidgets />
     </>
   );
 }

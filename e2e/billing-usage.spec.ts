@@ -1,21 +1,21 @@
 /**
  * Billing & Usage E2E Tests
  *
- * Tests for VoiceFleet calls-included billing model:
- * - Starter: €49/mo 100 calls
- * - Growth: €199/mo 500 calls
- * - Pro: €599/mo 1500 inbound + 200 outbound
+ * Tests for VoiceFleet minutes-included billing model:
+ * - Starter: €99/mo 500 minutes
+ * - Growth: €299/mo 1000 minutes
+ * - Pro: €599/mo 2000 minutes
  */
 
 import { test, expect, TEST_USERS, PLAN_LIMITS } from './fixtures/test-fixtures';
 
 const API_URL = process.env.E2E_API_URL || 'http://localhost:3000';
 
-// Per-call rates in cents (all 0 - calls included in plan)
+// Per-call rates in cents (all 0 - minutes included in plan)
 const PER_CALL_RATES = {
-  starter: 0,   // €0 (100 calls included)
-  growth: 0,    // €0 (500 calls included)
-  pro: 0        // €0 (1500 calls included)
+  starter: 0,   // €0 (500 minutes included)
+  growth: 0,    // €0 (1000 minutes included)
+  pro: 0        // €0 (2000 minutes included)
 };
 
 // Fair use caps (calls included)
@@ -349,11 +349,11 @@ test.describe('Plan Pricing Display', () => {
     await page.goto('/pricing');
 
     // Wait for pricing to load
-    await page.waitForSelector('text=/€49|€199|€599/');
+    await page.waitForSelector('text=/€99|€299|€599/');
 
     // Verify all three plans are displayed
-    const starterPrice = page.locator('text=€49');
-    const growthPrice = page.locator('text=€199');
+    const starterPrice = page.locator('text=€99');
+    const growthPrice = page.locator('text=€299');
     const proPrice = page.locator('text=€599');
 
     expect(await starterPrice.count()).toBeGreaterThan(0);
@@ -361,16 +361,16 @@ test.describe('Plan Pricing Display', () => {
     expect(await proPrice.count()).toBeGreaterThan(0);
   });
 
-  test('pricing page shows calls included', async ({ page }) => {
+  test('pricing page shows minutes included', async ({ page }) => {
     await page.goto('/pricing');
 
-    await page.waitForSelector('text=/100.*calls|calls.*100/i');
+    await page.waitForSelector('text=/500.*minute|minute.*500/i');
 
-    // Verify calls are shown for each plan
-    const starterCalls = page.locator('text=/100.*calls/i');
-    const growthCalls = page.locator('text=/500.*calls/i');
+    // Verify minutes are shown for each plan
+    const starterMinutes = page.locator('text=/500.*minute/i');
+    const growthMinutes = page.locator('text=/1,?000.*minute/i');
 
-    expect(await starterCalls.count()).toBeGreaterThan(0);
-    expect(await growthCalls.count()).toBeGreaterThan(0);
+    expect(await starterMinutes.count()).toBeGreaterThan(0);
+    expect(await growthMinutes.count()).toBeGreaterThan(0);
   });
 });

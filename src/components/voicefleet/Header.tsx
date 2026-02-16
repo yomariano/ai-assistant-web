@@ -1,10 +1,16 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Phone, Menu, X } from "lucide-react";
+import { Phone, Menu, X, Sparkles } from "lucide-react";
 import { useState } from "react";
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import { useRegion } from "@/hooks/useRegion";
+
+const LiveDemoCall = dynamic(
+  () => import("@/components/voicefleet/LiveDemoCall"),
+  { ssr: false }
+);
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -80,9 +86,14 @@ const Header = () => {
 
           {/* Desktop CTA */}
           <div className="hidden lg:flex items-center gap-4">
-            <a href="tel:+35312345678" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
-              +353 1 234 5678
-            </a>
+            <LiveDemoCall
+              trigger={
+                <button className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors inline-flex items-center gap-1.5">
+                  <Sparkles className="w-4 h-4" />
+                  Try Live Demo
+                </button>
+              }
+            />
             <a
               href="https://calendly.com/voicefleet"
               target="_blank"
@@ -130,13 +141,14 @@ const Header = () => {
                 )
               )}
               <div className="pt-4 border-t border-border space-y-3">
-                <a
-                  href="tel:+35312345678"
-                  className="flex items-center justify-center gap-2 text-base font-medium text-muted-foreground hover:text-foreground transition-colors py-2"
-                >
-                  <Phone className="w-4 h-4" />
-                  +353 1 234 5678
-                </a>
+                <LiveDemoCall
+                  trigger={
+                    <button className="flex items-center justify-center gap-2 text-base font-medium text-muted-foreground hover:text-foreground transition-colors py-2 w-full">
+                      <Phone className="w-4 h-4" />
+                      Try Live Demo
+                    </button>
+                  }
+                />
                 <a
                   href="https://calendly.com/voicefleet"
                   target="_blank"

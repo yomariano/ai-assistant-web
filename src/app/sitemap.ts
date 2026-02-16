@@ -1,5 +1,6 @@
 import { MetadataRoute } from 'next';
 import { INTEGRATIONS } from '@/lib/marketing/integrations';
+import { getReceptionistCitySlugs } from '@/lib/content/receptionist-cities';
 
 const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://voicefleet.ai';
 
@@ -149,6 +150,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'weekly',
       priority: 0.8,
     },
+    // City landing pages
+    ...getReceptionistCitySlugs().map((slug) => ({
+      url: `${BASE_URL}/ai-receptionist-${slug}`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
+    })),
   ];
 
   // If no dynamic content yet, return only static pages

@@ -1,9 +1,15 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Phone, Menu, X, Globe } from "lucide-react";
+import { Phone, Menu, X, Globe, Sparkles } from "lucide-react";
 import { useState } from "react";
 import Link from "next/link";
+import dynamic from "next/dynamic";
+
+const LiveDemoCall = dynamic(
+  () => import("@/components/voicefleet/LiveDemoCall"),
+  { ssr: false }
+);
 
 const HeaderES = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -53,6 +59,14 @@ const HeaderES = () => {
 
           {/* Desktop CTA + Language */}
           <div className="hidden lg:flex items-center gap-4">
+            <LiveDemoCall
+              trigger={
+                <button className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors inline-flex items-center gap-1.5">
+                  <Sparkles className="w-4 h-4" />
+                  Probá la Demo
+                </button>
+              }
+            />
             <Link
               href="/"
               className="flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
@@ -96,6 +110,14 @@ const HeaderES = () => {
                 </Link>
               ))}
               <div className="pt-4 border-t border-border space-y-3">
+                <LiveDemoCall
+                  trigger={
+                    <button className="flex items-center justify-center gap-2 text-base font-medium text-muted-foreground hover:text-foreground transition-colors py-2 w-full">
+                      <Phone className="w-4 h-4" />
+                      Probá la Demo
+                    </button>
+                  }
+                />
                 <Link
                   href="/"
                   className="flex items-center justify-center gap-2 text-base font-medium text-muted-foreground hover:text-foreground transition-colors py-2"
