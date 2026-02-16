@@ -439,7 +439,7 @@ export default function AssistantPage() {
         <div className="lg:col-span-1">
           <h2 className="text-lg font-bold text-slate-900">Behavior</h2>
           <p className="text-sm text-slate-500 mt-1">
-            Instructions that guide how your AI responds.
+            Instructions that guide how your AI responds. Think of this as a script for your assistant.
           </p>
           <Button
             variant="outline"
@@ -450,17 +450,29 @@ export default function AssistantPage() {
             <RefreshCw className="w-4 h-4 mr-2" />
             Regenerate from Business Info
           </Button>
+
+          <div className="mt-5 p-3 bg-blue-50 border border-blue-100 rounded-xl">
+            <p className="text-xs font-semibold text-blue-800 mb-2">Tips to customize:</p>
+            <ul className="text-xs text-blue-700 space-y-1.5">
+              <li>Add your business hours and location</li>
+              <li>List your services, menu items, or pricing</li>
+              <li>Specify how to handle bookings or complaints</li>
+              <li>Add answers to frequently asked questions</li>
+              <li>Set a tone &mdash; friendly, formal, or casual</li>
+            </ul>
+          </div>
         </div>
 
         <div className="lg:col-span-2">
           <Card className="border-none shadow-md ring-1 ring-slate-200 overflow-hidden">
             <CardContent className="p-6">
               <textarea
-                className="w-full px-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all resize-none min-h-[200px] text-sm bg-slate-50/50 font-mono"
+                className="w-full px-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all resize-y min-h-[400px] text-sm bg-slate-50/50 font-mono"
                 value={systemPrompt}
                 onChange={(e) => dispatch({ type: 'UPDATE_FORM', payload: { systemPrompt: e.target.value } })}
                 placeholder="You are a helpful AI assistant..."
               />
+              <p className="text-xs text-slate-400 mt-2">Drag the bottom-right corner to resize</p>
             </CardContent>
           </Card>
         </div>
