@@ -89,7 +89,7 @@ export function InteractiveTable({
     return '';
   };
 
-  const SortIcon = ({ column }: { column: string }) => {
+  const renderSortIcon = (column: string) => {
     if (sortColumn !== column) {
       return (
         <svg className="w-4 h-4 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -146,7 +146,7 @@ export function InteractiveTable({
               >
                 <div className="flex items-center gap-2">
                   Feature
-                  <SortIcon column="feature" />
+                  {renderSortIcon('feature')}
                 </div>
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -161,7 +161,7 @@ export function InteractiveTable({
               >
                 <div className="flex items-center justify-center gap-2">
                   Winner
-                  <SortIcon column="winner" />
+                  {renderSortIcon('winner')}
                 </div>
               </th>
             </tr>

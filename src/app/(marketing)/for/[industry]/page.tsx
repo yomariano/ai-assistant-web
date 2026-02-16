@@ -237,7 +237,7 @@ export default async function UseCasePage({ params }: Props) {
                           <span className="text-slate-400 text-sm">After Hours</span>
                         </div>
                         <div className="text-4xl font-bold text-white mb-1">Often</div>
-                        <div className="text-slate-500 text-sm">when you can't pick up</div>
+                        <div className="text-slate-500 text-sm">when you can&apos;t pick up</div>
                         <div className="mt-3 h-2 bg-slate-700 rounded-full overflow-hidden">
                           <div className="h-full w-[40%] bg-gradient-to-r from-amber-500 to-yellow-500 rounded-full" />
                         </div>

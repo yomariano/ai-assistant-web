@@ -24,7 +24,7 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 const siteConfig = {
   name: "VoiceFleet",
   description:
-    "AI Voice Agents that handle calls at 80% lower cost. Scale support without scaling headcount.",
+    "AI voice receptionist for small businesses. Answer calls, take messages, and book appointments around the clock.",
   url: process.env.NEXT_PUBLIC_SITE_URL || "https://voicefleet.ai",
   twitterHandle: "@voicefleetai",
 };
@@ -41,7 +41,7 @@ const shouldLoadGA = gaId.startsWith("G-") && gaId.length > 0;
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
-    default: `${siteConfig.name} - AI Voice Agents for Phone Calls`,
+    default: `${siteConfig.name} - AI Voice Receptionist for Small Businesses`,
     template: `%s | ${siteConfig.name}`,
   },
   description: siteConfig.description,
@@ -81,14 +81,14 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: siteConfig.url,
     siteName: siteConfig.name,
-    title: `${siteConfig.name} - AI Voice Agents for Phone Calls`,
+    title: `${siteConfig.name} - AI Voice Receptionist for Small Businesses`,
     description: siteConfig.description,
   },
   twitter: {
     card: "summary_large_image",
     site: siteConfig.twitterHandle,
     creator: siteConfig.twitterHandle,
-    title: `${siteConfig.name} - AI Voice Agents for Phone Calls`,
+    title: `${siteConfig.name} - AI Voice Receptionist for Small Businesses`,
     description: siteConfig.description,
   },
   alternates: {

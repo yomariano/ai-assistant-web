@@ -41,7 +41,7 @@ export function RichBlogContent({ post, className = '' }: RichBlogContentProps) 
   const quoteMap = useMemo(() => new Map(expert_quotes.map(q => [q.id || `quote-${expert_quotes.indexOf(q)}`, q])), [expert_quotes]);
 
   // Process the content
-  const processedContent = useMemo(() => {
+  const processedContent = (() => {
     // First, extract and replace markers with placeholders
     const markers: Array<{ placeholder: string; type: string; id: string }> = [];
     let processed = content;
@@ -69,7 +69,7 @@ export function RichBlogContent({ post, className = '' }: RichBlogContentProps) 
     processed = processed.replace(/\[[A-Z]+:[^\]]*\]/g, '');
 
     return { html: processed, markers };
-  }, [content]);
+  })();
 
   // Convert markdown to Medium-style HTML
   function convertMarkdownToHtml(markdown: string): string {

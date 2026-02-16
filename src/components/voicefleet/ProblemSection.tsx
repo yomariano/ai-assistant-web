@@ -4,27 +4,27 @@ const ProblemSection = () => {
   const problems = [
     {
       icon: PhoneMissed,
-      title: "Missed Calls = Lost Business",
+      title: "Missed Calls Lead to Lost Revenue",
       description:
-        "Phone rings while you're with a customer. You can't answer. That caller moves on to your competitor. Every missed call is money walking out the door.",
-      stat: "67%",
-      statLabel: "of callers won't leave a voicemail",
+        "When calls arrive during appointments or on-site work, many prospects move to the next business instead of waiting for a callback.",
+      stat: "High",
+      statLabel: "risk of lead leakage",
     },
     {
       icon: Clock,
-      title: "After-Hours Hang-Ups",
+      title: "After-Hours Demand",
       description:
-        "Customers call at 6pm, 8pm, weekends. Your phone goes to voicemail. They hang up and try someone else. You never even knew they called.",
-      stat: "40%",
-      statLabel: "of calls come outside business hours",
+        "Evening and weekend callers still expect answers. If the line goes to voicemail, those bookings are often delayed or lost.",
+      stat: "Frequent",
+      statLabel: "after-hours opportunities",
     },
     {
       icon: Wallet,
-      title: "Receptionist Costs",
+      title: "Front-Desk Overhead",
       description:
-        "Hiring someone just to answer phones costs €30,000+ per year. And they still can't work nights, weekends, or bank holidays.",
-      stat: "€30k+",
-      statLabel: "annual receptionist salary",
+        "Hiring and scheduling phone coverage adds fixed overhead, while call volume changes throughout the week.",
+      stat: "Fixed",
+      statLabel: "cost even during quiet periods",
     },
   ];
 
@@ -37,7 +37,7 @@ const ProblemSection = () => {
             <span className="text-gradient-primary">A Missed Opportunity</span>
           </h2>
           <p className="text-lg text-muted-foreground">
-            Small businesses lose thousands in revenue each year from unanswered calls
+            Many service businesses lose high-intent demand when calls are missed or delayed
           </p>
         </div>
 
@@ -70,6 +70,10 @@ const ProblemSection = () => {
             </div>
           ))}
         </div>
+
+        <p className="mt-8 text-center text-xs text-muted-foreground">
+          Typical phone-workflow challenges for SMB teams. Impact varies by industry and call volume.
+        </p>
       </div>
     </section>
   );

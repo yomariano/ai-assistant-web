@@ -23,7 +23,7 @@ export function ExpertQuote({ quote, sources = [], variant = 'default', classNam
   if (variant === 'minimal') {
     return (
       <blockquote className={`text-gray-600 italic ${className}`}>
-        "{quote.quote}"
+        &ldquo;{quote.quote}&rdquo;
         <footer className="mt-1 text-sm text-gray-500 not-italic">
           - {quote.author}
           {quote.title && `, ${quote.title}`}
@@ -37,7 +37,7 @@ export function ExpertQuote({ quote, sources = [], variant = 'default', classNam
       <div className={`my-8 relative ${className}`}>
         {/* Decorative quote marks */}
         <div className="absolute -top-4 -left-2 text-6xl text-blue-100 font-serif leading-none select-none">
-          "
+          &ldquo;
         </div>
 
         <blockquote className="relative bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-8 border border-blue-100">
@@ -71,7 +71,7 @@ export function ExpertQuote({ quote, sources = [], variant = 'default', classNam
 
         {/* Decorative element */}
         <div className="absolute -bottom-4 -right-2 text-6xl text-blue-100 font-serif leading-none select-none rotate-180">
-          "
+          &rdquo;
         </div>
       </div>
     );
@@ -82,7 +82,7 @@ export function ExpertQuote({ quote, sources = [], variant = 'default', classNam
     <div className={`my-6 ${className}`}>
       <blockquote className="border-l-4 border-blue-500 pl-6 py-2">
         <p className="text-lg text-gray-700 italic">
-          "{quote.quote}"
+          &ldquo;{quote.quote}&rdquo;
         </p>
         <footer className="mt-3 flex items-center gap-3">
           <div className="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center text-gray-600 font-medium">
@@ -125,7 +125,7 @@ interface InlineQuoteProps {
 export function InlineQuote({ quote, author, className = '' }: InlineQuoteProps) {
   return (
     <span className={`italic text-gray-700 ${className}`}>
-      "{quote}" <span className="text-gray-500 not-italic">- {author}</span>
+      &ldquo;{quote}&rdquo; <span className="text-gray-500 not-italic">- {author}</span>
     </span>
   );
 }

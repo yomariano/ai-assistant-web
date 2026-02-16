@@ -1,6 +1,16 @@
 import { MetadataRoute } from 'next';
 
 const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://voicefleet.ai';
+const DISALLOWED_PATHS = [
+  '/dashboard/',
+  '/call/',
+  '/agenda/',
+  '/scheduled/',
+  '/history/',
+  '/settings/',
+  '/auth/',
+  '/api/',
+];
 
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -8,30 +18,32 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: '*',
         allow: '/',
-        disallow: [
-          '/dashboard/',
-          '/call/',
-          '/agenda/',
-          '/scheduled/',
-          '/history/',
-          '/settings/',
-          '/auth/',
-          '/api/',
-        ],
+        disallow: DISALLOWED_PATHS,
       },
       {
         userAgent: 'Googlebot',
         allow: '/',
-        disallow: [
-          '/dashboard/',
-          '/call/',
-          '/agenda/',
-          '/scheduled/',
-          '/history/',
-          '/settings/',
-          '/auth/',
-          '/api/',
-        ],
+        disallow: DISALLOWED_PATHS,
+      },
+      {
+        userAgent: 'Bingbot',
+        allow: '/',
+        disallow: DISALLOWED_PATHS,
+      },
+      {
+        userAgent: 'GPTBot',
+        allow: '/',
+        disallow: DISALLOWED_PATHS,
+      },
+      {
+        userAgent: 'OAI-SearchBot',
+        allow: '/',
+        disallow: DISALLOWED_PATHS,
+      },
+      {
+        userAgent: 'ChatGPT-User',
+        allow: '/',
+        disallow: DISALLOWED_PATHS,
       },
     ],
     sitemap: `${BASE_URL}/sitemap.xml`,

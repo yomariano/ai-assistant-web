@@ -48,13 +48,13 @@ const CaseStudiesSection = () => {
       <div className="container mx-auto px-4">
         <div className="max-w-3xl mx-auto text-center mb-10 lg:mb-16">
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-heading font-bold text-foreground mb-4">
-            Trusted by <span className="text-gradient-accent">SMB Teams</span>
+            Common <span className="text-gradient-accent">SMB Workflows</span>
           </h2>
           <p className="text-base lg:text-lg text-muted-foreground">
-            See how businesses like yours are using VoiceFleet
+            See practical call-handling patterns teams use with VoiceFleet
           </p>
           <p className="mt-2 text-sm text-muted-foreground">
-            These are representative examples of common workflows and outcomes.
+            The examples below are illustrative call flows, not guaranteed performance claims.
           </p>
         </div>
 

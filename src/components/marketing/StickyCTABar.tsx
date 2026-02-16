@@ -6,27 +6,28 @@ import Link from "next/link";
 import { useRegion } from "@/hooks/useRegion";
 
 const WHATSAPP_NUMBER = "5491133869439";
-const WHATSAPP_MESSAGE = "Hola, me interesa saber más sobre VoiceFleet";
+const WHATSAPP_MESSAGE = "Hola, me interesa saber mas sobre VoiceFleet";
 
 export default function StickyCTABar() {
   const [visible, setVisible] = useState(false);
-  const [dismissed, setDismissed] = useState(false);
+  const [dismissed, setDismissed] = useState(() => {
+    if (typeof window === "undefined") return false;
+    return sessionStorage.getItem("stickyCTADismissed") === "1";
+  });
   const { region } = useRegion();
   const isArgentina = region === "AR";
 
   useEffect(() => {
-    if (sessionStorage.getItem("stickyCTADismissed")) {
-      setDismissed(true);
-      return;
-    }
+    if (dismissed) return;
 
     const onScroll = () => {
       setVisible(window.scrollY > 300);
     };
 
+    onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [dismissed]);
 
   const handleDismiss = () => {
     setDismissed(true);

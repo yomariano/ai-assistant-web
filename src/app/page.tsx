@@ -1,10 +1,28 @@
 import dynamic from "next/dynamic";
 import { Metadata } from "next";
-import { FAQSchema, OrganizationSchema, ProductSchema } from "@/components/seo";
+import { FAQSchema, OrganizationSchema, ProductSchema, WebSiteSchema } from "@/components/seo";
 import { HOMEPAGE_FAQS } from "@/lib/marketing/faqs";
+import { generatePageMetadata } from "@/lib/seo/metadata";
+import CROWidgets from "@/components/marketing/CROWidgets";
+
+const homepageMetadata = generatePageMetadata({
+  title: "AI Voice Receptionist for Small Businesses | VoiceFleet",
+  description:
+    "VoiceFleet answers business calls 24/7, captures caller intent, books appointments, and routes urgent calls to your team.",
+  path: "/",
+  keywords: [
+    "ai voice receptionist",
+    "ai phone answering service",
+    "virtual receptionist for small business",
+    "appointment booking ai",
+    "after hours call answering",
+  ],
+});
 
 export const metadata: Metadata = {
+  ...homepageMetadata,
   alternates: {
+    ...homepageMetadata.alternates,
     languages: {
       "es-AR": "/es/",
       en: "/",
@@ -35,6 +53,7 @@ const Footer = dynamic(() => import("@/components/voicefleet/Footer"));
 export default function Home() {
   return (
     <div className="min-h-screen bg-background">
+      <WebSiteSchema />
       <OrganizationSchema />
       <ProductSchema />
       <FAQSchema items={[...HOMEPAGE_FAQS]} />
@@ -56,6 +75,7 @@ export default function Home() {
         <FAQSection />
       </main>
       <Footer />
+      <CROWidgets />
     </div>
   );
 }

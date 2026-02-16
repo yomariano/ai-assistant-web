@@ -1,30 +1,30 @@
-import { TrendingDown, Zap, Clock, CheckCircle2 } from "lucide-react";
+import { ShieldCheck, PhoneCall, Route, CalendarClock } from "lucide-react";
 
 const MetricsBar = () => {
   const metrics = [
     {
-      icon: TrendingDown,
-      value: "80%",
-      label: "Cost Reduction",
-      description: "vs. human agents",
+      icon: PhoneCall,
+      value: "24/7",
+      label: "Call Coverage",
+      description: "Answers during business and after-hours windows",
     },
     {
-      icon: Zap,
-      value: "0.5s",
-      label: "Average Response Time",
-      description: "instant engagement",
+      icon: CalendarClock,
+      value: "Fast",
+      label: "First Response",
+      description: "Callers reach an assistant immediately",
     },
     {
-      icon: Clock,
-      value: "24/7/365",
-      label: "Availability",
-      description: "never miss a call",
+      icon: Route,
+      value: "Smart",
+      label: "Routing",
+      description: "Urgent calls can be escalated to staff",
     },
     {
-      icon: CheckCircle2,
-      value: "95%+",
-      label: "Resolution Rate",
-      description: "first-call resolution",
+      icon: ShieldCheck,
+      value: "Clear",
+      label: "Call Summaries",
+      description: "Teams get structured details after each call",
     },
   ];
 
@@ -55,6 +55,10 @@ const MetricsBar = () => {
             </div>
           ))}
         </div>
+
+        <p className="mt-6 text-center text-xs text-primary-foreground/70">
+          Outcomes depend on call flow, configuration, and business process.
+        </p>
       </div>
     </section>
   );

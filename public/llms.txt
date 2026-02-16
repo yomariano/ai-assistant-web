@@ -1,62 +1,32 @@
 # VoiceFleet
 
-> AI voice receptionist for small businesses. Answers phone calls 24/7, takes messages, books appointments, and escalates urgent calls — at 80% less than hiring a human receptionist.
+Last updated: 2026-02-16
 
-## What VoiceFleet Does
+> VoiceFleet is an AI voice receptionist for small businesses. It answers calls, captures caller intent, books appointments, and routes urgent calls.
 
-VoiceFleet is a SaaS product that provides AI-powered voice agents for business phone lines. When a customer calls, VoiceFleet's AI receptionist answers in a natural human-like voice, understands the caller's intent, and takes action: booking appointments, taking messages, answering FAQs, routing urgent calls to staff, or sending instant summaries via SMS/email.
-
-## Key Facts
+## Quick facts
 
 - Website: https://voicefleet.ai
-- Founded: 2025
-- Headquarters: Ireland
-- Markets: Ireland (English), Argentina (Spanish)
-- Category: AI Voice Assistant / Virtual Receptionist / SaaS
-- Languages: English, Spanish, French, German, Italian
-- Setup time: Under 1 hour, no technical skills required
+- Product category: AI voice receptionist SaaS
+- Main markets: Ireland (EUR pricing) and Argentina (USD pricing)
+- Supported call languages shown on site: English, Spanish, French, German, Italian
+- Trial: 5-day free trial, no credit card required
+- Contact: support@voicefleet.ai
 
-## Pricing (Ireland / Europe, EUR)
-
-- Starter: €99/month — 500 minutes (~200 calls), 1 parallel call
-- Growth: €299/month — 1,000 minutes (~400 calls), 3 parallel calls
-- Pro: €599/month — 2,000 minutes (~800 calls), 5 parallel calls
-- Annual plans save 16%
-- 5-day free trial, no credit card required
-
-## Pricing (Argentina, USD)
-
-- Starter: $49/month — 250 minutes (~100 calls)
-- Growth: $149/month — 500 minutes (~200 calls)
-- Pro: $299/month — 1,000 minutes (~400 calls)
-
-## Core Features
-
-- 24/7 AI call answering with natural voice
-- Appointment booking with calendar integration (Google Calendar, Outlook, Calendly, Cal.com)
-- Message taking with instant SMS/email notifications
-- Smart call routing and human transfer
-- Custom greetings, scripts, and business rules
-- Multi-language support
-- Call recordings and analytics dashboard
-- GDPR compliant with EU data residency
-
-## Industries Served
-
-Medical & dental practices, legal & accounting firms, restaurants & hospitality, trades & services (plumbers, electricians), property & letting agencies, salons & wellness, gyms & fitness, retail
-
-## Competitors
-
-Smith.ai, Ruby Receptionists, Dialpad, Aircall, Arini AI, Newo AI
-
-## Links
+## Key links
 
 - Homepage: https://voicefleet.ai
 - Pricing: https://voicefleet.ai/pricing
 - Features: https://voicefleet.ai/features
 - Industries: https://voicefleet.ai/for
 - Integrations: https://voicefleet.ai/connect
-- Comparisons: https://voicefleet.ai/compare
+- Compare: https://voicefleet.ai/compare
+- Demo: https://voicefleet.ai/demo
 - Blog: https://voicefleet.ai/blog
-- Spanish site: https://voicefleet.ai/es/
+- Spanish homepage: https://voicefleet.ai/es/
 - Full LLM context: https://voicefleet.ai/llms-full.txt
+
+## Notes
+
+- For current plan details, always prefer https://voicefleet.ai/pricing.
+- For legal terms, see https://voicefleet.ai/terms and https://voicefleet.ai/privacy.

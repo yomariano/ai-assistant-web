@@ -55,6 +55,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
   const adminCheckDoneRef = useRef(false);
+  const showAdmin = isAuthenticated && !isLoading && isAdmin;
 
   // Check admin status only once after authentication is complete
   useEffect(() => {
@@ -63,7 +64,6 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
       // Reset the check flag if user logs out
       if (!isAuthenticated && !isLoading) {
         adminCheckDoneRef.current = false;
-        setIsAdmin(false);
       }
       return;
     }
@@ -174,7 +174,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
           })}
 
           {/* Admin Section */}
-          {isAdmin && (
+          {showAdmin && (
             <>
               <div className={`mt-4 mb-2 ${isCollapsed ? 'px-3' : 'px-3'}`}>
                 {!isCollapsed && (

@@ -16,21 +16,18 @@ export function ProductSchema() {
       highPrice: "599",
       priceCurrency: "EUR",
       offerCount: 3,
-    },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.8",
-      ratingCount: "150",
+      url: `${siteUrl}/pricing`,
     },
     description:
-      "AI Voice Agents that handle calls at 80% lower cost. Scale support without scaling headcount.",
+      "AI voice receptionist for small businesses. Answer calls, take messages, and book appointments 24/7.",
     image: [`${siteUrl}/logo-mark.svg`],
+    inLanguage: ["en", "es-AR"],
     featureList: [
       "AI-powered voice calls",
       "24/7 availability",
       "Multiple languages",
-      "Call history tracking",
-      "Custom call scripts",
+      "Appointment booking",
+      "Custom call workflows",
     ],
   };
 

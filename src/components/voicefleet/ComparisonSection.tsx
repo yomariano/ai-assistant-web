@@ -2,78 +2,54 @@ import { Check, X } from "lucide-react";
 import Link from "next/link";
 
 const ComparisonSection = () => {
-  const competitors = [
+  const options = [
     { key: "voicefleet", name: "VoiceFleet", highlight: true },
-    { key: "smithai", name: "Smith.ai" },
-    { key: "ruby", name: "Ruby" },
-    { key: "dialpad", name: "Dialpad" },
-    { key: "aircall", name: "Aircall" },
+    { key: "humanFrontDesk", name: "Human-only Front Desk" },
+    { key: "basicIvr", name: "Basic IVR Menu" },
   ];
 
   const features = [
     {
-      name: "Starting price",
-      voicefleet: "€99/mo",
-      smithai: "$140/mo",
-      ruby: "$230/mo",
-      dialpad: "$15/user/mo",
-      aircall: "€30/user/mo",
-    },
-    {
-      name: "True AI (no humans)",
+      name: "24/7 call handling",
       voicefleet: true,
-      smithai: false,
-      ruby: false,
-      dialpad: "Partial",
-      aircall: "Add-on",
+      humanFrontDesk: "Depends on staffing",
+      basicIvr: true,
     },
     {
-      name: "24/7 availability",
+      name: "Natural conversation",
       voicefleet: true,
-      smithai: "Extra cost",
-      ruby: "Limited",
-      dialpad: true,
-      aircall: true,
+      humanFrontDesk: true,
+      basicIvr: false,
     },
     {
-      name: "Per-call fees",
-      voicefleet: "None",
-      smithai: "$6-12/call",
-      ruby: "Per minute",
-      dialpad: "None",
-      aircall: "None",
+      name: "Appointment/reservation booking",
+      voicefleet: true,
+      humanFrontDesk: true,
+      basicIvr: "Limited",
+    },
+    {
+      name: "After-hours lead capture",
+      voicefleet: true,
+      humanFrontDesk: "Depends on staffing",
+      basicIvr: "Limited",
+    },
+    {
+      name: "Urgent escalation rules",
+      voicefleet: true,
+      humanFrontDesk: true,
+      basicIvr: "Limited",
+    },
+    {
+      name: "Multilingual handling",
+      voicefleet: true,
+      humanFrontDesk: "Depends on team",
+      basicIvr: "Limited",
     },
     {
       name: "Setup time",
-      voicefleet: "< 1 hour",
-      smithai: "3-5 days",
-      ruby: "1-2 weeks",
-      dialpad: "1-2 days",
-      aircall: "1-2 days",
-    },
-    {
-      name: "EUR pricing",
-      voicefleet: true,
-      smithai: false,
-      ruby: false,
-      dialpad: false,
-      aircall: true,
-    },
-    {
-      name: "Local phone numbers (Ireland)",
-      voicefleet: true,
-      smithai: false,
-      ruby: false,
-      dialpad: true,
-      aircall: true,
-    },
-    {
-      name: "GDPR compliant",
-      voicefleet: true,
-      smithai: "Varies",
-      ruby: "Varies",
-      dialpad: true,
-      aircall: true,
+      voicefleet: "Hours",
+      humanFrontDesk: "Hiring + training",
+      basicIvr: "Days",
     },
   ];
 
@@ -118,30 +94,29 @@ const ComparisonSection = () => {
       <div className="container mx-auto px-4">
         <div className="max-w-3xl mx-auto text-center mb-10 lg:mb-16">
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-heading font-bold text-foreground mb-4">
-            How VoiceFleet <span className="text-gradient-primary">Compares</span>
+            How VoiceFleet <span className="text-gradient-primary">Fits Your Stack</span>
           </h2>
           <p className="text-base lg:text-lg text-muted-foreground">
-            See how we stack up against the leading alternatives
+            Compare common call-handling approaches for SMB teams
           </p>
         </div>
 
-        {/* Desktop Table View */}
         <div className="hidden lg:block overflow-x-auto">
           <table className="w-full">
             <thead>
               <tr className="border-b border-border">
                 <th className="py-4 px-4 text-left text-sm font-semibold text-muted-foreground">
-                  Feature
+                  Capability
                 </th>
-                {competitors.map((comp) => (
-                  <th key={comp.key} className="py-4 px-4 text-center">
-                    {comp.highlight ? (
+                {options.map((option) => (
+                  <th key={option.key} className="py-4 px-4 text-center">
+                    {option.highlight ? (
                       <div className="inline-flex flex-col items-center">
-                        <span className="text-lg font-heading font-bold text-primary">{comp.name}</span>
+                        <span className="text-lg font-heading font-bold text-primary">{option.name}</span>
                         <span className="text-xs text-accent">Recommended</span>
                       </div>
                     ) : (
-                      <span className="text-sm font-semibold text-muted-foreground">{comp.name}</span>
+                      <span className="text-sm font-semibold text-muted-foreground">{option.name}</span>
                     )}
                   </th>
                 ))}
@@ -156,12 +131,12 @@ const ComparisonSection = () => {
                   <td className="py-4 px-4 text-sm font-medium text-foreground">
                     {feature.name}
                   </td>
-                  {competitors.map((comp) => (
+                  {options.map((option) => (
                     <td
-                      key={comp.key}
-                      className={`py-4 px-4 text-center ${comp.highlight ? "bg-primary/5" : ""}`}
+                      key={option.key}
+                      className={`py-4 px-4 text-center ${option.highlight ? "bg-primary/5" : ""}`}
                     >
-                      {renderCell(feature[comp.key as keyof typeof feature] as boolean | string)}
+                      {renderCell(feature[option.key as keyof typeof feature] as boolean | string)}
                     </td>
                   ))}
                 </tr>
@@ -170,7 +145,6 @@ const ComparisonSection = () => {
           </table>
         </div>
 
-        {/* Mobile Card View */}
         <div className="lg:hidden space-y-4">
           {features.map((feature, index) => (
             <div
@@ -178,18 +152,18 @@ const ComparisonSection = () => {
               className="bg-card rounded-xl border border-border p-4"
             >
               <h3 className="font-semibold text-foreground mb-3">{feature.name}</h3>
-              <div className="grid grid-cols-2 gap-2">
-                {competitors.map((comp) => (
+              <div className="grid grid-cols-1 gap-2">
+                {options.map((option) => (
                   <div
-                    key={comp.key}
+                    key={option.key}
                     className={`flex items-center justify-between rounded-lg p-2 ${
-                      comp.highlight ? "bg-primary/5" : "bg-muted/50"
+                      option.highlight ? "bg-primary/5" : "bg-muted/50"
                     }`}
                   >
-                    <span className={`text-xs font-medium ${comp.highlight ? "text-primary" : "text-muted-foreground"}`}>
-                      {comp.name}
+                    <span className={`text-xs font-medium ${option.highlight ? "text-primary" : "text-muted-foreground"}`}>
+                      {option.name}
                     </span>
-                    {renderMobileCell(feature[comp.key as keyof typeof feature] as boolean | string)}
+                    {renderMobileCell(feature[option.key as keyof typeof feature] as boolean | string)}
                   </div>
                 ))}
               </div>
@@ -197,29 +171,22 @@ const ComparisonSection = () => {
           ))}
         </div>
 
-        {/* Bottom CTA */}
         <div className="mt-12 text-center">
           <p className="text-muted-foreground mb-4">
-            Want a detailed comparison? Check out our blog posts
+            Need deeper alternatives analysis for your use case?
           </p>
           <div className="flex flex-wrap justify-center gap-3">
             <Link
-              href="/blog/voicefleet-vs-smith-ai-comparison"
+              href="/compare"
               className="text-sm text-primary hover:underline"
             >
-              VoiceFleet vs Smith.ai →
+              See all comparison pages
             </Link>
             <Link
-              href="/blog/voicefleet-vs-ruby-receptionists"
+              href="/blog"
               className="text-sm text-primary hover:underline"
             >
-              VoiceFleet vs Ruby →
-            </Link>
-            <Link
-              href="/blog/best-ai-phone-answering-service-ireland"
-              className="text-sm text-primary hover:underline"
-            >
-              Full Comparison Guide →
+              Read comparison guides
             </Link>
           </div>
         </div>

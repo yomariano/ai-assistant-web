@@ -18,7 +18,7 @@ const LiveDemoCall = dynamic(
 );
 
 const WHATSAPP_NUMBER = "5491133869439";
-const WHATSAPP_MESSAGE = "Hola, me interesa saber más sobre VoiceFleet";
+const WHATSAPP_MESSAGE = "Hola, me interesa saber mas sobre VoiceFleet";
 
 export default function ExitIntentModal() {
   const [open, setOpen] = useState(false);
@@ -74,7 +74,7 @@ export default function ExitIntentModal() {
       <DialogContent className="w-[95vw] max-w-md p-6">
         <DialogHeader>
           <DialogTitle className="text-xl">
-            Wait — try a 90-second demo call before you go
+            Wait - try a 90-second demo call before you go
           </DialogTitle>
           <DialogDescription>
             Hear how your AI receptionist sounds. No signup required.

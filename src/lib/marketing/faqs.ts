@@ -55,12 +55,12 @@ export const BLOG_FAQS = [
   {
     question: "Is VoiceFleet GDPR compliant?",
     answer:
-      "Yes. VoiceFleet is fully GDPR compliant with EU data residency. All data stays in the EU (Ireland and Frankfurt data centres). Calls are encrypted in transit and at rest. Data Processing Agreements are provided, and data residency never leaves the EU.",
+      "VoiceFleet supports GDPR-ready deployments with EU data residency options. If you have specific compliance requirements, contact our team so we can confirm the right setup for your business.",
   },
   {
     question: "How much does an AI receptionist cost compared to hiring a human?",
     answer:
-      "An AI receptionist like VoiceFleet costs \u20ac99\u2013299/month (\u20ac1,188\u20133,588/year). A human receptionist in Ireland costs approximately \u20ac56,000/year fully loaded. That\u2019s over 95% cheaper while providing 24/7 coverage with no sick days or holidays.",
+      "VoiceFleet starts at \u20ac99/month and offers tiered plans based on call volume. Many businesses use it to reduce fixed front-desk overhead while extending call coverage outside business hours.",
   },
 ] as const;
 
@@ -68,12 +68,12 @@ export const PRICING_FAQS = [
   {
     question: "How much does VoiceFleet cost?",
     answer:
-      "VoiceFleet starts at \u20ac99/month (Starter) for 500 minutes, \u20ac299/month (Growth) for 1,000 minutes, and \u20ac599/month (Pro) for 2,000 minutes. Annual plans save 16%. No per-call fees, no contracts, no setup charges. Every plan includes 24/7 AI call answering and a local Irish phone number.",
+      "VoiceFleet starts at \u20ac99/month (Starter) for 500 minutes, \u20ac299/month (Growth) for 1,000 minutes, and \u20ac599/month (Pro) for 2,000 minutes. Annual plans save 16%. No per-call fees, no contracts, and no setup charges. Every plan includes 24/7 AI call answering and a local business phone number.",
   },
   {
     question: "How much does an AI receptionist cost compared to hiring a human?",
     answer:
-      "An AI receptionist like VoiceFleet costs \u20ac99\u2013299/month (\u20ac1,188\u20133,588/year). A human receptionist in Ireland costs approximately \u20ac56,000/year fully loaded with PRSI and benefits. That\u2019s over 95% cheaper while providing 24/7 coverage with no sick days or holidays.",
+      "VoiceFleet starts at \u20ac99/month with plans that scale by minutes and features. Compared with hiring and scheduling full-time reception coverage, many teams use VoiceFleet to lower fixed costs and improve after-hours call handling.",
   },
   {
     question: "Is there a free trial?",
