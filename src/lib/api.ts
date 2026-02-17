@@ -4,8 +4,6 @@ import { getSession } from './supabase';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
 
-console.log('[API] Initializing with API_URL:', API_URL);
-
 const api = axios.create({
   baseURL: API_URL,
   headers: {
@@ -22,12 +20,9 @@ const PUBLIC_ENDPOINTS = [
 
 // Request interceptor to add auth token
 api.interceptors.request.use(async (config) => {
-  console.log('[API] Request interceptor - URL:', config.url);
-
   // Skip auth for public endpoints
   const isPublicEndpoint = PUBLIC_ENDPOINTS.some(endpoint => config.url?.includes(endpoint));
   if (isPublicEndpoint) {
-    console.log('[API] Public endpoint, skipping auth');
     return config;
   }
 
@@ -36,7 +31,6 @@ api.interceptors.request.use(async (config) => {
   if (storedAuth) {
     const { state } = JSON.parse(storedAuth);
     if (state?.devMode && state?.token === 'dev-mode') {
-      console.log('[API] Dev mode detected, skipping auth token');
       return config;
     }
   }
@@ -49,7 +43,6 @@ api.interceptors.request.use(async (config) => {
       (config.headers as Record<string, unknown> | undefined)?.Authorization ??
       (config.headers as Record<string, unknown> | undefined)?.authorization;
     if (existingAuthHeader) {
-      console.log('[API] Authorization already present, skipping getSession');
       return config;
     }
 
@@ -63,7 +56,6 @@ api.interceptors.request.use(async (config) => {
         // fall back to Supabase `getSession()` (which can intermittently time out).
         if (state?.token && state.token !== 'dev-mode') {
           config.headers.Authorization = `Bearer ${state.token}`;
-          console.log('[API] Added stored auth token to request');
           return config;
         }
       } catch {
@@ -72,16 +64,12 @@ api.interceptors.request.use(async (config) => {
     }
 
     // Fallback: get fresh session from Supabase
-    console.log('[API] Getting Supabase session for auth header...');
     const session = await getSession();
     if (session?.access_token) {
       config.headers.Authorization = `Bearer ${session.access_token}`;
-      console.log('[API] Added auth token to request');
-    } else {
-      console.log('[API] No session token available');
     }
-  } catch (error) {
-    console.error('[API] Failed to get session:', error);
+  } catch {
+    // Session retrieval failed — continue without auth
   }
 
   return config;
@@ -95,23 +83,12 @@ const SILENT_401_ENDPOINTS = [
 
 // Response interceptor to handle auth errors
 api.interceptors.response.use(
-  (response) => {
-    console.log('[API] Response success:', response.config.url, response.status);
-    return response;
-  },
+  (response) => response,
   (error) => {
-    console.error('[API] Response error:', {
-      url: error.config?.url,
-      status: error.response?.status,
-      message: error.message,
-      data: error.response?.data
-    });
-
     if (error.response?.status === 401) {
       // Don't redirect for endpoints that handle 401 gracefully
       const isSilent401 = SILENT_401_ENDPOINTS.some(ep => error.config?.url?.includes(ep));
       if (isSilent401) {
-        console.log('[API] 401 error on silent endpoint, not redirecting:', error.config?.url);
         return Promise.reject(error);
       }
 
@@ -120,7 +97,6 @@ api.interceptors.response.use(
       if (storedAuth) {
         const { state } = JSON.parse(storedAuth);
         if (state?.devMode) {
-          console.log('[API] 401 error in dev mode, not redirecting');
           return Promise.reject(error);
         }
       }
@@ -129,17 +105,14 @@ api.interceptors.response.use(
       const lastRedirect = sessionStorage.getItem('auth-redirect-time');
       const now = Date.now();
       if (lastRedirect && now - parseInt(lastRedirect) < 5000) {
-        console.log('[API] 401 error - skipping redirect (too recent)');
         return Promise.reject(error);
       }
 
       // Don't redirect if already on login page
       if (window.location.pathname === '/login') {
-        console.log('[API] 401 error - already on login page');
         return Promise.reject(error);
       }
 
-      console.log('[API] 401 error, redirecting to login');
       sessionStorage.setItem('auth-redirect-time', now.toString());
       localStorage.removeItem('auth-storage');
       window.location.href = '/login';
