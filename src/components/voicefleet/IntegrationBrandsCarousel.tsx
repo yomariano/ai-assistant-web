@@ -1,13 +1,28 @@
 import Link from "next/link";
+import Image from "next/image";
 import { INTEGRATIONS } from "@/lib/marketing/integrations";
 
 const BRAND_NAME_OVERRIDES: Record<string, string> = {
   "Microsoft 365 (Outlook)": "Outlook",
 };
 
+const BRAND_LOGOS: Record<string, string> = {
+  "google-calendar": "/integrations/google-calendar.png",
+  "microsoft-365": "/integrations/outlook.png",
+  calendly: "/integrations/calendly.png",
+  "cal-com": "/integrations/cal-com.png",
+  "square-appointments": "/integrations/square.png",
+  "simplybook-me": "/integrations/simplybook-me.png",
+  mindbody: "/integrations/mindbody.png",
+  thefork: "/integrations/thefork.png",
+  opentable: "/integrations/opentable.png",
+  resy: "/integrations/resy.png",
+};
+
 const brands = INTEGRATIONS.map((integration) => ({
   slug: integration.slug,
   name: BRAND_NAME_OVERRIDES[integration.name] || integration.name,
+  logoSrc: BRAND_LOGOS[integration.slug],
 }));
 
 const marqueeBrands = [...brands, ...brands];
@@ -30,10 +45,21 @@ const IntegrationBrandsCarousel = () => {
             <Link
               key={`${brand.slug}-${index}`}
               href={`/connect/${brand.slug}`}
-              className="mx-1.5 sm:mx-2.5 inline-flex items-center gap-2 rounded-full border border-border bg-background/80 px-4 py-2 text-xs sm:text-sm font-semibold text-foreground/70 hover:text-foreground hover:border-primary/40 transition-colors whitespace-nowrap"
+              className="mx-1.5 sm:mx-2.5 inline-flex h-12 w-20 sm:h-14 sm:w-24 items-center justify-center rounded-2xl border border-border bg-background/90 hover:border-primary/40 transition-colors"
+              aria-label={brand.name}
             >
-              <span className="h-1.5 w-1.5 rounded-full bg-foreground/30" />
-              <span>{brand.name}</span>
+              {brand.logoSrc ? (
+                <Image
+                  src={brand.logoSrc}
+                  alt={brand.name}
+                  width={38}
+                  height={38}
+                  className="h-6 w-6 sm:h-7 sm:w-7 object-contain grayscale opacity-75 hover:opacity-100 transition-opacity"
+                />
+              ) : (
+                <span className="text-[10px] font-semibold text-muted-foreground">{brand.name}</span>
+              )}
+              <span className="sr-only">{brand.name}</span>
             </Link>
           ))}
         </div>
