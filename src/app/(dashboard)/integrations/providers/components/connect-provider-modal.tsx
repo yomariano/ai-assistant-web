@@ -19,6 +19,9 @@ export function ConnectProviderModal({ provider, onClose, onSuccess }: ConnectPr
   const [serverDomain, setServerDomain] = useState('simplybook.me');
   const [restaurantId, setRestaurantId] = useState('');
   const [siteId, setSiteId] = useState('');
+  const [clinikoRegion, setClinikoRegion] = useState('eu1');
+  const [pabauCompanyId, setPabauCompanyId] = useState('');
+  const [nookalLocationId, setNookalLocationId] = useState('');
   const [isConnecting, setIsConnecting] = useState(false);
   const [error, setError] = useState('');
 
@@ -49,6 +52,20 @@ export function ConnectProviderModal({ provider, onClose, onSuccess }: ConnectPr
       }
       if (provider.id === 'mindbody' && siteId) {
         config.siteId = siteId;
+      }
+      if (provider.id === 'cliniko') {
+        config.region = clinikoRegion;
+      }
+      if (provider.id === 'nookal' && nookalLocationId) {
+        config.locationID = nookalLocationId;
+      }
+      if (provider.id === 'pabau') {
+        if (!pabauCompanyId) {
+          setError('Company ID is required for Pabau');
+          setIsConnecting(false);
+          return;
+        }
+        config.companyId = pabauCompanyId;
       }
 
       await providersApi.createConnection({
@@ -177,6 +194,66 @@ export function ConnectProviderModal({ provider, onClose, onSuccess }: ConnectPr
             />
             <p className="mt-1 text-xs text-slate-500">
               Your Mindbody Site ID (found in your developer account)
+            </p>
+          </div>
+        );
+      case 'cliniko':
+        return (
+          <div>
+            <label className="block text-sm font-medium text-slate-700 mb-1">
+              Region <span className="text-rose-500">*</span>
+            </label>
+            <select
+              value={clinikoRegion}
+              onChange={(e) => setClinikoRegion(e.target.value)}
+              className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
+            >
+              <option value="eu1">EU (eu1)</option>
+              <option value="au1">Australia (au1)</option>
+              <option value="au2">Australia (au2)</option>
+              <option value="au3">Australia (au3)</option>
+              <option value="ca1">Canada (ca1)</option>
+              <option value="uk1">United Kingdom (uk1)</option>
+              <option value="us1">United States (us1)</option>
+            </select>
+            <p className="mt-1 text-xs text-slate-500">
+              Select the region matching your Cliniko account
+            </p>
+          </div>
+        );
+      case 'nookal':
+        return (
+          <div>
+            <label className="block text-sm font-medium text-slate-700 mb-1">
+              Location ID (optional)
+            </label>
+            <input
+              type="text"
+              value={nookalLocationId}
+              onChange={(e) => setNookalLocationId(e.target.value)}
+              placeholder="e.g., 1"
+              className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
+            />
+            <p className="mt-1 text-xs text-slate-500">
+              For multi-location clinics, enter your location ID
+            </p>
+          </div>
+        );
+      case 'pabau':
+        return (
+          <div>
+            <label className="block text-sm font-medium text-slate-700 mb-1">
+              Company ID <span className="text-rose-500">*</span>
+            </label>
+            <input
+              type="text"
+              value={pabauCompanyId}
+              onChange={(e) => setPabauCompanyId(e.target.value)}
+              placeholder="e.g., 12345"
+              className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
+            />
+            <p className="mt-1 text-xs text-slate-500">
+              Found in Settings &gt; API in your Pabau account
             </p>
           </div>
         );
