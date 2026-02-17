@@ -289,7 +289,7 @@ export interface BookingProvider {
   name: string;
   description: string;
   icon: string;
-  category: 'general' | 'restaurant' | 'salon' | 'fitness' | 'healthcare';
+  category: 'general' | 'restaurant' | 'salon' | 'fitness' | 'healthcare' | 'veterinary';
   websiteUrl: string;
   docsUrl: string;
   authType: 'oauth2' | 'api_key' | 'basic';

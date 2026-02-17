@@ -22,6 +22,7 @@ export function ConnectProviderModal({ provider, onClose, onSuccess }: ConnectPr
   const [clinikoRegion, setClinikoRegion] = useState('eu1');
   const [pabauCompanyId, setPabauCompanyId] = useState('');
   const [nookalLocationId, setNookalLocationId] = useState('');
+  const [ezyvetBaseUrl, setEzyvetBaseUrl] = useState('https://api.trial.ezyvet.com/v2');
   const [isConnecting, setIsConnecting] = useState(false);
   const [error, setError] = useState('');
 
@@ -66,6 +67,9 @@ export function ConnectProviderModal({ provider, onClose, onSuccess }: ConnectPr
           return;
         }
         config.companyId = pabauCompanyId;
+      }
+      if (provider.id === 'ezyvet' && ezyvetBaseUrl) {
+        config.baseUrl = ezyvetBaseUrl;
       }
 
       await providersApi.createConnection({
@@ -257,6 +261,54 @@ export function ConnectProviderModal({ provider, onClose, onSuccess }: ConnectPr
             </p>
           </div>
         );
+      case 'halaxy':
+        return (
+          <div className="p-3 bg-blue-50 rounded-lg">
+            <p className="text-xs text-blue-700">
+              Generate your API key from <strong>Settings &gt; Add-ons &gt; API</strong> in your Halaxy account.
+              You can set per-resource read/write permissions from the API Key Manager.
+            </p>
+          </div>
+        );
+      case 'opendental':
+        return (
+          <div className="space-y-3">
+            <div className="p-3 bg-blue-50 rounded-lg">
+              <p className="text-xs text-blue-700">
+                Open Dental uses dual-key auth. Enter your <strong>Customer Key</strong> as the API Key
+                and your <strong>Developer Key</strong> as the Secret Key below.
+              </p>
+            </div>
+          </div>
+        );
+      case 'ezyvet':
+        return (
+          <div className="space-y-3">
+            <div>
+              <label className="block text-sm font-medium text-slate-700 mb-1">
+                API Base URL
+              </label>
+              <select
+                value={ezyvetBaseUrl}
+                onChange={(e) => setEzyvetBaseUrl(e.target.value)}
+                className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
+              >
+                <option value="https://api.trial.ezyvet.com/v2">Trial / Sandbox</option>
+                <option value="https://api.ezyvet.com/v2">Production</option>
+              </select>
+              <p className="mt-1 text-xs text-slate-500">
+                Use Trial for testing, switch to Production when ready
+              </p>
+            </div>
+            <div className="p-3 bg-blue-50 rounded-lg">
+              <p className="text-xs text-blue-700">
+                Enter your <strong>Partner/Client ID</strong> as the API Key and
+                your <strong>Client Secret</strong> as the Secret Key.
+                Apply at <a href="https://developers.ezyvet.com/apply.html" target="_blank" rel="noopener noreferrer" className="underline">developers.ezyvet.com</a>.
+              </p>
+            </div>
+          </div>
+        );
       default:
         return null;
     }
@@ -328,17 +380,27 @@ export function ConnectProviderModal({ provider, onClose, onSuccess }: ConnectPr
                 </div>
               </div>
 
-              {/* Optional API Secret for some providers */}
-              {['square', 'simplybook'].includes(provider.id) && (
+              {/* API Secret / Developer Key for providers that need it */}
+              {['square', 'simplybook', 'opendental', 'ezyvet'].includes(provider.id) && (
                 <div>
                   <label className="block text-sm font-medium text-slate-700 mb-1">
-                    Secret Key {provider.id === 'square' ? '(optional)' : '(optional - for REST API)'}
+                    {provider.id === 'opendental' ? 'Developer Key' :
+                     provider.id === 'ezyvet' ? 'Client Secret' :
+                     'Secret Key'}{' '}
+                    {['opendental', 'ezyvet'].includes(provider.id) ?
+                      <span className="text-rose-500">*</span> :
+                      provider.id === 'square' ? '(optional)' : '(optional - for REST API)'}
                   </label>
                   <input
                     type="password"
                     value={apiSecret}
                     onChange={(e) => setApiSecret(e.target.value)}
-                    placeholder={provider.id === 'simplybook' ? 'Enter your secret key (if using REST API)' : 'Enter your API secret'}
+                    placeholder={
+                      provider.id === 'opendental' ? 'Enter your Developer Key' :
+                      provider.id === 'ezyvet' ? 'Enter your Client Secret' :
+                      provider.id === 'simplybook' ? 'Enter your secret key (if using REST API)' :
+                      'Enter your API secret'
+                    }
                     className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
                   />
                 </div>

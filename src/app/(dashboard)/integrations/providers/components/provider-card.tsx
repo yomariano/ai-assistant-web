@@ -1,6 +1,6 @@
 'use client';
 
-import { Calendar, CalendarCheck, Square, BookOpen, UtensilsCrossed, Dumbbell, ExternalLink, Sparkles } from 'lucide-react';
+import { Calendar, CalendarCheck, Square, BookOpen, UtensilsCrossed, Dumbbell, ExternalLink, Sparkles, HeartPulse, Stethoscope, PawPrint } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import Button from '@/components/ui/button';
 import type { BookingProvider } from '@/types';
@@ -12,6 +12,9 @@ const PROVIDER_ICONS: Record<string, React.ComponentType<{ className?: string }>
   BookOpen: BookOpen,
   UtensilsCrossed: UtensilsCrossed,
   Dumbbell: Dumbbell,
+  HeartPulse: HeartPulse,
+  Stethoscope: Stethoscope,
+  PawPrint: PawPrint,
 };
 
 const CATEGORY_COLORS: Record<string, string> = {
@@ -20,6 +23,7 @@ const CATEGORY_COLORS: Record<string, string> = {
   salon: 'bg-pink-100 text-pink-700',
   fitness: 'bg-green-100 text-green-700',
   healthcare: 'bg-purple-100 text-purple-700',
+  veterinary: 'bg-teal-100 text-teal-700',
 };
 
 interface ProviderCardProps {

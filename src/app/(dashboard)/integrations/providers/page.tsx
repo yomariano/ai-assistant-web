@@ -186,7 +186,7 @@ export default function ProvidersPage() {
 
         {/* Category filters */}
         <div className="flex flex-wrap gap-2 mb-6">
-          {['all', 'general', 'restaurant', 'fitness', 'salon'].map(category => (
+          {['all', 'general', 'healthcare', 'veterinary', 'restaurant', 'fitness', 'salon'].map(category => (
             <button
               key={category}
               className="px-3 py-1.5 text-sm font-medium rounded-full bg-slate-100 text-slate-600 hover:bg-slate-200 transition-colors capitalize"
