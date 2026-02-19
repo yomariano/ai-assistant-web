@@ -472,7 +472,7 @@ export default function DemoCallPanel({
           : { provider: "vapi", voiceId: selectedVoice.id },
         model: {
           provider: "openai",
-          model: "gpt-4o-mini",
+          model: "gpt-4.1-mini",
           messages: [
             {
               role: "system",
