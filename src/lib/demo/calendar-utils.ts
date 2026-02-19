@@ -113,6 +113,47 @@ export function getIndustryDefaults(
   return availability;
 }
 
+/** Format time for voice: "09:00" -> "9 AM", "14:30" -> "2:30 PM" */
+function formatTimeForVoice(time: string): string {
+  const [hStr, mStr] = time.split(":");
+  const h = parseInt(hStr, 10);
+  const ampm = h >= 12 ? "PM" : "AM";
+  const h12 = h === 0 ? 12 : h > 12 ? h - 12 : h;
+  if (parseInt(mStr, 10) === 0) return `${h12} ${ampm}`;
+  return `${h12}:${mStr} ${ampm}`;
+}
+
+function addThirtyMin(time: string): string {
+  const [h, m] = time.split(":").map(Number);
+  const total = h * 60 + m + 30;
+  return `${String(Math.floor(total / 60)).padStart(2, "0")}:${String(total % 60).padStart(2, "0")}`;
+}
+
+/** Group sorted 30-min time slots into human-readable ranges for voice */
+export function formatSlotsAsRanges(slots: string[]): string {
+  if (slots.length === 0) return "No available slots";
+  if (slots.length <= 3) return slots.map(formatTimeForVoice).join(", ");
+
+  const ranges: [string, string][] = [];
+  let start = slots[0];
+  let prev = slots[0];
+
+  for (let i = 1; i < slots.length; i++) {
+    if (slots[i] !== addThirtyMin(prev)) {
+      ranges.push([start, prev]);
+      start = slots[i];
+    }
+    prev = slots[i];
+  }
+  ranges.push([start, prev]);
+
+  return ranges
+    .map(([s, e]) =>
+      s === e ? formatTimeForVoice(s) : `${formatTimeForVoice(s)} to ${formatTimeForVoice(e)}`
+    )
+    .join(" and ");
+}
+
 /** Scenarios with tool-aware system prompts */
 export const DEMO_SCENARIOS: DemoScenario[] = [
   {

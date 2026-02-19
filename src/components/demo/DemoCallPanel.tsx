@@ -25,7 +25,7 @@ import type {
   DemoScenario,
   TranscriptMessage,
 } from "@/lib/demo/types";
-import { DEMO_LANGUAGES, formatDate } from "@/lib/demo/calendar-utils";
+import { DEMO_LANGUAGES, formatDate, formatSlotsAsRanges } from "@/lib/demo/calendar-utils";
 
 type DemoVoice = {
   id: string;
@@ -178,7 +178,7 @@ export default function DemoCallPanel({
       const d = new Date(date + "T12:00:00");
       const dayName = DAY_NAMES[d.getDay()];
       const slots = byDate[date].sort();
-      return `- ${dayName} ${date}: ${slots.join(", ")}`;
+      return `- ${dayName} ${date}: ${formatSlotsAsRanges(slots)}`;
     }).join("\n");
   }, [availability]);
 
@@ -188,7 +188,7 @@ export default function DemoCallPanel({
     const dayName = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"][now.getDay()];
     const monthName = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"][now.getMonth()];
     const todayFull = `${dayName}, ${monthName} ${now.getDate()}, ${now.getFullYear()} (${todayStr})`;
-    const toolInstructions = `\n\nToday is ${todayFull}.\n\nHere are the ACTUAL available appointment slots:\n${availabilitySummary}\n\nUse this information to answer availability questions. Use the create_booking tool to confirm appointments (required parameters: date in YYYY-MM-DD, time in HH:MM 24h format, customerName). You may also use check_availability to verify slots before booking.\n\nWhen the caller asks about a date, refer to the availability list above. If a time slot is listed, it IS available. Only say "no availability" if the date/time is genuinely NOT in the list above.`;
+    const toolInstructions = `\n\nToday is ${todayFull}.\n\nHere are the ACTUAL available appointment slots:\n${availabilitySummary}\n\nUse this information to answer availability questions. Use the create_booking tool to confirm appointments (required parameters: date in YYYY-MM-DD, time in HH:MM 24h format, customerName). You may also use check_availability to verify slots before booking.\n\nWhen the caller asks about a date, refer to the availability list above. If a time slot is listed, it IS available. Only say "no availability" if the date/time is genuinely NOT in the list above.\n\nCRITICAL VOICE RULES:\n- NEVER list individual time slots one by one. Always summarize availability as time ranges (e.g. "We have openings from 9 AM to 12 PM and from 2 PM to 4:30 PM"). The caller can then pick a specific time.\n- When you need to use a tool, say ONE short filler phrase (e.g. "Let me check that for you") and then STOP talking until you get the result. Do NOT repeat filler phrases like "one moment", "give me a sec", "hold on" multiple times.\n- After getting tool results, respond naturally with the summary — do not read raw data.`;
     const base = scenario.systemPrompt + toolInstructions;
     if (languageId === "en") return base;
     return `${base}\n\nIMPORTANT:\n- Speak to the caller in ${language.label}.\n- Keep the same structure (collect details, confirm back).\n- If the caller switches languages, continue in ${language.label}.`;
@@ -549,7 +549,18 @@ export default function DemoCallPanel({
         };
       }
 
-      await vapiRef.current.start(assistantConfig);
+      try {
+        await vapiRef.current.start(assistantConfig);
+      } catch (startErr: unknown) {
+        // If an 11labs custom voice failed, retry with a Vapi native fallback
+        if (selectedVoice.provider === "11labs") {
+          console.warn("[Demo] 11labs voice failed, falling back to Vapi voice:", startErr);
+          assistantConfig.voice = { provider: "vapi", voiceId: "Savannah" };
+          await vapiRef.current.start(assistantConfig);
+        } else {
+          throw startErr;
+        }
+      }
     } catch (err: unknown) {
       const fallback = "Failed to start the demo. Please allow microphone access and try again.";
       let errorMessage = fallback;
