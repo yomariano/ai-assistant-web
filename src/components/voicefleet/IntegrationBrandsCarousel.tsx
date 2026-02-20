@@ -2,6 +2,14 @@ import Link from "next/link";
 import Image from "next/image";
 import { INTEGRATIONS } from "@/lib/marketing/integrations";
 
+type BrandItem = {
+  id: string;
+  name: string;
+  logoSrc: string;
+  href: string;
+  external?: boolean;
+};
+
 const BRAND_NAME_OVERRIDES: Record<string, string> = {
   "Microsoft 365 (Outlook)": "Outlook",
 };
@@ -19,12 +27,38 @@ const BRAND_LOGOS: Record<string, string> = {
   resy: "/integrations/resy.png",
 };
 
-const brands = INTEGRATIONS.map((integration) => ({
-  slug: integration.slug,
+const integrationBrands: BrandItem[] = INTEGRATIONS.map((integration) => ({
+  id: integration.slug,
   name: BRAND_NAME_OVERRIDES[integration.name] || integration.name,
   logoSrc: BRAND_LOGOS[integration.slug],
+  href: `/connect/${integration.slug}`,
 }));
 
+const reviewBrands: BrandItem[] = [
+  {
+    id: "trustpilot",
+    name: "Trustpilot",
+    logoSrc: "/integrations/trustpilot.svg",
+    href: "https://www.trustpilot.com/",
+    external: true,
+  },
+  {
+    id: "g2",
+    name: "G2",
+    logoSrc: "/integrations/g2.svg",
+    href: "https://www.g2.com/",
+    external: true,
+  },
+  {
+    id: "capterra",
+    name: "Capterra",
+    logoSrc: "/integrations/capterra.png",
+    href: "https://www.capterra.com/",
+    external: true,
+  },
+];
+
+const brands = [...integrationBrands, ...reviewBrands];
 const marqueeBrands = [...brands, ...brands];
 
 const IntegrationBrandsCarousel = () => {
@@ -42,25 +76,41 @@ const IntegrationBrandsCarousel = () => {
 
         <div className="integration-marquee-track py-4 sm:py-5">
           {marqueeBrands.map((brand, index) => (
-            <Link
-              key={`${brand.slug}-${index}`}
-              href={`/connect/${brand.slug}`}
-              className="mx-1.5 sm:mx-2.5 inline-flex h-12 w-20 sm:h-14 sm:w-24 items-center justify-center rounded-2xl border border-border bg-background/90 hover:border-primary/40 transition-colors"
-              aria-label={brand.name}
-            >
-              {brand.logoSrc ? (
+            brand.external ? (
+              <a
+                key={`${brand.id}-${index}`}
+                href={brand.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mx-1.5 sm:mx-2.5 inline-flex h-12 items-center gap-2.5 rounded-full border border-border bg-background/90 px-3.5 sm:px-4 hover:border-primary/40 transition-colors whitespace-nowrap"
+                aria-label={brand.name}
+              >
                 <Image
                   src={brand.logoSrc}
                   alt={brand.name}
-                  width={38}
-                  height={38}
-                  className="h-6 w-6 sm:h-7 sm:w-7 object-contain grayscale opacity-75 hover:opacity-100 transition-opacity"
+                  width={24}
+                  height={24}
+                  className="h-5 w-5 sm:h-6 sm:w-6 object-contain"
                 />
-              ) : (
-                <span className="text-[10px] font-semibold text-muted-foreground">{brand.name}</span>
-              )}
-              <span className="sr-only">{brand.name}</span>
-            </Link>
+                <span className="text-xs sm:text-sm font-semibold text-foreground/80">{brand.name}</span>
+              </a>
+            ) : (
+              <Link
+                key={`${brand.id}-${index}`}
+                href={brand.href}
+                className="mx-1.5 sm:mx-2.5 inline-flex h-12 items-center gap-2.5 rounded-full border border-border bg-background/90 px-3.5 sm:px-4 hover:border-primary/40 transition-colors whitespace-nowrap"
+                aria-label={brand.name}
+              >
+                <Image
+                  src={brand.logoSrc}
+                  alt={brand.name}
+                  width={24}
+                  height={24}
+                  className="h-5 w-5 sm:h-6 sm:w-6 object-contain"
+                />
+                <span className="text-xs sm:text-sm font-semibold text-foreground/80">{brand.name}</span>
+              </Link>
+            )
           ))}
         </div>
       </div>
