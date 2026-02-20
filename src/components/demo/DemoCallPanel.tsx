@@ -25,7 +25,7 @@ import type {
   DemoScenario,
   TranscriptMessage,
 } from "@/lib/demo/types";
-import { DEMO_LANGUAGES, formatDate } from "@/lib/demo/calendar-utils";
+import { DEMO_LANGUAGES, formatDate, getWeekStart } from "@/lib/demo/calendar-utils";
 
 type DemoVoice = {
   id: string;
@@ -167,36 +167,34 @@ export default function DemoCallPanel({
     const DAY_NAMES = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
     const MONTH_NAMES = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
-    // Collect all unique dates from availability keys (both true and false)
-    const allDates = new Set<string>();
-    const datesWithSlots = new Set<string>();
-    for (const [key, avail] of Object.entries(availability)) {
-      const date = key.split("_")[0];
-      allDates.add(date);
-      if (avail) datesWithSlots.add(date);
+    // Generate all 7 days of the week (Mon-Sun) so we know about EVERY day
+    const weekStart = getWeekStart();
+    const allWeekDates: string[] = [];
+    for (let i = 0; i < 7; i++) {
+      const d = new Date(weekStart);
+      d.setDate(weekStart.getDate() + i);
+      allWeekDates.push(formatDate(d));
     }
 
-    const sortedDates = [...allDates].sort();
+    // Find which dates have at least one available slot
+    const datesWithSlots = new Set<string>();
+    for (const [key, avail] of Object.entries(availability)) {
+      if (avail) datesWithSlots.add(key.split("_")[0]);
+    }
+
+    const formatDateLabel = (date: string) => {
+      const d = new Date(date + "T12:00:00");
+      return `${DAY_NAMES[d.getDay()]} ${MONTH_NAMES[d.getMonth()]} ${d.getDate()}`;
+    };
 
     // Build date reference: "Monday = February 16 (2026-02-16)"
-    const dateRef = sortedDates.map((date) => {
+    const dateRef = allWeekDates.map((date) => {
       const d = new Date(date + "T12:00:00");
       return `- ${DAY_NAMES[d.getDay()]} = ${MONTH_NAMES[d.getMonth()]} ${d.getDate()} (${date})`;
     }).join("\n");
 
-    const available = sortedDates
-      .filter((date) => datesWithSlots.has(date))
-      .map((date) => {
-        const d = new Date(date + "T12:00:00");
-        return `${DAY_NAMES[d.getDay()]} ${MONTH_NAMES[d.getMonth()]} ${d.getDate()}`;
-      });
-
-    const unavailable = sortedDates
-      .filter((date) => !datesWithSlots.has(date))
-      .map((date) => {
-        const d = new Date(date + "T12:00:00");
-        return `${DAY_NAMES[d.getDay()]} ${MONTH_NAMES[d.getMonth()]} ${d.getDate()}`;
-      });
+    const available = allWeekDates.filter((d) => datesWithSlots.has(d)).map(formatDateLabel);
+    const unavailable = allWeekDates.filter((d) => !datesWithSlots.has(d)).map(formatDateLabel);
 
     return {
       dateReference: dateRef,
