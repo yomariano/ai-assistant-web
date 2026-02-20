@@ -574,6 +574,9 @@ export default function DemoCallPanel({
         },
         metadata: {
           demoSessionId,
+          availability,
+          scenario: scenario.id,
+          businessName: scenario.businessName,
         },
       };
 
