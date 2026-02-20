@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { Leaf } from "lucide-react";
 import { INTEGRATIONS } from "@/lib/marketing/integrations";
 
 type BrandItem = {
@@ -60,6 +61,7 @@ const reviewBrands: BrandItem[] = [
 
 const brands = [...integrationBrands, ...reviewBrands];
 const marqueeBrands = [...brands, ...brands];
+const complianceBadges = ["GDPR compliant", "EU AI Act compliant"];
 
 const IntegrationBrandsCarousel = () => {
   return (
@@ -68,6 +70,21 @@ const IntegrationBrandsCarousel = () => {
         <p className="text-center text-[11px] sm:text-xs tracking-[0.14em] font-semibold uppercase text-muted-foreground">
           Trusted integrations for booking and scheduling workflows
         </p>
+      </div>
+
+      <div className="container mx-auto px-4 mb-5">
+        <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4">
+          {complianceBadges.map((badge) => (
+            <div
+              key={badge}
+              className="inline-flex items-center gap-2.5 rounded-full border border-border/70 bg-card/40 px-4 py-2 text-sm font-semibold text-foreground/65"
+            >
+              <Leaf className="h-4 w-4 -scale-x-100 text-muted-foreground/70" aria-hidden="true" />
+              <span>{badge}</span>
+              <Leaf className="h-4 w-4 text-muted-foreground/70" aria-hidden="true" />
+            </div>
+          ))}
+        </div>
       </div>
 
       <div className="integration-marquee relative overflow-hidden border-y border-border/70 bg-card/30">
