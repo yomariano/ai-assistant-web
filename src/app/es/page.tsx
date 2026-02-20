@@ -4,6 +4,7 @@ import { HOMEPAGE_FAQS_ES } from "@/lib/marketing/faqs-es";
 
 import HeaderES from "@/components/voicefleet/HeaderES";
 import HeroSectionES from "@/components/voicefleet/es/HeroSectionES";
+import IntegrationBrandsCarousel from "@/components/voicefleet/IntegrationBrandsCarousel";
 import MetricsBar from "@/components/voicefleet/MetricsBar";
 
 const ProblemSectionES = dynamic(() => import("@/components/voicefleet/es/ProblemSectionES"));
@@ -29,6 +30,7 @@ export default function HomeES() {
       <HeaderES />
       <main>
         <HeroSectionES />
+        <IntegrationBrandsCarousel />
         <MetricsBar />
         <ProblemSectionES />
         <SolutionSectionES />
