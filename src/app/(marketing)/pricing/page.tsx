@@ -7,6 +7,7 @@ import Header from "@/components/voicefleet/Header";
 import Footer from "@/components/voicefleet/Footer";
 import PricingSection from "@/components/voicefleet/PricingSection";
 import FAQSection from "@/components/voicefleet/FAQSection";
+import ROICalculator from "@/components/voicefleet/ROICalculator";
 import { PRICING_FAQS } from "@/lib/marketing/faqs";
 
 export const revalidate = 3600;
@@ -47,7 +48,8 @@ export default function PricingPage() {
           </p>
         </div>
         <PricingSection />
-        <FAQSection />
+        <ROICalculator />
+        <FAQSection variant="pricing" />
         <CTASection />
       </div>
       <Footer />

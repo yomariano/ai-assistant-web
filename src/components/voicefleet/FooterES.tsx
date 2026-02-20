@@ -1,12 +1,7 @@
 import { Phone, Globe } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
-
-const reviewPlatforms = [
-  { name: "Trustpilot", logo: "/integrations/trustpilot.svg", href: "https://www.trustpilot.com/" },
-  { name: "G2", logo: "/integrations/g2.svg", href: "https://www.g2.com/" },
-  { name: "Capterra", logo: "/integrations/capterra.png", href: "https://www.capterra.com/" },
-];
+import { REVIEW_PLATFORMS } from "@/lib/marketing/review-platforms";
 
 const FooterES = () => {
   return (
@@ -80,7 +75,7 @@ const FooterES = () => {
                 Plataformas de resenas
               </p>
               <div className="flex flex-wrap gap-2.5">
-                {reviewPlatforms.map((platform) => (
+                {REVIEW_PLATFORMS.map((platform) => (
                   <a
                     key={platform.name}
                     href={platform.href}

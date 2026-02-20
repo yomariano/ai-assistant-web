@@ -1,14 +1,25 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { Check, Zap, Rocket, Crown, Gift, Clock, Shield, Phone, Sparkles, Globe } from "lucide-react";
+import { Check, Zap, Rocket, Crown, Gift, Clock, Shield, Phone, Sparkles, Globe, Star, X } from "lucide-react";
 import { useAuthStore } from "@/lib/store";
 import { signInWithGoogle } from "@/lib/supabase";
 import { trackEvent } from "@/lib/umami";
 import { useRegion } from "@/hooks/useRegion";
+import { REVIEW_PLATFORMS } from "@/lib/marketing/review-platforms";
 
 type Region = 'EU' | 'AR';
+type ComparisonValue = boolean | string;
+
+interface ComparisonRow {
+  category: string;
+  feature: string;
+  starter: ComparisonValue;
+  growth: ComparisonValue;
+  pro: ComparisonValue;
+}
 
 // Get payment links based on stripe mode, billing period, and region
 const getPaymentLinks = (isAnnual: boolean = false, region: Region = 'EU') => {
@@ -95,7 +106,6 @@ const PricingSection = () => {
   const { isAuthenticated, token } = useAuthStore();
   // Get checkAuth with a stable reference to avoid infinite loops
   const checkAuth = useAuthStore((state) => state.checkAuth);
-  const [authChecked, setAuthChecked] = useState(false);
   const [redirectingPlan, setRedirectingPlan] = useState<string | null>(null);
   const hasCheckedAuth = useRef(false);
 
@@ -103,7 +113,7 @@ const PricingSection = () => {
     // Only check auth once on mount
     if (!hasCheckedAuth.current) {
       hasCheckedAuth.current = true;
-      checkAuth().then(() => setAuthChecked(true));
+      checkAuth();
     }
   }, [checkAuth]);
 
@@ -258,6 +268,295 @@ const PricingSection = () => {
     { icon: Clock, text: "Cancel anytime, no questions" },
     { icon: Phone, text: `Your own ${pricing.phoneNumber}` },
   ];
+
+  const testimonials = [
+    {
+      quote: "We no longer miss booking calls while the team is busy with patients.",
+      source: "Practice manager",
+      segment: "Dental clinic",
+      impact: "Fewer dropped opportunities during peak hours",
+    },
+    {
+      quote: "Evening and weekend callers now get a real answer instead of voicemail.",
+      source: "Restaurant owner",
+      segment: "Hospitality",
+      impact: "Improved reservation capture after hours",
+    },
+    {
+      quote: "Urgent calls are routed fast, while routine questions are handled automatically.",
+      source: "Operations lead",
+      segment: "Home services",
+      impact: "Faster triage with cleaner call notes",
+    },
+  ];
+
+  const comparisonRows: ComparisonRow[] = [
+    {
+      category: "Volume & Billing",
+      feature: "Included minutes / month",
+      starter: pricing.starter.minutes.toLocaleString(),
+      growth: pricing.growth.minutes.toLocaleString(),
+      pro: pricing.pro.minutes.toLocaleString(),
+    },
+    {
+      category: "Volume & Billing",
+      feature: "Approx. calls / month",
+      starter: pricing.starter.calls,
+      growth: pricing.growth.calls,
+      pro: pricing.pro.calls,
+    },
+    {
+      category: "Volume & Billing",
+      feature: "Parallel call capacity",
+      starter: "1",
+      growth: "3",
+      pro: "5",
+    },
+    {
+      category: "Volume & Billing",
+      feature: "Overage rate",
+      starter: `${pricing.starter.overage}/min`,
+      growth: `${pricing.growth.overage}/min`,
+      pro: `${pricing.pro.overage}/min`,
+    },
+    {
+      category: "Volume & Billing",
+      feature: "Pricing model",
+      starter: "Minutes based",
+      growth: "Minutes based",
+      pro: "Minutes based",
+    },
+    {
+      category: "Volume & Billing",
+      feature: "No per-call charges",
+      starter: true,
+      growth: true,
+      pro: true,
+    },
+    {
+      category: "Volume & Billing",
+      feature: "Monthly billing",
+      starter: true,
+      growth: true,
+      pro: true,
+    },
+    {
+      category: "Volume & Billing",
+      feature: "Annual billing option",
+      starter: true,
+      growth: true,
+      pro: true,
+    },
+    {
+      category: "Volume & Billing",
+      feature: "Annual discount",
+      starter: "Save 16%",
+      growth: "Save 16%",
+      pro: "Save 16%",
+    },
+    {
+      category: "Volume & Billing",
+      feature: "Free trial length",
+      starter: "5 days",
+      growth: "5 days",
+      pro: "5 days",
+    },
+    {
+      category: "Volume & Billing",
+      feature: "Credit card required for trial",
+      starter: false,
+      growth: false,
+      pro: false,
+    },
+    {
+      category: "Volume & Billing",
+      feature: "Setup fee",
+      starter: false,
+      growth: false,
+      pro: false,
+    },
+    {
+      category: "Volume & Billing",
+      feature: "Contract lock-in",
+      starter: false,
+      growth: false,
+      pro: false,
+    },
+    {
+      category: "Volume & Billing",
+      feature: "Cancel anytime",
+      starter: true,
+      growth: true,
+      pro: true,
+    },
+    {
+      category: "Volume & Billing",
+      feature: "Local business number included",
+      starter: true,
+      growth: true,
+      pro: true,
+    },
+    {
+      category: "Call Handling & Automation",
+      feature: "24/7 AI call answering",
+      starter: true,
+      growth: true,
+      pro: true,
+    },
+    {
+      category: "Call Handling & Automation",
+      feature: "Appointment booking",
+      starter: true,
+      growth: true,
+      pro: true,
+    },
+    {
+      category: "Call Handling & Automation",
+      feature: "Calendar integrations",
+      starter: true,
+      growth: true,
+      pro: true,
+    },
+    {
+      category: "Call Handling & Automation",
+      feature: "Emergency flagging",
+      starter: true,
+      growth: true,
+      pro: true,
+    },
+    {
+      category: "Call Handling & Automation",
+      feature: "Message capture",
+      starter: true,
+      growth: true,
+      pro: true,
+    },
+    {
+      category: "Call Handling & Automation",
+      feature: "FAQ and service question handling",
+      starter: true,
+      growth: true,
+      pro: true,
+    },
+    {
+      category: "Call Handling & Automation",
+      feature: "After-hours coverage",
+      starter: true,
+      growth: true,
+      pro: true,
+    },
+    {
+      category: "Call Handling & Automation",
+      feature: "Call summaries and notes",
+      starter: true,
+      growth: true,
+      pro: true,
+    },
+    {
+      category: "Call Handling & Automation",
+      feature: "Transfer to human staff",
+      starter: false,
+      growth: true,
+      pro: true,
+    },
+    {
+      category: "Call Handling & Automation",
+      feature: "Custom scripts and workflows",
+      starter: false,
+      growth: true,
+      pro: true,
+    },
+    {
+      category: "Call Handling & Automation",
+      feature: "Voice personalization",
+      starter: false,
+      growth: true,
+      pro: true,
+    },
+    {
+      category: "Call Handling & Automation",
+      feature: "Call recording retention",
+      starter: "7 days",
+      growth: "30 days",
+      pro: "90 days",
+    },
+    {
+      category: "Support & Compliance",
+      feature: "Support tier",
+      starter: "Email",
+      growth: "Priority",
+      pro: "Dedicated",
+    },
+    {
+      category: "Support & Compliance",
+      feature: "Priority support",
+      starter: false,
+      growth: true,
+      pro: true,
+    },
+    {
+      category: "Support & Compliance",
+      feature: "Dedicated support manager",
+      starter: false,
+      growth: false,
+      pro: true,
+    },
+    {
+      category: "Support & Compliance",
+      feature: "Free setup and onboarding support",
+      starter: true,
+      growth: true,
+      pro: true,
+    },
+    {
+      category: "Support & Compliance",
+      feature: "EU data residency options",
+      starter: true,
+      growth: true,
+      pro: true,
+    },
+    {
+      category: "Support & Compliance",
+      feature: "GDPR-ready deployment",
+      starter: true,
+      growth: true,
+      pro: true,
+    },
+    {
+      category: "Support & Compliance",
+      feature: "EU AI Act-aligned workflows",
+      starter: true,
+      growth: true,
+      pro: true,
+    },
+    {
+      category: "Support & Compliance",
+      feature: "Presence on Trustpilot, G2, and Capterra",
+      starter: true,
+      growth: true,
+      pro: true,
+    },
+  ];
+
+  const renderComparisonValue = (value: ComparisonValue) => {
+    if (value === true) {
+      return (
+        <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-accent/15">
+          <Check className="h-3.5 w-3.5 text-accent" />
+        </span>
+      );
+    }
+
+    if (value === false) {
+      return (
+        <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-muted">
+          <X className="h-3.5 w-3.5 text-muted-foreground" />
+        </span>
+      );
+    }
+
+    return <span className="text-xs sm:text-sm font-medium text-foreground/85">{value}</span>;
+  };
 
   return (
     <section id="pricing" className="py-16 lg:py-28 bg-background">
@@ -451,6 +750,116 @@ const PricingSection = () => {
               </div>
             </div>
           ))}
+        </div>
+
+        <div className="max-w-6xl mx-auto mb-10 lg:mb-12">
+          <div className="rounded-2xl border border-border bg-card p-5 sm:p-7 shadow-elegant">
+            <div className="text-center mb-6">
+              <h3 className="text-xl sm:text-2xl font-heading font-bold text-foreground mb-2">
+                Social Proof Buyers Expect
+              </h3>
+              <p className="text-sm sm:text-base text-muted-foreground">
+                Public review-platform presence plus real workflow feedback from teams evaluating VoiceFleet.
+              </p>
+            </div>
+
+            <div className="grid sm:grid-cols-3 gap-3 mb-6">
+              {REVIEW_PLATFORMS.map((platform) => (
+                <a
+                  key={platform.id}
+                  href={platform.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-between gap-3 rounded-xl border border-border bg-background px-4 py-3 hover:border-primary/40 transition-colors"
+                >
+                  <span className="inline-flex items-center gap-2.5">
+                    <Image
+                      src={platform.logo}
+                      alt={platform.name}
+                      width={20}
+                      height={20}
+                      className="h-5 w-5 object-contain"
+                    />
+                    <span className="text-sm font-semibold text-foreground">{platform.name}</span>
+                  </span>
+                  <span className="inline-flex rounded-full bg-primary/10 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide text-primary">
+                    {platform.status}
+                  </span>
+                </a>
+              ))}
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-4">
+              {testimonials.map((testimonial) => (
+                <div key={testimonial.quote} className="rounded-xl border border-border bg-background p-4">
+                  <div className="mb-3 flex items-center gap-1">
+                    {Array.from({ length: 5 }).map((_, index) => (
+                      <Star key={`${testimonial.source}-${index}`} className="h-3.5 w-3.5 fill-amber-400 text-amber-400" />
+                    ))}
+                  </div>
+                  <p className="text-sm text-foreground/85 leading-relaxed mb-3">
+                    &ldquo;{testimonial.quote}&rdquo;
+                  </p>
+                  <p className="text-xs font-semibold text-foreground">{testimonial.source} · {testimonial.segment}</p>
+                  <p className="text-xs text-muted-foreground mt-1">{testimonial.impact}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div className="max-w-6xl mx-auto mb-12 lg:mb-14">
+          <div className="text-center mb-6">
+            <h3 className="text-2xl sm:text-3xl font-heading font-bold text-foreground mb-2">
+              Full Plan Comparison
+            </h3>
+            <p className="text-sm sm:text-base text-muted-foreground">
+              Compare 30+ line items across Starter, Growth, and Pro before you choose a plan.
+            </p>
+          </div>
+
+          <div className="overflow-x-auto rounded-2xl border border-border bg-card shadow-elegant">
+            <table className="w-full min-w-[880px]">
+              <thead>
+                <tr className="border-b border-border">
+                  <th className="px-4 py-4 text-left text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                    Capability
+                  </th>
+                  <th className="px-4 py-4 text-center text-sm font-semibold text-foreground">Starter</th>
+                  <th className="px-4 py-4 text-center">
+                    <span className="inline-flex flex-col items-center">
+                      <span className="text-sm font-semibold text-primary">Growth</span>
+                      <span className="text-[10px] font-semibold uppercase tracking-wide text-accent">Most Popular</span>
+                    </span>
+                  </th>
+                  <th className="px-4 py-4 text-center text-sm font-semibold text-foreground">Pro</th>
+                </tr>
+              </thead>
+              <tbody>
+                {comparisonRows.map((row, index) => {
+                  const showCategory = index === 0 || comparisonRows[index - 1].category !== row.category;
+
+                  return (
+                    <Fragment key={`${row.category}-${row.feature}`}>
+                      {showCategory && (
+                        <tr className="border-y border-border bg-muted/40">
+                          <td colSpan={4} className="px-4 py-2.5 text-xs font-semibold uppercase tracking-[0.08em] text-muted-foreground">
+                            {row.category}
+                          </td>
+                        </tr>
+                      )}
+                      <tr className="border-b border-border/70">
+                        <td className="px-4 py-3.5 text-sm font-medium text-foreground">{row.feature}</td>
+                        <td className="px-4 py-3.5 text-center">{renderComparisonValue(row.starter)}</td>
+                        <td className="px-4 py-3.5 text-center bg-primary/5">{renderComparisonValue(row.growth)}</td>
+                        <td className="px-4 py-3.5 text-center">{renderComparisonValue(row.pro)}</td>
+                      </tr>
+                    </Fragment>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
         </div>
 
         {/* Trial benefits bar */}

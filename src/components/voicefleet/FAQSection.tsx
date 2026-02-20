@@ -6,10 +6,15 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { HOMEPAGE_FAQS } from "@/lib/marketing/faqs";
+import { HOMEPAGE_FAQS, PRICING_FAQS } from "@/lib/marketing/faqs";
 
-const FAQSection = () => {
-  const faqs = HOMEPAGE_FAQS;
+interface FAQSectionProps {
+  variant?: "homepage" | "pricing";
+}
+
+const FAQSection = ({ variant = "homepage" }: FAQSectionProps) => {
+  const faqs = variant === "pricing" ? PRICING_FAQS : HOMEPAGE_FAQS;
+  const defaultOpen = variant === "pricing" && faqs.length > 0 ? "item-0" : undefined;
 
   return (
     <section id="faq" className="py-20 lg:py-28 bg-background">
@@ -24,7 +29,7 @@ const FAQSection = () => {
             </p>
           </div>
 
-          <Accordion type="single" collapsible className="space-y-4">
+          <Accordion type="single" collapsible defaultValue={defaultOpen} className="space-y-4">
             {faqs.map((faq, index) => (
               <AccordionItem
                 key={index}

@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Leaf } from "lucide-react";
 import { INTEGRATIONS } from "@/lib/marketing/integrations";
+import { REVIEW_PLATFORMS } from "@/lib/marketing/review-platforms";
 
 type BrandItem = {
   id: string;
@@ -35,29 +36,13 @@ const integrationBrands: BrandItem[] = INTEGRATIONS.map((integration) => ({
   href: `/connect/${integration.slug}`,
 }));
 
-const reviewBrands: BrandItem[] = [
-  {
-    id: "trustpilot",
-    name: "Trustpilot",
-    logoSrc: "/integrations/trustpilot.svg",
-    href: "https://www.trustpilot.com/",
-    external: true,
-  },
-  {
-    id: "g2",
-    name: "G2",
-    logoSrc: "/integrations/g2.svg",
-    href: "https://www.g2.com/",
-    external: true,
-  },
-  {
-    id: "capterra",
-    name: "Capterra",
-    logoSrc: "/integrations/capterra.png",
-    href: "https://www.capterra.com/",
-    external: true,
-  },
-];
+const reviewBrands: BrandItem[] = REVIEW_PLATFORMS.map((platform) => ({
+  id: platform.id,
+  name: platform.name,
+  logoSrc: platform.logo,
+  href: platform.href,
+  external: true,
+}));
 
 const brands = [...integrationBrands, ...reviewBrands];
 const marqueeBrands = [...brands, ...brands];
