@@ -235,7 +235,7 @@ export default function DemoCallPanel({
           hardStopTimeoutRef.current = window.setTimeout(() => {
             if (vapiRef.current) vapiRef.current.stop();
             setCallStatus("ended");
-          }, 90_000);
+          }, 180_000);
         });
 
         vapi.on("call-end", () => {
@@ -447,7 +447,7 @@ export default function DemoCallPanel({
         firstMessage: assistantFirstMessage,
         firstMessageMode: "assistant-speaks-first",
         backgroundSound: "office",
-        maxDurationSeconds: 90,
+        maxDurationSeconds: 180,
         clientMessages: [
           "transcript",
           "hang",
@@ -476,7 +476,7 @@ export default function DemoCallPanel({
           messages: [
             {
               role: "system",
-              content: `${assistantSystemPrompt}\n\nDemo constraint:\n- This demo call is limited to 90 seconds. If time is nearly up, politely say goodbye.`,
+              content: `${assistantSystemPrompt}\n\nDemo constraint:\n- This demo call is limited to 3 minutes. If time is nearly up, politely say goodbye.`,
             },
           ],
           tools: [
