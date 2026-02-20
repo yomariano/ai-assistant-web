@@ -25,7 +25,7 @@ import type {
   DemoScenario,
   TranscriptMessage,
 } from "@/lib/demo/types";
-import { DEMO_LANGUAGES, formatDate, formatSlotsAsRanges } from "@/lib/demo/calendar-utils";
+import { DEMO_LANGUAGES, formatDate } from "@/lib/demo/calendar-utils";
 
 type DemoVoice = {
   id: string;
@@ -162,24 +162,47 @@ export default function DemoCallPanel({
     [languageId, scenario]
   );
 
-  const availabilitySummary = useMemo(() => {
+  // Build date reference table and availability summary for the AI
+  const { dateReference, availableDays, unavailableDays } = useMemo(() => {
     const DAY_NAMES = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-    // Group available slots by date
-    const byDate: Record<string, string[]> = {};
+    const MONTH_NAMES = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+    // Collect all unique dates from availability keys (both true and false)
+    const allDates = new Set<string>();
+    const datesWithSlots = new Set<string>();
     for (const [key, avail] of Object.entries(availability)) {
-      if (!avail) continue;
-      const [date, time] = key.split("_");
-      if (!byDate[date]) byDate[date] = [];
-      byDate[date].push(time);
+      const date = key.split("_")[0];
+      allDates.add(date);
+      if (avail) datesWithSlots.add(date);
     }
-    const dates = Object.keys(byDate).sort();
-    if (dates.length === 0) return "No availability configured.";
-    return dates.map((date) => {
+
+    const sortedDates = [...allDates].sort();
+
+    // Build date reference: "Monday = February 16 (2026-02-16)"
+    const dateRef = sortedDates.map((date) => {
       const d = new Date(date + "T12:00:00");
-      const dayName = DAY_NAMES[d.getDay()];
-      const slots = byDate[date].sort();
-      return `- ${dayName} ${date}: ${formatSlotsAsRanges(slots)}`;
+      return `- ${DAY_NAMES[d.getDay()]} = ${MONTH_NAMES[d.getMonth()]} ${d.getDate()} (${date})`;
     }).join("\n");
+
+    const available = sortedDates
+      .filter((date) => datesWithSlots.has(date))
+      .map((date) => {
+        const d = new Date(date + "T12:00:00");
+        return `${DAY_NAMES[d.getDay()]} ${MONTH_NAMES[d.getMonth()]} ${d.getDate()}`;
+      });
+
+    const unavailable = sortedDates
+      .filter((date) => !datesWithSlots.has(date))
+      .map((date) => {
+        const d = new Date(date + "T12:00:00");
+        return `${DAY_NAMES[d.getDay()]} ${MONTH_NAMES[d.getMonth()]} ${d.getDate()}`;
+      });
+
+    return {
+      dateReference: dateRef,
+      availableDays: available.length > 0 ? available.join(", ") : "None",
+      unavailableDays: unavailable.length > 0 ? unavailable.join(", ") : "None",
+    };
   }, [availability]);
 
   const assistantSystemPrompt = useMemo(() => {
@@ -188,11 +211,26 @@ export default function DemoCallPanel({
     const dayName = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"][now.getDay()];
     const monthName = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"][now.getMonth()];
     const todayFull = `${dayName}, ${monthName} ${now.getDate()}, ${now.getFullYear()} (${todayStr})`;
-    const toolInstructions = `\n\nToday is ${todayFull}.\n\nHere are the ONLY dates and times with availability:\n${availabilitySummary}\n\nIMPORTANT: ONLY the dates listed above have availability. Any date NOT listed has ZERO availability — the office is closed or fully booked on those days. If the caller asks about a date not listed above, immediately tell them that date is not available and suggest one of the listed dates instead. NEVER guess or assume availability for unlisted dates.\n\nYou MUST use the check_availability tool before confirming any time slot. Do NOT skip the tool call. Do NOT assume a slot is available without checking. Trust the tool result over any assumption.\n\nUse the create_booking tool to confirm appointments (required parameters: date in YYYY-MM-DD, time in HH:MM 24h format, customerName).\n\nCRITICAL VOICE RULES:\n- NEVER list individual time slots one by one. Always summarize availability as time ranges (e.g. "We have openings from 9 AM to 4 PM"). The caller can then pick a specific time.\n- When calling a tool, say ONE short phrase like "Let me check that for you" then STOP talking and wait silently for the result. Do NOT say multiple filler phrases. ONE phrase only, then silence.\n- If the tool says no availability, tell the caller immediately and suggest alternative dates from the list above.\n- After getting tool results, respond naturally with the summary — do not read raw data.`;
+    const toolInstructions = [
+      `\n\nToday is ${todayFull}.`,
+      `\nDATE REFERENCE (use this to convert day names to dates):`,
+      dateReference,
+      `\nDays WITH availability: ${availableDays}`,
+      `Days with NO availability (closed/fully booked): ${unavailableDays}`,
+      `\nIMPORTANT RULES:`,
+      `- You do NOT know specific time slots. You MUST call the check_availability tool to get available times for any date. NEVER guess or make up time slots.`,
+      `- When the caller mentions a day name (e.g. "Saturday"), use the date reference above to find the correct YYYY-MM-DD date. Double-check the mapping before calling the tool.`,
+      `- If the caller asks about a day listed under "NO availability", tell them immediately that date is unavailable and suggest days from the "WITH availability" list.`,
+      `- Use the create_booking tool to confirm appointments (required: date YYYY-MM-DD, time HH:MM 24h, customerName).`,
+      `\nVOICE RULES:`,
+      `- Summarize availability as time ranges (e.g. "We have openings from 9 AM to 4 PM"), never list individual slots.`,
+      `- When calling a tool, say ONE short phrase like "Let me check that for you" then wait silently. Do NOT repeat filler phrases.`,
+      `- After getting tool results, respond naturally with the summary.`,
+    ].join("\n");
     const base = scenario.systemPrompt + toolInstructions;
     if (languageId === "en") return base;
     return `${base}\n\nIMPORTANT:\n- Speak to the caller in ${language.label}.\n- Keep the same structure (collect details, confirm back).\n- If the caller switches languages, continue in ${language.label}.`;
-  }, [availabilitySummary, language.label, languageId, scenario.systemPrompt]);
+  }, [dateReference, availableDays, unavailableDays, language.label, languageId, scenario.systemPrompt]);
 
   useEffect(() => {
     const container = transcriptContainerRef.current;
