@@ -94,7 +94,10 @@ function safeErrorMessage(value: unknown, fallback: string): string {
   return fallback;
 }
 
-/** Encode availability as compact URL param: "0216:0900-1630,0217:0900-1630,..." */
+/** Encode availability as compact URL param (lossless, per-slot).
+ *  Format: "0223.1100.1130.1300.1330,0224.1100.1130.1200..."
+ *  Each date is MMDD followed by dot-separated HHMM time slots.
+ *  Days are comma-separated. Preserves gaps (e.g., missing 12:00 slot). */
 function encodeCompactAvailability(availability: Record<string, boolean>): string {
   const dateSlots: Record<string, string[]> = {};
   for (const [key, avail] of Object.entries(availability)) {
@@ -107,9 +110,8 @@ function encodeCompactAvailability(availability: Record<string, boolean>): strin
   for (const [date, times] of Object.entries(dateSlots)) {
     times.sort();
     const [, mm, dd] = date.split("-");
-    const first = times[0].replace(":", "");
-    const last = times[times.length - 1].replace(":", "");
-    parts.push(`${mm}${dd}:${first}-${last}`);
+    const timeStrs = times.map((t) => t.replace(":", ""));
+    parts.push(`${mm}${dd}.${timeStrs.join(".")}`);
   }
   return parts.sort().join(",");
 }
