@@ -94,6 +94,26 @@ function safeErrorMessage(value: unknown, fallback: string): string {
   return fallback;
 }
 
+/** Encode availability as compact URL param: "0216:0900-1630,0217:0900-1630,..." */
+function encodeCompactAvailability(availability: Record<string, boolean>): string {
+  const dateSlots: Record<string, string[]> = {};
+  for (const [key, avail] of Object.entries(availability)) {
+    if (!avail) continue;
+    const [date, time] = key.split("_");
+    if (!dateSlots[date]) dateSlots[date] = [];
+    dateSlots[date].push(time);
+  }
+  const parts: string[] = [];
+  for (const [date, times] of Object.entries(dateSlots)) {
+    times.sort();
+    const [, mm, dd] = date.split("-");
+    const first = times[0].replace(":", "");
+    const last = times[times.length - 1].replace(":", "");
+    parts.push(`${mm}${dd}:${first}-${last}`);
+  }
+  return parts.sort().join(",");
+}
+
 function shouldHangUpForUserUtterance(languageId: DemoLanguageId, utterance: string): boolean {
   const text = utterance.toLowerCase().trim();
   if (!text) return false;
@@ -475,8 +495,11 @@ export default function DemoCallPanel({
         }
       }
 
+      // Encode availability as compact URL param so tool server can reconstruct
+      // even after server restart (in-memory sessions are lost on redeploy)
+      const compactAvail = encodeCompactAvailability(availability);
       const toolServerUrl = apiUrl
-        ? `${apiUrl.replace(/\/$/, "")}/api/public/demo-tools?sid=${encodeURIComponent(demoSessionId)}`
+        ? `${apiUrl.replace(/\/$/, "")}/api/public/demo-tools?sid=${encodeURIComponent(demoSessionId)}&av=${encodeURIComponent(compactAvail)}&sc=${encodeURIComponent(scenario.id)}&bn=${encodeURIComponent(scenario.businessName)}`
         : "";
 
       const assistantConfig: Record<string, unknown> = {
