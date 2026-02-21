@@ -487,7 +487,7 @@ export default function DemoCallPanel({
           if (data && data.allowed === false) {
             setIsDemoBlocked(true);
             setCallStatus("idle");
-            setError("Live demo limit reached (2 calls per IP). Book a demo to try a full-length call.");
+            setError("Live demo limit reached (10 calls per IP). Book a demo to try a full-length call.");
             return;
           }
         } catch {
