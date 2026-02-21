@@ -219,6 +219,7 @@ export default function DemoCallPanel({
       `- You do NOT know specific time slots. You MUST call the check_availability tool to get available times for any date. NEVER guess or make up time slots.`,
       `- When the caller mentions a day name (e.g. "Saturday"), use the date reference above to find the correct YYYY-MM-DD date. Double-check the mapping before calling the tool.`,
       `- If the caller asks about a day listed under "NO availability", tell them immediately that date is unavailable and suggest days from the "WITH availability" list.`,
+      `- When the caller mentions a specific date or time they want, call check_availability IMMEDIATELY. Do NOT ask for their name or other details first — check availability first, then collect remaining info after.`,
       `- Use the create_booking tool to confirm appointments (required: date YYYY-MM-DD, time HH:MM 24h, customerName).`,
       `\nVOICE RULES:`,
       `- Summarize availability as time ranges (e.g. "We have openings from 9 AM to 4 PM"), never list individual slots.`,
