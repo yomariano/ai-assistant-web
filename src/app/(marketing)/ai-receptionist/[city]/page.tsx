@@ -284,10 +284,10 @@ export default async function CityPage({ params }: Props) {
                 <ul className="space-y-1">
                   <li>
                     <Link
-                      href="/for/dental-clinics"
+                      href="/for/dental-practices"
                       className="text-blue-600 hover:underline"
                     >
-                      Dental Clinics
+                      Dental Practices
                     </Link>
                   </li>
                   <li>

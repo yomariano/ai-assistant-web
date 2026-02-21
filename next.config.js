@@ -18,12 +18,17 @@ const nextConfig = {
       },
       {
         source: '/dental',
-        destination: '/for/dental-clinics',
+        destination: '/for/dental-practices',
         permanent: true,
       },
       {
         source: '/dental-clinics',
-        destination: '/for/dental-clinics',
+        destination: '/for/dental-practices',
+        permanent: true,
+      },
+      {
+        source: '/dental-practices',
+        destination: '/for/dental-practices',
         permanent: true,
       },
       // Other popular industries
@@ -37,11 +42,7 @@ const nextConfig = {
         destination: '/for/electricians',
         permanent: true,
       },
-      {
-        source: '/hotels',
-        destination: '/for/hotels',
-        permanent: true,
-      },
+      // Note: /hotels removed — no 'hotels' use_case_page exists yet
       {
         source: '/salons',
         destination: '/for/hair-salons',
@@ -59,12 +60,22 @@ const nextConfig = {
       },
       {
         source: '/real-estate',
-        destination: '/for/real-estate',
+        destination: '/for/real-estate-agencies',
+        permanent: true,
+      },
+      {
+        source: '/real-estate-agencies',
+        destination: '/for/real-estate-agencies',
         permanent: true,
       },
       {
         source: '/hvac',
-        destination: '/for/hvac',
+        destination: '/for/hvac-services',
+        permanent: true,
+      },
+      {
+        source: '/hvac-services',
+        destination: '/for/hvac-services',
         permanent: true,
       },
       {
