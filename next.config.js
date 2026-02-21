@@ -42,7 +42,22 @@ const nextConfig = {
         destination: '/for/electricians',
         permanent: true,
       },
-      // Note: /hotels removed — no 'hotels' use_case_page exists yet
+      // Fix old /for/ URLs that used wrong slugs
+      {
+        source: '/for/dental-clinics',
+        destination: '/for/dental-practices',
+        permanent: true,
+      },
+      {
+        source: '/for/real-estate',
+        destination: '/for/real-estate-agencies',
+        permanent: true,
+      },
+      {
+        source: '/for/hvac',
+        destination: '/for/hvac-services',
+        permanent: true,
+      },
       {
         source: '/salons',
         destination: '/for/hair-salons',
