@@ -39,13 +39,20 @@ export async function POST(request: NextRequest) {
     const pathsToRevalidate: string[] = [];
 
     if (type === 'blog' || type === 'all') {
-      revalidatePath('/blog');
+      revalidatePath('/blog', 'layout');
       pathsToRevalidate.push('/blog');
     }
 
     if (type === 'comparison' || type === 'all') {
-      revalidatePath('/compare');
+      revalidatePath('/compare', 'layout');
       pathsToRevalidate.push('/compare');
+    }
+
+    if (type === 'all') {
+      revalidatePath('/for', 'layout');
+      revalidatePath('/in', 'layout');
+      revalidatePath('/features', 'layout');
+      pathsToRevalidate.push('/for', '/in', '/features');
     }
 
     if (pathsToRevalidate.length === 0) {
@@ -96,7 +103,7 @@ export async function GET(request: NextRequest) {
   }
 
   if (type === 'blog') {
-    revalidatePath('/blog');
+    revalidatePath('/blog', 'layout');
     return NextResponse.json({
       revalidated: true,
       path: '/blog',
@@ -105,7 +112,7 @@ export async function GET(request: NextRequest) {
   }
 
   if (type === 'comparison') {
-    revalidatePath('/compare');
+    revalidatePath('/compare', 'layout');
     return NextResponse.json({
       revalidated: true,
       path: '/compare',
@@ -114,11 +121,14 @@ export async function GET(request: NextRequest) {
   }
 
   if (type === 'all') {
-    revalidatePath('/blog');
-    revalidatePath('/compare');
+    revalidatePath('/blog', 'layout');
+    revalidatePath('/compare', 'layout');
+    revalidatePath('/for', 'layout');
+    revalidatePath('/in', 'layout');
+    revalidatePath('/features', 'layout');
     return NextResponse.json({
       revalidated: true,
-      paths: ['/blog', '/compare'],
+      paths: ['/blog', '/compare', '/for', '/in', '/features'],
       timestamp: new Date().toISOString()
     });
   }

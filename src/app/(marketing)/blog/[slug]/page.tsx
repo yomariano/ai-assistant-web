@@ -18,11 +18,9 @@ interface Props {
   params: Promise<{ slug: string }>;
 }
 
-// Allow dynamic params for posts not in generateStaticParams (posts created after build)
-export const dynamicParams = true;
-
-// Revalidate every hour as fallback (on-demand revalidation is primary)
-export const revalidate = 3600;
+// Force dynamic rendering so new posts are available immediately
+// (ISR with revalidate cached 404s for new posts for up to 1 hour)
+export const dynamic = "force-dynamic";
 
 export async function generateStaticParams() {
   const slugs = await getBlogPostSlugs();

@@ -10,6 +10,8 @@ import MidPageCTA from "@/components/marketing/MidPageCTA";
 import Footer from "@/components/landing/Footer";
 import { MapPin, Building2, Check, ChevronRight, Quote } from "lucide-react";
 
+export const dynamic = "force-dynamic";
+
 interface Props {
   params: Promise<{ industry: string; location: string }>;
 }
@@ -62,6 +64,9 @@ export default async function ComboPage({ params }: Props) {
   const relatedInSameLocation = sameLocation.filter(
     (p) => p.industry_slug !== industry
   ).slice(0, 4);
+
+  // Safely destructure content with defaults for null/undefined
+  const content = page.content || {} as NonNullable<typeof page.content>;
 
   const breadcrumbs = [
     { name: "Home", href: "/" },
@@ -127,40 +132,40 @@ export default async function ComboPage({ params }: Props) {
         </section>
 
         {/* Intro Section */}
-        {page.content.intro && (
+        {content.intro && (
           <section className="py-16 max-w-7xl mx-auto px-6">
             <div className="prose prose-lg max-w-none">
               <h2 className="text-3xl font-bold text-gray-900 mb-6">
                 AI Voice Receptionist for {page.industry_name} in {page.city_name}
               </h2>
-              <p className="text-gray-600 whitespace-pre-line">{page.content.intro}</p>
+              <p className="text-gray-600 whitespace-pre-line">{content.intro}</p>
             </div>
           </section>
         )}
 
         {/* Why They Need Section */}
-        {page.content.why_need && (
+        {content.why_need && (
           <section className="bg-gray-50 py-16">
             <div className="max-w-7xl mx-auto px-6">
               <h2 className="text-3xl font-bold text-gray-900 mb-6">
                 Why {page.industry_name} in {page.city_name} Choose VoiceFleet
               </h2>
               <p className="text-gray-600 whitespace-pre-line max-w-4xl">
-                {page.content.why_need}
+                {content.why_need}
               </p>
             </div>
           </section>
         )}
 
         {/* Local Stats */}
-        {page.content.local_stats && Object.keys(page.content.local_stats).length > 0 && (
+        {content.local_stats && Object.keys(content.local_stats).length > 0 && (
           <section className="py-16">
             <div className="max-w-7xl mx-auto px-6">
               <h2 className="text-2xl font-bold text-center text-gray-900 mb-8">
                 {page.industry_name} in {page.city_name} at a Glance
               </h2>
               <div className="grid grid-cols-2 md:grid-cols-3 gap-6 text-center">
-                {Object.entries(page.content.local_stats).map(([key, value]) => (
+                {Object.entries(content.local_stats).map(([key, value]) => (
                   <div key={key} className="bg-orange-50 p-6 rounded-xl">
                     <div className="text-3xl font-bold text-orange-600">
                       {String(value)}
@@ -178,14 +183,14 @@ export default async function ComboPage({ params }: Props) {
         <MidPageCTA />
 
         {/* Benefits */}
-        {page.content.benefits && page.content.benefits.length > 0 && (
+        {content.benefits && content.benefits.length > 0 && (
           <section className="bg-gray-900 py-16">
             <div className="max-w-7xl mx-auto px-6">
               <h2 className="text-3xl font-bold text-center text-white mb-12">
                 Benefits for {page.city_name} {page.industry_name}
               </h2>
               <div className="grid md:grid-cols-2 gap-8">
-                {page.content.benefits.map((benefit, i) => (
+                {content.benefits.map((benefit, i) => (
                   <div key={i} className="flex gap-4">
                     <div className="flex-shrink-0">
                       <div className="h-10 w-10 rounded-full bg-orange-500 flex items-center justify-center">
@@ -206,7 +211,7 @@ export default async function ComboPage({ params }: Props) {
         )}
 
         {/* Case Study */}
-        {page.content.case_study && (
+        {content.case_study && (
           <section className="py-16">
             <div className="max-w-4xl mx-auto px-6">
               <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">
@@ -214,21 +219,21 @@ export default async function ComboPage({ params }: Props) {
               </h2>
               <div className="bg-gradient-to-br from-orange-50 to-orange-100 rounded-2xl p-8 md:p-12">
                 <h3 className="text-2xl font-bold text-gray-900 mb-4">
-                  {page.content.case_study.business_name}
+                  {content.case_study.business_name}
                 </h3>
                 <div className="space-y-6">
                   <div>
                     <h4 className="font-semibold text-gray-700 mb-2">The Challenge</h4>
-                    <p className="text-gray-600">{page.content.case_study.challenge}</p>
+                    <p className="text-gray-600">{content.case_study.challenge}</p>
                   </div>
                   <div>
                     <h4 className="font-semibold text-gray-700 mb-2">The Solution</h4>
-                    <p className="text-gray-600">{page.content.case_study.solution}</p>
+                    <p className="text-gray-600">{content.case_study.solution}</p>
                   </div>
                   <div>
                     <h4 className="font-semibold text-gray-700 mb-2">The Results</h4>
                     <ul className="space-y-2">
-                      {page.content.case_study.results.map((result, i) => (
+                      {content.case_study.results.map((result, i) => (
                         <li key={i} className="flex items-start gap-2">
                           <ChevronRight className="h-5 w-5 text-orange-500 flex-shrink-0 mt-0.5" />
                           <span className="text-gray-600">{result}</span>
@@ -243,14 +248,14 @@ export default async function ComboPage({ params }: Props) {
         )}
 
         {/* FAQ */}
-        {page.content.faq && page.content.faq.length > 0 && (
+        {content.faq && content.faq.length > 0 && (
           <section className="bg-gray-50 py-16">
             <div className="max-w-3xl mx-auto px-6">
               <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">
                 Frequently Asked Questions
               </h2>
               <div className="space-y-6">
-                {page.content.faq.map((item, i) => (
+                {content.faq.map((item, i) => (
                   <div key={i} className="bg-white rounded-xl p-6 shadow-sm">
                     <h3 className="text-lg font-semibold text-gray-900 mb-2">
                       {item.question}
@@ -312,7 +317,7 @@ export default async function ComboPage({ params }: Props) {
         )}
 
         <CTASection
-          title={page.content.cta_text || `Ready to automate calls for your ${page.city_name} ${page.industry_name.toLowerCase()}?`}
+          title={content.cta_text || `Ready to automate calls for your ${page.city_name} ${page.industry_name.toLowerCase()}?`}
           description="Join local businesses already saving time and never missing orders."
         />
 
