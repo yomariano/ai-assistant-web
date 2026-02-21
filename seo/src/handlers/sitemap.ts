@@ -18,9 +18,14 @@ interface SitemapApiData {
   comparisons: ContentItem[];
 }
 
+/** Strip trailing slashes from a URL base and leading slashes from a slug */
+function normalizeUrl(base: string, path: string): string {
+  return `${base.replace(/\/+$/, '')}/${path.replace(/^\/+/, '')}`;
+}
+
 async function fetchSitemapApiData(apiUrl: string): Promise<SitemapApiData | null> {
   try {
-    const response = await fetch(`${apiUrl}/api/content/sitemap-data`, {
+    const response = await fetch(`${apiUrl.replace(/\/+$/, '')}/api/content/sitemap-data`, {
       headers: { 'Accept': 'application/json' },
     });
     if (!response.ok) return null;
@@ -34,7 +39,7 @@ async function fetchSitemapApiData(apiUrl: string): Promise<SitemapApiData | nul
  * Sitemap index handler - lists all sub-sitemaps
  */
 export async function sitemapIndexHandler(c: Context<{ Bindings: Bindings }>) {
-  const siteUrl = c.env.SITE_URL || 'https://voicefleet.ai';
+  const siteUrl = (c.env.SITE_URL || 'https://voicefleet.ai').replace(/\/+$/, '');
 
   const sitemaps = [
     'static',
@@ -68,7 +73,7 @@ ${sitemaps.map(s => `  <sitemap>
  */
 export async function sitemapHandler(c: Context<{ Bindings: Bindings }>) {
   const type = c.req.param('type');
-  const siteUrl = c.env.SITE_URL || 'https://voicefleet.ai';
+  const siteUrl = (c.env.SITE_URL || 'https://voicefleet.ai').replace(/\/+$/, '');
 
   let urls: Array<{ loc: string; priority: string; changefreq: string }> = [];
 
@@ -117,8 +122,8 @@ export async function sitemapHandlerWithType(
   c: Context<{ Bindings: Bindings }>,
   type: string
 ) {
-  const siteUrl = c.env.SITE_URL || 'https://voicefleet.ai';
-  const apiUrl = c.env.API_URL || 'https://api.voicefleet.ai';
+  const siteUrl = (c.env.SITE_URL || 'https://voicefleet.ai').replace(/\/+$/, '');
+  const apiUrl = (c.env.API_URL || 'https://api.voicefleet.ai').replace(/\/+$/, '');
 
   let urls: Array<{ loc: string; priority: string; changefreq: string; lastmod?: string }> = [];
 
@@ -277,7 +282,7 @@ async function generateBlogSitemap(siteUrl: string, apiUrl: string) {
   if (!data?.blogPosts?.length) return [];
 
   return data.blogPosts.map(post => ({
-    loc: `${siteUrl}/blog/${post.slug}`,
+    loc: normalizeUrl(siteUrl, `blog/${post.slug.replace(/^\/+/, '')}`),
     lastmod: post.updated_at ? new Date(post.updated_at).toISOString().split('T')[0] : undefined,
     priority: '0.7',
     changefreq: 'weekly',
@@ -292,7 +297,7 @@ async function generateComparisonsSitemap(siteUrl: string, apiUrl: string) {
   if (!data?.comparisons?.length) return [];
 
   return data.comparisons.map(page => ({
-    loc: `${siteUrl}/compare/${page.slug}`,
+    loc: normalizeUrl(siteUrl, `compare/${page.slug.replace(/^\/+/, '')}`),
     lastmod: page.updated_at ? new Date(page.updated_at).toISOString().split('T')[0] : undefined,
     priority: '0.6',
     changefreq: 'monthly',

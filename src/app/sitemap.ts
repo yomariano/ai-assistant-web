@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next';
 import { INTEGRATIONS } from '@/lib/marketing/integrations';
 import { getReceptionistCitySlugs } from '@/lib/content/receptionist-cities';
 
-const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://voicefleet.ai';
+const BASE_URL = (process.env.NEXT_PUBLIC_SITE_URL || 'https://voicefleet.ai').replace(/\/+$/, '');
 
 /**
  * Get API URL at request time (not module load time)
@@ -170,9 +170,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     return staticPages;
   }
 
+  /** Strip leading slashes from a slug to prevent double-slash URLs */
+  const s = (slug: string) => slug.replace(/^\/+/, '');
+
   // Dynamic blog posts
   const blogPosts: MetadataRoute.Sitemap = content.blogPosts.map((post) => ({
-    url: `${BASE_URL}/blog/${post.slug}`,
+    url: `${BASE_URL}/blog/${s(post.slug)}`,
     lastModified: new Date(post.updated_at),
     changeFrequency: 'weekly',
     priority: 0.7,
@@ -180,7 +183,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   // Dynamic use case pages
   const useCases: MetadataRoute.Sitemap = content.useCases.map((page) => ({
-    url: `${BASE_URL}/for/${page.slug}`,
+    url: `${BASE_URL}/for/${s(page.slug)}`,
     lastModified: new Date(page.updated_at),
     changeFrequency: 'monthly',
     priority: 0.8,
@@ -188,7 +191,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   // Dynamic location pages
   const locations: MetadataRoute.Sitemap = content.locations.map((page) => ({
-    url: `${BASE_URL}/in/${page.slug}`,
+    url: `${BASE_URL}/in/${s(page.slug)}`,
     lastModified: new Date(page.updated_at),
     changeFrequency: 'monthly',
     priority: 0.6,
@@ -196,7 +199,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   // Dynamic feature pages
   const features: MetadataRoute.Sitemap = content.features.map((page) => ({
-    url: `${BASE_URL}/features/${page.slug}`,
+    url: `${BASE_URL}/features/${s(page.slug)}`,
     lastModified: new Date(page.updated_at),
     changeFrequency: 'monthly',
     priority: 0.8,
@@ -204,7 +207,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   // Dynamic combo pages (industry + location)
   const combos: MetadataRoute.Sitemap = (content.combos || []).map((page) => ({
-    url: `${BASE_URL}/${page.industry_slug}/${page.location_slug}`,
+    url: `${BASE_URL}/${s(page.industry_slug)}/${s(page.location_slug)}`,
     lastModified: new Date(page.updated_at),
     changeFrequency: 'monthly',
     priority: 0.7,
@@ -212,7 +215,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   // Dynamic comparison pages
   const comparisons: MetadataRoute.Sitemap = (content.comparisons || []).map((page) => ({
-    url: `${BASE_URL}/compare/${page.slug}`,
+    url: `${BASE_URL}/compare/${s(page.slug)}`,
     lastModified: new Date(page.updated_at),
     changeFrequency: 'monthly',
     priority: 0.6,

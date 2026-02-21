@@ -7,7 +7,7 @@ import { Context } from 'hono';
 import { Bindings } from '../types';
 
 export async function robotsHandler(c: Context<{ Bindings: Bindings }>) {
-  const siteUrl = c.env.SITE_URL || 'https://voicefleet.ai';
+  const siteUrl = (c.env.SITE_URL || 'https://voicefleet.ai').replace(/\/+$/, '');
 
   const robots = `User-agent: *
 Allow: /

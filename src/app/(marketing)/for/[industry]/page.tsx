@@ -11,7 +11,10 @@ import InternalLinks from "@/components/marketing/InternalLinks";
 import MidPageCTA from "@/components/marketing/MidPageCTA";
 import Header from "@/components/voicefleet/Header";
 import Footer from "@/components/voicefleet/Footer";
+import { Suspense } from "react";
 import { Check, AlertTriangle, Sparkles, TrendingDown, TrendingUp, Phone, Clock, Euro, Users } from "lucide-react";
+
+export const dynamic = "force-dynamic";
 
 interface Props {
   params: Promise<{ industry: string }>;
@@ -97,10 +100,10 @@ export default async function UseCasePage({ params }: Props) {
                   {page.subheadline}
                 </p>
                 <Link
-                  href={page.cta_url}
+                  href={page.cta_url || "/login"}
                   className="inline-flex items-center justify-center px-8 py-4 bg-white text-indigo-600 rounded-lg font-semibold hover:bg-indigo-50 transition-colors shadow-lg"
                 >
-                  {page.cta_text}
+                  {page.cta_text || "Get Started Free"}
                 </Link>
               </div>
               {page.hero_image_url && (
@@ -499,13 +502,15 @@ export default async function UseCasePage({ params }: Props) {
         </section>
 
           {/* Internal Links */}
-          <InternalLinks
-            relatedFeatures={page.related_features}
-            relatedLocations={page.related_locations}
-          />
+          <Suspense fallback={null}>
+            <InternalLinks
+              relatedFeatures={page.related_features}
+              relatedLocations={page.related_locations}
+            />
+          </Suspense>
 
           <CTASection
-            title={`Ready to transform your ${page.industry_name.toLowerCase()} operations?`}
+            title={`Ready to transform your ${(page.industry_name || "your").toLowerCase()} operations?`}
             description="Start your free trial today and see how AI voice agents can help."
           />
         </main>
