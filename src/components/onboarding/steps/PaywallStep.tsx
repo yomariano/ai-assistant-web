@@ -11,6 +11,7 @@ export interface RegionPlan {
   price: number;
   formattedPrice: string;
   monthlyMinutes: number;
+  minutesIncluded?: number;
   paymentLink: string | null;
 }
 
@@ -61,12 +62,12 @@ export function PaywallStep({
     ? regionPlans.map((rp, index) => {
         const planId = rp.id as PlanId;
         // Use region-specific minutes - API may return as monthlyMinutes or minutesIncluded
-        const minutes = rp.monthlyMinutes || (rp as any).minutesIncluded || minutesPerPlan[planId]?.minutes || 500;
+        const minutes = rp.monthlyMinutes || rp.minutesIncluded || minutesPerPlan[planId]?.minutes || 500;
         const estimatedCalls = `~${Math.round(minutes / 2.5)}`;
         return {
           id: planId,
           name: planId.charAt(0).toUpperCase() + planId.slice(1),
-          price: `${rp.formattedPrice}/mo`,
+          price: rp.formattedPrice,
           subtitle: `${minutes.toLocaleString()} minutes/month (${estimatedCalls} calls)`,
           highlight: planId === "growth",
         };
@@ -167,6 +168,7 @@ export function PaywallStep({
 }
 
 export default PaywallStep;
+
 
 
 
