@@ -205,7 +205,7 @@ const PricingSection = () => {
         { text: "7-day call recordings", highlight: false },
         { text: "Email support", highlight: false },
       ],
-      cta: "Start 5-Day Free Trial",
+      cta: "Start 30-Day Free Trial",
       popular: false,
     },
     {
@@ -231,7 +231,7 @@ const PricingSection = () => {
         { text: "30-day call recordings", highlight: false },
         { text: "Priority support", highlight: false },
       ],
-      cta: "Start 5-Day Free Trial",
+      cta: "Start 30-Day Free Trial",
       popular: true,
     },
     {
@@ -257,14 +257,14 @@ const PricingSection = () => {
         { text: "Early access to features", highlight: true },
         { text: "Dedicated support", highlight: true },
       ],
-      cta: "Start 5-Day Free Trial",
+      cta: "Start 30-Day Free Trial",
       popular: false,
     },
   ];
 
   const trialBenefits = [
     { icon: Gift, text: "Full access to all features" },
-    { icon: Shield, text: "No credit card required" },
+    { icon: Shield, text: "Cancel anytime during trial" },
     { icon: Clock, text: "Cancel anytime, no questions" },
     { icon: Phone, text: `Your own ${pricing.phoneNumber}` },
   ];
@@ -357,16 +357,16 @@ const PricingSection = () => {
     {
       category: "Volume & Billing",
       feature: "Free trial length",
-      starter: "5 days",
-      growth: "5 days",
-      pro: "5 days",
+      starter: "30 days",
+      growth: "30 days",
+      pro: "30 days",
     },
     {
       category: "Volume & Billing",
       feature: "Credit card required for trial",
-      starter: false,
-      growth: false,
-      pro: false,
+      starter: true,
+      growth: true,
+      pro: true,
     },
     {
       category: "Volume & Billing",
@@ -572,10 +572,10 @@ const PricingSection = () => {
                 </div>
                 <div className="text-center sm:text-left">
                   <h3 className="text-xl sm:text-2xl font-bold text-white">
-                    Try Free for 5 Days
+                    Try Free for 30 Days
                   </h3>
                   <p className="text-white/90 text-sm sm:text-base">
-                    Experience the full power of AI call handling - no credit card needed
+                    Experience the full power of AI call handling - cancel anytime
                   </p>
                 </div>
               </div>
@@ -723,7 +723,7 @@ const PricingSection = () => {
                   <div className="flex items-center justify-center gap-2 text-sm font-semibold">
                     <Gift className={`w-4 h-4 ${tier.popular ? "text-primary" : "text-accent"}`} />
                     <span className={tier.popular ? "text-primary" : "text-accent"}>
-                      5 Days Free - No Card Required
+                      30-Day Free Trial
                     </span>
                   </div>
                 </div>

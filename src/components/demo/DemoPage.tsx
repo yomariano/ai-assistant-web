@@ -10,13 +10,15 @@ import {
   getTimeSlots,
   formatSlotKey,
 } from "@/lib/demo/calendar-utils";
+import { DEMO_VOICES, type DemoVoice } from "@/lib/demo/voices";
 import DemoSteps from "./DemoSteps";
 import IndustryPicker from "./IndustryPicker";
 import WeeklyCalendar from "./WeeklyCalendar";
 import DemoCallPanel from "./DemoCallPanel";
 import LiveBookings from "./LiveBookings";
+import AgentPicker from "./AgentPicker";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, ArrowRight, Phone } from "lucide-react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { trackEvent } from "@/lib/umami";
 
@@ -28,6 +30,7 @@ export default function DemoPage() {
   const [demoSessionId, setDemoSessionId] = useState("");
   const [highlightDate, setHighlightDate] = useState<string | null>(null);
   const [languageId, setLanguageId] = useState<DemoLanguageId>("en");
+  const [selectedVoice, setSelectedVoice] = useState<DemoVoice>(DEMO_VOICES[0]);
   const [isCreatingSession, setIsCreatingSession] = useState(false);
 
   const weekStart = useMemo(() => getWeekStart(), []);
@@ -89,7 +92,15 @@ export default function DemoPage() {
     trackEvent("demo_availability_preset", { preset: "clear_all" });
   }, []);
 
-  // Step 2 -> 3: Create session and start call flow
+  // Step 2 -> 3: Advance to agent picker
+  const handleNextToAgentPicker = useCallback(() => {
+    if (availableSlotCount === 0) return;
+    setStep(3);
+    trackEvent("demo_availability_configured", { slots: availableSlotCount, industry: scenarioId || "" });
+    trackEvent("demo_step_changed", { from: 2, to: 3 });
+  }, [availableSlotCount, scenarioId]);
+
+  // Step 3 -> 4: Create session and start call
   const handleStartCallMode = useCallback(async () => {
     if (!scenarioId || !scenario) return;
     if (availableSlotCount === 0) return;
@@ -122,9 +133,8 @@ export default function DemoPage() {
     setDemoSessionId(sessionId);
     setBookings([]);
     setIsCreatingSession(false);
-    setStep(3);
-    trackEvent("demo_availability_configured", { slots: availableSlotCount, industry: scenarioId });
-    trackEvent("demo_step_changed", { from: 2, to: 3 });
+    setStep(4);
+    trackEvent("demo_step_changed", { from: 3, to: 4 });
   }, [availability, availableSlotCount, scenario, scenarioId]);
 
   const handleBookingCreated = useCallback((booking: Booking) => {
@@ -203,37 +213,46 @@ export default function DemoPage() {
                 <Button
                   variant="hero"
                   size="lg"
-                  onClick={handleStartCallMode}
-                  disabled={availableSlotCount === 0 || isCreatingSession}
+                  onClick={handleNextToAgentPicker}
+                  disabled={availableSlotCount === 0}
                 >
-                  {isCreatingSession ? (
-                    "Setting up..."
-                  ) : (
-                    <>
-                      Start Demo Call
-                      <Phone className="w-4 h-4" />
-                    </>
-                  )}
+                  Next <ArrowRight className="w-4 h-4" />
                 </Button>
               </div>
             </div>
           )}
 
-          {/* Step 3: Call + Live Calendar */}
+          {/* Step 3: Pick Agent */}
           {step === 3 && scenario && (
+            <AgentPicker
+              selectedVoice={selectedVoice}
+              languageId={languageId}
+              isCreatingSession={isCreatingSession}
+              onSelectVoice={setSelectedVoice}
+              onLanguageChange={setLanguageId}
+              onStartCall={handleStartCallMode}
+              onBack={() => {
+                setStep(2);
+                trackEvent("demo_step_changed", { from: 3, to: 2 });
+              }}
+            />
+          )}
+
+          {/* Step 4: Watch It Work — Call + Live Calendar */}
+          {step === 4 && scenario && (
             <div className="space-y-4">
               <div className="flex items-center justify-between">
                 <button
                   type="button"
                   onClick={() => {
-                    setStep(2);
+                    setStep(3);
                     setBookings([]);
                     setHighlightDate(null);
-                    trackEvent("demo_step_changed", { from: 3, to: 2 });
+                    trackEvent("demo_step_changed", { from: 4, to: 3 });
                   }}
                   className="flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors"
                 >
-                  <ArrowLeft className="w-4 h-4" /> Back to calendar setup
+                  <ArrowLeft className="w-4 h-4" /> Back to agent picker
                 </button>
               </div>
 
@@ -257,7 +276,7 @@ export default function DemoPage() {
                     demoSessionId={demoSessionId}
                     availability={availability}
                     languageId={languageId}
-                    onLanguageChange={setLanguageId}
+                    selectedVoice={selectedVoice}
                     onBookingCreated={handleBookingCreated}
                     onHighlightDate={setHighlightDate}
                   />
@@ -275,7 +294,7 @@ export default function DemoPage() {
             Ready to automate your bookings?
           </h2>
           <p className="text-muted-foreground">
-            Get your AI receptionist live in under 5 minutes. No credit card required for the trial.
+            Get your AI receptionist live in under 5 minutes. 30-day free trial on all plans.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Link href="/pricing" data-umami-event="cta_click" data-umami-event-location="demo_bottom">

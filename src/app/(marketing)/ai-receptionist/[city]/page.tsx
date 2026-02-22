@@ -40,7 +40,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!city) return {};
 
   const title = `AI Receptionist in ${city.name} | VoiceFleet`;
-  const description = `24/7 AI receptionist for ${city.name} businesses. Answer calls, book appointments, and take messages automatically. Plans from \u20ac99/mo. Try free for 5 days.`;
+  const description = `24/7 AI receptionist for ${city.name} businesses. Answer calls, book appointments, and take messages automatically. Plans from \u20ac99/mo. Try free for 30 days.`;
 
   return {
     title,

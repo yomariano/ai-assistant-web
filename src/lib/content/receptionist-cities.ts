@@ -75,7 +75,7 @@ export function getCityFAQs(city: ReceptionistCity): CityFAQ[] {
     },
     {
       question: `How much does an AI receptionist cost in ${city.name}?`,
-      answer: `VoiceFleet plans start at \u20ac99/month (Starter) with 500 minutes included. Growth (\u20ac299/mo) includes 1,000 minutes, and Pro (\u20ac599/mo) includes 2,000 minutes. Every plan includes a 5-day free trial with no credit card required. That\u2019s over 95% cheaper than hiring a full-time receptionist in ${city.name}.`,
+      answer: `VoiceFleet plans start at \u20ac99/month (Starter) with 500 minutes included. Growth (\u20ac299/mo) includes 1,000 minutes, and Pro (\u20ac599/mo) includes 2,000 minutes. Every plan includes a 30-day free trial. That\u2019s over 95% cheaper than hiring a full-time receptionist in ${city.name}.`,
     },
     {
       question: `Does VoiceFleet understand local ${city.name} accents?`,

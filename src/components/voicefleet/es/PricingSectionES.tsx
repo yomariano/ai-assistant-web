@@ -173,7 +173,7 @@ const PricingSectionES = () => {
         { text: "Grabaciones por 7 días", highlight: false },
         { text: "Soporte por email", highlight: false },
       ],
-      cta: "Probá 5 Días Gratis",
+      cta: "Probá 30 Días Gratis",
       popular: false,
     },
     {
@@ -199,7 +199,7 @@ const PricingSectionES = () => {
         { text: "Grabaciones por 30 días", highlight: false },
         { text: "Soporte prioritario", highlight: false },
       ],
-      cta: "Probá 5 Días Gratis",
+      cta: "Probá 30 Días Gratis",
       popular: true,
     },
     {
@@ -225,14 +225,14 @@ const PricingSectionES = () => {
         { text: "Acceso anticipado a funciones", highlight: true },
         { text: "Soporte dedicado", highlight: true },
       ],
-      cta: "Probá 5 Días Gratis",
+      cta: "Probá 30 Días Gratis",
       popular: false,
     },
   ];
 
   const trialBenefits = [
     { icon: Gift, text: "Acceso completo a todas las funciones" },
-    { icon: Shield, text: "Sin tarjeta de crédito" },
+    { icon: Shield, text: "Cancelá durante la prueba" },
     { icon: Clock, text: "Cancelá cuando quieras" },
     { icon: Phone, text: `Tu propio ${pricing.phoneNumber}` },
   ];
@@ -251,10 +251,10 @@ const PricingSectionES = () => {
                 </div>
                 <div className="text-center sm:text-left">
                   <h3 className="text-xl sm:text-2xl font-bold text-white">
-                    Probá Gratis por 5 Días
+                    Probá Gratis por 30 Días
                   </h3>
                   <p className="text-white/90 text-sm sm:text-base">
-                    Experimentá todo el poder de la atención telefónica con IA - sin tarjeta de crédito
+                    Experimentá todo el poder de la atención telefónica con IA - cancelá cuando quieras
                   </p>
                 </div>
               </div>
@@ -417,7 +417,7 @@ const PricingSectionES = () => {
                   <div className="flex items-center justify-center gap-2 text-sm font-semibold">
                     <Gift className={`w-4 h-4 ${tier.popular ? "text-primary" : "text-accent"}`} />
                     <span className={tier.popular ? "text-primary" : "text-accent"}>
-                      5 Días Gratis - Sin Tarjeta
+                      30 Días de Prueba Gratis
                     </span>
                   </div>
                 </div>

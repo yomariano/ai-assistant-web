@@ -172,7 +172,7 @@ export default function FeaturesPage() {
               Powerful AI Voice Features
             </h1>
             <p className="text-sm sm:text-base text-primary-foreground/70 max-w-2xl mx-auto mb-4">
-              VoiceFleet provides AI call handling, 24/7 availability, calendar and booking integrations, SMS and email notifications, multilingual support, and smart call routing. No-code setup in under 1 hour, starting at &euro;99/mo with a 5-day free trial.
+              VoiceFleet provides AI call handling, 24/7 availability, calendar and booking integrations, SMS and email notifications, multilingual support, and smart call routing. No-code setup in under 1 hour, starting at &euro;99/mo with a 30-day free trial.
             </p>
             <p className="text-lg lg:text-xl text-primary-foreground/80 max-w-2xl mx-auto">
               Everything you need to automate phone calls and save hours every week.

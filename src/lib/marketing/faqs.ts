@@ -42,7 +42,7 @@ export const HOMEPAGE_FAQS = [
   {
     question: "How much does an AI receptionist cost?",
     answer:
-      "VoiceFleet AI receptionist plans start at \u20ac99/month (Starter, 500 minutes), \u20ac299/month (Growth, 1,000 minutes), and \u20ac599/month (Pro, 2,000 minutes). Annual billing saves 16%. Every plan includes a 5-day free trial, 24/7 AI call answering, and a local business phone number. No setup fees or contracts.",
+      "VoiceFleet AI receptionist plans start at \u20ac99/month (Starter, 500 minutes), \u20ac299/month (Growth, 1,000 minutes), and \u20ac599/month (Pro, 2,000 minutes). Annual billing saves 16%. Every plan includes a 30-day free trial, 24/7 AI call answering, and a local business phone number. No setup fees or contracts.",
   },
   {
     question: "What is an AI voice receptionist?",
@@ -113,7 +113,7 @@ export const PRICING_FAQS = [
   {
     question: "Is there a free trial?",
     answer:
-      "Yes. Every plan comes with a 5-day free trial so you can test VoiceFleet with your real business calls before committing. No credit card required to start.",
+      "Yes. Every plan comes with a 30-day free trial so you can test VoiceFleet with your real business calls before committing. Cancel anytime during the trial.",
   },
   {
     question: "What happens if I go over my included minutes?",

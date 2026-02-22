@@ -54,8 +54,8 @@ VoiceFleet presents tiered plans and regional pricing on the pricing page.
 
 - Ireland/Europe plans are listed in EUR.
 - Argentina plans are listed in USD.
-- A 5-day free trial is advertised.
-- No credit card is required to start the trial.
+- A 30-day free trial is available on all plans.
+- Credit card is collected upfront but not charged during the trial period.
 
 For exact prices and inclusions, always check:
 https://voicefleet.ai/pricing

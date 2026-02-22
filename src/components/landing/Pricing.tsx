@@ -28,7 +28,7 @@ const tiers: TierData[] = [
             '1 parallel call',
             'Google Calendar integration',
             '24/7 AI call answering',
-            '5-day free trial',
+            '30-day free trial',
         ],
         mostPopular: false,
         cta: 'Start Free Trial',
@@ -45,7 +45,7 @@ const tiers: TierData[] = [
             '3 parallel calls',
             'Custom voice & scripts',
             'Transfer to human',
-            '5-day free trial',
+            '30-day free trial',
         ],
         mostPopular: true,
         cta: 'Start Free Trial',
@@ -182,7 +182,7 @@ export default function Pricing() {
 
                 <div className="mt-12 text-center">
                     <p className="text-sm text-gray-500">
-                        All plans include: <span className="font-medium">5-day free trial</span> • Cancel anytime • GDPR compliant
+                        All plans include: <span className="font-medium">30-day free trial</span> • Cancel anytime • GDPR compliant
                     </p>
                 </div>
             </div>

@@ -30,7 +30,7 @@ export default function MidPageCTA() {
           Hear how it sounds — try a live demo call
         </h3>
         <p className="text-muted-foreground mb-6">
-          Plans from {priceLabel}. No credit card required.
+          Plans from {priceLabel}. 30-day free trial.
         </p>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">

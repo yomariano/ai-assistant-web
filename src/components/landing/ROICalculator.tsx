@@ -7,6 +7,8 @@ import Link from 'next/link';
 export default function ROICalculator() {
     const [missedCalls, setMissedCalls] = useState(5);
     const [avgOrderValue, setAvgOrderValue] = useState(15);
+    const missedCallsInputId = "landing-roi-missed-calls";
+    const avgOrderValueInputId = "landing-roi-order-value";
 
     const monthlyLoss = missedCalls * avgOrderValue * 30;
     const orderBotCost = 149; // Starter plan
@@ -34,11 +36,14 @@ export default function ROICalculator() {
                             {/* Inputs */}
                             <div className="space-y-8">
                                 <div>
-                                    <label className="flex justify-between text-sm font-medium text-gray-700 mb-3">
+                                    <label htmlFor={missedCallsInputId} className="flex justify-between text-sm font-medium text-gray-700 mb-3">
                                         <span>Missed calls per day</span>
                                         <span className="text-orange-600 font-semibold">{missedCalls} calls</span>
                                     </label>
                                     <input
+                                        id={missedCallsInputId}
+                                        name="missedCalls"
+                                        aria-label="Missed calls per day"
                                         type="range"
                                         min="1"
                                         max="20"
@@ -53,11 +58,14 @@ export default function ROICalculator() {
                                 </div>
 
                                 <div>
-                                    <label className="flex justify-between text-sm font-medium text-gray-700 mb-3">
+                                    <label htmlFor={avgOrderValueInputId} className="flex justify-between text-sm font-medium text-gray-700 mb-3">
                                         <span>Average order value</span>
                                         <span className="text-orange-600 font-semibold">&euro;{avgOrderValue}</span>
                                     </label>
                                     <input
+                                        id={avgOrderValueInputId}
+                                        name="avgOrderValue"
+                                        aria-label="Average order value"
                                         type="range"
                                         min="10"
                                         max="50"
@@ -122,7 +130,7 @@ export default function ROICalculator() {
                                 <ArrowRight className="h-5 w-5" />
                             </Link>
                             <p className="mt-3 text-sm text-gray-500">
-                                14-day free trial &bull; No credit card required
+                                30-day free trial &bull; Cancel anytime
                             </p>
                         </div>
                     </div>

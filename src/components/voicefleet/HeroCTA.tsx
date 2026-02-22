@@ -71,7 +71,7 @@ const HeroCTA = () => {
         {" "}Or <Link href="/demo" className="text-foreground font-semibold hover:underline">try the interactive booking demo</Link>.
       </p>
       <p className="text-xs text-muted-foreground -mt-4 mb-6">
-        Free trial includes setup support and no credit card is required to get started.
+        Free 30-day trial includes setup support. Cancel anytime.
       </p>
       <p className="text-sm text-muted-foreground -mt-4 mb-10">
         Prefer a guided walkthrough?{" "}

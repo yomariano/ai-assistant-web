@@ -37,7 +37,7 @@ const setupSteps = [
     {
         step: 1,
         title: "Sign Up",
-        description: "2-minute form. No credit card required for trial."
+        description: "2-minute form. 30-day free trial on all plans."
     },
     {
         step: 2,

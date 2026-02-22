@@ -30,7 +30,7 @@ export default function CTA() {
                         Ready to Stop Missing Orders?
                     </h2>
                     <p className="mx-auto mt-4 max-w-xl text-lg leading-7 text-orange-100">
-                        Join 50+ Irish restaurants already using OrderBot. Start your 14-day free trial today.
+                        Join 50+ Irish restaurants already using OrderBot. Start your 30-day free trial today.
                     </p>
                     <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
                         <Link

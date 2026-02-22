@@ -8,7 +8,7 @@ import CROWidgets from "@/components/marketing/CROWidgets";
 const homepageMetadata = generatePageMetadata({
   title: "AI Voice Receptionist for Small Businesses | VoiceFleet",
   description:
-    "VoiceFleet is an AI voice receptionist starting at \u20ac99/mo with a 5-day free trial. Answers calls 24/7, books appointments, takes messages, and routes urgent calls. EU data residency, setup in under 1 hour.",
+    "VoiceFleet is an AI voice receptionist starting at \u20ac99/mo with a 30-day free trial. Answers calls 24/7, books appointments, takes messages, and routes urgent calls. EU data residency, setup in under 1 hour.",
   path: "/",
   keywords: [
     "ai voice receptionist",

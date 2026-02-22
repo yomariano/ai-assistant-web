@@ -46,7 +46,7 @@ const HeroSection = () => {
             </h1>
 
             <p className="text-sm sm:text-base text-foreground/80 mb-4 leading-relaxed font-medium">
-              VoiceFleet is an AI voice receptionist for small businesses, starting at &euro;99/mo with a 5-day free trial. It answers calls 24/7, books appointments, takes messages, and routes urgent calls — with no-code setup in under 1 hour and EU data residency.
+              VoiceFleet is an AI voice receptionist for small businesses, starting at &euro;99/mo with a 30-day free trial. It answers calls 24/7, books appointments, takes messages, and routes urgent calls — with no-code setup in under 1 hour and EU data residency.
             </p>
 
             <p className="text-base sm:text-lg lg:text-xl text-muted-foreground mb-8 leading-relaxed">

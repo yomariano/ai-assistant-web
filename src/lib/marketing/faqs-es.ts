@@ -55,7 +55,7 @@ export const PRICING_FAQS_ES = [
   {
     question: "¿Hay una prueba gratuita?",
     answer:
-      "Sí. Todos los planes incluyen 5 días de prueba gratuita para que pruebes VoiceFleet con tus llamadas reales. Sin tarjeta de crédito.",
+      "Sí. Todos los planes incluyen 30 días de prueba gratuita para que pruebes VoiceFleet con tus llamadas reales. Cancelá cuando quieras durante la prueba.",
   },
   {
     question: "¿Qué pasa si supero mis minutos incluidos?",

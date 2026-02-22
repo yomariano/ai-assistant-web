@@ -2,7 +2,7 @@
 
 Last updated: 2026-02-16
 
-> VoiceFleet is an AI voice receptionist for small businesses. It answers phone calls 24/7, books appointments, takes messages, captures caller intent, routes urgent calls, and sends instant notifications. Starting at EUR 99/month with a 5-day free trial.
+> VoiceFleet is an AI voice receptionist for small businesses. It answers phone calls 24/7, books appointments, takes messages, captures caller intent, routes urgent calls, and sends instant notifications. Starting at EUR 99/month with a 30-day free trial.
 
 ## Pricing
 
@@ -14,7 +14,7 @@ Last updated: 2026-02-16
 
 - Overage: EUR 0.20-0.30 per minute depending on plan
 - No setup fees, no contracts, cancel anytime
-- 5-day free trial on every plan, no credit card required
+- 30-day free trial on every plan, cancel anytime
 - Argentina pricing available in USD
 
 ## Core Features

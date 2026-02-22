@@ -24,7 +24,7 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 const siteConfig = {
   name: "VoiceFleet",
   description:
-    "VoiceFleet is an AI voice receptionist starting at \u20ac99/mo. Answers calls 24/7, books appointments, takes messages, sends notifications. EU data residency, setup in under 1 hour, 5-day free trial.",
+    "VoiceFleet is an AI voice receptionist starting at \u20ac99/mo. Answers calls 24/7, books appointments, takes messages, sends notifications. EU data residency, setup in under 1 hour, 30-day free trial.",
   url: process.env.NEXT_PUBLIC_SITE_URL || "https://voicefleet.ai",
   twitterHandle: "@voicefleetai",
 };
