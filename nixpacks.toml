@@ -1,8 +1,14 @@
 # Nixpacks configuration for Coolify deployments
 # Ensures clean builds so stale pricing/config never persists
+#
+# NOTE: Nixpacks mounts .next/cache as a Docker BuildKit cache volume,
+# so we can't rm -rf .next (Device or resource busy). Instead we:
+# 1. Delete all .next/* EXCEPT the cache mount point
+# 2. Clear .next/cache/fetch-cache (stale ISR data, e.g. old pricing)
+# 3. Keep .next/cache/webpack + swc (speeds up builds, no stale content)
 
 [phases.build]
 cmds = [
-  "rm -rf .next",
+  "find .next -mindepth 1 -maxdepth 1 ! -name cache -exec rm -rf {} + 2>/dev/null; rm -rf .next/cache/fetch-cache 2>/dev/null; true",
   "npm run build",
 ]
