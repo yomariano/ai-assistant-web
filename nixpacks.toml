@@ -1,0 +1,8 @@
+# Nixpacks configuration for Coolify deployments
+# Ensures clean builds so stale pricing/config never persists
+
+[phases.build]
+cmds = [
+  "rm -rf .next",
+  "npm run build",
+]

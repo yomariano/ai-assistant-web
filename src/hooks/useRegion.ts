@@ -52,9 +52,10 @@ interface UseRegionReturn {
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
 
 // Cache the region data to avoid repeated API calls
+// Keep short (5 min) so pricing updates after deployments aren't stale for long
 let cachedData: RegionData | null = null;
 let cacheTimestamp: number | null = null;
-const CACHE_DURATION_MS = 60 * 60 * 1000; // 1 hour
+const CACHE_DURATION_MS = 5 * 60 * 1000; // 5 minutes
 
 export function useRegion(): UseRegionReturn {
   const [data, setData] = useState<RegionData | null>(cachedData);
@@ -75,6 +76,7 @@ export function useRegion(): UseRegionReturn {
     try {
       const response = await fetch(`${API_URL}/api/billing/region`, {
         credentials: 'include',
+        cache: 'no-store',
       });
 
       if (!response.ok) {
@@ -169,7 +171,7 @@ export function useRegion(): UseRegionReturn {
 export async function getRegionFromServer(): Promise<RegionData> {
   try {
     const response = await fetch(`${API_URL}/api/billing/region`, {
-      next: { revalidate: 3600 }, // Cache for 1 hour
+      cache: 'no-store',
     });
 
     if (!response.ok) {

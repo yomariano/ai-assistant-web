@@ -1,6 +1,16 @@
 import type { NextConfig } from "next";
+import { execSync } from "child_process";
 
 const nextConfig: NextConfig = {
+  // Force unique build IDs so Coolify/Nixpacks never serves stale JS chunks
+  generateBuildId: async () => {
+    try {
+      return execSync("git rev-parse --short HEAD").toString().trim();
+    } catch {
+      return `build-${Date.now()}`;
+    }
+  },
+
   // Image optimization configuration
   images: {
     remotePatterns: [
@@ -37,8 +47,37 @@ const nextConfig: NextConfig = {
   // Enable compression
   compress: true,
 
+  // Strip console.* calls from production bundles (keep console.error)
+  compiler: {
+    removeConsole: process.env.NODE_ENV === "production" ? { exclude: ["error"] } : false,
+  },
+
   // Strict mode for better development experience
   reactStrictMode: true,
+
+  // Redirect bare industry slugs to /for/[industry] pages
+  async redirects() {
+    return [
+      { source: "/restaurants", destination: "/for/restaurants", permanent: true },
+      { source: "/dental", destination: "/for/dental-practices", permanent: true },
+      { source: "/dental-clinics", destination: "/for/dental-practices", permanent: true },
+      { source: "/dental-practices", destination: "/for/dental-practices", permanent: true },
+      { source: "/plumbers", destination: "/for/plumbers", permanent: true },
+      { source: "/electricians", destination: "/for/electricians", permanent: true },
+      { source: "/for/dental-clinics", destination: "/for/dental-practices", permanent: true },
+      { source: "/for/real-estate", destination: "/for/real-estate-agencies", permanent: true },
+      { source: "/for/hvac", destination: "/for/hvac-services", permanent: true },
+      { source: "/salons", destination: "/for/hair-salons", permanent: true },
+      { source: "/hair-salons", destination: "/for/hair-salons", permanent: true },
+      { source: "/spas", destination: "/for/spas", permanent: true },
+      { source: "/real-estate", destination: "/for/real-estate-agencies", permanent: true },
+      { source: "/real-estate-agencies", destination: "/for/real-estate-agencies", permanent: true },
+      { source: "/hvac", destination: "/for/hvac-services", permanent: true },
+      { source: "/hvac-services", destination: "/for/hvac-services", permanent: true },
+      { source: "/medical-clinics", destination: "/for/medical-clinics", permanent: true },
+      { source: "/law-firms", destination: "/for/law-firms", permanent: true },
+    ];
+  },
 
   // Headers for security and caching
   async headers() {
@@ -86,4 +125,3 @@ const nextConfig: NextConfig = {
 };
 
 export default nextConfig;
-// force rebuild 1769206245
