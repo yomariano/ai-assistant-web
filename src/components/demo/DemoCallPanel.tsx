@@ -726,6 +726,7 @@ export default function DemoCallPanel({
   const copyPhrase = useCallback(async (text: string) => {
     try {
       await navigator.clipboard.writeText(text);
+      trackEvent("demo_phrase_copied", { phrase: text.slice(0, 50) });
     } catch {
       // no-op
     }

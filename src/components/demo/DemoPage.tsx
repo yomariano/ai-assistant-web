@@ -51,6 +51,7 @@ export default function DemoPage() {
       setBookings([]);
       setStep(2);
       trackEvent("demo_industry_selected", { industry: id });
+      trackEvent("demo_step_changed", { from: 1, to: 2 });
     },
     [weekDays]
   );
@@ -79,11 +80,13 @@ export default function DemoPage() {
       }
     });
     setAvailability(newAvailability);
+    trackEvent("demo_availability_preset", { preset: "business_hours" });
   }, [weekDays]);
 
   // Step 2: Clear all
   const handleClearAll = useCallback(() => {
     setAvailability({});
+    trackEvent("demo_availability_preset", { preset: "clear_all" });
   }, []);
 
   // Step 2 -> 3: Create session and start call flow
@@ -120,6 +123,8 @@ export default function DemoPage() {
     setBookings([]);
     setIsCreatingSession(false);
     setStep(3);
+    trackEvent("demo_availability_configured", { slots: availableSlotCount, industry: scenarioId });
+    trackEvent("demo_step_changed", { from: 2, to: 3 });
   }, [availability, availableSlotCount, scenario, scenarioId]);
 
   const handleBookingCreated = useCallback((booking: Booking) => {
@@ -171,7 +176,7 @@ export default function DemoPage() {
               <div className="flex items-center justify-between">
                 <button
                   type="button"
-                  onClick={() => setStep(1)}
+                  onClick={() => { setStep(1); trackEvent("demo_step_changed", { from: 2, to: 1 }); }}
                   className="flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors"
                 >
                   <ArrowLeft className="w-4 h-4" /> Change industry
@@ -224,6 +229,7 @@ export default function DemoPage() {
                     setStep(2);
                     setBookings([]);
                     setHighlightDate(null);
+                    trackEvent("demo_step_changed", { from: 3, to: 2 });
                   }}
                   className="flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors"
                 >
@@ -281,6 +287,8 @@ export default function DemoPage() {
               href="https://calendly.com/voicefleet"
               target="_blank"
               rel="noopener noreferrer"
+              data-umami-event="cta_click"
+              data-umami-event-location="demo_bottom_calendly"
             >
               <Button variant="outline" size="lg">
                 Book a Guided Demo
