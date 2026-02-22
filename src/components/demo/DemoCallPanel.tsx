@@ -38,13 +38,18 @@ type DemoVoice = {
 
 const DEFAULT_ARGENTINA_VOICE_ID =
   process.env.NEXT_PUBLIC_DEMO_ARGENTINA_VOICE_ID || "1709f1e8-d660-4e22-b253-158ccf68bf0a";
+const DEFAULT_IRISH_VOICE_ID =
+  process.env.NEXT_PUBLIC_DEMO_IRISH_VOICE_ID || "f1dbef4d-b259-4549-90d0-912478492273";
 
 const DEMO_VOICES: DemoVoice[] = [
+  // -- Vapi native (English, all accents) --
   { id: "Elliot", label: "Elliot (conversational)", provider: "vapi" },
   { id: "Savannah", label: "Savannah (friendly)", provider: "vapi" },
   { id: "Rohan", label: "Rohan (warm)", provider: "vapi" },
   { id: "Lily", label: "Lily (natural)", provider: "vapi" },
   { id: "Cole", label: "Cole (professional)", provider: "vapi" },
+  { id: "Paige", label: "Paige (clear)", provider: "vapi" },
+  // -- Argentine Spanish (ElevenLabs) --
   {
     id: DEFAULT_ARGENTINA_VOICE_ID,
     label: "Valentina (Argentina)",
@@ -67,6 +72,31 @@ const DEMO_VOICES: DemoVoice[] = [
     provider: "11labs",
     defaultLanguageId: "es",
     enforceLanguage: "es",
+    model: "eleven_turbo_v2_5",
+  },
+  // -- Irish English (ElevenLabs) --
+  {
+    id: DEFAULT_IRISH_VOICE_ID,
+    label: "Custom (Irish)",
+    provider: "11labs",
+    defaultLanguageId: "en",
+    enforceLanguage: "en",
+    model: "eleven_turbo_v2_5",
+  },
+  {
+    id: "D38z5RcWu1voky8WS1ja",
+    label: "Fin (Irish)",
+    provider: "11labs",
+    defaultLanguageId: "en",
+    enforceLanguage: "en",
+    model: "eleven_turbo_v2_5",
+  },
+  {
+    id: "bVMeCyTHy58xNoL34h3p",
+    label: "Jeremy (Irish)",
+    provider: "11labs",
+    defaultLanguageId: "en",
+    enforceLanguage: "en",
     model: "eleven_turbo_v2_5",
   },
 ];
@@ -159,6 +189,8 @@ export default function DemoCallPanel({
   const [isDemoBlocked, setIsDemoBlocked] = useState(false);
   const [bypassCode, setBypassCode] = useState("");
   const [isCheckingAllowance, setIsCheckingAllowance] = useState(false);
+  const callStartTimeRef = useRef<number>(0);
+  const bookingCountRef = useRef<number>(0);
 
   const transcriptContainerRef = useRef<HTMLDivElement>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -288,6 +320,9 @@ export default function DemoCallPanel({
         vapi.on("call-start", () => {
           setCallStatus("connected");
           setError(null);
+          callStartTimeRef.current = Date.now();
+          bookingCountRef.current = 0;
+          trackEvent("demo_call_connected", { scenario: scenario.id });
           if (hardStopTimeoutRef.current) {
             window.clearTimeout(hardStopTimeoutRef.current);
           }
@@ -304,6 +339,14 @@ export default function DemoCallPanel({
           setVolumeLevel(0);
           hangupRequestedRef.current = false;
           onHighlightDate(null);
+          const durationSec = callStartTimeRef.current
+            ? Math.round((Date.now() - callStartTimeRef.current) / 1000)
+            : 0;
+          trackEvent("demo_call_ended", {
+            duration_seconds: durationSec,
+            bookings: bookingCountRef.current,
+            scenario: scenario.id,
+          });
           if (hardStopTimeoutRef.current) {
             window.clearTimeout(hardStopTimeoutRef.current);
             hardStopTimeoutRef.current = null;
@@ -377,6 +420,11 @@ export default function DemoCallPanel({
                 // If tool-calls-result also fires with data, bookingMap
                 // deduplicates by slot key so no visual double-up.
                 if (tc.function?.name === "create_booking" && args.date && args.time) {
+                  bookingCountRef.current += 1;
+                  trackEvent("demo_booking_created", {
+                    scenario: scenario.id,
+                    booking_number: bookingCountRef.current,
+                  });
                   onBookingCreated({
                     date: args.date,
                     time: args.time,
@@ -431,6 +479,7 @@ export default function DemoCallPanel({
           }
           setError(errorMessage);
           setCallStatus("error");
+          trackEvent("demo_call_error", { error: errorMessage.slice(0, 100) });
         });
 
         setCallStatus("idle");
@@ -488,6 +537,7 @@ export default function DemoCallPanel({
             setIsDemoBlocked(true);
             setCallStatus("idle");
             setError("Live demo limit reached (10 calls per IP). Book a demo to try a full-length call.");
+            trackEvent("demo_call_blocked", { reason: "rate_limit" });
             return;
           }
         } catch {
@@ -700,6 +750,7 @@ export default function DemoCallPanel({
               const voice = DEMO_VOICES.find((v) => v.id === e.target.value);
               if (voice) {
                 setSelectedVoice(voice);
+                trackEvent("demo_voice_selected", { voice: voice.label });
                 if (voice.defaultLanguageId && voice.defaultLanguageId !== languageId) {
                   onLanguageChange(voice.defaultLanguageId);
                 }
@@ -719,7 +770,7 @@ export default function DemoCallPanel({
           <label className="block text-[11px] font-medium text-muted-foreground mb-1">Language</label>
           <select
             value={languageId}
-            onChange={(e) => onLanguageChange(e.target.value as DemoLanguageId)}
+            onChange={(e) => { const lang = e.target.value as DemoLanguageId; onLanguageChange(lang); trackEvent("demo_language_selected", { language: lang }); }}
             className="w-full px-3 py-1.5 rounded-lg border border-border bg-background text-foreground text-xs focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none"
             disabled={callStatus === "connecting" || callStatus === "connected" || !!selectedVoice.enforceLanguage}
           >

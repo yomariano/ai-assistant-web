@@ -385,9 +385,26 @@ const VOICES: DemoVoice[] = [
     enforceLanguage: "es",
     model: "eleven_turbo_v2_5",
   },
+  // -- Irish English (ElevenLabs) --
   {
     id: DEFAULT_IRISH_DEMO_VOICE_ID,
     label: "Custom (Irish)",
+    provider: "11labs",
+    defaultLanguageId: "en",
+    enforceLanguage: "en",
+    model: "eleven_turbo_v2_5",
+  },
+  {
+    id: "D38z5RcWu1voky8WS1ja",
+    label: "Fin (Irish)",
+    provider: "11labs",
+    defaultLanguageId: "en",
+    enforceLanguage: "en",
+    model: "eleven_turbo_v2_5",
+  },
+  {
+    id: "bVMeCyTHy58xNoL34h3p",
+    label: "Jeremy (Irish)",
     provider: "11labs",
     defaultLanguageId: "en",
     enforceLanguage: "en",
@@ -682,7 +699,18 @@ export default function LiveDemoCall({ trigger }: LiveDemoCallProps) {
         };
       }
 
-      await vapiRef.current.start(assistantConfig);
+      try {
+        await vapiRef.current.start(assistantConfig);
+      } catch (startErr: unknown) {
+        // If an 11labs custom voice failed, retry with a Vapi native fallback
+        if (selectedVoice.provider === "11labs") {
+          console.warn("[Demo] 11labs voice failed, falling back to Vapi voice:", startErr);
+          assistantConfig.voice = { provider: "vapi", voiceId: "Savannah" };
+          await vapiRef.current.start(assistantConfig);
+        } else {
+          throw startErr;
+        }
+      }
     } catch (err: unknown) {
       const fallback = "Failed to start the demo. Please allow microphone access and try again.";
       let errorMessage = fallback;
