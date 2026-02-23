@@ -29,7 +29,7 @@ export type DemoScenario = {
   defaultAvailability: Record<number, { start: string; end: string }>; // dayOfWeek (1=Mon) -> hours
 };
 
-export type DemoStep = 1 | 2 | 3;
+export type DemoStep = 1 | 2 | 3 | 4;
 
 export type CallStatus =
   | "idle"

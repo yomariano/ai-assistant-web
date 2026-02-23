@@ -26,80 +26,7 @@ import type {
   TranscriptMessage,
 } from "@/lib/demo/types";
 import { DEMO_LANGUAGES, formatDate, getWeekStart } from "@/lib/demo/calendar-utils";
-
-type DemoVoice = {
-  id: string;
-  label: string;
-  provider: "vapi" | "11labs";
-  defaultLanguageId?: DemoLanguageId;
-  enforceLanguage?: string;
-  model?: string;
-};
-
-const DEFAULT_ARGENTINA_VOICE_ID =
-  process.env.NEXT_PUBLIC_DEMO_ARGENTINA_VOICE_ID || "1709f1e8-d660-4e22-b253-158ccf68bf0a";
-const DEFAULT_IRISH_VOICE_ID =
-  process.env.NEXT_PUBLIC_DEMO_IRISH_VOICE_ID || "f1dbef4d-b259-4549-90d0-912478492273";
-
-const DEMO_VOICES: DemoVoice[] = [
-  // -- Vapi native (English, all accents) --
-  { id: "Elliot", label: "Elliot (conversational)", provider: "vapi" },
-  { id: "Savannah", label: "Savannah (friendly)", provider: "vapi" },
-  { id: "Rohan", label: "Rohan (warm)", provider: "vapi" },
-  { id: "Lily", label: "Lily (natural)", provider: "vapi" },
-  { id: "Cole", label: "Cole (professional)", provider: "vapi" },
-  { id: "Paige", label: "Paige (clear)", provider: "vapi" },
-  // -- Argentine Spanish (ElevenLabs) --
-  {
-    id: DEFAULT_ARGENTINA_VOICE_ID,
-    label: "Valentina (Argentina)",
-    provider: "11labs",
-    defaultLanguageId: "es",
-    enforceLanguage: "es",
-    model: "eleven_turbo_v2_5",
-  },
-  {
-    id: "ErXwobaYiN019PkySvjV",
-    label: "Antoni (Argentina)",
-    provider: "11labs",
-    defaultLanguageId: "es",
-    enforceLanguage: "es",
-    model: "eleven_turbo_v2_5",
-  },
-  {
-    id: "TxGEqnHWrfWFTfGW9XjX",
-    label: "Josh (Argentina)",
-    provider: "11labs",
-    defaultLanguageId: "es",
-    enforceLanguage: "es",
-    model: "eleven_turbo_v2_5",
-  },
-  // -- Irish English (ElevenLabs) --
-  {
-    id: DEFAULT_IRISH_VOICE_ID,
-    label: "Custom (Irish)",
-    provider: "11labs",
-    defaultLanguageId: "en",
-    enforceLanguage: "en",
-    model: "eleven_turbo_v2_5",
-  },
-  {
-    id: "D38z5RcWu1voky8WS1ja",
-    label: "Fin (Irish)",
-    provider: "11labs",
-    defaultLanguageId: "en",
-    enforceLanguage: "en",
-    model: "eleven_turbo_v2_5",
-  },
-  {
-    id: "bVMeCyTHy58xNoL34h3p",
-    label: "Jeremy (Irish)",
-    provider: "11labs",
-    defaultLanguageId: "en",
-    enforceLanguage: "en",
-    model: "eleven_turbo_v2_5",
-  },
-];
+import type { DemoVoice } from "@/lib/demo/voices";
 
 function coerceTranscript(value: unknown): string | null {
   if (typeof value === "string") return value.trim() ? value : null;
@@ -165,7 +92,7 @@ type DemoCallPanelProps = {
   demoSessionId: string;
   availability: Record<string, boolean>;
   languageId: DemoLanguageId;
-  onLanguageChange: (id: DemoLanguageId) => void;
+  selectedVoice: DemoVoice;
   onBookingCreated: (booking: Booking) => void;
   onHighlightDate: (date: string | null) => void;
 };
@@ -175,11 +102,10 @@ export default function DemoCallPanel({
   demoSessionId,
   availability,
   languageId,
-  onLanguageChange,
+  selectedVoice,
   onBookingCreated,
   onHighlightDate,
 }: DemoCallPanelProps) {
-  const [selectedVoice, setSelectedVoice] = useState<DemoVoice>(DEMO_VOICES[0]);
   const [callStatus, setCallStatus] = useState<CallStatus>("idle");
   const [error, setError] = useState<string | null>(null);
   const [isMuted, setIsMuted] = useState(false);
@@ -739,49 +665,6 @@ export default function DemoCallPanel({
         <span className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
           {scenario.businessName}
         </span>
-      </div>
-
-      {/* Voice + Language pickers */}
-      <div className="grid grid-cols-2 gap-2">
-        <div>
-          <label className="block text-[11px] font-medium text-muted-foreground mb-1">Voice</label>
-          <select
-            value={selectedVoice.id}
-            onChange={(e) => {
-              const voice = DEMO_VOICES.find((v) => v.id === e.target.value);
-              if (voice) {
-                setSelectedVoice(voice);
-                trackEvent("demo_voice_selected", { voice: voice.label });
-                if (voice.defaultLanguageId && voice.defaultLanguageId !== languageId) {
-                  onLanguageChange(voice.defaultLanguageId);
-                }
-              }
-            }}
-            className="w-full px-3 py-1.5 rounded-lg border border-border bg-background text-foreground text-xs focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none"
-            disabled={callStatus === "connecting" || callStatus === "connected"}
-          >
-            {DEMO_VOICES.map((v) => (
-              <option key={v.id} value={v.id}>
-                {v.label}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div>
-          <label className="block text-[11px] font-medium text-muted-foreground mb-1">Language</label>
-          <select
-            value={languageId}
-            onChange={(e) => { const lang = e.target.value as DemoLanguageId; onLanguageChange(lang); trackEvent("demo_language_selected", { language: lang }); }}
-            className="w-full px-3 py-1.5 rounded-lg border border-border bg-background text-foreground text-xs focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none"
-            disabled={callStatus === "connecting" || callStatus === "connected" || !!selectedVoice.enforceLanguage}
-          >
-            {DEMO_LANGUAGES.map((l) => (
-              <option key={l.id} value={l.id}>
-                {l.label}
-              </option>
-            ))}
-          </select>
-        </div>
       </div>
 
       {/* Error */}

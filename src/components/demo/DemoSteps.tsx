@@ -6,7 +6,8 @@ import type { DemoStep } from "@/lib/demo/types";
 const STEPS = [
   { num: 1 as DemoStep, label: "Choose Industry" },
   { num: 2 as DemoStep, label: "Set Availability" },
-  { num: 3 as DemoStep, label: "Try the Call" },
+  { num: 3 as DemoStep, label: "Pick Agent" },
+  { num: 4 as DemoStep, label: "Watch It Work" },
 ];
 
 type DemoStepsProps = {
