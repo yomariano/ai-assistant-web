@@ -2,6 +2,7 @@ import { Phone } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { REVIEW_PLATFORMS } from "@/lib/marketing/review-platforms";
+import SocialLinks from "@/components/voicefleet/SocialLinks";
 
 const Footer = () => {
   return (
@@ -32,6 +33,10 @@ const Footer = () => {
               <Phone className="w-4 h-4" />
               Talk to our team
             </Link>
+            <SocialLinks
+              className="pt-1"
+              linkClassName="h-9 w-9 border border-primary-foreground/20 bg-primary-foreground/5 text-primary-foreground/70 hover:text-primary-foreground hover:border-primary-foreground/40"
+            />
           </div>
 
           {/* Links */}
