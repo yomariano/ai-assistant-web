@@ -6,6 +6,7 @@ import { CreditCard, ExternalLink, TrendingUp, AlertCircle, DollarSign, Clock } 
 import { Card, CardContent } from '@/components/ui/card';
 import Button from '@/components/ui/button';
 import { billingApi, emailApi } from '@/lib/api';
+import { useBillingStore } from '@/lib/store';
 import { trackEvent } from '@/lib/umami';
 
 type Region = 'EU' | 'AR';
@@ -62,6 +63,7 @@ const REGIONAL_PLAN_DETAILS: Record<Region, Record<string, { name: string; price
 
 export default function BillingPage() {
   const router = useRouter();
+  const setUsageStore = useBillingStore((state) => state.setUsage);
   const [subscription, setSubscription] = useState<SubscriptionData | null>(null);
   const [usage, setUsage] = useState<UsageData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -88,7 +90,10 @@ export default function BillingPage() {
         setSubscription(subData);
       }
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      setUsage(usageRes as any);
+      const usageData = usageRes as any;
+      setUsage(usageData);
+      // Also update Zustand store so Sidebar minutes tracker stays in sync
+      setUsageStore(usageData);
     } catch (err) {
       console.error('Failed to fetch billing data:', err);
     } finally {

@@ -239,6 +239,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
             billingApi.getUsage()
               // eslint-disable-next-line @typescript-eslint/no-explicit-any
               .then((usageData: any) => {
+                console.log('[DASHBOARD] Dev usage data received:', usageData?.minutesIncluded);
                 // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
                 setUsageStore(usageData);
               })
@@ -252,14 +253,32 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
 
         if (isActive) {
           setSubscriptionStore(subscription);
-          // Fetch usage data for sidebar display
-          billingApi.getUsage()
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            .then((usageData: any) => {
-              // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-              setUsageStore(usageData);
-            })
-            .catch((err: unknown) => console.error('[DASHBOARD] Failed to fetch usage:', err));
+          // Fetch usage data for sidebar display (with retry on failure)
+          const fetchUsage = () => {
+            billingApi.getUsage()
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              .then((usageData: any) => {
+                console.log('[DASHBOARD] Usage data received:', usageData?.minutesIncluded, usageData?.minutesUsed);
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+                setUsageStore(usageData);
+              })
+              .catch((err: unknown) => {
+                console.error('[DASHBOARD] Failed to fetch usage:', err);
+                // Retry once after 2 seconds
+                setTimeout(() => {
+                  console.log('[DASHBOARD] Retrying usage fetch...');
+                  billingApi.getUsage()
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                    .then((usageData: any) => {
+                      console.log('[DASHBOARD] Usage retry succeeded:', usageData?.minutesIncluded);
+                      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+                      setUsageStore(usageData);
+                    })
+                    .catch((retryErr: unknown) => console.error('[DASHBOARD] Usage retry also failed:', retryErr));
+                }, 2000);
+              });
+          };
+          fetchUsage();
         }
 
         if (!isActive) {
