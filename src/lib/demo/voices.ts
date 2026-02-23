@@ -10,10 +10,6 @@ export type DemoVoice = {
   personality?: string;
 };
 
-const DEFAULT_ARGENTINA_VOICE_ID =
-  process.env.NEXT_PUBLIC_DEMO_ARGENTINA_VOICE_ID || "1709f1e8-d660-4e22-b253-158ccf68bf0a";
-const DEFAULT_IRISH_VOICE_ID =
-  process.env.NEXT_PUBLIC_DEMO_IRISH_VOICE_ID || "f1dbef4d-b259-4549-90d0-912478492273";
 
 export const DEMO_VOICES: DemoVoice[] = [
   // -- Vapi native (English, all accents) --
@@ -24,15 +20,6 @@ export const DEMO_VOICES: DemoVoice[] = [
   { id: "Cole", label: "Cole", provider: "vapi", personality: "professional" },
   { id: "Paige", label: "Paige", provider: "vapi", personality: "clear" },
   // -- Argentine Spanish (ElevenLabs) --
-  {
-    id: DEFAULT_ARGENTINA_VOICE_ID,
-    label: "Valentina",
-    provider: "11labs",
-    defaultLanguageId: "es",
-    enforceLanguage: "es",
-    model: "eleven_turbo_v2_5",
-    personality: "warm",
-  },
   {
     id: "ErXwobaYiN019PkySvjV",
     label: "Antoni",
@@ -52,15 +39,6 @@ export const DEMO_VOICES: DemoVoice[] = [
     personality: "friendly",
   },
   // -- Irish English (ElevenLabs) --
-  {
-    id: DEFAULT_IRISH_VOICE_ID,
-    label: "Custom",
-    provider: "11labs",
-    defaultLanguageId: "en",
-    enforceLanguage: "en",
-    model: "eleven_turbo_v2_5",
-    personality: "natural",
-  },
   {
     id: "D38z5RcWu1voky8WS1ja",
     label: "Fin",
