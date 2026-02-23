@@ -1,17 +1,17 @@
 import { test, expect } from '@playwright/test';
 
 const API_URL = 'http://localhost:3000';
-// Stripe payment links for each plan (EUR - Ireland/EU) - VoiceFleet Jan 2026
+// Stripe payment links for each plan (EUR - Ireland/EU) - VoiceFleet test mode
 const STRIPE_PAYMENT_LINKS = {
   starter: 'https://buy.stripe.com/test_8x2fZgbzggJganK7UgfQI0m',
   growth: 'https://buy.stripe.com/test_3cI5kC46O9gOeE06QcfQI0n',
   pro: 'https://buy.stripe.com/test_dRmeVcgTAboW67u2zWfQI0o',
 };
-// Expected phone numbers per plan (VoiceFleet Pricing Jan 2026)
+// Expected phone numbers per plan (VoiceFleet Feb 2026)
 // All plans: 1 phone
 const PLAN_PHONE_LIMITS = {
-  starter: 1,  // Starter: €49
-  growth: 1,   // Growth: €199
+  starter: 1,  // Starter: €99
+  growth: 1,   // Growth: €299
   pro: 1,      // Pro: €599
 };
 const TEST_USER_ID = '00000000-0000-0000-0000-000000000099'; // Must be valid UUID for database
