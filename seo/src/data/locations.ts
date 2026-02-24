@@ -88,9 +88,13 @@ export const COUNTRIES: Record<string, Country> = {
     phoneFormat: "+54",
     cities: [
       { slug: "buenos-aires", name: "Buenos Aires", country: "Argentina", countryCode: "AR", population: 3100000, region: "Buenos Aires" },
+      { slug: "cordoba", name: "Córdoba", country: "Argentina", countryCode: "AR", population: 1535000, region: "Córdoba" },
+      { slug: "rosario", name: "Rosario", country: "Argentina", countryCode: "AR", population: 1280000, region: "Santa Fe" },
+      { slug: "mendoza", name: "Mendoza", country: "Argentina", countryCode: "AR", population: 937000, region: "Mendoza" },
       { slug: "mar-del-plata", name: "Mar del Plata", country: "Argentina", countryCode: "AR", population: 614000, region: "Buenos Aires" },
-      { slug: "formosa", name: "Formosa", country: "Argentina", countryCode: "AR", population: 270000, region: "Formosa" },
       { slug: "tucuman", name: "Tucumán", country: "Argentina", countryCode: "AR", population: 550000, region: "Tucumán" },
+      { slug: "salta", name: "Salta", country: "Argentina", countryCode: "AR", population: 535000, region: "Salta" },
+      { slug: "formosa", name: "Formosa", country: "Argentina", countryCode: "AR", population: 270000, region: "Formosa" },
       { slug: "el-calafate", name: "El Calafate", country: "Argentina", countryCode: "AR", population: 22000, region: "Santa Cruz" },
       { slug: "san-martin-de-los-andes", name: "San Martín de los Andes", country: "Argentina", countryCode: "AR", population: 28000, region: "Neuquén" },
       { slug: "villa-gesell", name: "Villa Gesell", country: "Argentina", countryCode: "AR", population: 42000, region: "Buenos Aires" }
