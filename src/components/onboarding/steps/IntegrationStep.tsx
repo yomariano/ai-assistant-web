@@ -21,6 +21,7 @@ const PROVIDER_ICONS: Record<string, string> = {
   thefork: "🍴",
   opentable: "🍽️",
   resy: "🍷",
+  meitre: "🍴",
   // Other providers
   simplybook: "📋",
   mindbody: "💪",
@@ -73,6 +74,7 @@ export function IntegrationStep({
   const [viewState, setViewState] = useState<ViewState>("select");
   const [selectedProvider, setSelectedProvider] = useState<BookingProvider | null>(null);
   const [apiKey, setApiKey] = useState("");
+  const [restaurantId, setRestaurantId] = useState("");
   const [connecting, setConnecting] = useState(false);
   const [connectionError, setConnectionError] = useState<string | null>(null);
   const [connectedAccount, setConnectedAccount] = useState<{ name: string; email?: string } | null>(null);
@@ -116,6 +118,7 @@ export function IntegrationStep({
   const handleSelectProvider = (provider: BookingProvider) => {
     setSelectedProvider(provider);
     setApiKey("");
+    setRestaurantId("");
     setConnectionError(null);
 
     if (provider.authType === "oauth2") {
@@ -152,9 +155,15 @@ export function IntegrationStep({
     setConnectionError(null);
 
     try {
+      const config: Record<string, unknown> = {};
+      if ((selectedProvider.id === 'meitre' || selectedProvider.id === 'thefork') && restaurantId.trim()) {
+        config.restaurantId = restaurantId.trim();
+      }
+
       const result = await providersApi.createConnection({
         providerId: selectedProvider.id,
         apiKey: apiKey.trim(),
+        config: Object.keys(config).length > 0 ? config : undefined,
       });
 
       if (result.success && result.connection) {
@@ -292,6 +301,23 @@ export function IntegrationStep({
               />
             </div>
           </div>
+
+          {(selectedProvider.id === 'meitre' || selectedProvider.id === 'thefork') && (
+            <div>
+              <Label htmlFor="restaurantId" className="text-sm font-medium">
+                Restaurant ID
+              </Label>
+              <Input
+                id="restaurantId"
+                type="text"
+                value={restaurantId}
+                onChange={(e) => setRestaurantId(e.target.value)}
+                placeholder="Your restaurant ID"
+                className="mt-1"
+                disabled={connecting}
+              />
+            </div>
+          )}
 
           {connectionError && (
             <div className="p-3 bg-destructive/10 border border-destructive/20 rounded-lg">

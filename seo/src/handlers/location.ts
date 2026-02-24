@@ -44,7 +44,12 @@ export async function locationHandler(c: Context<{ Bindings: Bindings }>) {
 
   // Try to get AI-generated content from cache
   const cacheKey = `content:location:${citySlug}`;
-  const content = await getContent(c.env.CONTENT_CACHE, cacheKey);
+  let content: GeneratedContent | null = null;
+  try {
+    content = await getContent(c.env.CONTENT_CACHE, cacheKey);
+  } catch (e) {
+    console.error(`[SEO] Failed to parse cached content for ${cacheKey}:`, e);
+  }
 
   c.header('X-VoiceFleet-SEO', '1');
   c.header('X-VoiceFleet-SEO-Content', content ? 'ai' : 'fallback');

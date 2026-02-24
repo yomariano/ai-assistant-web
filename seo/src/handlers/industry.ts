@@ -35,9 +35,14 @@ export async function industryHandler(c: Context<{ Bindings: Bindings }>) {
   const siteUrl = c.env.SITE_URL || 'https://voicefleet.ai';
   const appUrl = c.env.APP_URL || 'https://app.voicefleet.ai';
 
-  // Try to get AI-generated content from cache
+  // Try to get AI-generated content from cache (graceful fallback on error)
   const cacheKey = `content:industry:${industrySlug}`;
-  const content = await getContent(c.env.CONTENT_CACHE, cacheKey);
+  let content: GeneratedContent | null = null;
+  try {
+    content = await getContent(c.env.CONTENT_CACHE, cacheKey);
+  } catch (e) {
+    console.error(`[SEO] Failed to parse cached content for ${cacheKey}:`, e);
+  }
 
   c.header('X-VoiceFleet-SEO', '1');
   c.header('X-VoiceFleet-SEO-Content', content ? 'ai' : 'fallback');
@@ -46,13 +51,25 @@ export async function industryHandler(c: Context<{ Bindings: Bindings }>) {
     c.header('X-VoiceFleet-SEO-Generated-At', content.generatedAt);
   }
 
-  // Generate page content
-  const pageContent = content
-    ? renderWithAIContent(industry, content, siteUrl, appUrl)
-    : renderFallbackContent(industry, siteUrl, appUrl);
+  // Generate page content (fall back to static content if AI content causes errors)
+  let pageContent: string;
+  try {
+    pageContent = content
+      ? renderWithAIContent(industry, content, siteUrl, appUrl)
+      : renderFallbackContent(industry, siteUrl, appUrl);
+  } catch (e) {
+    console.error(`[SEO] Render error for ${industrySlug}, falling back:`, e);
+    pageContent = renderFallbackContent(industry, siteUrl, appUrl);
+  }
 
   // Generate schemas
-  const schemas = generateIndustryPageSchemas(industry, content, siteUrl);
+  let schemas: string[];
+  try {
+    schemas = generateIndustryPageSchemas(industry, content, siteUrl);
+  } catch (e) {
+    console.error(`[SEO] Schema error for ${industrySlug}:`, e);
+    schemas = [];
+  }
 
   // Build full HTML
   const html = generateBaseHtml({

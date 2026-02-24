@@ -80,25 +80,26 @@ app.get('/locations', (c) => {
   return locationsIndexHandler(c);
 });
 
-// AI Receptionist pages: /ai-receptionist-dental-dublin
-app.get('/ai-receptionist-*', async (c) => {
-  const path = new URL(c.req.url).pathname;
-  const remainder = path.replace(/^\/ai-receptionist-/, '').replace(/\/$/, '');
-  if (!remainder) return c.notFound();
-  return aiReceptionistHandler(c, remainder);
-});
-
 // Spanish AI Receptionist pages: /es/asistente-ia-odontologos-buenos-aires
-app.get('/es/asistente-ia-*', async (c) => {
-  const path = new URL(c.req.url).pathname;
-  const remainder = path.replace(/^\/es\/asistente-ia-/, '').replace(/\/$/, '');
-  if (!remainder) return c.notFound();
-  return asistenteIaHandler(c, remainder);
+// Must be before the single-segment catch-all since /es/... is multi-segment
+app.get('/es/:slug', async (c) => {
+  const slug = c.req.param('slug');
+  if (slug.startsWith('asistente-ia-')) {
+    const remainder = slug.replace(/^asistente-ia-/, '');
+    if (remainder) return asistenteIaHandler(c, remainder);
+  }
+  return c.notFound();
 });
 
-// Industry + Location pages: /restaurant-voice-agent-in-dublin
+// Industry + Location pages AND AI Receptionist pages (single path segment)
 app.get('/:industryLocation', async (c) => {
   const slug = c.req.param('industryLocation');
+
+  // Check if it matches AI Receptionist pattern: ai-receptionist-{industry}-{city}
+  if (slug.startsWith('ai-receptionist-')) {
+    const remainder = slug.replace(/^ai-receptionist-/, '');
+    if (remainder) return aiReceptionistHandler(c, remainder);
+  }
 
   // Check if it matches the pattern: {industry}-voice-agent-in-{location}
   const match = slug.match(/^(.+)-voice-agent-in-(.+)$/);

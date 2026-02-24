@@ -2,7 +2,8 @@
 
 import { Phone, Copy, Check, ExternalLink, Loader2, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { billingApi } from "@/lib/api";
 
 interface PhoneNumberStepProps {
   phoneNumbers: { number: string; label: string }[];
@@ -12,9 +13,34 @@ interface PhoneNumberStepProps {
 
 export function PhoneNumberStep({ phoneNumbers, onNext, onBack }: PhoneNumberStepProps) {
   const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
+  const [resolvedNumbers, setResolvedNumbers] = useState<{ number: string; label: string }[] | null>(null);
 
-  // Check if number is pending (Argentina provisioning in progress)
+  // Check if number is pending (Argentina/Ireland provisioning in progress)
   const isPending = phoneNumbers.length === 1 && phoneNumbers[0].number === 'PENDING';
+
+  // Poll for phone numbers when in pending state
+  useEffect(() => {
+    if (!isPending || resolvedNumbers) return;
+
+    const interval = setInterval(async () => {
+      try {
+        const data = await billingApi.getPhoneNumbers();
+        if (data.numbers && data.numbers.length > 0) {
+          setResolvedNumbers(
+            data.numbers.map((p: { phone_number?: string; phoneNumber?: string; label?: string }) => ({
+              number: p.phone_number || p.phoneNumber || '',
+              label: p.label || 'Primary',
+            }))
+          );
+          clearInterval(interval);
+        }
+      } catch {
+        // Ignore polling errors - will retry on next interval
+      }
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, [isPending, resolvedNumbers]);
 
   const copyToClipboard = async (number: string, index: number) => {
     try {
@@ -39,8 +65,11 @@ export function PhoneNumberStep({ phoneNumbers, onNext, onBack }: PhoneNumberSte
     return number;
   };
 
-  // Render pending state for Argentina users
-  if (isPending) {
+  // Use resolved numbers (from polling) or the original prop
+  const displayNumbers = resolvedNumbers || phoneNumbers;
+
+  // Render pending state for Argentina users (only if not yet resolved)
+  if (isPending && !resolvedNumbers) {
     return (
       <div className="py-4">
         {/* Header */}
@@ -101,7 +130,7 @@ export function PhoneNumberStep({ phoneNumbers, onNext, onBack }: PhoneNumberSte
           <Phone className="w-8 h-8 text-accent" />
         </div>
         <h2 className="text-xl font-heading font-bold text-foreground mb-2">
-          Your VoiceFleet Number{phoneNumbers.length > 1 ? 's' : ''}
+          Your VoiceFleet Number{displayNumbers.length > 1 ? 's' : ''}
         </h2>
         <p className="text-muted-foreground text-sm">
           This is the number your callers will be forwarded to
@@ -110,7 +139,7 @@ export function PhoneNumberStep({ phoneNumbers, onNext, onBack }: PhoneNumberSte
 
       {/* Phone Numbers */}
       <div className="space-y-3 mb-6">
-        {phoneNumbers.map((phone, index) => (
+        {displayNumbers.map((phone, index) => (
           <div
             key={index}
             className="flex items-center justify-between gap-2 p-4 bg-muted/50 rounded-xl border border-border"

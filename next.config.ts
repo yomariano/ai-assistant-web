@@ -58,6 +58,11 @@ const nextConfig: NextConfig = {
   // Redirect bare industry slugs to /for/[industry] pages
   async redirects() {
     return [
+      // /industries/:slug → /for/:slug (old URL format)
+      { source: "/industries/:slug", destination: "/for/:slug", permanent: true },
+      // /blog/es/ → /es/blog/ (Spanish blog canonical URL)
+      { source: "/blog/es", destination: "/es/blog", permanent: true },
+      { source: "/blog/es/:path*", destination: "/es/blog/:path*", permanent: true },
       { source: "/restaurants", destination: "/for/restaurants", permanent: true },
       { source: "/dental", destination: "/for/dental-practices", permanent: true },
       { source: "/dental-clinics", destination: "/for/dental-practices", permanent: true },

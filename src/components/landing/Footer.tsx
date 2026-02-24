@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Phone } from 'lucide-react';
+import Image from 'next/image';
 
 export default function Footer() {
     return (
@@ -13,9 +13,9 @@ export default function Footer() {
                     <div className="flex flex-col gap-4">
                         <Link href="/" className="flex items-center gap-2">
                             <div className="bg-orange-500 p-2 rounded-lg">
-                                <img
+                                <Image
                                     src="/logo-mark.svg"
-                                    alt="VoiceFleet"
+                                    alt=""
                                     width={20}
                                     height={20}
                                     className="h-5 w-5"
@@ -39,9 +39,9 @@ export default function Footer() {
                         <a href="#features" className="text-gray-400 hover:text-white transition-colors">
                             Features
                         </a>
-                        <a href="/#pricing" className="text-gray-400 hover:text-white transition-colors">
+                        <Link href="/pricing" className="text-gray-400 hover:text-white transition-colors">
                             Pricing
-                        </a>
+                        </Link>
                         <a href="#faq" className="text-gray-400 hover:text-white transition-colors">
                             FAQ
                         </a>
@@ -57,9 +57,9 @@ export default function Footer() {
                         <Link href="/locations" className="text-gray-400 hover:text-white transition-colors">
                             Locations
                         </Link>
-                        <a href="/sitemap.xml" className="text-gray-400 hover:text-white transition-colors">
+                        <Link href="/sitemap.xml" className="text-gray-400 hover:text-white transition-colors">
                             Sitemap
-                        </a>
+                        </Link>
                         <Link href="/privacy" className="text-gray-400 hover:text-white transition-colors">
                             Privacy
                         </Link>
