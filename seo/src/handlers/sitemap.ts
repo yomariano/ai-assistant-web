@@ -51,7 +51,9 @@ export async function sitemapIndexHandler(c: Context<{ Bindings: Bindings }>) {
     'locations-uk',
     'locations-usa',
     'industry-locations-1',
-    'industry-locations-2'
+    'industry-locations-2',
+    'locations-argentina',
+    'ai-receptionist'
   ];
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
@@ -93,11 +95,17 @@ export async function sitemapHandler(c: Context<{ Bindings: Bindings }>) {
     case 'locations-usa':
       urls = generateLocationsSitemap(siteUrl, 'usa');
       break;
+    case 'locations-argentina':
+      urls = generateLocationsSitemap(siteUrl, 'argentina');
+      break;
     case 'industry-locations-1':
       urls = generateIndustryLocationsSitemap(siteUrl, 0, 100);
       break;
     case 'industry-locations-2':
       urls = generateIndustryLocationsSitemap(siteUrl, 100, 200);
+      break;
+    case 'ai-receptionist':
+      urls = generateAiReceptionistSitemap(siteUrl);
       break;
     default:
       return c.notFound();
@@ -152,11 +160,17 @@ export async function sitemapHandlerWithType(
     case 'locations-usa':
       urls = generateLocationsSitemap(siteUrl, 'usa');
       break;
+    case 'locations-argentina':
+      urls = generateLocationsSitemap(siteUrl, 'argentina');
+      break;
     case 'industry-locations-1':
       urls = generateIndustryLocationsSitemap(siteUrl, 0, 100);
       break;
     case 'industry-locations-2':
       urls = generateIndustryLocationsSitemap(siteUrl, 100, 200);
+      break;
+    case 'ai-receptionist':
+      urls = generateAiReceptionistSitemap(siteUrl);
       break;
     default:
       return c.notFound();
@@ -302,4 +316,49 @@ async function generateComparisonsSitemap(siteUrl: string, apiUrl: string) {
     priority: '0.6',
     changefreq: 'monthly',
   }));
+}
+
+/**
+ * Generate AI Receptionist pages sitemap (EN + ES)
+ */
+function generateAiReceptionistSitemap(siteUrl: string) {
+  const urls: Array<{ loc: string; priority: string; changefreq: string }> = [];
+
+  // EN industry short slugs → canonical slugs
+  const enMap: Record<string, string> = {
+    'dental': 'dental-clinics',
+    'restaurant': 'restaurants',
+  };
+  // ES industry short slugs → canonical slugs
+  const esMap: Record<string, string> = {
+    'odontologos': 'dental-clinics',
+    'restaurantes': 'restaurants',
+  };
+
+  const allCities = getAllCities();
+
+  // EN pages: /ai-receptionist-{shortIndustry}-{city}
+  for (const [shortKey] of Object.entries(enMap)) {
+    for (const city of allCities) {
+      urls.push({
+        loc: `${siteUrl}/ai-receptionist-${shortKey}-${city.slug}`,
+        priority: '0.6',
+        changefreq: 'weekly'
+      });
+    }
+  }
+
+  // ES pages: /es/asistente-ia-{shortIndustry}-{city} (Argentina cities only)
+  const arCities = COUNTRIES['argentina']?.cities || [];
+  for (const [shortKey] of Object.entries(esMap)) {
+    for (const city of arCities) {
+      urls.push({
+        loc: `${siteUrl}/es/asistente-ia-${shortKey}-${city.slug}`,
+        priority: '0.6',
+        changefreq: 'weekly'
+      });
+    }
+  }
+
+  return urls;
 }

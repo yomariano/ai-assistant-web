@@ -10,6 +10,7 @@ import { industriesIndexHandler } from './handlers/industries-index';
 import { locationHandler } from './handlers/location';
 import { locationsCountryHandler, locationsIndexHandler } from './handlers/locations-index';
 import { industryLocationHandler } from './handlers/industry-location';
+import { aiReceptionistHandler, asistenteIaHandler } from './handlers/ai-receptionist';
 import { sitemapHandlerWithType, sitemapIndexHandler } from './handlers/sitemap';
 import { robotsHandler } from './handlers/robots';
 import { scheduledHandler, manualGenerateContent, runContentGeneration } from './handlers/scheduled';
@@ -77,6 +78,22 @@ app.get('/locations/:country', (c) => {
 
 app.get('/locations', (c) => {
   return locationsIndexHandler(c);
+});
+
+// AI Receptionist pages: /ai-receptionist-dental-dublin
+app.get('/ai-receptionist-*', async (c) => {
+  const path = new URL(c.req.url).pathname;
+  const remainder = path.replace(/^\/ai-receptionist-/, '').replace(/\/$/, '');
+  if (!remainder) return c.notFound();
+  return aiReceptionistHandler(c, remainder);
+});
+
+// Spanish AI Receptionist pages: /es/asistente-ia-odontologos-buenos-aires
+app.get('/es/asistente-ia-*', async (c) => {
+  const path = new URL(c.req.url).pathname;
+  const remainder = path.replace(/^\/es\/asistente-ia-/, '').replace(/\/$/, '');
+  if (!remainder) return c.notFound();
+  return asistenteIaHandler(c, remainder);
 });
 
 // Industry + Location pages: /restaurant-voice-agent-in-dublin

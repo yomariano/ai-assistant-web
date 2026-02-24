@@ -15,6 +15,7 @@ export function generateBaseHtml(options: {
   content: string;
   schemas?: string[];
   siteUrl: string;
+  lang?: string;
 }): string {
   const schemaScripts = options.schemas?.map(s =>
     `<script type="application/ld+json">${s}</script>`
@@ -23,7 +24,7 @@ export function generateBaseHtml(options: {
   const ogImageUrl = `${options.siteUrl}/logo-mark.png`;
 
   return `<!DOCTYPE html>
-<html lang="en">
+<html lang="${options.lang || 'en'}">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -109,7 +110,7 @@ function generateHeader(siteUrl: string): string {
         <a href="${siteUrl}/connect">Integrations</a>
         <a href="${siteUrl}/compare">Compare</a>
         <a href="${siteUrl}/blog">Blog</a>
-        <a href="${siteUrl}/#pricing">Pricing</a>
+        <a href="${siteUrl}/pricing">Pricing</a>
       </nav>
       <div class="header-cta">
         <a href="tel:+35312345678" class="header-phone">+353 1 234 5678</a>
@@ -144,7 +145,7 @@ function generateFooter(siteUrl: string): string {
           <a href="${siteUrl}/for">Industries</a>
           <a href="${siteUrl}/connect">Integrations</a>
           <a href="${siteUrl}/compare">Compare</a>
-          <a href="${siteUrl}/#pricing">Pricing</a>
+          <a href="${siteUrl}/pricing">Pricing</a>
         </div>
         <div class="footer-links">
           <h4>Company</h4>

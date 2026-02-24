@@ -21,7 +21,13 @@ export const COUNTRIES: Record<string, Country> = {
       { slug: "waterford", name: "Waterford", country: "Ireland", countryCode: "IE", population: 54000, region: "Munster" },
       { slug: "drogheda", name: "Drogheda", country: "Ireland", countryCode: "IE", population: 41000, region: "Leinster" },
       { slug: "kilkenny", name: "Kilkenny", country: "Ireland", countryCode: "IE", population: 26000, region: "Leinster" },
-      { slug: "sligo", name: "Sligo", country: "Ireland", countryCode: "IE", population: 20000, region: "Connacht" }
+      { slug: "sligo", name: "Sligo", country: "Ireland", countryCode: "IE", population: 20000, region: "Connacht" },
+      { slug: "bray", name: "Bray", country: "Ireland", countryCode: "IE", population: 33000, region: "Leinster" },
+      { slug: "carlow", name: "Carlow", country: "Ireland", countryCode: "IE", population: 24000, region: "Leinster" },
+      { slug: "navan", name: "Navan", country: "Ireland", countryCode: "IE", population: 30000, region: "Leinster" },
+      { slug: "athlone", name: "Athlone", country: "Ireland", countryCode: "IE", population: 21000, region: "Leinster" },
+      { slug: "clonmel", name: "Clonmel", country: "Ireland", countryCode: "IE", population: 18000, region: "Munster" },
+      { slug: "dundalk", name: "Dundalk", country: "Ireland", countryCode: "IE", population: 39000, region: "Leinster" }
     ]
   },
 
@@ -70,6 +76,24 @@ export const COUNTRIES: Record<string, Country> = {
       { slug: "seattle", name: "Seattle", country: "United States", countryCode: "US", population: 750000, region: "Washington" },
       { slug: "austin", name: "Austin", country: "United States", countryCode: "US", population: 980000, region: "Texas" },
       { slug: "las-vegas", name: "Las Vegas", country: "United States", countryCode: "US", population: 640000, region: "Nevada" }
+    ]
+  },
+
+  argentina: {
+    slug: "argentina",
+    name: "Argentina",
+    code: "AR",
+    language: "Spanish",
+    currency: "USD",
+    phoneFormat: "+54",
+    cities: [
+      { slug: "buenos-aires", name: "Buenos Aires", country: "Argentina", countryCode: "AR", population: 3100000, region: "Buenos Aires" },
+      { slug: "mar-del-plata", name: "Mar del Plata", country: "Argentina", countryCode: "AR", population: 614000, region: "Buenos Aires" },
+      { slug: "formosa", name: "Formosa", country: "Argentina", countryCode: "AR", population: 270000, region: "Formosa" },
+      { slug: "tucuman", name: "Tucumán", country: "Argentina", countryCode: "AR", population: 550000, region: "Tucumán" },
+      { slug: "el-calafate", name: "El Calafate", country: "Argentina", countryCode: "AR", population: 22000, region: "Santa Cruz" },
+      { slug: "san-martin-de-los-andes", name: "San Martín de los Andes", country: "Argentina", countryCode: "AR", population: 28000, region: "Neuquén" },
+      { slug: "villa-gesell", name: "Villa Gesell", country: "Argentina", countryCode: "AR", population: 42000, region: "Buenos Aires" }
     ]
   }
 };

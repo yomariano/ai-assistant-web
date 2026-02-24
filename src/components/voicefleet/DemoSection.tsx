@@ -12,6 +12,10 @@ const DemoSection = () => {
     useCase: "",
   });
   const [submitted, setSubmitted] = useState(false);
+  const emailInputId = "demo-email";
+  const companyInputId = "demo-company";
+  const volumeSelectId = "demo-volume";
+  const useCaseSelectId = "demo-use-case";
 
   const volumeOptions = [
     "5,000 - 10,000",
@@ -69,15 +73,17 @@ const DemoSection = () => {
               ))}
             </ul>
 
-            <div className="flex items-center gap-3 p-4 bg-primary-foreground/10 rounded-xl backdrop-blur-sm">
-              <Phone className="w-6 h-6 text-accent" />
-              <div>
-                <p className="text-sm text-primary-foreground/70">Prefer to talk now?</p>
-                <a href="tel:+35312345678" className="text-lg font-semibold hover:underline">
-                  +353 1 234 5678
-                </a>
+            {process.env.NEXT_PUBLIC_DEMO_PHONE_NUMBER && (
+              <div className="flex items-center gap-3 p-4 bg-primary-foreground/10 rounded-xl backdrop-blur-sm">
+                <Phone className="w-6 h-6 text-accent" />
+                <div>
+                  <p className="text-sm text-primary-foreground/70">Prefer to talk now?</p>
+                  <a href={`tel:${process.env.NEXT_PUBLIC_DEMO_PHONE_NUMBER}`} className="text-lg font-semibold hover:underline">
+                    {process.env.NEXT_PUBLIC_DEMO_PHONE_NUMBER}
+                  </a>
+                </div>
               </div>
-            </div>
+            )}
           </div>
 
           {/* Form */}
@@ -95,24 +101,30 @@ const DemoSection = () => {
             ) : (
               <form onSubmit={handleSubmit} className="space-y-5">
                 <div>
-                  <label className="block text-sm font-medium text-foreground mb-2">
+                  <label htmlFor={emailInputId} className="block text-sm font-medium text-foreground mb-2">
                     Work Email *
                   </label>
                   <input
+                    id={emailInputId}
+                    name="email"
+                    aria-label="Work email"
                     type="email"
                     required
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     className="w-full px-4 py-3 rounded-lg border border-border bg-background text-foreground focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all"
-                    placeholder="you@company.com"
+                    placeholder="name at company dot com"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-foreground mb-2">
+                  <label htmlFor={companyInputId} className="block text-sm font-medium text-foreground mb-2">
                     Company *
                   </label>
                   <input
+                    id={companyInputId}
+                    name="company"
+                    aria-label="Company"
                     type="text"
                     required
                     value={formData.company}
@@ -123,10 +135,13 @@ const DemoSection = () => {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-foreground mb-2">
+                  <label htmlFor={volumeSelectId} className="block text-sm font-medium text-foreground mb-2">
                     Monthly Call Volume
                   </label>
                   <select
+                    id={volumeSelectId}
+                    name="volume"
+                    aria-label="Monthly call volume"
                     value={formData.volume}
                     onChange={(e) => setFormData({ ...formData, volume: e.target.value })}
                     className="w-full px-4 py-3 rounded-lg border border-border bg-background text-foreground focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all"
@@ -139,10 +154,13 @@ const DemoSection = () => {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-foreground mb-2">
+                  <label htmlFor={useCaseSelectId} className="block text-sm font-medium text-foreground mb-2">
                     Primary Use Case
                   </label>
                   <select
+                    id={useCaseSelectId}
+                    name="useCase"
+                    aria-label="Primary use case"
                     value={formData.useCase}
                     onChange={(e) => setFormData({ ...formData, useCase: e.target.value })}
                     className="w-full px-4 py-3 rounded-lg border border-border bg-background text-foreground focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all"

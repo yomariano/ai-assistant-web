@@ -12,6 +12,7 @@ function getApiUrl(): string | undefined {
 export async function getBlogPosts(options?: {
   category?: string;
   tag?: string;
+  language?: string;
   limit?: number;
   offset?: number;
 }): Promise<BlogPost[]> {
@@ -25,6 +26,7 @@ export async function getBlogPosts(options?: {
     const params = new URLSearchParams();
     if (options?.category) params.set("category", options.category);
     if (options?.tag) params.set("tag", options.tag);
+    if (options?.language) params.set("language", options.language);
     if (options?.limit) params.set("limit", String(options.limit));
     if (options?.offset) params.set("offset", String(options.offset));
 
