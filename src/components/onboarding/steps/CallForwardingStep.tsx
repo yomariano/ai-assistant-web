@@ -9,6 +9,7 @@ import {
   Copy,
   Check,
   ChevronRight,
+  ChevronDown,
   ExternalLink,
   HelpCircle,
 } from "lucide-react";
@@ -193,7 +194,11 @@ export function CallForwardingStep({
 
   // Instructions view
   if (view === "instructions" && selectedProvider) {
+    const noAnswerOption = selectedProvider.options.find((o) => o.type === "no_answer");
     const allCallsOption = selectedProvider.options.find((o) => o.type === "all");
+    // Primary option: no_answer if available, else fall back to all
+    const primaryOption = noAnswerOption || allCallsOption;
+    const hasAdvancedOption = noAnswerOption && allCallsOption;
 
     return (
       <div className="py-4">
@@ -210,16 +215,23 @@ export function CallForwardingStep({
             {selectedProvider.name}
           </h2>
           <p className="text-muted-foreground text-sm">
-            Follow these steps to forward your calls
+            Forward missed calls to your AI receptionist
           </p>
         </div>
 
-        {/* Main forwarding option */}
-        {allCallsOption && (
+        {/* Primary forwarding option (no_answer preferred) */}
+        {primaryOption && (
           <div className="mb-6">
-            <h3 className="font-semibold text-foreground mb-3">
-              {allCallsOption.label}
-            </h3>
+            <div className="flex items-center gap-2 mb-3">
+              <h3 className="font-semibold text-foreground">
+                {primaryOption.label}
+              </h3>
+              {noAnswerOption && (
+                <span className="text-xs bg-primary/10 text-primary px-2 py-0.5 rounded-full font-medium">
+                  Recommended
+                </span>
+              )}
+            </div>
             <div className="bg-muted/50 rounded-xl p-4 border border-border">
               <div className="flex items-center justify-between mb-2">
                 <span className="text-xs text-muted-foreground uppercase tracking-wide">
@@ -229,9 +241,9 @@ export function CallForwardingStep({
                   variant="ghost"
                   size="sm"
                   className="shrink-0"
-                  onClick={() => copyCode(allCallsOption.activateCode)}
+                  onClick={() => copyCode(primaryOption.activateCode)}
                 >
-                  {copiedCode === allCallsOption.activateCode ? (
+                  {copiedCode === primaryOption.activateCode ? (
                     <>
                       <Check className="w-4 h-4 mr-1 text-accent" />
                       Copied
@@ -245,10 +257,10 @@ export function CallForwardingStep({
                 </Button>
               </div>
               <code className="text-lg font-mono font-bold text-foreground block mb-3 break-all">
-                {generateActivationCode(allCallsOption.activateCode, voicefleetNumber)}
+                {generateActivationCode(primaryOption.activateCode, voicefleetNumber)}
               </code>
               <p className="text-sm text-muted-foreground">
-                {allCallsOption.description}
+                {primaryOption.description}
               </p>
             </div>
 
@@ -261,9 +273,9 @@ export function CallForwardingStep({
                   variant="ghost"
                   size="sm"
                   className="shrink-0"
-                  onClick={() => copyCode(allCallsOption.deactivateCode)}
+                  onClick={() => copyCode(primaryOption.deactivateCode)}
                 >
-                  {copiedCode === allCallsOption.deactivateCode ? (
+                  {copiedCode === primaryOption.deactivateCode ? (
                     <>
                       <Check className="w-4 h-4 mr-1 text-accent" />
                       Copied
@@ -277,10 +289,61 @@ export function CallForwardingStep({
                 </Button>
               </div>
               <code className="text-base font-mono text-foreground break-all">
-                {allCallsOption.deactivateCode}
+                {primaryOption.deactivateCode}
               </code>
             </div>
           </div>
+        )}
+
+        {/* Advanced option: Forward All Calls (collapsible) */}
+        {hasAdvancedOption && (
+          <details className="mb-6 group">
+            <summary className="flex items-center gap-2 cursor-pointer text-sm text-muted-foreground hover:text-foreground transition-colors">
+              <ChevronDown className="w-4 h-4 transition-transform group-open:rotate-180" />
+              Forward All Calls (Advanced)
+            </summary>
+            <div className="mt-3 pl-6">
+              <p className="text-xs text-muted-foreground mb-3">
+                Use this if you want the AI to answer every call immediately. Note: you&apos;ll need to set up an AI Schedule to control when calls go to humans.
+              </p>
+              <div className="bg-muted/30 rounded-xl p-4 border border-border/50">
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-xs text-muted-foreground uppercase tracking-wide">
+                    Activation Code
+                  </span>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="shrink-0"
+                    onClick={() => copyCode(allCallsOption.activateCode)}
+                  >
+                    {copiedCode === allCallsOption.activateCode ? (
+                      <>
+                        <Check className="w-4 h-4 mr-1 text-accent" />
+                        Copied
+                      </>
+                    ) : (
+                      <>
+                        <Copy className="w-4 h-4 mr-1" />
+                        Copy
+                      </>
+                    )}
+                  </Button>
+                </div>
+                <code className="text-base font-mono font-bold text-foreground block mb-2 break-all">
+                  {generateActivationCode(allCallsOption.activateCode, voicefleetNumber)}
+                </code>
+                <p className="text-sm text-muted-foreground">
+                  {allCallsOption.description}
+                </p>
+                <div className="mt-2 pt-2 border-t border-border/50">
+                  <span className="text-xs text-muted-foreground">
+                    Disable: <code className="font-mono">{allCallsOption.deactivateCode}</code>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </details>
         )}
 
         {/* Notes */}

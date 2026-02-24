@@ -55,7 +55,7 @@ export const callForwardingProviders: CallForwardingProvider[] = [
         label: 'Forward When No Answer',
         activateCode: '**61*{number}*11*20#',
         deactivateCode: '##61#',
-        description: 'Calls will forward after 20 seconds if not answered',
+        description: 'If you don\'t answer within 20 seconds, calls go to your AI receptionist. During business hours, answer as normal.',
       },
       {
         type: 'unreachable',
@@ -97,7 +97,7 @@ export const callForwardingProviders: CallForwardingProvider[] = [
         label: 'Forward When No Answer',
         activateCode: '**61*{number}**20#',
         deactivateCode: '##61#',
-        description: 'Calls will forward after 20 seconds if not answered',
+        description: 'If you don\'t answer within 20 seconds, calls go to your AI receptionist. During business hours, answer as normal.',
       },
       {
         type: 'unreachable',
@@ -139,7 +139,7 @@ export const callForwardingProviders: CallForwardingProvider[] = [
         label: 'Forward When No Answer',
         activateCode: '**61*{number}**20#',
         deactivateCode: '##61#',
-        description: 'Calls will forward after 20 seconds if not answered',
+        description: 'If you don\'t answer within 20 seconds, calls go to your AI receptionist. During business hours, answer as normal.',
       },
       {
         type: 'unreachable',
@@ -186,7 +186,7 @@ export const callForwardingProviders: CallForwardingProvider[] = [
         label: 'Forward When No Answer',
         activateCode: '**61*{number}*11*20#',
         deactivateCode: '##61#',
-        description: 'Calls will forward after 20 seconds if not answered',
+        description: 'If you don\'t answer within 20 seconds, calls go to your AI receptionist. During business hours, answer as normal.',
       },
       {
         type: 'unreachable',
@@ -228,7 +228,7 @@ export const callForwardingProviders: CallForwardingProvider[] = [
         label: 'Forward When No Answer',
         activateCode: '**61*{number}**20#',
         deactivateCode: '##61#',
-        description: 'Calls will forward after 20 seconds if not answered',
+        description: 'If you don\'t answer within 20 seconds, calls go to your AI receptionist. During business hours, answer as normal.',
       },
       {
         type: 'unreachable',
@@ -270,7 +270,7 @@ export const callForwardingProviders: CallForwardingProvider[] = [
         label: 'Forward When No Answer',
         activateCode: '**61*{number}**20#',
         deactivateCode: '##61#',
-        description: 'Calls will forward after 20 seconds if not answered',
+        description: 'If you don\'t answer within 20 seconds, calls go to your AI receptionist. During business hours, answer as normal.',
       },
       {
         type: 'unreachable',
@@ -313,7 +313,7 @@ export const callForwardingProviders: CallForwardingProvider[] = [
         label: 'Forward When No Answer',
         activateCode: '**61*{number}**20#',
         deactivateCode: '##61#',
-        description: 'Calls will forward after 20 seconds if not answered',
+        description: 'If you don\'t answer within 20 seconds, calls go to your AI receptionist. During business hours, answer as normal.',
       },
       {
         type: 'unreachable',
@@ -356,7 +356,7 @@ export const callForwardingProviders: CallForwardingProvider[] = [
         label: 'Forward When No Answer',
         activateCode: '**61*{number}**20#',
         deactivateCode: '##61#',
-        description: 'Calls will forward after 20 seconds if not answered',
+        description: 'If you don\'t answer within 20 seconds, calls go to your AI receptionist. During business hours, answer as normal.',
       },
       {
         type: 'unreachable',
@@ -399,7 +399,7 @@ export const callForwardingProviders: CallForwardingProvider[] = [
         label: 'Forward When No Answer',
         activateCode: '**61*{number}**20#',
         deactivateCode: '##61#',
-        description: 'Calls will forward after 20 seconds if not answered',
+        description: 'If you don\'t answer within 20 seconds, calls go to your AI receptionist. During business hours, answer as normal.',
       },
       {
         type: 'unreachable',
@@ -441,7 +441,7 @@ export const callForwardingProviders: CallForwardingProvider[] = [
         label: 'Forward When No Answer',
         activateCode: '**61*{number}**20#',
         deactivateCode: '##61#',
-        description: 'Calls will forward after 20 seconds if not answered',
+        description: 'If you don\'t answer within 20 seconds, calls go to your AI receptionist. During business hours, answer as normal.',
       },
       {
         type: 'unreachable',
@@ -485,7 +485,7 @@ export const callForwardingProviders: CallForwardingProvider[] = [
         label: 'Forward When No Answer',
         activateCode: '*61*{number}#',
         deactivateCode: '#61#',
-        description: 'Calls will forward if not answered after several rings',
+        description: 'If you don\'t answer after several rings, calls go to your AI receptionist. During business hours, answer as normal.',
       },
     ],
     notes: [
@@ -535,7 +535,7 @@ export const callForwardingProviders: CallForwardingProvider[] = [
         label: 'Forward When No Answer',
         activateCode: '*61*{number}#',
         deactivateCode: '#61#',
-        description: 'Calls will forward if not answered after several rings',
+        description: 'If you don\'t answer after several rings, calls go to your AI receptionist. During business hours, answer as normal.',
       },
     ],
     notes: [
@@ -689,7 +689,7 @@ export const callForwardingProvidersAR: CallForwardingProvider[] = [
         label: 'Desviar si No Contesta',
         activateCode: '**61*{number}*11*20#',
         deactivateCode: '##61#',
-        description: 'Las llamadas se desvían después de 20 segundos sin respuesta',
+        description: 'Si no contestás en 20 segundos, las llamadas van a tu recepcionista AI. En horario laboral, atendé normalmente.',
       },
       {
         type: 'unreachable',
@@ -731,7 +731,7 @@ export const callForwardingProvidersAR: CallForwardingProvider[] = [
         label: 'Desviar si No Contesta',
         activateCode: '**61*{number}*11*20#',
         deactivateCode: '##61#',
-        description: 'Las llamadas se desvían después de 20 segundos sin respuesta',
+        description: 'Si no contestás en 20 segundos, las llamadas van a tu recepcionista AI. En horario laboral, atendé normalmente.',
       },
       {
         type: 'unreachable',
@@ -773,7 +773,7 @@ export const callForwardingProvidersAR: CallForwardingProvider[] = [
         label: 'Desviar si No Contesta',
         activateCode: '**61*{number}*11*20#',
         deactivateCode: '##61#',
-        description: 'Las llamadas se desvían después de 20 segundos sin respuesta',
+        description: 'Si no contestás en 20 segundos, las llamadas van a tu recepcionista AI. En horario laboral, atendé normalmente.',
       },
       {
         type: 'unreachable',
@@ -820,7 +820,7 @@ export const callForwardingProvidersAR: CallForwardingProvider[] = [
         label: 'Desviar si No Contesta',
         activateCode: '**61*{number}*11*20#',
         deactivateCode: '##61#',
-        description: 'Las llamadas se desvían después de 20 segundos sin respuesta',
+        description: 'Si no contestás en 20 segundos, las llamadas van a tu recepcionista AI. En horario laboral, atendé normalmente.',
       },
       {
         type: 'unreachable',

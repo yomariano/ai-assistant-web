@@ -315,13 +315,13 @@ export default function NotificationsPage() {
                   <div>
                     <Input
                       type="tel"
-                      label="Transfer To"
+                      label="Transfer To (Mobile / Direct Line)"
                       value={escalation.transfer_number || ''}
                       onChange={(e) => setEscalation(prev => ({ ...prev, transfer_number: e.target.value }))}
-                      placeholder="+353851234567"
+                      placeholder="+353 85 123 4567"
                       className="bg-slate-50/50"
                     />
-                    <p className="text-xs text-slate-400 mt-1">Calls will be transferred to this number</p>
+                    <p className="text-xs text-slate-400 mt-1">Use a mobile or direct line. Do not use the number that forwards to your AI.</p>
                   </div>
                 )}
               </div>

@@ -160,7 +160,7 @@ function ScheduleRow({
 
       {!isActive && (
         <div className="flex-1">
-          <span className="text-sm text-slate-400 italic">AI off - calls forward to your business line</span>
+          <span className="text-sm text-slate-400 italic">AI off - calls forward to your mobile / direct line</span>
         </div>
       )}
     </div>
@@ -333,7 +333,7 @@ export default function AISchedulePage() {
     <div className="max-w-4xl mx-auto space-y-8 pb-12">
       <div>
         <h1 className="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">AI Schedule</h1>
-        <p className="text-slate-500 mt-2">Configure when the AI receptionist answers calls vs. forwards to your business line.</p>
+        <p className="text-slate-500 mt-2">Control when the AI answers calls. With no-answer forwarding, the AI only picks up missed calls — use this for additional fine-grained control.</p>
       </div>
 
       {/* Success/Error Messages */}
@@ -359,7 +359,7 @@ export default function AISchedulePage() {
             <h2 className="text-lg font-bold text-slate-900">Schedule</h2>
           </div>
           <p className="text-sm text-slate-500">
-            When should the AI answer your calls? Outside these hours, calls will forward to your business line.
+            When should the AI answer your calls? Outside these hours, calls will forward to your mobile or direct line.
           </p>
         </div>
 
@@ -416,14 +416,14 @@ export default function AISchedulePage() {
                     <div>
                       <Input
                         type="tel"
-                        label="Business Line (when AI is off)"
+                        label="Mobile / Direct Line (when AI is off)"
                         value={transferNumber}
                         onChange={(e) => setTransferNumber(e.target.value)}
-                        placeholder="+353 1 234 5678"
+                        placeholder="+353 85 123 4567"
                         className="bg-slate-50/50"
                       />
                       <p className="text-xs text-slate-400 mt-1">
-                        Calls will forward to this number when AI is not scheduled to answer.
+                        Use your mobile or a direct line — not your main business number (to avoid call loops).
                       </p>
                     </div>
 
