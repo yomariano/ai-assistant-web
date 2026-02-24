@@ -100,24 +100,7 @@ const nextConfig: NextConfig = {
         ],
       },
       {
-        // Prevent browser/proxy from caching HTML and RSC responses.
-        // After Coolify deployments, stale HTML references old JS chunks
-        // with outdated pricing/content. _next/static has content-hashed
-        // filenames and is cached immutably by Next.js internally.
-        source: "/((?!_next/static|_next/image).*)",
-        headers: [
-          {
-            key: "Cache-Control",
-            value: "no-cache, no-store, must-revalidate",
-          },
-          {
-            key: "Pragma",
-            value: "no-cache",
-          },
-        ],
-      },
-      {
-        // Cache static image assets (overrides no-cache above since this comes after)
+        // Cache static image assets
         source: "/(.*).(jpg|jpeg|png|gif|ico|svg|webp|avif)",
         headers: [
           {
@@ -127,7 +110,7 @@ const nextConfig: NextConfig = {
         ],
       },
       {
-        // Cache fonts (overrides no-cache above since this comes after)
+        // Cache fonts
         source: "/(.*).(woff|woff2|ttf|eot)",
         headers: [
           {
