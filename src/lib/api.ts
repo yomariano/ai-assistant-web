@@ -389,12 +389,13 @@ export const billingApi = {
   },
 
   getPaymentLink: async (planId: string): Promise<{ url: string }> => {
-    const { data } = await api.get(`/api/billing/payment-link/${planId}`);
+    // Cache-bust to prevent browser from serving stale payment links
+    const { data } = await api.get(`/api/billing/payment-link/${planId}?_t=${Date.now()}`);
     return data;
   },
 
   getPaymentLinks: async (): Promise<{ plans: Array<{ id: string; name: string; url: string }> }> => {
-    const { data } = await api.get('/api/billing/payment-links');
+    const { data } = await api.get(`/api/billing/payment-links?_t=${Date.now()}`);
     return data;
   },
 
