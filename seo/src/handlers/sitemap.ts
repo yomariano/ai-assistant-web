@@ -11,6 +11,7 @@ import { COUNTRIES, getAllCities } from '../data/locations';
 interface ContentItem {
   slug: string;
   updated_at: string;
+  language?: string;
 }
 
 interface SitemapApiData {
@@ -295,12 +296,22 @@ async function generateBlogSitemap(siteUrl: string, apiUrl: string) {
   const data = await fetchSitemapApiData(apiUrl);
   if (!data?.blogPosts?.length) return [];
 
-  return data.blogPosts.map(post => ({
-    loc: normalizeUrl(siteUrl, `blog/${post.slug.replace(/^\/+/, '')}`),
-    lastmod: post.updated_at ? new Date(post.updated_at).toISOString().split('T')[0] : undefined,
-    priority: '0.7',
-    changefreq: 'weekly',
-  }));
+  return data.blogPosts
+    .filter(post => {
+      // Skip posts with malformed slugs (leading slashes, path prefixes)
+      const clean = post.slug.replace(/^\/+/, '');
+      return clean && !clean.includes('/');
+    })
+    .map(post => {
+      const slug = post.slug.replace(/^\/+/, '').replace(/\/+$/, '');
+      const prefix = post.language === 'es' ? 'es/blog' : 'blog';
+      return {
+        loc: normalizeUrl(siteUrl, `${prefix}/${slug}`),
+        lastmod: post.updated_at ? new Date(post.updated_at).toISOString().split('T')[0] : undefined,
+        priority: '0.7',
+        changefreq: 'weekly',
+      };
+    });
 }
 
 /**
