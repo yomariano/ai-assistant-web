@@ -38,7 +38,7 @@ app.use('*', async (c, next) => {
 
   // Apply cache for GET requests on public routes
   const cacheMiddleware = cache({
-    cacheName: 'voicefleet-seo-v3',
+    cacheName: 'voicefleet-seo-v4',
     cacheControl: 'max-age=3600, stale-while-revalidate=86400',
   });
   return cacheMiddleware(c, next);
