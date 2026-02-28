@@ -160,11 +160,16 @@ export function getLocalizedDescription(business: Business, locale: string): str
   return fillTemplate(tpl, business, locale);
 }
 
-export function getLocalizedHours(business: Business, locale: string): string {
-  // Use per-vertical hours instead of the generic hardcoded value
-  const hours = business.openingHours === 'Mo-Fr 09:00-18:00'
-    ? (verticalHours[business.vertical] || business.openingHours)
-    : business.openingHours;
-  if (locale !== 'es') return hours;
-  return hours.replace(/\b(Mo|Tu|We|Th|Fr|Sa|Su)\b/g, (m) => dayMapES[m] || m);
+// All known template/generated hours values — not real business data
+const templateHoursSet = new Set([
+  'Mo-Fr 09:00-18:00',
+  ...Object.values(verticalHours),
+]);
+
+export function getLocalizedHours(business: Business, locale: string): string | null {
+  if (!business.openingHours) return null;
+  // Hide template hours — only show verified/real hours
+  if (templateHoursSet.has(business.openingHours)) return null;
+  if (locale !== 'es') return business.openingHours;
+  return business.openingHours.replace(/\b(Mo|Tu|We|Th|Fr|Sa|Su)\b/g, (m) => dayMapES[m] || m);
 }
