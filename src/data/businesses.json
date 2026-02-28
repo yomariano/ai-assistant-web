@@ -17846,5 +17846,233 @@
     "schema_type": "VeterinaryCare",
     "locale": "en",
     "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "ard-bia-at-nimmos",
+    "name": "Ard Bia at Nimmos",
+    "vertical": "restaurants",
+    "city": "Galway City",
+    "citySlug": "galway-city",
+    "country": "ireland",
+    "address": "Galway City, Ireland",
+    "phone": "+353 91 539897",
+    "website": "https://www.ardbia.com",
+    "email": "",
+    "description": "Ard Bia at Nimmos is a trusted restaurants located in Galway City, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Ard Bia at Nimmos take reservations?",
+        "a": "Yes, Ard Bia at Nimmos accepts reservations. Call ahead or book online for the best experience."
+      },
+      {
+        "q": "What type of cuisine does Ard Bia at Nimmos serve?",
+        "a": "Ard Bia at Nimmos offers a carefully curated menu featuring local and international dishes."
+      },
+      {
+        "q": "Does Ard Bia at Nimmos have parking?",
+        "a": "Please contact Ard Bia at Nimmos directly for parking information and availability."
+      },
+      {
+        "q": "Is there a dress code at Ard Bia at Nimmos?",
+        "a": "Smart casual attire is recommended. Contact the restaurant for specific event requirements."
+      },
+      {
+        "q": "Does Ard Bia at Nimmos offer private dining?",
+        "a": "Ard Bia at Nimmos may offer private dining options for special events. Contact them for details."
+      }
+    ],
+    "schema_type": "Restaurant",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "dela-restaurant",
+    "name": "Dela Restaurant",
+    "vertical": "restaurants",
+    "city": "Galway City",
+    "citySlug": "galway-city",
+    "country": "ireland",
+    "address": "Galway City, Ireland",
+    "phone": "+353 91 449252",
+    "website": "https://dela.ie",
+    "email": "",
+    "description": "Dela Restaurant is a trusted restaurants located in Galway City, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Dela Restaurant take reservations?",
+        "a": "Yes, Dela Restaurant accepts reservations. Call ahead or book online for the best experience."
+      },
+      {
+        "q": "What type of cuisine does Dela Restaurant serve?",
+        "a": "Dela Restaurant offers a carefully curated menu featuring local and international dishes."
+      },
+      {
+        "q": "Does Dela Restaurant have parking?",
+        "a": "Please contact Dela Restaurant directly for parking information and availability."
+      },
+      {
+        "q": "Is there a dress code at Dela Restaurant?",
+        "a": "Smart casual attire is recommended. Contact the restaurant for specific event requirements."
+      },
+      {
+        "q": "Does Dela Restaurant offer private dining?",
+        "a": "Dela Restaurant may offer private dining options for special events. Contact them for details."
+      }
+    ],
+    "schema_type": "Restaurant",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "ruibin-bar-restaurant",
+    "name": "Ruibín Bar & Restaurant",
+    "vertical": "restaurants",
+    "city": "Galway City",
+    "citySlug": "galway-city",
+    "country": "ireland",
+    "address": "Galway City, Ireland",
+    "phone": "+353 91 399200",
+    "website": "https://ruibin.ie",
+    "email": "info@ruibin.ie",
+    "description": "Ruibín Bar & Restaurant is a trusted restaurants located in Galway City, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Ruibín Bar & Restaurant take reservations?",
+        "a": "Yes, Ruibín Bar & Restaurant accepts reservations. Call ahead or book online for the best experience."
+      },
+      {
+        "q": "What type of cuisine does Ruibín Bar & Restaurant serve?",
+        "a": "Ruibín Bar & Restaurant offers a carefully curated menu featuring local and international dishes."
+      },
+      {
+        "q": "Does Ruibín Bar & Restaurant have parking?",
+        "a": "Please contact Ruibín Bar & Restaurant directly for parking information and availability."
+      },
+      {
+        "q": "Is there a dress code at Ruibín Bar & Restaurant?",
+        "a": "Smart casual attire is recommended. Contact the restaurant for specific event requirements."
+      },
+      {
+        "q": "Does Ruibín Bar & Restaurant offer private dining?",
+        "a": "Ruibín Bar & Restaurant may offer private dining options for special events. Contact them for details."
+      }
+    ],
+    "schema_type": "Restaurant",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "blackrock-cottage",
+    "name": "Blackrock Cottage",
+    "vertical": "restaurants",
+    "city": "Salthill Galway",
+    "citySlug": "salthill-galway",
+    "country": "ireland",
+    "address": "Salthill Galway, Ireland",
+    "phone": "+353 91 399280",
+    "website": "https://www.blackrockcottage.ie",
+    "email": "enquiries@blackrockcottage.ie",
+    "description": "Blackrock Cottage is a trusted restaurants located in Salthill Galway, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Blackrock Cottage take reservations?",
+        "a": "Yes, Blackrock Cottage accepts reservations. Call ahead or book online for the best experience."
+      },
+      {
+        "q": "What type of cuisine does Blackrock Cottage serve?",
+        "a": "Blackrock Cottage offers a carefully curated menu featuring local and international dishes."
+      },
+      {
+        "q": "Does Blackrock Cottage have parking?",
+        "a": "Please contact Blackrock Cottage directly for parking information and availability."
+      },
+      {
+        "q": "Is there a dress code at Blackrock Cottage?",
+        "a": "Smart casual attire is recommended. Contact the restaurant for specific event requirements."
+      },
+      {
+        "q": "Does Blackrock Cottage offer private dining?",
+        "a": "Blackrock Cottage may offer private dining options for special events. Contact them for details."
+      }
+    ],
+    "schema_type": "Restaurant",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "the-galleon-restaurant",
+    "name": "The Galleon Restaurant",
+    "vertical": "restaurants",
+    "city": "Salthill Galway",
+    "citySlug": "salthill-galway",
+    "country": "ireland",
+    "address": "Salthill Galway, Ireland",
+    "phone": "+353 91 522963",
+    "website": "https://www.thegalleonrestaurant.ie",
+    "email": "",
+    "description": "The Galleon Restaurant is a trusted restaurants located in Salthill Galway, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does The Galleon Restaurant take reservations?",
+        "a": "Yes, The Galleon Restaurant accepts reservations. Call ahead or book online for the best experience."
+      },
+      {
+        "q": "What type of cuisine does The Galleon Restaurant serve?",
+        "a": "The Galleon Restaurant offers a carefully curated menu featuring local and international dishes."
+      },
+      {
+        "q": "Does The Galleon Restaurant have parking?",
+        "a": "Please contact The Galleon Restaurant directly for parking information and availability."
+      },
+      {
+        "q": "Is there a dress code at The Galleon Restaurant?",
+        "a": "Smart casual attire is recommended. Contact the restaurant for specific event requirements."
+      },
+      {
+        "q": "Does The Galleon Restaurant offer private dining?",
+        "a": "The Galleon Restaurant may offer private dining options for special events. Contact them for details."
+      }
+    ],
+    "schema_type": "Restaurant",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "tribeton",
+    "name": "Tribeton",
+    "vertical": "restaurants",
+    "city": "Galway City",
+    "citySlug": "galway-city",
+    "country": "ireland",
+    "address": "Galway City, Ireland",
+    "phone": "+353 91 421600",
+    "website": "https://tribeton.ie",
+    "email": "",
+    "description": "Tribeton is a trusted restaurants located in Galway City, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Tribeton take reservations?",
+        "a": "Yes, Tribeton accepts reservations. Call ahead or book online for the best experience."
+      },
+      {
+        "q": "What type of cuisine does Tribeton serve?",
+        "a": "Tribeton offers a carefully curated menu featuring local and international dishes."
+      },
+      {
+        "q": "Does Tribeton have parking?",
+        "a": "Please contact Tribeton directly for parking information and availability."
+      },
+      {
+        "q": "Is there a dress code at Tribeton?",
+        "a": "Smart casual attire is recommended. Contact the restaurant for specific event requirements."
+      },
+      {
+        "q": "Does Tribeton offer private dining?",
+        "a": "Tribeton may offer private dining options for special events. Contact them for details."
+      }
+    ],
+    "schema_type": "Restaurant",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
   }
 ]
