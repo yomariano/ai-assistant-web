@@ -78,6 +78,9 @@ export function generateBaseHtml(options: {
     ${options.content}
   </main>
   ${generateFooter(options.siteUrl)}
+  <script defer src="https://umami-nowsccow8g0gk840cowocg80.voicefleet.ai/script.js" data-website-id="c5537431-034e-48a1-a174-afc879f28a56"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-FG80YCJMY2"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-FG80YCJMY2');</script>
 </body>
 </html>`;
 }
