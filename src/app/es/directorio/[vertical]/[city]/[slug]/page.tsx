@@ -16,9 +16,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const b = getBusinessBySlug(enV, city, slug);
   if (!b) return {};
   return {
-    title: `${b.name} — ${capitalize(b.city)} | VoiceFleet`,
+    title: `${b.name} — ${capitalize(b.city)}`,
     description: `${b.name} en ${b.city}. ${b.description.slice(0, 140)}`,
-    openGraph: { title: `${b.name} | VoiceFleet`, description: b.description.slice(0, 200) },
+    openGraph: { title: `${b.name} — ${capitalize(b.city)}`, description: b.description.slice(0, 200) },
   };
 }
 

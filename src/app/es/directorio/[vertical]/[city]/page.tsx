@@ -3,7 +3,7 @@ import Link from 'next/link';
 import HeaderES from '@/components/voicefleet/HeaderES';
 import FooterES from '@/components/voicefleet/FooterES';
 import BusinessCard from '@/components/directory/BusinessCard';
-import { getBusinessesByCity, verticalLabelsES, esSlugToVertical, capitalize } from '@/lib/directory-data';
+import { getBusinessesByCity, verticalLabelsES, esSlugToVertical, capitalize, getLocalizedDescription } from '@/lib/directory-data';
 import { generateItemListSchema } from '@/lib/schema-generators';
 import { notFound } from 'next/navigation';
 
@@ -15,8 +15,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const label = enV ? verticalLabelsES[enV] : null;
   if (!label) return {};
   return {
-    title: `Mejores ${label} en ${capitalize(city)} 2026 | VoiceFleet`,
-    description: `Encontra los mejores ${label.toLowerCase()} en ${capitalize(city)}.`,
+    title: `Mejores ${label} en ${capitalize(city)} 2026`,
+    description: `Encontrá los mejores ${label.toLowerCase()} en ${capitalize(city)}. Reseñas, datos de contacto y reservas con IA.`,
   };
 }
 
@@ -46,16 +46,17 @@ export default async function CityPageES({ params }: Props) {
             <span className="text-white">{cityName}</span>
           </nav>
           <h1 className="text-4xl md:text-5xl font-bold mb-4">Mejores {label} en {cityName}</h1>
-          <p className="text-xl text-slate-400 mb-12">{businesses.length} {label.toLowerCase()} en {cityName}</p>
+          <p className="text-xl text-slate-400 mb-12">{businesses.length} {businesses.length === 1 ? label.toLowerCase().replace(/s$/, '') : label.toLowerCase()} en {cityName}</p>
           <div className="grid md:grid-cols-2 gap-4">
             {businesses.map(b => (
               <BusinessCard
                 key={b.slug}
                 name={b.name}
                 address={b.address}
-                description={b.description}
+                description={getLocalizedDescription(b, 'es')}
                 phone={b.phone}
                 href={`/es/directorio/${vertical}/${city}/${b.slug}`}
+                locale="es"
               />
             ))}
           </div>

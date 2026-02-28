@@ -5,10 +5,10 @@ import DirectoryGrid from '@/components/directory/DirectoryGrid';
 import { getVerticals, verticalLabels, verticalIcons } from '@/lib/directory-data';
 
 export const metadata: Metadata = {
-  title: 'Business Directory — Find Local Services | VoiceFleet',
+  title: 'Business Directory — Find Local Services',
   description: 'Find local businesses across Ireland and Argentina. Restaurants, dentists, vets, salons, and more — all powered by AI.',
   openGraph: {
-    title: 'Business Directory | VoiceFleet',
+    title: 'Business Directory',
     description: 'Find local businesses powered by AI across Ireland and Argentina.',
     url: 'https://voicefleet.ai/directory',
   },

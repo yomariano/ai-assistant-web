@@ -3,7 +3,7 @@ import Link from 'next/link';
 import Header from '@/components/voicefleet/Header';
 import Footer from '@/components/voicefleet/Footer';
 import BusinessCard from '@/components/directory/BusinessCard';
-import { getBusinessesByCity, verticalLabels, capitalize } from '@/lib/directory-data';
+import { getBusinessesByCity, verticalLabels, capitalize, getLocalizedDescription } from '@/lib/directory-data';
 import { generateItemListSchema } from '@/lib/schema-generators';
 import { notFound } from 'next/navigation';
 
@@ -15,10 +15,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!label) return {};
   const cityName = capitalize(city);
   return {
-    title: `Best ${label} in ${cityName} 2026 | VoiceFleet`,
+    title: `Best ${label} in ${cityName} 2026`,
     description: `Find the best ${label.toLowerCase()} in ${cityName}. Reviews, contact info, and AI-powered booking.`,
     openGraph: {
-      title: `Best ${label} in ${cityName} | VoiceFleet`,
+      title: `Best ${label} in ${cityName}`,
       description: `Top ${label.toLowerCase()} in ${cityName} with AI-powered call handling.`,
     },
   };
@@ -62,7 +62,7 @@ export default async function CityPage({ params }: Props) {
                 key={b.slug}
                 name={b.name}
                 address={b.address}
-                description={b.description}
+                description={getLocalizedDescription(b, 'en')}
                 phone={b.phone}
                 href={`/directory/${vertical}/${city}/${b.slug}`}
               />

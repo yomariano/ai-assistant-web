@@ -5,9 +5,9 @@ import DirectoryGrid from '@/components/directory/DirectoryGrid';
 import { getVerticals, verticalLabelsES, verticalIcons, verticalSlugsES } from '@/lib/directory-data';
 
 export const metadata: Metadata = {
-  title: 'Directorio de Negocios — Encontra Servicios Locales | VoiceFleet',
-  description: 'Encontra negocios locales en Argentina e Irlanda. Restaurantes, dentistas, veterinarias y mas — impulsado por IA.',
-  openGraph: { title: 'Directorio de Negocios | VoiceFleet', description: 'Encontra negocios locales impulsados por IA.' },
+  title: 'Directorio de Negocios — Encontrá Servicios Locales',
+  description: 'Encontrá negocios locales en Argentina e Irlanda. Restaurantes, dentistas, veterinarias y más — impulsado por IA.',
+  openGraph: { title: 'Directorio de Negocios', description: 'Encontrá negocios locales impulsados por IA.' },
 };
 
 export default function DirectorioPage() {

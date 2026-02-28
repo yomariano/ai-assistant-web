@@ -12,10 +12,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const label = verticalLabels[vertical];
   if (!label) return {};
   return {
-    title: `${label} Directory Ireland & Argentina 2026 | VoiceFleet`,
+    title: `${label} Directory — Ireland & Argentina 2026`,
     description: `Find the best ${label.toLowerCase()} across Ireland and Argentina. Browse by city.`,
     openGraph: {
-      title: `${label} Directory | VoiceFleet`,
+      title: `${label} Directory`,
       description: `Browse ${label.toLowerCase()} by city across Ireland and Argentina.`,
     },
   };

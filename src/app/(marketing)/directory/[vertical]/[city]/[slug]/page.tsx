@@ -15,10 +15,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!b) return {};
   const label = verticalLabels[vertical] || vertical;
   return {
-    title: `${b.name} — ${capitalize(b.city)} ${label} | VoiceFleet`,
+    title: `${b.name} — ${capitalize(b.city)} ${label}`,
     description: `${b.name} in ${b.city}. ${b.description.slice(0, 140)}`,
     openGraph: {
-      title: `${b.name} | VoiceFleet Directory`,
+      title: `${b.name} — ${capitalize(b.city)}`,
       description: b.description.slice(0, 200),
       url: `https://voicefleet.ai/directory/${vertical}/${city}/${slug}`,
       type: 'website',

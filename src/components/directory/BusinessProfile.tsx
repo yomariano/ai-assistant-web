@@ -1,33 +1,11 @@
 import CTAButton from './CTAButton';
-import { Business } from '@/lib/directory-data';
-
-const dayMapES: Record<string, string> = {
-  Mo: 'Lun', Tu: 'Mar', We: 'Mié', Th: 'Jue', Fr: 'Vie', Sa: 'Sáb', Su: 'Dom',
-};
-
-const verticalNameES: Record<string, string> = {
-  dentists: 'clínica dental', vets: 'veterinaria', restaurants: 'restaurante',
-  salons: 'peluquería', plumbers: 'plomería', gyms: 'gimnasio',
-  mechanics: 'taller mecánico', accountants: 'estudio profesional',
-  physios: 'centro de fisioterapia', barbers: 'barbería',
-};
-
-function localizeHours(hours: string, isES: boolean): string {
-  if (!isES) return hours;
-  return hours.replace(/\b(Mo|Tu|We|Th|Fr|Sa|Su)\b/g, (m) => dayMapES[m] || m);
-}
-
-function localizeDescription(desc: string, business: Business, isES: boolean): string {
-  if (!isES) return desc;
-  const match = desc.match(/^(.+) is a trusted .+ located in (.+),\s*(.+)\.\s*Providing quality service to the local community\.$/);
-  if (!match) return desc;
-  const vName = verticalNameES[business.vertical] || business.vertical;
-  return `${match[1]} es una ${vName} de confianza ubicada en ${match[2]}, ${match[3]}. Brindando servicios de calidad a la comunidad local.`;
-}
+import { Business, getLocalizedDescription, getLocalizedHours } from '@/lib/directory-data';
 
 export default function BusinessProfile({ business, locale = 'en' }: { business: Business; locale?: string }) {
   const isES = locale === 'es';
   const demoHref = isES ? '/es/demo' : '/demo';
+  const description = getLocalizedDescription(business, locale);
+  const hours = getLocalizedHours(business, locale);
 
   return (
     <div className="max-w-4xl mx-auto">
@@ -42,7 +20,7 @@ export default function BusinessProfile({ business, locale = 'en' }: { business:
         <div className="grid md:grid-cols-3 gap-4">
           {business.phone && (
             <div>
-              <p className="text-slate-400 text-sm">{isES ? 'Telefono' : 'Phone'}</p>
+              <p className="text-slate-400 text-sm">{isES ? 'Teléfono' : 'Phone'}</p>
               <a href={`tel:${business.phone}`} className="text-cyan-400 font-medium hover:text-cyan-300">
                 {business.phone}
               </a>
@@ -65,10 +43,10 @@ export default function BusinessProfile({ business, locale = 'en' }: { business:
             </div>
           )}
         </div>
-        {business.openingHours && (
+        {hours && (
           <div className="mt-4 pt-4 border-t border-slate-700">
             <p className="text-slate-400 text-sm">{isES ? 'Horarios' : 'Opening Hours'}</p>
-            <p className="text-white">{localizeHours(business.openingHours, isES)}</p>
+            <p className="text-white">{hours}</p>
           </div>
         )}
       </div>
@@ -76,7 +54,7 @@ export default function BusinessProfile({ business, locale = 'en' }: { business:
       {/* Description */}
       <div className="mb-8">
         <h2 className="text-2xl font-semibold text-white mb-3">{isES ? 'Acerca de' : 'About'} {business.name}</h2>
-        <p className="text-slate-300 leading-relaxed">{localizeDescription(business.description, business, isES)}</p>
+        <p className="text-slate-300 leading-relaxed">{description}</p>
       </div>
 
       {/* CTAs */}
@@ -109,21 +87,21 @@ export default function BusinessProfile({ business, locale = 'en' }: { business:
       {/* VoiceFleet Value Prop */}
       <div className="bg-gradient-to-br from-blue-900/30 to-cyan-900/20 border border-blue-500/20 rounded-2xl p-8">
         <h2 className="text-2xl font-semibold text-white mb-4">
-          {isES ? `Sos dueno de ${business.name}?` : `Own ${business.name}?`}
+          {isES ? `¿Sos dueño de ${business.name}?` : `Own ${business.name}?`}
         </h2>
         <p className="text-slate-300 mb-4">
           {isES
-            ? `VoiceFleet puede responder automaticamente las llamadas de ${business.name} las 24 horas del dia, agendar turnos, y responder consultas — todo con inteligencia artificial.`
+            ? `VoiceFleet puede responder automáticamente las llamadas de ${business.name} las 24 horas del día, agendar turnos, y responder consultas — todo con inteligencia artificial.`
             : `VoiceFleet can automatically answer calls to ${business.name} 24/7, book appointments, and handle enquiries — all powered by AI.`}
         </p>
         <ul className="text-slate-400 space-y-2 mb-6">
-          <li>✅ {isES ? 'Nunca mas pierdas una llamada' : 'Never miss a call again'}</li>
-          <li>✅ {isES ? 'Agendamiento automatico de turnos' : 'Automatic appointment booking'}</li>
-          <li>✅ {isES ? 'Configuracion en 5 minutos' : 'Set up in 5 minutes'}</li>
-          <li>✅ {isES ? 'Funciona con tu numero actual' : 'Works with your existing number'}</li>
+          <li>✅ {isES ? 'Nunca más pierdas una llamada' : 'Never miss a call again'}</li>
+          <li>✅ {isES ? 'Agendamiento automático de turnos' : 'Automatic appointment booking'}</li>
+          <li>✅ {isES ? 'Configuración en 5 minutos' : 'Set up in 5 minutes'}</li>
+          <li>✅ {isES ? 'Funciona con tu número actual' : 'Works with your existing number'}</li>
         </ul>
         <CTAButton href={demoHref} variant="primary">
-          🚀 {isES ? 'Proba VoiceFleet Gratis' : 'Try VoiceFleet Free'}
+          🚀 {isES ? 'Probá VoiceFleet Gratis' : 'Try VoiceFleet Free'}
         </CTAButton>
       </div>
     </div>
