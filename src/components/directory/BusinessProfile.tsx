@@ -1,8 +1,33 @@
 import CTAButton from './CTAButton';
 import { Business } from '@/lib/directory-data';
 
+const dayMapES: Record<string, string> = {
+  Mo: 'Lun', Tu: 'Mar', We: 'Mié', Th: 'Jue', Fr: 'Vie', Sa: 'Sáb', Su: 'Dom',
+};
+
+const verticalNameES: Record<string, string> = {
+  dentists: 'clínica dental', vets: 'veterinaria', restaurants: 'restaurante',
+  salons: 'peluquería', plumbers: 'plomería', gyms: 'gimnasio',
+  mechanics: 'taller mecánico', accountants: 'estudio profesional',
+  physios: 'centro de fisioterapia', barbers: 'barbería',
+};
+
+function localizeHours(hours: string, isES: boolean): string {
+  if (!isES) return hours;
+  return hours.replace(/\b(Mo|Tu|We|Th|Fr|Sa|Su)\b/g, (m) => dayMapES[m] || m);
+}
+
+function localizeDescription(desc: string, business: Business, isES: boolean): string {
+  if (!isES) return desc;
+  const match = desc.match(/^(.+) is a trusted .+ located in (.+),\s*(.+)\.\s*Providing quality service to the local community\.$/);
+  if (!match) return desc;
+  const vName = verticalNameES[business.vertical] || business.vertical;
+  return `${match[1]} es una ${vName} de confianza ubicada en ${match[2]}, ${match[3]}. Brindando servicios de calidad a la comunidad local.`;
+}
+
 export default function BusinessProfile({ business, locale = 'en' }: { business: Business; locale?: string }) {
   const isES = locale === 'es';
+  const demoHref = isES ? '/es/demo' : '/demo';
 
   return (
     <div className="max-w-4xl mx-auto">
@@ -43,7 +68,7 @@ export default function BusinessProfile({ business, locale = 'en' }: { business:
         {business.openingHours && (
           <div className="mt-4 pt-4 border-t border-slate-700">
             <p className="text-slate-400 text-sm">{isES ? 'Horarios' : 'Opening Hours'}</p>
-            <p className="text-white">{business.openingHours}</p>
+            <p className="text-white">{localizeHours(business.openingHours, isES)}</p>
           </div>
         )}
       </div>
@@ -51,7 +76,7 @@ export default function BusinessProfile({ business, locale = 'en' }: { business:
       {/* Description */}
       <div className="mb-8">
         <h2 className="text-2xl font-semibold text-white mb-3">{isES ? 'Acerca de' : 'About'} {business.name}</h2>
-        <p className="text-slate-300 leading-relaxed">{business.description}</p>
+        <p className="text-slate-300 leading-relaxed">{localizeDescription(business.description, business, isES)}</p>
       </div>
 
       {/* CTAs */}
@@ -61,7 +86,7 @@ export default function BusinessProfile({ business, locale = 'en' }: { business:
             📞 {isES ? 'Llamar Ahora — IA 24/7' : 'Call Now — AI Answers 24/7'}
           </CTAButton>
         )}
-        <CTAButton href="/demo" variant="secondary">
+        <CTAButton href={demoHref} variant="secondary">
           {isES ? 'Solicitar Demo' : 'Book a Demo'}
         </CTAButton>
       </div>
@@ -97,7 +122,7 @@ export default function BusinessProfile({ business, locale = 'en' }: { business:
           <li>✅ {isES ? 'Configuracion en 5 minutos' : 'Set up in 5 minutes'}</li>
           <li>✅ {isES ? 'Funciona con tu numero actual' : 'Works with your existing number'}</li>
         </ul>
-        <CTAButton href="/demo" variant="primary">
+        <CTAButton href={demoHref} variant="primary">
           🚀 {isES ? 'Proba VoiceFleet Gratis' : 'Try VoiceFleet Free'}
         </CTAButton>
       </div>

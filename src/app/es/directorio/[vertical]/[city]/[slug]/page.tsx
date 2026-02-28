@@ -1,5 +1,7 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
+import HeaderES from '@/components/voicefleet/HeaderES';
+import FooterES from '@/components/voicefleet/FooterES';
 import BusinessProfile from '@/components/directory/BusinessProfile';
 import { getBusinessBySlug, verticalLabelsES, esSlugToVertical, capitalize } from '@/lib/directory-data';
 import { generateBusinessSchema, generateFAQSchema } from '@/lib/schema-generators';
@@ -32,21 +34,25 @@ export default async function BusinessPageES({ params }: Props) {
   const faqSchema = generateFAQSchema(business.faqs);
 
   return (
-    <div className="min-h-screen bg-slate-950 text-white">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
-      <div className="max-w-6xl mx-auto px-4 py-16">
-        <nav className="text-sm text-slate-400 mb-8">
-          <Link href="/es/directorio" className="hover:text-blue-400">Directorio</Link>
-          <span className="mx-2">/</span>
-          <Link href={`/es/directorio/${vertical}`} className="hover:text-blue-400">{label}</Link>
-          <span className="mx-2">/</span>
-          <Link href={`/es/directorio/${vertical}/${city}`} className="hover:text-blue-400">{capitalize(business.city)}</Link>
-          <span className="mx-2">/</span>
-          <span className="text-white">{business.name}</span>
-        </nav>
-        <BusinessProfile business={business} locale="es" />
+    <>
+      <HeaderES />
+      <div className="min-h-screen bg-slate-950 text-white pt-20">
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+        <div className="max-w-6xl mx-auto px-4 py-16">
+          <nav className="text-sm text-slate-400 mb-8">
+            <Link href="/es/directorio" className="hover:text-blue-400">Directorio</Link>
+            <span className="mx-2">/</span>
+            <Link href={`/es/directorio/${vertical}`} className="hover:text-blue-400">{label}</Link>
+            <span className="mx-2">/</span>
+            <Link href={`/es/directorio/${vertical}/${city}`} className="hover:text-blue-400">{capitalize(business.city)}</Link>
+            <span className="mx-2">/</span>
+            <span className="text-white">{business.name}</span>
+          </nav>
+          <BusinessProfile business={business} locale="es" />
+        </div>
       </div>
-    </div>
+      <FooterES />
+    </>
   );
 }

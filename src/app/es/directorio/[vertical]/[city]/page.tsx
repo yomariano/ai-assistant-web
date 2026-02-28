@@ -1,5 +1,7 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
+import HeaderES from '@/components/voicefleet/HeaderES';
+import FooterES from '@/components/voicefleet/FooterES';
 import BusinessCard from '@/components/directory/BusinessCard';
 import { getBusinessesByCity, verticalLabelsES, esSlugToVertical, capitalize } from '@/lib/directory-data';
 import { generateItemListSchema } from '@/lib/schema-generators';
@@ -31,31 +33,35 @@ export default async function CityPageES({ params }: Props) {
   const schema = generateItemListSchema(businesses, `Mejores ${label} en ${cityName}`);
 
   return (
-    <div className="min-h-screen bg-slate-950 text-white">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
-      <div className="max-w-6xl mx-auto px-4 py-16">
-        <nav className="text-sm text-slate-400 mb-8">
-          <Link href="/es/directorio" className="hover:text-blue-400">Directorio</Link>
-          <span className="mx-2">/</span>
-          <Link href={`/es/directorio/${vertical}`} className="hover:text-blue-400">{label}</Link>
-          <span className="mx-2">/</span>
-          <span className="text-white">{cityName}</span>
-        </nav>
-        <h1 className="text-4xl md:text-5xl font-bold mb-4">Mejores {label} en {cityName}</h1>
-        <p className="text-xl text-slate-400 mb-12">{businesses.length} {label.toLowerCase()} en {cityName}</p>
-        <div className="grid md:grid-cols-2 gap-4">
-          {businesses.map(b => (
-            <BusinessCard
-              key={b.slug}
-              name={b.name}
-              address={b.address}
-              description={b.description}
-              phone={b.phone}
-              href={`/es/directorio/${vertical}/${city}/${b.slug}`}
-            />
-          ))}
+    <>
+      <HeaderES />
+      <div className="min-h-screen bg-slate-950 text-white pt-20">
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+        <div className="max-w-6xl mx-auto px-4 py-16">
+          <nav className="text-sm text-slate-400 mb-8">
+            <Link href="/es/directorio" className="hover:text-blue-400">Directorio</Link>
+            <span className="mx-2">/</span>
+            <Link href={`/es/directorio/${vertical}`} className="hover:text-blue-400">{label}</Link>
+            <span className="mx-2">/</span>
+            <span className="text-white">{cityName}</span>
+          </nav>
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">Mejores {label} en {cityName}</h1>
+          <p className="text-xl text-slate-400 mb-12">{businesses.length} {label.toLowerCase()} en {cityName}</p>
+          <div className="grid md:grid-cols-2 gap-4">
+            {businesses.map(b => (
+              <BusinessCard
+                key={b.slug}
+                name={b.name}
+                address={b.address}
+                description={b.description}
+                phone={b.phone}
+                href={`/es/directorio/${vertical}/${city}/${b.slug}`}
+              />
+            ))}
+          </div>
         </div>
       </div>
-    </div>
+      <FooterES />
+    </>
   );
 }
