@@ -36,6 +36,7 @@ export default function NotificationsPage() {
     notify_on_call_complete: true,
     notify_on_escalation: true,
     notify_on_voicemail: true,
+    notify_on_knowledge_gap: true,
   });
 
   // Simplified Escalation Settings State
@@ -254,6 +255,14 @@ export default function NotificationsPage() {
                         onChange={(val) => setPreferences(prev => ({ ...prev, notify_on_voicemail: val }))}
                       />
                     </div>
+
+                    <div className="flex items-center justify-between py-1">
+                      <span className="text-sm text-slate-600">AI can&apos;t answer a question</span>
+                      <Toggle
+                        enabled={preferences.notify_on_knowledge_gap !== false}
+                        onChange={(val) => setPreferences(prev => ({ ...prev, notify_on_knowledge_gap: val }))}
+                      />
+                    </div>
                   </div>
                 )}
               </div>
@@ -315,13 +324,13 @@ export default function NotificationsPage() {
                   <div>
                     <Input
                       type="tel"
-                      label="Transfer To (Mobile / Direct Line)"
+                      label="Transfer To (Business Phone Number)"
                       value={escalation.transfer_number || ''}
                       onChange={(e) => setEscalation(prev => ({ ...prev, transfer_number: e.target.value }))}
                       placeholder="+353 85 123 4567"
                       className="bg-slate-50/50"
                     />
-                    <p className="text-xs text-slate-400 mt-1">Use a mobile or direct line. Do not use the number that forwards to your AI.</p>
+                    <p className="text-xs text-slate-400 mt-1">Your business phone number. The AI will transfer callers here when they ask for a human.</p>
                   </div>
                 )}
               </div>

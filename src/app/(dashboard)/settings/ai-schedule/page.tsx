@@ -160,7 +160,7 @@ function ScheduleRow({
 
       {!isActive && (
         <div className="flex-1">
-          <span className="text-sm text-slate-400 italic">AI off - calls forward to your mobile / direct line</span>
+          <span className="text-sm text-slate-400 italic">AI off — calls forward to your business number</span>
         </div>
       )}
     </div>
@@ -359,7 +359,7 @@ export default function AISchedulePage() {
             <h2 className="text-lg font-bold text-slate-900">Schedule</h2>
           </div>
           <p className="text-sm text-slate-500">
-            When should the AI answer your calls? Outside these hours, calls will forward to your mobile or direct line.
+            When should the AI answer your calls? Outside these hours, calls will forward to your business number.
           </p>
         </div>
 
@@ -416,14 +416,14 @@ export default function AISchedulePage() {
                     <div>
                       <Input
                         type="tel"
-                        label="Mobile / Direct Line (when AI is off)"
+                        label="Business Phone Number (when AI is off)"
                         value={transferNumber}
                         onChange={(e) => setTransferNumber(e.target.value)}
-                        placeholder="+353 85 123 4567"
+                        placeholder="+353 1 234 5678"
                         className="bg-slate-50/50"
                       />
                       <p className="text-xs text-slate-400 mt-1">
-                        Use your mobile or a direct line — not your main business number (to avoid call loops).
+                        Your business phone number. When the AI is off, calls will ring back on this number.
                       </p>
                     </div>
 
