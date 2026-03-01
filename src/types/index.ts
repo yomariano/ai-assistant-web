@@ -147,6 +147,7 @@ export interface NotificationPreferences {
   notify_on_message_taken?: boolean; // Optional for MVP - defaults to true
   notify_on_escalation: boolean;
   notify_on_voicemail: boolean;
+  notify_on_knowledge_gap?: boolean;
   // Advanced fields (not shown in MVP UI, use defaults)
   business_hours_only?: boolean;
   timezone?: string;
