@@ -51,7 +51,7 @@ export default function Footer() {
                         <Link href="/compare" className="text-gray-400 hover:text-white transition-colors">
                             Compare
                         </Link>
-                        <Link href="/industries" className="text-gray-400 hover:text-white transition-colors">
+                        <Link href="/for" className="text-gray-400 hover:text-white transition-colors">
                             Industries
                         </Link>
                         <Link href="/locations" className="text-gray-400 hover:text-white transition-colors">

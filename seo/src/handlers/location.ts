@@ -8,6 +8,7 @@ import { Bindings, GeneratedContent } from '../types';
 import { getCity, getCountry, COUNTRIES } from '../data/locations';
 import { INDUSTRIES } from '../data/industries';
 import { getContent } from '../utils/claude';
+import { getSafeHeaderValue, getTextOrFallback, sanitizeGeneratedContent } from '../utils/content';
 import {
   generateBaseHtml,
   generateHeroSection,
@@ -50,12 +51,14 @@ export async function locationHandler(c: Context<{ Bindings: Bindings }>) {
   } catch (e) {
     console.error(`[SEO] Failed to parse cached content for ${cacheKey}:`, e);
   }
+  content = sanitizeGeneratedContent(content);
 
   c.header('X-VoiceFleet-SEO', '1');
   c.header('X-VoiceFleet-SEO-Content', content ? 'ai' : 'fallback');
   c.header('X-VoiceFleet-SEO-Cache-Key', cacheKey);
-  if (content?.generatedAt) {
-    c.header('X-VoiceFleet-SEO-Generated-At', content.generatedAt);
+  const generatedAt = getSafeHeaderValue(content?.generatedAt);
+  if (generatedAt) {
+    c.header('X-VoiceFleet-SEO-Generated-At', generatedAt);
   }
 
   // Generate page content
@@ -85,8 +88,11 @@ export async function locationHandler(c: Context<{ Bindings: Bindings }>) {
   }
 
   const html = generateBaseHtml({
-    title: content?.title || `AI Voice Agent in ${city.name}, ${country.name} | VoiceFleet`,
-    description: content?.metaDescription || `VoiceFleet provides AI voice agents for businesses in ${city.name}. Get a local ${country.phoneFormat} phone number and automate your calls 24/7.`,
+    title: getTextOrFallback(content?.title, `AI Voice Agent in ${city.name}, ${country.name} | VoiceFleet`),
+    description: getTextOrFallback(
+      content?.metaDescription,
+      `VoiceFleet provides AI voice agents for businesses in ${city.name}. Get a local ${country.phoneFormat} phone number and automate your calls 24/7.`
+    ),
     canonicalUrl: `${siteUrl}/locations/${countrySlug}/${citySlug}`,
     content: pageContent,
     schemas,

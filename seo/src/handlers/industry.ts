@@ -7,6 +7,7 @@ import { Context } from 'hono';
 import { Bindings, GeneratedContent } from '../types';
 import { INDUSTRIES, getIndustry, getRelatedIndustries } from '../data/industries';
 import { getContent } from '../utils/claude';
+import { getSafeHeaderValue, getTextOrFallback, sanitizeGeneratedContent } from '../utils/content';
 import { generateIndustryPageSchemas } from '../utils/seo';
 import {
   generateBaseHtml,
@@ -43,12 +44,14 @@ export async function industryHandler(c: Context<{ Bindings: Bindings }>) {
   } catch (e) {
     console.error(`[SEO] Failed to parse cached content for ${cacheKey}:`, e);
   }
+  content = sanitizeGeneratedContent(content);
 
   c.header('X-VoiceFleet-SEO', '1');
   c.header('X-VoiceFleet-SEO-Content', content ? 'ai' : 'fallback');
   c.header('X-VoiceFleet-SEO-Cache-Key', cacheKey);
-  if (content?.generatedAt) {
-    c.header('X-VoiceFleet-SEO-Generated-At', content.generatedAt);
+  const generatedAt = getSafeHeaderValue(content?.generatedAt);
+  if (generatedAt) {
+    c.header('X-VoiceFleet-SEO-Generated-At', generatedAt);
   }
 
   // Generate page content (fall back to static content if AI content causes errors)
@@ -73,9 +76,9 @@ export async function industryHandler(c: Context<{ Bindings: Bindings }>) {
 
   // Build full HTML
   const html = generateBaseHtml({
-    title: content?.title || `AI Voice Agent for ${industry.name} | VoiceFleet`,
-    description: content?.metaDescription || industry.metaDescription,
-    canonicalUrl: `${siteUrl}/industries/${industrySlug}`,
+    title: getTextOrFallback(content?.title, `AI Voice Agent for ${industry.name} | VoiceFleet`),
+    description: getTextOrFallback(content?.metaDescription, industry.metaDescription),
+    canonicalUrl: `${siteUrl}/for/${industry.slug}`,
     content: pageContent,
     schemas,
     siteUrl
@@ -99,8 +102,8 @@ function renderWithAIContent(
     // Breadcrumbs
     generateBreadcrumbs([
       { name: 'Home', url: siteUrl },
-      { name: 'Industries', url: `${siteUrl}/industries` },
-      { name: industry.name, url: `${siteUrl}/industries/${industry.slug}` }
+      { name: 'Industries', url: `${siteUrl}/for` },
+      { name: industry.name, url: `${siteUrl}/for/${industry.slug}` }
     ]),
 
     // Hero
@@ -186,8 +189,8 @@ function renderFallbackContent(
     // Breadcrumbs
     generateBreadcrumbs([
       { name: 'Home', url: siteUrl },
-      { name: 'Industries', url: `${siteUrl}/industries` },
-      { name: industry.name, url: `${siteUrl}/industries/${industry.slug}` }
+      { name: 'Industries', url: `${siteUrl}/for` },
+      { name: industry.name, url: `${siteUrl}/for/${industry.slug}` }
     ]),
 
     // Hero

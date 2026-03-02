@@ -12,6 +12,7 @@ import { Bindings, GeneratedContent } from '../types';
 import { INDUSTRIES, getIndustry, getRelatedIndustries } from '../data/industries';
 import { findCityBySlug, COUNTRIES } from '../data/locations';
 import { getContent } from '../utils/claude';
+import { getTextOrFallback, sanitizeGeneratedContent } from '../utils/content';
 import {
   generateBaseHtml,
   generateHeroSection,
@@ -137,6 +138,7 @@ export async function aiReceptionistHandler(
   } catch (e) {
     console.error(`[SEO] Failed to parse cached content for ${cacheKey}:`, e);
   }
+  content = sanitizeGeneratedContent(content);
 
   c.header('X-VoiceFleet-SEO', '1');
   c.header('X-VoiceFleet-SEO-Page-Type', 'ai-receptionist-en');
@@ -166,8 +168,8 @@ export async function aiReceptionistHandler(
     })),
     JSON.stringify(generateBreadcrumbSchema([
       { name: 'Home', url: siteUrl },
-      { name: 'Industries', url: `${siteUrl}/industries` },
-      { name: industry.name, url: `${siteUrl}/industries/${industry.slug}` },
+      { name: 'Industries', url: `${siteUrl}/for` },
+      { name: industry.name, url: `${siteUrl}/for/${industry.slug}` },
       { name: `AI Receptionist in ${city.name}`, url: pageUrl }
     ]))
   ];
@@ -177,8 +179,8 @@ export async function aiReceptionistHandler(
   }
 
   return c.html(generateBaseHtml({
-    title: content?.title?.replace('Voice Agent', 'AI Receptionist') || title,
-    description: content?.metaDescription || description,
+    title: getTextOrFallback(content?.title?.replace('Voice Agent', 'AI Receptionist'), title),
+    description: getTextOrFallback(content?.metaDescription, description),
     canonicalUrl: pageUrl,
     content: pageContent,
     schemas,
@@ -217,6 +219,7 @@ export async function asistenteIaHandler(
   } catch (e) {
     console.error(`[SEO] Failed to parse cached content for ${cacheKey}:`, e);
   }
+  content = sanitizeGeneratedContent(content);
 
   c.header('X-VoiceFleet-SEO', '1');
   c.header('X-VoiceFleet-SEO-Page-Type', 'asistente-ia-es');
@@ -317,8 +320,8 @@ function renderAiReceptionistContent(
   const sections = [
     generateBreadcrumbs([
       { name: 'Home', url: siteUrl },
-      { name: 'Industries', url: `${siteUrl}/industries` },
-      { name: industry.name, url: `${siteUrl}/industries/${industry.slug}` },
+      { name: 'Industries', url: `${siteUrl}/for` },
+      { name: industry.name, url: `${siteUrl}/for/${industry.slug}` },
       { name: `AI Receptionist in ${city.name}`, url: pageUrl }
     ]),
 

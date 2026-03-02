@@ -399,7 +399,7 @@ export function generateBreadcrumbs(items: Array<{ name: string; url: string }>)
  */
 export function generateRelatedIndustriesSection(industries: Industry[], siteUrl: string): string {
   const items = industries.slice(0, 4).map(ind => `
-    <a href="${siteUrl}/industries/${ind.slug}" class="related-industry">
+    <a href="${siteUrl}/for/${ind.slug}" class="related-industry">
       <span class="related-icon">${getIndustryIcon(ind.icon)}</span>
       <span class="related-name">${escapeHtml(ind.name)}</span>
     </a>
@@ -419,7 +419,13 @@ export function generateRelatedIndustriesSection(industries: Industry[], siteUrl
 /**
  * Utility: Escape HTML
  */
-export function escapeHtml(text: string): string {
+export function escapeHtml(text: unknown): string {
+  const safeText =
+    typeof text === 'string'
+      ? text
+      : typeof text === 'number' || typeof text === 'boolean'
+        ? String(text)
+        : '';
   const map: Record<string, string> = {
     '&': '&amp;',
     '<': '&lt;',
@@ -427,7 +433,7 @@ export function escapeHtml(text: string): string {
     '"': '&quot;',
     "'": '&#39;'
   };
-  return text.replace(/[&<>"']/g, m => map[m]);
+  return safeText.replace(/[&<>"']/g, m => map[m]);
 }
 
 /**

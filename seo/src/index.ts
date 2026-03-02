@@ -5,8 +5,6 @@
 
 import { Hono, type Context } from 'hono';
 import { cache } from 'hono/cache';
-import { industryHandler } from './handlers/industry';
-import { industriesIndexHandler } from './handlers/industries-index';
 import { locationHandler } from './handlers/location';
 import { locationsCountryHandler, locationsIndexHandler } from './handlers/locations-index';
 import { industryLocationHandler } from './handlers/industry-location';
@@ -14,7 +12,7 @@ import { aiReceptionistHandler, asistenteIaHandler } from './handlers/ai-recepti
 import { sitemapHandlerWithType, sitemapIndexHandler } from './handlers/sitemap';
 import { robotsHandler } from './handlers/robots';
 import { scheduledHandler, manualGenerateContent, runContentGeneration } from './handlers/scheduled';
-import { INDUSTRIES } from './data/industries';
+import { INDUSTRIES, getIndustry } from './data/industries';
 import { COUNTRIES } from './data/locations';
 import { Bindings } from './types';
 import { isConfiguredSecret } from './utils/config';
@@ -38,7 +36,7 @@ app.use('*', async (c, next) => {
 
   // Apply cache for GET requests on public routes
   const cacheMiddleware = cache({
-    cacheName: 'voicefleet-seo-v4',
+    cacheName: 'voicefleet-seo-v5',
     cacheControl: 'max-age=3600, stale-while-revalidate=86400',
   });
   return cacheMiddleware(c, next);
@@ -61,11 +59,22 @@ app.get('/sitemaps/:type', (c) => {
   return sitemapHandlerWithType(c, type);
 });
 
-// Industry index page - lists all industries
-app.get('/industries', industriesIndexHandler);
+// Legacy industry pages now redirect to the canonical Next.js use-case pages.
+app.get('/industries', (c) => {
+  const siteUrl = (c.env.SITE_URL || 'https://voicefleet.ai').replace(/\/+$/, '');
+  return c.redirect(`${siteUrl}/for`, 301);
+});
 
-// Industry pages: /industries/restaurants
-app.get('/industries/:industry', industryHandler);
+app.get('/industries/:industry', (c) => {
+  const siteUrl = (c.env.SITE_URL || 'https://voicefleet.ai').replace(/\/+$/, '');
+  const industry = getIndustry(c.req.param('industry'));
+
+  if (!industry) {
+    return c.notFound();
+  }
+
+  return c.redirect(`${siteUrl}/for/${industry.slug}`, 301);
+});
 
 // Location pages: /locations/ireland/dublin
 app.get('/locations/:country/:city', locationHandler);

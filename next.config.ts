@@ -59,6 +59,7 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       // /industries/:slug → /for/:slug (old URL format)
+      { source: "/industries", destination: "/for", permanent: true },
       { source: "/industries/:slug", destination: "/for/:slug", permanent: true },
       // /blog/es/ → /es/blog/ (Spanish blog canonical URL)
       { source: "/blog/es", destination: "/es/blog", permanent: true },

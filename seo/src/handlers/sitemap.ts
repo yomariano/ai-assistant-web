@@ -198,13 +198,13 @@ ${urls.map(u => `  <url>
 function generateIndustriesSitemap(siteUrl: string) {
   const urls = [
     // Industries index
-    { loc: `${siteUrl}/industries`, priority: '0.9', changefreq: 'weekly' }
+    { loc: `${siteUrl}/for`, priority: '0.9', changefreq: 'weekly' }
   ];
 
   // Individual industry pages
   for (const slug of getIndustrySlugs()) {
     urls.push({
-      loc: `${siteUrl}/industries/${slug}`,
+      loc: `${siteUrl}/for/${slug}`,
       priority: '0.8',
       changefreq: 'weekly'
     });
@@ -218,7 +218,7 @@ function generateIndustriesSitemap(siteUrl: string) {
  */
 function generateIndexesSitemap(siteUrl: string) {
   return [
-    { loc: `${siteUrl}/industries`, priority: '0.9', changefreq: 'weekly' },
+    { loc: `${siteUrl}/for`, priority: '0.9', changefreq: 'weekly' },
     { loc: `${siteUrl}/locations`, priority: '0.9', changefreq: 'weekly' },
     { loc: `${siteUrl}/locations/ireland`, priority: '0.7', changefreq: 'weekly' },
     { loc: `${siteUrl}/locations/uk`, priority: '0.7', changefreq: 'weekly' },

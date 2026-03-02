@@ -213,6 +213,7 @@ export function generateIndustryPageSchemas(
   content: GeneratedContent | null,
   siteUrl: string
 ): string[] {
+  const industryUrl = `${siteUrl}/for/${industry.slug}`;
   const schemas: object[] = [
     generateOrganizationSchema(),
     generateSoftwareSchema(industry),
@@ -224,14 +225,14 @@ export function generateIndustryPageSchemas(
     generateArticleSchema({
       title: content?.title || `AI Voice Agent for ${industry.name}`,
       description: content?.metaDescription || industry.metaDescription,
-      url: `${siteUrl}/industries/${industry.slug}`,
+      url: industryUrl,
       datePublished: content?.generatedAt,
       dateModified: content?.generatedAt
     }),
     generateBreadcrumbSchema([
       { name: 'Home', url: siteUrl },
-      { name: 'Industries', url: `${siteUrl}/industries` },
-      { name: industry.name, url: `${siteUrl}/industries/${industry.slug}` }
+      { name: 'Industries', url: `${siteUrl}/for` },
+      { name: industry.name, url: industryUrl }
     ])
   ];
 

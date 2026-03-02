@@ -8,6 +8,7 @@ import { Bindings, GeneratedContent } from '../types';
 import { INDUSTRIES, getIndustry, getRelatedIndustries } from '../data/industries';
 import { findCityBySlug, COUNTRIES } from '../data/locations';
 import { getContent } from '../utils/claude';
+import { getSafeHeaderValue, getTextOrFallback, sanitizeGeneratedContent } from '../utils/content';
 import {
   generateBaseHtml,
   generateHeroSection,
@@ -71,11 +72,13 @@ export async function industryLocationHandler(
   } catch (e) {
     console.error(`[SEO] Failed to parse cached content for ${cacheKey}:`, e);
   }
+  content = sanitizeGeneratedContent(content);
 
   c.header('X-VoiceFleet-SEO', '1');
   c.header('X-VoiceFleet-SEO-Cache-Key', cacheKey);
-  if (content?.generatedAt) {
-    c.header('X-VoiceFleet-SEO-Generated-At', content.generatedAt);
+  const generatedAt = getSafeHeaderValue(content?.generatedAt);
+  if (generatedAt) {
+    c.header('X-VoiceFleet-SEO-Generated-At', generatedAt);
   }
 
   // Generate page content — fall back to template if AI content is incomplete/corrupt
@@ -113,8 +116,8 @@ export async function industryLocationHandler(
     })),
     JSON.stringify(generateBreadcrumbSchema([
       { name: 'Home', url: siteUrl },
-      { name: 'Industries', url: `${siteUrl}/industries` },
-      { name: industry.name, url: `${siteUrl}/industries/${industry.slug}` },
+      { name: 'Industries', url: `${siteUrl}/for` },
+      { name: industry.name, url: `${siteUrl}/for/${industry.slug}` },
       { name: `${industry.name} in ${city.name}`, url: pageUrl }
     ]))
   ];
@@ -124,8 +127,11 @@ export async function industryLocationHandler(
   }
 
   const html = generateBaseHtml({
-    title: content?.title || `AI Voice Agent for ${industry.name} in ${city.name} | VoiceFleet`,
-    description: content?.metaDescription || `VoiceFleet provides AI voice agents for ${industry.name.toLowerCase()} in ${city.name}, ${country.name}. Automate phone orders, appointments, and inquiries 24/7.`,
+    title: getTextOrFallback(content?.title, `AI Voice Agent for ${industry.name} in ${city.name} | VoiceFleet`),
+    description: getTextOrFallback(
+      content?.metaDescription,
+      `VoiceFleet provides AI voice agents for ${industry.name.toLowerCase()} in ${city.name}, ${country.name}. Automate phone orders, appointments, and inquiries 24/7.`
+    ),
     canonicalUrl: pageUrl,
     content: pageContent,
     schemas,
@@ -149,8 +155,8 @@ function renderWithAIContent(
   const sections = [
     generateBreadcrumbs([
       { name: 'Home', url: siteUrl },
-      { name: 'Industries', url: `${siteUrl}/industries` },
-      { name: industry.name, url: `${siteUrl}/industries/${industry.slug}` },
+      { name: 'Industries', url: `${siteUrl}/for` },
+      { name: industry.name, url: `${siteUrl}/for/${industry.slug}` },
       { name: `${industry.name} in ${city.name}`, url: pageUrl }
     ]),
 
@@ -214,8 +220,8 @@ function renderFallbackContent(
   const sections = [
     generateBreadcrumbs([
       { name: 'Home', url: siteUrl },
-      { name: 'Industries', url: `${siteUrl}/industries` },
-      { name: industry.name, url: `${siteUrl}/industries/${industry.slug}` },
+      { name: 'Industries', url: `${siteUrl}/for` },
+      { name: industry.name, url: `${siteUrl}/for/${industry.slug}` },
       { name: `${industry.name} in ${city.name}`, url: pageUrl }
     ]),
 
