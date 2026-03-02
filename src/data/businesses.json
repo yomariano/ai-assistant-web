@@ -1354,6 +1354,156 @@
     "openingHours": "Mo-Fr 09:00-18:00"
   },
   {
+    "slug": "consultorio-odontologico-integral",
+    "name": "Consultorio Odontológico Integral",
+    "vertical": "dentists",
+    "city": "Buenos Aires",
+    "citySlug": "buenos-aires",
+    "country": "argentina",
+    "address": "Buenos Aires, Argentina",
+    "phone": "(011) 4777-2008",
+    "website": "https://www.odontologos.com.ar",
+    "email": "",
+    "description": "Consultorio Odontológico Integral is a trusted dentists located in Buenos Aires, Argentina. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "¿Consultorio Odontológico Integral acepta pacientes nuevos?",
+        "a": "Consultorio Odontológico Integral recibe pacientes nuevos. Llamá para agendar tu primera consulta."
+      },
+      {
+        "q": "¿Consultorio Odontológico Integral ofrece atención de emergencia?",
+        "a": "Contactá a Consultorio Odontológico Integral para consultar disponibilidad de emergencias dentales."
+      },
+      {
+        "q": "¿Qué tratamientos ofrece Consultorio Odontológico Integral?",
+        "a": "Consultorio Odontológico Integral ofrece limpieza, empastes, ortodoncia, y odontología estética."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "es",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "odontologia-san-isidro",
+    "name": "Odontología San Isidro",
+    "vertical": "dentists",
+    "city": "San Isidro",
+    "citySlug": "san-isidro",
+    "country": "argentina",
+    "address": "San Isidro, Argentina",
+    "phone": "011 4732-2410",
+    "website": "https://odontologiasanisidro.com",
+    "email": "",
+    "description": "Odontología San Isidro is a trusted dentists located in San Isidro, Argentina. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "¿Odontología San Isidro acepta pacientes nuevos?",
+        "a": "Odontología San Isidro recibe pacientes nuevos. Llamá para agendar tu primera consulta."
+      },
+      {
+        "q": "¿Odontología San Isidro ofrece atención de emergencia?",
+        "a": "Contactá a Odontología San Isidro para consultar disponibilidad de emergencias dentales."
+      },
+      {
+        "q": "¿Qué tratamientos ofrece Odontología San Isidro?",
+        "a": "Odontología San Isidro ofrece limpieza, empastes, ortodoncia, y odontología estética."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "es",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "consultorio-odontologico-del-norte",
+    "name": "Consultorio Odontológico del Norte",
+    "vertical": "dentists",
+    "city": "San Isidro",
+    "citySlug": "san-isidro",
+    "country": "argentina",
+    "address": "San Isidro, Argentina",
+    "phone": "(011) 4743 0208",
+    "website": "https://www.codelnorte.com",
+    "email": "",
+    "description": "Consultorio Odontológico del Norte is a trusted dentists located in San Isidro, Argentina. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "¿Consultorio Odontológico del Norte acepta pacientes nuevos?",
+        "a": "Consultorio Odontológico del Norte recibe pacientes nuevos. Llamá para agendar tu primera consulta."
+      },
+      {
+        "q": "¿Consultorio Odontológico del Norte ofrece atención de emergencia?",
+        "a": "Contactá a Consultorio Odontológico del Norte para consultar disponibilidad de emergencias dentales."
+      },
+      {
+        "q": "¿Qué tratamientos ofrece Consultorio Odontológico del Norte?",
+        "a": "Consultorio Odontológico del Norte ofrece limpieza, empastes, ortodoncia, y odontología estética."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "es",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "mil-odontologia-integral",
+    "name": "Mil Odontología Integral",
+    "vertical": "dentists",
+    "city": "San Isidro",
+    "citySlug": "san-isidro",
+    "country": "argentina",
+    "address": "San Isidro, Argentina",
+    "phone": "11-71006268",
+    "website": "http://milodontologia.com.ar",
+    "email": "",
+    "description": "Mil Odontología Integral is a trusted dentists located in San Isidro, Argentina. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "¿Mil Odontología Integral acepta pacientes nuevos?",
+        "a": "Mil Odontología Integral recibe pacientes nuevos. Llamá para agendar tu primera consulta."
+      },
+      {
+        "q": "¿Mil Odontología Integral ofrece atención de emergencia?",
+        "a": "Contactá a Mil Odontología Integral para consultar disponibilidad de emergencias dentales."
+      },
+      {
+        "q": "¿Qué tratamientos ofrece Mil Odontología Integral?",
+        "a": "Mil Odontología Integral ofrece limpieza, empastes, ortodoncia, y odontología estética."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "es",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "bis-odontologia-nueva-cordoba",
+    "name": "Bis Odontología Nueva Córdoba",
+    "vertical": "dentists",
+    "city": "Córdoba",
+    "citySlug": "cordoba",
+    "country": "argentina",
+    "address": "Córdoba, Argentina",
+    "phone": "3515951025",
+    "website": "https://bisodontologia.com",
+    "email": "",
+    "description": "Bis Odontología Nueva Córdoba is a trusted dentists located in Córdoba, Argentina. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "¿Bis Odontología Nueva Córdoba acepta pacientes nuevos?",
+        "a": "Bis Odontología Nueva Córdoba recibe pacientes nuevos. Llamá para agendar tu primera consulta."
+      },
+      {
+        "q": "¿Bis Odontología Nueva Córdoba ofrece atención de emergencia?",
+        "a": "Contactá a Bis Odontología Nueva Córdoba para consultar disponibilidad de emergencias dentales."
+      },
+      {
+        "q": "¿Qué tratamientos ofrece Bis Odontología Nueva Córdoba?",
+        "a": "Bis Odontología Nueva Córdoba ofrece limpieza, empastes, ortodoncia, y odontología estética."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "es",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
     "slug": "fitzwilliam-medical-centre",
     "name": "Fitzwilliam Medical Centre",
     "vertical": "physios",
@@ -16072,6 +16222,1670 @@
     "openingHours": "Mo-Fr 09:00-18:00"
   },
   {
+    "slug": "williams-solicitors-llp",
+    "name": "Williams Solicitors LLP",
+    "vertical": "accountants",
+    "city": "Dublin",
+    "citySlug": "dublin",
+    "country": "ireland",
+    "address": "Dublin, Ireland",
+    "phone": "(01) 675 3000",
+    "website": "https://williamssolicitors.ie/",
+    "email": "info@williamssolicitors.ie",
+    "description": "Williams Solicitors LLP is a trusted professional services located in Dublin, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Williams Solicitors LLP offer free consultations?",
+        "a": "Contact Williams Solicitors LLP to enquire about initial consultation availability."
+      },
+      {
+        "q": "What services does Williams Solicitors LLP provide?",
+        "a": "Williams Solicitors LLP offers a range of professional services. Contact them for details."
+      },
+      {
+        "q": "Does Williams Solicitors LLP work with small businesses?",
+        "a": "Yes, Williams Solicitors LLP works with businesses of all sizes. Get in touch to discuss your needs."
+      }
+    ],
+    "schema_type": "AccountingService",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "arthur-cox-llp",
+    "name": "Arthur Cox LLP",
+    "vertical": "accountants",
+    "city": "Dublin",
+    "citySlug": "dublin",
+    "country": "ireland",
+    "address": "Dublin, Ireland",
+    "phone": "",
+    "website": "https://www.arthurcox.com/",
+    "email": "",
+    "description": "Arthur Cox LLP is a trusted professional services located in Dublin, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Arthur Cox LLP offer free consultations?",
+        "a": "Contact Arthur Cox LLP to enquire about initial consultation availability."
+      },
+      {
+        "q": "What services does Arthur Cox LLP provide?",
+        "a": "Arthur Cox LLP offers a range of professional services. Contact them for details."
+      },
+      {
+        "q": "Does Arthur Cox LLP work with small businesses?",
+        "a": "Yes, Arthur Cox LLP works with businesses of all sizes. Get in touch to discuss your needs."
+      }
+    ],
+    "schema_type": "AccountingService",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "best-co-solicitors",
+    "name": "Best & Co. Solicitors",
+    "vertical": "accountants",
+    "city": "Cork",
+    "citySlug": "cork",
+    "country": "ireland",
+    "address": "Cork, Ireland",
+    "phone": "021 4271012",
+    "website": "https://www.bestandco.ie/",
+    "email": "",
+    "description": "Best & Co. Solicitors is a trusted professional services located in Cork, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Best & Co. Solicitors offer free consultations?",
+        "a": "Contact Best & Co. Solicitors to enquire about initial consultation availability."
+      },
+      {
+        "q": "What services does Best & Co. Solicitors provide?",
+        "a": "Best & Co. Solicitors offers a range of professional services. Contact them for details."
+      },
+      {
+        "q": "Does Best & Co. Solicitors work with small businesses?",
+        "a": "Yes, Best & Co. Solicitors works with businesses of all sizes. Get in touch to discuss your needs."
+      }
+    ],
+    "schema_type": "AccountingService",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "blake-kenny-llp",
+    "name": "Blake & Kenny LLP",
+    "vertical": "accountants",
+    "city": "Galway",
+    "citySlug": "galway",
+    "country": "ireland",
+    "address": "Galway, Ireland",
+    "phone": "091-564340",
+    "website": "https://blakeandkenny.ie/",
+    "email": "info@blakeandkenny.ie",
+    "description": "Blake & Kenny LLP is a trusted professional services located in Galway, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Blake & Kenny LLP offer free consultations?",
+        "a": "Contact Blake & Kenny LLP to enquire about initial consultation availability."
+      },
+      {
+        "q": "What services does Blake & Kenny LLP provide?",
+        "a": "Blake & Kenny LLP offers a range of professional services. Contact them for details."
+      },
+      {
+        "q": "Does Blake & Kenny LLP work with small businesses?",
+        "a": "Yes, Blake & Kenny LLP works with businesses of all sizes. Get in touch to discuss your needs."
+      }
+    ],
+    "schema_type": "AccountingService",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "gilmartin-solicitors",
+    "name": "Gilmartin Solicitors",
+    "vertical": "accountants",
+    "city": "Galway",
+    "citySlug": "galway",
+    "country": "ireland",
+    "address": "Galway, Ireland",
+    "phone": "091 569984",
+    "website": "https://www.gilmartinsolicitors.com/",
+    "email": "info@gilmartinsolicitors.com",
+    "description": "Gilmartin Solicitors is a trusted professional services located in Galway, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Gilmartin Solicitors offer free consultations?",
+        "a": "Contact Gilmartin Solicitors to enquire about initial consultation availability."
+      },
+      {
+        "q": "What services does Gilmartin Solicitors provide?",
+        "a": "Gilmartin Solicitors offers a range of professional services. Contact them for details."
+      },
+      {
+        "q": "Does Gilmartin Solicitors work with small businesses?",
+        "a": "Yes, Gilmartin Solicitors works with businesses of all sizes. Get in touch to discuss your needs."
+      }
+    ],
+    "schema_type": "AccountingService",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "mulroy-company-solicitors",
+    "name": "Mulroy & Company Solicitors",
+    "vertical": "accountants",
+    "city": "Galway",
+    "citySlug": "galway",
+    "country": "ireland",
+    "address": "Galway, Ireland",
+    "phone": "091 586760",
+    "website": "https://mulroyandcompany.ie/",
+    "email": "info@mulroyandcompany.ie",
+    "description": "Mulroy & Company Solicitors is a trusted professional services located in Galway, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Mulroy & Company Solicitors offer free consultations?",
+        "a": "Contact Mulroy & Company Solicitors to enquire about initial consultation availability."
+      },
+      {
+        "q": "What services does Mulroy & Company Solicitors provide?",
+        "a": "Mulroy & Company Solicitors offers a range of professional services. Contact them for details."
+      },
+      {
+        "q": "Does Mulroy & Company Solicitors work with small businesses?",
+        "a": "Yes, Mulroy & Company Solicitors works with businesses of all sizes. Get in touch to discuss your needs."
+      }
+    ],
+    "schema_type": "AccountingService",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "o-donnell-co-accountants",
+    "name": "O'Donnell & Co Accountants",
+    "vertical": "accountants",
+    "city": "Limerick",
+    "citySlug": "limerick",
+    "country": "ireland",
+    "address": "Limerick, Ireland",
+    "phone": "061 317678",
+    "website": "https://www.odonnellaccountants.ie/",
+    "email": "",
+    "description": "O'Donnell & Co Accountants is a trusted professional services located in Limerick, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does O'Donnell & Co Accountants offer free consultations?",
+        "a": "Contact O'Donnell & Co Accountants to enquire about initial consultation availability."
+      },
+      {
+        "q": "What services does O'Donnell & Co Accountants provide?",
+        "a": "O'Donnell & Co Accountants offers a range of professional services. Contact them for details."
+      },
+      {
+        "q": "Does O'Donnell & Co Accountants work with small businesses?",
+        "a": "Yes, O'Donnell & Co Accountants works with businesses of all sizes. Get in touch to discuss your needs."
+      }
+    ],
+    "schema_type": "AccountingService",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "moore-mcnamara-accountants",
+    "name": "Moore McNamara Accountants",
+    "vertical": "accountants",
+    "city": "Limerick",
+    "citySlug": "limerick",
+    "country": "ireland",
+    "address": "Limerick, Ireland",
+    "phone": "(061) 229666",
+    "website": "https://mooremcnamara.ie/",
+    "email": "",
+    "description": "Moore McNamara Accountants is a trusted professional services located in Limerick, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Moore McNamara Accountants offer free consultations?",
+        "a": "Contact Moore McNamara Accountants to enquire about initial consultation availability."
+      },
+      {
+        "q": "What services does Moore McNamara Accountants provide?",
+        "a": "Moore McNamara Accountants offers a range of professional services. Contact them for details."
+      },
+      {
+        "q": "Does Moore McNamara Accountants work with small businesses?",
+        "a": "Yes, Moore McNamara Accountants works with businesses of all sizes. Get in touch to discuss your needs."
+      }
+    ],
+    "schema_type": "AccountingService",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "coffey-co-accountants",
+    "name": "Coffey & Co Accountants",
+    "vertical": "accountants",
+    "city": "Limerick",
+    "citySlug": "limerick",
+    "country": "ireland",
+    "address": "Limerick, Ireland",
+    "phone": "",
+    "website": "https://www.coffeyandco.ie/",
+    "email": "",
+    "description": "Coffey & Co Accountants is a trusted professional services located in Limerick, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Coffey & Co Accountants offer free consultations?",
+        "a": "Contact Coffey & Co Accountants to enquire about initial consultation availability."
+      },
+      {
+        "q": "What services does Coffey & Co Accountants provide?",
+        "a": "Coffey & Co Accountants offers a range of professional services. Contact them for details."
+      },
+      {
+        "q": "Does Coffey & Co Accountants work with small businesses?",
+        "a": "Yes, Coffey & Co Accountants works with businesses of all sizes. Get in touch to discuss your needs."
+      }
+    ],
+    "schema_type": "AccountingService",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "murphy-o-connor-accountants",
+    "name": "Murphy O'Connor Accountants",
+    "vertical": "accountants",
+    "city": "Limerick",
+    "citySlug": "limerick",
+    "country": "ireland",
+    "address": "Limerick, Ireland",
+    "phone": "",
+    "website": "https://murphyoconnor.ie/",
+    "email": "",
+    "description": "Murphy O'Connor Accountants is a trusted professional services located in Limerick, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Murphy O'Connor Accountants offer free consultations?",
+        "a": "Contact Murphy O'Connor Accountants to enquire about initial consultation availability."
+      },
+      {
+        "q": "What services does Murphy O'Connor Accountants provide?",
+        "a": "Murphy O'Connor Accountants offers a range of professional services. Contact them for details."
+      },
+      {
+        "q": "Does Murphy O'Connor Accountants work with small businesses?",
+        "a": "Yes, Murphy O'Connor Accountants works with businesses of all sizes. Get in touch to discuss your needs."
+      }
+    ],
+    "schema_type": "AccountingService",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "sweeneys-garage",
+    "name": "Sweeneys Garage",
+    "vertical": "mechanics",
+    "city": "Dublin",
+    "citySlug": "dublin",
+    "country": "ireland",
+    "address": "Dublin, Ireland",
+    "phone": "",
+    "website": "https://sweeneysgarage.ie/",
+    "email": "",
+    "description": "Sweeneys Garage is a trusted mechanics located in Dublin, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Sweeneys Garage service all car brands?",
+        "a": "Sweeneys Garage works on most vehicle makes and models. Call to confirm your car."
+      },
+      {
+        "q": "Does Sweeneys Garage offer free estimates?",
+        "a": "Contact Sweeneys Garage for pricing information and repair estimates."
+      },
+      {
+        "q": "Does Sweeneys Garage handle NCT prep?",
+        "a": "Sweeneys Garage can help prepare your car for NCT testing. Book an appointment."
+      }
+    ],
+    "schema_type": "AutoRepair",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "cobra-garage",
+    "name": "Cobra Garage",
+    "vertical": "mechanics",
+    "city": "Dublin",
+    "citySlug": "dublin",
+    "country": "ireland",
+    "address": "Dublin, Ireland",
+    "phone": "",
+    "website": "https://cobragarage.ie/",
+    "email": "",
+    "description": "Cobra Garage is a trusted mechanics located in Dublin, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Cobra Garage service all car brands?",
+        "a": "Cobra Garage works on most vehicle makes and models. Call to confirm your car."
+      },
+      {
+        "q": "Does Cobra Garage offer free estimates?",
+        "a": "Contact Cobra Garage for pricing information and repair estimates."
+      },
+      {
+        "q": "Does Cobra Garage handle NCT prep?",
+        "a": "Cobra Garage can help prepare your car for NCT testing. Book an appointment."
+      }
+    ],
+    "schema_type": "AutoRepair",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "n7-auto-repairs",
+    "name": "N7 Auto Repairs",
+    "vertical": "mechanics",
+    "city": "Dublin",
+    "citySlug": "dublin",
+    "country": "ireland",
+    "address": "Dublin, Ireland",
+    "phone": "0851578148",
+    "website": "https://n7autorepairs.ie/",
+    "email": "",
+    "description": "N7 Auto Repairs is a trusted mechanics located in Dublin, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does N7 Auto Repairs service all car brands?",
+        "a": "N7 Auto Repairs works on most vehicle makes and models. Call to confirm your car."
+      },
+      {
+        "q": "Does N7 Auto Repairs offer free estimates?",
+        "a": "Contact N7 Auto Repairs for pricing information and repair estimates."
+      },
+      {
+        "q": "Does N7 Auto Repairs handle NCT prep?",
+        "a": "N7 Auto Repairs can help prepare your car for NCT testing. Book an appointment."
+      }
+    ],
+    "schema_type": "AutoRepair",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "baldoyle-auto-centre",
+    "name": "Baldoyle Auto Centre",
+    "vertical": "mechanics",
+    "city": "Dublin",
+    "citySlug": "dublin",
+    "country": "ireland",
+    "address": "Dublin, Ireland",
+    "phone": "",
+    "website": "https://baldoyleautocentre.ie/",
+    "email": "",
+    "description": "Baldoyle Auto Centre is a trusted mechanics located in Dublin, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Baldoyle Auto Centre service all car brands?",
+        "a": "Baldoyle Auto Centre works on most vehicle makes and models. Call to confirm your car."
+      },
+      {
+        "q": "Does Baldoyle Auto Centre offer free estimates?",
+        "a": "Contact Baldoyle Auto Centre for pricing information and repair estimates."
+      },
+      {
+        "q": "Does Baldoyle Auto Centre handle NCT prep?",
+        "a": "Baldoyle Auto Centre can help prepare your car for NCT testing. Book an appointment."
+      }
+    ],
+    "schema_type": "AutoRepair",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "kellehers-auto-service",
+    "name": "Kellehers Auto Service",
+    "vertical": "mechanics",
+    "city": "Cork",
+    "citySlug": "cork",
+    "country": "ireland",
+    "address": "Cork, Ireland",
+    "phone": "",
+    "website": "https://kellehersautoservice.ie/",
+    "email": "",
+    "description": "Kellehers Auto Service is a trusted mechanics located in Cork, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Kellehers Auto Service service all car brands?",
+        "a": "Kellehers Auto Service works on most vehicle makes and models. Call to confirm your car."
+      },
+      {
+        "q": "Does Kellehers Auto Service offer free estimates?",
+        "a": "Contact Kellehers Auto Service for pricing information and repair estimates."
+      },
+      {
+        "q": "Does Kellehers Auto Service handle NCT prep?",
+        "a": "Kellehers Auto Service can help prepare your car for NCT testing. Book an appointment."
+      }
+    ],
+    "schema_type": "AutoRepair",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "carserve",
+    "name": "Carserve",
+    "vertical": "mechanics",
+    "city": "Waterford",
+    "citySlug": "waterford",
+    "country": "ireland",
+    "address": "Waterford, Ireland",
+    "phone": "",
+    "website": "https://carserve.ie/",
+    "email": "",
+    "description": "Carserve is a trusted mechanics located in Waterford, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Carserve service all car brands?",
+        "a": "Carserve works on most vehicle makes and models. Call to confirm your car."
+      },
+      {
+        "q": "Does Carserve offer free estimates?",
+        "a": "Contact Carserve for pricing information and repair estimates."
+      },
+      {
+        "q": "Does Carserve handle NCT prep?",
+        "a": "Carserve can help prepare your car for NCT testing. Book an appointment."
+      }
+    ],
+    "schema_type": "AutoRepair",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "af-auto-services",
+    "name": "AF Auto Services",
+    "vertical": "mechanics",
+    "city": "Waterford",
+    "citySlug": "waterford",
+    "country": "ireland",
+    "address": "Waterford, Ireland",
+    "phone": "+353 51 351 111",
+    "website": "https://www.facebook.com/AFAutoServicesWaterford/",
+    "email": "afautoservices@outlook.com",
+    "description": "AF Auto Services is a trusted mechanics located in Waterford, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does AF Auto Services service all car brands?",
+        "a": "AF Auto Services works on most vehicle makes and models. Call to confirm your car."
+      },
+      {
+        "q": "Does AF Auto Services offer free estimates?",
+        "a": "Contact AF Auto Services for pricing information and repair estimates."
+      },
+      {
+        "q": "Does AF Auto Services handle NCT prep?",
+        "a": "AF Auto Services can help prepare your car for NCT testing. Book an appointment."
+      }
+    ],
+    "schema_type": "AutoRepair",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "o-brien-motors",
+    "name": "O'Brien Motors",
+    "vertical": "mechanics",
+    "city": "Waterford",
+    "citySlug": "waterford",
+    "country": "ireland",
+    "address": "Waterford, Ireland",
+    "phone": "",
+    "website": "https://www.obrienmotorswaterford.ie/",
+    "email": "",
+    "description": "O'Brien Motors is a trusted mechanics located in Waterford, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does O'Brien Motors service all car brands?",
+        "a": "O'Brien Motors works on most vehicle makes and models. Call to confirm your car."
+      },
+      {
+        "q": "Does O'Brien Motors offer free estimates?",
+        "a": "Contact O'Brien Motors for pricing information and repair estimates."
+      },
+      {
+        "q": "Does O'Brien Motors handle NCT prep?",
+        "a": "O'Brien Motors can help prepare your car for NCT testing. Book an appointment."
+      }
+    ],
+    "schema_type": "AutoRepair",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "eden-one-gym",
+    "name": "Eden One Gym",
+    "vertical": "gyms",
+    "city": "Dublin",
+    "citySlug": "dublin",
+    "country": "ireland",
+    "address": "Dublin, Ireland",
+    "phone": "+353 (1) 215 0640",
+    "website": "https://edenone.ie/",
+    "email": "",
+    "description": "Eden One Gym is a trusted gyms located in Dublin, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Eden One Gym offer trial memberships?",
+        "a": "Contact Eden One Gym to ask about trial passes and membership options."
+      },
+      {
+        "q": "What classes does Eden One Gym offer?",
+        "a": "Eden One Gym offers a range of fitness classes. Check their schedule for availability."
+      },
+      {
+        "q": "Does Eden One Gym have personal trainers?",
+        "a": "Yes, Eden One Gym has qualified personal trainers available. Enquire about packages."
+      }
+    ],
+    "schema_type": "HealthClub",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "ben-dunne-gyms",
+    "name": "Ben Dunne Gyms",
+    "vertical": "gyms",
+    "city": "Dublin",
+    "citySlug": "dublin",
+    "country": "ireland",
+    "address": "Dublin, Ireland",
+    "phone": "+35318870600",
+    "website": "https://www.bendunnegyms.com/",
+    "email": "",
+    "description": "Ben Dunne Gyms is a trusted gyms located in Dublin, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Ben Dunne Gyms offer trial memberships?",
+        "a": "Contact Ben Dunne Gyms to ask about trial passes and membership options."
+      },
+      {
+        "q": "What classes does Ben Dunne Gyms offer?",
+        "a": "Ben Dunne Gyms offers a range of fitness classes. Check their schedule for availability."
+      },
+      {
+        "q": "Does Ben Dunne Gyms have personal trainers?",
+        "a": "Yes, Ben Dunne Gyms has qualified personal trainers available. Enquire about packages."
+      }
+    ],
+    "schema_type": "HealthClub",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "westwood-gym",
+    "name": "Westwood Gym",
+    "vertical": "gyms",
+    "city": "Dublin",
+    "citySlug": "dublin",
+    "country": "ireland",
+    "address": "Dublin, Ireland",
+    "phone": "",
+    "website": "https://westwood.ie/",
+    "email": "",
+    "description": "Westwood Gym is a trusted gyms located in Dublin, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Westwood Gym offer trial memberships?",
+        "a": "Contact Westwood Gym to ask about trial passes and membership options."
+      },
+      {
+        "q": "What classes does Westwood Gym offer?",
+        "a": "Westwood Gym offers a range of fitness classes. Check their schedule for availability."
+      },
+      {
+        "q": "Does Westwood Gym have personal trainers?",
+        "a": "Yes, Westwood Gym has qualified personal trainers available. Enquire about packages."
+      }
+    ],
+    "schema_type": "HealthClub",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "kingfisher-club-waterford",
+    "name": "Kingfisher Club Waterford",
+    "vertical": "gyms",
+    "city": "Waterford",
+    "citySlug": "waterford",
+    "country": "ireland",
+    "address": "Waterford, Ireland",
+    "phone": "",
+    "website": "https://kingfisherclub.com/",
+    "email": "",
+    "description": "Kingfisher Club Waterford is a trusted gyms located in Waterford, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Kingfisher Club Waterford offer trial memberships?",
+        "a": "Contact Kingfisher Club Waterford to ask about trial passes and membership options."
+      },
+      {
+        "q": "What classes does Kingfisher Club Waterford offer?",
+        "a": "Kingfisher Club Waterford offers a range of fitness classes. Check their schedule for availability."
+      },
+      {
+        "q": "Does Kingfisher Club Waterford have personal trainers?",
+        "a": "Yes, Kingfisher Club Waterford has qualified personal trainers available. Enquire about packages."
+      }
+    ],
+    "schema_type": "HealthClub",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "xtreme-csc-waterford",
+    "name": "Xtreme CSC Waterford",
+    "vertical": "gyms",
+    "city": "Waterford",
+    "citySlug": "waterford",
+    "country": "ireland",
+    "address": "Waterford, Ireland",
+    "phone": "",
+    "website": "https://xtremecsc.ie/waterford/",
+    "email": "",
+    "description": "Xtreme CSC Waterford is a trusted gyms located in Waterford, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Xtreme CSC Waterford offer trial memberships?",
+        "a": "Contact Xtreme CSC Waterford to ask about trial passes and membership options."
+      },
+      {
+        "q": "What classes does Xtreme CSC Waterford offer?",
+        "a": "Xtreme CSC Waterford offers a range of fitness classes. Check their schedule for availability."
+      },
+      {
+        "q": "Does Xtreme CSC Waterford have personal trainers?",
+        "a": "Yes, Xtreme CSC Waterford has qualified personal trainers available. Enquire about packages."
+      }
+    ],
+    "schema_type": "HealthClub",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "planet-health-club-waterford",
+    "name": "Planet Health Club Waterford",
+    "vertical": "gyms",
+    "city": "Waterford",
+    "citySlug": "waterford",
+    "country": "ireland",
+    "address": "Waterford, Ireland",
+    "phone": "",
+    "website": "https://planethealthwaterford.ie/",
+    "email": "",
+    "description": "Planet Health Club Waterford is a trusted gyms located in Waterford, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Planet Health Club Waterford offer trial memberships?",
+        "a": "Contact Planet Health Club Waterford to ask about trial passes and membership options."
+      },
+      {
+        "q": "What classes does Planet Health Club Waterford offer?",
+        "a": "Planet Health Club Waterford offers a range of fitness classes. Check their schedule for availability."
+      },
+      {
+        "q": "Does Planet Health Club Waterford have personal trainers?",
+        "a": "Yes, Planet Health Club Waterford has qualified personal trainers available. Enquire about packages."
+      }
+    ],
+    "schema_type": "HealthClub",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "goldstone-gym-waterford",
+    "name": "Goldstone Gym Waterford",
+    "vertical": "gyms",
+    "city": "Waterford",
+    "citySlug": "waterford",
+    "country": "ireland",
+    "address": "Waterford, Ireland",
+    "phone": "",
+    "website": "https://www.goldstonefitness.ie/",
+    "email": "",
+    "description": "Goldstone Gym Waterford is a trusted gyms located in Waterford, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Goldstone Gym Waterford offer trial memberships?",
+        "a": "Contact Goldstone Gym Waterford to ask about trial passes and membership options."
+      },
+      {
+        "q": "What classes does Goldstone Gym Waterford offer?",
+        "a": "Goldstone Gym Waterford offers a range of fitness classes. Check their schedule for availability."
+      },
+      {
+        "q": "Does Goldstone Gym Waterford have personal trainers?",
+        "a": "Yes, Goldstone Gym Waterford has qualified personal trainers available. Enquire about packages."
+      }
+    ],
+    "schema_type": "HealthClub",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "dublin-street-dental-clinic",
+    "name": "Dublin Street Dental Clinic",
+    "vertical": "dentists",
+    "city": "Dundalk",
+    "citySlug": "dundalk",
+    "country": "ireland",
+    "address": "Dundalk, Ireland",
+    "phone": "+353 42 933 7033",
+    "website": "https://dublinstreetdental.ie/",
+    "email": "care@dublinstreetdental.ie",
+    "description": "Dublin Street Dental Clinic is a trusted dentists located in Dundalk, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Dublin Street Dental Clinic accepting new patients?",
+        "a": "Dublin Street Dental Clinic welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Dublin Street Dental Clinic offer emergency dental care?",
+        "a": "Contact Dublin Street Dental Clinic directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Dublin Street Dental Clinic accept?",
+        "a": "Dublin Street Dental Clinic works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Dublin Street Dental Clinic offer?",
+        "a": "Dublin Street Dental Clinic provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "o-regan-dental-ennis-dental",
+    "name": "O'Regan Dental (Ennis Dental)",
+    "vertical": "dentists",
+    "city": "Ennis",
+    "citySlug": "ennis",
+    "country": "ireland",
+    "address": "Ennis, Ireland",
+    "phone": "065-6828486",
+    "website": "http://www.ennisdental.ie/",
+    "email": "",
+    "description": "O'Regan Dental (Ennis Dental) is a trusted dentists located in Ennis, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is O'Regan Dental (Ennis Dental) accepting new patients?",
+        "a": "O'Regan Dental (Ennis Dental) welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does O'Regan Dental (Ennis Dental) offer emergency dental care?",
+        "a": "Contact O'Regan Dental (Ennis Dental) directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does O'Regan Dental (Ennis Dental) accept?",
+        "a": "O'Regan Dental (Ennis Dental) works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does O'Regan Dental (Ennis Dental) offer?",
+        "a": "O'Regan Dental (Ennis Dental) provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "daniel-o-connell-dental-surgery",
+    "name": "Daniel O'Connell Dental Surgery",
+    "vertical": "dentists",
+    "city": "Clonmel",
+    "citySlug": "clonmel",
+    "country": "ireland",
+    "address": "Clonmel, Ireland",
+    "phone": "052 612 1263",
+    "website": "https://www.goldenpages.ie/daniel-o-connell-dental-surgery-clonmel/",
+    "email": "",
+    "description": "Daniel O'Connell Dental Surgery is a trusted dentists located in Clonmel, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Daniel O'Connell Dental Surgery accepting new patients?",
+        "a": "Daniel O'Connell Dental Surgery welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Daniel O'Connell Dental Surgery offer emergency dental care?",
+        "a": "Contact Daniel O'Connell Dental Surgery directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Daniel O'Connell Dental Surgery accept?",
+        "a": "Daniel O'Connell Dental Surgery works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Daniel O'Connell Dental Surgery offer?",
+        "a": "Daniel O'Connell Dental Surgery provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "bacchus-restaurant",
+    "name": "Bacchus Restaurant",
+    "vertical": "restaurants",
+    "city": "Athlone",
+    "citySlug": "athlone",
+    "country": "ireland",
+    "address": "Athlone, Ireland",
+    "phone": "+353 90 645 0433",
+    "website": "https://www.tripadvisor.co.uk/Restaurant_Review-g212091-d10291852",
+    "email": "",
+    "description": "Bacchus Restaurant is a trusted restaurants located in Athlone, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Bacchus Restaurant take reservations?",
+        "a": "Yes, Bacchus Restaurant accepts reservations. Call ahead or book online for the best experience."
+      },
+      {
+        "q": "What type of cuisine does Bacchus Restaurant serve?",
+        "a": "Bacchus Restaurant offers a carefully curated menu featuring local and international dishes."
+      },
+      {
+        "q": "Does Bacchus Restaurant have parking?",
+        "a": "Please contact Bacchus Restaurant directly for parking information and availability."
+      },
+      {
+        "q": "Is there a dress code at Bacchus Restaurant?",
+        "a": "Smart casual attire is recommended. Contact the restaurant for specific event requirements."
+      },
+      {
+        "q": "Does Bacchus Restaurant offer private dining?",
+        "a": "Bacchus Restaurant may offer private dining options for special events. Contact them for details."
+      }
+    ],
+    "schema_type": "Restaurant",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "bastion-kitchen",
+    "name": "Bastion Kitchen",
+    "vertical": "restaurants",
+    "city": "Athlone",
+    "citySlug": "athlone",
+    "country": "ireland",
+    "address": "Athlone, Ireland",
+    "phone": "(090) 649 8369",
+    "website": "https://www.bastionkitchen.online/",
+    "email": "bastionk1tchen@gmail.com",
+    "description": "Bastion Kitchen is a trusted restaurants located in Athlone, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Bastion Kitchen take reservations?",
+        "a": "Yes, Bastion Kitchen accepts reservations. Call ahead or book online for the best experience."
+      },
+      {
+        "q": "What type of cuisine does Bastion Kitchen serve?",
+        "a": "Bastion Kitchen offers a carefully curated menu featuring local and international dishes."
+      },
+      {
+        "q": "Does Bastion Kitchen have parking?",
+        "a": "Please contact Bastion Kitchen directly for parking information and availability."
+      },
+      {
+        "q": "Is there a dress code at Bastion Kitchen?",
+        "a": "Smart casual attire is recommended. Contact the restaurant for specific event requirements."
+      },
+      {
+        "q": "Does Bastion Kitchen offer private dining?",
+        "a": "Bastion Kitchen may offer private dining options for special events. Contact them for details."
+      }
+    ],
+    "schema_type": "Restaurant",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "jocelyn-bistro",
+    "name": "Jocelyn Bistro",
+    "vertical": "restaurants",
+    "city": "Dundalk",
+    "citySlug": "dundalk",
+    "country": "ireland",
+    "address": "Dundalk, Ireland",
+    "phone": "",
+    "website": "https://www.jocelynbistro.com/",
+    "email": "",
+    "description": "Jocelyn Bistro is a trusted restaurants located in Dundalk, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Jocelyn Bistro take reservations?",
+        "a": "Yes, Jocelyn Bistro accepts reservations. Call ahead or book online for the best experience."
+      },
+      {
+        "q": "What type of cuisine does Jocelyn Bistro serve?",
+        "a": "Jocelyn Bistro offers a carefully curated menu featuring local and international dishes."
+      },
+      {
+        "q": "Does Jocelyn Bistro have parking?",
+        "a": "Please contact Jocelyn Bistro directly for parking information and availability."
+      },
+      {
+        "q": "Is there a dress code at Jocelyn Bistro?",
+        "a": "Smart casual attire is recommended. Contact the restaurant for specific event requirements."
+      },
+      {
+        "q": "Does Jocelyn Bistro offer private dining?",
+        "a": "Jocelyn Bistro may offer private dining options for special events. Contact them for details."
+      }
+    ],
+    "schema_type": "Restaurant",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "the-sherwood",
+    "name": "The Sherwood",
+    "vertical": "restaurants",
+    "city": "Ennis",
+    "citySlug": "ennis",
+    "country": "ireland",
+    "address": "Ennis, Ireland",
+    "phone": "",
+    "website": "https://www.thesherwood.ie/",
+    "email": "",
+    "description": "The Sherwood is a trusted restaurants located in Ennis, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does The Sherwood take reservations?",
+        "a": "Yes, The Sherwood accepts reservations. Call ahead or book online for the best experience."
+      },
+      {
+        "q": "What type of cuisine does The Sherwood serve?",
+        "a": "The Sherwood offers a carefully curated menu featuring local and international dishes."
+      },
+      {
+        "q": "Does The Sherwood have parking?",
+        "a": "Please contact The Sherwood directly for parking information and availability."
+      },
+      {
+        "q": "Is there a dress code at The Sherwood?",
+        "a": "Smart casual attire is recommended. Contact the restaurant for specific event requirements."
+      },
+      {
+        "q": "Does The Sherwood offer private dining?",
+        "a": "The Sherwood may offer private dining options for special events. Contact them for details."
+      }
+    ],
+    "schema_type": "Restaurant",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "ennis-vet-clinic",
+    "name": "Ennis Vet Clinic",
+    "vertical": "vets",
+    "city": "Ennis",
+    "citySlug": "ennis",
+    "country": "ireland",
+    "address": "Ennis, Ireland",
+    "phone": "(065) 6797 444",
+    "website": "https://www.ennisvetclinic.ie/",
+    "email": "",
+    "description": "Ennis Vet Clinic is a trusted veterinary clinics located in Ennis, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Ennis Vet Clinic treat?",
+        "a": "Ennis Vet Clinic treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Ennis Vet Clinic offer emergency veterinary services?",
+        "a": "Contact Ennis Vet Clinic for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Ennis Vet Clinic provide vaccinations?",
+        "a": "Yes, Ennis Vet Clinic offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Ennis Vet Clinic?",
+        "a": "Ennis Vet Clinic can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "summerhill-veterinary-hospital",
+    "name": "Summerhill Veterinary Hospital",
+    "vertical": "vets",
+    "city": "Ennis",
+    "citySlug": "ennis",
+    "country": "ireland",
+    "address": "Ennis, Ireland",
+    "phone": "+353 65 682 8215",
+    "website": "https://www.facebook.com/summerhillveterinarycentreennis/",
+    "email": "summerhillcentre@gmail.com",
+    "description": "Summerhill Veterinary Hospital is a trusted veterinary clinics located in Ennis, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Summerhill Veterinary Hospital treat?",
+        "a": "Summerhill Veterinary Hospital treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Summerhill Veterinary Hospital offer emergency veterinary services?",
+        "a": "Contact Summerhill Veterinary Hospital for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Summerhill Veterinary Hospital provide vaccinations?",
+        "a": "Yes, Summerhill Veterinary Hospital offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Summerhill Veterinary Hospital?",
+        "a": "Summerhill Veterinary Hospital can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "tullow-road-vet-clinic-vet-care",
+    "name": "Tullow Road Vet Clinic (Vet Care)",
+    "vertical": "vets",
+    "city": "Carlow",
+    "citySlug": "carlow",
+    "country": "ireland",
+    "address": "Carlow, Ireland",
+    "phone": "059 913 0988",
+    "website": "https://www.vetcare.ie/",
+    "email": "",
+    "description": "Tullow Road Vet Clinic (Vet Care) is a trusted veterinary clinics located in Carlow, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Tullow Road Vet Clinic (Vet Care) treat?",
+        "a": "Tullow Road Vet Clinic (Vet Care) treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Tullow Road Vet Clinic (Vet Care) offer emergency veterinary services?",
+        "a": "Contact Tullow Road Vet Clinic (Vet Care) for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Tullow Road Vet Clinic (Vet Care) provide vaccinations?",
+        "a": "Yes, Tullow Road Vet Clinic (Vet Care) offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Tullow Road Vet Clinic (Vet Care)?",
+        "a": "Tullow Road Vet Clinic (Vet Care) can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "healthy-pets-veterinary-clinic",
+    "name": "Healthy Pets Veterinary Clinic",
+    "vertical": "vets",
+    "city": "Dundalk",
+    "citySlug": "dundalk",
+    "country": "ireland",
+    "address": "Dundalk, Ireland",
+    "phone": "042 933 7763",
+    "website": "https://healthy-pets.ie/",
+    "email": "",
+    "description": "Healthy Pets Veterinary Clinic is a trusted veterinary clinics located in Dundalk, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Healthy Pets Veterinary Clinic treat?",
+        "a": "Healthy Pets Veterinary Clinic treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Healthy Pets Veterinary Clinic offer emergency veterinary services?",
+        "a": "Contact Healthy Pets Veterinary Clinic for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Healthy Pets Veterinary Clinic provide vaccinations?",
+        "a": "Yes, Healthy Pets Veterinary Clinic offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Healthy Pets Veterinary Clinic?",
+        "a": "Healthy Pets Veterinary Clinic can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "avenue-vet-hospital",
+    "name": "Avenue Vet Hospital",
+    "vertical": "vets",
+    "city": "Dundalk",
+    "citySlug": "dundalk",
+    "country": "ireland",
+    "address": "Dundalk, Ireland",
+    "phone": "042 9328000",
+    "website": "",
+    "email": "",
+    "description": "Avenue Vet Hospital is a trusted veterinary clinics located in Dundalk, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Avenue Vet Hospital treat?",
+        "a": "Avenue Vet Hospital treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Avenue Vet Hospital offer emergency veterinary services?",
+        "a": "Contact Avenue Vet Hospital for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Avenue Vet Hospital provide vaccinations?",
+        "a": "Yes, Avenue Vet Hospital offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Avenue Vet Hospital?",
+        "a": "Avenue Vet Hospital can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "dbc-naas-physiotherapy",
+    "name": "DBC Naas Physiotherapy",
+    "vertical": "physios",
+    "city": "Naas",
+    "citySlug": "naas",
+    "country": "ireland",
+    "address": "Naas, Ireland",
+    "phone": "045 874133",
+    "website": "https://www.naasphysiotherapy.ie/",
+    "email": "physiosportdbc@gmail.com",
+    "description": "DBC Naas Physiotherapy is a trusted physiotherapy located in Naas, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Do I need a referral for DBC Naas Physiotherapy?",
+        "a": "In most cases, you don't need a referral. Contact DBC Naas Physiotherapy to book directly."
+      },
+      {
+        "q": "What conditions does DBC Naas Physiotherapy treat?",
+        "a": "DBC Naas Physiotherapy treats sports injuries, back pain, rehabilitation, and more."
+      },
+      {
+        "q": "Does DBC Naas Physiotherapy accept health insurance?",
+        "a": "DBC Naas Physiotherapy is covered by most major health insurers. Confirm your plan when booking."
+      }
+    ],
+    "schema_type": "PhysicalTherapy",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "dbc-bray-physiotherapy",
+    "name": "DBC Bray Physiotherapy",
+    "vertical": "physios",
+    "city": "Bray",
+    "citySlug": "bray",
+    "country": "ireland",
+    "address": "Bray, Ireland",
+    "phone": "01 531 0333",
+    "website": "https://www.dbc.ie/bray-physio-clinic/",
+    "email": "",
+    "description": "DBC Bray Physiotherapy is a trusted physiotherapy located in Bray, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Do I need a referral for DBC Bray Physiotherapy?",
+        "a": "In most cases, you don't need a referral. Contact DBC Bray Physiotherapy to book directly."
+      },
+      {
+        "q": "What conditions does DBC Bray Physiotherapy treat?",
+        "a": "DBC Bray Physiotherapy treats sports injuries, back pain, rehabilitation, and more."
+      },
+      {
+        "q": "Does DBC Bray Physiotherapy accept health insurance?",
+        "a": "DBC Bray Physiotherapy is covered by most major health insurers. Confirm your plan when booking."
+      }
+    ],
+    "schema_type": "PhysicalTherapy",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "gb-sports-physio",
+    "name": "GB Sports Physio",
+    "vertical": "physios",
+    "city": "Malahide",
+    "citySlug": "malahide",
+    "country": "ireland",
+    "address": "Malahide, Ireland",
+    "phone": "",
+    "website": "https://www.gbsportsphysio.com",
+    "email": "",
+    "description": "GB Sports Physio is a trusted physiotherapy located in Malahide, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Do I need a referral for GB Sports Physio?",
+        "a": "In most cases, you don't need a referral. Contact GB Sports Physio to book directly."
+      },
+      {
+        "q": "What conditions does GB Sports Physio treat?",
+        "a": "GB Sports Physio treats sports injuries, back pain, rehabilitation, and more."
+      },
+      {
+        "q": "Does GB Sports Physio accept health insurance?",
+        "a": "GB Sports Physio is covered by most major health insurers. Confirm your plan when booking."
+      }
+    ],
+    "schema_type": "PhysicalTherapy",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "zuni-restaurant",
+    "name": "Zuni Restaurant",
+    "vertical": "restaurants",
+    "city": "Kilkenny",
+    "citySlug": "kilkenny",
+    "country": "ireland",
+    "address": "Kilkenny, Ireland",
+    "phone": "056 7723999",
+    "website": "zuni.ie",
+    "email": "",
+    "description": "Zuni Restaurant is a trusted restaurants located in Kilkenny, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Zuni Restaurant take reservations?",
+        "a": "Yes, Zuni Restaurant accepts reservations. Call ahead or book online for the best experience."
+      },
+      {
+        "q": "What type of cuisine does Zuni Restaurant serve?",
+        "a": "Zuni Restaurant offers a carefully curated menu featuring local and international dishes."
+      },
+      {
+        "q": "Does Zuni Restaurant have parking?",
+        "a": "Please contact Zuni Restaurant directly for parking information and availability."
+      },
+      {
+        "q": "Is there a dress code at Zuni Restaurant?",
+        "a": "Smart casual attire is recommended. Contact the restaurant for specific event requirements."
+      },
+      {
+        "q": "Does Zuni Restaurant offer private dining?",
+        "a": "Zuni Restaurant may offer private dining options for special events. Contact them for details."
+      }
+    ],
+    "schema_type": "Restaurant",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "grill-and-thrill",
+    "name": "Grill and Thrill",
+    "vertical": "restaurants",
+    "city": "Tralee",
+    "citySlug": "tralee",
+    "country": "ireland",
+    "address": "Tralee, Ireland",
+    "phone": "066 7117703",
+    "website": "grillandthrill.ie",
+    "email": "",
+    "description": "Grill and Thrill is a trusted restaurants located in Tralee, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Grill and Thrill take reservations?",
+        "a": "Yes, Grill and Thrill accepts reservations. Call ahead or book online for the best experience."
+      },
+      {
+        "q": "What type of cuisine does Grill and Thrill serve?",
+        "a": "Grill and Thrill offers a carefully curated menu featuring local and international dishes."
+      },
+      {
+        "q": "Does Grill and Thrill have parking?",
+        "a": "Please contact Grill and Thrill directly for parking information and availability."
+      },
+      {
+        "q": "Is there a dress code at Grill and Thrill?",
+        "a": "Smart casual attire is recommended. Contact the restaurant for specific event requirements."
+      },
+      {
+        "q": "Does Grill and Thrill offer private dining?",
+        "a": "Grill and Thrill may offer private dining options for special events. Contact them for details."
+      }
+    ],
+    "schema_type": "Restaurant",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "kubez-hair-and-beauty",
+    "name": "Kubez Hair and Beauty",
+    "vertical": "salons",
+    "city": "Wexford",
+    "citySlug": "wexford",
+    "country": "ireland",
+    "address": "Wexford, Ireland",
+    "phone": "",
+    "website": "kubez.ie",
+    "email": "",
+    "description": "Kubez Hair and Beauty is a trusted hair salons located in Wexford, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Kubez Hair and Beauty accept walk-ins?",
+        "a": "Kubez Hair and Beauty welcomes walk-ins subject to availability. Booking in advance is recommended."
+      },
+      {
+        "q": "What services does Kubez Hair and Beauty offer?",
+        "a": "Kubez Hair and Beauty offers cuts, colour, styling, treatments, and more. Contact them for a full service menu."
+      },
+      {
+        "q": "What products does Kubez Hair and Beauty use?",
+        "a": "Kubez Hair and Beauty uses premium, professional-grade hair care products. Ask your stylist for details."
+      }
+    ],
+    "schema_type": "HairSalon",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "gallagher-vets-ballymote",
+    "name": "Gallagher Vets Ballymote",
+    "vertical": "vets",
+    "city": "Sligo",
+    "citySlug": "sligo",
+    "country": "ireland",
+    "address": "Sligo, Ireland",
+    "phone": "071 9183321",
+    "website": "gallaghervets.ie",
+    "email": "info@gallaghervets.ie",
+    "description": "Gallagher Vets Ballymote is a trusted veterinary clinics located in Sligo, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Gallagher Vets Ballymote treat?",
+        "a": "Gallagher Vets Ballymote treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Gallagher Vets Ballymote offer emergency veterinary services?",
+        "a": "Contact Gallagher Vets Ballymote for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Gallagher Vets Ballymote provide vaccinations?",
+        "a": "Yes, Gallagher Vets Ballymote offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Gallagher Vets Ballymote?",
+        "a": "Gallagher Vets Ballymote can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "ballygawley-veterinary-clinic",
+    "name": "Ballygawley Veterinary Clinic",
+    "vertical": "vets",
+    "city": "Sligo",
+    "citySlug": "sligo",
+    "country": "ireland",
+    "address": "Sligo, Ireland",
+    "phone": "(071) 930 3061",
+    "website": "",
+    "email": "",
+    "description": "Ballygawley Veterinary Clinic is a trusted veterinary clinics located in Sligo, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Ballygawley Veterinary Clinic treat?",
+        "a": "Ballygawley Veterinary Clinic treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Ballygawley Veterinary Clinic offer emergency veterinary services?",
+        "a": "Contact Ballygawley Veterinary Clinic for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Ballygawley Veterinary Clinic provide vaccinations?",
+        "a": "Yes, Ballygawley Veterinary Clinic offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Ballygawley Veterinary Clinic?",
+        "a": "Ballygawley Veterinary Clinic can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "peaches-and-cream-beauty",
+    "name": "Peaches and Cream Beauty",
+    "vertical": "salons",
+    "city": "Sligo",
+    "citySlug": "sligo",
+    "country": "ireland",
+    "address": "Sligo, Ireland",
+    "phone": "+353 71 914 1294",
+    "website": "peachesandcreambeautysalon.ie",
+    "email": "",
+    "description": "Peaches and Cream Beauty is a trusted hair salons located in Sligo, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Peaches and Cream Beauty accept walk-ins?",
+        "a": "Peaches and Cream Beauty welcomes walk-ins subject to availability. Booking in advance is recommended."
+      },
+      {
+        "q": "What services does Peaches and Cream Beauty offer?",
+        "a": "Peaches and Cream Beauty offers cuts, colour, styling, treatments, and more. Contact them for a full service menu."
+      },
+      {
+        "q": "What products does Peaches and Cream Beauty use?",
+        "a": "Peaches and Cream Beauty uses premium, professional-grade hair care products. Ask your stylist for details."
+      }
+    ],
+    "schema_type": "HairSalon",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "patrick-gildea-hairdressing",
+    "name": "Patrick Gildea Hairdressing",
+    "vertical": "salons",
+    "city": "Letterkenny",
+    "citySlug": "letterkenny",
+    "country": "ireland",
+    "address": "Letterkenny, Ireland",
+    "phone": "074 91 25476",
+    "website": "patrickgildea.ie",
+    "email": "",
+    "description": "Patrick Gildea Hairdressing is a trusted hair salons located in Letterkenny, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Patrick Gildea Hairdressing accept walk-ins?",
+        "a": "Patrick Gildea Hairdressing welcomes walk-ins subject to availability. Booking in advance is recommended."
+      },
+      {
+        "q": "What services does Patrick Gildea Hairdressing offer?",
+        "a": "Patrick Gildea Hairdressing offers cuts, colour, styling, treatments, and more. Contact them for a full service menu."
+      },
+      {
+        "q": "What products does Patrick Gildea Hairdressing use?",
+        "a": "Patrick Gildea Hairdressing uses premium, professional-grade hair care products. Ask your stylist for details."
+      }
+    ],
+    "schema_type": "HairSalon",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "greenmount-house",
+    "name": "Greenmount House",
+    "vertical": "restaurants",
+    "city": "Drogheda",
+    "citySlug": "drogheda",
+    "country": "ireland",
+    "address": "Drogheda, Ireland",
+    "phone": "(041) 983 6927",
+    "website": "",
+    "email": "",
+    "description": "Greenmount House is a trusted restaurants located in Drogheda, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Greenmount House take reservations?",
+        "a": "Yes, Greenmount House accepts reservations. Call ahead or book online for the best experience."
+      },
+      {
+        "q": "What type of cuisine does Greenmount House serve?",
+        "a": "Greenmount House offers a carefully curated menu featuring local and international dishes."
+      },
+      {
+        "q": "Does Greenmount House have parking?",
+        "a": "Please contact Greenmount House directly for parking information and availability."
+      },
+      {
+        "q": "Is there a dress code at Greenmount House?",
+        "a": "Smart casual attire is recommended. Contact the restaurant for specific event requirements."
+      },
+      {
+        "q": "Does Greenmount House offer private dining?",
+        "a": "Greenmount House may offer private dining options for special events. Contact them for details."
+      }
+    ],
+    "schema_type": "Restaurant",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "the-farmer-s-kitchen",
+    "name": "The Farmer's Kitchen",
+    "vertical": "restaurants",
+    "city": "Wexford",
+    "citySlug": "wexford",
+    "country": "ireland",
+    "address": "Wexford, Ireland",
+    "phone": "+353 53 914 5816",
+    "website": "farmerskitchen.com",
+    "email": "info@farmerskitchen.com",
+    "description": "The Farmer's Kitchen is a trusted restaurants located in Wexford, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does The Farmer's Kitchen take reservations?",
+        "a": "Yes, The Farmer's Kitchen accepts reservations. Call ahead or book online for the best experience."
+      },
+      {
+        "q": "What type of cuisine does The Farmer's Kitchen serve?",
+        "a": "The Farmer's Kitchen offers a carefully curated menu featuring local and international dishes."
+      },
+      {
+        "q": "Does The Farmer's Kitchen have parking?",
+        "a": "Please contact The Farmer's Kitchen directly for parking information and availability."
+      },
+      {
+        "q": "Is there a dress code at The Farmer's Kitchen?",
+        "a": "Smart casual attire is recommended. Contact the restaurant for specific event requirements."
+      },
+      {
+        "q": "Does The Farmer's Kitchen offer private dining?",
+        "a": "The Farmer's Kitchen may offer private dining options for special events. Contact them for details."
+      }
+    ],
+    "schema_type": "Restaurant",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "sligo-physiotherapy-clinic",
+    "name": "Sligo Physiotherapy Clinic",
+    "vertical": "physios",
+    "city": "Sligo",
+    "citySlug": "sligo",
+    "country": "ireland",
+    "address": "Sligo, Ireland",
+    "phone": "",
+    "website": "sligophysiotherapy.ie",
+    "email": "",
+    "description": "Sligo Physiotherapy Clinic is a trusted physiotherapy located in Sligo, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Do I need a referral for Sligo Physiotherapy Clinic?",
+        "a": "In most cases, you don't need a referral. Contact Sligo Physiotherapy Clinic to book directly."
+      },
+      {
+        "q": "What conditions does Sligo Physiotherapy Clinic treat?",
+        "a": "Sligo Physiotherapy Clinic treats sports injuries, back pain, rehabilitation, and more."
+      },
+      {
+        "q": "Does Sligo Physiotherapy Clinic accept health insurance?",
+        "a": "Sligo Physiotherapy Clinic is covered by most major health insurers. Confirm your plan when booking."
+      }
+    ],
+    "schema_type": "PhysicalTherapy",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "north-west-physiotherapy",
+    "name": "North West Physiotherapy",
+    "vertical": "physios",
+    "city": "Sligo",
+    "citySlug": "sligo",
+    "country": "ireland",
+    "address": "Sligo, Ireland",
+    "phone": "+353 71 916 2334",
+    "website": "northwestphysiotherapy.com",
+    "email": "info@northwestphysio.ie",
+    "description": "North West Physiotherapy is a trusted physiotherapy located in Sligo, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Do I need a referral for North West Physiotherapy?",
+        "a": "In most cases, you don't need a referral. Contact North West Physiotherapy to book directly."
+      },
+      {
+        "q": "What conditions does North West Physiotherapy treat?",
+        "a": "North West Physiotherapy treats sports injuries, back pain, rehabilitation, and more."
+      },
+      {
+        "q": "Does North West Physiotherapy accept health insurance?",
+        "a": "North West Physiotherapy is covered by most major health insurers. Confirm your plan when booking."
+      }
+    ],
+    "schema_type": "PhysicalTherapy",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "sligo-physical-therapy",
+    "name": "Sligo Physical Therapy",
+    "vertical": "physios",
+    "city": "Sligo",
+    "citySlug": "sligo",
+    "country": "ireland",
+    "address": "Sligo, Ireland",
+    "phone": "+353 87 917 1295",
+    "website": "sligophysicaltherapy.com",
+    "email": "troymcie@hotmail.com",
+    "description": "Sligo Physical Therapy is a trusted physiotherapy located in Sligo, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Do I need a referral for Sligo Physical Therapy?",
+        "a": "In most cases, you don't need a referral. Contact Sligo Physical Therapy to book directly."
+      },
+      {
+        "q": "What conditions does Sligo Physical Therapy treat?",
+        "a": "Sligo Physical Therapy treats sports injuries, back pain, rehabilitation, and more."
+      },
+      {
+        "q": "Does Sligo Physical Therapy accept health insurance?",
+        "a": "Sligo Physical Therapy is covered by most major health insurers. Confirm your plan when booking."
+      }
+    ],
+    "schema_type": "PhysicalTherapy",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
     "slug": "don-julio",
     "name": "Don Julio",
     "vertical": "restaurants",
@@ -20414,6 +22228,1536 @@
       }
     ],
     "schema_type": "Restaurant",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "sunbeam-veterinary-hospital",
+    "name": "Sunbeam Veterinary Hospital",
+    "vertical": "vets",
+    "city": "Cork",
+    "citySlug": "cork",
+    "country": "ireland",
+    "address": "Cork, Ireland",
+    "phone": "+353 21 439 1600",
+    "website": "https://www.sunbeamvets.com",
+    "email": "",
+    "description": "Sunbeam Veterinary Hospital is a trusted veterinary clinics located in Cork, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Sunbeam Veterinary Hospital treat?",
+        "a": "Sunbeam Veterinary Hospital treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Sunbeam Veterinary Hospital offer emergency veterinary services?",
+        "a": "Contact Sunbeam Veterinary Hospital for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Sunbeam Veterinary Hospital provide vaccinations?",
+        "a": "Yes, Sunbeam Veterinary Hospital offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Sunbeam Veterinary Hospital?",
+        "a": "Sunbeam Veterinary Hospital can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "village-vets-goold-goold-vets",
+    "name": "Village Vets Goold (Goold Vets)",
+    "vertical": "vets",
+    "city": "Cork",
+    "citySlug": "cork",
+    "country": "ireland",
+    "address": "Cork, Ireland",
+    "phone": "+353 21 451 1122",
+    "website": "",
+    "email": "",
+    "description": "Village Vets Goold (Goold Vets) is a trusted veterinary clinics located in Cork, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Village Vets Goold (Goold Vets) treat?",
+        "a": "Village Vets Goold (Goold Vets) treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Village Vets Goold (Goold Vets) offer emergency veterinary services?",
+        "a": "Contact Village Vets Goold (Goold Vets) for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Village Vets Goold (Goold Vets) provide vaccinations?",
+        "a": "Yes, Village Vets Goold (Goold Vets) offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Village Vets Goold (Goold Vets)?",
+        "a": "Village Vets Goold (Goold Vets) can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "village-vets-douglas",
+    "name": "Village Vets Douglas",
+    "vertical": "vets",
+    "city": "Cork",
+    "citySlug": "cork",
+    "country": "ireland",
+    "address": "Cork, Ireland",
+    "phone": "+353 21 489 0101",
+    "website": "https://thevillagevetdouglas.com",
+    "email": "info@thevillagevetdouglas.com",
+    "description": "Village Vets Douglas is a trusted veterinary clinics located in Cork, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Village Vets Douglas treat?",
+        "a": "Village Vets Douglas treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Village Vets Douglas offer emergency veterinary services?",
+        "a": "Contact Village Vets Douglas for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Village Vets Douglas provide vaccinations?",
+        "a": "Yes, Village Vets Douglas offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Village Vets Douglas?",
+        "a": "Village Vets Douglas can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "animal-care-vets-douglas",
+    "name": "Animal Care Vets Douglas",
+    "vertical": "vets",
+    "city": "Cork",
+    "citySlug": "cork",
+    "country": "ireland",
+    "address": "Cork, Ireland",
+    "phone": "+353 21 489 3033",
+    "website": "",
+    "email": "",
+    "description": "Animal Care Vets Douglas is a trusted veterinary clinics located in Cork, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Animal Care Vets Douglas treat?",
+        "a": "Animal Care Vets Douglas treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Animal Care Vets Douglas offer emergency veterinary services?",
+        "a": "Contact Animal Care Vets Douglas for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Animal Care Vets Douglas provide vaccinations?",
+        "a": "Yes, Animal Care Vets Douglas offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Animal Care Vets Douglas?",
+        "a": "Animal Care Vets Douglas can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "paw-paws-vet-clinic",
+    "name": "Paw Paws Vet Clinic",
+    "vertical": "vets",
+    "city": "Cork",
+    "citySlug": "cork",
+    "country": "ireland",
+    "address": "Cork, Ireland",
+    "phone": "+353 21 206 7700",
+    "website": "",
+    "email": "",
+    "description": "Paw Paws Vet Clinic is a trusted veterinary clinics located in Cork, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Paw Paws Vet Clinic treat?",
+        "a": "Paw Paws Vet Clinic treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Paw Paws Vet Clinic offer emergency veterinary services?",
+        "a": "Contact Paw Paws Vet Clinic for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Paw Paws Vet Clinic provide vaccinations?",
+        "a": "Yes, Paw Paws Vet Clinic offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Paw Paws Vet Clinic?",
+        "a": "Paw Paws Vet Clinic can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "sunbeam-vets-south-ring",
+    "name": "Sunbeam Vets (South Ring)",
+    "vertical": "vets",
+    "city": "Cork",
+    "citySlug": "cork",
+    "country": "ireland",
+    "address": "Cork, Ireland",
+    "phone": "+353 21 431 1600",
+    "website": "https://www.sunbeamvets.com",
+    "email": "",
+    "description": "Sunbeam Vets (South Ring) is a trusted veterinary clinics located in Cork, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Sunbeam Vets (South Ring) treat?",
+        "a": "Sunbeam Vets (South Ring) treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Sunbeam Vets (South Ring) offer emergency veterinary services?",
+        "a": "Contact Sunbeam Vets (South Ring) for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Sunbeam Vets (South Ring) provide vaccinations?",
+        "a": "Yes, Sunbeam Vets (South Ring) offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Sunbeam Vets (South Ring)?",
+        "a": "Sunbeam Vets (South Ring) can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "home-vetcare",
+    "name": "Home VetCare",
+    "vertical": "vets",
+    "city": "Cork",
+    "citySlug": "cork",
+    "country": "ireland",
+    "address": "Cork, Ireland",
+    "phone": "+353 21 245 5999",
+    "website": "",
+    "email": "",
+    "description": "Home VetCare is a trusted veterinary clinics located in Cork, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Home VetCare treat?",
+        "a": "Home VetCare treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Home VetCare offer emergency veterinary services?",
+        "a": "Contact Home VetCare for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Home VetCare provide vaccinations?",
+        "a": "Yes, Home VetCare offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Home VetCare?",
+        "a": "Home VetCare can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "cashman-veterinary-hospital",
+    "name": "Cashman Veterinary Hospital",
+    "vertical": "vets",
+    "city": "Cork",
+    "citySlug": "cork",
+    "country": "ireland",
+    "address": "Cork, Ireland",
+    "phone": "+353 21 482 1243",
+    "website": "",
+    "email": "",
+    "description": "Cashman Veterinary Hospital is a trusted veterinary clinics located in Cork, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Cashman Veterinary Hospital treat?",
+        "a": "Cashman Veterinary Hospital treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Cashman Veterinary Hospital offer emergency veterinary services?",
+        "a": "Contact Cashman Veterinary Hospital for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Cashman Veterinary Hospital provide vaccinations?",
+        "a": "Yes, Cashman Veterinary Hospital offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Cashman Veterinary Hospital?",
+        "a": "Cashman Veterinary Hospital can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "oldcote-veterinary-clinic",
+    "name": "Oldcote Veterinary Clinic",
+    "vertical": "vets",
+    "city": "Cork",
+    "citySlug": "cork",
+    "country": "ireland",
+    "address": "Cork, Ireland",
+    "phone": "+353 21 487 0300",
+    "website": "",
+    "email": "",
+    "description": "Oldcote Veterinary Clinic is a trusted veterinary clinics located in Cork, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Oldcote Veterinary Clinic treat?",
+        "a": "Oldcote Veterinary Clinic treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Oldcote Veterinary Clinic offer emergency veterinary services?",
+        "a": "Contact Oldcote Veterinary Clinic for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Oldcote Veterinary Clinic provide vaccinations?",
+        "a": "Yes, Oldcote Veterinary Clinic offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Oldcote Veterinary Clinic?",
+        "a": "Oldcote Veterinary Clinic can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "blackpool-veterinary-hospital",
+    "name": "Blackpool Veterinary Hospital",
+    "vertical": "vets",
+    "city": "Cork",
+    "citySlug": "cork",
+    "country": "ireland",
+    "address": "Cork, Ireland",
+    "phone": "+353 21 202 8090",
+    "website": "",
+    "email": "",
+    "description": "Blackpool Veterinary Hospital is a trusted veterinary clinics located in Cork, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Blackpool Veterinary Hospital treat?",
+        "a": "Blackpool Veterinary Hospital treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Blackpool Veterinary Hospital offer emergency veterinary services?",
+        "a": "Contact Blackpool Veterinary Hospital for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Blackpool Veterinary Hospital provide vaccinations?",
+        "a": "Yes, Blackpool Veterinary Hospital offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Blackpool Veterinary Hospital?",
+        "a": "Blackpool Veterinary Hospital can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "marina-veterinary-clinic",
+    "name": "Marina Veterinary Clinic",
+    "vertical": "vets",
+    "city": "Cork",
+    "citySlug": "cork",
+    "country": "ireland",
+    "address": "Cork, Ireland",
+    "phone": "+353 21 203 8344",
+    "website": "",
+    "email": "",
+    "description": "Marina Veterinary Clinic is a trusted veterinary clinics located in Cork, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Marina Veterinary Clinic treat?",
+        "a": "Marina Veterinary Clinic treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Marina Veterinary Clinic offer emergency veterinary services?",
+        "a": "Contact Marina Veterinary Clinic for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Marina Veterinary Clinic provide vaccinations?",
+        "a": "Yes, Marina Veterinary Clinic offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Marina Veterinary Clinic?",
+        "a": "Marina Veterinary Clinic can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "riverview-veterinary-group-carrigaline",
+    "name": "Riverview Veterinary Group Carrigaline",
+    "vertical": "vets",
+    "city": "Carrigaline",
+    "citySlug": "carrigaline",
+    "country": "ireland",
+    "address": "Carrigaline, Ireland",
+    "phone": "+353 21 437 5628",
+    "website": "",
+    "email": "",
+    "description": "Riverview Veterinary Group Carrigaline is a trusted veterinary clinics located in Carrigaline, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Riverview Veterinary Group Carrigaline treat?",
+        "a": "Riverview Veterinary Group Carrigaline treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Riverview Veterinary Group Carrigaline offer emergency veterinary services?",
+        "a": "Contact Riverview Veterinary Group Carrigaline for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Riverview Veterinary Group Carrigaline provide vaccinations?",
+        "a": "Yes, Riverview Veterinary Group Carrigaline offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Riverview Veterinary Group Carrigaline?",
+        "a": "Riverview Veterinary Group Carrigaline can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "sunbeam-veterinary-clinic-passage-west",
+    "name": "Sunbeam Veterinary Clinic Passage West",
+    "vertical": "vets",
+    "city": "Passage West",
+    "citySlug": "passage-west",
+    "country": "ireland",
+    "address": "Passage West, Ireland",
+    "phone": "+353 21 485 9594",
+    "website": "https://www.sunbeamvets.com",
+    "email": "",
+    "description": "Sunbeam Veterinary Clinic Passage West is a trusted veterinary clinics located in Passage West, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Sunbeam Veterinary Clinic Passage West treat?",
+        "a": "Sunbeam Veterinary Clinic Passage West treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Sunbeam Veterinary Clinic Passage West offer emergency veterinary services?",
+        "a": "Contact Sunbeam Veterinary Clinic Passage West for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Sunbeam Veterinary Clinic Passage West provide vaccinations?",
+        "a": "Yes, Sunbeam Veterinary Clinic Passage West offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Sunbeam Veterinary Clinic Passage West?",
+        "a": "Sunbeam Veterinary Clinic Passage West can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "abbeyville-veterinary-clinic-carrigaline",
+    "name": "Abbeyville Veterinary Clinic Carrigaline",
+    "vertical": "vets",
+    "city": "Carrigaline",
+    "citySlug": "carrigaline",
+    "country": "ireland",
+    "address": "Carrigaline, Ireland",
+    "phone": "+353 21 437 7163",
+    "website": "https://abbeyvillevet.ie",
+    "email": "",
+    "description": "Abbeyville Veterinary Clinic Carrigaline is a trusted veterinary clinics located in Carrigaline, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Abbeyville Veterinary Clinic Carrigaline treat?",
+        "a": "Abbeyville Veterinary Clinic Carrigaline treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Abbeyville Veterinary Clinic Carrigaline offer emergency veterinary services?",
+        "a": "Contact Abbeyville Veterinary Clinic Carrigaline for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Abbeyville Veterinary Clinic Carrigaline provide vaccinations?",
+        "a": "Yes, Abbeyville Veterinary Clinic Carrigaline offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Abbeyville Veterinary Clinic Carrigaline?",
+        "a": "Abbeyville Veterinary Clinic Carrigaline can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "abbeyville-veterinary-clinic-blarney",
+    "name": "Abbeyville Veterinary Clinic Blarney",
+    "vertical": "vets",
+    "city": "Blarney",
+    "citySlug": "blarney",
+    "country": "ireland",
+    "address": "Blarney, Ireland",
+    "phone": "+353 21 438 2583",
+    "website": "https://abbeyvillevet.ie",
+    "email": "",
+    "description": "Abbeyville Veterinary Clinic Blarney is a trusted veterinary clinics located in Blarney, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Abbeyville Veterinary Clinic Blarney treat?",
+        "a": "Abbeyville Veterinary Clinic Blarney treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Abbeyville Veterinary Clinic Blarney offer emergency veterinary services?",
+        "a": "Contact Abbeyville Veterinary Clinic Blarney for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Abbeyville Veterinary Clinic Blarney provide vaccinations?",
+        "a": "Yes, Abbeyville Veterinary Clinic Blarney offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Abbeyville Veterinary Clinic Blarney?",
+        "a": "Abbeyville Veterinary Clinic Blarney can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "midleton-vets",
+    "name": "Midleton Vets",
+    "vertical": "vets",
+    "city": "Midleton",
+    "citySlug": "midleton",
+    "country": "ireland",
+    "address": "Midleton, Ireland",
+    "phone": "021 4613672",
+    "website": "https://www.midletonvets.ie",
+    "email": "",
+    "description": "Midleton Vets is a trusted veterinary clinics located in Midleton, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Midleton Vets treat?",
+        "a": "Midleton Vets treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Midleton Vets offer emergency veterinary services?",
+        "a": "Contact Midleton Vets for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Midleton Vets provide vaccinations?",
+        "a": "Yes, Midleton Vets offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Midleton Vets?",
+        "a": "Midleton Vets can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "the-vet-clinic-midleton",
+    "name": "The Vet Clinic Midleton",
+    "vertical": "vets",
+    "city": "Midleton",
+    "citySlug": "midleton",
+    "country": "ireland",
+    "address": "Midleton, Ireland",
+    "phone": "021 463 2586",
+    "website": "https://thevetclinic.ie",
+    "email": "",
+    "description": "The Vet Clinic Midleton is a trusted veterinary clinics located in Midleton, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does The Vet Clinic Midleton treat?",
+        "a": "The Vet Clinic Midleton treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does The Vet Clinic Midleton offer emergency veterinary services?",
+        "a": "Contact The Vet Clinic Midleton for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does The Vet Clinic Midleton provide vaccinations?",
+        "a": "Yes, The Vet Clinic Midleton offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from The Vet Clinic Midleton?",
+        "a": "The Vet Clinic Midleton can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "the-veterinary-centre-kanturk",
+    "name": "The Veterinary Centre Kanturk",
+    "vertical": "vets",
+    "city": "Kanturk",
+    "citySlug": "kanturk",
+    "country": "ireland",
+    "address": "Kanturk, Ireland",
+    "phone": "029 50888",
+    "website": "https://vetskanturk.com",
+    "email": "",
+    "description": "The Veterinary Centre Kanturk is a trusted veterinary clinics located in Kanturk, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does The Veterinary Centre Kanturk treat?",
+        "a": "The Veterinary Centre Kanturk treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does The Veterinary Centre Kanturk offer emergency veterinary services?",
+        "a": "Contact The Veterinary Centre Kanturk for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does The Veterinary Centre Kanturk provide vaccinations?",
+        "a": "Yes, The Veterinary Centre Kanturk offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from The Veterinary Centre Kanturk?",
+        "a": "The Veterinary Centre Kanturk can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "ark-vets-knocknacarra",
+    "name": "Ark Vets Knocknacarra",
+    "vertical": "vets",
+    "city": "Galway",
+    "citySlug": "galway",
+    "country": "ireland",
+    "address": "Galway, Ireland",
+    "phone": "+353 91 510 131",
+    "website": "https://www.arkvetsgalway.com",
+    "email": "",
+    "description": "Ark Vets Knocknacarra is a trusted veterinary clinics located in Galway, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Ark Vets Knocknacarra treat?",
+        "a": "Ark Vets Knocknacarra treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Ark Vets Knocknacarra offer emergency veterinary services?",
+        "a": "Contact Ark Vets Knocknacarra for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Ark Vets Knocknacarra provide vaccinations?",
+        "a": "Yes, Ark Vets Knocknacarra offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Ark Vets Knocknacarra?",
+        "a": "Ark Vets Knocknacarra can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "glenina-veterinary-clinic",
+    "name": "Glenina Veterinary Clinic",
+    "vertical": "vets",
+    "city": "Galway",
+    "citySlug": "galway",
+    "country": "ireland",
+    "address": "Galway, Ireland",
+    "phone": "+353 91 752 014",
+    "website": "https://gleninavets.ie",
+    "email": "",
+    "description": "Glenina Veterinary Clinic is a trusted veterinary clinics located in Galway, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Glenina Veterinary Clinic treat?",
+        "a": "Glenina Veterinary Clinic treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Glenina Veterinary Clinic offer emergency veterinary services?",
+        "a": "Contact Glenina Veterinary Clinic for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Glenina Veterinary Clinic provide vaccinations?",
+        "a": "Yes, Glenina Veterinary Clinic offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Glenina Veterinary Clinic?",
+        "a": "Glenina Veterinary Clinic can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "ark-vets-galway-st-mary-s",
+    "name": "Ark Vets Galway (St Mary's)",
+    "vertical": "vets",
+    "city": "Galway",
+    "citySlug": "galway",
+    "country": "ireland",
+    "address": "Galway, Ireland",
+    "phone": "+353 91 510 131",
+    "website": "https://www.arkvetsgalway.com",
+    "email": "",
+    "description": "Ark Vets Galway (St Mary's) is a trusted veterinary clinics located in Galway, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Ark Vets Galway (St Mary's) treat?",
+        "a": "Ark Vets Galway (St Mary's) treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Ark Vets Galway (St Mary's) offer emergency veterinary services?",
+        "a": "Contact Ark Vets Galway (St Mary's) for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Ark Vets Galway (St Mary's) provide vaccinations?",
+        "a": "Yes, Ark Vets Galway (St Mary's) offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Ark Vets Galway (St Mary's)?",
+        "a": "Ark Vets Galway (St Mary's) can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "oran-veterinary-clinic",
+    "name": "Oran Veterinary Clinic",
+    "vertical": "vets",
+    "city": "Oranmore",
+    "citySlug": "oranmore",
+    "country": "ireland",
+    "address": "Oranmore, Ireland",
+    "phone": "+353 91 788 270",
+    "website": "",
+    "email": "",
+    "description": "Oran Veterinary Clinic is a trusted veterinary clinics located in Oranmore, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Oran Veterinary Clinic treat?",
+        "a": "Oran Veterinary Clinic treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Oran Veterinary Clinic offer emergency veterinary services?",
+        "a": "Contact Oran Veterinary Clinic for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Oran Veterinary Clinic provide vaccinations?",
+        "a": "Yes, Oran Veterinary Clinic offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Oran Veterinary Clinic?",
+        "a": "Oran Veterinary Clinic can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "moycullen-veterinary-clinic",
+    "name": "Moycullen Veterinary Clinic",
+    "vertical": "vets",
+    "city": "Moycullen",
+    "citySlug": "moycullen",
+    "country": "ireland",
+    "address": "Moycullen, Ireland",
+    "phone": "+353 91 868 572",
+    "website": "https://www.barnavetclinic.ie",
+    "email": "",
+    "description": "Moycullen Veterinary Clinic is a trusted veterinary clinics located in Moycullen, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Moycullen Veterinary Clinic treat?",
+        "a": "Moycullen Veterinary Clinic treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Moycullen Veterinary Clinic offer emergency veterinary services?",
+        "a": "Contact Moycullen Veterinary Clinic for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Moycullen Veterinary Clinic provide vaccinations?",
+        "a": "Yes, Moycullen Veterinary Clinic offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Moycullen Veterinary Clinic?",
+        "a": "Moycullen Veterinary Clinic can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "west-coast-vets",
+    "name": "West Coast Vets",
+    "vertical": "vets",
+    "city": "Bearna",
+    "citySlug": "bearna",
+    "country": "ireland",
+    "address": "Bearna, Ireland",
+    "phone": "+353 91 867 455",
+    "website": "",
+    "email": "",
+    "description": "West Coast Vets is a trusted veterinary clinics located in Bearna, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does West Coast Vets treat?",
+        "a": "West Coast Vets treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does West Coast Vets offer emergency veterinary services?",
+        "a": "Contact West Coast Vets for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does West Coast Vets provide vaccinations?",
+        "a": "Yes, West Coast Vets offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from West Coast Vets?",
+        "a": "West Coast Vets can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "kelly-vets-athenry",
+    "name": "Kelly Vets Athenry",
+    "vertical": "vets",
+    "city": "Athenry",
+    "citySlug": "athenry",
+    "country": "ireland",
+    "address": "Athenry, Ireland",
+    "phone": "087 9145862",
+    "website": "https://www.kellyvets.com",
+    "email": "",
+    "description": "Kelly Vets Athenry is a trusted veterinary clinics located in Athenry, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Kelly Vets Athenry treat?",
+        "a": "Kelly Vets Athenry treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Kelly Vets Athenry offer emergency veterinary services?",
+        "a": "Contact Kelly Vets Athenry for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Kelly Vets Athenry provide vaccinations?",
+        "a": "Yes, Kelly Vets Athenry offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Kelly Vets Athenry?",
+        "a": "Kelly Vets Athenry can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "divilly-veterinary-clinic",
+    "name": "Divilly Veterinary Clinic",
+    "vertical": "vets",
+    "city": "Headford",
+    "citySlug": "headford",
+    "country": "ireland",
+    "address": "Headford, Ireland",
+    "phone": "+353 93 36501",
+    "website": "http://divillyveterinaryclinic.ie",
+    "email": "info@divillyvetclinic.ie",
+    "description": "Divilly Veterinary Clinic is a trusted veterinary clinics located in Headford, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Divilly Veterinary Clinic treat?",
+        "a": "Divilly Veterinary Clinic treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Divilly Veterinary Clinic offer emergency veterinary services?",
+        "a": "Contact Divilly Veterinary Clinic for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Divilly Veterinary Clinic provide vaccinations?",
+        "a": "Yes, Divilly Veterinary Clinic offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Divilly Veterinary Clinic?",
+        "a": "Divilly Veterinary Clinic can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "western-veterinary",
+    "name": "Western Veterinary",
+    "vertical": "vets",
+    "city": "Clifden",
+    "citySlug": "clifden",
+    "country": "ireland",
+    "address": "Clifden, Ireland",
+    "phone": "095 22209",
+    "website": "https://www.westernveterinary.ie",
+    "email": "info@westernveterinary.ie",
+    "description": "Western Veterinary is a trusted veterinary clinics located in Clifden, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Western Veterinary treat?",
+        "a": "Western Veterinary treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Western Veterinary offer emergency veterinary services?",
+        "a": "Contact Western Veterinary for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Western Veterinary provide vaccinations?",
+        "a": "Yes, Western Veterinary offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Western Veterinary?",
+        "a": "Western Veterinary can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "all-paws-veterinary-clinic",
+    "name": "All Paws Veterinary Clinic",
+    "vertical": "vets",
+    "city": "Limerick",
+    "citySlug": "limerick",
+    "country": "ireland",
+    "address": "Limerick, Ireland",
+    "phone": "+353 61 275 616",
+    "website": "",
+    "email": "",
+    "description": "All Paws Veterinary Clinic is a trusted veterinary clinics located in Limerick, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does All Paws Veterinary Clinic treat?",
+        "a": "All Paws Veterinary Clinic treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does All Paws Veterinary Clinic offer emergency veterinary services?",
+        "a": "Contact All Paws Veterinary Clinic for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does All Paws Veterinary Clinic provide vaccinations?",
+        "a": "Yes, All Paws Veterinary Clinic offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from All Paws Veterinary Clinic?",
+        "a": "All Paws Veterinary Clinic can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "rockhall-vets-clare-street",
+    "name": "Rockhall Vets Clare Street",
+    "vertical": "vets",
+    "city": "Limerick",
+    "citySlug": "limerick",
+    "country": "ireland",
+    "address": "Limerick, Ireland",
+    "phone": "+353 61 415 104",
+    "website": "https://rockhallveterinary.ie",
+    "email": "",
+    "description": "Rockhall Vets Clare Street is a trusted veterinary clinics located in Limerick, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Rockhall Vets Clare Street treat?",
+        "a": "Rockhall Vets Clare Street treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Rockhall Vets Clare Street offer emergency veterinary services?",
+        "a": "Contact Rockhall Vets Clare Street for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Rockhall Vets Clare Street provide vaccinations?",
+        "a": "Yes, Rockhall Vets Clare Street offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Rockhall Vets Clare Street?",
+        "a": "Rockhall Vets Clare Street can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "castletroy-veterinary-clinic",
+    "name": "Castletroy Veterinary Clinic",
+    "vertical": "vets",
+    "city": "Limerick",
+    "citySlug": "limerick",
+    "country": "ireland",
+    "address": "Limerick, Ireland",
+    "phone": "+353 61 330 966",
+    "website": "",
+    "email": "",
+    "description": "Castletroy Veterinary Clinic is a trusted veterinary clinics located in Limerick, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Castletroy Veterinary Clinic treat?",
+        "a": "Castletroy Veterinary Clinic treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Castletroy Veterinary Clinic offer emergency veterinary services?",
+        "a": "Contact Castletroy Veterinary Clinic for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Castletroy Veterinary Clinic provide vaccinations?",
+        "a": "Yes, Castletroy Veterinary Clinic offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Castletroy Veterinary Clinic?",
+        "a": "Castletroy Veterinary Clinic can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "dooradoyle-raheen-pet-clinic",
+    "name": "Dooradoyle-Raheen Pet Clinic",
+    "vertical": "vets",
+    "city": "Limerick",
+    "citySlug": "limerick",
+    "country": "ireland",
+    "address": "Limerick, Ireland",
+    "phone": "+353 61 301 433",
+    "website": "",
+    "email": "",
+    "description": "Dooradoyle-Raheen Pet Clinic is a trusted veterinary clinics located in Limerick, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Dooradoyle-Raheen Pet Clinic treat?",
+        "a": "Dooradoyle-Raheen Pet Clinic treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Dooradoyle-Raheen Pet Clinic offer emergency veterinary services?",
+        "a": "Contact Dooradoyle-Raheen Pet Clinic for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Dooradoyle-Raheen Pet Clinic provide vaccinations?",
+        "a": "Yes, Dooradoyle-Raheen Pet Clinic offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Dooradoyle-Raheen Pet Clinic?",
+        "a": "Dooradoyle-Raheen Pet Clinic can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "east-limerick-veterinary-centre",
+    "name": "East Limerick Veterinary Centre",
+    "vertical": "vets",
+    "city": "Caherconlish",
+    "citySlug": "caherconlish",
+    "country": "ireland",
+    "address": "Caherconlish, Ireland",
+    "phone": "+353 61 351 204",
+    "website": "",
+    "email": "",
+    "description": "East Limerick Veterinary Centre is a trusted veterinary clinics located in Caherconlish, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does East Limerick Veterinary Centre treat?",
+        "a": "East Limerick Veterinary Centre treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does East Limerick Veterinary Centre offer emergency veterinary services?",
+        "a": "Contact East Limerick Veterinary Centre for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does East Limerick Veterinary Centre provide vaccinations?",
+        "a": "Yes, East Limerick Veterinary Centre offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from East Limerick Veterinary Centre?",
+        "a": "East Limerick Veterinary Centre can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "rockhall-vets-ennis-road",
+    "name": "Rockhall Vets Ennis Road",
+    "vertical": "vets",
+    "city": "Limerick",
+    "citySlug": "limerick",
+    "country": "ireland",
+    "address": "Limerick, Ireland",
+    "phone": "+353 61 327 900",
+    "website": "https://rockhallveterinary.ie",
+    "email": "",
+    "description": "Rockhall Vets Ennis Road is a trusted veterinary clinics located in Limerick, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Rockhall Vets Ennis Road treat?",
+        "a": "Rockhall Vets Ennis Road treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Rockhall Vets Ennis Road offer emergency veterinary services?",
+        "a": "Contact Rockhall Vets Ennis Road for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Rockhall Vets Ennis Road provide vaccinations?",
+        "a": "Yes, Rockhall Vets Ennis Road offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Rockhall Vets Ennis Road?",
+        "a": "Rockhall Vets Ennis Road can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "rockhall-vets-henry-street",
+    "name": "Rockhall Vets Henry Street",
+    "vertical": "vets",
+    "city": "Limerick",
+    "citySlug": "limerick",
+    "country": "ireland",
+    "address": "Limerick, Ireland",
+    "phone": "+353 61 314 203",
+    "website": "https://rockhallveterinary.ie",
+    "email": "henryst@rockhallveterinary.ie",
+    "description": "Rockhall Vets Henry Street is a trusted veterinary clinics located in Limerick, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Rockhall Vets Henry Street treat?",
+        "a": "Rockhall Vets Henry Street treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Rockhall Vets Henry Street offer emergency veterinary services?",
+        "a": "Contact Rockhall Vets Henry Street for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Rockhall Vets Henry Street provide vaccinations?",
+        "a": "Yes, Rockhall Vets Henry Street offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Rockhall Vets Henry Street?",
+        "a": "Rockhall Vets Henry Street can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "adare-veterinary-clinic",
+    "name": "Adare Veterinary Clinic",
+    "vertical": "vets",
+    "city": "Adare",
+    "citySlug": "adare",
+    "country": "ireland",
+    "address": "Adare, Ireland",
+    "phone": "+353 61 396 390",
+    "website": "https://www.adarevets.com",
+    "email": "info@adarevets.com",
+    "description": "Adare Veterinary Clinic is a trusted veterinary clinics located in Adare, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Adare Veterinary Clinic treat?",
+        "a": "Adare Veterinary Clinic treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Adare Veterinary Clinic offer emergency veterinary services?",
+        "a": "Contact Adare Veterinary Clinic for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Adare Veterinary Clinic provide vaccinations?",
+        "a": "Yes, Adare Veterinary Clinic offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Adare Veterinary Clinic?",
+        "a": "Adare Veterinary Clinic can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "allpaws-veterinary-clinic-castletroy",
+    "name": "Allpaws Veterinary Clinic Castletroy",
+    "vertical": "vets",
+    "city": "Annacotty",
+    "citySlug": "annacotty",
+    "country": "ireland",
+    "address": "Annacotty, Ireland",
+    "phone": "+353 61 597 678",
+    "website": "",
+    "email": "",
+    "description": "Allpaws Veterinary Clinic Castletroy is a trusted veterinary clinics located in Annacotty, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Allpaws Veterinary Clinic Castletroy treat?",
+        "a": "Allpaws Veterinary Clinic Castletroy treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Allpaws Veterinary Clinic Castletroy offer emergency veterinary services?",
+        "a": "Contact Allpaws Veterinary Clinic Castletroy for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Allpaws Veterinary Clinic Castletroy provide vaccinations?",
+        "a": "Yes, Allpaws Veterinary Clinic Castletroy offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Allpaws Veterinary Clinic Castletroy?",
+        "a": "Allpaws Veterinary Clinic Castletroy can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "city-vets-ireland",
+    "name": "City Vets Ireland",
+    "vertical": "vets",
+    "city": "Waterford",
+    "citySlug": "waterford",
+    "country": "ireland",
+    "address": "Waterford, Ireland",
+    "phone": "+353 51 371 155",
+    "website": "https://www.cityvets.ie",
+    "email": "",
+    "description": "City Vets Ireland is a trusted veterinary clinics located in Waterford, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does City Vets Ireland treat?",
+        "a": "City Vets Ireland treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does City Vets Ireland offer emergency veterinary services?",
+        "a": "Contact City Vets Ireland for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does City Vets Ireland provide vaccinations?",
+        "a": "Yes, City Vets Ireland offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from City Vets Ireland?",
+        "a": "City Vets Ireland can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "the-pet-hospital-waterford",
+    "name": "The Pet Hospital Waterford",
+    "vertical": "vets",
+    "city": "Waterford",
+    "citySlug": "waterford",
+    "country": "ireland",
+    "address": "Waterford, Ireland",
+    "phone": "+353 51 856 904",
+    "website": "https://www.pethospitalwaterford.ie",
+    "email": "",
+    "description": "The Pet Hospital Waterford is a trusted veterinary clinics located in Waterford, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does The Pet Hospital Waterford treat?",
+        "a": "The Pet Hospital Waterford treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does The Pet Hospital Waterford offer emergency veterinary services?",
+        "a": "Contact The Pet Hospital Waterford for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does The Pet Hospital Waterford provide vaccinations?",
+        "a": "Yes, The Pet Hospital Waterford offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from The Pet Hospital Waterford?",
+        "a": "The Pet Hospital Waterford can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "tir-na-bho-veterinary-kiersey-murphy",
+    "name": "Tír Na Bhó Veterinary (Kiersey & Murphy)",
+    "vertical": "vets",
+    "city": "Waterford",
+    "citySlug": "waterford",
+    "country": "ireland",
+    "address": "Waterford, Ireland",
+    "phone": "+353 51 373 798",
+    "website": "",
+    "email": "",
+    "description": "Tír Na Bhó Veterinary (Kiersey & Murphy) is a trusted veterinary clinics located in Waterford, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Tír Na Bhó Veterinary (Kiersey & Murphy) treat?",
+        "a": "Tír Na Bhó Veterinary (Kiersey & Murphy) treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Tír Na Bhó Veterinary (Kiersey & Murphy) offer emergency veterinary services?",
+        "a": "Contact Tír Na Bhó Veterinary (Kiersey & Murphy) for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Tír Na Bhó Veterinary (Kiersey & Murphy) provide vaccinations?",
+        "a": "Yes, Tír Na Bhó Veterinary (Kiersey & Murphy) offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Tír Na Bhó Veterinary (Kiersey & Murphy)?",
+        "a": "Tír Na Bhó Veterinary (Kiersey & Murphy) can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "pets-r-vets-veterinary-clinic",
+    "name": "Pets R Vets Veterinary Clinic",
+    "vertical": "vets",
+    "city": "Waterford",
+    "citySlug": "waterford",
+    "country": "ireland",
+    "address": "Waterford, Ireland",
+    "phone": "+353 51 345 165",
+    "website": "",
+    "email": "",
+    "description": "Pets R Vets Veterinary Clinic is a trusted veterinary clinics located in Waterford, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Pets R Vets Veterinary Clinic treat?",
+        "a": "Pets R Vets Veterinary Clinic treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Pets R Vets Veterinary Clinic offer emergency veterinary services?",
+        "a": "Contact Pets R Vets Veterinary Clinic for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Pets R Vets Veterinary Clinic provide vaccinations?",
+        "a": "Yes, Pets R Vets Veterinary Clinic offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Pets R Vets Veterinary Clinic?",
+        "a": "Pets R Vets Veterinary Clinic can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "ani-pets-veterinary-clinic",
+    "name": "Ani-Pets Veterinary Clinic",
+    "vertical": "vets",
+    "city": "Tramore",
+    "citySlug": "tramore",
+    "country": "ireland",
+    "address": "Tramore, Ireland",
+    "phone": "+353 51 393 630",
+    "website": "",
+    "email": "",
+    "description": "Ani-Pets Veterinary Clinic is a trusted veterinary clinics located in Tramore, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Ani-Pets Veterinary Clinic treat?",
+        "a": "Ani-Pets Veterinary Clinic treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Ani-Pets Veterinary Clinic offer emergency veterinary services?",
+        "a": "Contact Ani-Pets Veterinary Clinic for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Ani-Pets Veterinary Clinic provide vaccinations?",
+        "a": "Yes, Ani-Pets Veterinary Clinic offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Ani-Pets Veterinary Clinic?",
+        "a": "Ani-Pets Veterinary Clinic can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "killarney-veterinary-clinic",
+    "name": "Killarney Veterinary Clinic",
+    "vertical": "vets",
+    "city": "Killarney",
+    "citySlug": "killarney",
+    "country": "ireland",
+    "address": "Killarney, Ireland",
+    "phone": "+353 64 66 31121",
+    "website": "https://www.killarneyvet.ie",
+    "email": "",
+    "description": "Killarney Veterinary Clinic is a trusted veterinary clinics located in Killarney, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Killarney Veterinary Clinic treat?",
+        "a": "Killarney Veterinary Clinic treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Killarney Veterinary Clinic offer emergency veterinary services?",
+        "a": "Contact Killarney Veterinary Clinic for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Killarney Veterinary Clinic provide vaccinations?",
+        "a": "Yes, Killarney Veterinary Clinic offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Killarney Veterinary Clinic?",
+        "a": "Killarney Veterinary Clinic can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "dingle-veterinary-clinic",
+    "name": "Dingle Veterinary Clinic",
+    "vertical": "vets",
+    "city": "Dingle",
+    "citySlug": "dingle",
+    "country": "ireland",
+    "address": "Dingle, Ireland",
+    "phone": "+353 66 9151814",
+    "website": "https://dingleveterinaryclinic.com",
+    "email": "brendanocvet@gmail.com",
+    "description": "Dingle Veterinary Clinic is a trusted veterinary clinics located in Dingle, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Dingle Veterinary Clinic treat?",
+        "a": "Dingle Veterinary Clinic treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Dingle Veterinary Clinic offer emergency veterinary services?",
+        "a": "Contact Dingle Veterinary Clinic for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Dingle Veterinary Clinic provide vaccinations?",
+        "a": "Yes, Dingle Veterinary Clinic offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Dingle Veterinary Clinic?",
+        "a": "Dingle Veterinary Clinic can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "ark-veterinary-hospital-killarney",
+    "name": "Ark Veterinary Hospital Killarney",
+    "vertical": "vets",
+    "city": "Killarney",
+    "citySlug": "killarney",
+    "country": "ireland",
+    "address": "Killarney, Ireland",
+    "phone": "",
+    "website": "https://arkveterinaryhospital.ie",
+    "email": "",
+    "description": "Ark Veterinary Hospital Killarney is a trusted veterinary clinics located in Killarney, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Ark Veterinary Hospital Killarney treat?",
+        "a": "Ark Veterinary Hospital Killarney treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Ark Veterinary Hospital Killarney offer emergency veterinary services?",
+        "a": "Contact Ark Veterinary Hospital Killarney for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Ark Veterinary Hospital Killarney provide vaccinations?",
+        "a": "Yes, Ark Veterinary Hospital Killarney offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Ark Veterinary Hospital Killarney?",
+        "a": "Ark Veterinary Hospital Killarney can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "ardfert-veterinary-clinic",
+    "name": "Ardfert Veterinary Clinic",
+    "vertical": "vets",
+    "city": "Tralee",
+    "citySlug": "tralee",
+    "country": "ireland",
+    "address": "Tralee, Ireland",
+    "phone": "+353 66 713 4104",
+    "website": "",
+    "email": "",
+    "description": "Ardfert Veterinary Clinic is a trusted veterinary clinics located in Tralee, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Ardfert Veterinary Clinic treat?",
+        "a": "Ardfert Veterinary Clinic treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Ardfert Veterinary Clinic offer emergency veterinary services?",
+        "a": "Contact Ardfert Veterinary Clinic for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Ardfert Veterinary Clinic provide vaccinations?",
+        "a": "Yes, Ardfert Veterinary Clinic offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Ardfert Veterinary Clinic?",
+        "a": "Ardfert Veterinary Clinic can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
     "locale": "en",
     "openingHours": "Mo-Fr 09:00-18:00"
   }
