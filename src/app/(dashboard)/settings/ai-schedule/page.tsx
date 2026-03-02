@@ -248,8 +248,10 @@ export default function AISchedulePage() {
     setSuccess('');
 
     try {
-      // If schedule is disabled or empty, save null
-      const scheduleToSave = scheduleEnabled && Object.keys(schedule).length > 0 ? schedule : null;
+      // null = no schedule (AI 24/7), {} = schedule enabled but all days off (AI never on)
+      const scheduleToSave = scheduleEnabled
+        ? (Object.keys(schedule).length > 0 ? schedule : {})
+        : null;
 
       await notificationsApi.updateEscalation({
         timezone,
