@@ -15,6 +15,17 @@ export default function BusinessProfile({ business, locale = 'en' }: { business:
         <p className="text-slate-400 text-lg">{business.address}</p>
       </div>
 
+      {/* Business Photo */}
+      {business.image_url && (
+        <div className="mb-8 rounded-2xl overflow-hidden">
+          <img
+            src={business.image_url}
+            alt={business.name}
+            className="w-full h-64 md:h-80 object-cover"
+          />
+        </div>
+      )}
+
       {/* Contact Info */}
       <div className="bg-slate-800/50 border border-slate-700/50 rounded-2xl p-6 mb-8">
         <div className="grid md:grid-cols-3 gap-4">

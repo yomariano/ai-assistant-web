@@ -65,6 +65,7 @@ export default async function CityPage({ params }: Props) {
                 description={getLocalizedDescription(b, 'en')}
                 phone={b.phone}
                 href={`/directory/${vertical}/${city}/${b.slug}`}
+                image_url={b.image_url}
               />
             ))}
           </div>

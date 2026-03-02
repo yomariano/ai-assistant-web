@@ -16,6 +16,7 @@ export interface Business {
   schema_type: string;
   locale: string;
   openingHours: string;
+  image_url?: string;
 }
 
 const businesses: Business[] = businessesData as Business[];

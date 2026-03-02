@@ -22,6 +22,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: b.description.slice(0, 200),
       url: `https://voicefleet.ai/directory/${vertical}/${city}/${slug}`,
       type: 'website',
+      ...(b.image_url ? { images: [{ url: b.image_url.startsWith('http') ? b.image_url : `https://voicefleet.ai${b.image_url}` }] } : {}),
     },
   };
 }

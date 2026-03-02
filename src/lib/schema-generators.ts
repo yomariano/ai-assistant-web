@@ -22,6 +22,7 @@ export function generateBusinessSchema(b: Business, baseUrl = 'https://voiceflee
   if (b.phone) schema.telephone = b.phone;
   if (b.website) schema.sameAs = b.website;
   if (b.openingHours) schema.openingHours = b.openingHours;
+  if (b.image_url) schema.image = b.image_url.startsWith('http') ? b.image_url : `${baseUrl}${b.image_url}`;
 
   // Vertical-specific
   if (b.vertical === 'restaurants') {

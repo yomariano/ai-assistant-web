@@ -57,6 +57,7 @@ export default async function CityPageES({ params }: Props) {
                 phone={b.phone}
                 href={`/es/directorio/${vertical}/${city}/${b.slug}`}
                 locale="es"
+                image_url={b.image_url}
               />
             ))}
           </div>

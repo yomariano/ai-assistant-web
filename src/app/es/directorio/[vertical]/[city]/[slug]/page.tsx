@@ -18,7 +18,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${b.name} — ${capitalize(b.city)}`,
     description: `${b.name} en ${b.city}. ${b.description.slice(0, 140)}`,
-    openGraph: { title: `${b.name} — ${capitalize(b.city)}`, description: b.description.slice(0, 200) },
+    openGraph: {
+      title: `${b.name} — ${capitalize(b.city)}`,
+      description: b.description.slice(0, 200),
+      ...(b.image_url ? { images: [{ url: b.image_url.startsWith('http') ? b.image_url : `https://voicefleet.ai${b.image_url}` }] } : {}),
+    },
   };
 }
 
