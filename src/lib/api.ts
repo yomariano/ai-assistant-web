@@ -912,4 +912,51 @@ export const providersApi = {
   },
 };
 
+// Knowledge Gaps
+export interface KnowledgeGap {
+  id: string;
+  user_id: string;
+  call_history_id: string | null;
+  vapi_call_id: string | null;
+  question: string;
+  category: string;
+  caller_phone: string | null;
+  status: 'open' | 'resolved' | 'dismissed';
+  resolution_note: string | null;
+  resolved_at: string | null;
+  notification_sent: boolean;
+  created_at: string;
+  updated_at: string | null;
+}
+
+export const knowledgeGapsApi = {
+  list: async (params?: {
+    status?: string;
+    category?: string;
+    limit?: number;
+    offset?: number;
+  }): Promise<{ gaps: KnowledgeGap[]; total: number; limit: number; offset: number }> => {
+    const { data } = await api.get('/api/knowledge-gaps', { params });
+    return data;
+  },
+
+  getStats: async (): Promise<{ open: number; resolved: number; dismissed: number }> => {
+    const { data } = await api.get('/api/knowledge-gaps/stats');
+    return data;
+  },
+
+  update: async (id: string, updates: {
+    status?: 'open' | 'resolved' | 'dismissed';
+    resolution_note?: string;
+  }): Promise<{ gap: KnowledgeGap }> => {
+    const { data } = await api.patch(`/api/knowledge-gaps/${id}`, updates);
+    return data;
+  },
+
+  applyToAI: async (id: string): Promise<{ success: boolean; message: string }> => {
+    const { data } = await api.post(`/api/knowledge-gaps/${id}/apply`);
+    return data;
+  },
+};
+
 export default api;
