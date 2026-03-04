@@ -35,8 +35,6 @@ import Header from "@/components/voicefleet/Header";
 import HeroSection from "@/components/voicefleet/HeroSection";
 import IntegrationBrandsCarousel from "@/components/voicefleet/IntegrationBrandsCarousel";
 import MetricsBar from "@/components/voicefleet/MetricsBar";
-import CountdownBanner from "@/components/voicefleet/CountdownBanner";
-import VideoShowcase from "@/components/voicefleet/VideoShowcase";
 
 // Below-fold components: lazy load for smaller initial bundle
 const ProblemSection = dynamic(() => import("@/components/voicefleet/ProblemSection"));
@@ -80,11 +78,9 @@ export default function Home() {
           },
         ]}
       />
-      <CountdownBanner />
       <Header />
       <main>
         <HeroSection />
-        <VideoShowcase />
         <IntegrationBrandsCarousel />
         <MetricsBar />
         <ProblemSection />
