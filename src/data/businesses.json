@@ -19982,6 +19982,1310 @@
     "openingHours": "Mo-Fr 09:00-18:00"
   },
   {
+    "slug": "mccann-fitzgerald",
+    "name": "McCann Fitzgerald",
+    "vertical": "accountants",
+    "city": "Dublin",
+    "citySlug": "dublin",
+    "country": "ireland",
+    "address": "Dublin, Ireland",
+    "phone": "+353 1 611 9141",
+    "website": "https://www.mccannfitzgerald.com/",
+    "email": "",
+    "description": "McCann Fitzgerald is a trusted professional services located in Dublin, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does McCann Fitzgerald offer free consultations?",
+        "a": "Contact McCann Fitzgerald to enquire about initial consultation availability."
+      },
+      {
+        "q": "What services does McCann Fitzgerald provide?",
+        "a": "McCann Fitzgerald offers a range of professional services. Contact them for details."
+      },
+      {
+        "q": "Does McCann Fitzgerald work with small businesses?",
+        "a": "Yes, McCann Fitzgerald works with businesses of all sizes. Get in touch to discuss your needs."
+      }
+    ],
+    "schema_type": "AccountingService",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "tj-hegarty-llp-solicitors",
+    "name": "TJ Hegarty LLP Solicitors",
+    "vertical": "accountants",
+    "city": "Cork",
+    "citySlug": "cork",
+    "country": "ireland",
+    "address": "Cork, Ireland",
+    "phone": "(021) 427 0351",
+    "website": "https://www.tjhegarty.ie/",
+    "email": "",
+    "description": "TJ Hegarty LLP Solicitors is a trusted professional services located in Cork, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does TJ Hegarty LLP Solicitors offer free consultations?",
+        "a": "Contact TJ Hegarty LLP Solicitors to enquire about initial consultation availability."
+      },
+      {
+        "q": "What services does TJ Hegarty LLP Solicitors provide?",
+        "a": "TJ Hegarty LLP Solicitors offers a range of professional services. Contact them for details."
+      },
+      {
+        "q": "Does TJ Hegarty LLP Solicitors work with small businesses?",
+        "a": "Yes, TJ Hegarty LLP Solicitors works with businesses of all sizes. Get in touch to discuss your needs."
+      }
+    ],
+    "schema_type": "AccountingService",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "dominic-creedon-co-solicitors",
+    "name": "Dominic Creedon & Co Solicitors",
+    "vertical": "accountants",
+    "city": "Cork",
+    "citySlug": "cork",
+    "country": "ireland",
+    "address": "Cork, Ireland",
+    "phone": "(021) 427 1801",
+    "website": "https://dominiccreedonsolicitors.fcrlead.ie/",
+    "email": "",
+    "description": "Dominic Creedon & Co Solicitors is a trusted professional services located in Cork, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Dominic Creedon & Co Solicitors offer free consultations?",
+        "a": "Contact Dominic Creedon & Co Solicitors to enquire about initial consultation availability."
+      },
+      {
+        "q": "What services does Dominic Creedon & Co Solicitors provide?",
+        "a": "Dominic Creedon & Co Solicitors offers a range of professional services. Contact them for details."
+      },
+      {
+        "q": "Does Dominic Creedon & Co Solicitors work with small businesses?",
+        "a": "Yes, Dominic Creedon & Co Solicitors works with businesses of all sizes. Get in touch to discuss your needs."
+      }
+    ],
+    "schema_type": "AccountingService",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "babington-clarke-and-mooney",
+    "name": "Babington Clarke and Mooney",
+    "vertical": "accountants",
+    "city": "Cork",
+    "citySlug": "cork",
+    "country": "ireland",
+    "address": "Cork, Ireland",
+    "phone": "(021) 601 9467",
+    "website": "https://babingtonclarkeandmooney.fcr.ie/",
+    "email": "",
+    "description": "Babington Clarke and Mooney is a trusted professional services located in Cork, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Babington Clarke and Mooney offer free consultations?",
+        "a": "Contact Babington Clarke and Mooney to enquire about initial consultation availability."
+      },
+      {
+        "q": "What services does Babington Clarke and Mooney provide?",
+        "a": "Babington Clarke and Mooney offers a range of professional services. Contact them for details."
+      },
+      {
+        "q": "Does Babington Clarke and Mooney work with small businesses?",
+        "a": "Yes, Babington Clarke and Mooney works with businesses of all sizes. Get in touch to discuss your needs."
+      }
+    ],
+    "schema_type": "AccountingService",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "o-donnell-sons-llp-solicitors",
+    "name": "O'Donnell & Sons LLP Solicitors",
+    "vertical": "accountants",
+    "city": "Galway",
+    "citySlug": "galway",
+    "country": "ireland",
+    "address": "Galway, Ireland",
+    "phone": "(091) 561128",
+    "website": "https://odonnellsolicitorsgalway.com/",
+    "email": "info@jcod.ie",
+    "description": "O'Donnell & Sons LLP Solicitors is a trusted professional services located in Galway, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does O'Donnell & Sons LLP Solicitors offer free consultations?",
+        "a": "Contact O'Donnell & Sons LLP Solicitors to enquire about initial consultation availability."
+      },
+      {
+        "q": "What services does O'Donnell & Sons LLP Solicitors provide?",
+        "a": "O'Donnell & Sons LLP Solicitors offers a range of professional services. Contact them for details."
+      },
+      {
+        "q": "Does O'Donnell & Sons LLP Solicitors work with small businesses?",
+        "a": "Yes, O'Donnell & Sons LLP Solicitors works with businesses of all sizes. Get in touch to discuss your needs."
+      }
+    ],
+    "schema_type": "AccountingService",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "pkf-brenson-lawlor",
+    "name": "PKF Brenson Lawlor",
+    "vertical": "accountants",
+    "city": "Dublin",
+    "citySlug": "dublin",
+    "country": "ireland",
+    "address": "Dublin, Ireland",
+    "phone": "+353 1 668 9760",
+    "website": "https://www.pkfbrensonlawlor.ie/",
+    "email": "info@pkfbl.ie",
+    "description": "PKF Brenson Lawlor is a trusted professional services located in Dublin, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does PKF Brenson Lawlor offer free consultations?",
+        "a": "Contact PKF Brenson Lawlor to enquire about initial consultation availability."
+      },
+      {
+        "q": "What services does PKF Brenson Lawlor provide?",
+        "a": "PKF Brenson Lawlor offers a range of professional services. Contact them for details."
+      },
+      {
+        "q": "Does PKF Brenson Lawlor work with small businesses?",
+        "a": "Yes, PKF Brenson Lawlor works with businesses of all sizes. Get in touch to discuss your needs."
+      }
+    ],
+    "schema_type": "AccountingService",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "kilcoyne-accountants",
+    "name": "Kilcoyne Accountants",
+    "vertical": "accountants",
+    "city": "Dublin",
+    "citySlug": "dublin",
+    "country": "ireland",
+    "address": "Dublin, Ireland",
+    "phone": "",
+    "website": "https://kilcoyneaccountants.ie/",
+    "email": "",
+    "description": "Kilcoyne Accountants is a trusted professional services located in Dublin, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Kilcoyne Accountants offer free consultations?",
+        "a": "Contact Kilcoyne Accountants to enquire about initial consultation availability."
+      },
+      {
+        "q": "What services does Kilcoyne Accountants provide?",
+        "a": "Kilcoyne Accountants offers a range of professional services. Contact them for details."
+      },
+      {
+        "q": "Does Kilcoyne Accountants work with small businesses?",
+        "a": "Yes, Kilcoyne Accountants works with businesses of all sizes. Get in touch to discuss your needs."
+      }
+    ],
+    "schema_type": "AccountingService",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "kerr-accountants",
+    "name": "Kerr Accountants",
+    "vertical": "accountants",
+    "city": "Cork",
+    "citySlug": "cork",
+    "country": "ireland",
+    "address": "Cork, Ireland",
+    "phone": "(021) 496 9176",
+    "website": "https://www.kerraccountants.ie/",
+    "email": "info@kerraccountants.ie",
+    "description": "Kerr Accountants is a trusted professional services located in Cork, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Kerr Accountants offer free consultations?",
+        "a": "Contact Kerr Accountants to enquire about initial consultation availability."
+      },
+      {
+        "q": "What services does Kerr Accountants provide?",
+        "a": "Kerr Accountants offers a range of professional services. Contact them for details."
+      },
+      {
+        "q": "Does Kerr Accountants work with small businesses?",
+        "a": "Yes, Kerr Accountants works with businesses of all sizes. Get in touch to discuss your needs."
+      }
+    ],
+    "schema_type": "AccountingService",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "cork-auto-repairs",
+    "name": "Cork Auto Repairs",
+    "vertical": "mechanics",
+    "city": "Cork",
+    "citySlug": "cork",
+    "country": "ireland",
+    "address": "Cork, Ireland",
+    "phone": "(021) 431 4584",
+    "website": "",
+    "email": "",
+    "description": "Cork Auto Repairs is a trusted mechanics located in Cork, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Cork Auto Repairs service all car brands?",
+        "a": "Cork Auto Repairs works on most vehicle makes and models. Call to confirm your car."
+      },
+      {
+        "q": "Does Cork Auto Repairs offer free estimates?",
+        "a": "Contact Cork Auto Repairs for pricing information and repair estimates."
+      },
+      {
+        "q": "Does Cork Auto Repairs handle NCT prep?",
+        "a": "Cork Auto Repairs can help prepare your car for NCT testing. Book an appointment."
+      }
+    ],
+    "schema_type": "AutoRepair",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "car-fix-garage",
+    "name": "Car Fix Garage",
+    "vertical": "mechanics",
+    "city": "Cork",
+    "citySlug": "cork",
+    "country": "ireland",
+    "address": "Cork, Ireland",
+    "phone": "(021) 434 5451",
+    "website": "",
+    "email": "",
+    "description": "Car Fix Garage is a trusted mechanics located in Cork, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Car Fix Garage service all car brands?",
+        "a": "Car Fix Garage works on most vehicle makes and models. Call to confirm your car."
+      },
+      {
+        "q": "Does Car Fix Garage offer free estimates?",
+        "a": "Contact Car Fix Garage for pricing information and repair estimates."
+      },
+      {
+        "q": "Does Car Fix Garage handle NCT prep?",
+        "a": "Car Fix Garage can help prepare your car for NCT testing. Book an appointment."
+      }
+    ],
+    "schema_type": "AutoRepair",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "john-o-leary-autos",
+    "name": "John O'Leary Autos",
+    "vertical": "mechanics",
+    "city": "Cork",
+    "citySlug": "cork",
+    "country": "ireland",
+    "address": "Cork, Ireland",
+    "phone": "(021) 4208616",
+    "website": "https://johnolearyautos.ie/",
+    "email": "",
+    "description": "John O'Leary Autos is a trusted mechanics located in Cork, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does John O'Leary Autos service all car brands?",
+        "a": "John O'Leary Autos works on most vehicle makes and models. Call to confirm your car."
+      },
+      {
+        "q": "Does John O'Leary Autos offer free estimates?",
+        "a": "Contact John O'Leary Autos for pricing information and repair estimates."
+      },
+      {
+        "q": "Does John O'Leary Autos handle NCT prep?",
+        "a": "John O'Leary Autos can help prepare your car for NCT testing. Book an appointment."
+      }
+    ],
+    "schema_type": "AutoRepair",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "danny-s-garage",
+    "name": "Danny's Garage",
+    "vertical": "mechanics",
+    "city": "Dublin",
+    "citySlug": "dublin",
+    "country": "ireland",
+    "address": "Dublin, Ireland",
+    "phone": "+353 894632473",
+    "website": "",
+    "email": "",
+    "description": "Danny's Garage is a trusted mechanics located in Dublin, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Danny's Garage service all car brands?",
+        "a": "Danny's Garage works on most vehicle makes and models. Call to confirm your car."
+      },
+      {
+        "q": "Does Danny's Garage offer free estimates?",
+        "a": "Contact Danny's Garage for pricing information and repair estimates."
+      },
+      {
+        "q": "Does Danny's Garage handle NCT prep?",
+        "a": "Danny's Garage can help prepare your car for NCT testing. Book an appointment."
+      }
+    ],
+    "schema_type": "AutoRepair",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "planet-health-club-limerick",
+    "name": "Planet Health Club Limerick",
+    "vertical": "gyms",
+    "city": "Limerick",
+    "citySlug": "limerick",
+    "country": "ireland",
+    "address": "Limerick, Ireland",
+    "phone": "(061) 422 350",
+    "website": "https://planethealthlimerick.ie/",
+    "email": "getfit@planethealthlimerick.ie",
+    "description": "Planet Health Club Limerick is a trusted gyms located in Limerick, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Planet Health Club Limerick offer trial memberships?",
+        "a": "Contact Planet Health Club Limerick to ask about trial passes and membership options."
+      },
+      {
+        "q": "What classes does Planet Health Club Limerick offer?",
+        "a": "Planet Health Club Limerick offers a range of fitness classes. Check their schedule for availability."
+      },
+      {
+        "q": "Does Planet Health Club Limerick have personal trainers?",
+        "a": "Yes, Planet Health Club Limerick has qualified personal trainers available. Enquire about packages."
+      }
+    ],
+    "schema_type": "HealthClub",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "go-gym-limerick",
+    "name": "Go Gym Limerick",
+    "vertical": "gyms",
+    "city": "Limerick",
+    "citySlug": "limerick",
+    "country": "ireland",
+    "address": "Limerick, Ireland",
+    "phone": "",
+    "website": "https://gogymlimerick.ie/",
+    "email": "",
+    "description": "Go Gym Limerick is a trusted gyms located in Limerick, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Go Gym Limerick offer trial memberships?",
+        "a": "Contact Go Gym Limerick to ask about trial passes and membership options."
+      },
+      {
+        "q": "What classes does Go Gym Limerick offer?",
+        "a": "Go Gym Limerick offers a range of fitness classes. Check their schedule for availability."
+      },
+      {
+        "q": "Does Go Gym Limerick have personal trainers?",
+        "a": "Yes, Go Gym Limerick has qualified personal trainers available. Enquire about packages."
+      }
+    ],
+    "schema_type": "HealthClub",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "energie-fitness-limerick",
+    "name": "Energie Fitness Limerick",
+    "vertical": "gyms",
+    "city": "Limerick",
+    "citySlug": "limerick",
+    "country": "ireland",
+    "address": "Limerick, Ireland",
+    "phone": "",
+    "website": "https://energiefitness.com/gym/limerick",
+    "email": "",
+    "description": "Energie Fitness Limerick is a trusted gyms located in Limerick, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Energie Fitness Limerick offer trial memberships?",
+        "a": "Contact Energie Fitness Limerick to ask about trial passes and membership options."
+      },
+      {
+        "q": "What classes does Energie Fitness Limerick offer?",
+        "a": "Energie Fitness Limerick offers a range of fitness classes. Check their schedule for availability."
+      },
+      {
+        "q": "Does Energie Fitness Limerick have personal trainers?",
+        "a": "Yes, Energie Fitness Limerick has qualified personal trainers available. Enquire about packages."
+      }
+    ],
+    "schema_type": "HealthClub",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "citygym-limerick",
+    "name": "CityGym Limerick",
+    "vertical": "gyms",
+    "city": "Limerick",
+    "citySlug": "limerick",
+    "country": "ireland",
+    "address": "Limerick, Ireland",
+    "phone": "",
+    "website": "https://www.citygymlk.com/",
+    "email": "",
+    "description": "CityGym Limerick is a trusted gyms located in Limerick, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does CityGym Limerick offer trial memberships?",
+        "a": "Contact CityGym Limerick to ask about trial passes and membership options."
+      },
+      {
+        "q": "What classes does CityGym Limerick offer?",
+        "a": "CityGym Limerick offers a range of fitness classes. Check their schedule for availability."
+      },
+      {
+        "q": "Does CityGym Limerick have personal trainers?",
+        "a": "Yes, CityGym Limerick has qualified personal trainers available. Enquire about packages."
+      }
+    ],
+    "schema_type": "HealthClub",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "dooradoyle-gym",
+    "name": "Dooradoyle Gym",
+    "vertical": "gyms",
+    "city": "Limerick",
+    "citySlug": "limerick",
+    "country": "ireland",
+    "address": "Limerick, Ireland",
+    "phone": "",
+    "website": "https://www.dooradoylegym.com/",
+    "email": "",
+    "description": "Dooradoyle Gym is a trusted gyms located in Limerick, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Dooradoyle Gym offer trial memberships?",
+        "a": "Contact Dooradoyle Gym to ask about trial passes and membership options."
+      },
+      {
+        "q": "What classes does Dooradoyle Gym offer?",
+        "a": "Dooradoyle Gym offers a range of fitness classes. Check their schedule for availability."
+      },
+      {
+        "q": "Does Dooradoyle Gym have personal trainers?",
+        "a": "Yes, Dooradoyle Gym has qualified personal trainers available. Enquire about packages."
+      }
+    ],
+    "schema_type": "HealthClub",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "greenhills-leisure-club",
+    "name": "Greenhills Leisure Club",
+    "vertical": "gyms",
+    "city": "Limerick",
+    "citySlug": "limerick",
+    "country": "ireland",
+    "address": "Limerick, Ireland",
+    "phone": "",
+    "website": "https://www.greenhillsgroup.com/leisure-club/",
+    "email": "",
+    "description": "Greenhills Leisure Club is a trusted gyms located in Limerick, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Greenhills Leisure Club offer trial memberships?",
+        "a": "Contact Greenhills Leisure Club to ask about trial passes and membership options."
+      },
+      {
+        "q": "What classes does Greenhills Leisure Club offer?",
+        "a": "Greenhills Leisure Club offers a range of fitness classes. Check their schedule for availability."
+      },
+      {
+        "q": "Does Greenhills Leisure Club have personal trainers?",
+        "a": "Yes, Greenhills Leisure Club has qualified personal trainers available. Enquire about packages."
+      }
+    ],
+    "schema_type": "HealthClub",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "woodlands-health-leisure-club",
+    "name": "Woodlands Health & Leisure Club",
+    "vertical": "gyms",
+    "city": "Limerick",
+    "citySlug": "limerick",
+    "country": "ireland",
+    "address": "Limerick, Ireland",
+    "phone": "061 605111",
+    "website": "https://www.woodlands-hotel.ie/leisure-club/",
+    "email": "",
+    "description": "Woodlands Health & Leisure Club is a trusted gyms located in Limerick, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Woodlands Health & Leisure Club offer trial memberships?",
+        "a": "Contact Woodlands Health & Leisure Club to ask about trial passes and membership options."
+      },
+      {
+        "q": "What classes does Woodlands Health & Leisure Club offer?",
+        "a": "Woodlands Health & Leisure Club offers a range of fitness classes. Check their schedule for availability."
+      },
+      {
+        "q": "Does Woodlands Health & Leisure Club have personal trainers?",
+        "a": "Yes, Woodlands Health & Leisure Club has qualified personal trainers available. Enquire about packages."
+      }
+    ],
+    "schema_type": "HealthClub",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "eden-one",
+    "name": "Eden One",
+    "vertical": "gyms",
+    "city": "Dublin",
+    "citySlug": "dublin",
+    "country": "ireland",
+    "address": "Dublin, Ireland",
+    "phone": "+353 (1) 215 0640",
+    "website": "https://edenone.ie/",
+    "email": "",
+    "description": "Eden One is a trusted gyms located in Dublin, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Eden One offer trial memberships?",
+        "a": "Contact Eden One to ask about trial passes and membership options."
+      },
+      {
+        "q": "What classes does Eden One offer?",
+        "a": "Eden One offers a range of fitness classes. Check their schedule for availability."
+      },
+      {
+        "q": "Does Eden One have personal trainers?",
+        "a": "Yes, Eden One has qualified personal trainers available. Enquire about packages."
+      }
+    ],
+    "schema_type": "HealthClub",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "counihan-dental-practice",
+    "name": "Counihan Dental Practice",
+    "vertical": "dentists",
+    "city": "Ennis",
+    "citySlug": "ennis",
+    "country": "ireland",
+    "address": "Ennis, Ireland",
+    "phone": "",
+    "website": "http://www.counihandental.ie",
+    "email": "",
+    "description": "Counihan Dental Practice is a trusted dentists located in Ennis, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Counihan Dental Practice accepting new patients?",
+        "a": "Counihan Dental Practice welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Counihan Dental Practice offer emergency dental care?",
+        "a": "Contact Counihan Dental Practice directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Counihan Dental Practice accept?",
+        "a": "Counihan Dental Practice works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Counihan Dental Practice offer?",
+        "a": "Counihan Dental Practice provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "mahony-dental-cube-dental-ennis",
+    "name": "Mahony Dental / Cube Dental Ennis",
+    "vertical": "dentists",
+    "city": "Ennis",
+    "citySlug": "ennis",
+    "country": "ireland",
+    "address": "Ennis, Ireland",
+    "phone": "065 682 1547",
+    "website": "https://mahonydental.ie",
+    "email": "",
+    "description": "Mahony Dental / Cube Dental Ennis is a trusted dentists located in Ennis, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Mahony Dental / Cube Dental Ennis accepting new patients?",
+        "a": "Mahony Dental / Cube Dental Ennis welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Mahony Dental / Cube Dental Ennis offer emergency dental care?",
+        "a": "Contact Mahony Dental / Cube Dental Ennis directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Mahony Dental / Cube Dental Ennis accept?",
+        "a": "Mahony Dental / Cube Dental Ennis works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Mahony Dental / Cube Dental Ennis offer?",
+        "a": "Mahony Dental / Cube Dental Ennis provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "boroimhe-dental-practice",
+    "name": "Boroimhe Dental Practice",
+    "vertical": "dentists",
+    "city": "Swords",
+    "citySlug": "swords",
+    "country": "ireland",
+    "address": "Swords, Ireland",
+    "phone": "01 840 6450",
+    "website": "https://boroimhedentalpractice.ie",
+    "email": "info@boroimhedentalpractice.ie",
+    "description": "Boroimhe Dental Practice is a trusted dentists located in Swords, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Boroimhe Dental Practice accepting new patients?",
+        "a": "Boroimhe Dental Practice welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Boroimhe Dental Practice offer emergency dental care?",
+        "a": "Contact Boroimhe Dental Practice directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Boroimhe Dental Practice accept?",
+        "a": "Boroimhe Dental Practice works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Boroimhe Dental Practice offer?",
+        "a": "Boroimhe Dental Practice provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "o-neill-dental-care",
+    "name": "O'Neill Dental Care",
+    "vertical": "dentists",
+    "city": "Swords",
+    "citySlug": "swords",
+    "country": "ireland",
+    "address": "Swords, Ireland",
+    "phone": "",
+    "website": "https://oneilldentalcare.ie",
+    "email": "",
+    "description": "O'Neill Dental Care is a trusted dentists located in Swords, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is O'Neill Dental Care accepting new patients?",
+        "a": "O'Neill Dental Care welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does O'Neill Dental Care offer emergency dental care?",
+        "a": "Contact O'Neill Dental Care directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does O'Neill Dental Care accept?",
+        "a": "O'Neill Dental Care works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does O'Neill Dental Care offer?",
+        "a": "O'Neill Dental Care provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "the-central-navan",
+    "name": "The Central Navan",
+    "vertical": "restaurants",
+    "city": "Navan",
+    "citySlug": "navan",
+    "country": "ireland",
+    "address": "Navan, Ireland",
+    "phone": "046 992 7999",
+    "website": "https://thecentral.ie",
+    "email": "everything@thecentral.ie",
+    "description": "The Central Navan is a trusted restaurants located in Navan, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does The Central Navan take reservations?",
+        "a": "Yes, The Central Navan accepts reservations. Call ahead or book online for the best experience."
+      },
+      {
+        "q": "What type of cuisine does The Central Navan serve?",
+        "a": "The Central Navan offers a carefully curated menu featuring local and international dishes."
+      },
+      {
+        "q": "Does The Central Navan have parking?",
+        "a": "Please contact The Central Navan directly for parking information and availability."
+      },
+      {
+        "q": "Is there a dress code at The Central Navan?",
+        "a": "Smart casual attire is recommended. Contact the restaurant for specific event requirements."
+      },
+      {
+        "q": "Does The Central Navan offer private dining?",
+        "a": "The Central Navan may offer private dining options for special events. Contact them for details."
+      }
+    ],
+    "schema_type": "Restaurant",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "the-seven-arches",
+    "name": "The Seven Arches",
+    "vertical": "restaurants",
+    "city": "Navan",
+    "citySlug": "navan",
+    "country": "ireland",
+    "address": "Navan, Ireland",
+    "phone": "+353 46 907 6597",
+    "website": "",
+    "email": "",
+    "description": "The Seven Arches is a trusted restaurants located in Navan, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does The Seven Arches take reservations?",
+        "a": "Yes, The Seven Arches accepts reservations. Call ahead or book online for the best experience."
+      },
+      {
+        "q": "What type of cuisine does The Seven Arches serve?",
+        "a": "The Seven Arches offers a carefully curated menu featuring local and international dishes."
+      },
+      {
+        "q": "Does The Seven Arches have parking?",
+        "a": "Please contact The Seven Arches directly for parking information and availability."
+      },
+      {
+        "q": "Is there a dress code at The Seven Arches?",
+        "a": "Smart casual attire is recommended. Contact the restaurant for specific event requirements."
+      },
+      {
+        "q": "Does The Seven Arches offer private dining?",
+        "a": "The Seven Arches may offer private dining options for special events. Contact them for details."
+      }
+    ],
+    "schema_type": "Restaurant",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "pimientos-cafe",
+    "name": "Pimientos Café",
+    "vertical": "restaurants",
+    "city": "Navan",
+    "citySlug": "navan",
+    "country": "ireland",
+    "address": "Navan, Ireland",
+    "phone": "+353 46 907 9450",
+    "website": "",
+    "email": "",
+    "description": "Pimientos Café is a trusted restaurants located in Navan, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Pimientos Café take reservations?",
+        "a": "Yes, Pimientos Café accepts reservations. Call ahead or book online for the best experience."
+      },
+      {
+        "q": "What type of cuisine does Pimientos Café serve?",
+        "a": "Pimientos Café offers a carefully curated menu featuring local and international dishes."
+      },
+      {
+        "q": "Does Pimientos Café have parking?",
+        "a": "Please contact Pimientos Café directly for parking information and availability."
+      },
+      {
+        "q": "Is there a dress code at Pimientos Café?",
+        "a": "Smart casual attire is recommended. Contact the restaurant for specific event requirements."
+      },
+      {
+        "q": "Does Pimientos Café offer private dining?",
+        "a": "Pimientos Café may offer private dining options for special events. Contact them for details."
+      }
+    ],
+    "schema_type": "Restaurant",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "barne-lodge",
+    "name": "Barne Lodge",
+    "vertical": "restaurants",
+    "city": "Clonmel",
+    "citySlug": "clonmel",
+    "country": "ireland",
+    "address": "Clonmel, Ireland",
+    "phone": "+353 52 612 2849",
+    "website": "",
+    "email": "",
+    "description": "Barne Lodge is a trusted restaurants located in Clonmel, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Barne Lodge take reservations?",
+        "a": "Yes, Barne Lodge accepts reservations. Call ahead or book online for the best experience."
+      },
+      {
+        "q": "What type of cuisine does Barne Lodge serve?",
+        "a": "Barne Lodge offers a carefully curated menu featuring local and international dishes."
+      },
+      {
+        "q": "Does Barne Lodge have parking?",
+        "a": "Please contact Barne Lodge directly for parking information and availability."
+      },
+      {
+        "q": "Is there a dress code at Barne Lodge?",
+        "a": "Smart casual attire is recommended. Contact the restaurant for specific event requirements."
+      },
+      {
+        "q": "Does Barne Lodge offer private dining?",
+        "a": "Barne Lodge may offer private dining options for special events. Contact them for details."
+      }
+    ],
+    "schema_type": "Restaurant",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "emperor-chinese-restaurant",
+    "name": "Emperor Chinese Restaurant",
+    "vertical": "restaurants",
+    "city": "Clonmel",
+    "citySlug": "clonmel",
+    "country": "ireland",
+    "address": "Clonmel, Ireland",
+    "phone": "+353 52 612 4162",
+    "website": "https://emperorchineserestaurantclonmel.com",
+    "email": "",
+    "description": "Emperor Chinese Restaurant is a trusted restaurants located in Clonmel, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Emperor Chinese Restaurant take reservations?",
+        "a": "Yes, Emperor Chinese Restaurant accepts reservations. Call ahead or book online for the best experience."
+      },
+      {
+        "q": "What type of cuisine does Emperor Chinese Restaurant serve?",
+        "a": "Emperor Chinese Restaurant offers a carefully curated menu featuring local and international dishes."
+      },
+      {
+        "q": "Does Emperor Chinese Restaurant have parking?",
+        "a": "Please contact Emperor Chinese Restaurant directly for parking information and availability."
+      },
+      {
+        "q": "Is there a dress code at Emperor Chinese Restaurant?",
+        "a": "Smart casual attire is recommended. Contact the restaurant for specific event requirements."
+      },
+      {
+        "q": "Does Emperor Chinese Restaurant offer private dining?",
+        "a": "Emperor Chinese Restaurant may offer private dining options for special events. Contact them for details."
+      }
+    ],
+    "schema_type": "Restaurant",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "il-sorriso",
+    "name": "Il Sorriso",
+    "vertical": "restaurants",
+    "city": "Malahide",
+    "citySlug": "malahide",
+    "country": "ireland",
+    "address": "Malahide, Ireland",
+    "phone": "+353 1 845 2584",
+    "website": "http://ilsorrisomalahide.ie",
+    "email": "",
+    "description": "Il Sorriso is a trusted restaurants located in Malahide, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Il Sorriso take reservations?",
+        "a": "Yes, Il Sorriso accepts reservations. Call ahead or book online for the best experience."
+      },
+      {
+        "q": "What type of cuisine does Il Sorriso serve?",
+        "a": "Il Sorriso offers a carefully curated menu featuring local and international dishes."
+      },
+      {
+        "q": "Does Il Sorriso have parking?",
+        "a": "Please contact Il Sorriso directly for parking information and availability."
+      },
+      {
+        "q": "Is there a dress code at Il Sorriso?",
+        "a": "Smart casual attire is recommended. Contact the restaurant for specific event requirements."
+      },
+      {
+        "q": "Does Il Sorriso offer private dining?",
+        "a": "Il Sorriso may offer private dining options for special events. Contact them for details."
+      }
+    ],
+    "schema_type": "Restaurant",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "gourmet-food-parlour-malahide",
+    "name": "Gourmet Food Parlour Malahide",
+    "vertical": "restaurants",
+    "city": "Malahide",
+    "citySlug": "malahide",
+    "country": "ireland",
+    "address": "Malahide, Ireland",
+    "phone": "01 828 3661",
+    "website": "https://www.gourmetfoodparlour.com/restaurants/malahide",
+    "email": "",
+    "description": "Gourmet Food Parlour Malahide is a trusted restaurants located in Malahide, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Gourmet Food Parlour Malahide take reservations?",
+        "a": "Yes, Gourmet Food Parlour Malahide accepts reservations. Call ahead or book online for the best experience."
+      },
+      {
+        "q": "What type of cuisine does Gourmet Food Parlour Malahide serve?",
+        "a": "Gourmet Food Parlour Malahide offers a carefully curated menu featuring local and international dishes."
+      },
+      {
+        "q": "Does Gourmet Food Parlour Malahide have parking?",
+        "a": "Please contact Gourmet Food Parlour Malahide directly for parking information and availability."
+      },
+      {
+        "q": "Is there a dress code at Gourmet Food Parlour Malahide?",
+        "a": "Smart casual attire is recommended. Contact the restaurant for specific event requirements."
+      },
+      {
+        "q": "Does Gourmet Food Parlour Malahide offer private dining?",
+        "a": "Gourmet Food Parlour Malahide may offer private dining options for special events. Contact them for details."
+      }
+    ],
+    "schema_type": "Restaurant",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "al-fresco-malahide",
+    "name": "Al Fresco Malahide",
+    "vertical": "restaurants",
+    "city": "Malahide",
+    "citySlug": "malahide",
+    "country": "ireland",
+    "address": "Malahide, Ireland",
+    "phone": "01 806 1928",
+    "website": "https://www.alfrescomalahide.com",
+    "email": "restaurant@alfrescomalahide.com",
+    "description": "Al Fresco Malahide is a trusted restaurants located in Malahide, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Al Fresco Malahide take reservations?",
+        "a": "Yes, Al Fresco Malahide accepts reservations. Call ahead or book online for the best experience."
+      },
+      {
+        "q": "What type of cuisine does Al Fresco Malahide serve?",
+        "a": "Al Fresco Malahide offers a carefully curated menu featuring local and international dishes."
+      },
+      {
+        "q": "Does Al Fresco Malahide have parking?",
+        "a": "Please contact Al Fresco Malahide directly for parking information and availability."
+      },
+      {
+        "q": "Is there a dress code at Al Fresco Malahide?",
+        "a": "Smart casual attire is recommended. Contact the restaurant for specific event requirements."
+      },
+      {
+        "q": "Does Al Fresco Malahide offer private dining?",
+        "a": "Al Fresco Malahide may offer private dining options for special events. Contact them for details."
+      }
+    ],
+    "schema_type": "Restaurant",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "sienna-s-italian-restaurant",
+    "name": "Sienna's Italian Restaurant",
+    "vertical": "restaurants",
+    "city": "Malahide",
+    "citySlug": "malahide",
+    "country": "ireland",
+    "address": "Malahide, Ireland",
+    "phone": "01 845 1233",
+    "website": "https://siennas.ie",
+    "email": "",
+    "description": "Sienna's Italian Restaurant is a trusted restaurants located in Malahide, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Sienna's Italian Restaurant take reservations?",
+        "a": "Yes, Sienna's Italian Restaurant accepts reservations. Call ahead or book online for the best experience."
+      },
+      {
+        "q": "What type of cuisine does Sienna's Italian Restaurant serve?",
+        "a": "Sienna's Italian Restaurant offers a carefully curated menu featuring local and international dishes."
+      },
+      {
+        "q": "Does Sienna's Italian Restaurant have parking?",
+        "a": "Please contact Sienna's Italian Restaurant directly for parking information and availability."
+      },
+      {
+        "q": "Is there a dress code at Sienna's Italian Restaurant?",
+        "a": "Smart casual attire is recommended. Contact the restaurant for specific event requirements."
+      },
+      {
+        "q": "Does Sienna's Italian Restaurant offer private dining?",
+        "a": "Sienna's Italian Restaurant may offer private dining options for special events. Contact them for details."
+      }
+    ],
+    "schema_type": "Restaurant",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "seabank-bistro",
+    "name": "Seabank Bistro",
+    "vertical": "restaurants",
+    "city": "Malahide",
+    "citySlug": "malahide",
+    "country": "ireland",
+    "address": "Malahide, Ireland",
+    "phone": "+353 1 845 1988",
+    "website": "",
+    "email": "",
+    "description": "Seabank Bistro is a trusted restaurants located in Malahide, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Seabank Bistro take reservations?",
+        "a": "Yes, Seabank Bistro accepts reservations. Call ahead or book online for the best experience."
+      },
+      {
+        "q": "What type of cuisine does Seabank Bistro serve?",
+        "a": "Seabank Bistro offers a carefully curated menu featuring local and international dishes."
+      },
+      {
+        "q": "Does Seabank Bistro have parking?",
+        "a": "Please contact Seabank Bistro directly for parking information and availability."
+      },
+      {
+        "q": "Is there a dress code at Seabank Bistro?",
+        "a": "Smart casual attire is recommended. Contact the restaurant for specific event requirements."
+      },
+      {
+        "q": "Does Seabank Bistro offer private dining?",
+        "a": "Seabank Bistro may offer private dining options for special events. Contact them for details."
+      }
+    ],
+    "schema_type": "Restaurant",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "rustic",
+    "name": "Rustic",
+    "vertical": "restaurants",
+    "city": "Naas",
+    "citySlug": "naas",
+    "country": "ireland",
+    "address": "Naas, Ireland",
+    "phone": "045 884 848",
+    "website": "https://rustic.ie",
+    "email": "",
+    "description": "Rustic is a trusted restaurants located in Naas, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Rustic take reservations?",
+        "a": "Yes, Rustic accepts reservations. Call ahead or book online for the best experience."
+      },
+      {
+        "q": "What type of cuisine does Rustic serve?",
+        "a": "Rustic offers a carefully curated menu featuring local and international dishes."
+      },
+      {
+        "q": "Does Rustic have parking?",
+        "a": "Please contact Rustic directly for parking information and availability."
+      },
+      {
+        "q": "Is there a dress code at Rustic?",
+        "a": "Smart casual attire is recommended. Contact the restaurant for specific event requirements."
+      },
+      {
+        "q": "Does Rustic offer private dining?",
+        "a": "Rustic may offer private dining options for special events. Contact them for details."
+      }
+    ],
+    "schema_type": "Restaurant",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "realta-clinic-physiotherapy",
+    "name": "Realta Clinic (Physiotherapy)",
+    "vertical": "physios",
+    "city": "Carlow",
+    "citySlug": "carlow",
+    "country": "ireland",
+    "address": "Carlow, Ireland",
+    "phone": "059 913 4779",
+    "website": "",
+    "email": "",
+    "description": "Realta Clinic (Physiotherapy) is a trusted physiotherapy located in Carlow, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Do I need a referral for Realta Clinic (Physiotherapy)?",
+        "a": "In most cases, you don't need a referral. Contact Realta Clinic (Physiotherapy) to book directly."
+      },
+      {
+        "q": "What conditions does Realta Clinic (Physiotherapy) treat?",
+        "a": "Realta Clinic (Physiotherapy) treats sports injuries, back pain, rehabilitation, and more."
+      },
+      {
+        "q": "Does Realta Clinic (Physiotherapy) accept health insurance?",
+        "a": "Realta Clinic (Physiotherapy) is covered by most major health insurers. Confirm your plan when booking."
+      }
+    ],
+    "schema_type": "PhysicalTherapy",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "carlow-rehab-sports-injury-centre",
+    "name": "Carlow Rehab & Sports Injury Centre",
+    "vertical": "physios",
+    "city": "Carlow",
+    "citySlug": "carlow",
+    "country": "ireland",
+    "address": "Carlow, Ireland",
+    "phone": "+353 87 678 6796",
+    "website": "",
+    "email": "carlowrehabandsportsinjury@gmail.com",
+    "description": "Carlow Rehab & Sports Injury Centre is a trusted physiotherapy located in Carlow, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Do I need a referral for Carlow Rehab & Sports Injury Centre?",
+        "a": "In most cases, you don't need a referral. Contact Carlow Rehab & Sports Injury Centre to book directly."
+      },
+      {
+        "q": "What conditions does Carlow Rehab & Sports Injury Centre treat?",
+        "a": "Carlow Rehab & Sports Injury Centre treats sports injuries, back pain, rehabilitation, and more."
+      },
+      {
+        "q": "Does Carlow Rehab & Sports Injury Centre accept health insurance?",
+        "a": "Carlow Rehab & Sports Injury Centre is covered by most major health insurers. Confirm your plan when booking."
+      }
+    ],
+    "schema_type": "PhysicalTherapy",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "bray-physiotherapy",
+    "name": "Bray Physiotherapy",
+    "vertical": "physios",
+    "city": "Bray",
+    "citySlug": "bray",
+    "country": "ireland",
+    "address": "Bray, Ireland",
+    "phone": "01 286 0410",
+    "website": "https://www.brayphysio.com",
+    "email": "brayphysio@eircom.net",
+    "description": "Bray Physiotherapy is a trusted physiotherapy located in Bray, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Do I need a referral for Bray Physiotherapy?",
+        "a": "In most cases, you don't need a referral. Contact Bray Physiotherapy to book directly."
+      },
+      {
+        "q": "What conditions does Bray Physiotherapy treat?",
+        "a": "Bray Physiotherapy treats sports injuries, back pain, rehabilitation, and more."
+      },
+      {
+        "q": "Does Bray Physiotherapy accept health insurance?",
+        "a": "Bray Physiotherapy is covered by most major health insurers. Confirm your plan when booking."
+      }
+    ],
+    "schema_type": "PhysicalTherapy",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "elaine-barry-chartered-physiotherapy",
+    "name": "Elaine Barry Chartered Physiotherapy",
+    "vertical": "physios",
+    "city": "Bray",
+    "citySlug": "bray",
+    "country": "ireland",
+    "address": "Bray, Ireland",
+    "phone": "+353 83 137 4603",
+    "website": "",
+    "email": "Elainebarryphysio@gmail.com",
+    "description": "Elaine Barry Chartered Physiotherapy is a trusted physiotherapy located in Bray, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Do I need a referral for Elaine Barry Chartered Physiotherapy?",
+        "a": "In most cases, you don't need a referral. Contact Elaine Barry Chartered Physiotherapy to book directly."
+      },
+      {
+        "q": "What conditions does Elaine Barry Chartered Physiotherapy treat?",
+        "a": "Elaine Barry Chartered Physiotherapy treats sports injuries, back pain, rehabilitation, and more."
+      },
+      {
+        "q": "Does Elaine Barry Chartered Physiotherapy accept health insurance?",
+        "a": "Elaine Barry Chartered Physiotherapy is covered by most major health insurers. Confirm your plan when booking."
+      }
+    ],
+    "schema_type": "PhysicalTherapy",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "prohealth365-physiotherapy",
+    "name": "Prohealth365 Physiotherapy",
+    "vertical": "physios",
+    "city": "Bray",
+    "citySlug": "bray",
+    "country": "ireland",
+    "address": "Bray, Ireland",
+    "phone": "",
+    "website": "https://prohealth365.ie",
+    "email": "",
+    "description": "Prohealth365 Physiotherapy is a trusted physiotherapy located in Bray, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Do I need a referral for Prohealth365 Physiotherapy?",
+        "a": "In most cases, you don't need a referral. Contact Prohealth365 Physiotherapy to book directly."
+      },
+      {
+        "q": "What conditions does Prohealth365 Physiotherapy treat?",
+        "a": "Prohealth365 Physiotherapy treats sports injuries, back pain, rehabilitation, and more."
+      },
+      {
+        "q": "Does Prohealth365 Physiotherapy accept health insurance?",
+        "a": "Prohealth365 Physiotherapy is covered by most major health insurers. Confirm your plan when booking."
+      }
+    ],
+    "schema_type": "PhysicalTherapy",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
     "slug": "don-julio",
     "name": "Don Julio",
     "vertical": "restaurants",
@@ -25855,6 +27159,890 @@
     ],
     "schema_type": "VeterinaryCare",
     "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "budhapets-veterinaria-24hs",
+    "name": "Budhapets Veterinaria 24hs",
+    "vertical": "vets",
+    "city": "Buenos Aires CABA",
+    "citySlug": "buenos-aires-caba",
+    "country": "argentina",
+    "address": "Buenos Aires CABA, Argentina",
+    "phone": "011 4583-5595",
+    "website": "",
+    "email": "",
+    "description": "Budhapets Veterinaria 24hs is a trusted veterinary clinics located in Buenos Aires CABA, Argentina. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Budhapets Veterinaria 24hs treat?",
+        "a": "Budhapets Veterinaria 24hs treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Budhapets Veterinaria 24hs offer emergency veterinary services?",
+        "a": "Contact Budhapets Veterinaria 24hs for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Budhapets Veterinaria 24hs provide vaccinations?",
+        "a": "Yes, Budhapets Veterinaria 24hs offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Budhapets Veterinaria 24hs?",
+        "a": "Budhapets Veterinaria 24hs can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "es",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "clinica-veterinaria-del-labrador",
+    "name": "Clínica Veterinaria Del Labrador",
+    "vertical": "vets",
+    "city": "Buenos Aires CABA",
+    "citySlug": "buenos-aires-caba",
+    "country": "argentina",
+    "address": "Buenos Aires CABA, Argentina",
+    "phone": "011 4863-0700",
+    "website": "",
+    "email": "",
+    "description": "Clínica Veterinaria Del Labrador is a trusted veterinary clinics located in Buenos Aires CABA, Argentina. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Clínica Veterinaria Del Labrador treat?",
+        "a": "Clínica Veterinaria Del Labrador treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Clínica Veterinaria Del Labrador offer emergency veterinary services?",
+        "a": "Contact Clínica Veterinaria Del Labrador for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Clínica Veterinaria Del Labrador provide vaccinations?",
+        "a": "Yes, Clínica Veterinaria Del Labrador offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Clínica Veterinaria Del Labrador?",
+        "a": "Clínica Veterinaria Del Labrador can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "es",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "centro-veterinario-palermo",
+    "name": "Centro Veterinario Palermo",
+    "vertical": "vets",
+    "city": "Buenos Aires CABA",
+    "citySlug": "buenos-aires-caba",
+    "country": "argentina",
+    "address": "Buenos Aires CABA, Argentina",
+    "phone": "011 4772-3490",
+    "website": "",
+    "email": "",
+    "description": "Centro Veterinario Palermo is a trusted veterinary clinics located in Buenos Aires CABA, Argentina. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Centro Veterinario Palermo treat?",
+        "a": "Centro Veterinario Palermo treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Centro Veterinario Palermo offer emergency veterinary services?",
+        "a": "Contact Centro Veterinario Palermo for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Centro Veterinario Palermo provide vaccinations?",
+        "a": "Yes, Centro Veterinario Palermo offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Centro Veterinario Palermo?",
+        "a": "Centro Veterinario Palermo can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "es",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "veterinaria-las-marias",
+    "name": "Veterinaria Las Marías",
+    "vertical": "vets",
+    "city": "Buenos Aires CABA",
+    "citySlug": "buenos-aires-caba",
+    "country": "argentina",
+    "address": "Buenos Aires CABA, Argentina",
+    "phone": "011 4826-5180",
+    "website": "",
+    "email": "",
+    "description": "Veterinaria Las Marías is a trusted veterinary clinics located in Buenos Aires CABA, Argentina. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Veterinaria Las Marías treat?",
+        "a": "Veterinaria Las Marías treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Veterinaria Las Marías offer emergency veterinary services?",
+        "a": "Contact Veterinaria Las Marías for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Veterinaria Las Marías provide vaccinations?",
+        "a": "Yes, Veterinaria Las Marías offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Veterinaria Las Marías?",
+        "a": "Veterinaria Las Marías can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "es",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "faunatikos-veterinaria-pet-shop",
+    "name": "Faunatikos Veterinaria + Pet Shop",
+    "vertical": "vets",
+    "city": "Buenos Aires CABA",
+    "citySlug": "buenos-aires-caba",
+    "country": "argentina",
+    "address": "Buenos Aires CABA, Argentina",
+    "phone": "0810 220-8383",
+    "website": "",
+    "email": "",
+    "description": "Faunatikos Veterinaria + Pet Shop is a trusted veterinary clinics located in Buenos Aires CABA, Argentina. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Faunatikos Veterinaria + Pet Shop treat?",
+        "a": "Faunatikos Veterinaria + Pet Shop treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Faunatikos Veterinaria + Pet Shop offer emergency veterinary services?",
+        "a": "Contact Faunatikos Veterinaria + Pet Shop for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Faunatikos Veterinaria + Pet Shop provide vaccinations?",
+        "a": "Yes, Faunatikos Veterinaria + Pet Shop offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Faunatikos Veterinaria + Pet Shop?",
+        "a": "Faunatikos Veterinaria + Pet Shop can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "es",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "tierra-de-mascotas",
+    "name": "Tierra de Mascotas",
+    "vertical": "vets",
+    "city": "Buenos Aires CABA",
+    "citySlug": "buenos-aires-caba",
+    "country": "argentina",
+    "address": "Buenos Aires CABA, Argentina",
+    "phone": "011 6267-2114",
+    "website": "",
+    "email": "",
+    "description": "Tierra de Mascotas is a trusted veterinary clinics located in Buenos Aires CABA, Argentina. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Tierra de Mascotas treat?",
+        "a": "Tierra de Mascotas treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Tierra de Mascotas offer emergency veterinary services?",
+        "a": "Contact Tierra de Mascotas for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Tierra de Mascotas provide vaccinations?",
+        "a": "Yes, Tierra de Mascotas offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Tierra de Mascotas?",
+        "a": "Tierra de Mascotas can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "es",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "veterinaria-honduras",
+    "name": "Veterinaria Honduras",
+    "vertical": "vets",
+    "city": "Buenos Aires CABA",
+    "citySlug": "buenos-aires-caba",
+    "country": "argentina",
+    "address": "Buenos Aires CABA, Argentina",
+    "phone": "011 4777-9245",
+    "website": "",
+    "email": "",
+    "description": "Veterinaria Honduras is a trusted veterinary clinics located in Buenos Aires CABA, Argentina. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Veterinaria Honduras treat?",
+        "a": "Veterinaria Honduras treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Veterinaria Honduras offer emergency veterinary services?",
+        "a": "Contact Veterinaria Honduras for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Veterinaria Honduras provide vaccinations?",
+        "a": "Yes, Veterinaria Honduras offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Veterinaria Honduras?",
+        "a": "Veterinaria Honduras can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "es",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "veterinaria-nueva-era",
+    "name": "Veterinaria Nueva Era",
+    "vertical": "vets",
+    "city": "Buenos Aires CABA",
+    "citySlug": "buenos-aires-caba",
+    "country": "argentina",
+    "address": "Buenos Aires CABA, Argentina",
+    "phone": "011 4832-2001",
+    "website": "",
+    "email": "",
+    "description": "Veterinaria Nueva Era is a trusted veterinary clinics located in Buenos Aires CABA, Argentina. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Veterinaria Nueva Era treat?",
+        "a": "Veterinaria Nueva Era treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Veterinaria Nueva Era offer emergency veterinary services?",
+        "a": "Contact Veterinaria Nueva Era for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Veterinaria Nueva Era provide vaccinations?",
+        "a": "Yes, Veterinaria Nueva Era offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Veterinaria Nueva Era?",
+        "a": "Veterinaria Nueva Era can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "es",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "veterinaria-rural-palermo",
+    "name": "Veterinaria Rural Palermo",
+    "vertical": "vets",
+    "city": "Buenos Aires CABA",
+    "citySlug": "buenos-aires-caba",
+    "country": "argentina",
+    "address": "Buenos Aires CABA, Argentina",
+    "phone": "011 4832-0442",
+    "website": "",
+    "email": "",
+    "description": "Veterinaria Rural Palermo is a trusted veterinary clinics located in Buenos Aires CABA, Argentina. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Veterinaria Rural Palermo treat?",
+        "a": "Veterinaria Rural Palermo treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Veterinaria Rural Palermo offer emergency veterinary services?",
+        "a": "Contact Veterinaria Rural Palermo for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Veterinaria Rural Palermo provide vaccinations?",
+        "a": "Yes, Veterinaria Rural Palermo offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Veterinaria Rural Palermo?",
+        "a": "Veterinaria Rural Palermo can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "es",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "s-b-servicios-veterinarios",
+    "name": "S&B Servicios Veterinarios",
+    "vertical": "vets",
+    "city": "Buenos Aires CABA",
+    "citySlug": "buenos-aires-caba",
+    "country": "argentina",
+    "address": "Buenos Aires CABA, Argentina",
+    "phone": "011 2875-2510",
+    "website": "https://sbveterinarios.com.ar",
+    "email": "",
+    "description": "S&B Servicios Veterinarios is a trusted veterinary clinics located in Buenos Aires CABA, Argentina. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does S&B Servicios Veterinarios treat?",
+        "a": "S&B Servicios Veterinarios treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does S&B Servicios Veterinarios offer emergency veterinary services?",
+        "a": "Contact S&B Servicios Veterinarios for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does S&B Servicios Veterinarios provide vaccinations?",
+        "a": "Yes, S&B Servicios Veterinarios offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from S&B Servicios Veterinarios?",
+        "a": "S&B Servicios Veterinarios can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "es",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "animal-shop-veterinaria",
+    "name": "Animal Shop Veterinaria",
+    "vertical": "vets",
+    "city": "Buenos Aires CABA",
+    "citySlug": "buenos-aires-caba",
+    "country": "argentina",
+    "address": "Buenos Aires CABA, Argentina",
+    "phone": "",
+    "website": "",
+    "email": "",
+    "description": "Animal Shop Veterinaria is a trusted veterinary clinics located in Buenos Aires CABA, Argentina. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Animal Shop Veterinaria treat?",
+        "a": "Animal Shop Veterinaria treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Animal Shop Veterinaria offer emergency veterinary services?",
+        "a": "Contact Animal Shop Veterinaria for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Animal Shop Veterinaria provide vaccinations?",
+        "a": "Yes, Animal Shop Veterinaria offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Animal Shop Veterinaria?",
+        "a": "Animal Shop Veterinaria can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "es",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "clinica-veterinaria-sinclair",
+    "name": "Clínica Veterinaria Sinclair",
+    "vertical": "vets",
+    "city": "Buenos Aires CABA",
+    "citySlug": "buenos-aires-caba",
+    "country": "argentina",
+    "address": "Buenos Aires CABA, Argentina",
+    "phone": "",
+    "website": "",
+    "email": "",
+    "description": "Clínica Veterinaria Sinclair is a trusted veterinary clinics located in Buenos Aires CABA, Argentina. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Clínica Veterinaria Sinclair treat?",
+        "a": "Clínica Veterinaria Sinclair treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Clínica Veterinaria Sinclair offer emergency veterinary services?",
+        "a": "Contact Clínica Veterinaria Sinclair for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Clínica Veterinaria Sinclair provide vaccinations?",
+        "a": "Yes, Clínica Veterinaria Sinclair offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Clínica Veterinaria Sinclair?",
+        "a": "Clínica Veterinaria Sinclair can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "es",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "veterinaria-monroe",
+    "name": "Veterinaria Monroe",
+    "vertical": "vets",
+    "city": "Buenos Aires CABA",
+    "citySlug": "buenos-aires-caba",
+    "country": "argentina",
+    "address": "Buenos Aires CABA, Argentina",
+    "phone": "+54 9 11 6947-9140",
+    "website": "",
+    "email": "",
+    "description": "Veterinaria Monroe is a trusted veterinary clinics located in Buenos Aires CABA, Argentina. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Veterinaria Monroe treat?",
+        "a": "Veterinaria Monroe treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Veterinaria Monroe offer emergency veterinary services?",
+        "a": "Contact Veterinaria Monroe for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Veterinaria Monroe provide vaccinations?",
+        "a": "Yes, Veterinaria Monroe offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Veterinaria Monroe?",
+        "a": "Veterinaria Monroe can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "es",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "hospital-veterinario-julieta",
+    "name": "Hospital Veterinario Julieta",
+    "vertical": "vets",
+    "city": "Buenos Aires CABA",
+    "citySlug": "buenos-aires-caba",
+    "country": "argentina",
+    "address": "Buenos Aires CABA, Argentina",
+    "phone": "+54 11 4521-5814",
+    "website": "",
+    "email": "",
+    "description": "Hospital Veterinario Julieta is a trusted veterinary clinics located in Buenos Aires CABA, Argentina. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Hospital Veterinario Julieta treat?",
+        "a": "Hospital Veterinario Julieta treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Hospital Veterinario Julieta offer emergency veterinary services?",
+        "a": "Contact Hospital Veterinario Julieta for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Hospital Veterinario Julieta provide vaccinations?",
+        "a": "Yes, Hospital Veterinario Julieta offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Hospital Veterinario Julieta?",
+        "a": "Hospital Veterinario Julieta can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "es",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "veterinaria-wapp",
+    "name": "Veterinaria Wapp",
+    "vertical": "vets",
+    "city": "Buenos Aires CABA",
+    "citySlug": "buenos-aires-caba",
+    "country": "argentina",
+    "address": "Buenos Aires CABA, Argentina",
+    "phone": "+54 11 4524-9031",
+    "website": "",
+    "email": "",
+    "description": "Veterinaria Wapp is a trusted veterinary clinics located in Buenos Aires CABA, Argentina. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Veterinaria Wapp treat?",
+        "a": "Veterinaria Wapp treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Veterinaria Wapp offer emergency veterinary services?",
+        "a": "Contact Veterinaria Wapp for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Veterinaria Wapp provide vaccinations?",
+        "a": "Yes, Veterinaria Wapp offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Veterinaria Wapp?",
+        "a": "Veterinaria Wapp can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "es",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "veterinaria-amvett",
+    "name": "Veterinaria AMVett",
+    "vertical": "vets",
+    "city": "Buenos Aires CABA",
+    "citySlug": "buenos-aires-caba",
+    "country": "argentina",
+    "address": "Buenos Aires CABA, Argentina",
+    "phone": "+54 11 4544-2623",
+    "website": "",
+    "email": "",
+    "description": "Veterinaria AMVett is a trusted veterinary clinics located in Buenos Aires CABA, Argentina. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Veterinaria AMVett treat?",
+        "a": "Veterinaria AMVett treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Veterinaria AMVett offer emergency veterinary services?",
+        "a": "Contact Veterinaria AMVett for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Veterinaria AMVett provide vaccinations?",
+        "a": "Yes, Veterinaria AMVett offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Veterinaria AMVett?",
+        "a": "Veterinaria AMVett can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "es",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "veterinaria-ciudad-de-la-paz",
+    "name": "Veterinaria Ciudad de La Paz",
+    "vertical": "vets",
+    "city": "Buenos Aires CABA",
+    "citySlug": "buenos-aires-caba",
+    "country": "argentina",
+    "address": "Buenos Aires CABA, Argentina",
+    "phone": "+54 5430480",
+    "website": "",
+    "email": "",
+    "description": "Veterinaria Ciudad de La Paz is a trusted veterinary clinics located in Buenos Aires CABA, Argentina. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Veterinaria Ciudad de La Paz treat?",
+        "a": "Veterinaria Ciudad de La Paz treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Veterinaria Ciudad de La Paz offer emergency veterinary services?",
+        "a": "Contact Veterinaria Ciudad de La Paz for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Veterinaria Ciudad de La Paz provide vaccinations?",
+        "a": "Yes, Veterinaria Ciudad de La Paz offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Veterinaria Ciudad de La Paz?",
+        "a": "Veterinaria Ciudad de La Paz can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "es",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "veterinaria-groovy-pets",
+    "name": "Veterinaria Groovy Pets",
+    "vertical": "vets",
+    "city": "Buenos Aires CABA",
+    "citySlug": "buenos-aires-caba",
+    "country": "argentina",
+    "address": "Buenos Aires CABA, Argentina",
+    "phone": "+54 11 2251-8118",
+    "website": "",
+    "email": "",
+    "description": "Veterinaria Groovy Pets is a trusted veterinary clinics located in Buenos Aires CABA, Argentina. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Veterinaria Groovy Pets treat?",
+        "a": "Veterinaria Groovy Pets treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Veterinaria Groovy Pets offer emergency veterinary services?",
+        "a": "Contact Veterinaria Groovy Pets for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Veterinaria Groovy Pets provide vaccinations?",
+        "a": "Yes, Veterinaria Groovy Pets offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Veterinaria Groovy Pets?",
+        "a": "Veterinaria Groovy Pets can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "es",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "veterinaria-aurora",
+    "name": "Veterinaria Aurora",
+    "vertical": "vets",
+    "city": "Buenos Aires CABA",
+    "citySlug": "buenos-aires-caba",
+    "country": "argentina",
+    "address": "Buenos Aires CABA, Argentina",
+    "phone": "+54 11 4544-4059",
+    "website": "",
+    "email": "",
+    "description": "Veterinaria Aurora is a trusted veterinary clinics located in Buenos Aires CABA, Argentina. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Veterinaria Aurora treat?",
+        "a": "Veterinaria Aurora treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Veterinaria Aurora offer emergency veterinary services?",
+        "a": "Contact Veterinaria Aurora for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Veterinaria Aurora provide vaccinations?",
+        "a": "Yes, Veterinaria Aurora offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Veterinaria Aurora?",
+        "a": "Veterinaria Aurora can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "es",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "veterinaria-vagabundo-s",
+    "name": "Veterinaria Vagabundo's",
+    "vertical": "vets",
+    "city": "Buenos Aires CABA",
+    "citySlug": "buenos-aires-caba",
+    "country": "argentina",
+    "address": "Buenos Aires CABA, Argentina",
+    "phone": "+54 11 4703-2744",
+    "website": "",
+    "email": "",
+    "description": "Veterinaria Vagabundo's is a trusted veterinary clinics located in Buenos Aires CABA, Argentina. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Veterinaria Vagabundo's treat?",
+        "a": "Veterinaria Vagabundo's treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Veterinaria Vagabundo's offer emergency veterinary services?",
+        "a": "Contact Veterinaria Vagabundo's for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Veterinaria Vagabundo's provide vaccinations?",
+        "a": "Yes, Veterinaria Vagabundo's offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Veterinaria Vagabundo's?",
+        "a": "Veterinaria Vagabundo's can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "es",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "veterinaria-panda-villa-urquiza",
+    "name": "Veterinaria Panda (Villa Urquiza)",
+    "vertical": "vets",
+    "city": "Buenos Aires CABA",
+    "citySlug": "buenos-aires-caba",
+    "country": "argentina",
+    "address": "Buenos Aires CABA, Argentina",
+    "phone": "011 2488-2849",
+    "website": "https://www.veterinariapanda.com.ar",
+    "email": "",
+    "description": "Veterinaria Panda (Villa Urquiza) is a trusted veterinary clinics located in Buenos Aires CABA, Argentina. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Veterinaria Panda (Villa Urquiza) treat?",
+        "a": "Veterinaria Panda (Villa Urquiza) treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Veterinaria Panda (Villa Urquiza) offer emergency veterinary services?",
+        "a": "Contact Veterinaria Panda (Villa Urquiza) for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Veterinaria Panda (Villa Urquiza) provide vaccinations?",
+        "a": "Yes, Veterinaria Panda (Villa Urquiza) offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Veterinaria Panda (Villa Urquiza)?",
+        "a": "Veterinaria Panda (Villa Urquiza) can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "es",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "veterinaria-honorio",
+    "name": "Veterinaria Honorio",
+    "vertical": "vets",
+    "city": "Buenos Aires CABA",
+    "citySlug": "buenos-aires-caba",
+    "country": "argentina",
+    "address": "Buenos Aires CABA, Argentina",
+    "phone": "011 5263-8681",
+    "website": "",
+    "email": "",
+    "description": "Veterinaria Honorio is a trusted veterinary clinics located in Buenos Aires CABA, Argentina. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Veterinaria Honorio treat?",
+        "a": "Veterinaria Honorio treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Veterinaria Honorio offer emergency veterinary services?",
+        "a": "Contact Veterinaria Honorio for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Veterinaria Honorio provide vaccinations?",
+        "a": "Yes, Veterinaria Honorio offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Veterinaria Honorio?",
+        "a": "Veterinaria Honorio can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "es",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "veterinaria-guayaquil",
+    "name": "Veterinaria Guayaquil",
+    "vertical": "vets",
+    "city": "Buenos Aires CABA",
+    "citySlug": "buenos-aires-caba",
+    "country": "argentina",
+    "address": "Buenos Aires CABA, Argentina",
+    "phone": "011 3388-1507",
+    "website": "",
+    "email": "",
+    "description": "Veterinaria Guayaquil is a trusted veterinary clinics located in Buenos Aires CABA, Argentina. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Veterinaria Guayaquil treat?",
+        "a": "Veterinaria Guayaquil treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Veterinaria Guayaquil offer emergency veterinary services?",
+        "a": "Contact Veterinaria Guayaquil for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Veterinaria Guayaquil provide vaccinations?",
+        "a": "Yes, Veterinaria Guayaquil offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Veterinaria Guayaquil?",
+        "a": "Veterinaria Guayaquil can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "es",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "del-sol-clinica-veterinaria",
+    "name": "Del Sol Clínica Veterinaria",
+    "vertical": "vets",
+    "city": "Buenos Aires CABA",
+    "citySlug": "buenos-aires-caba",
+    "country": "argentina",
+    "address": "Buenos Aires CABA, Argentina",
+    "phone": "011 4925-6801",
+    "website": "",
+    "email": "",
+    "description": "Del Sol Clínica Veterinaria is a trusted veterinary clinics located in Buenos Aires CABA, Argentina. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Del Sol Clínica Veterinaria treat?",
+        "a": "Del Sol Clínica Veterinaria treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Del Sol Clínica Veterinaria offer emergency veterinary services?",
+        "a": "Contact Del Sol Clínica Veterinaria for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Del Sol Clínica Veterinaria provide vaccinations?",
+        "a": "Yes, Del Sol Clínica Veterinaria offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Del Sol Clínica Veterinaria?",
+        "a": "Del Sol Clínica Veterinaria can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "es",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "veterinaria-la-quinta-pata",
+    "name": "Veterinaria La Quinta Pata",
+    "vertical": "vets",
+    "city": "Buenos Aires CABA",
+    "citySlug": "buenos-aires-caba",
+    "country": "argentina",
+    "address": "Buenos Aires CABA, Argentina",
+    "phone": "011 4924-2649",
+    "website": "",
+    "email": "",
+    "description": "Veterinaria La Quinta Pata is a trusted veterinary clinics located in Buenos Aires CABA, Argentina. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Veterinaria La Quinta Pata treat?",
+        "a": "Veterinaria La Quinta Pata treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Veterinaria La Quinta Pata offer emergency veterinary services?",
+        "a": "Contact Veterinaria La Quinta Pata for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Veterinaria La Quinta Pata provide vaccinations?",
+        "a": "Yes, Veterinaria La Quinta Pata offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Veterinaria La Quinta Pata?",
+        "a": "Veterinaria La Quinta Pata can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "es",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "clinica-veterinaria-ayelen",
+    "name": "Clínica Veterinaria Ayelen",
+    "vertical": "vets",
+    "city": "Buenos Aires CABA",
+    "citySlug": "buenos-aires-caba",
+    "country": "argentina",
+    "address": "Buenos Aires CABA, Argentina",
+    "phone": "",
+    "website": "",
+    "email": "",
+    "description": "Clínica Veterinaria Ayelen is a trusted veterinary clinics located in Buenos Aires CABA, Argentina. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Clínica Veterinaria Ayelen treat?",
+        "a": "Clínica Veterinaria Ayelen treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Clínica Veterinaria Ayelen offer emergency veterinary services?",
+        "a": "Contact Clínica Veterinaria Ayelen for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Clínica Veterinaria Ayelen provide vaccinations?",
+        "a": "Yes, Clínica Veterinaria Ayelen offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Clínica Veterinaria Ayelen?",
+        "a": "Clínica Veterinaria Ayelen can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "es",
     "openingHours": "Mo-Fr 09:00-18:00"
   }
 ]
