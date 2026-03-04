@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { Phone, MessageSquare, Clock, ArrowRight, History as HistoryIcon, Settings as SettingsIcon, Bot, Voicemail } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import Button from '@/components/ui/button';
-import { userApi, historyApi } from '@/lib/api';
+import { userApi, historyApi, emailApi } from '@/lib/api';
 import type { UserStats, CallHistory } from '@/types';
 import { useAuthStore } from '@/lib/store';
 import { formatDistanceToNow } from 'date-fns';
@@ -32,6 +32,7 @@ export default function DashboardPage() {
       }
     }
     fetchData();
+    emailApi.trackEvent('dashboard_view').catch(() => {});
   }, []);
 
   if (isLoading) {

@@ -6,7 +6,7 @@ import { Bot, Save, RefreshCw, Phone } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import Button from '@/components/ui/button';
 import Input from '@/components/ui/input';
-import { assistantApi, billingApi } from '@/lib/api';
+import { assistantApi, billingApi, emailApi } from '@/lib/api';
 import type { Assistant, Voice, PhoneNumber } from '@/types';
 import { AssistantStatsCards } from './components/assistant-stats-cards';
 import { AssistantPhoneNumbers } from './components/assistant-phone-numbers';
@@ -258,6 +258,7 @@ export default function AssistantPage() {
         dispatch({ type: 'SET_ERROR', payload: result.warning });
       } else {
         dispatch({ type: 'SET_SUCCESS', payload: 'Assistant configuration saved successfully!' });
+        emailApi.trackEvent('feature_used', { feature: 'assistant_config' }).catch(() => {});
       }
     } catch (err: unknown) {
       const axiosErr = err as { response?: { data?: { error?: { message?: string } } } };

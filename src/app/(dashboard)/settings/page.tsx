@@ -5,7 +5,7 @@ import { Save } from 'lucide-react';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import Button from '@/components/ui/button';
 import Input from '@/components/ui/input';
-import { userApi } from '@/lib/api';
+import { userApi, emailApi } from '@/lib/api';
 import { useAuthStore } from '@/lib/store';
 
 export default function SettingsPage() {
@@ -24,6 +24,10 @@ export default function SettingsPage() {
       setAddress(user.address || '');
     }
   }, [user]);
+
+  useEffect(() => {
+    emailApi.trackEvent('settings_view').catch(() => {});
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

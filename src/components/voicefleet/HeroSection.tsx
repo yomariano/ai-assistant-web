@@ -1,6 +1,17 @@
-import { Shield, Clock, Phone, MessageSquare, Calendar, Link2, Headphones, PhoneIncoming, Globe2 } from "lucide-react";
+"use client";
+
+import { useState } from "react";
+import { Shield, Clock, Phone, Link2, Globe2, Star, Mic, Play } from "lucide-react";
+import dynamic from "next/dynamic";
 import HeroCTA from "@/components/voicefleet/HeroCTA";
-import Link from "next/link";
+
+const LiveDemoCall = dynamic(
+  () => import("@/components/voicefleet/LiveDemoCall"),
+  { ssr: false }
+);
+
+const VIDEO_ID = "XrPhV1WfluI";
+const THUMBNAIL = `https://img.youtube.com/vi/${VIDEO_ID}/maxresdefault.jpg`;
 
 const trustBadges = [
   { icon: Shield, label: "EU data residency options" },
@@ -24,216 +35,243 @@ const integrations = [
 ];
 
 const HeroSection = () => {
+  const [videoPlaying, setVideoPlaying] = useState(false);
+
   return (
-    <section className="relative min-h-screen pt-20 lg:pt-24 overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0 bg-gradient-subtle" />
-      <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-hero opacity-5 blur-3xl" />
+    <>
+      <section className="relative pt-20 lg:pt-24 overflow-hidden">
+        {/* Background */}
+        <div className="absolute inset-0 bg-gradient-subtle" />
+        <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-hero opacity-5 blur-3xl" />
 
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center min-h-[calc(100vh-6rem)]">
-          {/* Left Content */}
-          <div className="py-12 lg:py-0">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-accent/10 rounded-full mb-6 animate-fade-up">
-              <span className="w-2 h-2 bg-accent rounded-full animate-pulse-subtle" />
-              <span className="text-sm font-medium text-accent">24/7 AI voice receptionist for SMBs</span>
-            </div>
-
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-heading font-extrabold text-foreground leading-tight mb-6">
-              Answer Every Call.{" "}
-              <span className="text-gradient-primary">Book More Appointments.</span>{" "}
-              With an AI Voice Receptionist.
-            </h1>
-
-            <p className="text-sm sm:text-base text-foreground/80 mb-4 leading-relaxed font-medium">
-              VoiceFleet is an AI voice receptionist for small businesses, starting at &euro;99/mo with a 30-day free trial. It answers calls 24/7, books appointments, takes messages, and routes urgent calls — with no-code setup in under 1 hour and EU data residency.
-            </p>
-
-            <p className="text-base sm:text-lg lg:text-xl text-muted-foreground mb-8 leading-relaxed">
-              Forward your existing number to VoiceFleet. We answer calls, capture intent + details, and book appointments or reservations into your calendar/booking system.
-              We also escalate urgent calls to your team and send instant summaries.
-            </p>
-
-            <p className="text-sm text-muted-foreground mb-8">
-              Explore by use case:{" "}
-              <Link href="/for" className="text-foreground font-semibold hover:underline">
-                Industries
-              </Link>
-              {" · "}
-              <Link href="/connect" className="text-foreground font-semibold hover:underline">
-                Integrations
-              </Link>
-              {" · "}
-              <Link href="/compare" className="text-foreground font-semibold hover:underline">
-                Comparisons
-              </Link>
-            </p>
-
-            <HeroCTA />
-
-            {/* Trust Badges */}
-            <div className="flex flex-wrap gap-4 animate-fade-up stagger-4">
-              {trustBadges.map((badge, index) => (
-                <div
-                  key={index}
-                  className="flex items-center gap-2 px-4 py-2 bg-card rounded-lg border border-border shadow-sm"
-                >
-                  <badge.icon className="w-4 h-4 text-accent" />
-                  <span className="text-sm font-medium text-foreground">{badge.label}</span>
-                </div>
-              ))}
-            </div>
-
-            {/* Social Proof */}
-            <div className="mt-10 pt-10 border-t border-border animate-fade-up stagger-5">
-              <p className="text-sm text-muted-foreground mb-3">Built for teams that rely on phone calls</p>
-              <div className="flex flex-wrap items-center gap-2 mb-5">
-                {industries.map((industry) => (
-                  <div
-                    key={industry}
-                    className="h-7 px-3 bg-card border border-border rounded flex items-center justify-center text-xs font-medium text-foreground/80"
-                  >
-                    {industry}
-                  </div>
-                ))}
+        <div className="container mx-auto px-4 relative z-10">
+          {/* Two-column: headline + demo card */}
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+            {/* Left Content */}
+            <div className="py-12 lg:py-0">
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-accent/10 rounded-full mb-6 animate-fade-up">
+                <span className="w-2 h-2 bg-accent rounded-full animate-pulse-subtle" />
+                <span className="text-sm font-medium text-accent">24/7 AI voice receptionist for SMBs</span>
               </div>
 
-              <p className="text-sm text-muted-foreground mb-3">Integrates with</p>
-              <div className="flex flex-wrap items-center gap-2">
-                {integrations.map((integration) => (
-                  <div
-                    key={integration}
-                    className="h-7 px-3 bg-card border border-border rounded flex items-center justify-center text-xs font-medium text-foreground/80"
-                  >
-                    {integration}
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-heading font-extrabold text-foreground leading-tight mb-6">
+                Answer Every Call.{" "}
+                <span className="text-gradient-primary">Book More Appointments.</span>{" "}
+                With an AI Voice Receptionist.
+              </h1>
+
+              <p className="text-sm sm:text-base text-foreground/80 mb-4 leading-relaxed font-medium">
+                VoiceFleet is an AI voice receptionist for small businesses, starting at &euro;99/mo with a 30-day free trial. It answers calls 24/7, books appointments, takes messages, and routes urgent calls — with no-code setup in under 1 hour and EU data residency.
+              </p>
+
+              <p className="text-base sm:text-lg lg:text-xl text-muted-foreground mb-8 leading-relaxed">
+                Forward your existing number to VoiceFleet. We answer calls, capture intent + details, and book appointments or reservations into your calendar/booking system.
+                We also escalate urgent calls to your team and send instant summaries.
+              </p>
+
+              <HeroCTA />
+            </div>
+
+            {/* Right Content - Demo Trigger Card */}
+            <div className="relative animate-fade-up stagger-3 pt-12 lg:pt-0">
+              <div className="relative bg-card rounded-2xl shadow-xl border border-border overflow-hidden">
+                {/* Header */}
+                <div className="bg-gradient-hero p-5 text-center">
+                  <p className="text-sm font-medium text-primary-foreground/80">Hear it for yourself</p>
+                  <h2 className="text-xl sm:text-2xl font-heading font-bold text-primary-foreground mt-1">
+                    Talk to an AI Receptionist Now
+                  </h2>
+                </div>
+
+                <div className="p-6 sm:p-8 space-y-6">
+                  {/* Animated waveform visual */}
+                  <div className="flex items-center justify-center gap-1">
+                    <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center">
+                      <Phone className="w-6 h-6 text-accent" />
+                    </div>
+                    <div className="flex items-end gap-[3px] h-10 ml-3">
+                      {[40, 70, 50, 85, 60, 90, 45, 75, 55, 80, 50, 65].map((h, i) => (
+                        <div
+                          key={i}
+                          className="w-1.5 bg-accent/60 rounded-full animate-pulse"
+                          style={{
+                            height: `${h}%`,
+                            animationDelay: `${i * 0.1}s`,
+                            animationDuration: `${0.8 + (i % 3) * 0.2}s`,
+                          }}
+                        />
+                      ))}
+                    </div>
                   </div>
-                ))}
+
+                  {/* Industry quick picks */}
+                  <div>
+                    <p className="text-xs text-muted-foreground text-center mb-3">Pick an industry scenario</p>
+                    <div className="flex flex-wrap justify-center gap-2">
+                      {["Restaurant", "Dentist", "Gym", "Plumber", "Beauty Salon"].map((industry) => (
+                        <span
+                          key={industry}
+                          className="px-3 py-1.5 bg-muted rounded-full text-xs font-medium text-foreground/80 border border-border"
+                        >
+                          {industry}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Demo CTA Button */}
+                  <HeroDemoCTA />
+
+                  {/* Supporting text */}
+                  <p className="text-xs text-muted-foreground text-center">
+                    <Mic className="w-3 h-3 inline mr-1" />
+                    No signup. Uses your microphone. 90 seconds.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
 
-          {/* Right Content - Receptionist Preview */}
-          <div className="relative animate-fade-up stagger-3">
-            <div className="relative bg-card rounded-2xl shadow-xl border border-border overflow-hidden">
-              {/* Dashboard Header */}
-              <div className="bg-gradient-hero p-4 flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <div className="w-3 h-3 rounded-full bg-primary-foreground/30" />
-                  <div className="w-3 h-3 rounded-full bg-primary-foreground/30" />
-                  <div className="w-3 h-3 rounded-full bg-primary-foreground/30" />
-                </div>
-                <div className="text-right">
-                  <span className="block text-sm font-medium text-primary-foreground/80">VoiceFleet Receptionist</span>
-                  <span className="block text-[11px] text-primary-foreground/70">Sample dashboard (example data)</span>
-                </div>
-              </div>
-
-              {/* Dashboard Content */}
-              <div className="p-4 sm:p-6 space-y-4 sm:space-y-6">
-                {/* Stats Row */}
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
-                  <DashboardStat icon={PhoneIncoming} label="Calls Answered" value="47" trend="Today" />
-                  <DashboardStat icon={MessageSquare} label="Messages" value="12" trend="New" positive />
-                  <DashboardStat icon={Calendar} label="Bookings" value="8" trend="Today" className="col-span-2 sm:col-span-1" />
-                </div>
-
-                {/* Live Activity */}
-                <div className="bg-muted/50 rounded-xl p-4">
-                  <div className="flex items-center justify-between mb-4">
-                    <span className="text-sm font-semibold text-foreground">Recent Activity</span>
-                    <span className="flex items-center gap-1 text-xs text-accent">
-                      <span className="w-2 h-2 bg-accent rounded-full animate-pulse" />
-                      Live
-                    </span>
-                  </div>
-                  <div className="space-y-3">
-                    {[
-                      { status: "Appointment booked", time: "2 min ago", caller: "New patient enquiry" },
-                      { status: "Message taken", time: "8 min ago", caller: "Callback requested" },
-                      { status: "FAQ answered", time: "15 min ago", caller: "Opening hours query" },
-                    ].map((activity, i) => (
-                      <div key={i} className="flex items-center justify-between p-3 bg-card rounded-lg border border-border">
-                        <div className="flex items-center gap-3">
-                          <div className="w-8 h-8 bg-gradient-accent rounded-full flex items-center justify-center">
-                            <Headphones className="w-4 h-4 text-accent-foreground" />
-                          </div>
-                          <div>
-                            <p className="text-sm font-medium text-foreground">{activity.status}</p>
-                            <p className="text-xs text-muted-foreground">{activity.caller}</p>
-                          </div>
-                        </div>
-                        <div className="text-right">
-                          <p className="text-xs text-muted-foreground">{activity.time}</p>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Quick Stats */}
-                <div className="bg-muted/50 rounded-xl p-4">
-                  <div className="flex items-center justify-between mb-4">
-                    <span className="text-sm font-semibold text-foreground">Coverage</span>
-                    <span className="text-sm font-bold text-accent">24/7</span>
-                  </div>
-                  <div className="flex items-end gap-1 h-16">
-                    {[70, 85, 80, 90, 75, 88, 82, 92, 78, 86, 84, 90].map((height, i) => (
-                      <div
-                        key={i}
-                        className="flex-1 bg-gradient-accent rounded-t opacity-80 hover:opacity-100 transition-opacity"
-                        style={{ height: `${height}%` }}
-                      />
-                    ))}
-                  </div>
-                  <p className="text-xs text-muted-foreground mt-2 text-center">Always-on phone coverage, even after hours</p>
-                </div>
-              </div>
+          {/* Full-width video row — centered below the two columns */}
+          <div className="py-12 lg:py-16 animate-fade-up stagger-4">
+            <div className="text-center mb-6">
+              <h2 className="text-xl sm:text-2xl font-heading font-bold text-foreground mb-2">
+                See How It Works
+              </h2>
+              <p className="text-sm text-muted-foreground">
+                Watch a quick walkthrough of VoiceFleet in action.
+              </p>
             </div>
 
-            {/* Floating Element */}
-            <div className="hidden sm:block absolute -top-4 -right-4 bg-card rounded-xl shadow-lg border border-border p-4 animate-float">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-accent/10 rounded-full flex items-center justify-center">
-                  <Phone className="w-5 h-5 text-accent" />
-                </div>
-                <div>
-                  <p className="text-xs text-foreground/70">Calls This Month (example)</p>
-                  <p className="text-lg font-bold text-foreground">1,247</p>
-                </div>
+            <div className="mx-auto max-w-4xl">
+              <div
+                className="relative rounded-2xl overflow-hidden shadow-2xl ring-1 ring-border bg-card"
+                style={{ aspectRatio: '16 / 9' }}
+              >
+                <div className="absolute -inset-2 bg-gradient-to-br from-primary/15 via-accent/10 to-primary/15 rounded-3xl blur-2xl -z-10" />
+
+                {videoPlaying ? (
+                  <div className="absolute inset-0 overflow-hidden bg-black">
+                    <iframe
+                      className="absolute top-1/2 left-1/2"
+                      style={{
+                        width: '200%',
+                        height: '200%',
+                        transform: 'translate(-50%, -50%)',
+                      }}
+                      src={`https://www.youtube.com/embed/${VIDEO_ID}?autoplay=1&rel=0&modestbranding=1`}
+                      title="How VoiceFleet Works"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                    />
+                  </div>
+                ) : (
+                  <button
+                    onClick={() => setVideoPlaying(true)}
+                    className="group absolute inset-0 w-full h-full cursor-pointer"
+                    aria-label="Play video"
+                  >
+                    <div className="absolute inset-0 overflow-hidden">
+                      <img
+                        src={THUMBNAIL}
+                        alt="VoiceFleet walkthrough video thumbnail"
+                        className="w-full h-full object-cover scale-[2] object-center"
+                      />
+                    </div>
+                    <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/50 group-hover:from-black/30 group-hover:via-black/10 group-hover:to-black/40 transition-colors" />
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div className="w-20 h-20 rounded-full bg-white/90 group-hover:bg-white group-hover:scale-110 transition-all flex items-center justify-center shadow-2xl">
+                        <Play className="w-9 h-9 text-primary ml-1" fill="currentColor" />
+                      </div>
+                    </div>
+                    <div className="absolute bottom-0 inset-x-0 p-5 bg-gradient-to-t from-black/80 to-transparent">
+                      <p className="text-white text-base font-semibold">
+                        Set Up Your AI Receptionist in 5 Minutes
+                      </p>
+                      <p className="text-white/70 text-sm mt-1">Click to play</p>
+                    </div>
+                  </button>
+                )}
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      {/* Trust & social proof — below the hero */}
+      <section className="bg-background py-10 lg:py-14 border-t border-border/50">
+        <div className="container mx-auto px-4">
+          {/* Trust Badges */}
+          <div className="flex flex-wrap justify-center gap-4 mb-6">
+            {trustBadges.map((badge, index) => (
+              <div
+                key={index}
+                className="flex items-center gap-2 px-4 py-2 bg-card rounded-lg border border-border shadow-sm"
+              >
+                <badge.icon className="w-4 h-4 text-accent" />
+                <span className="text-sm font-medium text-foreground">{badge.label}</span>
+              </div>
+            ))}
+          </div>
+
+          {/* Inline Testimonial */}
+          <div className="max-w-2xl mx-auto mb-8">
+            <div className="flex items-start gap-3 bg-card/60 border border-border/50 rounded-xl px-4 py-3 justify-center">
+              <div className="flex items-center gap-0.5 flex-shrink-0 mt-0.5">
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <Star key={i} className="h-3.5 w-3.5 fill-amber-400 text-amber-400" />
+                ))}
+              </div>
+              <p className="text-sm text-foreground/80 leading-relaxed">
+                &ldquo;We no longer miss booking calls while the team is busy with patients.&rdquo;
+                <span className="text-xs text-muted-foreground ml-1">— Practice Manager, Dental Clinic</span>
+              </p>
+            </div>
+          </div>
+
+          {/* Social Proof */}
+          <div className="text-center">
+            <p className="text-sm text-muted-foreground mb-3">Built for teams that rely on phone calls</p>
+            <div className="flex flex-wrap justify-center gap-2 mb-5">
+              {industries.map((industry) => (
+                <div
+                  key={industry}
+                  className="h-7 px-3 bg-card border border-border rounded flex items-center justify-center text-xs font-medium text-foreground/80"
+                >
+                  {industry}
+                </div>
+              ))}
+            </div>
+
+            <p className="text-sm text-muted-foreground mb-3">Integrates with</p>
+            <div className="flex flex-wrap justify-center gap-2">
+              {integrations.map((integration) => (
+                <div
+                  key={integration}
+                  className="h-7 px-3 bg-card border border-border rounded flex items-center justify-center text-xs font-medium text-foreground/80"
+                >
+                  {integration}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+    </>
   );
 };
 
-const DashboardStat = ({
-  icon: Icon,
-  label,
-  value,
-  trend,
-  positive = true,
-  className = ""
-}: {
-  icon: React.ElementType;
-  label: string;
-  value: string;
-  trend: string;
-  positive?: boolean;
-  className?: string;
-}) => (
-  <div className={`bg-muted/50 rounded-xl p-3 sm:p-4 ${className}`}>
-    <div className="flex items-center gap-2 mb-2">
-      <Icon className="w-4 h-4 text-foreground/60" />
-      <span className="text-xs text-foreground/70">{label}</span>
-    </div>
-    <p className="text-2xl font-bold text-foreground">{value}</p>
-    <p className={`text-xs font-medium ${positive ? 'text-accent' : 'text-foreground/70'}`}>
-      {trend}
-    </p>
-  </div>
-);
+function HeroDemoCTA() {
+  return (
+    <LiveDemoCall
+      trigger={
+        <button className="w-full py-4 rounded-xl bg-gradient-hero text-primary-foreground font-semibold text-lg shadow-lg shadow-primary/25 hover:opacity-90 transition-opacity flex items-center justify-center gap-2 cursor-pointer">
+          <Phone className="w-5 h-5" />
+          Start Demo Call
+        </button>
+      }
+    />
+  );
+}
 
 export default HeroSection;

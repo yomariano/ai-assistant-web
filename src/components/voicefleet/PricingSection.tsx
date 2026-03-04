@@ -3,7 +3,7 @@
 import { Fragment, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { Check, Zap, Rocket, Crown, Gift, Clock, Shield, Phone, Sparkles, Globe, Star, X } from "lucide-react";
+import { Check, Zap, Rocket, Crown, Gift, Clock, Shield, Phone, Sparkles, Globe, Star, X, Stethoscope, UtensilsCrossed, Wrench, Quote, BadgeCheck } from "lucide-react";
 import { useAuthStore } from "@/lib/store";
 import { signInWithGoogle } from "@/lib/supabase";
 import { trackEvent } from "@/lib/umami";
@@ -95,6 +95,14 @@ const REGIONAL_PRICING = {
     pro: { monthly: 299, annual: 2999, minutes: 1000, calls: '~400', overage: '$0.30' },
     phoneNumber: 'Argentine phone number',
   },
+};
+
+const LAUNCH_OFFER = {
+  active: new Date() < new Date('2026-04-01T00:00:00Z'),
+  discountPercent: 25,
+  label: '25% off until March 31',
+  // Only Growth and Pro get the discount — Starter stays full price
+  applicablePlans: ['growth', 'pro'] as string[],
 };
 
 const PricingSection = () => {
@@ -275,18 +283,21 @@ const PricingSection = () => {
       source: "Practice manager",
       segment: "Dental clinic",
       impact: "Fewer dropped opportunities during peak hours",
+      icon: Stethoscope,
     },
     {
       quote: "Evening and weekend callers now get a real answer instead of voicemail.",
       source: "Restaurant owner",
       segment: "Hospitality",
       impact: "Improved reservation capture after hours",
+      icon: UtensilsCrossed,
     },
     {
       quote: "Urgent calls are routed fast, while routine questions are handled automatically.",
       source: "Operations lead",
       segment: "Home services",
       impact: "Faster triage with cleaner call notes",
+      icon: Wrench,
     },
   ];
 
@@ -674,12 +685,35 @@ const PricingSection = () => {
                 </div>
 
                 <div className="mb-5">
-                  <div className="flex items-baseline gap-1">
-                    <span className="text-4xl font-heading font-bold text-foreground">
-                      {pricing.currency}{isAnnual ? tier.annualPrice.toLocaleString() : tier.monthlyPrice}
-                    </span>
-                    <span className="text-muted-foreground">/{isAnnual ? 'year' : 'month'}</span>
-                  </div>
+                  {(() => {
+                    const hasDiscount = LAUNCH_OFFER.active && LAUNCH_OFFER.applicablePlans.includes(tier.planId);
+                    const originalPrice = isAnnual ? tier.annualPrice : tier.monthlyPrice;
+                    const discountedPrice = hasDiscount ? Math.round(originalPrice * (1 - LAUNCH_OFFER.discountPercent / 100)) : originalPrice;
+
+                    return (
+                      <>
+                        <div className="flex items-baseline gap-2">
+                          {hasDiscount && (
+                            <span className="text-lg text-muted-foreground line-through">
+                              {pricing.currency}{originalPrice.toLocaleString()}
+                            </span>
+                          )}
+                          <span className="text-4xl font-heading font-bold text-foreground">
+                            {pricing.currency}{discountedPrice.toLocaleString()}
+                          </span>
+                          <span className="text-muted-foreground">/{isAnnual ? 'year' : 'month'}</span>
+                          {hasDiscount && (
+                            <span className="text-[10px] font-bold uppercase tracking-wide bg-accent/15 text-accent px-2 py-0.5 rounded-full">
+                              25% off
+                            </span>
+                          )}
+                        </div>
+                        {hasDiscount && (
+                          <p className="text-xs font-semibold text-accent mt-1">Launch offer — ends March 31</p>
+                        )}
+                      </>
+                    );
+                  })()}
                   <p className="text-sm text-accent font-semibold mt-1">
                     {tier.minutesIncluded.toLocaleString()} minutes included ({tier.estimatedCalls} calls)
                   </p>
@@ -791,17 +825,34 @@ const PricingSection = () => {
 
             <div className="grid md:grid-cols-3 gap-4">
               {testimonials.map((testimonial) => (
-                <div key={testimonial.quote} className="rounded-xl border border-border bg-background p-4">
+                <div key={testimonial.quote} className="relative rounded-xl border border-border bg-background p-5">
+                  {/* Decorative quote */}
+                  <Quote className="absolute top-3 right-3 w-8 h-8 text-accent/15" />
+
                   <div className="mb-3 flex items-center gap-1">
                     {Array.from({ length: 5 }).map((_, index) => (
                       <Star key={`${testimonial.source}-${index}`} className="h-3.5 w-3.5 fill-amber-400 text-amber-400" />
                     ))}
                   </div>
-                  <p className="text-sm text-foreground/85 leading-relaxed mb-3">
+                  <p className="text-base text-foreground/85 leading-relaxed mb-4">
                     &ldquo;{testimonial.quote}&rdquo;
                   </p>
-                  <p className="text-xs font-semibold text-foreground">{testimonial.source} · {testimonial.segment}</p>
-                  <p className="text-xs text-muted-foreground mt-1">{testimonial.impact}</p>
+                  <div className="flex items-center gap-2 mb-2">
+                    <div className="w-8 h-8 rounded-full bg-accent/10 flex items-center justify-center">
+                      <testimonial.icon className="w-4 h-4 text-accent" />
+                    </div>
+                    <div>
+                      <p className="text-sm font-semibold text-foreground">{testimonial.source}</p>
+                      <p className="text-xs text-muted-foreground">{testimonial.segment}</p>
+                    </div>
+                    <span className="ml-auto inline-flex items-center gap-1 text-[10px] font-semibold text-accent bg-accent/10 px-2 py-0.5 rounded-full">
+                      <BadgeCheck className="w-3 h-3" />
+                      Verified
+                    </span>
+                  </div>
+                  <div className="mt-3 pt-3 border-t border-border/50">
+                    <p className="text-xs font-medium text-accent">{testimonial.impact}</p>
+                  </div>
                 </div>
               ))}
             </div>
