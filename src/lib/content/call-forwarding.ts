@@ -4,7 +4,7 @@
  * This data is used in the onboarding flow to help users set up
  * call forwarding from their existing phone to their VoiceFleet number.
  *
- * Supported regions: IE (Ireland), AR (Argentina)
+ * Supported regions: IE (Ireland), UK (United Kingdom), AR (Argentina)
  */
 
 export interface CallForwardingOption {
@@ -927,6 +927,352 @@ export const callForwardingProvidersAR: CallForwardingProvider[] = [
   },
 ];
 
+// ============================================
+// UK PROVIDERS
+// ============================================
+
+export const callForwardingProvidersUK: CallForwardingProvider[] = [
+  // ============================================
+  // MOBILE NETWORK OPERATORS (MNOs)
+  // ============================================
+  {
+    id: 'ee-uk',
+    name: 'EE',
+    type: 'mobile',
+    options: [
+      {
+        type: 'no_answer',
+        label: 'Forward When No Answer',
+        activateCode: '**61*{number}*11*10#',
+        deactivateCode: '##61#',
+        description: 'If you don\'t answer within 10 seconds, calls go to your AI receptionist. During business hours, answer as normal.',
+      },
+    ],
+    notes: [
+      'Replace {number} with your VoiceFleet number (e.g., 0121...)',
+      'Dial the code directly from your phone app',
+      'You\'ll hear a confirmation tone when activated',
+    ],
+    supportUrl: 'https://help.ee.co.uk/',
+    supportPhone: '150',
+  },
+  {
+    id: 'vodafone-uk',
+    name: 'Vodafone UK',
+    type: 'mobile',
+    options: [
+      {
+        type: 'no_answer',
+        label: 'Forward When No Answer',
+        activateCode: '**61*{number}**10#',
+        deactivateCode: '##61#',
+        description: 'If you don\'t answer within 10 seconds, calls go to your AI receptionist. During business hours, answer as normal.',
+      },
+    ],
+    notes: [
+      'Replace {number} with your VoiceFleet number (e.g., 0121...)',
+      'You can also set up forwarding via the My Vodafone app',
+    ],
+    supportUrl: 'https://www.vodafone.co.uk/help',
+    supportPhone: '191',
+  },
+  {
+    id: 'three-uk',
+    name: 'Three UK',
+    type: 'mobile',
+    options: [
+      {
+        type: 'no_answer',
+        label: 'Forward When No Answer',
+        activateCode: '**61*{number}**10#',
+        deactivateCode: '##61#',
+        description: 'If you don\'t answer within 10 seconds, calls go to your AI receptionist. During business hours, answer as normal.',
+      },
+    ],
+    notes: [
+      'Replace {number} with your VoiceFleet number (e.g., 0121...)',
+      'You can also manage forwarding in the Three app',
+    ],
+    supportUrl: 'https://www.three.co.uk/support',
+    supportPhone: '333',
+  },
+  {
+    id: 'o2-uk',
+    name: 'O2',
+    type: 'mobile',
+    options: [
+      {
+        type: 'no_answer',
+        label: 'Forward When No Answer',
+        activateCode: '**61*{number}**10#',
+        deactivateCode: '##61#',
+        description: 'If you don\'t answer within 10 seconds, calls go to your AI receptionist. During business hours, answer as normal.',
+      },
+    ],
+    notes: [
+      'Replace {number} with your VoiceFleet number (e.g., 0121...)',
+      'You can also manage forwarding via the My O2 app',
+    ],
+    supportUrl: 'https://www.o2.co.uk/help',
+    supportPhone: '202',
+  },
+
+  // ============================================
+  // MOBILE VIRTUAL NETWORK OPERATORS (MVNOs)
+  // ============================================
+  {
+    id: 'giffgaff-uk',
+    name: 'giffgaff',
+    type: 'mobile',
+    network: 'O2',
+    options: [
+      {
+        type: 'no_answer',
+        label: 'Forward When No Answer',
+        activateCode: '**61*{number}**10#',
+        deactivateCode: '##61#',
+        description: 'If you don\'t answer within 10 seconds, calls go to your AI receptionist.',
+      },
+    ],
+    notes: [
+      'giffgaff uses the O2 network - same codes apply',
+      'Replace {number} with your VoiceFleet number (e.g., 0121...)',
+    ],
+    supportUrl: 'https://www.giffgaff.com/help',
+  },
+  {
+    id: 'tesco-mobile-uk',
+    name: 'Tesco Mobile',
+    type: 'mobile',
+    network: 'O2',
+    options: [
+      {
+        type: 'no_answer',
+        label: 'Forward When No Answer',
+        activateCode: '**61*{number}**10#',
+        deactivateCode: '##61#',
+        description: 'If you don\'t answer within 10 seconds, calls go to your AI receptionist.',
+      },
+    ],
+    notes: [
+      'Tesco Mobile uses the O2 network - same codes apply',
+      'Replace {number} with your VoiceFleet number (e.g., 0121...)',
+    ],
+    supportUrl: 'https://www.tescomobile.com/help',
+  },
+  {
+    id: 'sky-mobile-uk',
+    name: 'Sky Mobile',
+    type: 'mobile',
+    network: 'O2',
+    options: [
+      {
+        type: 'no_answer',
+        label: 'Forward When No Answer',
+        activateCode: '**61*{number}**10#',
+        deactivateCode: '##61#',
+        description: 'If you don\'t answer within 10 seconds, calls go to your AI receptionist.',
+      },
+    ],
+    notes: [
+      'Sky Mobile uses the O2 network - same codes apply',
+      'Replace {number} with your VoiceFleet number (e.g., 0121...)',
+    ],
+    supportUrl: 'https://www.sky.com/help/articles/call-divert',
+  },
+
+  // ============================================
+  // LANDLINE PROVIDERS
+  // ============================================
+  {
+    id: 'bt-landline-uk',
+    name: 'BT',
+    type: 'landline',
+    options: [
+      {
+        type: 'no_answer',
+        label: 'Forward When No Answer',
+        activateCode: '*61*{number}#',
+        deactivateCode: '#61#',
+        description: 'If you don\'t answer after several rings, calls go to your AI receptionist. During business hours, answer as normal.',
+      },
+    ],
+    notes: [
+      'Replace {number} with your VoiceFleet number (e.g., 01216306195)',
+      'May take up to 24 hours to activate',
+      'Diverted calls are charged at your standard landline rate',
+    ],
+    supportUrl: 'https://www.bt.com/help/landline/calling-features-and-security/all-about-call-diversion',
+    supportPhone: '150',
+  },
+  {
+    id: 'sky-landline-uk',
+    name: 'Sky Talk',
+    type: 'landline',
+    options: [
+      {
+        type: 'no_answer',
+        label: 'Forward When No Answer',
+        activateCode: '*61*{number}#',
+        deactivateCode: '#61#',
+        description: 'If you don\'t answer after several rings, calls go to your AI receptionist.',
+      },
+    ],
+    notes: [
+      'Call diversion must be enabled on your account first — call Sky on 150',
+      'Replace {number} with your VoiceFleet number (e.g., 01216306195)',
+    ],
+    supportUrl: 'https://www.sky.com/help/articles/call-divert',
+    supportPhone: '150',
+  },
+  {
+    id: 'talktalk-landline-uk',
+    name: 'TalkTalk',
+    type: 'landline',
+    options: [
+      {
+        type: 'no_answer',
+        label: 'Forward When No Answer',
+        activateCode: '*61*{number}#',
+        deactivateCode: '#61#',
+        description: 'If you don\'t answer after several rings, calls go to your AI receptionist.',
+      },
+    ],
+    notes: [
+      'Uses same codes as BT (Openreach network)',
+      'Replace {number} with your VoiceFleet number (e.g., 01216306195)',
+    ],
+    supportUrl: 'https://community.talktalk.co.uk/t5/Articles/Call-Divert/ta-p/2205403',
+    supportPhone: '0345 172 0088',
+  },
+  {
+    id: 'virgin-media-landline-uk',
+    name: 'Virgin Media',
+    type: 'landline',
+    options: [
+      {
+        type: 'no_answer',
+        label: 'Forward When No Answer',
+        activateCode: '*61*{number}#',
+        deactivateCode: '#61#',
+        description: 'If you don\'t answer after several rings, calls go to your AI receptionist.',
+      },
+    ],
+    notes: [
+      'Works in most areas. If codes don\'t work, call 150 — you may be in a "Red area" which uses *70 instead',
+      'Replace {number} with your VoiceFleet number (e.g., 01216306195)',
+      'Call Divert feature costs \u00a32.25/month',
+    ],
+    supportUrl: 'https://www.virginmedia.com/help/landline/set-up-call-diversion',
+    supportPhone: '150',
+  },
+  {
+    id: 'vodafone-landline-uk',
+    name: 'Vodafone Home Phone',
+    type: 'landline',
+    options: [
+      {
+        type: 'no_answer',
+        label: 'Forward When No Answer',
+        activateCode: '*61*{number}#',
+        deactivateCode: '#61#',
+        description: 'If you don\'t answer after several rings, calls go to your AI receptionist.',
+      },
+    ],
+    notes: [
+      'Uses same codes as BT (Openreach network)',
+      'Replace {number} with your VoiceFleet number (e.g., 01216306195)',
+    ],
+    supportUrl: 'https://support.vodafone.co.uk/Broadband-home-phone/',
+    supportPhone: '191',
+  },
+  {
+    id: 'plusnet-landline-uk',
+    name: 'Plusnet',
+    type: 'landline',
+    options: [
+      {
+        type: 'no_answer',
+        label: 'Forward When No Answer',
+        activateCode: '*61*{number}#',
+        deactivateCode: '#61#',
+        description: 'If you don\'t answer after several rings, calls go to your AI receptionist.',
+      },
+    ],
+    notes: [
+      'BT subsidiary — uses same codes as BT (Openreach network)',
+      'Replace {number} with your VoiceFleet number (e.g., 01216306195)',
+      'Codes must be dialled from the home phone handset',
+    ],
+    supportUrl: 'https://www.plus.net/help/phone/',
+    supportPhone: '0800 432 0200',
+  },
+  {
+    id: 'ee-landline-uk',
+    name: 'EE Home Phone',
+    type: 'landline',
+    options: [
+      {
+        type: 'no_answer',
+        label: 'Forward When No Answer',
+        activateCode: 'Call 150, Option 1 > 2 > 4 > 1',
+        deactivateCode: 'Call 150, Option 1 > 2 > 4 > 2',
+        description: 'EE uses an automated phone menu to set up call forwarding',
+      },
+    ],
+    notes: [
+      'EE landline does not support star codes — you must call 150 and follow the menu',
+      'Have your VoiceFleet number ready before calling',
+      'Option path: 1 (landline) > 2 (features) > 4 (call divert) > 1 (activate)',
+    ],
+    supportUrl: 'https://help.ee.co.uk/',
+    supportPhone: '150',
+  },
+
+  // ============================================
+  // BUSINESS / VoIP PROVIDERS
+  // ============================================
+  {
+    id: 'generic-voip-uk',
+    name: 'VoIP / Cloud Phone System',
+    type: 'voip',
+    options: [
+      {
+        type: 'no_answer',
+        label: 'Forward When No Answer',
+        activateCode: 'See admin panel',
+        deactivateCode: 'See admin panel',
+        description: 'Set up no-answer forwarding through your VoIP provider\'s admin dashboard',
+      },
+    ],
+    notes: [
+      'Most VoIP systems (RingCentral, 8x8, Vonage, etc.) have a web portal for call forwarding',
+      'Look for "Call Forwarding" or "Routing" in your settings',
+      'Set the ring timeout to 10 seconds before forwarding',
+    ],
+  },
+  {
+    id: 'generic-pbx-uk',
+    name: 'Office PBX System',
+    type: 'business',
+    options: [
+      {
+        type: 'no_answer',
+        label: 'Forward When No Answer',
+        activateCode: 'Varies by system',
+        deactivateCode: 'Varies by system',
+        description: 'Configuration depends on your specific PBX system',
+      },
+    ],
+    notes: [
+      'Contact your IT administrator or phone system provider',
+      'Common PBX systems: Avaya, Cisco, Mitel, Panasonic, Samsung',
+      'Set "no answer" forwarding with a 10-second timeout to your VoiceFleet number',
+      'We can help configure — contact support@voicefleet.ai',
+    ],
+  },
+];
+
 /**
  * Get providers by type
  */
@@ -1002,13 +1348,39 @@ export const providerCategories = [
 /**
  * All providers combined (for lookup by ID)
  */
-const allProviders = [...callForwardingProviders, ...callForwardingProvidersAR];
+const allProviders = [...callForwardingProviders, ...callForwardingProvidersAR, ...callForwardingProvidersUK];
 
 /**
  * Provider categories by region
  */
 export const providerCategoriesByRegion: Record<string, typeof providerCategories> = {
   IE: providerCategories,
+  UK: [
+    {
+      id: 'mobile',
+      title: 'Mobile Networks',
+      description: 'Major UK mobile operators',
+      providers: ['ee-uk', 'vodafone-uk', 'three-uk', 'o2-uk'],
+    },
+    {
+      id: 'mvno',
+      title: 'Budget Mobile',
+      description: 'Virtual operators using major networks',
+      providers: ['giffgaff-uk', 'tesco-mobile-uk', 'sky-mobile-uk'],
+    },
+    {
+      id: 'landline',
+      title: 'Landline / Home Phone',
+      description: 'UK landline services',
+      providers: ['bt-landline-uk', 'sky-landline-uk', 'talktalk-landline-uk', 'virgin-media-landline-uk', 'vodafone-landline-uk', 'plusnet-landline-uk', 'ee-landline-uk'],
+    },
+    {
+      id: 'business',
+      title: 'Business / VoIP',
+      description: 'Business phone systems and VoIP providers',
+      providers: ['generic-voip-uk', 'generic-pbx-uk'],
+    },
+  ],
   AR: [
     {
       id: 'mobile',
@@ -1048,7 +1420,9 @@ export function getProviderCategoriesForRegion(region: string) {
  * Get all providers for a specific region
  */
 export function getProvidersForRegion(region: string): CallForwardingProvider[] {
-  return region === 'AR' ? callForwardingProvidersAR : callForwardingProviders;
+  if (region === 'AR') return callForwardingProvidersAR;
+  if (region === 'UK') return callForwardingProvidersUK;
+  return callForwardingProviders;
 }
 
 /**
