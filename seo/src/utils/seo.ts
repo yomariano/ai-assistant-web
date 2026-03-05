@@ -44,11 +44,6 @@ export function generateSoftwareSchema(industry?: Industry): object {
       priceCurrency: 'USD',
       description: 'Free trial available'
     },
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: '4.8',
-      ratingCount: '150'
-    },
     featureList: [
       '24/7 AI Phone Answering',
       'Natural Voice Conversations',
