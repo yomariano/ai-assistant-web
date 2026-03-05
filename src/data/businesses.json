@@ -1804,6 +1804,262 @@
     "openingHours": "Mo-Fr 09:00-18:00"
   },
   {
+    "slug": "veterinaria-cazorla",
+    "name": "Veterinaria Cazorla",
+    "vertical": "vets",
+    "city": "Córdoba",
+    "citySlug": "cordoba",
+    "country": "argentina",
+    "address": "Córdoba, Argentina",
+    "phone": "0351-4229793",
+    "website": "",
+    "email": "",
+    "description": "Veterinaria Cazorla is a trusted veterinary clinics located in Córdoba, Argentina. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Veterinaria Cazorla treat?",
+        "a": "Veterinaria Cazorla treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Veterinaria Cazorla offer emergency veterinary services?",
+        "a": "Contact Veterinaria Cazorla for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Veterinaria Cazorla provide vaccinations?",
+        "a": "Yes, Veterinaria Cazorla offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Veterinaria Cazorla?",
+        "a": "Veterinaria Cazorla can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "es",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "veterinaria-biovet",
+    "name": "Veterinaria Biovet",
+    "vertical": "vets",
+    "city": "Córdoba",
+    "citySlug": "cordoba",
+    "country": "argentina",
+    "address": "Córdoba, Argentina",
+    "phone": "0351-3487860",
+    "website": "",
+    "email": "",
+    "description": "Veterinaria Biovet is a trusted veterinary clinics located in Córdoba, Argentina. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Veterinaria Biovet treat?",
+        "a": "Veterinaria Biovet treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Veterinaria Biovet offer emergency veterinary services?",
+        "a": "Contact Veterinaria Biovet for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Veterinaria Biovet provide vaccinations?",
+        "a": "Yes, Veterinaria Biovet offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Veterinaria Biovet?",
+        "a": "Veterinaria Biovet can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "es",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "veterinaria-la-cucha",
+    "name": "Veterinaria La Cucha",
+    "vertical": "vets",
+    "city": "Córdoba",
+    "citySlug": "cordoba",
+    "country": "argentina",
+    "address": "Córdoba, Argentina",
+    "phone": "0351-4898499",
+    "website": "",
+    "email": "",
+    "description": "Veterinaria La Cucha is a trusted veterinary clinics located in Córdoba, Argentina. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Veterinaria La Cucha treat?",
+        "a": "Veterinaria La Cucha treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Veterinaria La Cucha offer emergency veterinary services?",
+        "a": "Contact Veterinaria La Cucha for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Veterinaria La Cucha provide vaccinations?",
+        "a": "Yes, Veterinaria La Cucha offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Veterinaria La Cucha?",
+        "a": "Veterinaria La Cucha can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "es",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "veterinaria-centro-america",
+    "name": "Veterinaria Centro América",
+    "vertical": "vets",
+    "city": "Córdoba",
+    "citySlug": "cordoba",
+    "country": "argentina",
+    "address": "Córdoba, Argentina",
+    "phone": "0351-4704108",
+    "website": "",
+    "email": "",
+    "description": "Veterinaria Centro América is a trusted veterinary clinics located in Córdoba, Argentina. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Veterinaria Centro América treat?",
+        "a": "Veterinaria Centro América treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Veterinaria Centro América offer emergency veterinary services?",
+        "a": "Contact Veterinaria Centro América for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Veterinaria Centro América provide vaccinations?",
+        "a": "Yes, Veterinaria Centro América offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Veterinaria Centro América?",
+        "a": "Veterinaria Centro América can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "es",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "dentis-odontologia",
+    "name": "Dentis Odontología",
+    "vertical": "dentists",
+    "city": "Córdoba",
+    "citySlug": "cordoba",
+    "country": "argentina",
+    "address": "Córdoba, Argentina",
+    "phone": "",
+    "website": "https://www.dentis-cba.com.ar",
+    "email": "",
+    "description": "Dentis Odontología is a trusted dentists located in Córdoba, Argentina. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "¿Dentis Odontología acepta pacientes nuevos?",
+        "a": "Dentis Odontología recibe pacientes nuevos. Llamá para agendar tu primera consulta."
+      },
+      {
+        "q": "¿Dentis Odontología ofrece atención de emergencia?",
+        "a": "Contactá a Dentis Odontología para consultar disponibilidad de emergencias dentales."
+      },
+      {
+        "q": "¿Qué tratamientos ofrece Dentis Odontología?",
+        "a": "Dentis Odontología ofrece limpieza, empastes, ortodoncia, y odontología estética."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "es",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "cop-consultorios-odontologicos",
+    "name": "COP Consultorios Odontológicos",
+    "vertical": "dentists",
+    "city": "Córdoba",
+    "citySlug": "cordoba",
+    "country": "argentina",
+    "address": "Córdoba, Argentina",
+    "phone": "0351-4240031",
+    "website": "",
+    "email": "",
+    "description": "COP Consultorios Odontológicos is a trusted dentists located in Córdoba, Argentina. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "¿COP Consultorios Odontológicos acepta pacientes nuevos?",
+        "a": "COP Consultorios Odontológicos recibe pacientes nuevos. Llamá para agendar tu primera consulta."
+      },
+      {
+        "q": "¿COP Consultorios Odontológicos ofrece atención de emergencia?",
+        "a": "Contactá a COP Consultorios Odontológicos para consultar disponibilidad de emergencias dentales."
+      },
+      {
+        "q": "¿Qué tratamientos ofrece COP Consultorios Odontológicos?",
+        "a": "COP Consultorios Odontológicos ofrece limpieza, empastes, ortodoncia, y odontología estética."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "es",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "centro-odontologico-de-avanzada",
+    "name": "Centro Odontológico de Avanzada",
+    "vertical": "dentists",
+    "city": "Mar del Plata",
+    "citySlug": "mar-del-plata",
+    "country": "argentina",
+    "address": "Mar del Plata, Argentina",
+    "phone": "",
+    "website": "http://coamardelplata.com.ar",
+    "email": "",
+    "description": "Centro Odontológico de Avanzada is a trusted dentists located in Mar del Plata, Argentina. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "¿Centro Odontológico de Avanzada acepta pacientes nuevos?",
+        "a": "Centro Odontológico de Avanzada recibe pacientes nuevos. Llamá para agendar tu primera consulta."
+      },
+      {
+        "q": "¿Centro Odontológico de Avanzada ofrece atención de emergencia?",
+        "a": "Contactá a Centro Odontológico de Avanzada para consultar disponibilidad de emergencias dentales."
+      },
+      {
+        "q": "¿Qué tratamientos ofrece Centro Odontológico de Avanzada?",
+        "a": "Centro Odontológico de Avanzada ofrece limpieza, empastes, ortodoncia, y odontología estética."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "es",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "dental-total-rosario",
+    "name": "Dental Total Rosario",
+    "vertical": "dentists",
+    "city": "Rosario",
+    "citySlug": "rosario",
+    "country": "argentina",
+    "address": "Rosario, Argentina",
+    "phone": "",
+    "website": "https://dentaltotal.com.ar/sucursales/rosario/",
+    "email": "",
+    "description": "Dental Total Rosario is a trusted dentists located in Rosario, Argentina. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "¿Dental Total Rosario acepta pacientes nuevos?",
+        "a": "Dental Total Rosario recibe pacientes nuevos. Llamá para agendar tu primera consulta."
+      },
+      {
+        "q": "¿Dental Total Rosario ofrece atención de emergencia?",
+        "a": "Contactá a Dental Total Rosario para consultar disponibilidad de emergencias dentales."
+      },
+      {
+        "q": "¿Qué tratamientos ofrece Dental Total Rosario?",
+        "a": "Dental Total Rosario ofrece limpieza, empastes, ortodoncia, y odontología estética."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "es",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
     "slug": "fitzwilliam-medical-centre",
     "name": "Fitzwilliam Medical Centre",
     "vertical": "physios",
@@ -21286,6 +21542,834 @@
     "openingHours": "Mo-Fr 09:00-18:00"
   },
   {
+    "slug": "the-clinic-naas",
+    "name": "The Clinic Naas",
+    "vertical": "dentists",
+    "city": "Naas",
+    "citySlug": "naas",
+    "country": "ireland",
+    "address": "Naas, Ireland",
+    "phone": "045 889 749",
+    "website": "https://excellenceindentistry.ie/",
+    "email": "reception@theclinicnaas.ie",
+    "description": "The Clinic Naas is a trusted dentists located in Naas, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is The Clinic Naas accepting new patients?",
+        "a": "The Clinic Naas welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does The Clinic Naas offer emergency dental care?",
+        "a": "Contact The Clinic Naas directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does The Clinic Naas accept?",
+        "a": "The Clinic Naas works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does The Clinic Naas offer?",
+        "a": "The Clinic Naas provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "vevay-dental-centre",
+    "name": "Vevay Dental Centre",
+    "vertical": "dentists",
+    "city": "Bray",
+    "citySlug": "bray",
+    "country": "ireland",
+    "address": "Bray, Ireland",
+    "phone": "01 286 6394",
+    "website": "https://vevaydental.ie/",
+    "email": "reception@vevaydental.ie",
+    "description": "Vevay Dental Centre is a trusted dentists located in Bray, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Vevay Dental Centre accepting new patients?",
+        "a": "Vevay Dental Centre welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Vevay Dental Centre offer emergency dental care?",
+        "a": "Contact Vevay Dental Centre directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Vevay Dental Centre accept?",
+        "a": "Vevay Dental Centre works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Vevay Dental Centre offer?",
+        "a": "Vevay Dental Centre provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "truly-dental-bray",
+    "name": "Truly Dental Bray",
+    "vertical": "dentists",
+    "city": "Bray",
+    "citySlug": "bray",
+    "country": "ireland",
+    "address": "Bray, Ireland",
+    "phone": "",
+    "website": "https://trulydental.ie/location/wicklow/21-main-st-bray-co-wicklow",
+    "email": "",
+    "description": "Truly Dental Bray is a trusted dentists located in Bray, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Truly Dental Bray accepting new patients?",
+        "a": "Truly Dental Bray welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Truly Dental Bray offer emergency dental care?",
+        "a": "Contact Truly Dental Bray directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Truly Dental Bray accept?",
+        "a": "Truly Dental Bray works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Truly Dental Bray offer?",
+        "a": "Truly Dental Bray provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "sean-tierney-s-bar-restaurant",
+    "name": "Sean Tierney's Bar & Restaurant",
+    "vertical": "restaurants",
+    "city": "Clonmel",
+    "citySlug": "clonmel",
+    "country": "ireland",
+    "address": "Clonmel, Ireland",
+    "phone": "",
+    "website": "http://www.seantierneys.com/",
+    "email": "",
+    "description": "Sean Tierney's Bar & Restaurant is a trusted restaurants located in Clonmel, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Sean Tierney's Bar & Restaurant take reservations?",
+        "a": "Yes, Sean Tierney's Bar & Restaurant accepts reservations. Call ahead or book online for the best experience."
+      },
+      {
+        "q": "What type of cuisine does Sean Tierney's Bar & Restaurant serve?",
+        "a": "Sean Tierney's Bar & Restaurant offers a carefully curated menu featuring local and international dishes."
+      },
+      {
+        "q": "Does Sean Tierney's Bar & Restaurant have parking?",
+        "a": "Please contact Sean Tierney's Bar & Restaurant directly for parking information and availability."
+      },
+      {
+        "q": "Is there a dress code at Sean Tierney's Bar & Restaurant?",
+        "a": "Smart casual attire is recommended. Contact the restaurant for specific event requirements."
+      },
+      {
+        "q": "Does Sean Tierney's Bar & Restaurant offer private dining?",
+        "a": "Sean Tierney's Bar & Restaurant may offer private dining options for special events. Contact them for details."
+      }
+    ],
+    "schema_type": "Restaurant",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "sienna-s-italian",
+    "name": "Sienna's Italian",
+    "vertical": "restaurants",
+    "city": "Malahide",
+    "citySlug": "malahide",
+    "country": "ireland",
+    "address": "Malahide, Ireland",
+    "phone": "018451233",
+    "website": "https://siennas.ie/",
+    "email": "",
+    "description": "Sienna's Italian is a trusted restaurants located in Malahide, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Sienna's Italian take reservations?",
+        "a": "Yes, Sienna's Italian accepts reservations. Call ahead or book online for the best experience."
+      },
+      {
+        "q": "What type of cuisine does Sienna's Italian serve?",
+        "a": "Sienna's Italian offers a carefully curated menu featuring local and international dishes."
+      },
+      {
+        "q": "Does Sienna's Italian have parking?",
+        "a": "Please contact Sienna's Italian directly for parking information and availability."
+      },
+      {
+        "q": "Is there a dress code at Sienna's Italian?",
+        "a": "Smart casual attire is recommended. Contact the restaurant for specific event requirements."
+      },
+      {
+        "q": "Does Sienna's Italian offer private dining?",
+        "a": "Sienna's Italian may offer private dining options for special events. Contact them for details."
+      }
+    ],
+    "schema_type": "Restaurant",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "that-s-amore-malahide",
+    "name": "That's Amore Malahide",
+    "vertical": "restaurants",
+    "city": "Malahide",
+    "citySlug": "malahide",
+    "country": "ireland",
+    "address": "Malahide, Ireland",
+    "phone": "",
+    "website": "https://www.thatsamoremalahide.com/",
+    "email": "",
+    "description": "That's Amore Malahide is a trusted restaurants located in Malahide, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does That's Amore Malahide take reservations?",
+        "a": "Yes, That's Amore Malahide accepts reservations. Call ahead or book online for the best experience."
+      },
+      {
+        "q": "What type of cuisine does That's Amore Malahide serve?",
+        "a": "That's Amore Malahide offers a carefully curated menu featuring local and international dishes."
+      },
+      {
+        "q": "Does That's Amore Malahide have parking?",
+        "a": "Please contact That's Amore Malahide directly for parking information and availability."
+      },
+      {
+        "q": "Is there a dress code at That's Amore Malahide?",
+        "a": "Smart casual attire is recommended. Contact the restaurant for specific event requirements."
+      },
+      {
+        "q": "Does That's Amore Malahide offer private dining?",
+        "a": "That's Amore Malahide may offer private dining options for special events. Contact them for details."
+      }
+    ],
+    "schema_type": "Restaurant",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "ennis-veterinary-surgery",
+    "name": "Ennis Veterinary Surgery",
+    "vertical": "vets",
+    "city": "Ennis",
+    "citySlug": "ennis",
+    "country": "ireland",
+    "address": "Ennis, Ireland",
+    "phone": "(065) 6829599",
+    "website": "http://www.ennisveterinarysurgery.com/",
+    "email": "",
+    "description": "Ennis Veterinary Surgery is a trusted veterinary clinics located in Ennis, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Ennis Veterinary Surgery treat?",
+        "a": "Ennis Veterinary Surgery treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Ennis Veterinary Surgery offer emergency veterinary services?",
+        "a": "Contact Ennis Veterinary Surgery for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Ennis Veterinary Surgery provide vaccinations?",
+        "a": "Yes, Ennis Veterinary Surgery offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Ennis Veterinary Surgery?",
+        "a": "Ennis Veterinary Surgery can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "village-vets-bray",
+    "name": "Village Vets Bray",
+    "vertical": "vets",
+    "city": "Bray",
+    "citySlug": "bray",
+    "country": "ireland",
+    "address": "Bray, Ireland",
+    "phone": "+353 127 23857",
+    "website": "https://www.villagevets.ie/clinics/bray-vets",
+    "email": "",
+    "description": "Village Vets Bray is a trusted veterinary clinics located in Bray, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Village Vets Bray treat?",
+        "a": "Village Vets Bray treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Village Vets Bray offer emergency veterinary services?",
+        "a": "Contact Village Vets Bray for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Village Vets Bray provide vaccinations?",
+        "a": "Yes, Village Vets Bray offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Village Vets Bray?",
+        "a": "Village Vets Bray can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "florence-road-vets",
+    "name": "Florence Road Vets",
+    "vertical": "vets",
+    "city": "Bray",
+    "citySlug": "bray",
+    "country": "ireland",
+    "address": "Bray, Ireland",
+    "phone": "01 282 9589",
+    "website": "https://greystonesvet.ie/florence-road-vets-co-wicklow/",
+    "email": "info@florenceroadvet.ie",
+    "description": "Florence Road Vets is a trusted veterinary clinics located in Bray, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Florence Road Vets treat?",
+        "a": "Florence Road Vets treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Florence Road Vets offer emergency veterinary services?",
+        "a": "Contact Florence Road Vets for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Florence Road Vets provide vaccinations?",
+        "a": "Yes, Florence Road Vets offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Florence Road Vets?",
+        "a": "Florence Road Vets can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "applewood-veterinary-clinic",
+    "name": "Applewood Veterinary Clinic",
+    "vertical": "vets",
+    "city": "Swords",
+    "citySlug": "swords",
+    "country": "ireland",
+    "address": "Swords, Ireland",
+    "phone": "01 840 6135",
+    "website": "http://www.applewoodvetclinic.ie/",
+    "email": "",
+    "description": "Applewood Veterinary Clinic is a trusted veterinary clinics located in Swords, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Applewood Veterinary Clinic treat?",
+        "a": "Applewood Veterinary Clinic treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Applewood Veterinary Clinic offer emergency veterinary services?",
+        "a": "Contact Applewood Veterinary Clinic for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Applewood Veterinary Clinic provide vaccinations?",
+        "a": "Yes, Applewood Veterinary Clinic offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Applewood Veterinary Clinic?",
+        "a": "Applewood Veterinary Clinic can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "assisi-veterinary-clinic",
+    "name": "Assisi Veterinary Clinic",
+    "vertical": "vets",
+    "city": "Swords",
+    "citySlug": "swords",
+    "country": "ireland",
+    "address": "Swords, Ireland",
+    "phone": "+353 15648884",
+    "website": "https://www.assisivetclinic.ie/",
+    "email": "",
+    "description": "Assisi Veterinary Clinic is a trusted veterinary clinics located in Swords, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Assisi Veterinary Clinic treat?",
+        "a": "Assisi Veterinary Clinic treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Assisi Veterinary Clinic offer emergency veterinary services?",
+        "a": "Contact Assisi Veterinary Clinic for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Assisi Veterinary Clinic provide vaccinations?",
+        "a": "Yes, Assisi Veterinary Clinic offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Assisi Veterinary Clinic?",
+        "a": "Assisi Veterinary Clinic can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "realta-clinic",
+    "name": "Realta Clinic",
+    "vertical": "physios",
+    "city": "Carlow",
+    "citySlug": "carlow",
+    "country": "ireland",
+    "address": "Carlow, Ireland",
+    "phone": "059 9134779",
+    "website": "",
+    "email": "",
+    "description": "Realta Clinic is a trusted physiotherapy located in Carlow, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Do I need a referral for Realta Clinic?",
+        "a": "In most cases, you don't need a referral. Contact Realta Clinic to book directly."
+      },
+      {
+        "q": "What conditions does Realta Clinic treat?",
+        "a": "Realta Clinic treats sports injuries, back pain, rehabilitation, and more."
+      },
+      {
+        "q": "Does Realta Clinic accept health insurance?",
+        "a": "Realta Clinic is covered by most major health insurers. Confirm your plan when booking."
+      }
+    ],
+    "schema_type": "PhysicalTherapy",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "springhill-clinic",
+    "name": "Springhill Clinic",
+    "vertical": "dentists",
+    "city": "Kilkenny",
+    "citySlug": "kilkenny",
+    "country": "ireland",
+    "address": "Kilkenny, Ireland",
+    "phone": "+353 56 775 3888",
+    "website": "",
+    "email": "",
+    "description": "Springhill Clinic is a trusted dentists located in Kilkenny, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Springhill Clinic accepting new patients?",
+        "a": "Springhill Clinic welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Springhill Clinic offer emergency dental care?",
+        "a": "Contact Springhill Clinic directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Springhill Clinic accept?",
+        "a": "Springhill Clinic works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Springhill Clinic offer?",
+        "a": "Springhill Clinic provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "angela-kearney-dental-care",
+    "name": "Angela Kearney Dental Care",
+    "vertical": "dentists",
+    "city": "Drogheda",
+    "citySlug": "drogheda",
+    "country": "ireland",
+    "address": "Drogheda, Ireland",
+    "phone": "",
+    "website": "https://www.angelakearney.ie",
+    "email": "",
+    "description": "Angela Kearney Dental Care is a trusted dentists located in Drogheda, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Angela Kearney Dental Care accepting new patients?",
+        "a": "Angela Kearney Dental Care welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Angela Kearney Dental Care offer emergency dental care?",
+        "a": "Contact Angela Kearney Dental Care directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Angela Kearney Dental Care accept?",
+        "a": "Angela Kearney Dental Care works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Angela Kearney Dental Care offer?",
+        "a": "Angela Kearney Dental Care provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "frederick-orthodontic-clinic",
+    "name": "Frederick Orthodontic Clinic",
+    "vertical": "dentists",
+    "city": "Drogheda",
+    "citySlug": "drogheda",
+    "country": "ireland",
+    "address": "Drogheda, Ireland",
+    "phone": "",
+    "website": "https://frederickdentaldrogheda.com",
+    "email": "info@frederickdentaldrogheda.com",
+    "description": "Frederick Orthodontic Clinic is a trusted dentists located in Drogheda, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Frederick Orthodontic Clinic accepting new patients?",
+        "a": "Frederick Orthodontic Clinic welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Frederick Orthodontic Clinic offer emergency dental care?",
+        "a": "Contact Frederick Orthodontic Clinic directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Frederick Orthodontic Clinic accept?",
+        "a": "Frederick Orthodontic Clinic works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Frederick Orthodontic Clinic offer?",
+        "a": "Frederick Orthodontic Clinic provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "blue-poppy-dental",
+    "name": "Blue Poppy Dental",
+    "vertical": "dentists",
+    "city": "Letterkenny",
+    "citySlug": "letterkenny",
+    "country": "ireland",
+    "address": "Letterkenny, Ireland",
+    "phone": "+353 74 912 0355",
+    "website": "https://www.bluepoppydental.com",
+    "email": "",
+    "description": "Blue Poppy Dental is a trusted dentists located in Letterkenny, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Blue Poppy Dental accepting new patients?",
+        "a": "Blue Poppy Dental welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Blue Poppy Dental offer emergency dental care?",
+        "a": "Contact Blue Poppy Dental directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Blue Poppy Dental accept?",
+        "a": "Blue Poppy Dental works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Blue Poppy Dental offer?",
+        "a": "Blue Poppy Dental provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "o3-dental",
+    "name": "O3 Dental",
+    "vertical": "dentists",
+    "city": "Letterkenny",
+    "citySlug": "letterkenny",
+    "country": "ireland",
+    "address": "Letterkenny, Ireland",
+    "phone": "+353 74 912 2409",
+    "website": "https://o3dental.com",
+    "email": "info@o3dental.com",
+    "description": "O3 Dental is a trusted dentists located in Letterkenny, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is O3 Dental accepting new patients?",
+        "a": "O3 Dental welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does O3 Dental offer emergency dental care?",
+        "a": "Contact O3 Dental directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does O3 Dental accept?",
+        "a": "O3 Dental works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does O3 Dental offer?",
+        "a": "O3 Dental provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "langtons-hotel-restaurant",
+    "name": "Langtons Hotel Restaurant",
+    "vertical": "restaurants",
+    "city": "Kilkenny",
+    "citySlug": "kilkenny",
+    "country": "ireland",
+    "address": "Kilkenny, Ireland",
+    "phone": "+353 56 776 5133",
+    "website": "https://www.langtons.ie",
+    "email": "dining@langtons.ie",
+    "description": "Langtons Hotel Restaurant is a trusted restaurants located in Kilkenny, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Langtons Hotel Restaurant take reservations?",
+        "a": "Yes, Langtons Hotel Restaurant accepts reservations. Call ahead or book online for the best experience."
+      },
+      {
+        "q": "What type of cuisine does Langtons Hotel Restaurant serve?",
+        "a": "Langtons Hotel Restaurant offers a carefully curated menu featuring local and international dishes."
+      },
+      {
+        "q": "Does Langtons Hotel Restaurant have parking?",
+        "a": "Please contact Langtons Hotel Restaurant directly for parking information and availability."
+      },
+      {
+        "q": "Is there a dress code at Langtons Hotel Restaurant?",
+        "a": "Smart casual attire is recommended. Contact the restaurant for specific event requirements."
+      },
+      {
+        "q": "Does Langtons Hotel Restaurant offer private dining?",
+        "a": "Langtons Hotel Restaurant may offer private dining options for special events. Contact them for details."
+      }
+    ],
+    "schema_type": "Restaurant",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "matt-the-millers",
+    "name": "Matt The Millers",
+    "vertical": "restaurants",
+    "city": "Kilkenny",
+    "citySlug": "kilkenny",
+    "country": "ireland",
+    "address": "Kilkenny, Ireland",
+    "phone": "+353 56 776 1696",
+    "website": "https://mattthemillers.com",
+    "email": "info@mattthemillers.com",
+    "description": "Matt The Millers is a trusted restaurants located in Kilkenny, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Matt The Millers take reservations?",
+        "a": "Yes, Matt The Millers accepts reservations. Call ahead or book online for the best experience."
+      },
+      {
+        "q": "What type of cuisine does Matt The Millers serve?",
+        "a": "Matt The Millers offers a carefully curated menu featuring local and international dishes."
+      },
+      {
+        "q": "Does Matt The Millers have parking?",
+        "a": "Please contact Matt The Millers directly for parking information and availability."
+      },
+      {
+        "q": "Is there a dress code at Matt The Millers?",
+        "a": "Smart casual attire is recommended. Contact the restaurant for specific event requirements."
+      },
+      {
+        "q": "Does Matt The Millers offer private dining?",
+        "a": "Matt The Millers may offer private dining options for special events. Contact them for details."
+      }
+    ],
+    "schema_type": "Restaurant",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "ember-at-kilkenny-hibernian",
+    "name": "Ember at Kilkenny Hibernian",
+    "vertical": "restaurants",
+    "city": "Kilkenny",
+    "citySlug": "kilkenny",
+    "country": "ireland",
+    "address": "Kilkenny, Ireland",
+    "phone": "+353 56 777 1888",
+    "website": "https://www.kilkennyhibernianhotel.com",
+    "email": "",
+    "description": "Ember at Kilkenny Hibernian is a trusted restaurants located in Kilkenny, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Ember at Kilkenny Hibernian take reservations?",
+        "a": "Yes, Ember at Kilkenny Hibernian accepts reservations. Call ahead or book online for the best experience."
+      },
+      {
+        "q": "What type of cuisine does Ember at Kilkenny Hibernian serve?",
+        "a": "Ember at Kilkenny Hibernian offers a carefully curated menu featuring local and international dishes."
+      },
+      {
+        "q": "Does Ember at Kilkenny Hibernian have parking?",
+        "a": "Please contact Ember at Kilkenny Hibernian directly for parking information and availability."
+      },
+      {
+        "q": "Is there a dress code at Ember at Kilkenny Hibernian?",
+        "a": "Smart casual attire is recommended. Contact the restaurant for specific event requirements."
+      },
+      {
+        "q": "Does Ember at Kilkenny Hibernian offer private dining?",
+        "a": "Ember at Kilkenny Hibernian may offer private dining options for special events. Contact them for details."
+      }
+    ],
+    "schema_type": "Restaurant",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "glow-hair-beauty-salon",
+    "name": "Glow Hair & Beauty Salon",
+    "vertical": "salons",
+    "city": "Drogheda",
+    "citySlug": "drogheda",
+    "country": "ireland",
+    "address": "Drogheda, Ireland",
+    "phone": "+353 41 984 1348",
+    "website": "",
+    "email": "glowdrogheda@gmail.com",
+    "description": "Glow Hair & Beauty Salon is a trusted hair salons located in Drogheda, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Glow Hair & Beauty Salon accept walk-ins?",
+        "a": "Glow Hair & Beauty Salon welcomes walk-ins subject to availability. Booking in advance is recommended."
+      },
+      {
+        "q": "What services does Glow Hair & Beauty Salon offer?",
+        "a": "Glow Hair & Beauty Salon offers cuts, colour, styling, treatments, and more. Contact them for a full service menu."
+      },
+      {
+        "q": "What products does Glow Hair & Beauty Salon use?",
+        "a": "Glow Hair & Beauty Salon uses premium, professional-grade hair care products. Ask your stylist for details."
+      }
+    ],
+    "schema_type": "HairSalon",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "west-end-salon",
+    "name": "West End Salon",
+    "vertical": "salons",
+    "city": "Drogheda",
+    "citySlug": "drogheda",
+    "country": "ireland",
+    "address": "Drogheda, Ireland",
+    "phone": "+353 41 987 3636",
+    "website": "",
+    "email": "",
+    "description": "West End Salon is a trusted hair salons located in Drogheda, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does West End Salon accept walk-ins?",
+        "a": "West End Salon welcomes walk-ins subject to availability. Booking in advance is recommended."
+      },
+      {
+        "q": "What services does West End Salon offer?",
+        "a": "West End Salon offers cuts, colour, styling, treatments, and more. Contact them for a full service menu."
+      },
+      {
+        "q": "What products does West End Salon use?",
+        "a": "West End Salon uses premium, professional-grade hair care products. Ask your stylist for details."
+      }
+    ],
+    "schema_type": "HairSalon",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "frontier-vet-services",
+    "name": "Frontier Vet Services",
+    "vertical": "vets",
+    "city": "Wexford",
+    "citySlug": "wexford",
+    "country": "ireland",
+    "address": "Wexford, Ireland",
+    "phone": "+353 53 926 1933",
+    "website": "https://www.frontiervetservices.ie",
+    "email": "",
+    "description": "Frontier Vet Services is a trusted veterinary clinics located in Wexford, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Frontier Vet Services treat?",
+        "a": "Frontier Vet Services treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Frontier Vet Services offer emergency veterinary services?",
+        "a": "Contact Frontier Vet Services for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Frontier Vet Services provide vaccinations?",
+        "a": "Yes, Frontier Vet Services offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Frontier Vet Services?",
+        "a": "Frontier Vet Services can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "arena-veterinary-hospital",
+    "name": "Arena Veterinary Hospital",
+    "vertical": "vets",
+    "city": "Wexford",
+    "citySlug": "wexford",
+    "country": "ireland",
+    "address": "Wexford, Ireland",
+    "phone": "+353 53 914 2891",
+    "website": "https://www.arenavets.ie",
+    "email": "",
+    "description": "Arena Veterinary Hospital is a trusted veterinary clinics located in Wexford, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Arena Veterinary Hospital treat?",
+        "a": "Arena Veterinary Hospital treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Arena Veterinary Hospital offer emergency veterinary services?",
+        "a": "Contact Arena Veterinary Hospital for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Arena Veterinary Hospital provide vaccinations?",
+        "a": "Yes, Arena Veterinary Hospital offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Arena Veterinary Hospital?",
+        "a": "Arena Veterinary Hospital can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
     "slug": "don-julio",
     "name": "Don Julio",
     "vertical": "restaurants",
@@ -28042,6 +29126,74 @@
       }
     ],
     "schema_type": "VeterinaryCare",
+    "locale": "es",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "el-fogon-de-los-arrieros",
+    "name": "El Fogón de los Arrieros",
+    "vertical": "restaurants",
+    "city": "Córdoba",
+    "citySlug": "cordoba",
+    "country": "argentina",
+    "address": "Córdoba, Argentina",
+    "phone": "(0351) 155-938277",
+    "website": "https://circuitogastronomico.com/restaurante/el-fogon-de-los-arrieros/",
+    "email": "",
+    "description": "El Fogón de los Arrieros is a trusted restaurants located in Córdoba, Argentina. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "¿El Fogón de los Arrieros acepta reservas?",
+        "a": "Sí, El Fogón de los Arrieros acepta reservas. Llamá con anticipación o reservá online."
+      },
+      {
+        "q": "¿Qué tipo de cocina ofrece El Fogón de los Arrieros?",
+        "a": "El Fogón de los Arrieros ofrece un menú variado con platos locales e internacionales."
+      },
+      {
+        "q": "¿El Fogón de los Arrieros tiene estacionamiento?",
+        "a": "Contactá a El Fogón de los Arrieros directamente para información sobre estacionamiento."
+      },
+      {
+        "q": "¿Hay código de vestimenta en El Fogón de los Arrieros?",
+        "a": "Se recomienda vestimenta smart casual. Consultá para eventos especiales."
+      }
+    ],
+    "schema_type": "Restaurant",
+    "locale": "es",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "pisa",
+    "name": "Pisa",
+    "vertical": "restaurants",
+    "city": "Córdoba",
+    "citySlug": "cordoba",
+    "country": "argentina",
+    "address": "Córdoba, Argentina",
+    "phone": "(0351) 152-118494",
+    "website": "https://app.circuitogastronomico.com/restaurante/pisa/",
+    "email": "",
+    "description": "Pisa is a trusted restaurants located in Córdoba, Argentina. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "¿Pisa acepta reservas?",
+        "a": "Sí, Pisa acepta reservas. Llamá con anticipación o reservá online."
+      },
+      {
+        "q": "¿Qué tipo de cocina ofrece Pisa?",
+        "a": "Pisa ofrece un menú variado con platos locales e internacionales."
+      },
+      {
+        "q": "¿Pisa tiene estacionamiento?",
+        "a": "Contactá a Pisa directamente para información sobre estacionamiento."
+      },
+      {
+        "q": "¿Hay código de vestimenta en Pisa?",
+        "a": "Se recomienda vestimenta smart casual. Consultá para eventos especiales."
+      }
+    ],
+    "schema_type": "Restaurant",
     "locale": "es",
     "openingHours": "Mo-Fr 09:00-18:00"
   }
