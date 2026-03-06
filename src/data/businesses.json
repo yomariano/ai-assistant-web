@@ -2060,6 +2060,36 @@
     "openingHours": "Mo-Fr 09:00-18:00"
   },
   {
+    "slug": "odontologia-palermo",
+    "name": "Odontología Palermo",
+    "vertical": "dentists",
+    "city": "Buenos Aires",
+    "citySlug": "buenos-aires",
+    "country": "argentina",
+    "address": "Buenos Aires, Argentina",
+    "phone": "115-494-8595",
+    "website": "https://www.odontologiapalermo.com",
+    "email": "",
+    "description": "Odontología Palermo is a trusted dentists located in Buenos Aires, Argentina. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "¿Odontología Palermo acepta pacientes nuevos?",
+        "a": "Odontología Palermo recibe pacientes nuevos. Llamá para agendar tu primera consulta."
+      },
+      {
+        "q": "¿Odontología Palermo ofrece atención de emergencia?",
+        "a": "Contactá a Odontología Palermo para consultar disponibilidad de emergencias dentales."
+      },
+      {
+        "q": "¿Qué tratamientos ofrece Odontología Palermo?",
+        "a": "Odontología Palermo ofrece limpieza, empastes, ortodoncia, y odontología estética."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "es",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
     "slug": "fitzwilliam-medical-centre",
     "name": "Fitzwilliam Medical Centre",
     "vertical": "physios",
@@ -22370,6 +22400,570 @@
     "openingHours": "Mo-Fr 09:00-18:00"
   },
   {
+    "slug": "mcavoy-associates",
+    "name": "McAvoy & Associates",
+    "vertical": "accountants",
+    "city": "Cork",
+    "citySlug": "cork",
+    "country": "ireland",
+    "address": "Cork, Ireland",
+    "phone": "+353 (0) 21 4321 321",
+    "website": "https://www.mcavoy.ie/",
+    "email": "info@mcavoy.ie",
+    "description": "McAvoy & Associates is a trusted professional services located in Cork, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does McAvoy & Associates offer free consultations?",
+        "a": "Contact McAvoy & Associates to enquire about initial consultation availability."
+      },
+      {
+        "q": "What services does McAvoy & Associates provide?",
+        "a": "McAvoy & Associates offers a range of professional services. Contact them for details."
+      },
+      {
+        "q": "Does McAvoy & Associates work with small businesses?",
+        "a": "Yes, McAvoy & Associates works with businesses of all sizes. Get in touch to discuss your needs."
+      }
+    ],
+    "schema_type": "AccountingService",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "omb-accountants",
+    "name": "OMB Accountants",
+    "vertical": "accountants",
+    "city": "Galway",
+    "citySlug": "galway",
+    "country": "ireland",
+    "address": "Galway, Ireland",
+    "phone": "091 568788",
+    "website": "https://www.ombaccountants.ie/",
+    "email": "info@ombaccountants.ie",
+    "description": "OMB Accountants is a trusted professional services located in Galway, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does OMB Accountants offer free consultations?",
+        "a": "Contact OMB Accountants to enquire about initial consultation availability."
+      },
+      {
+        "q": "What services does OMB Accountants provide?",
+        "a": "OMB Accountants offers a range of professional services. Contact them for details."
+      },
+      {
+        "q": "Does OMB Accountants work with small businesses?",
+        "a": "Yes, OMB Accountants works with businesses of all sizes. Get in touch to discuss your needs."
+      }
+    ],
+    "schema_type": "AccountingService",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "kenneth-o-connor-co-accountants",
+    "name": "Kenneth O'Connor & Co Accountants",
+    "vertical": "accountants",
+    "city": "Galway",
+    "citySlug": "galway",
+    "country": "ireland",
+    "address": "Galway, Ireland",
+    "phone": "091 771155",
+    "website": "https://www.kenocon.com/",
+    "email": "ken.oconnor@kenocon.com",
+    "description": "Kenneth O'Connor & Co Accountants is a trusted professional services located in Galway, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Kenneth O'Connor & Co Accountants offer free consultations?",
+        "a": "Contact Kenneth O'Connor & Co Accountants to enquire about initial consultation availability."
+      },
+      {
+        "q": "What services does Kenneth O'Connor & Co Accountants provide?",
+        "a": "Kenneth O'Connor & Co Accountants offers a range of professional services. Contact them for details."
+      },
+      {
+        "q": "Does Kenneth O'Connor & Co Accountants work with small businesses?",
+        "a": "Yes, Kenneth O'Connor & Co Accountants works with businesses of all sizes. Get in touch to discuss your needs."
+      }
+    ],
+    "schema_type": "AccountingService",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "bradan-accountants-galway",
+    "name": "Bradán Accountants (Galway)",
+    "vertical": "accountants",
+    "city": "Galway",
+    "citySlug": "galway",
+    "country": "ireland",
+    "address": "Galway, Ireland",
+    "phone": "(091) 450 705",
+    "website": "https://bradanaccountants.ie/",
+    "email": "",
+    "description": "Bradán Accountants (Galway) is a trusted professional services located in Galway, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Bradán Accountants (Galway) offer free consultations?",
+        "a": "Contact Bradán Accountants (Galway) to enquire about initial consultation availability."
+      },
+      {
+        "q": "What services does Bradán Accountants (Galway) provide?",
+        "a": "Bradán Accountants (Galway) offers a range of professional services. Contact them for details."
+      },
+      {
+        "q": "Does Bradán Accountants (Galway) work with small businesses?",
+        "a": "Yes, Bradán Accountants (Galway) works with businesses of all sizes. Get in touch to discuss your needs."
+      }
+    ],
+    "schema_type": "AccountingService",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "sweeney-s-garage-ballyfermot",
+    "name": "Sweeney's Garage Ballyfermot",
+    "vertical": "mechanics",
+    "city": "Dublin",
+    "citySlug": "dublin",
+    "country": "ireland",
+    "address": "Dublin, Ireland",
+    "phone": "+353 1 672 5926",
+    "website": "https://www.yelp.com/biz/sweeneys-garage-ballyfermot-dublin",
+    "email": "",
+    "description": "Sweeney's Garage Ballyfermot is a trusted mechanics located in Dublin, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Sweeney's Garage Ballyfermot service all car brands?",
+        "a": "Sweeney's Garage Ballyfermot works on most vehicle makes and models. Call to confirm your car."
+      },
+      {
+        "q": "Does Sweeney's Garage Ballyfermot offer free estimates?",
+        "a": "Contact Sweeney's Garage Ballyfermot for pricing information and repair estimates."
+      },
+      {
+        "q": "Does Sweeney's Garage Ballyfermot handle NCT prep?",
+        "a": "Sweeney's Garage Ballyfermot can help prepare your car for NCT testing. Book an appointment."
+      }
+    ],
+    "schema_type": "AutoRepair",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "mps-garage-galway",
+    "name": "MPS Garage Galway",
+    "vertical": "mechanics",
+    "city": "Galway",
+    "citySlug": "galway",
+    "country": "ireland",
+    "address": "Galway, Ireland",
+    "phone": "091 786951",
+    "website": "https://www.mpsgaragegalway.com/",
+    "email": "",
+    "description": "MPS Garage Galway is a trusted mechanics located in Galway, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does MPS Garage Galway service all car brands?",
+        "a": "MPS Garage Galway works on most vehicle makes and models. Call to confirm your car."
+      },
+      {
+        "q": "Does MPS Garage Galway offer free estimates?",
+        "a": "Contact MPS Garage Galway for pricing information and repair estimates."
+      },
+      {
+        "q": "Does MPS Garage Galway handle NCT prep?",
+        "a": "MPS Garage Galway can help prepare your car for NCT testing. Book an appointment."
+      }
+    ],
+    "schema_type": "AutoRepair",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "dennehy-s-health-and-fitness",
+    "name": "Dennehy's Health and Fitness",
+    "vertical": "gyms",
+    "city": "Cork",
+    "citySlug": "cork",
+    "country": "ireland",
+    "address": "Cork, Ireland",
+    "phone": "",
+    "website": "https://www.dennehys.ie/",
+    "email": "",
+    "description": "Dennehy's Health and Fitness is a trusted gyms located in Cork, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Dennehy's Health and Fitness offer trial memberships?",
+        "a": "Contact Dennehy's Health and Fitness to ask about trial passes and membership options."
+      },
+      {
+        "q": "What classes does Dennehy's Health and Fitness offer?",
+        "a": "Dennehy's Health and Fitness offers a range of fitness classes. Check their schedule for availability."
+      },
+      {
+        "q": "Does Dennehy's Health and Fitness have personal trainers?",
+        "a": "Yes, Dennehy's Health and Fitness has qualified personal trainers available. Enquire about packages."
+      }
+    ],
+    "schema_type": "HealthClub",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "studio-fitness-cork",
+    "name": "Studio Fitness Cork",
+    "vertical": "gyms",
+    "city": "Cork",
+    "citySlug": "cork",
+    "country": "ireland",
+    "address": "Cork, Ireland",
+    "phone": "",
+    "website": "https://studiofitness.ie/",
+    "email": "",
+    "description": "Studio Fitness Cork is a trusted gyms located in Cork, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Studio Fitness Cork offer trial memberships?",
+        "a": "Contact Studio Fitness Cork to ask about trial passes and membership options."
+      },
+      {
+        "q": "What classes does Studio Fitness Cork offer?",
+        "a": "Studio Fitness Cork offers a range of fitness classes. Check their schedule for availability."
+      },
+      {
+        "q": "Does Studio Fitness Cork have personal trainers?",
+        "a": "Yes, Studio Fitness Cork has qualified personal trainers available. Enquire about packages."
+      }
+    ],
+    "schema_type": "HealthClub",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "one-life-fitness-cork",
+    "name": "One Life Fitness Cork",
+    "vertical": "gyms",
+    "city": "Cork",
+    "citySlug": "cork",
+    "country": "ireland",
+    "address": "Cork, Ireland",
+    "phone": "",
+    "website": "https://onelifefitness.ie/",
+    "email": "",
+    "description": "One Life Fitness Cork is a trusted gyms located in Cork, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does One Life Fitness Cork offer trial memberships?",
+        "a": "Contact One Life Fitness Cork to ask about trial passes and membership options."
+      },
+      {
+        "q": "What classes does One Life Fitness Cork offer?",
+        "a": "One Life Fitness Cork offers a range of fitness classes. Check their schedule for availability."
+      },
+      {
+        "q": "Does One Life Fitness Cork have personal trainers?",
+        "a": "Yes, One Life Fitness Cork has qualified personal trainers available. Enquire about packages."
+      }
+    ],
+    "schema_type": "HealthClub",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "letterkenny-dental-hundental",
+    "name": "Letterkenny Dental (HunDental)",
+    "vertical": "dentists",
+    "city": "Letterkenny",
+    "citySlug": "letterkenny",
+    "country": "ireland",
+    "address": "Letterkenny, Ireland",
+    "phone": "+353 85 114 5317",
+    "website": "",
+    "email": "hundental.dentalsurgery@gmail.com",
+    "description": "Letterkenny Dental (HunDental) is a trusted dentists located in Letterkenny, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Letterkenny Dental (HunDental) accepting new patients?",
+        "a": "Letterkenny Dental (HunDental) welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Letterkenny Dental (HunDental) offer emergency dental care?",
+        "a": "Contact Letterkenny Dental (HunDental) directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Letterkenny Dental (HunDental) accept?",
+        "a": "Letterkenny Dental (HunDental) works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Letterkenny Dental (HunDental) offer?",
+        "a": "Letterkenny Dental (HunDental) provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "wexford-dental-clinic",
+    "name": "Wexford Dental Clinic",
+    "vertical": "dentists",
+    "city": "Wexford",
+    "citySlug": "wexford",
+    "country": "ireland",
+    "address": "Wexford, Ireland",
+    "phone": "+353 53 917 1817",
+    "website": "https://www.wexforddentalclinic.ie",
+    "email": "wexford@dentalcareireland.ie",
+    "description": "Wexford Dental Clinic is a trusted dentists located in Wexford, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Wexford Dental Clinic accepting new patients?",
+        "a": "Wexford Dental Clinic welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Wexford Dental Clinic offer emergency dental care?",
+        "a": "Contact Wexford Dental Clinic directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Wexford Dental Clinic accept?",
+        "a": "Wexford Dental Clinic works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Wexford Dental Clinic offer?",
+        "a": "Wexford Dental Clinic provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "langtons-restaurant",
+    "name": "Langtons Restaurant",
+    "vertical": "restaurants",
+    "city": "Kilkenny",
+    "citySlug": "kilkenny",
+    "country": "ireland",
+    "address": "Kilkenny, Ireland",
+    "phone": "+353 56 776 5133",
+    "website": "https://www.langtons.ie",
+    "email": "dining@langtons.ie",
+    "description": "Langtons Restaurant is a trusted restaurants located in Kilkenny, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Langtons Restaurant take reservations?",
+        "a": "Yes, Langtons Restaurant accepts reservations. Call ahead or book online for the best experience."
+      },
+      {
+        "q": "What type of cuisine does Langtons Restaurant serve?",
+        "a": "Langtons Restaurant offers a carefully curated menu featuring local and international dishes."
+      },
+      {
+        "q": "Does Langtons Restaurant have parking?",
+        "a": "Please contact Langtons Restaurant directly for parking information and availability."
+      },
+      {
+        "q": "Is there a dress code at Langtons Restaurant?",
+        "a": "Smart casual attire is recommended. Contact the restaurant for specific event requirements."
+      },
+      {
+        "q": "Does Langtons Restaurant offer private dining?",
+        "a": "Langtons Restaurant may offer private dining options for special events. Contact them for details."
+      }
+    ],
+    "schema_type": "Restaurant",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "great-shape-hair-body-beauty",
+    "name": "Great Shape Hair Body Beauty",
+    "vertical": "salons",
+    "city": "Wexford",
+    "citySlug": "wexford",
+    "country": "ireland",
+    "address": "Wexford, Ireland",
+    "phone": "+353 87 191 0319",
+    "website": "",
+    "email": "",
+    "description": "Great Shape Hair Body Beauty is a trusted hair salons located in Wexford, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Great Shape Hair Body Beauty accept walk-ins?",
+        "a": "Great Shape Hair Body Beauty welcomes walk-ins subject to availability. Booking in advance is recommended."
+      },
+      {
+        "q": "What services does Great Shape Hair Body Beauty offer?",
+        "a": "Great Shape Hair Body Beauty offers cuts, colour, styling, treatments, and more. Contact them for a full service menu."
+      },
+      {
+        "q": "What products does Great Shape Hair Body Beauty use?",
+        "a": "Great Shape Hair Body Beauty uses premium, professional-grade hair care products. Ask your stylist for details."
+      }
+    ],
+    "schema_type": "HairSalon",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "you-re-gorgeous-hair-ygh",
+    "name": "You're Gorgeous Hair (YGH)",
+    "vertical": "salons",
+    "city": "Drogheda",
+    "citySlug": "drogheda",
+    "country": "ireland",
+    "address": "Drogheda, Ireland",
+    "phone": "+353 41 980 0030",
+    "website": "https://ygh.ie",
+    "email": "",
+    "description": "You're Gorgeous Hair (YGH) is a trusted hair salons located in Drogheda, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does You're Gorgeous Hair (YGH) accept walk-ins?",
+        "a": "You're Gorgeous Hair (YGH) welcomes walk-ins subject to availability. Booking in advance is recommended."
+      },
+      {
+        "q": "What services does You're Gorgeous Hair (YGH) offer?",
+        "a": "You're Gorgeous Hair (YGH) offers cuts, colour, styling, treatments, and more. Contact them for a full service menu."
+      },
+      {
+        "q": "What products does You're Gorgeous Hair (YGH) use?",
+        "a": "You're Gorgeous Hair (YGH) uses premium, professional-grade hair care products. Ask your stylist for details."
+      }
+    ],
+    "schema_type": "HairSalon",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "identity-hair-salon",
+    "name": "Identity Hair Salon",
+    "vertical": "salons",
+    "city": "Drogheda",
+    "citySlug": "drogheda",
+    "country": "ireland",
+    "address": "Drogheda, Ireland",
+    "phone": "+353 41 981 8177",
+    "website": "",
+    "email": "",
+    "description": "Identity Hair Salon is a trusted hair salons located in Drogheda, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Identity Hair Salon accept walk-ins?",
+        "a": "Identity Hair Salon welcomes walk-ins subject to availability. Booking in advance is recommended."
+      },
+      {
+        "q": "What services does Identity Hair Salon offer?",
+        "a": "Identity Hair Salon offers cuts, colour, styling, treatments, and more. Contact them for a full service menu."
+      },
+      {
+        "q": "What products does Identity Hair Salon use?",
+        "a": "Identity Hair Salon uses premium, professional-grade hair care products. Ask your stylist for details."
+      }
+    ],
+    "schema_type": "HairSalon",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "st-benedicts-veterinary-hospital",
+    "name": "St. Benedicts Veterinary Hospital",
+    "vertical": "vets",
+    "city": "Sligo",
+    "citySlug": "sligo",
+    "country": "ireland",
+    "address": "Sligo, Ireland",
+    "phone": "+353 71 914 2435",
+    "website": "https://www.sligovet.ie",
+    "email": "stbenedictsvetclinic@gmail.com",
+    "description": "St. Benedicts Veterinary Hospital is a trusted veterinary clinics located in Sligo, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does St. Benedicts Veterinary Hospital treat?",
+        "a": "St. Benedicts Veterinary Hospital treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does St. Benedicts Veterinary Hospital offer emergency veterinary services?",
+        "a": "Contact St. Benedicts Veterinary Hospital for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does St. Benedicts Veterinary Hospital provide vaccinations?",
+        "a": "Yes, St. Benedicts Veterinary Hospital offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from St. Benedicts Veterinary Hospital?",
+        "a": "St. Benedicts Veterinary Hospital can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "village-veterinary-hospital",
+    "name": "Village Veterinary Hospital",
+    "vertical": "vets",
+    "city": "Kilkenny",
+    "citySlug": "kilkenny",
+    "country": "ireland",
+    "address": "Kilkenny, Ireland",
+    "phone": "+353 56 776 2674",
+    "website": "https://villagevet.ie",
+    "email": "info@villagevet.ie",
+    "description": "Village Veterinary Hospital is a trusted veterinary clinics located in Kilkenny, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Village Veterinary Hospital treat?",
+        "a": "Village Veterinary Hospital treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Village Veterinary Hospital offer emergency veterinary services?",
+        "a": "Contact Village Veterinary Hospital for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Village Veterinary Hospital provide vaccinations?",
+        "a": "Yes, Village Veterinary Hospital offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Village Veterinary Hospital?",
+        "a": "Village Veterinary Hospital can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "kilkenny-physiotherapy-clinic",
+    "name": "Kilkenny Physiotherapy Clinic",
+    "vertical": "physios",
+    "city": "Kilkenny",
+    "citySlug": "kilkenny",
+    "country": "ireland",
+    "address": "Kilkenny, Ireland",
+    "phone": "+353 56 775 2258",
+    "website": "https://www.kilkennyphysioclinic.com",
+    "email": "kilkennyphysio@gmail.com",
+    "description": "Kilkenny Physiotherapy Clinic is a trusted physiotherapy located in Kilkenny, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Do I need a referral for Kilkenny Physiotherapy Clinic?",
+        "a": "In most cases, you don't need a referral. Contact Kilkenny Physiotherapy Clinic to book directly."
+      },
+      {
+        "q": "What conditions does Kilkenny Physiotherapy Clinic treat?",
+        "a": "Kilkenny Physiotherapy Clinic treats sports injuries, back pain, rehabilitation, and more."
+      },
+      {
+        "q": "Does Kilkenny Physiotherapy Clinic accept health insurance?",
+        "a": "Kilkenny Physiotherapy Clinic is covered by most major health insurers. Confirm your plan when booking."
+      }
+    ],
+    "schema_type": "PhysicalTherapy",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
     "slug": "don-julio",
     "name": "Don Julio",
     "vertical": "restaurants",
@@ -25477,40 +26071,6 @@
       {
         "q": "Can I get pet insurance advice from Mid West Veterinary Clinic?",
         "a": "Mid West Veterinary Clinic can help guide you on pet insurance options during your consultation."
-      }
-    ],
-    "schema_type": "VeterinaryCare",
-    "locale": "en",
-    "openingHours": "Mo-Fr 09:00-18:00"
-  },
-  {
-    "slug": "village-veterinary-hospital",
-    "name": "Village Veterinary Hospital",
-    "vertical": "vets",
-    "city": "Kilkenny",
-    "citySlug": "kilkenny",
-    "country": "ireland",
-    "address": "Kilkenny, Ireland",
-    "phone": "(056) 7762674",
-    "website": "http://villagevet.ie",
-    "email": "info@villagevet.ie",
-    "description": "Village Veterinary Hospital is a trusted veterinary clinics located in Kilkenny, Ireland. Providing quality service to the local community.",
-    "faqs": [
-      {
-        "q": "What animals does Village Veterinary Hospital treat?",
-        "a": "Village Veterinary Hospital treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
-      },
-      {
-        "q": "Does Village Veterinary Hospital offer emergency veterinary services?",
-        "a": "Contact Village Veterinary Hospital for information about emergency and after-hours veterinary care."
-      },
-      {
-        "q": "Does Village Veterinary Hospital provide vaccinations?",
-        "a": "Yes, Village Veterinary Hospital offers a full vaccination schedule for pets. Book an appointment today."
-      },
-      {
-        "q": "Can I get pet insurance advice from Village Veterinary Hospital?",
-        "a": "Village Veterinary Hospital can help guide you on pet insurance options during your consultation."
       }
     ],
     "schema_type": "VeterinaryCare",
