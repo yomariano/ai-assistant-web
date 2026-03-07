@@ -22964,6 +22964,640 @@
     "openingHours": "Mo-Fr 09:00-18:00"
   },
   {
+    "slug": "around-finance",
+    "name": "Around Finance",
+    "vertical": "accountants",
+    "city": "Dublin",
+    "citySlug": "dublin",
+    "country": "ireland",
+    "address": "Dublin, Ireland",
+    "phone": "+353 1 4003674",
+    "website": "https://aroundfinance.ie/",
+    "email": "",
+    "description": "Around Finance is a trusted professional services located in Dublin, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Around Finance offer free consultations?",
+        "a": "Contact Around Finance to enquire about initial consultation availability."
+      },
+      {
+        "q": "What services does Around Finance provide?",
+        "a": "Around Finance offers a range of professional services. Contact them for details."
+      },
+      {
+        "q": "Does Around Finance work with small businesses?",
+        "a": "Yes, Around Finance works with businesses of all sizes. Get in touch to discuss your needs."
+      }
+    ],
+    "schema_type": "AccountingService",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "rbk",
+    "name": "RBK",
+    "vertical": "accountants",
+    "city": "Dublin",
+    "citySlug": "dublin",
+    "country": "ireland",
+    "address": "Dublin, Ireland",
+    "phone": "+353 1 6440100",
+    "website": "https://www.rbk.ie/",
+    "email": "",
+    "description": "RBK is a trusted professional services located in Dublin, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does RBK offer free consultations?",
+        "a": "Contact RBK to enquire about initial consultation availability."
+      },
+      {
+        "q": "What services does RBK provide?",
+        "a": "RBK offers a range of professional services. Contact them for details."
+      },
+      {
+        "q": "Does RBK work with small businesses?",
+        "a": "Yes, RBK works with businesses of all sizes. Get in touch to discuss your needs."
+      }
+    ],
+    "schema_type": "AccountingService",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "south-dublin-automotive",
+    "name": "South Dublin Automotive",
+    "vertical": "mechanics",
+    "city": "Dublin",
+    "citySlug": "dublin",
+    "country": "ireland",
+    "address": "Dublin, Ireland",
+    "phone": "085 274 2638",
+    "website": "http://southdublinautomotive.ie/",
+    "email": "info@southdublinautomotive.ie",
+    "description": "South Dublin Automotive is a trusted mechanics located in Dublin, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does South Dublin Automotive service all car brands?",
+        "a": "South Dublin Automotive works on most vehicle makes and models. Call to confirm your car."
+      },
+      {
+        "q": "Does South Dublin Automotive offer free estimates?",
+        "a": "Contact South Dublin Automotive for pricing information and repair estimates."
+      },
+      {
+        "q": "Does South Dublin Automotive handle NCT prep?",
+        "a": "South Dublin Automotive can help prepare your car for NCT testing. Book an appointment."
+      }
+    ],
+    "schema_type": "AutoRepair",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "educogym-dublin-docklands",
+    "name": "Educogym Dublin Docklands",
+    "vertical": "gyms",
+    "city": "Dublin",
+    "citySlug": "dublin",
+    "country": "ireland",
+    "address": "Dublin, Ireland",
+    "phone": "(01) 275 2003",
+    "website": "https://educogym.com/locations/dublin-docklands-gym/",
+    "email": "",
+    "description": "Educogym Dublin Docklands is a trusted gyms located in Dublin, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Educogym Dublin Docklands offer trial memberships?",
+        "a": "Contact Educogym Dublin Docklands to ask about trial passes and membership options."
+      },
+      {
+        "q": "What classes does Educogym Dublin Docklands offer?",
+        "a": "Educogym Dublin Docklands offers a range of fitness classes. Check their schedule for availability."
+      },
+      {
+        "q": "Does Educogym Dublin Docklands have personal trainers?",
+        "a": "Yes, Educogym Dublin Docklands has qualified personal trainers available. Enquire about packages."
+      }
+    ],
+    "schema_type": "HealthClub",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "kingfisher-fitness-club",
+    "name": "Kingfisher Fitness Club",
+    "vertical": "gyms",
+    "city": "Waterford",
+    "citySlug": "waterford",
+    "country": "ireland",
+    "address": "Waterford, Ireland",
+    "phone": "",
+    "website": "https://kingfisherclub.com/",
+    "email": "",
+    "description": "Kingfisher Fitness Club is a trusted gyms located in Waterford, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Kingfisher Fitness Club offer trial memberships?",
+        "a": "Contact Kingfisher Fitness Club to ask about trial passes and membership options."
+      },
+      {
+        "q": "What classes does Kingfisher Fitness Club offer?",
+        "a": "Kingfisher Fitness Club offers a range of fitness classes. Check their schedule for availability."
+      },
+      {
+        "q": "Does Kingfisher Fitness Club have personal trainers?",
+        "a": "Yes, Kingfisher Fitness Club has qualified personal trainers available. Enquire about packages."
+      }
+    ],
+    "schema_type": "HealthClub",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "room8-cafe-restaurant",
+    "name": "Room8 Café Restaurant",
+    "vertical": "restaurants",
+    "city": "Navan",
+    "citySlug": "navan",
+    "country": "ireland",
+    "address": "Navan, Ireland",
+    "phone": "",
+    "website": "roomeight.ie",
+    "email": "",
+    "description": "Room8 Café Restaurant is a trusted restaurants located in Navan, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Room8 Café Restaurant take reservations?",
+        "a": "Yes, Room8 Café Restaurant accepts reservations. Call ahead or book online for the best experience."
+      },
+      {
+        "q": "What type of cuisine does Room8 Café Restaurant serve?",
+        "a": "Room8 Café Restaurant offers a carefully curated menu featuring local and international dishes."
+      },
+      {
+        "q": "Does Room8 Café Restaurant have parking?",
+        "a": "Please contact Room8 Café Restaurant directly for parking information and availability."
+      },
+      {
+        "q": "Is there a dress code at Room8 Café Restaurant?",
+        "a": "Smart casual attire is recommended. Contact the restaurant for specific event requirements."
+      },
+      {
+        "q": "Does Room8 Café Restaurant offer private dining?",
+        "a": "Room8 Café Restaurant may offer private dining options for special events. Contact them for details."
+      }
+    ],
+    "schema_type": "Restaurant",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "moate-veterinary-hospital",
+    "name": "Moate Veterinary Hospital",
+    "vertical": "vets",
+    "city": "Athlone",
+    "citySlug": "athlone",
+    "country": "ireland",
+    "address": "Athlone, Ireland",
+    "phone": "+353 906481963",
+    "website": "moatevethospital.ie",
+    "email": "",
+    "description": "Moate Veterinary Hospital is a trusted veterinary clinics located in Athlone, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Moate Veterinary Hospital treat?",
+        "a": "Moate Veterinary Hospital treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Moate Veterinary Hospital offer emergency veterinary services?",
+        "a": "Contact Moate Veterinary Hospital for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Moate Veterinary Hospital provide vaccinations?",
+        "a": "Yes, Moate Veterinary Hospital offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Moate Veterinary Hospital?",
+        "a": "Moate Veterinary Hospital can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "pembroke-dental-carlow",
+    "name": "Pembroke Dental Carlow",
+    "vertical": "dentists",
+    "city": "Carlow",
+    "citySlug": "carlow",
+    "country": "ireland",
+    "address": "Carlow, Ireland",
+    "phone": "(059) 913 1667",
+    "website": "pembrokeclinic.ie",
+    "email": "patientcare@pembrokedental.ie",
+    "description": "Pembroke Dental Carlow is a trusted dentists located in Carlow, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Pembroke Dental Carlow accepting new patients?",
+        "a": "Pembroke Dental Carlow welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Pembroke Dental Carlow offer emergency dental care?",
+        "a": "Contact Pembroke Dental Carlow directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Pembroke Dental Carlow accept?",
+        "a": "Pembroke Dental Carlow works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Pembroke Dental Carlow offer?",
+        "a": "Pembroke Dental Carlow provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "vet-pet-carlow",
+    "name": "Vet & Pet Carlow",
+    "vertical": "vets",
+    "city": "Carlow",
+    "citySlug": "carlow",
+    "country": "ireland",
+    "address": "Carlow, Ireland",
+    "phone": "+353 59 913 2073",
+    "website": "vetandpetclinics.com",
+    "email": "vetpet2@gmail.com",
+    "description": "Vet & Pet Carlow is a trusted veterinary clinics located in Carlow, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Vet & Pet Carlow treat?",
+        "a": "Vet & Pet Carlow treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Vet & Pet Carlow offer emergency veterinary services?",
+        "a": "Contact Vet & Pet Carlow for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Vet & Pet Carlow provide vaccinations?",
+        "a": "Yes, Vet & Pet Carlow offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Vet & Pet Carlow?",
+        "a": "Vet & Pet Carlow can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "platinum-dental",
+    "name": "Platinum Dental",
+    "vertical": "dentists",
+    "city": "Naas",
+    "citySlug": "naas",
+    "country": "ireland",
+    "address": "Naas, Ireland",
+    "phone": "045 875 051",
+    "website": "platinumdental.ie",
+    "email": "",
+    "description": "Platinum Dental is a trusted dentists located in Naas, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Platinum Dental accepting new patients?",
+        "a": "Platinum Dental welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Platinum Dental offer emergency dental care?",
+        "a": "Contact Platinum Dental directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Platinum Dental accept?",
+        "a": "Platinum Dental works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Platinum Dental offer?",
+        "a": "Platinum Dental provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "osteria-nove",
+    "name": "Osteria Nove",
+    "vertical": "restaurants",
+    "city": "Malahide",
+    "citySlug": "malahide",
+    "country": "ireland",
+    "address": "Malahide, Ireland",
+    "phone": "01 845 0314",
+    "website": "bonappetit.ie",
+    "email": "hello@osterianove.ie",
+    "description": "Osteria Nove is a trusted restaurants located in Malahide, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Osteria Nove take reservations?",
+        "a": "Yes, Osteria Nove accepts reservations. Call ahead or book online for the best experience."
+      },
+      {
+        "q": "What type of cuisine does Osteria Nove serve?",
+        "a": "Osteria Nove offers a carefully curated menu featuring local and international dishes."
+      },
+      {
+        "q": "Does Osteria Nove have parking?",
+        "a": "Please contact Osteria Nove directly for parking information and availability."
+      },
+      {
+        "q": "Is there a dress code at Osteria Nove?",
+        "a": "Smart casual attire is recommended. Contact the restaurant for specific event requirements."
+      },
+      {
+        "q": "Does Osteria Nove offer private dining?",
+        "a": "Osteria Nove may offer private dining options for special events. Contact them for details."
+      }
+    ],
+    "schema_type": "Restaurant",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "the-martello-restaurant",
+    "name": "The Martello Restaurant",
+    "vertical": "restaurants",
+    "city": "Bray",
+    "citySlug": "bray",
+    "country": "ireland",
+    "address": "Bray, Ireland",
+    "phone": "+353 1 286 8000",
+    "website": "themartello.ie",
+    "email": "info@themartello.ie",
+    "description": "The Martello Restaurant is a trusted restaurants located in Bray, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does The Martello Restaurant take reservations?",
+        "a": "Yes, The Martello Restaurant accepts reservations. Call ahead or book online for the best experience."
+      },
+      {
+        "q": "What type of cuisine does The Martello Restaurant serve?",
+        "a": "The Martello Restaurant offers a carefully curated menu featuring local and international dishes."
+      },
+      {
+        "q": "Does The Martello Restaurant have parking?",
+        "a": "Please contact The Martello Restaurant directly for parking information and availability."
+      },
+      {
+        "q": "Is there a dress code at The Martello Restaurant?",
+        "a": "Smart casual attire is recommended. Contact the restaurant for specific event requirements."
+      },
+      {
+        "q": "Does The Martello Restaurant offer private dining?",
+        "a": "The Martello Restaurant may offer private dining options for special events. Contact them for details."
+      }
+    ],
+    "schema_type": "Restaurant",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "rara-nepalese-indian-restaurant",
+    "name": "RARA Nepalese & Indian Restaurant",
+    "vertical": "restaurants",
+    "city": "Bray",
+    "citySlug": "bray",
+    "country": "ireland",
+    "address": "Bray, Ireland",
+    "phone": "",
+    "website": "rararestaurant.ie",
+    "email": "",
+    "description": "RARA Nepalese & Indian Restaurant is a trusted restaurants located in Bray, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does RARA Nepalese & Indian Restaurant take reservations?",
+        "a": "Yes, RARA Nepalese & Indian Restaurant accepts reservations. Call ahead or book online for the best experience."
+      },
+      {
+        "q": "What type of cuisine does RARA Nepalese & Indian Restaurant serve?",
+        "a": "RARA Nepalese & Indian Restaurant offers a carefully curated menu featuring local and international dishes."
+      },
+      {
+        "q": "Does RARA Nepalese & Indian Restaurant have parking?",
+        "a": "Please contact RARA Nepalese & Indian Restaurant directly for parking information and availability."
+      },
+      {
+        "q": "Is there a dress code at RARA Nepalese & Indian Restaurant?",
+        "a": "Smart casual attire is recommended. Contact the restaurant for specific event requirements."
+      },
+      {
+        "q": "Does RARA Nepalese & Indian Restaurant offer private dining?",
+        "a": "RARA Nepalese & Indian Restaurant may offer private dining options for special events. Contact them for details."
+      }
+    ],
+    "schema_type": "Restaurant",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "lissenhall-veterinary-hospital",
+    "name": "Lissenhall Veterinary Hospital",
+    "vertical": "vets",
+    "city": "Swords",
+    "citySlug": "swords",
+    "country": "ireland",
+    "address": "Swords, Ireland",
+    "phone": "(01) 8900375",
+    "website": "",
+    "email": "lissenhallvet@eircom.net",
+    "description": "Lissenhall Veterinary Hospital is a trusted veterinary clinics located in Swords, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Lissenhall Veterinary Hospital treat?",
+        "a": "Lissenhall Veterinary Hospital treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Lissenhall Veterinary Hospital offer emergency veterinary services?",
+        "a": "Contact Lissenhall Veterinary Hospital for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Lissenhall Veterinary Hospital provide vaccinations?",
+        "a": "Yes, Lissenhall Veterinary Hospital offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Lissenhall Veterinary Hospital?",
+        "a": "Lissenhall Veterinary Hospital can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "relish-cafe-foodhall",
+    "name": "Relish Cafe & Foodhall",
+    "vertical": "restaurants",
+    "city": "Drogheda",
+    "citySlug": "drogheda",
+    "country": "ireland",
+    "address": "Drogheda, Ireland",
+    "phone": "+353 41 980 3295",
+    "website": "",
+    "email": "",
+    "description": "Relish Cafe & Foodhall is a trusted restaurants located in Drogheda, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Relish Cafe & Foodhall take reservations?",
+        "a": "Yes, Relish Cafe & Foodhall accepts reservations. Call ahead or book online for the best experience."
+      },
+      {
+        "q": "What type of cuisine does Relish Cafe & Foodhall serve?",
+        "a": "Relish Cafe & Foodhall offers a carefully curated menu featuring local and international dishes."
+      },
+      {
+        "q": "Does Relish Cafe & Foodhall have parking?",
+        "a": "Please contact Relish Cafe & Foodhall directly for parking information and availability."
+      },
+      {
+        "q": "Is there a dress code at Relish Cafe & Foodhall?",
+        "a": "Smart casual attire is recommended. Contact the restaurant for specific event requirements."
+      },
+      {
+        "q": "Does Relish Cafe & Foodhall offer private dining?",
+        "a": "Relish Cafe & Foodhall may offer private dining options for special events. Contact them for details."
+      }
+    ],
+    "schema_type": "Restaurant",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "his-hers-hair-salon",
+    "name": "His & Hers Hair Salon",
+    "vertical": "salons",
+    "city": "Wexford",
+    "citySlug": "wexford",
+    "country": "ireland",
+    "address": "Wexford, Ireland",
+    "phone": "053 9421033",
+    "website": "https://hisandhers.ie/",
+    "email": "",
+    "description": "His & Hers Hair Salon is a trusted hair salons located in Wexford, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does His & Hers Hair Salon accept walk-ins?",
+        "a": "His & Hers Hair Salon welcomes walk-ins subject to availability. Booking in advance is recommended."
+      },
+      {
+        "q": "What services does His & Hers Hair Salon offer?",
+        "a": "His & Hers Hair Salon offers cuts, colour, styling, treatments, and more. Contact them for a full service menu."
+      },
+      {
+        "q": "What products does His & Hers Hair Salon use?",
+        "a": "His & Hers Hair Salon uses premium, professional-grade hair care products. Ask your stylist for details."
+      }
+    ],
+    "schema_type": "HairSalon",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "beauty-by-cala",
+    "name": "Beauty by Cala",
+    "vertical": "salons",
+    "city": "Sligo",
+    "citySlug": "sligo",
+    "country": "ireland",
+    "address": "Sligo, Ireland",
+    "phone": "+353 87 341 2936",
+    "website": "https://beautybycala.com/",
+    "email": "",
+    "description": "Beauty by Cala is a trusted hair salons located in Sligo, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Beauty by Cala accept walk-ins?",
+        "a": "Beauty by Cala welcomes walk-ins subject to availability. Booking in advance is recommended."
+      },
+      {
+        "q": "What services does Beauty by Cala offer?",
+        "a": "Beauty by Cala offers cuts, colour, styling, treatments, and more. Contact them for a full service menu."
+      },
+      {
+        "q": "What products does Beauty by Cala use?",
+        "a": "Beauty by Cala uses premium, professional-grade hair care products. Ask your stylist for details."
+      }
+    ],
+    "schema_type": "HairSalon",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "life-hq-beauty-salon",
+    "name": "Life HQ Beauty Salon",
+    "vertical": "salons",
+    "city": "Sligo",
+    "citySlug": "sligo",
+    "country": "ireland",
+    "address": "Sligo, Ireland",
+    "phone": "",
+    "website": "https://www.lifehq.ie/",
+    "email": "",
+    "description": "Life HQ Beauty Salon is a trusted hair salons located in Sligo, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Life HQ Beauty Salon accept walk-ins?",
+        "a": "Life HQ Beauty Salon welcomes walk-ins subject to availability. Booking in advance is recommended."
+      },
+      {
+        "q": "What services does Life HQ Beauty Salon offer?",
+        "a": "Life HQ Beauty Salon offers cuts, colour, styling, treatments, and more. Contact them for a full service menu."
+      },
+      {
+        "q": "What products does Life HQ Beauty Salon use?",
+        "a": "Life HQ Beauty Salon uses premium, professional-grade hair care products. Ask your stylist for details."
+      }
+    ],
+    "schema_type": "HairSalon",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "highfield-veterinary-group",
+    "name": "Highfield Veterinary Group",
+    "vertical": "vets",
+    "city": "Wexford",
+    "citySlug": "wexford",
+    "country": "ireland",
+    "address": "Wexford, Ireland",
+    "phone": "",
+    "website": "https://highfield.ie/",
+    "email": "",
+    "description": "Highfield Veterinary Group is a trusted veterinary clinics located in Wexford, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Highfield Veterinary Group treat?",
+        "a": "Highfield Veterinary Group treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Highfield Veterinary Group offer emergency veterinary services?",
+        "a": "Contact Highfield Veterinary Group for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Highfield Veterinary Group provide vaccinations?",
+        "a": "Yes, Highfield Veterinary Group offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Highfield Veterinary Group?",
+        "a": "Highfield Veterinary Group can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
     "slug": "don-julio",
     "name": "Don Julio",
     "vertical": "restaurants",
@@ -29755,6 +30389,120 @@
     ],
     "schema_type": "Restaurant",
     "locale": "es",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "the-brasserie",
+    "name": "The Brasserie",
+    "vertical": "restaurants",
+    "city": "Waterford City",
+    "citySlug": "waterford-city",
+    "country": "ireland",
+    "address": "Waterford City, Ireland",
+    "phone": "+353 51 857 774",
+    "website": "",
+    "email": "",
+    "description": "The Brasserie is a trusted restaurants located in Waterford City, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does The Brasserie take reservations?",
+        "a": "Yes, The Brasserie accepts reservations. Call ahead or book online for the best experience."
+      },
+      {
+        "q": "What type of cuisine does The Brasserie serve?",
+        "a": "The Brasserie offers a carefully curated menu featuring local and international dishes."
+      },
+      {
+        "q": "Does The Brasserie have parking?",
+        "a": "Please contact The Brasserie directly for parking information and availability."
+      },
+      {
+        "q": "Is there a dress code at The Brasserie?",
+        "a": "Smart casual attire is recommended. Contact the restaurant for specific event requirements."
+      },
+      {
+        "q": "Does The Brasserie offer private dining?",
+        "a": "The Brasserie may offer private dining options for special events. Contact them for details."
+      }
+    ],
+    "schema_type": "Restaurant",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "the-pine-rooms",
+    "name": "The Pine Rooms",
+    "vertical": "restaurants",
+    "city": "Tramore",
+    "citySlug": "tramore",
+    "country": "ireland",
+    "address": "Tramore, Ireland",
+    "phone": "+353 51 381 683",
+    "website": "https://thepinerooms.ie",
+    "email": "",
+    "description": "The Pine Rooms is a trusted restaurants located in Tramore, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does The Pine Rooms take reservations?",
+        "a": "Yes, The Pine Rooms accepts reservations. Call ahead or book online for the best experience."
+      },
+      {
+        "q": "What type of cuisine does The Pine Rooms serve?",
+        "a": "The Pine Rooms offers a carefully curated menu featuring local and international dishes."
+      },
+      {
+        "q": "Does The Pine Rooms have parking?",
+        "a": "Please contact The Pine Rooms directly for parking information and availability."
+      },
+      {
+        "q": "Is there a dress code at The Pine Rooms?",
+        "a": "Smart casual attire is recommended. Contact the restaurant for specific event requirements."
+      },
+      {
+        "q": "Does The Pine Rooms offer private dining?",
+        "a": "The Pine Rooms may offer private dining options for special events. Contact them for details."
+      }
+    ],
+    "schema_type": "Restaurant",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "the-latch-restaurant",
+    "name": "The Latch Restaurant",
+    "vertical": "restaurants",
+    "city": "Tallow",
+    "citySlug": "tallow",
+    "country": "ireland",
+    "address": "Tallow, Ireland",
+    "phone": "+353 58 56486",
+    "website": "https://www.thelatchrestaurant.com",
+    "email": "",
+    "description": "The Latch Restaurant is a trusted restaurants located in Tallow, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does The Latch Restaurant take reservations?",
+        "a": "Yes, The Latch Restaurant accepts reservations. Call ahead or book online for the best experience."
+      },
+      {
+        "q": "What type of cuisine does The Latch Restaurant serve?",
+        "a": "The Latch Restaurant offers a carefully curated menu featuring local and international dishes."
+      },
+      {
+        "q": "Does The Latch Restaurant have parking?",
+        "a": "Please contact The Latch Restaurant directly for parking information and availability."
+      },
+      {
+        "q": "Is there a dress code at The Latch Restaurant?",
+        "a": "Smart casual attire is recommended. Contact the restaurant for specific event requirements."
+      },
+      {
+        "q": "Does The Latch Restaurant offer private dining?",
+        "a": "The Latch Restaurant may offer private dining options for special events. Contact them for details."
+      }
+    ],
+    "schema_type": "Restaurant",
+    "locale": "en",
     "openingHours": "Mo-Fr 09:00-18:00"
   }
 ]
