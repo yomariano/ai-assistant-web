@@ -8,7 +8,8 @@ import Breadcrumbs from "@/components/marketing/Breadcrumbs";
 import CTASection from "@/components/marketing/CTASection";
 import MidPageCTA from "@/components/marketing/MidPageCTA";
 import Footer from "@/components/landing/Footer";
-import { MapPin, Building2, Check, ChevronRight, Quote } from "lucide-react";
+import { MapPin, Building2, Check, ChevronRight, Quote, ArrowRight } from "lucide-react";
+import { getDirectoryVertical } from "@/lib/directory/verticals";
 
 export const dynamic = "force-dynamic";
 
@@ -315,6 +316,32 @@ export default async function ComboPage({ params }: Props) {
             </div>
           </section>
         )}
+
+        {/* Directory Cross-Link */}
+        {(() => {
+          const vertical = getDirectoryVertical(industry);
+          if (!vertical) return null;
+          return (
+            <section className="py-12">
+              <div className="max-w-7xl mx-auto px-6">
+                <Link
+                  href={`/directory/${vertical.slug}/${location}`}
+                  className="flex items-center justify-between gap-4 p-6 bg-gradient-to-r from-orange-50 to-orange-100 rounded-xl border border-orange-200 group hover:shadow-md transition-all"
+                >
+                  <div>
+                    <p className="font-semibold text-gray-900">
+                      See {page.city_name} {vertical.label} using AI receptionists
+                    </p>
+                    <p className="text-sm text-gray-600">
+                      Browse our directory of {vertical.label} in {page.city_name}
+                    </p>
+                  </div>
+                  <ArrowRight className="w-5 h-5 text-orange-600 group-hover:translate-x-1 transition-transform flex-shrink-0" />
+                </Link>
+              </div>
+            </section>
+          );
+        })()}
 
         <CTASection
           title={content.cta_text || `Ready to automate calls for your ${page.city_name} ${page.industry_name.toLowerCase()}?`}

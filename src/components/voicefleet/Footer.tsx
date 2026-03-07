@@ -60,12 +60,39 @@ const Footer = () => {
               <Link href="/blog" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
                 Blog
               </Link>
+              <Link href="/directory" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
+                Directory
+              </Link>
               <Link href="/privacy" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
                 Privacy
               </Link>
               <Link href="/terms" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
                 Terms
               </Link>
+            </div>
+
+            {/* Directory */}
+            <div>
+              <p className="text-xs font-semibold text-primary-foreground/50 uppercase tracking-wider mb-2">
+                Directory
+              </p>
+              <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm">
+                <Link href="/directory/restaurants" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
+                  Restaurants
+                </Link>
+                <Link href="/directory/dentists" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
+                  Dental Practices
+                </Link>
+                <Link href="/directory/salons" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
+                  Hair Salons
+                </Link>
+                <Link href="/directory/vets" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
+                  Veterinary Clinics
+                </Link>
+                <Link href="/directory/physios" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
+                  Physiotherapy
+                </Link>
+              </div>
             </div>
 
             {/* Top Cities */}

@@ -38,6 +38,7 @@ const Header = () => {
     { label: "Industries", href: "/for" },
     { label: "Demo", href: "/demo" },
     { label: "Integrations", href: "/connect" },
+    { label: "Directory", href: "/directory" },
     { label: "Compare", href: "/compare" },
     { label: "Pricing", href: "/pricing" },
     { label: "Blog", href: "/blog" },

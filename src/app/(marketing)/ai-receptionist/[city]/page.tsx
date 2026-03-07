@@ -317,6 +317,45 @@ export default async function CityPage({ params }: Props) {
                 </ul>
               </div>
               <div>
+                <h3 className="font-semibold text-gray-700 mb-2">
+                  Directory
+                </h3>
+                <ul className="space-y-1">
+                  <li>
+                    <Link
+                      href="/directory"
+                      className="text-blue-600 hover:underline"
+                    >
+                      All Businesses
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/directory/dentists"
+                      className="text-blue-600 hover:underline"
+                    >
+                      Dentists
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/directory/restaurants"
+                      className="text-blue-600 hover:underline"
+                    >
+                      Restaurants
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/directory/salons"
+                      className="text-blue-600 hover:underline"
+                    >
+                      Salons
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+              <div>
                 <h3 className="font-semibold text-gray-700 mb-2">Features</h3>
                 <ul className="space-y-1">
                   <li>

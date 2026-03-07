@@ -49,6 +49,7 @@ const SecuritySection = dynamic(() => import("@/components/voicefleet/SecuritySe
 const PricingSection = dynamic(() => import("@/components/voicefleet/PricingSection"));
 const DemoSection = dynamic(() => import("@/components/voicefleet/DemoSection"));
 const FAQSection = dynamic(() => import("@/components/voicefleet/FAQSection"));
+const DirectoryCTASection = dynamic(() => import("@/components/voicefleet/DirectoryCTASection"));
 const Footer = dynamic(() => import("@/components/voicefleet/Footer"));
 
 export default function Home() {
@@ -95,6 +96,7 @@ export default function Home() {
         <PricingSection />
         <DemoSection />
         <FAQSection />
+        <DirectoryCTASection />
       </main>
       <Footer />
       <CROWidgets />

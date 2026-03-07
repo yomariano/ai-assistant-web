@@ -12,7 +12,8 @@ import CTASection from "@/components/marketing/CTASection";
 import { RichBlogContent } from "@/components/content";
 import Image from "next/image";
 import Link from "next/link";
-import { Calendar, Clock, ArrowLeft, Tag } from "lucide-react";
+import { Calendar, Clock, ArrowLeft, Tag, ArrowRight } from "lucide-react";
+import { getDirectoryFromCategoryOrTags } from "@/lib/directory/verticals";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -204,6 +205,30 @@ export default async function BlogPostPage({ params }: Props) {
               </Link>
             </div>
           </div>
+
+          {/* Directory Cross-Link */}
+          {(() => {
+            const vertical = getDirectoryFromCategoryOrTags(post.category, post.tags);
+            if (!vertical) return null;
+            return (
+              <div className="mt-10 p-6 bg-gradient-to-r from-blue-50 to-emerald-50 rounded-xl border border-blue-100">
+                <Link
+                  href={`/directory/${vertical.slug}`}
+                  className="flex items-center justify-between gap-4 group"
+                >
+                  <div>
+                    <p className="font-semibold text-foreground">
+                      Browse {vertical.label} in our directory
+                    </p>
+                    <p className="text-sm text-muted-foreground">
+                      Discover {vertical.label} using AI receptionists
+                    </p>
+                  </div>
+                  <ArrowRight className="w-5 h-5 text-blue-600 group-hover:translate-x-1 transition-transform flex-shrink-0" />
+                </Link>
+              </div>
+            );
+          })()}
 
           <RelatedContent
             category={post.category}

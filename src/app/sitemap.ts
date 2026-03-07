@@ -137,6 +137,19 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'weekly',
       priority: 0.7,
     },
+    // Directory pages
+    {
+      url: `${BASE_URL}/directory`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.8,
+    },
+    ...['restaurants', 'dentists', 'salons', 'vets', 'physios', 'gyms', 'mechanics'].map((vertical) => ({
+      url: `${BASE_URL}/directory/${vertical}`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly' as const,
+      priority: 0.7,
+    })),
     // Spanish pages
     {
       url: `${BASE_URL}/es`,

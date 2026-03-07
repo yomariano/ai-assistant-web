@@ -12,7 +12,8 @@ import MidPageCTA from "@/components/marketing/MidPageCTA";
 import Header from "@/components/voicefleet/Header";
 import Footer from "@/components/voicefleet/Footer";
 import { Suspense } from "react";
-import { Check, AlertTriangle, Sparkles, TrendingDown, TrendingUp, Phone, Clock, Euro, Users } from "lucide-react";
+import { Check, AlertTriangle, Sparkles, TrendingDown, TrendingUp, Phone, Clock, Euro, Users, ArrowRight } from "lucide-react";
+import { getDirectoryVertical } from "@/lib/directory/verticals";
 
 export const dynamic = "force-dynamic";
 
@@ -500,6 +501,30 @@ export default async function UseCasePage({ params }: Props) {
             </div>
           </div>
         </section>
+
+          {/* Directory Cross-Link */}
+          {(() => {
+            const vertical = getDirectoryVertical(industry);
+            if (!vertical) return null;
+            return (
+              <section className="py-12 max-w-7xl mx-auto px-6">
+                <Link
+                  href={`/directory/${vertical.slug}`}
+                  className="flex items-center justify-between gap-4 p-6 bg-gradient-to-r from-blue-50 to-emerald-50 rounded-xl border border-blue-100 group hover:shadow-md transition-all"
+                >
+                  <div>
+                    <p className="font-semibold text-gray-900">
+                      Browse {vertical.label} in our directory
+                    </p>
+                    <p className="text-sm text-gray-600">
+                      Discover {vertical.label} across Ireland and Argentina using AI receptionists
+                    </p>
+                  </div>
+                  <ArrowRight className="w-5 h-5 text-blue-600 group-hover:translate-x-1 transition-transform flex-shrink-0" />
+                </Link>
+              </section>
+            );
+          })()}
 
           {/* Internal Links */}
           <Suspense fallback={null}>
