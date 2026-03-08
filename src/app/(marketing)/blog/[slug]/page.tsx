@@ -1,5 +1,4 @@
 import { Metadata } from "next";
-import nextDynamic from "next/dynamic";
 import { notFound } from "next/navigation";
 import { getBlogPost, getBlogPostSlugs } from "@/lib/content/blog";
 import { generateBlogMetadata } from "@/lib/seo/metadata";
@@ -11,17 +10,12 @@ import AuthorCard from "@/components/marketing/AuthorCard";
 import RelatedContent from "@/components/marketing/RelatedContent";
 import CTASection from "@/components/marketing/CTASection";
 import { RichBlogContent } from "@/components/content";
+import BlogDemoEmbed from "@/components/blog/BlogDemoEmbed";
+import PricingSection from "@/components/voicefleet/PricingSection";
 import Image from "next/image";
 import Link from "next/link";
 import { Calendar, Clock, ArrowLeft, Tag, ArrowRight } from "lucide-react";
 import { getDirectoryFromCategoryOrTags } from "@/lib/directory/verticals";
-
-const DemoPage = nextDynamic(() => import("@/components/demo/DemoPage"), {
-  ssr: false,
-  loading: () => <div className="py-16 text-center text-muted-foreground">Loading demo...</div>,
-});
-
-const PricingSection = nextDynamic(() => import("@/components/voicefleet/PricingSection"));
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -233,7 +227,7 @@ export default async function BlogPostPage({ params }: Props) {
 
         {/* Live Demo */}
         <section className="border-t border-border [&>div]:min-h-0">
-          <DemoPage />
+          <BlogDemoEmbed />
         </section>
 
         {/* Pricing */}
