@@ -1,10 +1,12 @@
 'use client';
 
 import { type ReactNode, useMemo } from 'react';
+import Link from 'next/link';
 import { ContentChart, type ChartConfig } from './ContentChart';
 import { StatCallout, type Statistic } from './StatCallout';
 import { ExpertQuote, type Quote } from './ExpertQuote';
 import { SourcesList, type Source } from './SourceCitation';
+import PricingSection from '@/components/voicefleet/PricingSection';
 
 export interface BlogPost {
   id: string;
@@ -27,9 +29,10 @@ interface RichBlogContentProps {
   className?: string;
 }
 
-type MarkerType = 'CHART' | 'STAT' | 'QUOTE' | 'SOURCE';
+type MarkerType = 'CHART' | 'STAT' | 'QUOTE' | 'SOURCE' | 'INLINE_PRICING';
 
 const MARKER_PATTERN = /\[(CHART|STAT|QUOTE|SOURCE):([^\]]+)\]/g;
+const INLINE_PRICING_PLACEHOLDER = '___INLINE_PRICING_0___';
 const HTML_PATTERN = /<\/?[a-z][\s\S]*?>/i;
 const ENTITY_MAP: Record<string, string> = {
   '&nbsp;': ' ',
@@ -229,6 +232,52 @@ function preprocessMarkdown(raw: string, title?: string): string {
   return result.join('\n').replace(/\n{3,}/g, '\n\n').trim();
 }
 
+function normalizeMarketingCopy(text: string): string {
+  return text
+    .replace(
+      /(plans start from\s+\*{0,2})€199((?:\s+per month)?\*{0,2})/gi,
+      '$1€99$2'
+    )
+    .replace(
+      /(starts?\s+from\s+\*{0,2})€199((?:\s+per month)?\*{0,2})/gi,
+      '$1€99$2'
+    );
+}
+
+function injectInlinePricingMarker(text: string): { text: string; inserted: boolean } {
+  const blocks = text.split(/\n{2,}/);
+  const result: string[] = [];
+  let inserted = false;
+
+  for (const block of blocks) {
+    result.push(block);
+
+    if (!inserted && isPricingParagraph(block)) {
+      result.push(INLINE_PRICING_PLACEHOLDER);
+      inserted = true;
+    }
+  }
+
+  return {
+    text: result.join('\n\n'),
+    inserted,
+  };
+}
+
+function isPricingParagraph(block: string): boolean {
+  const trimmed = block.trim().toLowerCase();
+  if (!trimmed || trimmed.startsWith('#') || trimmed.startsWith('|') || trimmed.startsWith('- ')) {
+    return false;
+  }
+
+  return (
+    trimmed.includes('plans start from') ||
+    trimmed.includes('pricing starts at') ||
+    trimmed.includes('from €99/month') ||
+    trimmed.includes('from €99 per month')
+  );
+}
+
 function looksLikeHeading(line: string): boolean {
   if (line.length < 5 || line.length > 90) {
     return false;
@@ -294,6 +343,15 @@ function escapeAttribute(text: string): string {
   return escapeHtml(text).replace(/`/g, '&#96;');
 }
 
+function normalizeInlineHref(label: string, href: string): string {
+  const normalizedLabel = label.toLowerCase().trim();
+  if (normalizedLabel.includes('book a demo') || normalizedLabel.includes('book your free voicefleet demo')) {
+    return 'https://calendly.com/voicefleet';
+  }
+
+  return href;
+}
+
 function processInline(text: string): string {
   let html = escapeHtml(repairEncodingArtifacts(text.trim()));
 
@@ -302,7 +360,7 @@ function processInline(text: string): string {
   html = html.replace(/(?<!\*)\*([^*]+)\*(?!\*)/g, '<em>$1</em>');
   html = html.replace(/`([^`]+)`/g, '<code class="blog-inline-code">$1</code>');
   html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (_, label: string, href: string) => {
-    const cleanHref = href.trim();
+    const cleanHref = normalizeInlineHref(label, href.trim());
     const external = /^(?:https?:)?\/\//i.test(cleanHref) || cleanHref.startsWith('mailto:');
     const target = external ? ' target="_blank" rel="noopener noreferrer"' : '';
 
@@ -468,6 +526,12 @@ function convertMarkdownToHtml(markdown: string): string {
       continue;
     }
 
+    if (/^___[A-Z0-9_]+___$/.test(trimmed)) {
+      flushAll();
+      output.push(trimmed);
+      continue;
+    }
+
     if (/^[-*]{3,}$/.test(trimmed)) {
       flushAll();
       output.push('<hr class="blog-divider" />');
@@ -547,10 +611,21 @@ export function RichBlogContent({ post, className = '' }: RichBlogContentProps) 
 
   const processedContent = useMemo(() => {
     const { text, markers } = extractMarkers(content);
-    const normalized = normalizeSourceContent(text, post.title);
-    const html = convertMarkdownToHtml(normalized).replace(/\[[A-Z]+:[^\]]*\]/g, '');
+    const normalized = normalizeMarketingCopy(normalizeSourceContent(text, post.title));
+    const inlinePricing = injectInlinePricingMarker(normalized);
+    const nextMarkers = [...markers];
 
-    return { html, markers };
+    if (inlinePricing.inserted) {
+      nextMarkers.push({
+        placeholder: INLINE_PRICING_PLACEHOLDER,
+        type: 'INLINE_PRICING',
+        id: 'pricing',
+      });
+    }
+
+    const html = convertMarkdownToHtml(inlinePricing.text).replace(/\[[A-Z]+:[^\]]*\]/g, '');
+
+    return { html, markers: nextMarkers };
   }, [content, post.title]);
 
   const renderContent = () => {
@@ -614,6 +689,47 @@ export function RichBlogContent({ post, className = '' }: RichBlogContentProps) 
               </sup>
             );
           }
+          break;
+        }
+        case 'INLINE_PRICING': {
+          parts.push(
+            <section
+              key={`pricing-${partIndex}`}
+              className="my-10 overflow-hidden rounded-[1.75rem] border border-stone-200 bg-[linear-gradient(180deg,#f8fafc_0%,#ffffff_18%,#ffffff_100%)] shadow-[0_20px_50px_rgba(15,23,42,0.08)]"
+            >
+              <div className="border-b border-stone-200 bg-[linear-gradient(135deg,rgba(239,246,255,0.92),rgba(248,250,252,0.96))] px-5 py-6 md:px-8">
+                <p className="text-xs font-semibold uppercase tracking-[0.22em] text-blue-700">
+                  Pricing and Demo
+                </p>
+                <h3 className="mt-3 font-heading text-2xl font-bold tracking-[-0.03em] text-stone-950">
+                  Plans start at €99/month
+                </h3>
+                <p className="mt-3 max-w-3xl text-sm leading-7 text-stone-600 md:text-base">
+                  Compare plans right here, then either try the live demo or book a guided walkthrough.
+                </p>
+                <div className="mt-5 flex flex-wrap gap-3">
+                  <Link
+                    href="/demo"
+                    className="inline-flex items-center justify-center rounded-full bg-stone-950 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-stone-800"
+                  >
+                    Try Live Demo
+                  </Link>
+                  <a
+                    href="https://calendly.com/voicefleet"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center rounded-full border border-stone-300 bg-white px-5 py-2.5 text-sm font-semibold text-stone-900 transition-colors hover:bg-stone-50"
+                  >
+                    Book a Demo
+                  </a>
+                </div>
+              </div>
+
+              <div className="px-5 py-6 md:px-8">
+                <PricingSection embedded />
+              </div>
+            </section>
+          );
           break;
         }
       }

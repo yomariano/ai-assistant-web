@@ -18,8 +18,6 @@ import Footer from "@/components/voicefleet/Footer";
 import RelatedContent from "@/components/marketing/RelatedContent";
 import CTASection from "@/components/marketing/CTASection";
 import { RichBlogContent } from "@/components/content";
-import BlogDemoEmbed from "@/components/blog/BlogDemoEmbed";
-import PricingSection from "@/components/voicefleet/PricingSection";
 import { getDirectoryFromCategoryOrTags } from "@/lib/directory/verticals";
 
 interface Props {
@@ -235,30 +233,6 @@ export default async function BlogPostPage({ params }: Props) {
                     </div>
                   )}
                 </article>
-
-                <section className="mt-8 overflow-hidden rounded-[2rem] border border-stone-200/80 bg-white shadow-[0_28px_70px_rgba(15,23,42,0.07)]">
-                  <div className="border-b border-stone-200/80 bg-[linear-gradient(135deg,rgba(239,246,255,0.92),rgba(248,250,252,0.96))] px-6 py-8 md:px-10 lg:px-14 xl:px-16">
-                    <p className="text-xs font-semibold uppercase tracking-[0.24em] text-blue-700">
-                      Try It Live
-                    </p>
-                    <h2 className="mt-3 font-heading text-3xl font-bold tracking-[-0.03em] text-stone-950">
-                      Demo and pricing, right where the article makes the case
-                    </h2>
-                    <p className="mt-4 max-w-3xl text-base leading-7 text-stone-600">
-                      If this article got you to the pricing section, you should not
-                      have to scroll into a separate landing page. Try the live demo
-                      here and compare plans in the same flow.
-                    </p>
-                  </div>
-
-                  <div className="border-b border-stone-200/80 bg-[linear-gradient(180deg,rgba(248,250,252,0.88),rgba(255,255,255,0.98))]">
-                    <BlogDemoEmbed embedded />
-                  </div>
-
-                  <div className="px-6 py-8 md:px-10 lg:px-14 xl:px-16">
-                    <PricingSection embedded />
-                  </div>
-                </section>
 
                 {vertical && (
                   <div className="mt-8 rounded-[1.75rem] border border-emerald-100 bg-[linear-gradient(135deg,rgba(236,253,245,0.92),rgba(248,250,252,0.96))] p-7 shadow-[0_18px_45px_rgba(16,185,129,0.08)]">
