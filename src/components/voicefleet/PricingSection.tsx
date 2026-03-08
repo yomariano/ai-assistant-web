@@ -815,59 +815,61 @@ const PricingSection = ({ embedded = false }: PricingSectionProps) => {
           </div>
         </div>
 
-        <div className="max-w-6xl mx-auto mb-12 lg:mb-14">
-          <div className="text-center mb-6">
-            <h3 className="text-2xl sm:text-3xl font-heading font-bold text-foreground mb-2">
-              Full Plan Comparison
-            </h3>
-            <p className="text-sm sm:text-base text-muted-foreground">
-              Compare 30+ line items across Starter, Growth, and Pro before you choose a plan.
-            </p>
-          </div>
+        {!embedded && (
+          <div className="max-w-6xl mx-auto mb-12 lg:mb-14">
+            <div className="text-center mb-6">
+              <h3 className="text-2xl sm:text-3xl font-heading font-bold text-foreground mb-2">
+                Full Plan Comparison
+              </h3>
+              <p className="text-sm sm:text-base text-muted-foreground">
+                Compare 30+ line items across Starter, Growth, and Pro before you choose a plan.
+              </p>
+            </div>
 
-          <div className="overflow-x-auto rounded-2xl border border-border bg-card shadow-elegant">
-            <table className="w-full min-w-[880px]">
-              <thead>
-                <tr className="border-b border-border">
-                  <th className="px-4 py-4 text-left text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-                    Capability
-                  </th>
-                  <th className="px-4 py-4 text-center text-sm font-semibold text-foreground">Starter</th>
-                  <th className="px-4 py-4 text-center">
-                    <span className="inline-flex flex-col items-center">
-                      <span className="text-sm font-semibold text-primary">Growth</span>
-                      <span className="text-[10px] font-semibold uppercase tracking-wide text-accent">Most Popular</span>
-                    </span>
-                  </th>
-                  <th className="px-4 py-4 text-center text-sm font-semibold text-foreground">Pro</th>
-                </tr>
-              </thead>
-              <tbody>
-                {comparisonRows.map((row, index) => {
-                  const showCategory = index === 0 || comparisonRows[index - 1].category !== row.category;
+            <div className="overflow-x-auto rounded-2xl border border-border bg-card shadow-elegant">
+              <table className="w-full min-w-[880px]">
+                <thead>
+                  <tr className="border-b border-border">
+                    <th className="px-4 py-4 text-left text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                      Capability
+                    </th>
+                    <th className="px-4 py-4 text-center text-sm font-semibold text-foreground">Starter</th>
+                    <th className="px-4 py-4 text-center">
+                      <span className="inline-flex flex-col items-center">
+                        <span className="text-sm font-semibold text-primary">Growth</span>
+                        <span className="text-[10px] font-semibold uppercase tracking-wide text-accent">Most Popular</span>
+                      </span>
+                    </th>
+                    <th className="px-4 py-4 text-center text-sm font-semibold text-foreground">Pro</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {comparisonRows.map((row, index) => {
+                    const showCategory = index === 0 || comparisonRows[index - 1].category !== row.category;
 
-                  return (
-                    <Fragment key={`${row.category}-${row.feature}`}>
-                      {showCategory && (
-                        <tr className="border-y border-border bg-muted/40">
-                          <td colSpan={4} className="px-4 py-2.5 text-xs font-semibold uppercase tracking-[0.08em] text-muted-foreground">
-                            {row.category}
-                          </td>
+                    return (
+                      <Fragment key={`${row.category}-${row.feature}`}>
+                        {showCategory && (
+                          <tr className="border-y border-border bg-muted/40">
+                            <td colSpan={4} className="px-4 py-2.5 text-xs font-semibold uppercase tracking-[0.08em] text-muted-foreground">
+                              {row.category}
+                            </td>
+                          </tr>
+                        )}
+                        <tr className="border-b border-border/70">
+                          <td className="px-4 py-3.5 text-sm font-medium text-foreground">{row.feature}</td>
+                          <td className="px-4 py-3.5 text-center">{renderComparisonValue(row.starter)}</td>
+                          <td className="px-4 py-3.5 text-center bg-primary/5">{renderComparisonValue(row.growth)}</td>
+                          <td className="px-4 py-3.5 text-center">{renderComparisonValue(row.pro)}</td>
                         </tr>
-                      )}
-                      <tr className="border-b border-border/70">
-                        <td className="px-4 py-3.5 text-sm font-medium text-foreground">{row.feature}</td>
-                        <td className="px-4 py-3.5 text-center">{renderComparisonValue(row.starter)}</td>
-                        <td className="px-4 py-3.5 text-center bg-primary/5">{renderComparisonValue(row.growth)}</td>
-                        <td className="px-4 py-3.5 text-center">{renderComparisonValue(row.pro)}</td>
-                      </tr>
-                    </Fragment>
-                  );
-                })}
-              </tbody>
-            </table>
+                      </Fragment>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
           </div>
-        </div>
+        )}
 
         {/* Trial benefits bar */}
         <div className="max-w-3xl mx-auto mb-10">
