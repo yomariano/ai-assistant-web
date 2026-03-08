@@ -345,123 +345,204 @@
   to { height: 0; }
 }
 
-/* Blog Content Styling */
-.prose table {
-  width: 100%;
-  border-collapse: collapse;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
-  margin: 2rem 0;
-}
-
-.prose thead {
-  background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
-}
-
-.prose thead th {
-  color: white !important;
-  font-weight: 600;
-  padding: 1rem 1.25rem;
-  text-align: left;
-  font-size: 0.875rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-.prose tbody tr {
-  border-bottom: 1px solid hsl(var(--border));
-  transition: background-color 0.15s ease;
-}
-
-.prose tbody tr:nth-child(even) {
-  background-color: hsl(var(--muted) / 0.5);
-}
-
-.prose tbody tr:hover {
-  background-color: hsl(var(--muted) / 0.8);
-}
-
-.prose tbody td {
-  padding: 1rem 1.25rem;
-  color: hsl(var(--muted-foreground));
-}
-
-.prose tbody td strong {
-  color: hsl(var(--foreground));
-  font-weight: 600;
-}
-
-.prose h2 {
-  font-size: 1.75rem;
-  font-weight: 700;
-  margin-top: 3rem;
-  margin-bottom: 1rem;
-  padding-bottom: 0.75rem;
-  border-bottom: 2px solid hsl(var(--border));
-  color: hsl(var(--foreground));
-}
-
-.prose h3 {
-  font-size: 1.25rem;
-  font-weight: 600;
-  margin-top: 2rem;
-  margin-bottom: 0.75rem;
-  color: hsl(var(--primary));
-}
-
-.prose ul {
-  margin: 1.5rem 0;
-  padding-left: 1.5rem;
-}
-
-.prose li {
-  margin-bottom: 0.75rem;
-  color: hsl(var(--muted-foreground));
-  line-height: 1.75;
-}
-
-.prose li strong {
-  color: hsl(var(--foreground));
-}
-
-.prose p {
-  margin-bottom: 1.5rem;
-  line-height: 1.8;
-  color: hsl(var(--muted-foreground));
-}
-
-/* Medium-style Blog Content */
+/* Editorial Blog Content */
 .blog-content {
-  font-family: Georgia, 'Times New Roman', serif;
+  color: #44403c;
+  font-family: Georgia, "Times New Roman", serif;
 }
 
-.blog-content p.blog-first-para::first-letter {
-  font-size: 4rem;
-  font-weight: 700;
+.blog-paragraph {
+  margin: 0 0 1.75rem;
+  color: #44403c;
+  font-size: clamp(1.08rem, 1rem + 0.25vw, 1.18rem);
+  line-height: 1.95;
+  text-wrap: pretty;
+}
+
+.blog-first-paragraph {
+  color: #292524;
+  font-size: clamp(1.18rem, 1.1rem + 0.3vw, 1.32rem);
+}
+
+.blog-first-paragraph::first-letter {
   float: left;
-  line-height: 0.8;
   margin-right: 0.75rem;
   margin-top: 0.5rem;
-  color: #4f46e5;
-  font-family: Georgia, 'Times New Roman', serif;
+  color: #1d4ed8;
+  font-size: 4.4rem;
+  font-weight: 700;
+  line-height: 0.82;
 }
 
-.blog-content h2,
-.blog-content h3,
-.blog-content h4 {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+.blog-heading {
+  color: #0f172a;
+  font-family: var(--font-heading);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
 }
 
-.blog-content blockquote {
-  font-family: Georgia, 'Times New Roman', serif;
+.blog-heading-2 {
+  margin: 4rem 0 1.35rem;
+  font-size: clamp(2rem, 1.75rem + 1vw, 2.7rem);
+  line-height: 1.08;
 }
 
-.blog-content a {
+.blog-heading-3 {
+  margin: 2.6rem 0 1rem;
+  font-size: clamp(1.45rem, 1.28rem + 0.55vw, 1.8rem);
+  line-height: 1.2;
+}
+
+.blog-heading-4 {
+  margin: 2rem 0 0.85rem;
+  font-size: clamp(1.2rem, 1.08rem + 0.35vw, 1.38rem);
+  line-height: 1.3;
+}
+
+.blog-list {
+  margin: 2rem 0;
+  padding-left: 1.35rem;
+  color: #44403c;
+}
+
+.blog-list-ul {
+  list-style: disc;
+}
+
+.blog-list-ol {
+  list-style: decimal;
+}
+
+.blog-list li {
+  margin-bottom: 0.9rem;
+  padding-left: 0.35rem;
+  font-size: 1.05rem;
+  line-height: 1.85;
+}
+
+.blog-list li::marker {
+  color: #2563eb;
+  font-weight: 700;
+}
+
+.blog-blockquote {
+  margin: 2.6rem 0;
+  border-left: 3px solid #2563eb;
+  border-radius: 0 1.4rem 1.4rem 0;
+  background: linear-gradient(180deg, rgba(239, 246, 255, 0.9), rgba(248, 250, 252, 0.95));
+  padding: 1.5rem 1.5rem 1.5rem 1.7rem;
+}
+
+.blog-blockquote p {
+  margin: 0;
+  color: #334155;
+  font-size: 1.08rem;
+  font-style: italic;
+  line-height: 1.85;
+}
+
+.blog-blockquote p + p {
+  margin-top: 0.85rem;
+}
+
+.blog-divider {
+  margin: 3rem 0;
+  border: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #d6d3d1, transparent);
+}
+
+.blog-link {
+  color: #1d4ed8;
+  text-decoration: underline;
+  text-decoration-color: rgba(37, 99, 235, 0.35);
   text-decoration-thickness: 1px;
-  text-underline-offset: 3px;
+  text-underline-offset: 4px;
+  transition: color 0.2s ease, text-decoration-color 0.2s ease;
 }
 
-.blog-content a:hover {
-  text-decoration-thickness: 2px;
+.blog-link:hover {
+  color: #1e40af;
+  text-decoration-color: rgba(30, 64, 175, 0.5);
+}
+
+.blog-inline-code {
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  border-radius: 0.55rem;
+  background: rgba(241, 245, 249, 0.9);
+  padding: 0.15rem 0.45rem;
+  color: #0f172a;
+  font-family: var(--font-jetbrains);
+  font-size: 0.92em;
+}
+
+.blog-table-wrap {
+  margin: 2.8rem 0;
+  overflow-x: auto;
+  border: 1px solid rgba(231, 229, 228, 0.95);
+  border-radius: 1.5rem;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.08);
+}
+
+.blog-table {
+  width: 100%;
+  min-width: 640px;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.blog-table thead {
+  background: linear-gradient(90deg, rgba(239, 246, 255, 0.96), rgba(248, 250, 252, 0.96));
+}
+
+.blog-table th {
+  border-bottom: 1px solid rgba(231, 229, 228, 0.9);
+  padding: 1rem 1.2rem;
+  color: #0f172a;
+  font-family: var(--font-heading);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-align: left;
+  text-transform: uppercase;
+}
+
+.blog-table td {
+  border-top: 1px solid rgba(241, 245, 249, 0.95);
+  padding: 1rem 1.2rem;
+  color: #44403c;
+  font-size: 1rem;
+  line-height: 1.75;
+  vertical-align: top;
+}
+
+.blog-table tbody tr:nth-child(even) td {
+  background: rgba(250, 250, 249, 0.9);
+}
+
+.blog-content strong {
+  color: #1c1917;
+  font-weight: 700;
+}
+
+.blog-content em {
+  font-style: italic;
+}
+
+@media (max-width: 768px) {
+  .blog-first-paragraph::first-letter {
+    font-size: 3.6rem;
+    margin-right: 0.55rem;
+  }
+
+  .blog-list li {
+    font-size: 1rem;
+    line-height: 1.8;
+  }
+
+  .blog-table {
+    min-width: 560px;
+  }
 }

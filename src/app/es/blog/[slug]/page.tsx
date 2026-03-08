@@ -1,14 +1,20 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
+import Image from "next/image";
+import Link from "next/link";
+import { ArrowLeft, Calendar, Clock3, Tag } from "lucide-react";
 import { getBlogPost } from "@/lib/content/blog";
+import {
+  estimateReadingTime,
+  formatBlogDate,
+  getBlogDisplayDate,
+  getBlogExcerpt,
+} from "@/lib/content/blog-presentation";
 import { ArticleSchema, BreadcrumbSchema } from "@/components/seo";
 import HeaderES from "@/components/voicefleet/HeaderES";
 import FooterES from "@/components/voicefleet/FooterES";
 import CTASection from "@/components/marketing/CTASection";
 import { RichBlogContent } from "@/components/content";
-import Image from "next/image";
-import Link from "next/link";
-import { Calendar, Clock, ArrowLeft, Tag } from "lucide-react";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -25,12 +31,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     return {};
   }
 
-  const siteUrl =
-    process.env.NEXT_PUBLIC_SITE_URL || "https://voicefleet.ai";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://voicefleet.ai";
 
   return {
     title: post.meta_title || post.title,
-    description: post.meta_description || post.excerpt || "",
+    description: post.meta_description || post.excerpt || getBlogExcerpt(post, 180),
     alternates: {
       canonical: `${siteUrl}/es/blog/${slug}`,
       languages: {
@@ -39,7 +44,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     },
     openGraph: {
       title: post.meta_title || post.title,
-      description: post.meta_description || post.excerpt || "",
+      description: post.meta_description || post.excerpt || getBlogExcerpt(post, 180),
       url: `${siteUrl}/es/blog/${slug}`,
       type: "article",
       locale: "es_AR",
@@ -64,14 +69,17 @@ export default async function BlogPostPageES({ params }: Props) {
     { name: post.title, href: `/es/blog/${slug}` },
   ];
 
-  const siteUrl =
-    process.env.NEXT_PUBLIC_SITE_URL || "https://voicefleet.ai";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://voicefleet.ai";
+  const displayDate = getBlogDisplayDate(post);
+  const formattedDate = formatBlogDate(displayDate, "es-AR", "long") || "Borrador";
+  const readTime = estimateReadingTime(post.content);
+  const description = getBlogExcerpt(post, 240);
 
   return (
     <>
       <ArticleSchema
         title={post.title}
-        description={post.excerpt || ""}
+        description={post.excerpt || description}
         image={post.featured_image_url || `${siteUrl}/opengraph-image`}
         datePublished={post.published_at || post.created_at}
         dateModified={post.updated_at}
@@ -80,151 +88,161 @@ export default async function BlogPostPageES({ params }: Props) {
       />
       <BreadcrumbSchema items={breadcrumbs} />
 
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen bg-[linear-gradient(180deg,#fafaf9_0%,#ffffff_28%,#f8fafc_100%)]">
         <HeaderES />
 
-        {/* Hero Section */}
-        <section className="bg-gradient-to-br from-indigo-600 via-purple-600 to-indigo-700 pt-24 pb-16">
-          <div className="max-w-4xl mx-auto px-6">
-            {/* Back Link */}
-            <Link
-              href="/es/blog"
-              className="inline-flex items-center gap-2 text-indigo-200 hover:text-white transition-colors mb-8"
-            >
-              <ArrowLeft className="w-4 h-4" />
-              <span>Volver al Blog</span>
-            </Link>
+        <main>
+          <section className="relative overflow-hidden border-b border-stone-200/80 bg-[radial-gradient(circle_at_top_left,rgba(219,234,254,0.8),transparent_32%),radial-gradient(circle_at_top_right,rgba(226,232,240,0.72),transparent_32%),linear-gradient(180deg,#ffffff_0%,#f8fafc_100%)] pt-28 pb-14">
+            <div className="mx-auto max-w-6xl px-6">
+              <Link
+                href="/es/blog"
+                className="inline-flex items-center gap-2 text-sm font-medium text-stone-500 transition-colors hover:text-stone-900"
+              >
+                <ArrowLeft className="h-4 w-4" />
+                Volver al Blog
+              </Link>
 
-            {post.category && (
-              <span className="inline-block px-4 py-1.5 text-sm font-semibold text-white bg-white/20 backdrop-blur rounded-full mb-6">
-                {post.category}
-              </span>
-            )}
-
-            <h1 className="text-3xl md:text-5xl font-bold text-white mb-6 leading-tight">
-              {post.title}
-            </h1>
-
-            {post.excerpt && (
-              <p className="text-xl text-indigo-100 mb-8 leading-relaxed max-w-3xl">
-                {post.excerpt}
-              </p>
-            )}
-
-            {/* Author & Meta */}
-            <div className="flex flex-wrap items-center gap-6 text-indigo-100">
-              <div className="flex items-center gap-3">
-                <div className="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center text-white font-bold text-lg">
-                  {post.author_name.charAt(0)}
-                </div>
-                <div>
-                  <p className="font-semibold text-white">{post.author_name}</p>
-                  <p className="text-sm text-indigo-200">Autor</p>
-                </div>
-              </div>
-              <div className="flex items-center gap-2">
-                <Calendar className="w-4 h-4" />
-                <span className="text-sm">
-                  {post.published_at
-                    ? new Date(post.published_at).toLocaleDateString("es-AR", {
-                        month: "long",
-                        day: "numeric",
-                        year: "numeric",
-                      })
-                    : "Borrador"}
+              <div className="mt-8 max-w-4xl">
+                <span className="inline-flex rounded-full border border-stone-200 bg-white/90 px-4 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-stone-600 shadow-sm">
+                  {post.category || "Artículo"}
                 </span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Clock className="w-4 h-4" />
-                <span className="text-sm">5 min de lectura</span>
+
+                <h1 className="mt-6 font-heading text-4xl font-extrabold tracking-[-0.05em] text-stone-950 md:text-6xl">
+                  {post.title}
+                </h1>
+
+                <p className="mt-6 max-w-3xl text-lg leading-8 text-stone-600 md:text-xl">
+                  {description}
+                </p>
+
+                <div className="mt-8 flex flex-wrap items-center gap-5 text-sm text-stone-500">
+                  <div className="flex items-center gap-3">
+                    <div className="flex h-11 w-11 items-center justify-center rounded-full bg-stone-900 text-sm font-semibold text-white shadow-sm">
+                      {post.author_name.charAt(0).toUpperCase()}
+                    </div>
+                    <div>
+                      <p className="font-semibold text-stone-900">{post.author_name}</p>
+                      <p className="text-stone-500">Equipo editorial de VoiceFleet</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-2">
+                    <Calendar className="h-4 w-4" />
+                    <span>{formattedDate}</span>
+                  </div>
+
+                  <div className="flex items-center gap-2">
+                    <Clock3 className="h-4 w-4" />
+                    <span>{readTime} min de lectura</span>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        </section>
+          </section>
 
-        {/* Content */}
-        <article className="max-w-4xl mx-auto px-6 py-12">
-          {post.featured_image_url && (
-            <div className="relative aspect-video rounded-2xl overflow-hidden mb-12 bg-muted shadow-xl -mt-20">
-              <Image
-                src={post.featured_image_url}
-                alt={post.featured_image_alt || post.title}
-                fill
-                priority
-                className="object-cover"
-                sizes="(max-width: 1024px) 100vw, 896px"
-              />
+          <section className="mx-auto max-w-6xl px-6 py-12">
+            <div className="grid gap-10 lg:grid-cols-[220px_minmax(0,1fr)]">
+              <aside className="h-fit lg:sticky lg:top-24">
+                <div className="rounded-[1.5rem] border border-stone-200/80 bg-white/90 p-5 shadow-[0_18px_45px_rgba(15,23,42,0.05)]">
+                  <p className="text-xs font-semibold uppercase tracking-[0.22em] text-stone-500">
+                    Datos del artículo
+                  </p>
+                  <dl className="mt-5 space-y-4 text-sm">
+                    <div>
+                      <dt className="text-stone-500">Publicado</dt>
+                      <dd className="mt-1 font-semibold text-stone-900">{formattedDate}</dd>
+                    </div>
+                    <div>
+                      <dt className="text-stone-500">Lectura</dt>
+                      <dd className="mt-1 font-semibold text-stone-900">{readTime} min</dd>
+                    </div>
+                    <div>
+                      <dt className="text-stone-500">Categoría</dt>
+                      <dd className="mt-1 font-semibold text-stone-900">{post.category || "Artículo"}</dd>
+                    </div>
+                  </dl>
+
+                  {post.tags && post.tags.length > 0 && (
+                    <div className="mt-6 border-t border-stone-100 pt-5">
+                      <p className="text-xs font-semibold uppercase tracking-[0.22em] text-stone-500">
+                        Etiquetas
+                      </p>
+                      <div className="mt-3 flex flex-wrap gap-2">
+                        {post.tags.slice(0, 5).map((tag) => (
+                          <span
+                            key={tag}
+                            className="rounded-full bg-stone-100 px-3 py-1 text-xs font-medium text-stone-600"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </aside>
+
+              <div className="min-w-0">
+                {post.featured_image_url && (
+                  <div className="relative mb-8 aspect-[16/8.8] overflow-hidden rounded-[2rem] border border-stone-200/80 bg-stone-100 shadow-[0_24px_60px_rgba(15,23,42,0.08)]">
+                    <Image
+                      src={post.featured_image_url}
+                      alt={post.featured_image_alt || post.title}
+                      fill
+                      priority
+                      className="object-cover"
+                      sizes="(max-width: 1024px) 100vw, 900px"
+                    />
+                  </div>
+                )}
+
+                <article className="rounded-[2rem] border border-stone-200/80 bg-white px-6 py-8 shadow-[0_28px_70px_rgba(15,23,42,0.07)] md:px-10 md:py-12 lg:px-14">
+                  <RichBlogContent
+                    post={{
+                      id: post.id,
+                      title: post.title,
+                      slug: post.slug,
+                      content: post.content,
+                      excerpt: post.excerpt || undefined,
+                      category: post.category || undefined,
+                      tags: post.tags || undefined,
+                      author_name: post.author_name,
+                      published_at: post.published_at || undefined,
+                      chart_data: post.chart_data,
+                      statistics: post.statistics,
+                      sources: post.sources,
+                      expert_quotes: post.expert_quotes,
+                    }}
+                  />
+
+                  {post.tags && post.tags.length > 0 && (
+                    <div className="mt-12 border-t border-stone-200 pt-8">
+                      <div className="mb-4 flex items-center gap-2 text-stone-700">
+                        <Tag className="h-5 w-5" />
+                        <span className="font-semibold">Etiquetas</span>
+                      </div>
+                      <div className="flex flex-wrap gap-2">
+                        {post.tags.map((tag) => (
+                          <span
+                            key={tag}
+                            className="rounded-full bg-stone-100 px-4 py-2 text-sm font-medium text-stone-700"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </article>
+              </div>
             </div>
-          )}
+          </section>
 
-          {/* Content - Medium-style typography with markdown conversion */}
-          <RichBlogContent
-            post={{
-              id: post.id,
-              title: post.title,
-              slug: post.slug,
-              content: post.content,
-              excerpt: post.excerpt || undefined,
-              category: post.category || undefined,
-              tags: post.tags || undefined,
-              author_name: post.author_name,
-              published_at: post.published_at || undefined,
-              chart_data: post.chart_data,
-              statistics: post.statistics,
-              sources: post.sources,
-              expert_quotes: post.expert_quotes,
-            }}
+          <CTASection
+            title="¿Listo para escalar tu atención?"
+            description="Descubrí cómo los agentes de voz IA de VoiceFleet pueden atender tus llamadas a un 80% menos de costo."
           />
-
-          {/* Tags */}
-          {post.tags && post.tags.length > 0 && (
-            <div className="mt-12 pt-8 border-t border-border">
-              <div className="flex items-center gap-2 mb-4">
-                <Tag className="w-5 h-5 text-muted-foreground" />
-                <span className="font-semibold text-foreground">Etiquetas</span>
-              </div>
-              <div className="flex flex-wrap gap-2">
-                {post.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="px-4 py-2 text-sm bg-gradient-to-r from-indigo-50 to-purple-50 text-indigo-700 rounded-full font-medium hover:from-indigo-100 hover:to-purple-100 transition-colors cursor-default"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {/* CTA Box */}
-          <div className="mt-12 p-8 bg-gradient-to-br from-indigo-50 to-purple-50 rounded-2xl border border-indigo-100">
-            <h3 className="text-xl font-bold text-foreground mb-2">
-              ¿Listo para probar VoiceFleet?
-            </h3>
-            <p className="text-muted-foreground mb-4">
-              Descubrí cómo los agentes de voz IA pueden transformar tu negocio a un 80% menos de costo.
-            </p>
-            <div className="flex flex-wrap gap-3">
-              <Link
-                href="/login"
-                className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold rounded-lg hover:from-indigo-700 hover:to-purple-700 transition-all shadow-lg shadow-indigo-200"
-              >
-                Comenzar Prueba Gratis
-              </Link>
-              <Link
-                href="/es/precios"
-                className="inline-flex items-center px-6 py-3 bg-white text-indigo-600 font-semibold rounded-lg hover:bg-indigo-50 transition-colors border border-indigo-200"
-              >
-                Ver Precios
-              </Link>
-            </div>
-          </div>
-        </article>
-
-        <CTASection
-          title="¿Listo para Escalar tu Atención?"
-          description="Descubrí cómo los agentes de voz IA de VoiceFleet pueden atender tus llamadas a un 80% menos de costo."
-        />
+        </main>
 
         <FooterES />
       </div>
