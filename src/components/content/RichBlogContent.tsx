@@ -44,7 +44,7 @@ export function RichBlogContent({ post, className = '' }: RichBlogContentProps) 
   const processedContent = (() => {
     // First, extract and replace markers with placeholders
     const markers: Array<{ placeholder: string; type: string; id: string }> = [];
-    let processed = content;
+    let processed = preprocessMarkdown(content, post.title);
 
     // Find all markers: [CHART:id], [STAT:id], [QUOTE:id], [SOURCE:id]
     const markerPattern = /\[(CHART|STAT|QUOTE|SOURCE):([^\]]+)\]/g;
@@ -70,6 +70,111 @@ export function RichBlogContent({ post, className = '' }: RichBlogContentProps) 
 
     return { html: processed, markers };
   })();
+
+  /**
+   * Preprocess markdown to normalize inconsistent AI-generated content.
+   * Strips metadata, H1 lines, duplicate titles, and auto-detects headings.
+   */
+  function preprocessMarkdown(raw: string, title?: string): string {
+    let text = raw;
+
+    // Normalize line endings
+    text = text.replace(/\r\n/g, '\n');
+
+    // Strip metadata lines (e.g. "**Target keyword:** value" or "Target keyword: value")
+    text = text.replace(/^\*{0,2}(?:Target keywords?|Secondary keywords?|Word count|Date|Keywords?)\s*:?\*{0,2}\s*:?\s*.+$/gim, '');
+
+    // Strip H1 lines (title is in hero section)
+    text = text.replace(/^#\s+.+$/gm, '');
+
+    // Strip lines that exactly match the blog title (already in hero)
+    if (title) {
+      const titleLower = title.toLowerCase().trim();
+      text = text.split('\n').filter(line => line.trim().toLowerCase() !== titleLower).join('\n');
+    }
+
+    // Ensure double newlines around horizontal rules
+    text = text.replace(/\n?(-{3,})\n?/g, '\n\n$1\n\n');
+
+    // Ensure double newlines before/after existing markdown headings
+    text = text.replace(/([^\n])\n(#{2,4}\s)/g, '$1\n\n$2');
+    text = text.replace(/(#{2,4}\s.+)\n([^\n#])/g, '$1\n\n$2');
+
+    // Auto-detect heading-like lines that lack ## prefix
+    const lines = text.split('\n');
+    const result: string[] = [];
+
+    for (let i = 0; i < lines.length; i++) {
+      const trimmed = lines[i].trim();
+
+      if (!trimmed) {
+        result.push('');
+        continue;
+      }
+
+      // Skip lines that are already markdown elements
+      if (trimmed.startsWith('#') || trimmed.startsWith('- ') || trimmed.startsWith('* ') ||
+          /^\d+\.\s/.test(trimmed) || trimmed.startsWith('>') || trimmed.startsWith('|') ||
+          /^-{3,}$/.test(trimmed) || /^\*{3,}$/.test(trimmed)) {
+        result.push(lines[i]);
+        continue;
+      }
+
+      // Check context: is previous line blank (or start of content)?
+      const prevResultLine = result.length > 0 ? result[result.length - 1].trim() : '';
+      const isAfterBlank = prevResultLine === '' || result.length === 0;
+
+      // Also detect heading after sentence-ending line (no blank line between)
+      const prevContentLine = findPrevContentLine(result);
+      const isAfterSentenceEnd = prevContentLine !== null && /[.!?]["']?\s*$/.test(prevContentLine);
+
+      if ((isAfterBlank || isAfterSentenceEnd) && looksLikeHeading(trimmed)) {
+        // Add blank line before heading if needed
+        if (!isAfterBlank && result.length > 0) {
+          result.push('');
+        }
+        result.push(`## ${trimmed}`);
+        result.push(''); // blank line after heading
+        continue;
+      }
+
+      result.push(lines[i]);
+    }
+
+    text = result.join('\n');
+
+    // Clean up 3+ consecutive blank lines → 2
+    text = text.replace(/\n{3,}/g, '\n\n');
+
+    return text.trim();
+  }
+
+  function looksLikeHeading(line: string): boolean {
+    if (line.length > 80 || line.length < 5) return false;
+    // Must not end with sentence punctuation (? is allowed for headings)
+    if (line.endsWith('.') || line.endsWith(',') || line.endsWith(';') || line.endsWith(':')) return false;
+    // Must not be bold/italic (TL;DR, CTA blocks)
+    if (line.startsWith('**') || line.startsWith('*')) return false;
+    // Must not be a CTA or link
+    if (line.includes('→') || line.includes('-->') || line.startsWith('[') ||
+        line.toLowerCase().startsWith('tl;dr') || line.toLowerCase().startsWith('call our') ||
+        line.toLowerCase().startsWith('start your') || line.toLowerCase().startsWith('hear it') ||
+        line.toLowerCase().startsWith('learn more') || line.toLowerCase().startsWith('click here')) return false;
+    // Title case check: majority of significant words (>3 chars) are capitalized
+    const words = line.replace(/[^\w\s'-]/g, '').split(/\s+/).filter(w => w.length > 0);
+    if (words.length < 2) return false;
+    const significantWords = words.filter(w => w.length > 3);
+    if (significantWords.length === 0) return true;
+    const capitalizedCount = significantWords.filter(w => /^[A-Z]/.test(w)).length;
+    return capitalizedCount / significantWords.length >= 0.5;
+  }
+
+  function findPrevContentLine(lines: string[]): string | null {
+    for (let i = lines.length - 1; i >= 0; i--) {
+      if (lines[i].trim()) return lines[i].trim();
+    }
+    return null;
+  }
 
   // Convert markdown to Medium-style HTML
   function convertMarkdownToHtml(markdown: string): string {
