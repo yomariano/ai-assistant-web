@@ -2,19 +2,12 @@
 
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Loader2 } from "lucide-react";
+import { ArrowRight, Play } from "lucide-react";
 import Link from "next/link";
-import dynamic from "next/dynamic";
 import { trackEvent } from "@/lib/umami";
-
-const LiveDemoCall = dynamic(
-  () => import("@/components/voicefleet/LiveDemoCall"),
-  { ssr: false }
-);
 
 const HeroCTA = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
 
   // Lazy-check auth after hydration to avoid pulling Supabase into the initial bundle
   useEffect(() => {
@@ -27,65 +20,47 @@ const HeroCTA = () => {
     });
   }, []);
 
-  const handleStartTrial = async () => {
-    setIsLoading(true);
-    trackEvent("cta_click", { location: "hero", label: "start_free_trial" });
-    try {
-      const { signInWithGoogle } = await import("@/lib/supabase");
-      await signInWithGoogle();
-    } catch (error) {
-      console.error("Failed to start Google OAuth:", error);
-      setIsLoading(false);
-    }
-  };
-
   return (
-    <>
-      <div className="flex flex-col sm:flex-row gap-4 mb-10 animate-fade-up stagger-3">
-        {isAuthenticated ? (
-          <Link href="/dashboard">
-            <Button variant="hero" size="xl">
-              Go to Dashboard
+    <div className="flex flex-col gap-3 mb-10 animate-fade-up stagger-3">
+      {isAuthenticated ? (
+        <Link href="/dashboard">
+          <Button variant="hero" size="xl">
+            Go to Dashboard
+          </Button>
+        </Link>
+      ) : (
+        <div className="flex flex-col sm:flex-row gap-3">
+          <Link href="/register">
+            <Button
+              variant="hero"
+              size="xl"
+              className="cursor-pointer"
+              onClick={() => trackEvent("cta_click", { location: "hero", label: "start_trial" })}
+            >
+              Start Free Trial
               <ArrowRight className="w-5 h-5" />
             </Button>
           </Link>
-        ) : (
-          <Button variant="hero" size="xl" onClick={handleStartTrial} disabled={isLoading}>
-            {isLoading ? (
-              <>
-                <Loader2 className="w-5 h-5 animate-spin" />
-                Connecting...
-              </>
-            ) : (
-              <>
-                Start Free Trial
-                <ArrowRight className="w-5 h-5" />
-              </>
-            )}
+          <Button
+            variant="outline"
+            size="xl"
+            className="cursor-pointer border-border/60 hover:bg-accent/5"
+            onClick={() => {
+              trackEvent("cta_click", { location: "hero", label: "watch_product_tour" });
+              document.getElementById("product-tour")?.scrollIntoView({ behavior: "smooth" });
+            }}
+          >
+            <Play className="w-5 h-5" />
+            Watch Product Tour
           </Button>
-        )}
-        <LiveDemoCall />
-      </div>
-      <p className="text-xs text-muted-foreground -mt-6 mb-8">
-        Live demo: choose an industry + voice + language (English, Spanish, French, German, Italian). Calls end automatically after 90 seconds.
-        {" "}Or <Link href="/demo" className="text-foreground font-semibold hover:underline">try the interactive booking demo</Link>.
-      </p>
-      <p className="text-xs text-muted-foreground -mt-4 mb-6">
-        Free 30-day trial includes setup support. Cancel anytime.
-      </p>
-      <p className="text-sm text-muted-foreground -mt-4 mb-10">
-        Prefer a guided walkthrough?{" "}
-        <a
-          href="https://calendly.com/voicefleet"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-foreground font-semibold hover:underline"
-        >
-          Book a demo
-        </a>
-        .
-      </p>
-    </>
+        </div>
+      )}
+      {!isAuthenticated && (
+        <p className="text-xs text-muted-foreground uppercase tracking-wider font-medium">
+          No credit card required
+        </p>
+      )}
+    </div>
   );
 };
 
