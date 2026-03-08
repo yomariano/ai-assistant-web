@@ -1,11 +1,14 @@
 import CTAButton from './CTAButton';
 import { Business, getLocalizedDescription, getLocalizedHours } from '@/lib/directory-data';
+import { buildTrackedDirectoryPath } from '@/lib/directory-tracking';
 
 export default function BusinessProfile({ business, locale = 'en' }: { business: Business; locale?: string }) {
   const isES = locale === 'es';
   const demoHref = isES ? '/es/demo' : '/demo';
   const description = getLocalizedDescription(business, locale);
   const hours = getLocalizedHours(business, locale);
+  const trackedWebsiteHref = buildTrackedDirectoryPath('go', business);
+  const trackedPhoneHref = buildTrackedDirectoryPath('call', business);
 
   return (
     <div className="max-w-4xl mx-auto">
@@ -32,7 +35,7 @@ export default function BusinessProfile({ business, locale = 'en' }: { business:
           {business.phone && (
             <div>
               <p className="text-slate-400 text-sm">{isES ? 'Teléfono' : 'Phone'}</p>
-              <a href={`tel:${business.phone}`} className="text-cyan-400 font-medium hover:text-cyan-300">
+              <a href={trackedPhoneHref} className="text-cyan-400 font-medium hover:text-cyan-300">
                 {business.phone}
               </a>
             </div>
@@ -40,7 +43,7 @@ export default function BusinessProfile({ business, locale = 'en' }: { business:
           {business.website && (
             <div>
               <p className="text-slate-400 text-sm">{isES ? 'Sitio Web' : 'Website'}</p>
-              <a href={business.website} target="_blank" rel="noopener noreferrer" className="text-blue-400 font-medium hover:text-blue-300 truncate block">
+              <a href={trackedWebsiteHref} target="_blank" rel="noopener noreferrer" className="text-blue-400 font-medium hover:text-blue-300 truncate block">
                 {business.website.replace(/https?:\/\//, '').replace(/\/$/, '')}
               </a>
             </div>
@@ -71,7 +74,7 @@ export default function BusinessProfile({ business, locale = 'en' }: { business:
       {/* CTAs */}
       <div className="flex flex-col sm:flex-row gap-4 mb-12">
         {business.phone && (
-          <CTAButton href={`tel:${business.phone}`} variant="primary">
+          <CTAButton href={trackedPhoneHref} variant="primary">
             📞 {isES ? 'Llamar Ahora — IA 24/7' : 'Call Now — AI Answers 24/7'}
           </CTAButton>
         )}

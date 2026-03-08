@@ -25,6 +25,10 @@ export function getAllBusinesses(): Business[] {
   return businesses;
 }
 
+export function getBusinessesBySlug(slug: string): Business[] {
+  return businesses.filter((business) => business.slug === slug);
+}
+
 export function getBusinessBySlug(vertical: string, citySlug: string, slug: string): Business | undefined {
   return businesses.find(b => b.vertical === vertical && b.citySlug === citySlug && b.slug === slug);
 }
