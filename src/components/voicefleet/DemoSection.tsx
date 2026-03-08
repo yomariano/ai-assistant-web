@@ -4,6 +4,8 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Phone, ArrowRight, CheckCircle2 } from "lucide-react";
 
+const CALENDLY_URL = "https://calendly.com/voicefleet";
+
 const DemoSection = () => {
   const [formData, setFormData] = useState({
     email: "",
@@ -11,7 +13,6 @@ const DemoSection = () => {
     volume: "",
     useCase: "",
   });
-  const [submitted, setSubmitted] = useState(false);
   const emailInputId = "demo-email";
   const companyInputId = "demo-company";
   const volumeSelectId = "demo-volume";
@@ -37,9 +38,12 @@ const DemoSection = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
-    setFormData({ email: "", company: "", volume: "", useCase: "" });
-    setTimeout(() => setSubmitted(false), 3000);
+
+    const calendlyWindow = window.open(CALENDLY_URL, "_blank", "noopener,noreferrer");
+
+    if (!calendlyWindow) {
+      window.location.href = CALENDLY_URL;
+    }
   };
 
   const benefits = [
@@ -92,96 +96,88 @@ const DemoSection = () => {
               Book Your Demo
             </h3>
 
-            {submitted ? (
-              <div className="text-center py-8">
-                <CheckCircle2 className="w-12 h-12 text-accent mx-auto mb-4" />
-                <h4 className="text-lg font-semibold text-foreground mb-2">Demo request received!</h4>
-                <p className="text-muted-foreground">Our team will contact you within 24 hours.</p>
+            <form onSubmit={handleSubmit} className="space-y-5">
+              <div>
+                <label htmlFor={emailInputId} className="block text-sm font-medium text-foreground mb-2">
+                  Work Email *
+                </label>
+                <input
+                  id={emailInputId}
+                  name="email"
+                  aria-label="Work email"
+                  type="email"
+                  required
+                  value={formData.email}
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  className="w-full px-4 py-3 rounded-lg border border-border bg-background text-foreground focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all"
+                  placeholder="name at company dot com"
+                />
               </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="space-y-5">
-                <div>
-                  <label htmlFor={emailInputId} className="block text-sm font-medium text-foreground mb-2">
-                    Work Email *
-                  </label>
-                  <input
-                    id={emailInputId}
-                    name="email"
-                    aria-label="Work email"
-                    type="email"
-                    required
-                    value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full px-4 py-3 rounded-lg border border-border bg-background text-foreground focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all"
-                    placeholder="name at company dot com"
-                  />
-                </div>
 
-                <div>
-                  <label htmlFor={companyInputId} className="block text-sm font-medium text-foreground mb-2">
-                    Company *
-                  </label>
-                  <input
-                    id={companyInputId}
-                    name="company"
-                    aria-label="Company"
-                    type="text"
-                    required
-                    value={formData.company}
-                    onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                    className="w-full px-4 py-3 rounded-lg border border-border bg-background text-foreground focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all"
-                    placeholder="Your company name"
-                  />
-                </div>
+              <div>
+                <label htmlFor={companyInputId} className="block text-sm font-medium text-foreground mb-2">
+                  Company *
+                </label>
+                <input
+                  id={companyInputId}
+                  name="company"
+                  aria-label="Company"
+                  type="text"
+                  required
+                  value={formData.company}
+                  onChange={(e) => setFormData({ ...formData, company: e.target.value })}
+                  className="w-full px-4 py-3 rounded-lg border border-border bg-background text-foreground focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all"
+                  placeholder="Your company name"
+                />
+              </div>
 
-                <div>
-                  <label htmlFor={volumeSelectId} className="block text-sm font-medium text-foreground mb-2">
-                    Monthly Call Volume
-                  </label>
-                  <select
-                    id={volumeSelectId}
-                    name="volume"
-                    aria-label="Monthly call volume"
-                    value={formData.volume}
-                    onChange={(e) => setFormData({ ...formData, volume: e.target.value })}
-                    className="w-full px-4 py-3 rounded-lg border border-border bg-background text-foreground focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all"
-                  >
-                    <option value="">Select volume</option>
-                    {volumeOptions.map((option) => (
-                      <option key={option} value={option}>{option}</option>
-                    ))}
-                  </select>
-                </div>
+              <div>
+                <label htmlFor={volumeSelectId} className="block text-sm font-medium text-foreground mb-2">
+                  Monthly Call Volume
+                </label>
+                <select
+                  id={volumeSelectId}
+                  name="volume"
+                  aria-label="Monthly call volume"
+                  value={formData.volume}
+                  onChange={(e) => setFormData({ ...formData, volume: e.target.value })}
+                  className="w-full px-4 py-3 rounded-lg border border-border bg-background text-foreground focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all"
+                >
+                  <option value="">Select volume</option>
+                  {volumeOptions.map((option) => (
+                    <option key={option} value={option}>{option}</option>
+                  ))}
+                </select>
+              </div>
 
-                <div>
-                  <label htmlFor={useCaseSelectId} className="block text-sm font-medium text-foreground mb-2">
-                    Primary Use Case
-                  </label>
-                  <select
-                    id={useCaseSelectId}
-                    name="useCase"
-                    aria-label="Primary use case"
-                    value={formData.useCase}
-                    onChange={(e) => setFormData({ ...formData, useCase: e.target.value })}
-                    className="w-full px-4 py-3 rounded-lg border border-border bg-background text-foreground focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all"
-                  >
-                    <option value="">Select use case</option>
-                    {useCaseOptions.map((option) => (
-                      <option key={option} value={option}>{option}</option>
-                    ))}
-                  </select>
-                </div>
+              <div>
+                <label htmlFor={useCaseSelectId} className="block text-sm font-medium text-foreground mb-2">
+                  Primary Use Case
+                </label>
+                <select
+                  id={useCaseSelectId}
+                  name="useCase"
+                  aria-label="Primary use case"
+                  value={formData.useCase}
+                  onChange={(e) => setFormData({ ...formData, useCase: e.target.value })}
+                  className="w-full px-4 py-3 rounded-lg border border-border bg-background text-foreground focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all"
+                >
+                  <option value="">Select use case</option>
+                  {useCaseOptions.map((option) => (
+                    <option key={option} value={option}>{option}</option>
+                  ))}
+                </select>
+              </div>
 
-                <Button type="submit" variant="hero" size="xl" className="w-full">
-                  Book Your Demo
-                  <ArrowRight className="w-5 h-5" />
-                </Button>
+              <Button type="submit" variant="hero" size="xl" className="w-full">
+                Book Your Demo
+                <ArrowRight className="w-5 h-5" />
+              </Button>
 
-                <p className="text-xs text-muted-foreground text-center">
-                  By submitting, you agree to our Privacy Policy and Terms of Service.
-                </p>
-              </form>
-            )}
+              <p className="text-xs text-muted-foreground text-center">
+                By submitting, you agree to our Privacy Policy and Terms of Service.
+              </p>
+            </form>
           </div>
         </div>
       </div>

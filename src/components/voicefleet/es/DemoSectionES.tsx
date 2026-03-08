@@ -4,6 +4,8 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Phone, ArrowRight, CheckCircle2 } from "lucide-react";
 
+const CALENDLY_URL = "https://calendly.com/voicefleet";
+
 const DemoSectionES = () => {
   const [formData, setFormData] = useState({
     email: "",
@@ -11,7 +13,6 @@ const DemoSectionES = () => {
     volume: "",
     useCase: "",
   });
-  const [submitted, setSubmitted] = useState(false);
   const emailInputId = "demo-email-es";
   const companyInputId = "demo-company-es";
   const volumeSelectId = "demo-volume-es";
@@ -37,9 +38,12 @@ const DemoSectionES = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
-    setFormData({ email: "", company: "", volume: "", useCase: "" });
-    setTimeout(() => setSubmitted(false), 3000);
+
+    const calendlyWindow = window.open(CALENDLY_URL, "_blank", "noopener,noreferrer");
+
+    if (!calendlyWindow) {
+      window.location.href = CALENDLY_URL;
+    }
   };
 
   const benefits = [
@@ -95,96 +99,88 @@ const DemoSectionES = () => {
               Reservá Tu Demo
             </h3>
 
-            {submitted ? (
-              <div className="text-center py-8">
-                <CheckCircle2 className="w-12 h-12 text-accent mx-auto mb-4" />
-                <h4 className="text-lg font-semibold text-foreground mb-2">¡Solicitud de demo recibida!</h4>
-                <p className="text-muted-foreground">Nuestro equipo te contactará en las próximas 24 horas.</p>
+            <form onSubmit={handleSubmit} className="space-y-5">
+              <div>
+                <label htmlFor={emailInputId} className="block text-sm font-medium text-foreground mb-2">
+                  Email Laboral *
+                </label>
+                <input
+                  id={emailInputId}
+                  name="email"
+                  aria-label="Email laboral"
+                  type="email"
+                  required
+                  value={formData.email}
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  className="w-full px-4 py-3 rounded-lg border border-border bg-background text-foreground focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all"
+                  placeholder="nombre@empresa.com"
+                />
               </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="space-y-5">
-                <div>
-                  <label htmlFor={emailInputId} className="block text-sm font-medium text-foreground mb-2">
-                    Email Laboral *
-                  </label>
-                  <input
-                    id={emailInputId}
-                    name="email"
-                    aria-label="Email laboral"
-                    type="email"
-                    required
-                    value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full px-4 py-3 rounded-lg border border-border bg-background text-foreground focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all"
-                    placeholder="nombre@empresa.com"
-                  />
-                </div>
 
-                <div>
-                  <label htmlFor={companyInputId} className="block text-sm font-medium text-foreground mb-2">
-                    Empresa *
-                  </label>
-                  <input
-                    id={companyInputId}
-                    name="company"
-                    aria-label="Empresa"
-                    type="text"
-                    required
-                    value={formData.company}
-                    onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                    className="w-full px-4 py-3 rounded-lg border border-border bg-background text-foreground focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all"
-                    placeholder="Nombre de tu empresa"
-                  />
-                </div>
+              <div>
+                <label htmlFor={companyInputId} className="block text-sm font-medium text-foreground mb-2">
+                  Empresa *
+                </label>
+                <input
+                  id={companyInputId}
+                  name="company"
+                  aria-label="Empresa"
+                  type="text"
+                  required
+                  value={formData.company}
+                  onChange={(e) => setFormData({ ...formData, company: e.target.value })}
+                  className="w-full px-4 py-3 rounded-lg border border-border bg-background text-foreground focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all"
+                  placeholder="Nombre de tu empresa"
+                />
+              </div>
 
-                <div>
-                  <label htmlFor={volumeSelectId} className="block text-sm font-medium text-foreground mb-2">
-                    Volumen Mensual de Llamadas
-                  </label>
-                  <select
-                    id={volumeSelectId}
-                    name="volume"
-                    aria-label="Volumen mensual de llamadas"
-                    value={formData.volume}
-                    onChange={(e) => setFormData({ ...formData, volume: e.target.value })}
-                    className="w-full px-4 py-3 rounded-lg border border-border bg-background text-foreground focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all"
-                  >
-                    <option value="">Seleccioná volumen</option>
-                    {volumeOptions.map((option) => (
-                      <option key={option} value={option}>{option}</option>
-                    ))}
-                  </select>
-                </div>
+              <div>
+                <label htmlFor={volumeSelectId} className="block text-sm font-medium text-foreground mb-2">
+                  Volumen Mensual de Llamadas
+                </label>
+                <select
+                  id={volumeSelectId}
+                  name="volume"
+                  aria-label="Volumen mensual de llamadas"
+                  value={formData.volume}
+                  onChange={(e) => setFormData({ ...formData, volume: e.target.value })}
+                  className="w-full px-4 py-3 rounded-lg border border-border bg-background text-foreground focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all"
+                >
+                  <option value="">Seleccioná volumen</option>
+                  {volumeOptions.map((option) => (
+                    <option key={option} value={option}>{option}</option>
+                  ))}
+                </select>
+              </div>
 
-                <div>
-                  <label htmlFor={useCaseSelectId} className="block text-sm font-medium text-foreground mb-2">
-                    Caso de Uso Principal
-                  </label>
-                  <select
-                    id={useCaseSelectId}
-                    name="useCase"
-                    aria-label="Caso de uso principal"
-                    value={formData.useCase}
-                    onChange={(e) => setFormData({ ...formData, useCase: e.target.value })}
-                    className="w-full px-4 py-3 rounded-lg border border-border bg-background text-foreground focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all"
-                  >
-                    <option value="">Seleccioná caso de uso</option>
-                    {useCaseOptions.map((option) => (
-                      <option key={option} value={option}>{option}</option>
-                    ))}
-                  </select>
-                </div>
+              <div>
+                <label htmlFor={useCaseSelectId} className="block text-sm font-medium text-foreground mb-2">
+                  Caso de Uso Principal
+                </label>
+                <select
+                  id={useCaseSelectId}
+                  name="useCase"
+                  aria-label="Caso de uso principal"
+                  value={formData.useCase}
+                  onChange={(e) => setFormData({ ...formData, useCase: e.target.value })}
+                  className="w-full px-4 py-3 rounded-lg border border-border bg-background text-foreground focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all"
+                >
+                  <option value="">Seleccioná caso de uso</option>
+                  {useCaseOptions.map((option) => (
+                    <option key={option} value={option}>{option}</option>
+                  ))}
+                </select>
+              </div>
 
-                <Button type="submit" variant="hero" size="xl" className="w-full">
-                  Reservá Tu Demo
-                  <ArrowRight className="w-5 h-5" />
-                </Button>
+              <Button type="submit" variant="hero" size="xl" className="w-full">
+                Reservá Tu Demo
+                <ArrowRight className="w-5 h-5" />
+              </Button>
 
-                <p className="text-xs text-muted-foreground text-center">
-                  Al enviar, aceptás nuestra Política de Privacidad y Términos de Servicio.
-                </p>
-              </form>
-            )}
+              <p className="text-xs text-muted-foreground text-center">
+                Al enviar, aceptás nuestra Política de Privacidad y Términos de Servicio.
+              </p>
+            </form>
           </div>
         </div>
       </div>

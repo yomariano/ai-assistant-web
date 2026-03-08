@@ -1,4 +1,4 @@
-import { Stethoscope, Scale, Wrench } from "lucide-react";
+import { Stethoscope, Scale, Wrench, Scissors, Building2 } from "lucide-react";
 
 const CaseStudiesSection = () => {
   const caseStudies = [
@@ -41,6 +41,32 @@ const CaseStudiesSection = () => {
       ],
       color: "primary",
     },
+    {
+      icon: Scissors,
+      industry: "Beauty salon",
+      name: "Salon owner",
+      headline: "Clients book even when we're with other clients",
+      quote: "We used to miss calls mid-appointment. Now VoiceFleet picks up, checks availability, and books the client in. We've seen a noticeable increase in bookings without lifting a finger.",
+      stats: [
+        { value: "0", label: "missed bookings" },
+        { value: "24/7", label: "availability" },
+        { value: "40%", label: "more bookings" },
+      ],
+      color: "accent",
+    },
+    {
+      icon: Building2,
+      industry: "Hotel",
+      name: "Front desk manager",
+      headline: "Guests get instant answers about rooms and availability",
+      quote: "During check-in rushes, phones went unanswered. VoiceFleet now handles room inquiries, confirms availability, and forwards urgent requests to the desk. Guest satisfaction improved overnight.",
+      stats: [
+        { value: "100%", label: "calls answered" },
+        { value: "<20s", label: "response time" },
+        { value: "5-star", label: "guest feedback" },
+      ],
+      color: "primary",
+    },
   ];
 
   return (
@@ -48,7 +74,7 @@ const CaseStudiesSection = () => {
       <div className="container mx-auto px-4">
         <div className="max-w-3xl mx-auto text-center mb-10 lg:mb-16">
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-heading font-bold text-foreground mb-4">
-            Common <span className="text-gradient-accent">SMB Workflows</span>
+            How Businesses Use <span className="text-gradient-accent">VoiceFleet</span>
           </h2>
           <p className="text-base lg:text-lg text-muted-foreground">
             See practical call-handling patterns teams use with VoiceFleet

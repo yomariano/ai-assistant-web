@@ -5,6 +5,16 @@ export const HOMEPAGE_FAQS = [
       "After signup, you'll get a VoiceFleet number. You then enable call forwarding from your existing number to VoiceFleet. Most providers can be set up in a few minutes.",
   },
   {
+    question: "Will forwarding my calls create a loop?",
+    answer:
+      "No. The call flow is strictly one-directional: your business line forwards to VoiceFleet, and VoiceFleet can escalate to your mobile if needed. Calls never loop back to your business line.",
+  },
+  {
+    question: "Do I need to change my phone number?",
+    answer:
+      "No. You keep your existing business number. Just enable call forwarding to your VoiceFleet number and your customers continue calling the same number they always have.",
+  },
+  {
     question: "Can it handle accents and names?",
     answer:
       "Yes. VoiceFleet is built for real-world calls and handles a wide range of accents, names, and pronunciations.",

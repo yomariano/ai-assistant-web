@@ -414,10 +414,11 @@ const VOICES: DemoVoice[] = [
 
 interface LiveDemoCallProps {
   trigger?: React.ReactNode;
+  inline?: boolean;
 }
 
-export default function LiveDemoCall({ trigger }: LiveDemoCallProps) {
-  const [open, setOpen] = useState(false);
+export default function LiveDemoCall({ trigger, inline }: LiveDemoCallProps) {
+  const [open, setOpen] = useState(!!inline);
   const [callStatus, setCallStatus] = useState<CallStatus>("idle");
   const [error, setError] = useState<string | null>(null);
   const [isMuted, setIsMuted] = useState(false);
@@ -784,6 +785,253 @@ export default function LiveDemoCall({ trigger }: LiveDemoCallProps) {
     }
   }, []);
 
+  // Shared demo UI content used by both inline and modal modes
+  const demoContent = (
+    <>
+      {error && (
+        <div className="rounded-xl border border-destructive/30 bg-destructive/10 px-4 py-3 text-sm text-destructive">
+          {error}{" "}
+          {isDemoBlocked && (
+            <a
+              href="https://calendly.com/voicefleet"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline font-semibold"
+            >
+              Book a demo
+            </a>
+          )}
+        </div>
+      )}
+
+      {isDemoBlocked && (
+        <div className="flex items-center gap-2">
+          <input
+            type="text"
+            value={bypassCode}
+            onChange={(e) => setBypassCode(e.target.value.toUpperCase())}
+            placeholder="Enter access code"
+            className="flex-1 px-4 py-2 rounded-lg border border-border bg-background text-foreground text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none"
+          />
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={startCall}
+            disabled={!bypassCode.trim()}
+          >
+            Try Code
+          </Button>
+        </div>
+      )}
+
+      <div className="grid gap-4 sm:grid-cols-3">
+        <div>
+          <label className="block text-sm font-medium text-foreground mb-2">Scenario</label>
+          <select
+            value={scenarioId}
+            onChange={(e) => setScenarioId(e.target.value)}
+            className="w-full px-4 py-3 rounded-lg border border-border bg-background text-foreground focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all"
+            disabled={callStatus === "connecting" || callStatus === "connected"}
+          >
+            {SCENARIOS.map((s) => (
+              <option key={s.id} value={s.id}>
+                {s.label}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium text-foreground mb-2">Voice</label>
+          <select
+            value={selectedVoice.id}
+            onChange={(e) => {
+              const voice = VOICES.find((v) => v.id === e.target.value);
+              if (voice) {
+                setSelectedVoice(voice);
+                if (voice.defaultLanguageId && voice.defaultLanguageId !== languageId) {
+                  setLanguageId(voice.defaultLanguageId);
+                }
+              }
+            }}
+            className="w-full px-4 py-3 rounded-lg border border-border bg-background text-foreground focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all"
+            disabled={callStatus === "connecting" || callStatus === "connected"}
+          >
+            {VOICES.map((v) => (
+              <option key={v.id} value={v.id}>
+                {v.label}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium text-foreground mb-2">Language</label>
+          <select
+            value={languageId}
+            onChange={(e) => setLanguageId(e.target.value as DemoLanguageId)}
+            className="w-full px-4 py-3 rounded-lg border border-border bg-background text-foreground focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all"
+            disabled={callStatus === "connecting" || callStatus === "connected"}
+          >
+            {LANGUAGES.map((l) => (
+              <option key={l.id} value={l.id}>
+                {l.label}
+              </option>
+            ))}
+          </select>
+          <p className="mt-2 text-xs text-muted-foreground">Use the sample phrases below for the best demo.</p>
+        </div>
+      </div>
+
+      <div className="rounded-2xl border border-border bg-muted/30 p-4">
+        <div className="flex items-center justify-between gap-4">
+          <div className="flex items-center gap-3">
+            <div
+              className={`w-11 h-11 rounded-xl flex items-center justify-center border ${
+                callStatus === "connected"
+                  ? "bg-accent/10 border-accent/20"
+                  : callStatus === "connecting"
+                  ? "bg-primary/10 border-primary/20"
+                  : "bg-background border-border"
+              }`}
+            >
+              {callStatus === "connected" ? (
+                <Mic className={`w-5 h-5 ${isAssistantSpeaking ? "text-accent" : "text-muted-foreground"}`} />
+              ) : callStatus === "connecting" ? (
+                <Phone className="w-5 h-5 text-primary" />
+              ) : callStatus === "ended" ? (
+                <PhoneOff className="w-5 h-5 text-muted-foreground" />
+              ) : (
+                <Phone className="w-5 h-5 text-muted-foreground" />
+              )}
+            </div>
+            <div>
+              <p className="text-sm font-semibold text-foreground">
+                {callStatus === "loading" && "Loading voice system..."}
+                {callStatus === "idle" && "Ready"}
+                {callStatus === "connecting" && "Connecting..."}
+                {callStatus === "connected" && (isAssistantSpeaking ? "Assistant speaking..." : "Listening...")}
+                {callStatus === "ended" && "Call ended"}
+                {callStatus === "error" && "Call failed"}
+              </p>
+              <p className="text-xs text-muted-foreground">{scenario.businessName} demo receptionist</p>
+            </div>
+          </div>
+
+          {callStatus === "connected" && (
+            <div className="flex items-center gap-2">
+              <Volume2 className="w-4 h-4 text-muted-foreground" />
+              <div className="w-24 h-2 bg-border rounded-full overflow-hidden">
+                <div
+                  className="h-full bg-accent transition-all"
+                  style={{ width: `${Math.min(Math.max(volumeLevel * 100, 0), 100)}%` }}
+                />
+              </div>
+            </div>
+          )}
+        </div>
+
+        <div className="mt-4">
+          <p className="text-xs font-medium text-muted-foreground mb-2">Try saying:</p>
+          <div className="flex flex-wrap gap-2">
+            {suggestedPhrases.map((p) => (
+              <button
+                key={p}
+                type="button"
+                onClick={() => copyPhrase(p)}
+                className="inline-flex items-center gap-2 rounded-full border border-border bg-background px-3 py-1.5 text-xs text-muted-foreground hover:text-foreground hover:border-primary/30 transition-colors"
+              >
+                <Copy className="w-3.5 h-3.5" />
+                {p}
+              </button>
+            ))}
+          </div>
+          <p className="mt-2 text-xs text-muted-foreground">Click a phrase to copy.</p>
+        </div>
+      </div>
+
+      {messages.length > 0 && (
+        <div className="max-h-56 overflow-y-auto rounded-2xl border border-border bg-background p-4">
+          <div className="flex items-center gap-2 mb-3">
+            <CheckCircle2 className="w-4 h-4 text-muted-foreground" />
+            <span className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Transcript</span>
+          </div>
+          <div className="space-y-3">
+            {messages.map((m, idx) => (
+              <div key={idx} className="text-sm">
+                <span className="font-semibold text-foreground">
+                  {m.role === "user" ? "You" : "Receptionist"}:
+                </span>{" "}
+                <span className="text-muted-foreground">{m.content}</span>
+              </div>
+            ))}
+            <div ref={messagesEndRef} />
+          </div>
+        </div>
+      )}
+
+      <div className="flex flex-wrap gap-2">
+        {callStatus === "connected" || callStatus === "connecting" ? (
+          <>
+            <Button
+              className="flex-1 sm:flex-none"
+              variant="outline"
+              onClick={toggleMute}
+              disabled={callStatus !== "connected"}
+            >
+              {isMuted ? (
+                <>
+                  <MicOff className="w-4 h-4" />
+                  Unmute
+                </>
+              ) : (
+                <>
+                  <Mic className="w-4 h-4" />
+                  Mute
+                </>
+              )}
+            </Button>
+            <Button
+              className="flex-1 sm:flex-none border-destructive/30 text-destructive hover:bg-destructive/10"
+              variant="outline"
+              onClick={endCall}
+            >
+              <PhoneOff className="w-4 h-4" />
+              End call
+            </Button>
+          </>
+        ) : (
+          <Button className="w-full" variant="hero" onClick={startCall} disabled={callStatus === "loading" || isCheckingAllowance || isDemoBlocked}>
+            <Phone className="w-4 h-4" />
+            {isCheckingAllowance ? "Starting..." : callStatus === "error" || callStatus === "ended" ? "Try again" : "Start demo call"}
+          </Button>
+        )}
+      </div>
+
+      <div className="rounded-xl bg-muted/40 px-4 py-3 text-xs text-muted-foreground">
+        Tip: if your mic is blocked, click the lock icon in your browser address bar and allow microphone access.
+      </div>
+    </>
+  );
+
+  // Inline mode: render directly in the page, no modal
+  if (inline) {
+    return (
+      <div className="relative bg-card rounded-2xl shadow-xl border border-border overflow-hidden">
+        <div className="bg-gradient-hero p-4 sm:p-5 text-center">
+          <p className="text-sm font-medium text-primary-foreground/80">Hear it for yourself</p>
+          <h2 className="text-lg sm:text-xl font-heading font-bold text-primary-foreground mt-1">
+            Talk to an AI Receptionist Now
+          </h2>
+        </div>
+        <div className="p-4 sm:p-5 space-y-4">
+          {demoContent}
+        </div>
+      </div>
+    );
+  }
+
+  // Modal mode: trigger button + Dialog
   return (
     <>
       {trigger ? (
@@ -812,229 +1060,7 @@ export default function LiveDemoCall({ trigger }: LiveDemoCallProps) {
             </DialogDescription>
           </DialogHeader>
 
-          {error && (
-            <div className="rounded-xl border border-destructive/30 bg-destructive/10 px-4 py-3 text-sm text-destructive">
-              {error}{" "}
-              {isDemoBlocked && (
-                <a
-                  href="https://calendly.com/voicefleet"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="underline font-semibold"
-                >
-                  Book a demo
-                </a>
-              )}
-            </div>
-          )}
-
-          {isDemoBlocked && (
-            <div className="flex items-center gap-2">
-              <input
-                type="text"
-                value={bypassCode}
-                onChange={(e) => setBypassCode(e.target.value.toUpperCase())}
-                placeholder="Enter access code"
-                className="flex-1 px-4 py-2 rounded-lg border border-border bg-background text-foreground text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none"
-              />
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={startCall}
-                disabled={!bypassCode.trim()}
-              >
-                Try Code
-              </Button>
-            </div>
-          )}
-
-          <div className="grid gap-4 sm:grid-cols-3">
-            <div>
-              <label className="block text-sm font-medium text-foreground mb-2">Scenario</label>
-              <select
-                value={scenarioId}
-                onChange={(e) => setScenarioId(e.target.value)}
-                className="w-full px-4 py-3 rounded-lg border border-border bg-background text-foreground focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all"
-                disabled={callStatus === "connecting" || callStatus === "connected"}
-              >
-                {SCENARIOS.map((s) => (
-                  <option key={s.id} value={s.id}>
-                    {s.label}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-foreground mb-2">Voice</label>
-              <select
-                value={selectedVoice.id}
-                onChange={(e) => {
-                  const voice = VOICES.find((v) => v.id === e.target.value);
-                  if (voice) {
-                    setSelectedVoice(voice);
-                    if (voice.defaultLanguageId && voice.defaultLanguageId !== languageId) {
-                      setLanguageId(voice.defaultLanguageId);
-                    }
-                  }
-                }}
-                className="w-full px-4 py-3 rounded-lg border border-border bg-background text-foreground focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all"
-                disabled={callStatus === "connecting" || callStatus === "connected"}
-              >
-                {VOICES.map((v) => (
-                  <option key={v.id} value={v.id}>
-                    {v.label}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-foreground mb-2">Language</label>
-              <select
-                value={languageId}
-                onChange={(e) => setLanguageId(e.target.value as DemoLanguageId)}
-                className="w-full px-4 py-3 rounded-lg border border-border bg-background text-foreground focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all"
-                disabled={callStatus === "connecting" || callStatus === "connected"}
-              >
-                {LANGUAGES.map((l) => (
-                  <option key={l.id} value={l.id}>
-                    {l.label}
-                  </option>
-                ))}
-              </select>
-              <p className="mt-2 text-xs text-muted-foreground">Use the sample phrases below for the best demo.</p>
-            </div>
-          </div>
-
-          <div className="rounded-2xl border border-border bg-muted/30 p-4">
-            <div className="flex items-center justify-between gap-4">
-              <div className="flex items-center gap-3">
-                <div
-                  className={`w-11 h-11 rounded-xl flex items-center justify-center border ${
-                    callStatus === "connected"
-                      ? "bg-accent/10 border-accent/20"
-                      : callStatus === "connecting"
-                      ? "bg-primary/10 border-primary/20"
-                      : "bg-background border-border"
-                  }`}
-                >
-                  {callStatus === "connected" ? (
-                    <Mic className={`w-5 h-5 ${isAssistantSpeaking ? "text-accent" : "text-muted-foreground"}`} />
-                  ) : callStatus === "connecting" ? (
-                    <Phone className="w-5 h-5 text-primary" />
-                  ) : callStatus === "ended" ? (
-                    <PhoneOff className="w-5 h-5 text-muted-foreground" />
-                  ) : (
-                    <Phone className="w-5 h-5 text-muted-foreground" />
-                  )}
-                </div>
-                <div>
-                  <p className="text-sm font-semibold text-foreground">
-                    {callStatus === "loading" && "Loading voice system..."}
-                    {callStatus === "idle" && "Ready"}
-                    {callStatus === "connecting" && "Connecting..."}
-                    {callStatus === "connected" && (isAssistantSpeaking ? "Assistant speaking..." : "Listening...")}
-                    {callStatus === "ended" && "Call ended"}
-                    {callStatus === "error" && "Call failed"}
-                  </p>
-                  <p className="text-xs text-muted-foreground">{scenario.businessName} demo receptionist</p>
-                </div>
-              </div>
-
-              {callStatus === "connected" && (
-                <div className="flex items-center gap-2">
-                  <Volume2 className="w-4 h-4 text-muted-foreground" />
-                  <div className="w-24 h-2 bg-border rounded-full overflow-hidden">
-                    <div
-                      className="h-full bg-accent transition-all"
-                      style={{ width: `${Math.min(Math.max(volumeLevel * 100, 0), 100)}%` }}
-                    />
-                  </div>
-                </div>
-              )}
-            </div>
-
-            <div className="mt-4">
-              <p className="text-xs font-medium text-muted-foreground mb-2">Try saying:</p>
-              <div className="flex flex-wrap gap-2">
-                {suggestedPhrases.map((p) => (
-                  <button
-                    key={p}
-                    type="button"
-                    onClick={() => copyPhrase(p)}
-                    className="inline-flex items-center gap-2 rounded-full border border-border bg-background px-3 py-1.5 text-xs text-muted-foreground hover:text-foreground hover:border-primary/30 transition-colors"
-                  >
-                    <Copy className="w-3.5 h-3.5" />
-                    {p}
-                  </button>
-                ))}
-              </div>
-              <p className="mt-2 text-xs text-muted-foreground">Click a phrase to copy.</p>
-            </div>
-          </div>
-
-          {messages.length > 0 && (
-            <div className="max-h-56 overflow-y-auto rounded-2xl border border-border bg-background p-4">
-              <div className="flex items-center gap-2 mb-3">
-                <CheckCircle2 className="w-4 h-4 text-muted-foreground" />
-                <span className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Transcript</span>
-              </div>
-              <div className="space-y-3">
-                {messages.map((m, idx) => (
-                  <div key={idx} className="text-sm">
-                    <span className="font-semibold text-foreground">
-                      {m.role === "user" ? "You" : "Receptionist"}:
-                    </span>{" "}
-                    <span className="text-muted-foreground">{m.content}</span>
-                  </div>
-                ))}
-                <div ref={messagesEndRef} />
-              </div>
-            </div>
-          )}
-
-          <DialogFooter className="gap-2">
-            {callStatus === "connected" || callStatus === "connecting" ? (
-              <>
-                <Button
-                  className="w-full sm:w-auto"
-                  variant="outline"
-                  onClick={toggleMute}
-                  disabled={callStatus !== "connected"}
-                >
-                  {isMuted ? (
-                    <>
-                      <MicOff className="w-4 h-4" />
-                      Unmute
-                    </>
-                  ) : (
-                    <>
-                      <Mic className="w-4 h-4" />
-                      Mute
-                    </>
-                  )}
-                </Button>
-                <Button
-                  className="w-full sm:w-auto border-destructive/30 text-destructive hover:bg-destructive/10"
-                  variant="outline"
-                  onClick={endCall}
-                >
-                  <PhoneOff className="w-4 h-4" />
-                  End call
-                </Button>
-              </>
-            ) : (
-              <Button className="w-full sm:w-auto" variant="hero" onClick={startCall} disabled={callStatus === "loading" || isCheckingAllowance || isDemoBlocked}>
-                <Phone className="w-4 h-4" />
-                {isCheckingAllowance ? "Starting..." : callStatus === "error" || callStatus === "ended" ? "Try again" : "Start demo call"}
-              </Button>
-            )}
-          </DialogFooter>
-
-          <div className="rounded-xl bg-muted/40 px-4 py-3 text-xs text-muted-foreground">
-            Tip: if your mic is blocked, click the lock icon in your browser address bar and allow microphone access.
-          </div>
+          {demoContent}
         </DialogContent>
       </Dialog>
     </>

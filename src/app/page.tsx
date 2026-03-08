@@ -33,8 +33,10 @@ export const metadata: Metadata = {
 // Above-fold components: load immediately for fast LCP
 import Header from "@/components/voicefleet/Header";
 import HeroSection from "@/components/voicefleet/HeroSection";
+import AsSeenOnSection from "@/components/voicefleet/AsSeenOnSection";
 import IntegrationBrandsCarousel from "@/components/voicefleet/IntegrationBrandsCarousel";
 import MetricsBar from "@/components/voicefleet/MetricsBar";
+import CountdownBanner from "@/components/voicefleet/CountdownBanner";
 
 // Below-fold components: lazy load for smaller initial bundle
 const ProblemSection = dynamic(() => import("@/components/voicefleet/ProblemSection"));
@@ -48,6 +50,7 @@ const FeaturesSection = dynamic(() => import("@/components/voicefleet/Integratio
 const SecuritySection = dynamic(() => import("@/components/voicefleet/SecuritySection"));
 const PricingSection = dynamic(() => import("@/components/voicefleet/PricingSection"));
 const DemoSection = dynamic(() => import("@/components/voicefleet/DemoSection"));
+const CallFlowDiagram = dynamic(() => import("@/components/voicefleet/CallFlowDiagram"));
 const FAQSection = dynamic(() => import("@/components/voicefleet/FAQSection"));
 const DirectoryCTASection = dynamic(() => import("@/components/voicefleet/DirectoryCTASection"));
 const Footer = dynamic(() => import("@/components/voicefleet/Footer"));
@@ -79,9 +82,11 @@ export default function Home() {
           },
         ]}
       />
+      <CountdownBanner />
       <Header />
       <main>
         <HeroSection />
+        <AsSeenOnSection />
         <IntegrationBrandsCarousel />
         <MetricsBar />
         <ProblemSection />
@@ -95,6 +100,7 @@ export default function Home() {
         <SecuritySection />
         <PricingSection />
         <DemoSection />
+        <CallFlowDiagram />
         <FAQSection />
         <DirectoryCTASection />
       </main>
