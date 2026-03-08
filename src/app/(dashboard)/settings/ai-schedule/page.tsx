@@ -5,9 +5,8 @@ import { Save, Clock, AlertCircle, Loader2, ArrowUpRight } from 'lucide-react';
 import Link from 'next/link';
 import { Card, CardContent } from '@/components/ui/card';
 import Button from '@/components/ui/button';
-import Input from '@/components/ui/input';
 import { notificationsApi, billingApi } from '@/lib/api';
-import type { AISchedule, AIScheduleDay, EscalationSettings } from '@/types';
+import type { AISchedule, AIScheduleDay } from '@/types';
 
 // Common timezones for the dropdown
 const TIMEZONES = [
@@ -255,7 +254,6 @@ export default function AISchedulePage() {
 
       await notificationsApi.updateEscalation({
         timezone,
-        transfer_number: transferNumber || undefined,
         ai_schedule: scheduleToSave,
       });
 
@@ -414,21 +412,6 @@ export default function AISchedulePage() {
                       </p>
                     </div>
 
-                    {/* Forward Number */}
-                    <div>
-                      <Input
-                        type="tel"
-                        label="Business Phone Number (when AI is off)"
-                        value={transferNumber}
-                        onChange={(e) => setTransferNumber(e.target.value)}
-                        placeholder="+353 1 234 5678"
-                        className="bg-slate-50/50"
-                      />
-                      <p className="text-xs text-slate-400 mt-1">
-                        Your business phone number. When the AI is off, calls will ring back on this number.
-                      </p>
-                    </div>
-
                     {/* Warning if no forward number */}
                     {!transferNumber && Object.keys(schedule).length > 0 && Object.keys(schedule).length < 7 && (
                       <div className="flex items-start gap-3 p-4 bg-amber-50 border border-amber-100 rounded-xl">
@@ -436,7 +419,11 @@ export default function AISchedulePage() {
                         <div>
                           <p className="text-sm font-semibold text-amber-800">No forward number set</p>
                           <p className="text-sm text-amber-700">
-                            When AI is off, calls need somewhere to go. Add a business line or the AI will answer anyway.
+                            When AI is off, calls need somewhere to go. Set your business phone number in{' '}
+                            <Link href="/notifications" className="underline font-semibold text-amber-800 hover:text-amber-900">
+                              Notification Settings
+                            </Link>{' '}
+                            or the AI will answer anyway.
                           </p>
                         </div>
                       </div>
