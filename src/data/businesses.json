@@ -2090,6 +2090,126 @@
     "openingHours": "Mo-Fr 09:00-18:00"
   },
   {
+    "slug": "odont-class",
+    "name": "Odont Class",
+    "vertical": "dentists",
+    "city": "Buenos Aires",
+    "citySlug": "buenos-aires",
+    "country": "argentina",
+    "address": "Buenos Aires, Argentina",
+    "phone": "+54 11 4831-4649",
+    "website": "https://odontclass.com.ar",
+    "email": "",
+    "description": "Odont Class is a trusted dentists located in Buenos Aires, Argentina. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "¿Odont Class acepta pacientes nuevos?",
+        "a": "Odont Class recibe pacientes nuevos. Llamá para agendar tu primera consulta."
+      },
+      {
+        "q": "¿Odont Class ofrece atención de emergencia?",
+        "a": "Contactá a Odont Class para consultar disponibilidad de emergencias dentales."
+      },
+      {
+        "q": "¿Qué tratamientos ofrece Odont Class?",
+        "a": "Odont Class ofrece limpieza, empastes, ortodoncia, y odontología estética."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "es",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "centro-odontologico-privado",
+    "name": "Centro Odontológico Privado",
+    "vertical": "dentists",
+    "city": "Rosario",
+    "citySlug": "rosario",
+    "country": "argentina",
+    "address": "Rosario, Argentina",
+    "phone": "+54 341 448-3132",
+    "website": "https://www.coprivado.com.ar",
+    "email": "",
+    "description": "Centro Odontológico Privado is a trusted dentists located in Rosario, Argentina. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "¿Centro Odontológico Privado acepta pacientes nuevos?",
+        "a": "Centro Odontológico Privado recibe pacientes nuevos. Llamá para agendar tu primera consulta."
+      },
+      {
+        "q": "¿Centro Odontológico Privado ofrece atención de emergencia?",
+        "a": "Contactá a Centro Odontológico Privado para consultar disponibilidad de emergencias dentales."
+      },
+      {
+        "q": "¿Qué tratamientos ofrece Centro Odontológico Privado?",
+        "a": "Centro Odontológico Privado ofrece limpieza, empastes, ortodoncia, y odontología estética."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "es",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "croi-odontologia",
+    "name": "CROI Odontología",
+    "vertical": "dentists",
+    "city": "Rosario",
+    "citySlug": "rosario",
+    "country": "argentina",
+    "address": "Rosario, Argentina",
+    "phone": "+54 341 440-8925",
+    "website": "https://croiodontologia.com.ar",
+    "email": "",
+    "description": "CROI Odontología is a trusted dentists located in Rosario, Argentina. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "¿CROI Odontología acepta pacientes nuevos?",
+        "a": "CROI Odontología recibe pacientes nuevos. Llamá para agendar tu primera consulta."
+      },
+      {
+        "q": "¿CROI Odontología ofrece atención de emergencia?",
+        "a": "Contactá a CROI Odontología para consultar disponibilidad de emergencias dentales."
+      },
+      {
+        "q": "¿Qué tratamientos ofrece CROI Odontología?",
+        "a": "CROI Odontología ofrece limpieza, empastes, ortodoncia, y odontología estética."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "es",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "ortodoncia-rosario",
+    "name": "Ortodoncia Rosario",
+    "vertical": "dentists",
+    "city": "Rosario",
+    "citySlug": "rosario",
+    "country": "argentina",
+    "address": "Rosario, Argentina",
+    "phone": "",
+    "website": "https://www.ortodonciarosario.com.ar",
+    "email": "info@ortodonciarosario.com.ar",
+    "description": "Ortodoncia Rosario is a trusted dentists located in Rosario, Argentina. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "¿Ortodoncia Rosario acepta pacientes nuevos?",
+        "a": "Ortodoncia Rosario recibe pacientes nuevos. Llamá para agendar tu primera consulta."
+      },
+      {
+        "q": "¿Ortodoncia Rosario ofrece atención de emergencia?",
+        "a": "Contactá a Ortodoncia Rosario para consultar disponibilidad de emergencias dentales."
+      },
+      {
+        "q": "¿Qué tratamientos ofrece Ortodoncia Rosario?",
+        "a": "Ortodoncia Rosario ofrece limpieza, empastes, ortodoncia, y odontología estética."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "es",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
     "slug": "fitzwilliam-medical-centre",
     "name": "Fitzwilliam Medical Centre",
     "vertical": "physios",
@@ -23598,6 +23718,738 @@
     "openingHours": "Mo-Fr 09:00-18:00"
   },
   {
+    "slug": "holmes-law",
+    "name": "Holmes Law",
+    "vertical": "accountants",
+    "city": "Cork",
+    "citySlug": "cork",
+    "country": "ireland",
+    "address": "Cork, Ireland",
+    "phone": "+353 21 4278620",
+    "website": "https://holmeslaw.ie/",
+    "email": "",
+    "description": "Holmes Law is a trusted professional services located in Cork, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Holmes Law offer free consultations?",
+        "a": "Contact Holmes Law to enquire about initial consultation availability."
+      },
+      {
+        "q": "What services does Holmes Law provide?",
+        "a": "Holmes Law offers a range of professional services. Contact them for details."
+      },
+      {
+        "q": "Does Holmes Law work with small businesses?",
+        "a": "Yes, Holmes Law works with businesses of all sizes. Get in touch to discuss your needs."
+      }
+    ],
+    "schema_type": "AccountingService",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "sck-group-accountants",
+    "name": "SCK Group Accountants",
+    "vertical": "accountants",
+    "city": "Dublin",
+    "citySlug": "dublin",
+    "country": "ireland",
+    "address": "Dublin, Ireland",
+    "phone": "(01) 291 0800",
+    "website": "https://www.sckgroup.ie/",
+    "email": "info@sckgroup.ie",
+    "description": "SCK Group Accountants is a trusted professional services located in Dublin, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does SCK Group Accountants offer free consultations?",
+        "a": "Contact SCK Group Accountants to enquire about initial consultation availability."
+      },
+      {
+        "q": "What services does SCK Group Accountants provide?",
+        "a": "SCK Group Accountants offers a range of professional services. Contact them for details."
+      },
+      {
+        "q": "Does SCK Group Accountants work with small businesses?",
+        "a": "Yes, SCK Group Accountants works with businesses of all sizes. Get in touch to discuss your needs."
+      }
+    ],
+    "schema_type": "AccountingService",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "gallagher-keane-chartered-accountants",
+    "name": "Gallagher Keane Chartered Accountants",
+    "vertical": "accountants",
+    "city": "Dublin",
+    "citySlug": "dublin",
+    "country": "ireland",
+    "address": "Dublin, Ireland",
+    "phone": "+353 1 9695100",
+    "website": "https://www.gallagherkeane.ie/",
+    "email": "info@gallagherkeane.ie",
+    "description": "Gallagher Keane Chartered Accountants is a trusted professional services located in Dublin, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Gallagher Keane Chartered Accountants offer free consultations?",
+        "a": "Contact Gallagher Keane Chartered Accountants to enquire about initial consultation availability."
+      },
+      {
+        "q": "What services does Gallagher Keane Chartered Accountants provide?",
+        "a": "Gallagher Keane Chartered Accountants offers a range of professional services. Contact them for details."
+      },
+      {
+        "q": "Does Gallagher Keane Chartered Accountants work with small businesses?",
+        "a": "Yes, Gallagher Keane Chartered Accountants works with businesses of all sizes. Get in touch to discuss your needs."
+      }
+    ],
+    "schema_type": "AccountingService",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "o-brien-motors-waterford",
+    "name": "O'Brien Motors Waterford",
+    "vertical": "mechanics",
+    "city": "Waterford",
+    "citySlug": "waterford",
+    "country": "ireland",
+    "address": "Waterford, Ireland",
+    "phone": "051 876353",
+    "website": "https://www.obrienmotorswaterford.ie/",
+    "email": "",
+    "description": "O'Brien Motors Waterford is a trusted mechanics located in Waterford, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does O'Brien Motors Waterford service all car brands?",
+        "a": "O'Brien Motors Waterford works on most vehicle makes and models. Call to confirm your car."
+      },
+      {
+        "q": "Does O'Brien Motors Waterford offer free estimates?",
+        "a": "Contact O'Brien Motors Waterford for pricing information and repair estimates."
+      },
+      {
+        "q": "Does O'Brien Motors Waterford handle NCT prep?",
+        "a": "O'Brien Motors Waterford can help prepare your car for NCT testing. Book an appointment."
+      }
+    ],
+    "schema_type": "AutoRepair",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "expert-auto-garage",
+    "name": "Expert Auto Garage",
+    "vertical": "mechanics",
+    "city": "Dublin",
+    "citySlug": "dublin",
+    "country": "ireland",
+    "address": "Dublin, Ireland",
+    "phone": "+353 1 534 0475",
+    "website": "",
+    "email": "",
+    "description": "Expert Auto Garage is a trusted mechanics located in Dublin, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Expert Auto Garage service all car brands?",
+        "a": "Expert Auto Garage works on most vehicle makes and models. Call to confirm your car."
+      },
+      {
+        "q": "Does Expert Auto Garage offer free estimates?",
+        "a": "Contact Expert Auto Garage for pricing information and repair estimates."
+      },
+      {
+        "q": "Does Expert Auto Garage handle NCT prep?",
+        "a": "Expert Auto Garage can help prepare your car for NCT testing. Book an appointment."
+      }
+    ],
+    "schema_type": "AutoRepair",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "western-dental-carlow",
+    "name": "Western Dental (Carlow)",
+    "vertical": "dentists",
+    "city": "Carlow",
+    "citySlug": "carlow",
+    "country": "ireland",
+    "address": "Carlow, Ireland",
+    "phone": "",
+    "website": "https://www.westerndental.ie/",
+    "email": "",
+    "description": "Western Dental (Carlow) is a trusted dentists located in Carlow, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Western Dental (Carlow) accepting new patients?",
+        "a": "Western Dental (Carlow) welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Western Dental (Carlow) offer emergency dental care?",
+        "a": "Contact Western Dental (Carlow) directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Western Dental (Carlow) accept?",
+        "a": "Western Dental (Carlow) works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Western Dental (Carlow) offer?",
+        "a": "Western Dental (Carlow) provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "western-dental-clonmel",
+    "name": "Western Dental (Clonmel)",
+    "vertical": "dentists",
+    "city": "Clonmel",
+    "citySlug": "clonmel",
+    "country": "ireland",
+    "address": "Clonmel, Ireland",
+    "phone": "",
+    "website": "https://www.westerndental.ie/",
+    "email": "",
+    "description": "Western Dental (Clonmel) is a trusted dentists located in Clonmel, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Western Dental (Clonmel) accepting new patients?",
+        "a": "Western Dental (Clonmel) welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Western Dental (Clonmel) offer emergency dental care?",
+        "a": "Contact Western Dental (Clonmel) directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Western Dental (Clonmel) accept?",
+        "a": "Western Dental (Clonmel) works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Western Dental (Clonmel) offer?",
+        "a": "Western Dental (Clonmel) provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "the-market-bar-restaurant",
+    "name": "The Market Bar & Restaurant",
+    "vertical": "restaurants",
+    "city": "Ennis",
+    "citySlug": "ennis",
+    "country": "ireland",
+    "address": "Ennis, Ireland",
+    "phone": "",
+    "website": "https://www.themarketbarennis.com/",
+    "email": "",
+    "description": "The Market Bar & Restaurant is a trusted restaurants located in Ennis, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does The Market Bar & Restaurant take reservations?",
+        "a": "Yes, The Market Bar & Restaurant accepts reservations. Call ahead or book online for the best experience."
+      },
+      {
+        "q": "What type of cuisine does The Market Bar & Restaurant serve?",
+        "a": "The Market Bar & Restaurant offers a carefully curated menu featuring local and international dishes."
+      },
+      {
+        "q": "Does The Market Bar & Restaurant have parking?",
+        "a": "Please contact The Market Bar & Restaurant directly for parking information and availability."
+      },
+      {
+        "q": "Is there a dress code at The Market Bar & Restaurant?",
+        "a": "Smart casual attire is recommended. Contact the restaurant for specific event requirements."
+      },
+      {
+        "q": "Does The Market Bar & Restaurant offer private dining?",
+        "a": "The Market Bar & Restaurant may offer private dining options for special events. Contact them for details."
+      }
+    ],
+    "schema_type": "Restaurant",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "osteria-nove-bon-appetit",
+    "name": "Osteria Nove (Bon Appetit)",
+    "vertical": "restaurants",
+    "city": "Malahide",
+    "citySlug": "malahide",
+    "country": "ireland",
+    "address": "Malahide, Ireland",
+    "phone": "",
+    "website": "https://www.bonappetit.ie/",
+    "email": "",
+    "description": "Osteria Nove (Bon Appetit) is a trusted restaurants located in Malahide, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Osteria Nove (Bon Appetit) take reservations?",
+        "a": "Yes, Osteria Nove (Bon Appetit) accepts reservations. Call ahead or book online for the best experience."
+      },
+      {
+        "q": "What type of cuisine does Osteria Nove (Bon Appetit) serve?",
+        "a": "Osteria Nove (Bon Appetit) offers a carefully curated menu featuring local and international dishes."
+      },
+      {
+        "q": "Does Osteria Nove (Bon Appetit) have parking?",
+        "a": "Please contact Osteria Nove (Bon Appetit) directly for parking information and availability."
+      },
+      {
+        "q": "Is there a dress code at Osteria Nove (Bon Appetit)?",
+        "a": "Smart casual attire is recommended. Contact the restaurant for specific event requirements."
+      },
+      {
+        "q": "Does Osteria Nove (Bon Appetit) offer private dining?",
+        "a": "Osteria Nove (Bon Appetit) may offer private dining options for special events. Contact them for details."
+      }
+    ],
+    "schema_type": "Restaurant",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "butler-and-barry",
+    "name": "Butler and Barry",
+    "vertical": "restaurants",
+    "city": "Bray",
+    "citySlug": "bray",
+    "country": "ireland",
+    "address": "Bray, Ireland",
+    "phone": "",
+    "website": "https://www.butlerandbarry.com/",
+    "email": "",
+    "description": "Butler and Barry is a trusted restaurants located in Bray, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Butler and Barry take reservations?",
+        "a": "Yes, Butler and Barry accepts reservations. Call ahead or book online for the best experience."
+      },
+      {
+        "q": "What type of cuisine does Butler and Barry serve?",
+        "a": "Butler and Barry offers a carefully curated menu featuring local and international dishes."
+      },
+      {
+        "q": "Does Butler and Barry have parking?",
+        "a": "Please contact Butler and Barry directly for parking information and availability."
+      },
+      {
+        "q": "Is there a dress code at Butler and Barry?",
+        "a": "Smart casual attire is recommended. Contact the restaurant for specific event requirements."
+      },
+      {
+        "q": "Does Butler and Barry offer private dining?",
+        "a": "Butler and Barry may offer private dining options for special events. Contact them for details."
+      }
+    ],
+    "schema_type": "Restaurant",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "advanced-pet-care-smith-foley",
+    "name": "Advanced Pet Care Smith & Foley",
+    "vertical": "vets",
+    "city": "Navan",
+    "citySlug": "navan",
+    "country": "ireland",
+    "address": "Navan, Ireland",
+    "phone": "(046) 902 3854",
+    "website": "https://www.smithfoleyvet.com/navan/",
+    "email": "apcnavan@smithfoleyvet.com",
+    "description": "Advanced Pet Care Smith & Foley is a trusted veterinary clinics located in Navan, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Advanced Pet Care Smith & Foley treat?",
+        "a": "Advanced Pet Care Smith & Foley treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Advanced Pet Care Smith & Foley offer emergency veterinary services?",
+        "a": "Contact Advanced Pet Care Smith & Foley for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Advanced Pet Care Smith & Foley provide vaccinations?",
+        "a": "Yes, Advanced Pet Care Smith & Foley offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Advanced Pet Care Smith & Foley?",
+        "a": "Advanced Pet Care Smith & Foley can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "dbc-athlone-physio",
+    "name": "DBC Athlone Physio",
+    "vertical": "physios",
+    "city": "Athlone",
+    "citySlug": "athlone",
+    "country": "ireland",
+    "address": "Athlone, Ireland",
+    "phone": "(090) 647 5898",
+    "website": "https://www.dbc.ie/athlone-physio-clinic/",
+    "email": "",
+    "description": "DBC Athlone Physio is a trusted physiotherapy located in Athlone, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Do I need a referral for DBC Athlone Physio?",
+        "a": "In most cases, you don't need a referral. Contact DBC Athlone Physio to book directly."
+      },
+      {
+        "q": "What conditions does DBC Athlone Physio treat?",
+        "a": "DBC Athlone Physio treats sports injuries, back pain, rehabilitation, and more."
+      },
+      {
+        "q": "Does DBC Athlone Physio accept health insurance?",
+        "a": "DBC Athlone Physio is covered by most major health insurers. Confirm your plan when booking."
+      }
+    ],
+    "schema_type": "PhysicalTherapy",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "athlone-physiotherapy-pilates",
+    "name": "Athlone Physiotherapy & Pilates",
+    "vertical": "physios",
+    "city": "Athlone",
+    "citySlug": "athlone",
+    "country": "ireland",
+    "address": "Athlone, Ireland",
+    "phone": "090 6492593",
+    "website": "https://athlonephysio.ie/",
+    "email": "anne@athlonephysio.ie",
+    "description": "Athlone Physiotherapy & Pilates is a trusted physiotherapy located in Athlone, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Do I need a referral for Athlone Physiotherapy & Pilates?",
+        "a": "In most cases, you don't need a referral. Contact Athlone Physiotherapy & Pilates to book directly."
+      },
+      {
+        "q": "What conditions does Athlone Physiotherapy & Pilates treat?",
+        "a": "Athlone Physiotherapy & Pilates treats sports injuries, back pain, rehabilitation, and more."
+      },
+      {
+        "q": "Does Athlone Physiotherapy & Pilates accept health insurance?",
+        "a": "Athlone Physiotherapy & Pilates is covered by most major health insurers. Confirm your plan when booking."
+      }
+    ],
+    "schema_type": "PhysicalTherapy",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "dental-practice-fair-street",
+    "name": "Dental Practice Fair Street",
+    "vertical": "dentists",
+    "city": "Drogheda",
+    "citySlug": "drogheda",
+    "country": "ireland",
+    "address": "Drogheda, Ireland",
+    "phone": "041-9846609",
+    "website": "",
+    "email": "",
+    "description": "Dental Practice Fair Street is a trusted dentists located in Drogheda, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Dental Practice Fair Street accepting new patients?",
+        "a": "Dental Practice Fair Street welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Dental Practice Fair Street offer emergency dental care?",
+        "a": "Contact Dental Practice Fair Street directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Dental Practice Fair Street accept?",
+        "a": "Dental Practice Fair Street works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Dental Practice Fair Street offer?",
+        "a": "Dental Practice Fair Street provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "kilkenny-ormonde-hotel-restaurant",
+    "name": "Kilkenny Ormonde Hotel Restaurant",
+    "vertical": "restaurants",
+    "city": "Kilkenny",
+    "citySlug": "kilkenny",
+    "country": "ireland",
+    "address": "Kilkenny, Ireland",
+    "phone": "056 7750200",
+    "website": "https://www.kilkennyormonde.com",
+    "email": "",
+    "description": "Kilkenny Ormonde Hotel Restaurant is a trusted restaurants located in Kilkenny, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Kilkenny Ormonde Hotel Restaurant take reservations?",
+        "a": "Yes, Kilkenny Ormonde Hotel Restaurant accepts reservations. Call ahead or book online for the best experience."
+      },
+      {
+        "q": "What type of cuisine does Kilkenny Ormonde Hotel Restaurant serve?",
+        "a": "Kilkenny Ormonde Hotel Restaurant offers a carefully curated menu featuring local and international dishes."
+      },
+      {
+        "q": "Does Kilkenny Ormonde Hotel Restaurant have parking?",
+        "a": "Please contact Kilkenny Ormonde Hotel Restaurant directly for parking information and availability."
+      },
+      {
+        "q": "Is there a dress code at Kilkenny Ormonde Hotel Restaurant?",
+        "a": "Smart casual attire is recommended. Contact the restaurant for specific event requirements."
+      },
+      {
+        "q": "Does Kilkenny Ormonde Hotel Restaurant offer private dining?",
+        "a": "Kilkenny Ormonde Hotel Restaurant may offer private dining options for special events. Contact them for details."
+      }
+    ],
+    "schema_type": "Restaurant",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "jasper-s-restaurant-crown-quarter",
+    "name": "Jasper's Restaurant (Crown Quarter)",
+    "vertical": "restaurants",
+    "city": "Wexford",
+    "citySlug": "wexford",
+    "country": "ireland",
+    "address": "Wexford, Ireland",
+    "phone": "053 912 1480",
+    "website": "https://www.crownquarter.com/jaspers/",
+    "email": "",
+    "description": "Jasper's Restaurant (Crown Quarter) is a trusted restaurants located in Wexford, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Jasper's Restaurant (Crown Quarter) take reservations?",
+        "a": "Yes, Jasper's Restaurant (Crown Quarter) accepts reservations. Call ahead or book online for the best experience."
+      },
+      {
+        "q": "What type of cuisine does Jasper's Restaurant (Crown Quarter) serve?",
+        "a": "Jasper's Restaurant (Crown Quarter) offers a carefully curated menu featuring local and international dishes."
+      },
+      {
+        "q": "Does Jasper's Restaurant (Crown Quarter) have parking?",
+        "a": "Please contact Jasper's Restaurant (Crown Quarter) directly for parking information and availability."
+      },
+      {
+        "q": "Is there a dress code at Jasper's Restaurant (Crown Quarter)?",
+        "a": "Smart casual attire is recommended. Contact the restaurant for specific event requirements."
+      },
+      {
+        "q": "Does Jasper's Restaurant (Crown Quarter) offer private dining?",
+        "a": "Jasper's Restaurant (Crown Quarter) may offer private dining options for special events. Contact them for details."
+      }
+    ],
+    "schema_type": "Restaurant",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "silver-tassie-hotel-restaurant",
+    "name": "Silver Tassie Hotel Restaurant",
+    "vertical": "restaurants",
+    "city": "Letterkenny",
+    "citySlug": "letterkenny",
+    "country": "ireland",
+    "address": "Letterkenny, Ireland",
+    "phone": "+353 749125619",
+    "website": "https://www.silvertassiehotel.com",
+    "email": "info@silvertassiehotel.ie",
+    "description": "Silver Tassie Hotel Restaurant is a trusted restaurants located in Letterkenny, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Silver Tassie Hotel Restaurant take reservations?",
+        "a": "Yes, Silver Tassie Hotel Restaurant accepts reservations. Call ahead or book online for the best experience."
+      },
+      {
+        "q": "What type of cuisine does Silver Tassie Hotel Restaurant serve?",
+        "a": "Silver Tassie Hotel Restaurant offers a carefully curated menu featuring local and international dishes."
+      },
+      {
+        "q": "Does Silver Tassie Hotel Restaurant have parking?",
+        "a": "Please contact Silver Tassie Hotel Restaurant directly for parking information and availability."
+      },
+      {
+        "q": "Is there a dress code at Silver Tassie Hotel Restaurant?",
+        "a": "Smart casual attire is recommended. Contact the restaurant for specific event requirements."
+      },
+      {
+        "q": "Does Silver Tassie Hotel Restaurant offer private dining?",
+        "a": "Silver Tassie Hotel Restaurant may offer private dining options for special events. Contact them for details."
+      }
+    ],
+    "schema_type": "Restaurant",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "westgate-veterinary-clinic",
+    "name": "Westgate Veterinary Clinic",
+    "vertical": "vets",
+    "city": "Drogheda",
+    "citySlug": "drogheda",
+    "country": "ireland",
+    "address": "Drogheda, Ireland",
+    "phone": "041 9838718",
+    "website": "https://westgatevets.com",
+    "email": "",
+    "description": "Westgate Veterinary Clinic is a trusted veterinary clinics located in Drogheda, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Westgate Veterinary Clinic treat?",
+        "a": "Westgate Veterinary Clinic treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Westgate Veterinary Clinic offer emergency veterinary services?",
+        "a": "Contact Westgate Veterinary Clinic for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Westgate Veterinary Clinic provide vaccinations?",
+        "a": "Yes, Westgate Veterinary Clinic offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Westgate Veterinary Clinic?",
+        "a": "Westgate Veterinary Clinic can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "allpets-veterinary-hospital",
+    "name": "Allpets Veterinary Hospital",
+    "vertical": "vets",
+    "city": "Drogheda",
+    "citySlug": "drogheda",
+    "country": "ireland",
+    "address": "Drogheda, Ireland",
+    "phone": "(041) 981 0000",
+    "website": "https://www.allpets.ie",
+    "email": "",
+    "description": "Allpets Veterinary Hospital is a trusted veterinary clinics located in Drogheda, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Allpets Veterinary Hospital treat?",
+        "a": "Allpets Veterinary Hospital treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Allpets Veterinary Hospital offer emergency veterinary services?",
+        "a": "Contact Allpets Veterinary Hospital for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Allpets Veterinary Hospital provide vaccinations?",
+        "a": "Yes, Allpets Veterinary Hospital offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Allpets Veterinary Hospital?",
+        "a": "Allpets Veterinary Hospital can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "wexford-physiotherapy-acupuncture-clinic",
+    "name": "Wexford Physiotherapy & Acupuncture Clinic",
+    "vertical": "physios",
+    "city": "Wexford",
+    "citySlug": "wexford",
+    "country": "ireland",
+    "address": "Wexford, Ireland",
+    "phone": "053 912 2666",
+    "website": "https://wexfordphysiotherapy.ie",
+    "email": "",
+    "description": "Wexford Physiotherapy & Acupuncture Clinic is a trusted physiotherapy located in Wexford, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Do I need a referral for Wexford Physiotherapy & Acupuncture Clinic?",
+        "a": "In most cases, you don't need a referral. Contact Wexford Physiotherapy & Acupuncture Clinic to book directly."
+      },
+      {
+        "q": "What conditions does Wexford Physiotherapy & Acupuncture Clinic treat?",
+        "a": "Wexford Physiotherapy & Acupuncture Clinic treats sports injuries, back pain, rehabilitation, and more."
+      },
+      {
+        "q": "Does Wexford Physiotherapy & Acupuncture Clinic accept health insurance?",
+        "a": "Wexford Physiotherapy & Acupuncture Clinic is covered by most major health insurers. Confirm your plan when booking."
+      }
+    ],
+    "schema_type": "PhysicalTherapy",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "cpclinic",
+    "name": "CPclinic",
+    "vertical": "physios",
+    "city": "Wexford",
+    "citySlug": "wexford",
+    "country": "ireland",
+    "address": "Wexford, Ireland",
+    "phone": "+353 85 256 0316",
+    "website": "",
+    "email": "info@cpclinic.ie",
+    "description": "CPclinic is a trusted physiotherapy located in Wexford, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Do I need a referral for CPclinic?",
+        "a": "In most cases, you don't need a referral. Contact CPclinic to book directly."
+      },
+      {
+        "q": "What conditions does CPclinic treat?",
+        "a": "CPclinic treats sports injuries, back pain, rehabilitation, and more."
+      },
+      {
+        "q": "Does CPclinic accept health insurance?",
+        "a": "CPclinic is covered by most major health insurers. Confirm your plan when booking."
+      }
+    ],
+    "schema_type": "PhysicalTherapy",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "physio-south-east",
+    "name": "Physio South East",
+    "vertical": "physios",
+    "city": "Wexford",
+    "citySlug": "wexford",
+    "country": "ireland",
+    "address": "Wexford, Ireland",
+    "phone": "",
+    "website": "https://physiosoutheast.ie",
+    "email": "",
+    "description": "Physio South East is a trusted physiotherapy located in Wexford, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Do I need a referral for Physio South East?",
+        "a": "In most cases, you don't need a referral. Contact Physio South East to book directly."
+      },
+      {
+        "q": "What conditions does Physio South East treat?",
+        "a": "Physio South East treats sports injuries, back pain, rehabilitation, and more."
+      },
+      {
+        "q": "Does Physio South East accept health insurance?",
+        "a": "Physio South East is covered by most major health insurers. Confirm your plan when booking."
+      }
+    ],
+    "schema_type": "PhysicalTherapy",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
     "slug": "don-julio",
     "name": "Don Julio",
     "vertical": "restaurants",
@@ -30502,6 +31354,1116 @@
       }
     ],
     "schema_type": "Restaurant",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "crow-street-collective",
+    "name": "Crow Street Collective",
+    "vertical": "salons",
+    "city": "Dublin",
+    "citySlug": "dublin",
+    "country": "ireland",
+    "address": "Dublin, Ireland",
+    "phone": "+353 1 764 5730",
+    "website": "https://www.cscollective.ie",
+    "email": "",
+    "description": "Crow Street Collective is a trusted hair salons located in Dublin, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Crow Street Collective accept walk-ins?",
+        "a": "Crow Street Collective welcomes walk-ins subject to availability. Booking in advance is recommended."
+      },
+      {
+        "q": "What services does Crow Street Collective offer?",
+        "a": "Crow Street Collective offers cuts, colour, styling, treatments, and more. Contact them for a full service menu."
+      },
+      {
+        "q": "What products does Crow Street Collective use?",
+        "a": "Crow Street Collective uses premium, professional-grade hair care products. Ask your stylist for details."
+      }
+    ],
+    "schema_type": "HairSalon",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "the-hive-hair-salon",
+    "name": "The Hive Hair Salon",
+    "vertical": "salons",
+    "city": "Dublin",
+    "citySlug": "dublin",
+    "country": "ireland",
+    "address": "Dublin, Ireland",
+    "phone": "+353 1 475 8649",
+    "website": "https://www.thehivehairsalon.ie",
+    "email": "",
+    "description": "The Hive Hair Salon is a trusted hair salons located in Dublin, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does The Hive Hair Salon accept walk-ins?",
+        "a": "The Hive Hair Salon welcomes walk-ins subject to availability. Booking in advance is recommended."
+      },
+      {
+        "q": "What services does The Hive Hair Salon offer?",
+        "a": "The Hive Hair Salon offers cuts, colour, styling, treatments, and more. Contact them for a full service menu."
+      },
+      {
+        "q": "What products does The Hive Hair Salon use?",
+        "a": "The Hive Hair Salon uses premium, professional-grade hair care products. Ask your stylist for details."
+      }
+    ],
+    "schema_type": "HairSalon",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "daveydavey-hair-salon",
+    "name": "DaveyDavey Hair Salon",
+    "vertical": "salons",
+    "city": "Dublin",
+    "citySlug": "dublin",
+    "country": "ireland",
+    "address": "Dublin, Ireland",
+    "phone": "+353 1 611 1400",
+    "website": "",
+    "email": "",
+    "description": "DaveyDavey Hair Salon is a trusted hair salons located in Dublin, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does DaveyDavey Hair Salon accept walk-ins?",
+        "a": "DaveyDavey Hair Salon welcomes walk-ins subject to availability. Booking in advance is recommended."
+      },
+      {
+        "q": "What services does DaveyDavey Hair Salon offer?",
+        "a": "DaveyDavey Hair Salon offers cuts, colour, styling, treatments, and more. Contact them for a full service menu."
+      },
+      {
+        "q": "What products does DaveyDavey Hair Salon use?",
+        "a": "DaveyDavey Hair Salon uses premium, professional-grade hair care products. Ask your stylist for details."
+      }
+    ],
+    "schema_type": "HairSalon",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "siobhan-hirrel-hair",
+    "name": "Siobhan Hirrel Hair",
+    "vertical": "salons",
+    "city": "Dublin",
+    "citySlug": "dublin",
+    "country": "ireland",
+    "address": "Dublin, Ireland",
+    "phone": "+353 1 892 167 076",
+    "website": "",
+    "email": "",
+    "description": "Siobhan Hirrel Hair is a trusted hair salons located in Dublin, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Siobhan Hirrel Hair accept walk-ins?",
+        "a": "Siobhan Hirrel Hair welcomes walk-ins subject to availability. Booking in advance is recommended."
+      },
+      {
+        "q": "What services does Siobhan Hirrel Hair offer?",
+        "a": "Siobhan Hirrel Hair offers cuts, colour, styling, treatments, and more. Contact them for a full service menu."
+      },
+      {
+        "q": "What products does Siobhan Hirrel Hair use?",
+        "a": "Siobhan Hirrel Hair uses premium, professional-grade hair care products. Ask your stylist for details."
+      }
+    ],
+    "schema_type": "HairSalon",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "platinum-expert-hair",
+    "name": "Platinum Expert Hair",
+    "vertical": "salons",
+    "city": "Dublin",
+    "citySlug": "dublin",
+    "country": "ireland",
+    "address": "Dublin, Ireland",
+    "phone": "+353 1 670 8639",
+    "website": "",
+    "email": "",
+    "description": "Platinum Expert Hair is a trusted hair salons located in Dublin, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Platinum Expert Hair accept walk-ins?",
+        "a": "Platinum Expert Hair welcomes walk-ins subject to availability. Booking in advance is recommended."
+      },
+      {
+        "q": "What services does Platinum Expert Hair offer?",
+        "a": "Platinum Expert Hair offers cuts, colour, styling, treatments, and more. Contact them for a full service menu."
+      },
+      {
+        "q": "What products does Platinum Expert Hair use?",
+        "a": "Platinum Expert Hair uses premium, professional-grade hair care products. Ask your stylist for details."
+      }
+    ],
+    "schema_type": "HairSalon",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "brown-sugar",
+    "name": "Brown Sugar",
+    "vertical": "salons",
+    "city": "Dublin",
+    "citySlug": "dublin",
+    "country": "ireland",
+    "address": "Dublin, Ireland",
+    "phone": "+353 1 210 8630",
+    "website": "https://brownsugar.ie",
+    "email": "",
+    "description": "Brown Sugar is a trusted hair salons located in Dublin, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Brown Sugar accept walk-ins?",
+        "a": "Brown Sugar welcomes walk-ins subject to availability. Booking in advance is recommended."
+      },
+      {
+        "q": "What services does Brown Sugar offer?",
+        "a": "Brown Sugar offers cuts, colour, styling, treatments, and more. Contact them for a full service menu."
+      },
+      {
+        "q": "What products does Brown Sugar use?",
+        "a": "Brown Sugar uses premium, professional-grade hair care products. Ask your stylist for details."
+      }
+    ],
+    "schema_type": "HairSalon",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "aviary-lane",
+    "name": "Aviary Lane",
+    "vertical": "salons",
+    "city": "Dublin",
+    "citySlug": "dublin",
+    "country": "ireland",
+    "address": "Dublin, Ireland",
+    "phone": "",
+    "website": "https://www.aviarylane.ie",
+    "email": "",
+    "description": "Aviary Lane is a trusted hair salons located in Dublin, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Aviary Lane accept walk-ins?",
+        "a": "Aviary Lane welcomes walk-ins subject to availability. Booking in advance is recommended."
+      },
+      {
+        "q": "What services does Aviary Lane offer?",
+        "a": "Aviary Lane offers cuts, colour, styling, treatments, and more. Contact them for a full service menu."
+      },
+      {
+        "q": "What products does Aviary Lane use?",
+        "a": "Aviary Lane uses premium, professional-grade hair care products. Ask your stylist for details."
+      }
+    ],
+    "schema_type": "HairSalon",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "the-barber-s-room",
+    "name": "The Barber's Room",
+    "vertical": "barbers",
+    "city": "Dublin",
+    "citySlug": "dublin",
+    "country": "ireland",
+    "address": "Dublin, Ireland",
+    "phone": "+353 1 677 8412",
+    "website": "https://thebarbersroom.com",
+    "email": "",
+    "description": "The Barber's Room is a trusted barber shops located in Dublin, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does The Barber's Room accept walk-ins?",
+        "a": "The Barber's Room welcomes walk-ins. Booking ahead is recommended during busy times."
+      },
+      {
+        "q": "What services does The Barber's Room offer?",
+        "a": "The Barber's Room offers cuts, fades, beard trims, and grooming services."
+      },
+      {
+        "q": "Does The Barber's Room offer student discounts?",
+        "a": "Contact The Barber's Room for information about pricing and any available discounts."
+      }
+    ],
+    "schema_type": "BarberShop",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "cult-barber",
+    "name": "Cult Barber",
+    "vertical": "barbers",
+    "city": "Dublin",
+    "citySlug": "dublin",
+    "country": "ireland",
+    "address": "Dublin, Ireland",
+    "phone": "",
+    "website": "https://cultbarber.ie",
+    "email": "info@cultbarber.ie",
+    "description": "Cult Barber is a trusted barber shops located in Dublin, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Cult Barber accept walk-ins?",
+        "a": "Cult Barber welcomes walk-ins. Booking ahead is recommended during busy times."
+      },
+      {
+        "q": "What services does Cult Barber offer?",
+        "a": "Cult Barber offers cuts, fades, beard trims, and grooming services."
+      },
+      {
+        "q": "Does Cult Barber offer student discounts?",
+        "a": "Contact Cult Barber for information about pricing and any available discounts."
+      }
+    ],
+    "schema_type": "BarberShop",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "the-fireplace-barber",
+    "name": "The Fireplace Barber",
+    "vertical": "barbers",
+    "city": "Dublin",
+    "citySlug": "dublin",
+    "country": "ireland",
+    "address": "Dublin, Ireland",
+    "phone": "+353 1 679 8322",
+    "website": "https://thefireplacebarbershop.com",
+    "email": "",
+    "description": "The Fireplace Barber is a trusted barber shops located in Dublin, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does The Fireplace Barber accept walk-ins?",
+        "a": "The Fireplace Barber welcomes walk-ins. Booking ahead is recommended during busy times."
+      },
+      {
+        "q": "What services does The Fireplace Barber offer?",
+        "a": "The Fireplace Barber offers cuts, fades, beard trims, and grooming services."
+      },
+      {
+        "q": "Does The Fireplace Barber offer student discounts?",
+        "a": "Contact The Fireplace Barber for information about pricing and any available discounts."
+      }
+    ],
+    "schema_type": "BarberShop",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "men-s-grooming-ireland-stillorgan",
+    "name": "Men's Grooming Ireland - Stillorgan",
+    "vertical": "barbers",
+    "city": "Dublin",
+    "citySlug": "dublin",
+    "country": "ireland",
+    "address": "Dublin, Ireland",
+    "phone": "+353 1 288 2870",
+    "website": "https://mensgrooming.ie",
+    "email": "info@mensgrooming.ie",
+    "description": "Men's Grooming Ireland - Stillorgan is a trusted barber shops located in Dublin, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Men's Grooming Ireland - Stillorgan accept walk-ins?",
+        "a": "Men's Grooming Ireland - Stillorgan welcomes walk-ins. Booking ahead is recommended during busy times."
+      },
+      {
+        "q": "What services does Men's Grooming Ireland - Stillorgan offer?",
+        "a": "Men's Grooming Ireland - Stillorgan offers cuts, fades, beard trims, and grooming services."
+      },
+      {
+        "q": "Does Men's Grooming Ireland - Stillorgan offer student discounts?",
+        "a": "Contact Men's Grooming Ireland - Stillorgan for information about pricing and any available discounts."
+      }
+    ],
+    "schema_type": "BarberShop",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "men-s-grooming-ireland-terenure",
+    "name": "Men's Grooming Ireland - Terenure",
+    "vertical": "barbers",
+    "city": "Dublin",
+    "citySlug": "dublin",
+    "country": "ireland",
+    "address": "Dublin, Ireland",
+    "phone": "+353 1 492 9337",
+    "website": "https://mensgrooming.ie",
+    "email": "info@mensgrooming.ie",
+    "description": "Men's Grooming Ireland - Terenure is a trusted barber shops located in Dublin, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Men's Grooming Ireland - Terenure accept walk-ins?",
+        "a": "Men's Grooming Ireland - Terenure welcomes walk-ins. Booking ahead is recommended during busy times."
+      },
+      {
+        "q": "What services does Men's Grooming Ireland - Terenure offer?",
+        "a": "Men's Grooming Ireland - Terenure offers cuts, fades, beard trims, and grooming services."
+      },
+      {
+        "q": "Does Men's Grooming Ireland - Terenure offer student discounts?",
+        "a": "Contact Men's Grooming Ireland - Terenure for information about pricing and any available discounts."
+      }
+    ],
+    "schema_type": "BarberShop",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "men-s-grooming-ireland-donnybrook",
+    "name": "Men's Grooming Ireland - Donnybrook",
+    "vertical": "barbers",
+    "city": "Dublin",
+    "citySlug": "dublin",
+    "country": "ireland",
+    "address": "Dublin, Ireland",
+    "phone": "+353 1 288 2870",
+    "website": "https://mensgrooming.ie",
+    "email": "info@mensgrooming.ie",
+    "description": "Men's Grooming Ireland - Donnybrook is a trusted barber shops located in Dublin, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Men's Grooming Ireland - Donnybrook accept walk-ins?",
+        "a": "Men's Grooming Ireland - Donnybrook welcomes walk-ins. Booking ahead is recommended during busy times."
+      },
+      {
+        "q": "What services does Men's Grooming Ireland - Donnybrook offer?",
+        "a": "Men's Grooming Ireland - Donnybrook offers cuts, fades, beard trims, and grooming services."
+      },
+      {
+        "q": "Does Men's Grooming Ireland - Donnybrook offer student discounts?",
+        "a": "Contact Men's Grooming Ireland - Donnybrook for information about pricing and any available discounts."
+      }
+    ],
+    "schema_type": "BarberShop",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "jonathan-s-barber-shop",
+    "name": "Jonathan's Barber Shop",
+    "vertical": "barbers",
+    "city": "Dublin",
+    "citySlug": "dublin",
+    "country": "ireland",
+    "address": "Dublin, Ireland",
+    "phone": "",
+    "website": "http://www.jonathansbarbershop.com",
+    "email": "",
+    "description": "Jonathan's Barber Shop is a trusted barber shops located in Dublin, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Jonathan's Barber Shop accept walk-ins?",
+        "a": "Jonathan's Barber Shop welcomes walk-ins. Booking ahead is recommended during busy times."
+      },
+      {
+        "q": "What services does Jonathan's Barber Shop offer?",
+        "a": "Jonathan's Barber Shop offers cuts, fades, beard trims, and grooming services."
+      },
+      {
+        "q": "Does Jonathan's Barber Shop offer student discounts?",
+        "a": "Contact Jonathan's Barber Shop for information about pricing and any available discounts."
+      }
+    ],
+    "schema_type": "BarberShop",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "the-works-salon",
+    "name": "The Works Salon",
+    "vertical": "salons",
+    "city": "Dublin",
+    "citySlug": "dublin",
+    "country": "ireland",
+    "address": "Dublin, Ireland",
+    "phone": "+353 1 490 7620",
+    "website": "",
+    "email": "",
+    "description": "The Works Salon is a trusted hair salons located in Dublin, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does The Works Salon accept walk-ins?",
+        "a": "The Works Salon welcomes walk-ins subject to availability. Booking in advance is recommended."
+      },
+      {
+        "q": "What services does The Works Salon offer?",
+        "a": "The Works Salon offers cuts, colour, styling, treatments, and more. Contact them for a full service menu."
+      },
+      {
+        "q": "What products does The Works Salon use?",
+        "a": "The Works Salon uses premium, professional-grade hair care products. Ask your stylist for details."
+      }
+    ],
+    "schema_type": "HairSalon",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "olivia-style-hair-and-beauty",
+    "name": "Olivia Style Hair and Beauty",
+    "vertical": "salons",
+    "city": "Dublin",
+    "citySlug": "dublin",
+    "country": "ireland",
+    "address": "Dublin, Ireland",
+    "phone": "+353 1 236 0680",
+    "website": "",
+    "email": "",
+    "description": "Olivia Style Hair and Beauty is a trusted hair salons located in Dublin, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Olivia Style Hair and Beauty accept walk-ins?",
+        "a": "Olivia Style Hair and Beauty welcomes walk-ins subject to availability. Booking in advance is recommended."
+      },
+      {
+        "q": "What services does Olivia Style Hair and Beauty offer?",
+        "a": "Olivia Style Hair and Beauty offers cuts, colour, styling, treatments, and more. Contact them for a full service menu."
+      },
+      {
+        "q": "What products does Olivia Style Hair and Beauty use?",
+        "a": "Olivia Style Hair and Beauty uses premium, professional-grade hair care products. Ask your stylist for details."
+      }
+    ],
+    "schema_type": "HairSalon",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "kris-morton-hair-salons",
+    "name": "Kris Morton Hair Salons",
+    "vertical": "salons",
+    "city": "Dublin",
+    "citySlug": "dublin",
+    "country": "ireland",
+    "address": "Dublin, Ireland",
+    "phone": "+353 1 842 1977",
+    "website": "",
+    "email": "",
+    "description": "Kris Morton Hair Salons is a trusted hair salons located in Dublin, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Kris Morton Hair Salons accept walk-ins?",
+        "a": "Kris Morton Hair Salons welcomes walk-ins subject to availability. Booking in advance is recommended."
+      },
+      {
+        "q": "What services does Kris Morton Hair Salons offer?",
+        "a": "Kris Morton Hair Salons offers cuts, colour, styling, treatments, and more. Contact them for a full service menu."
+      },
+      {
+        "q": "What products does Kris Morton Hair Salons use?",
+        "a": "Kris Morton Hair Salons uses premium, professional-grade hair care products. Ask your stylist for details."
+      }
+    ],
+    "schema_type": "HairSalon",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "ikon-hair",
+    "name": "Ikon Hair",
+    "vertical": "salons",
+    "city": "Cork",
+    "citySlug": "cork",
+    "country": "ireland",
+    "address": "Cork, Ireland",
+    "phone": "+353 21 427 4588",
+    "website": "https://ikonhair.ie",
+    "email": "",
+    "description": "Ikon Hair is a trusted hair salons located in Cork, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Ikon Hair accept walk-ins?",
+        "a": "Ikon Hair welcomes walk-ins subject to availability. Booking in advance is recommended."
+      },
+      {
+        "q": "What services does Ikon Hair offer?",
+        "a": "Ikon Hair offers cuts, colour, styling, treatments, and more. Contact them for a full service menu."
+      },
+      {
+        "q": "What products does Ikon Hair use?",
+        "a": "Ikon Hair uses premium, professional-grade hair care products. Ask your stylist for details."
+      }
+    ],
+    "schema_type": "HairSalon",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "edit-hair-club",
+    "name": "Edit Hair Club",
+    "vertical": "salons",
+    "city": "Cork",
+    "citySlug": "cork",
+    "country": "ireland",
+    "address": "Cork, Ireland",
+    "phone": "+353 21 451 8121",
+    "website": "https://edithairclub.ie",
+    "email": "",
+    "description": "Edit Hair Club is a trusted hair salons located in Cork, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Edit Hair Club accept walk-ins?",
+        "a": "Edit Hair Club welcomes walk-ins subject to availability. Booking in advance is recommended."
+      },
+      {
+        "q": "What services does Edit Hair Club offer?",
+        "a": "Edit Hair Club offers cuts, colour, styling, treatments, and more. Contact them for a full service menu."
+      },
+      {
+        "q": "What products does Edit Hair Club use?",
+        "a": "Edit Hair Club uses premium, professional-grade hair care products. Ask your stylist for details."
+      }
+    ],
+    "schema_type": "HairSalon",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "carbon-hair-design",
+    "name": "Carbon Hair Design",
+    "vertical": "salons",
+    "city": "Cork",
+    "citySlug": "cork",
+    "country": "ireland",
+    "address": "Cork, Ireland",
+    "phone": "+353 21 422 2898",
+    "website": "https://carbonhairdesign.ie",
+    "email": "",
+    "description": "Carbon Hair Design is a trusted hair salons located in Cork, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Carbon Hair Design accept walk-ins?",
+        "a": "Carbon Hair Design welcomes walk-ins subject to availability. Booking in advance is recommended."
+      },
+      {
+        "q": "What services does Carbon Hair Design offer?",
+        "a": "Carbon Hair Design offers cuts, colour, styling, treatments, and more. Contact them for a full service menu."
+      },
+      {
+        "q": "What products does Carbon Hair Design use?",
+        "a": "Carbon Hair Design uses premium, professional-grade hair care products. Ask your stylist for details."
+      }
+    ],
+    "schema_type": "HairSalon",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "reeb-hair-salon",
+    "name": "Reeb Hair Salon",
+    "vertical": "salons",
+    "city": "Cork",
+    "citySlug": "cork",
+    "country": "ireland",
+    "address": "Cork, Ireland",
+    "phone": "",
+    "website": "https://reeb.ie",
+    "email": "",
+    "description": "Reeb Hair Salon is a trusted hair salons located in Cork, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Reeb Hair Salon accept walk-ins?",
+        "a": "Reeb Hair Salon welcomes walk-ins subject to availability. Booking in advance is recommended."
+      },
+      {
+        "q": "What services does Reeb Hair Salon offer?",
+        "a": "Reeb Hair Salon offers cuts, colour, styling, treatments, and more. Contact them for a full service menu."
+      },
+      {
+        "q": "What products does Reeb Hair Salon use?",
+        "a": "Reeb Hair Salon uses premium, professional-grade hair care products. Ask your stylist for details."
+      }
+    ],
+    "schema_type": "HairSalon",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "goldirocks-salon",
+    "name": "Goldirocks Salon",
+    "vertical": "salons",
+    "city": "Cork",
+    "citySlug": "cork",
+    "country": "ireland",
+    "address": "Cork, Ireland",
+    "phone": "+353 21 427 9098",
+    "website": "https://goldirockssalon.com",
+    "email": "info@goldirockssalon.com",
+    "description": "Goldirocks Salon is a trusted hair salons located in Cork, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Goldirocks Salon accept walk-ins?",
+        "a": "Goldirocks Salon welcomes walk-ins subject to availability. Booking in advance is recommended."
+      },
+      {
+        "q": "What services does Goldirocks Salon offer?",
+        "a": "Goldirocks Salon offers cuts, colour, styling, treatments, and more. Contact them for a full service menu."
+      },
+      {
+        "q": "What products does Goldirocks Salon use?",
+        "a": "Goldirocks Salon uses premium, professional-grade hair care products. Ask your stylist for details."
+      }
+    ],
+    "schema_type": "HairSalon",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "darcy-s-hairdressing",
+    "name": "Darcy's Hairdressing",
+    "vertical": "salons",
+    "city": "Cork",
+    "citySlug": "cork",
+    "country": "ireland",
+    "address": "Cork, Ireland",
+    "phone": "+353 21 427 7216",
+    "website": "https://darcyshairdressing.ie",
+    "email": "",
+    "description": "Darcy's Hairdressing is a trusted hair salons located in Cork, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Darcy's Hairdressing accept walk-ins?",
+        "a": "Darcy's Hairdressing welcomes walk-ins subject to availability. Booking in advance is recommended."
+      },
+      {
+        "q": "What services does Darcy's Hairdressing offer?",
+        "a": "Darcy's Hairdressing offers cuts, colour, styling, treatments, and more. Contact them for a full service menu."
+      },
+      {
+        "q": "What products does Darcy's Hairdressing use?",
+        "a": "Darcy's Hairdressing uses premium, professional-grade hair care products. Ask your stylist for details."
+      }
+    ],
+    "schema_type": "HairSalon",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "karizma-turkish-barbers",
+    "name": "Karizma Turkish Barbers",
+    "vertical": "barbers",
+    "city": "Cork",
+    "citySlug": "cork",
+    "country": "ireland",
+    "address": "Cork, Ireland",
+    "phone": "",
+    "website": "",
+    "email": "",
+    "description": "Karizma Turkish Barbers is a trusted barber shops located in Cork, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Karizma Turkish Barbers accept walk-ins?",
+        "a": "Karizma Turkish Barbers welcomes walk-ins. Booking ahead is recommended during busy times."
+      },
+      {
+        "q": "What services does Karizma Turkish Barbers offer?",
+        "a": "Karizma Turkish Barbers offers cuts, fades, beard trims, and grooming services."
+      },
+      {
+        "q": "Does Karizma Turkish Barbers offer student discounts?",
+        "a": "Contact Karizma Turkish Barbers for information about pricing and any available discounts."
+      }
+    ],
+    "schema_type": "BarberShop",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "tom-winters-barbers",
+    "name": "Tom Winters Barbers",
+    "vertical": "barbers",
+    "city": "Cork",
+    "citySlug": "cork",
+    "country": "ireland",
+    "address": "Cork, Ireland",
+    "phone": "",
+    "website": "",
+    "email": "",
+    "description": "Tom Winters Barbers is a trusted barber shops located in Cork, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Tom Winters Barbers accept walk-ins?",
+        "a": "Tom Winters Barbers welcomes walk-ins. Booking ahead is recommended during busy times."
+      },
+      {
+        "q": "What services does Tom Winters Barbers offer?",
+        "a": "Tom Winters Barbers offers cuts, fades, beard trims, and grooming services."
+      },
+      {
+        "q": "Does Tom Winters Barbers offer student discounts?",
+        "a": "Contact Tom Winters Barbers for information about pricing and any available discounts."
+      }
+    ],
+    "schema_type": "BarberShop",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "the-grafton-barber-academy-street",
+    "name": "The Grafton Barber - Academy Street",
+    "vertical": "barbers",
+    "city": "Cork",
+    "citySlug": "cork",
+    "country": "ireland",
+    "address": "Cork, Ireland",
+    "phone": "+353 21 241 0306",
+    "website": "https://graftonbarbers.com/cork/",
+    "email": "",
+    "description": "The Grafton Barber - Academy Street is a trusted barber shops located in Cork, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does The Grafton Barber - Academy Street accept walk-ins?",
+        "a": "The Grafton Barber - Academy Street welcomes walk-ins. Booking ahead is recommended during busy times."
+      },
+      {
+        "q": "What services does The Grafton Barber - Academy Street offer?",
+        "a": "The Grafton Barber - Academy Street offers cuts, fades, beard trims, and grooming services."
+      },
+      {
+        "q": "Does The Grafton Barber - Academy Street offer student discounts?",
+        "a": "Contact The Grafton Barber - Academy Street for information about pricing and any available discounts."
+      }
+    ],
+    "schema_type": "BarberShop",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "zizenia-barbers",
+    "name": "Zizenia Barbers",
+    "vertical": "barbers",
+    "city": "Cork",
+    "citySlug": "cork",
+    "country": "ireland",
+    "address": "Cork, Ireland",
+    "phone": "",
+    "website": "",
+    "email": "",
+    "description": "Zizenia Barbers is a trusted barber shops located in Cork, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Zizenia Barbers accept walk-ins?",
+        "a": "Zizenia Barbers welcomes walk-ins. Booking ahead is recommended during busy times."
+      },
+      {
+        "q": "What services does Zizenia Barbers offer?",
+        "a": "Zizenia Barbers offers cuts, fades, beard trims, and grooming services."
+      },
+      {
+        "q": "Does Zizenia Barbers offer student discounts?",
+        "a": "Contact Zizenia Barbers for information about pricing and any available discounts."
+      }
+    ],
+    "schema_type": "BarberShop",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "paul-mac-special-barber-shop",
+    "name": "Paul Mac Special Barber Shop",
+    "vertical": "barbers",
+    "city": "Cork",
+    "citySlug": "cork",
+    "country": "ireland",
+    "address": "Cork, Ireland",
+    "phone": "",
+    "website": "",
+    "email": "",
+    "description": "Paul Mac Special Barber Shop is a trusted barber shops located in Cork, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Paul Mac Special Barber Shop accept walk-ins?",
+        "a": "Paul Mac Special Barber Shop welcomes walk-ins. Booking ahead is recommended during busy times."
+      },
+      {
+        "q": "What services does Paul Mac Special Barber Shop offer?",
+        "a": "Paul Mac Special Barber Shop offers cuts, fades, beard trims, and grooming services."
+      },
+      {
+        "q": "Does Paul Mac Special Barber Shop offer student discounts?",
+        "a": "Contact Paul Mac Special Barber Shop for information about pricing and any available discounts."
+      }
+    ],
+    "schema_type": "BarberShop",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "zenith-hairdressing",
+    "name": "Zenith Hairdressing",
+    "vertical": "salons",
+    "city": "Galway",
+    "citySlug": "galway",
+    "country": "ireland",
+    "address": "Galway, Ireland",
+    "phone": "+353 91 533 680",
+    "website": "https://zenithhairdressing.ie",
+    "email": "",
+    "description": "Zenith Hairdressing is a trusted hair salons located in Galway, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Zenith Hairdressing accept walk-ins?",
+        "a": "Zenith Hairdressing welcomes walk-ins subject to availability. Booking in advance is recommended."
+      },
+      {
+        "q": "What services does Zenith Hairdressing offer?",
+        "a": "Zenith Hairdressing offers cuts, colour, styling, treatments, and more. Contact them for a full service menu."
+      },
+      {
+        "q": "What products does Zenith Hairdressing use?",
+        "a": "Zenith Hairdressing uses premium, professional-grade hair care products. Ask your stylist for details."
+      }
+    ],
+    "schema_type": "HairSalon",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "pixie-hair-studio",
+    "name": "Pixie Hair Studio",
+    "vertical": "salons",
+    "city": "Galway",
+    "citySlug": "galway",
+    "country": "ireland",
+    "address": "Galway, Ireland",
+    "phone": "+353 91 530 727",
+    "website": "",
+    "email": "",
+    "description": "Pixie Hair Studio is a trusted hair salons located in Galway, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Pixie Hair Studio accept walk-ins?",
+        "a": "Pixie Hair Studio welcomes walk-ins subject to availability. Booking in advance is recommended."
+      },
+      {
+        "q": "What services does Pixie Hair Studio offer?",
+        "a": "Pixie Hair Studio offers cuts, colour, styling, treatments, and more. Contact them for a full service menu."
+      },
+      {
+        "q": "What products does Pixie Hair Studio use?",
+        "a": "Pixie Hair Studio uses premium, professional-grade hair care products. Ask your stylist for details."
+      }
+    ],
+    "schema_type": "HairSalon",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "studio-102",
+    "name": "Studio 102",
+    "vertical": "salons",
+    "city": "Galway",
+    "citySlug": "galway",
+    "country": "ireland",
+    "address": "Galway, Ireland",
+    "phone": "+353 85 872 0020",
+    "website": "",
+    "email": "",
+    "description": "Studio 102 is a trusted hair salons located in Galway, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Studio 102 accept walk-ins?",
+        "a": "Studio 102 welcomes walk-ins subject to availability. Booking in advance is recommended."
+      },
+      {
+        "q": "What services does Studio 102 offer?",
+        "a": "Studio 102 offers cuts, colour, styling, treatments, and more. Contact them for a full service menu."
+      },
+      {
+        "q": "What products does Studio 102 use?",
+        "a": "Studio 102 uses premium, professional-grade hair care products. Ask your stylist for details."
+      }
+    ],
+    "schema_type": "HairSalon",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "sinead-lee-hair-design",
+    "name": "Sinead Lee Hair Design",
+    "vertical": "salons",
+    "city": "Galway",
+    "citySlug": "galway",
+    "country": "ireland",
+    "address": "Galway, Ireland",
+    "phone": "",
+    "website": "https://sineadlee.com",
+    "email": "",
+    "description": "Sinead Lee Hair Design is a trusted hair salons located in Galway, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Sinead Lee Hair Design accept walk-ins?",
+        "a": "Sinead Lee Hair Design welcomes walk-ins subject to availability. Booking in advance is recommended."
+      },
+      {
+        "q": "What services does Sinead Lee Hair Design offer?",
+        "a": "Sinead Lee Hair Design offers cuts, colour, styling, treatments, and more. Contact them for a full service menu."
+      },
+      {
+        "q": "What products does Sinead Lee Hair Design use?",
+        "a": "Sinead Lee Hair Design uses premium, professional-grade hair care products. Ask your stylist for details."
+      }
+    ],
+    "schema_type": "HairSalon",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "fat-tony-s-barber-shop",
+    "name": "Fat Tony's Barber Shop",
+    "vertical": "barbers",
+    "city": "Galway",
+    "citySlug": "galway",
+    "country": "ireland",
+    "address": "Galway, Ireland",
+    "phone": "",
+    "website": "",
+    "email": "",
+    "description": "Fat Tony's Barber Shop is a trusted barber shops located in Galway, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Fat Tony's Barber Shop accept walk-ins?",
+        "a": "Fat Tony's Barber Shop welcomes walk-ins. Booking ahead is recommended during busy times."
+      },
+      {
+        "q": "What services does Fat Tony's Barber Shop offer?",
+        "a": "Fat Tony's Barber Shop offers cuts, fades, beard trims, and grooming services."
+      },
+      {
+        "q": "Does Fat Tony's Barber Shop offer student discounts?",
+        "a": "Contact Fat Tony's Barber Shop for information about pricing and any available discounts."
+      }
+    ],
+    "schema_type": "BarberShop",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "cutthroat-barber-shop",
+    "name": "Cutthroat Barber Shop",
+    "vertical": "barbers",
+    "city": "Galway",
+    "citySlug": "galway",
+    "country": "ireland",
+    "address": "Galway, Ireland",
+    "phone": "",
+    "website": "",
+    "email": "",
+    "description": "Cutthroat Barber Shop is a trusted barber shops located in Galway, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Cutthroat Barber Shop accept walk-ins?",
+        "a": "Cutthroat Barber Shop welcomes walk-ins. Booking ahead is recommended during busy times."
+      },
+      {
+        "q": "What services does Cutthroat Barber Shop offer?",
+        "a": "Cutthroat Barber Shop offers cuts, fades, beard trims, and grooming services."
+      },
+      {
+        "q": "Does Cutthroat Barber Shop offer student discounts?",
+        "a": "Contact Cutthroat Barber Shop for information about pricing and any available discounts."
+      }
+    ],
+    "schema_type": "BarberShop",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "3b-s-barber-shop-hair-salon",
+    "name": "3B's Barber Shop & Hair Salon",
+    "vertical": "barbers",
+    "city": "Galway",
+    "citySlug": "galway",
+    "country": "ireland",
+    "address": "Galway, Ireland",
+    "phone": "",
+    "website": "",
+    "email": "",
+    "description": "3B's Barber Shop & Hair Salon is a trusted barber shops located in Galway, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does 3B's Barber Shop & Hair Salon accept walk-ins?",
+        "a": "3B's Barber Shop & Hair Salon welcomes walk-ins. Booking ahead is recommended during busy times."
+      },
+      {
+        "q": "What services does 3B's Barber Shop & Hair Salon offer?",
+        "a": "3B's Barber Shop & Hair Salon offers cuts, fades, beard trims, and grooming services."
+      },
+      {
+        "q": "Does 3B's Barber Shop & Hair Salon offer student discounts?",
+        "a": "Contact 3B's Barber Shop & Hair Salon for information about pricing and any available discounts."
+      }
+    ],
+    "schema_type": "BarberShop",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "nelki-s-barber",
+    "name": "Nelki's Barber",
+    "vertical": "barbers",
+    "city": "Galway",
+    "citySlug": "galway",
+    "country": "ireland",
+    "address": "Galway, Ireland",
+    "phone": "",
+    "website": "",
+    "email": "",
+    "description": "Nelki's Barber is a trusted barber shops located in Galway, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Nelki's Barber accept walk-ins?",
+        "a": "Nelki's Barber welcomes walk-ins. Booking ahead is recommended during busy times."
+      },
+      {
+        "q": "What services does Nelki's Barber offer?",
+        "a": "Nelki's Barber offers cuts, fades, beard trims, and grooming services."
+      },
+      {
+        "q": "Does Nelki's Barber offer student discounts?",
+        "a": "Contact Nelki's Barber for information about pricing and any available discounts."
+      }
+    ],
+    "schema_type": "BarberShop",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "niall-colgan-hair-salon",
+    "name": "Niall Colgan Hair Salon",
+    "vertical": "salons",
+    "city": "Limerick",
+    "citySlug": "limerick",
+    "country": "ireland",
+    "address": "Limerick, Ireland",
+    "phone": "",
+    "website": "https://www.strandhotellimerick.ie/hair-salon-limerick/",
+    "email": "",
+    "description": "Niall Colgan Hair Salon is a trusted hair salons located in Limerick, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Niall Colgan Hair Salon accept walk-ins?",
+        "a": "Niall Colgan Hair Salon welcomes walk-ins subject to availability. Booking in advance is recommended."
+      },
+      {
+        "q": "What services does Niall Colgan Hair Salon offer?",
+        "a": "Niall Colgan Hair Salon offers cuts, colour, styling, treatments, and more. Contact them for a full service menu."
+      },
+      {
+        "q": "What products does Niall Colgan Hair Salon use?",
+        "a": "Niall Colgan Hair Salon uses premium, professional-grade hair care products. Ask your stylist for details."
+      }
+    ],
+    "schema_type": "HairSalon",
     "locale": "en",
     "openingHours": "Mo-Fr 09:00-18:00"
   }
