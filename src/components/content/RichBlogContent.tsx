@@ -78,6 +78,9 @@ export function RichBlogContent({ post, className = '' }: RichBlogContentProps) 
     // Normalize line breaks
     html = html.replace(/\r\n/g, '\n');
 
+    // Strip Kramdown-style attributes like {: .cta-hero }, {: .trust-badges }
+    html = html.replace(/\{:\s*[^}]+\}/g, '');
+
     // Add proper line breaks before headers that are inline with text
     html = html.replace(/([.!?:])(\s*)(#{1,3}\s)/g, '$1\n\n$3');
     html = html.replace(/([a-zA-Z0-9])(\s*)(#{1,3}\s)/g, '$1\n\n$3');
@@ -88,6 +91,7 @@ export function RichBlogContent({ post, className = '' }: RichBlogContentProps) 
     let inList = false;
     let listType: 'ul' | 'ol' | null = null;
     let paragraphBuffer: string[] = [];
+    let tableBuffer: string[] = [];
     let isFirstParagraph = true;
 
     const flushParagraph = () => {
@@ -114,12 +118,77 @@ export function RichBlogContent({ post, className = '' }: RichBlogContentProps) 
       }
     };
 
+    const flushTable = () => {
+      if (tableBuffer.length < 2) {
+        // Not enough rows for a table, treat as paragraphs
+        for (const row of tableBuffer) {
+          paragraphBuffer.push(row);
+        }
+        tableBuffer = [];
+        return;
+      }
+
+      // Find separator row (|---|---|)
+      const separatorIndex = tableBuffer.findIndex(row => /^\|[\s\-:|]+\|$/.test(row.trim()));
+
+      const parseCells = (row: string): string[] => {
+        return row.trim().replace(/^\|/, '').replace(/\|$/, '').split('|').map(c => c.trim());
+      };
+
+      let headerRows: string[] = [];
+      let bodyRows: string[] = [];
+
+      if (separatorIndex > 0) {
+        headerRows = tableBuffer.slice(0, separatorIndex);
+        bodyRows = tableBuffer.slice(separatorIndex + 1);
+      } else {
+        // No separator found — treat first row as header
+        headerRows = [tableBuffer[0]];
+        bodyRows = tableBuffer.slice(1);
+      }
+
+      let table = '<div class="overflow-x-auto my-8 rounded-lg border border-gray-200"><table class="min-w-full divide-y divide-gray-200">';
+
+      // Header
+      if (headerRows.length > 0) {
+        table += '<thead class="bg-gray-50">';
+        for (const row of headerRows) {
+          const cells = parseCells(row);
+          table += '<tr>';
+          for (const cell of cells) {
+            table += `<th class="px-4 py-3 text-left text-sm font-semibold text-gray-900">${processInline(cell)}</th>`;
+          }
+          table += '</tr>';
+        }
+        table += '</thead>';
+      }
+
+      // Body
+      if (bodyRows.length > 0) {
+        table += '<tbody class="divide-y divide-gray-100 bg-white">';
+        for (const row of bodyRows) {
+          const cells = parseCells(row);
+          table += '<tr>';
+          for (const cell of cells) {
+            table += `<td class="px-4 py-3 text-sm text-gray-700" style="font-family: Georgia, \'Times New Roman\', serif;">${processInline(cell)}</td>`;
+          }
+          table += '</tr>';
+        }
+        table += '</tbody>';
+      }
+
+      table += '</table></div>';
+      output.push(table);
+      tableBuffer = [];
+    };
+
     for (let i = 0; i < lines.length; i++) {
       const line = lines[i];
       const trimmed = line.trim();
 
       // Empty line - flush paragraph
       if (!trimmed) {
+        flushTable();
         flushParagraph();
         closeList();
         continue;
@@ -197,12 +266,26 @@ export function RichBlogContent({ post, className = '' }: RichBlogContentProps) 
         continue;
       }
 
+      // Table rows
+      if (trimmed.startsWith('|')) {
+        flushParagraph();
+        closeList();
+        tableBuffer.push(trimmed);
+        continue;
+      }
+
+      // Non-table line while table is buffered — flush the table
+      if (tableBuffer.length > 0) {
+        flushTable();
+      }
+
       // Regular text - add to paragraph buffer
       closeList();
       paragraphBuffer.push(trimmed);
     }
 
     // Flush remaining content
+    flushTable();
     flushParagraph();
     closeList();
 

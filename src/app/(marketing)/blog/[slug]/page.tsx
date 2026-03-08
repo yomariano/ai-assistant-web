@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import nextDynamic from "next/dynamic";
 import { notFound } from "next/navigation";
 import { getBlogPost, getBlogPostSlugs } from "@/lib/content/blog";
 import { generateBlogMetadata } from "@/lib/seo/metadata";
@@ -14,6 +15,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { Calendar, Clock, ArrowLeft, Tag, ArrowRight } from "lucide-react";
 import { getDirectoryFromCategoryOrTags } from "@/lib/directory/verticals";
+
+const DemoPage = nextDynamic(() => import("@/components/demo/DemoPage"), {
+  ssr: false,
+  loading: () => <div className="py-16 text-center text-muted-foreground">Loading demo...</div>,
+});
+
+const PricingSection = nextDynamic(() => import("@/components/voicefleet/PricingSection"));
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -186,24 +194,10 @@ export default async function BlogPostPage({ params }: Props) {
             </div>
           )}
 
-          {/* CTA Box */}
-          <div className="mt-12 p-8 bg-gradient-to-br from-indigo-50 to-purple-50 rounded-2xl border border-indigo-100">
-            <h3 className="text-xl font-bold text-foreground mb-2">Ready to try VoiceFleet?</h3>
-            <p className="text-muted-foreground mb-4">See how AI voice agents can transform your business at 80% lower cost.</p>
-            <div className="flex flex-wrap gap-3">
-              <Link
-                href="/login"
-                className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold rounded-lg hover:from-indigo-700 hover:to-purple-700 transition-all shadow-lg shadow-indigo-200"
-              >
-                Start Free Trial
-              </Link>
-              <Link
-                href="/pricing"
-                className="inline-flex items-center px-6 py-3 bg-white text-indigo-600 font-semibold rounded-lg hover:bg-indigo-50 transition-colors border border-indigo-200"
-              >
-                View Pricing
-              </Link>
-            </div>
+          {/* Transition to demo */}
+          <div className="mt-12 p-8 bg-gradient-to-br from-indigo-50 to-purple-50 rounded-2xl border border-indigo-100 text-center">
+            <h3 className="text-xl font-bold text-foreground mb-2">See it in action</h3>
+            <p className="text-muted-foreground">Try the live AI demo below — pick your industry and call the AI receptionist right from your browser.</p>
           </div>
 
           {/* Directory Cross-Link */}
@@ -236,6 +230,14 @@ export default async function BlogPostPage({ params }: Props) {
             tags={post.tags}
           />
         </article>
+
+        {/* Live Demo */}
+        <section className="border-t border-border [&>div]:min-h-0">
+          <DemoPage />
+        </section>
+
+        {/* Pricing */}
+        <PricingSection />
 
         <CTASection
           title="Ready to Scale Your Support?"
