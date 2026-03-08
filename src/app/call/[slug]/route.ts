@@ -17,7 +17,7 @@ interface RouteContext {
 export async function GET(request: NextRequest, { params }: RouteContext) {
   const { slug } = await params;
   const searchParams = request.nextUrl.searchParams;
-  const business = resolveTrackedBusiness({
+  const business = await resolveTrackedBusiness({
     slug,
     vertical: searchParams.get("vertical"),
     citySlug: searchParams.get("city"),

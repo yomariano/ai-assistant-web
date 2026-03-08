@@ -10,8 +10,8 @@ export const metadata: Metadata = {
   openGraph: { title: 'Directorio de Negocios', description: 'Encontrá negocios locales impulsados por IA.' },
 };
 
-export default function DirectorioPage() {
-  const verticals = getVerticals();
+export default async function DirectorioPage() {
+  const verticals = await getVerticals();
   return (
     <>
       <HeaderES />

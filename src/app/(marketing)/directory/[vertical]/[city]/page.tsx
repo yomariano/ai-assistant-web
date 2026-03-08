@@ -29,7 +29,7 @@ export default async function CityPage({ params }: Props) {
   const label = verticalLabels[vertical];
   if (!label) notFound();
 
-  const businesses = getBusinessesByCity(vertical, city);
+  const businesses = await getBusinessesByCity(vertical, city);
   if (!businesses.length) notFound();
 
   const cityName = businesses[0].city;

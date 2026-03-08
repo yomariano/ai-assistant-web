@@ -50,13 +50,13 @@ export function getDirectoryFallbackPath(referer?: string | null) {
   }
 }
 
-export function resolveTrackedBusiness({
+export async function resolveTrackedBusiness({
   slug,
   vertical,
   citySlug,
   referer,
 }: ResolveTrackedBusinessInput) {
-  const matches = getBusinessesBySlug(slug);
+  const matches = await getBusinessesBySlug(slug);
 
   if (!matches.length) {
     return null;

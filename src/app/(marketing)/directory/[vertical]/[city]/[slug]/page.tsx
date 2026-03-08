@@ -11,7 +11,7 @@ interface Props { params: Promise<{ vertical: string; city: string; slug: string
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { vertical, city, slug } = await params;
-  const b = getBusinessBySlug(vertical, city, slug);
+  const b = await getBusinessBySlug(vertical, city, slug);
   if (!b) return {};
   const label = verticalLabels[vertical] || vertical;
   return {
@@ -29,7 +29,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function BusinessPage({ params }: Props) {
   const { vertical, city, slug } = await params;
-  const business = getBusinessBySlug(vertical, city, slug);
+  const business = await getBusinessBySlug(vertical, city, slug);
   if (!business) notFound();
 
   const label = verticalLabels[vertical] || vertical;

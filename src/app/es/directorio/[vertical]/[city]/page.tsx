@@ -26,7 +26,7 @@ export default async function CityPageES({ params }: Props) {
   const label = enV ? verticalLabelsES[enV] : null;
   if (!label || !enV) notFound();
 
-  const businesses = getBusinessesByCity(enV, city);
+  const businesses = await getBusinessesByCity(enV, city);
   if (!businesses.length) notFound();
 
   const cityName = businesses[0].city;

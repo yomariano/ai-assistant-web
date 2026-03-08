@@ -14,8 +14,8 @@ export const metadata: Metadata = {
   },
 };
 
-export default function DirectoryPage() {
-  const verticals = getVerticals();
+export default async function DirectoryPage() {
+  const verticals = await getVerticals();
 
   return (
     <>

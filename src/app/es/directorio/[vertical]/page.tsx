@@ -24,7 +24,7 @@ export default async function VerticalPageES({ params }: Props) {
   const label = enV ? verticalLabelsES[enV] : null;
   if (!label || !enV) notFound();
 
-  const cities = getCitiesForVertical(enV);
+  const cities = await getCitiesForVertical(enV);
 
   return (
     <>

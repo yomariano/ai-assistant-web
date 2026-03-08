@@ -19,30 +19,63 @@ export interface Business {
   image_url?: string;
 }
 
-const businesses: Business[] = businessesData as Business[];
+const staticBusinesses: Business[] = businessesData as Business[];
 
-export function getAllBusinesses(): Business[] {
-  return businesses;
+// In-memory cache for CDN data
+let cachedBusinesses: Business[] | null = null;
+let cacheTime = 0;
+const CACHE_TTL = 3600_000; // 1 hour
+
+async function fetchBusinesses(): Promise<Business[]> {
+  const now = Date.now();
+  if (cachedBusinesses && now - cacheTime < CACHE_TTL) {
+    return cachedBusinesses;
+  }
+
+  try {
+    const res = await fetch('https://cdn.voicefleet.ai/directory/businesses.json', {
+      next: { revalidate: 3600 },
+    });
+    if (res.ok) {
+      const data = await res.json();
+      if (Array.isArray(data) && data.length > 50) {
+        cachedBusinesses = data as Business[];
+        cacheTime = now;
+        return cachedBusinesses;
+      }
+    }
+  } catch {
+    // Fallback to static
+  }
+  return staticBusinesses;
 }
 
-export function getBusinessesBySlug(slug: string): Business[] {
+export async function getAllBusinesses(): Promise<Business[]> {
+  return fetchBusinesses();
+}
+
+export async function getBusinessesBySlug(slug: string): Promise<Business[]> {
+  const businesses = await fetchBusinesses();
   return businesses.filter((business) => business.slug === slug);
 }
 
-export function getBusinessBySlug(vertical: string, citySlug: string, slug: string): Business | undefined {
+export async function getBusinessBySlug(vertical: string, citySlug: string, slug: string): Promise<Business | undefined> {
+  const businesses = await fetchBusinesses();
   return businesses.find(b => b.vertical === vertical && b.citySlug === citySlug && b.slug === slug);
 }
 
-export function getBusinessesByCity(vertical: string, citySlug: string): Business[] {
+export async function getBusinessesByCity(vertical: string, citySlug: string): Promise<Business[]> {
+  const businesses = await fetchBusinesses();
   return businesses.filter(b => b.vertical === vertical && b.citySlug === citySlug);
 }
 
-export function getBusinessesByVertical(vertical: string): Business[] {
+export async function getBusinessesByVertical(vertical: string): Promise<Business[]> {
+  const businesses = await fetchBusinesses();
   return businesses.filter(b => b.vertical === vertical);
 }
 
-export function getCitiesForVertical(vertical: string): { city: string; citySlug: string; count: number }[] {
-  const biz = getBusinessesByVertical(vertical);
+export async function getCitiesForVertical(vertical: string): Promise<{ city: string; citySlug: string; count: number }[]> {
+  const biz = await getBusinessesByVertical(vertical);
   const map = new Map<string, { city: string; citySlug: string; count: number }>();
   for (const b of biz) {
     const existing = map.get(b.citySlug);
@@ -52,13 +85,15 @@ export function getCitiesForVertical(vertical: string): { city: string; citySlug
   return [...map.values()].sort((a, z) => z.count - a.count);
 }
 
-export function getVerticals(): { vertical: string; count: number }[] {
+export async function getVerticals(): Promise<{ vertical: string; count: number }[]> {
+  const businesses = await fetchBusinesses();
   const map = new Map<string, number>();
   for (const b of businesses) map.set(b.vertical, (map.get(b.vertical) || 0) + 1);
   return [...map.entries()].map(([vertical, count]) => ({ vertical, count })).sort((a, z) => z.count - a.count);
 }
 
-export function getBusinessesByLocale(locale: 'en' | 'es'): Business[] {
+export async function getBusinessesByLocale(locale: 'en' | 'es'): Promise<Business[]> {
+  const businesses = await fetchBusinesses();
   return businesses.filter(b => b.locale === locale);
 }
 

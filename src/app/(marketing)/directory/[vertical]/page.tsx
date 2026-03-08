@@ -26,7 +26,7 @@ export default async function VerticalPage({ params }: Props) {
   const label = verticalLabels[vertical];
   if (!label) notFound();
 
-  const cities = getCitiesForVertical(vertical);
+  const cities = await getCitiesForVertical(vertical);
   const icon = verticalIcons[vertical] || '📌';
 
   return (

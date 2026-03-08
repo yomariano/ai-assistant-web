@@ -13,7 +13,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { vertical, city, slug } = await params;
   const enV = esSlugToVertical[vertical];
   if (!enV) return {};
-  const b = getBusinessBySlug(enV, city, slug);
+  const b = await getBusinessBySlug(enV, city, slug);
   if (!b) return {};
   return {
     title: `${b.name} — ${capitalize(b.city)}`,
@@ -30,7 +30,7 @@ export default async function BusinessPageES({ params }: Props) {
   const { vertical, city, slug } = await params;
   const enV = esSlugToVertical[vertical];
   if (!enV) notFound();
-  const business = getBusinessBySlug(enV, city, slug);
+  const business = await getBusinessBySlug(enV, city, slug);
   if (!business) notFound();
 
   const label = verticalLabelsES[enV] || enV;

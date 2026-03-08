@@ -48,6 +48,12 @@ export async function POST(request: NextRequest) {
       pathsToRevalidate.push('/compare');
     }
 
+    if (type === 'directory' || type === 'all') {
+      revalidatePath('/directory', 'layout');
+      revalidatePath('/es/directorio', 'layout');
+      pathsToRevalidate.push('/directory', '/es/directorio');
+    }
+
     if (type === 'all') {
       revalidatePath('/for', 'layout');
       revalidatePath('/in', 'layout');
@@ -120,15 +126,27 @@ export async function GET(request: NextRequest) {
     });
   }
 
+  if (type === 'directory') {
+    revalidatePath('/directory', 'layout');
+    revalidatePath('/es/directorio', 'layout');
+    return NextResponse.json({
+      revalidated: true,
+      paths: ['/directory', '/es/directorio'],
+      timestamp: new Date().toISOString()
+    });
+  }
+
   if (type === 'all') {
     revalidatePath('/blog', 'layout');
     revalidatePath('/compare', 'layout');
+    revalidatePath('/directory', 'layout');
+    revalidatePath('/es/directorio', 'layout');
     revalidatePath('/for', 'layout');
     revalidatePath('/in', 'layout');
     revalidatePath('/features', 'layout');
     return NextResponse.json({
       revalidated: true,
-      paths: ['/blog', '/compare', '/for', '/in', '/features'],
+      paths: ['/blog', '/compare', '/directory', '/es/directorio', '/for', '/in', '/features'],
       timestamp: new Date().toISOString()
     });
   }
