@@ -103,7 +103,7 @@ export default async function ComboPage({ params }: Props) {
                 <p className="text-xl text-orange-100 mb-8">{page.subheadline}</p>
                 <div className="flex flex-col sm:flex-row gap-4">
                   <Link
-                    href="/register"
+                    href="/register?plan=starter"
                     className="inline-flex items-center justify-center px-8 py-4 bg-white text-orange-600 rounded-lg font-semibold hover:bg-orange-50 transition-colors shadow-lg"
                   >
                     Start Free Trial

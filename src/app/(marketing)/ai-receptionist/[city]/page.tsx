@@ -154,7 +154,7 @@ export default async function CityPage({ params }: Props) {
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link
-                href="/register"
+                href="/register?plan=starter"
                 className="inline-flex items-center justify-center px-8 py-4 bg-white text-blue-600 rounded-xl font-semibold hover:bg-white/90 transition-colors shadow-lg hover:shadow-xl"
               >
                 Start Free Trial
@@ -397,7 +397,7 @@ export default async function CityPage({ params }: Props) {
                   </li>
                   <li>
                     <Link
-                      href="/register"
+                      href="/register?plan=starter"
                       className="text-blue-600 hover:underline"
                     >
                       Free Trial
@@ -422,7 +422,7 @@ export default async function CityPage({ params }: Props) {
           title={`Ready to automate your ${city.name} business calls?`}
           description={`Join businesses in ${city.name} saving hours every week with AI-powered voice agents.`}
           primaryButtonText="Start Free Trial"
-          primaryButtonHref="/register"
+          primaryButtonHref="/register?plan=starter"
         />
 
         <Footer />

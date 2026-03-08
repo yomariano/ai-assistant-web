@@ -31,7 +31,7 @@ export default function Hero() {
                     {/* CTA Buttons */}
                     <div className="mt-10 flex flex-col sm:flex-row justify-center items-center gap-4">
                         <Link
-                            href="/register"
+                            href="/register?plan=starter"
                             className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-lg bg-orange-500 px-8 py-4 text-base font-semibold text-white hover:bg-orange-600 transition-colors shadow-lg shadow-orange-500/25"
                             data-umami-event="cta_click"
                             data-umami-event-location="hero"

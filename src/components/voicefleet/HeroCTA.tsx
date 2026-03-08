@@ -30,7 +30,7 @@ const HeroCTA = () => {
         </Link>
       ) : (
         <div className="flex flex-col sm:flex-row gap-3">
-          <Link href="/register">
+          <Link href="/register?plan=starter">
             <Button
               variant="hero"
               size="xl"

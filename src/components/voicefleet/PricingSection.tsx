@@ -138,7 +138,7 @@ const PricingSection = ({ embedded = false, trackingData }: PricingSectionProps)
       sessionStorage.setItem('selectedPlan', planId);
       setRedirectingPlan(planId);
       try {
-        await signInWithGoogle();
+        await signInWithGoogle({ next: `/login?plan=${encodeURIComponent(planId)}` });
         // OAuth will redirect, so we don't need to handle success here
       } catch (error) {
         console.error("Failed to start Google OAuth:", error);

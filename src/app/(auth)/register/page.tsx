@@ -1,15 +1,42 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
+import { getSessionResult, signInWithGoogle } from '@/lib/supabase';
+
+const DEFAULT_TRIAL_PLAN = 'starter';
 
 export default function RegisterPage() {
   const router = useRouter();
+  const hasStarted = useRef(false);
 
   useEffect(() => {
-    // Redirect to login since we use Google OAuth
-    // Registration happens automatically on first sign-in
-    router.replace('/login');
+    if (hasStarted.current) {
+      return;
+    }
+
+    hasStarted.current = true;
+
+    const params = new URLSearchParams(window.location.search);
+    const plan = params.get('plan') || DEFAULT_TRIAL_PLAN;
+    const loginRedirect = `/login?plan=${encodeURIComponent(plan)}`;
+
+    const startRegistration = async () => {
+      sessionStorage.setItem('selectedPlan', plan);
+
+      const { session } = await getSessionResult({ timeoutMs: 3000 });
+      if (session?.access_token) {
+        router.replace(loginRedirect);
+        return;
+      }
+
+      await signInWithGoogle({ next: loginRedirect });
+    };
+
+    void startRegistration().catch((error) => {
+      console.error('[REGISTER] Failed to start Google OAuth:', error);
+      router.replace(loginRedirect);
+    });
   }, [router]);
 
   return (

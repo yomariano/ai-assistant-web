@@ -78,6 +78,10 @@ export default async function UseCasePage({ params }: Props) {
         "Yes. It's designed for SMBs that need reliable phone coverage without adding headcount, while keeping control over what the AI says and does.",
     },
   ];
+  const primaryTrialHref =
+    page.cta_url?.startsWith("/login") || page.cta_url === "/register"
+      ? "/register?plan=starter"
+      : page.cta_url || "/register?plan=starter";
 
   return (
     <>
@@ -101,7 +105,7 @@ export default async function UseCasePage({ params }: Props) {
                   {page.subheadline}
                 </p>
                 <Link
-                  href={page.cta_url || "/login"}
+                  href={primaryTrialHref}
                   className="inline-flex items-center justify-center px-8 py-4 bg-white text-indigo-600 rounded-lg font-semibold hover:bg-indigo-50 transition-colors shadow-lg"
                 >
                   {page.cta_text || "Get Started Free"}
@@ -343,7 +347,7 @@ export default async function UseCasePage({ params }: Props) {
                             <Sparkles className="h-4 w-4" />
                             <span>All Features</span>
                           </Link>
-                          <Link href="/login" className="inline-flex items-center gap-2 px-4 py-2 bg-indigo-100 text-indigo-700 rounded-lg text-sm font-medium hover:bg-indigo-200 transition-colors">
+                          <Link href="/register?plan=starter" className="inline-flex items-center gap-2 px-4 py-2 bg-indigo-100 text-indigo-700 rounded-lg text-sm font-medium hover:bg-indigo-200 transition-colors">
                             <Phone className="h-4 w-4" />
                             <span>Start Free Trial</span>
                           </Link>
@@ -394,7 +398,7 @@ export default async function UseCasePage({ params }: Props) {
                         <p className="mt-3 text-xs text-slate-400">Including holidays & weekends</p>
                       </div>
 
-                      <Link href="/login" className="bg-white rounded-2xl p-6 shadow-lg shadow-emerald-100 border border-emerald-100 hover:shadow-xl hover:shadow-emerald-200 hover:border-emerald-300 transition-all group">
+                      <Link href="/register?plan=starter" className="bg-white rounded-2xl p-6 shadow-lg shadow-emerald-100 border border-emerald-100 hover:shadow-xl hover:shadow-emerald-200 hover:border-emerald-300 transition-all group">
                         <div className="flex items-center gap-2 mb-2">
                           <Sparkles className="h-5 w-5 text-emerald-600" />
                           <span className="text-slate-500 text-sm">Setup Time</span>

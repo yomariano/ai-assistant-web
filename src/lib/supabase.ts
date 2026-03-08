@@ -22,19 +22,26 @@ export const supabase = getSupabase();
 
 export type AuthProvider = 'google';
 
-export const signInWithGoogle = async () => {
+interface GoogleSignInOptions {
+  next?: string;
+}
+
+export const signInWithGoogle = async ({ next }: GoogleSignInOptions = {}) => {
   const client = getSupabase();
   if (!client) {
     console.error('[SUPABASE] Client not initialized');
     throw new Error('Supabase client not initialized');
   }
 
-  const redirectTo = `${window.location.origin}/auth/callback`;
+  const callbackUrl = new URL('/auth/callback', window.location.origin);
+  if (next && next.startsWith('/')) {
+    callbackUrl.searchParams.set('next', next);
+  }
 
   const { data, error } = await client.auth.signInWithOAuth({
     provider: 'google',
     options: {
-      redirectTo,
+      redirectTo: callbackUrl.toString(),
     },
   });
   if (error) throw error;

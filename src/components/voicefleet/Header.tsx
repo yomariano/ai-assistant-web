@@ -24,7 +24,7 @@ const Header = () => {
     sessionStorage.setItem("selectedPlan", "starter");
     try {
       const { signInWithGoogle } = await import("@/lib/supabase");
-      await signInWithGoogle();
+      await signInWithGoogle({ next: "/login?plan=starter" });
     } catch (error) {
       console.error("Failed to start Google OAuth:", error);
       setIsTrialLoading(false);
