@@ -32,12 +32,14 @@ interface RegionData {
   currency: string;
   currencySymbol: string;
   telephonyProvider: string;
+  city: string | null;
   plans: Plan[];
 }
 
 interface UseRegionReturn {
   region: string | null;
   regionName: string | null;
+  city: string | null;
   currency: string | null;
   currencySymbol: string | null;
   plans: Plan[];
@@ -88,6 +90,7 @@ export function useRegion(): UseRegionReturn {
       // Map API response to our interface (API uses minutesIncluded, we use monthlyMinutes)
       const regionData: RegionData = {
         ...apiResponse,
+        city: apiResponse.city || null,
         plans: apiResponse.plans.map((p: ApiPlan) => ({
           id: p.id,
           price: p.price,
@@ -114,6 +117,7 @@ export function useRegion(): UseRegionReturn {
         currency: 'EUR',
         currencySymbol: '€',
         telephonyProvider: 'voipcloud',
+        city: null,
         plans: [
           { id: 'starter', price: 99, formattedPrice: '€99', monthlyMinutes: 500, paymentLink: null },
           { id: 'growth', price: 299, formattedPrice: '€299', monthlyMinutes: 1000, paymentLink: null },
@@ -155,6 +159,7 @@ export function useRegion(): UseRegionReturn {
   return {
     region: data?.region || null,
     regionName: data?.regionName || null,
+    city: data?.city || null,
     currency: data?.currency || null,
     currencySymbol: data?.currencySymbol || null,
     plans: data?.plans || [],
@@ -188,6 +193,7 @@ export async function getRegionFromServer(): Promise<RegionData> {
       currency: 'EUR',
       currencySymbol: '€',
       telephonyProvider: 'voipcloud',
+      city: null,
       plans: [
         { id: 'starter', price: 99, formattedPrice: '€99', monthlyMinutes: 500, paymentLink: null },
         { id: 'growth', price: 299, formattedPrice: '€299', monthlyMinutes: 1000, paymentLink: null },
