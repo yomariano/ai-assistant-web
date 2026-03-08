@@ -97,7 +97,11 @@ const REGIONAL_PRICING = {
   },
 };
 
-const PricingSection = () => {
+interface PricingSectionProps {
+  embedded?: boolean;
+}
+
+const PricingSection = ({ embedded = false }: PricingSectionProps) => {
   const [isAnnual, setIsAnnual] = useState(false);
   const { region: detectedRegion } = useRegion();
   const region: Region = detectedRegion === 'AR' ? 'AR' : 'EU';
@@ -559,8 +563,11 @@ const PricingSection = () => {
   };
 
   return (
-    <section id="pricing" className="py-16 lg:py-28 bg-background">
-      <div className="container mx-auto px-4">
+    <section
+      id="pricing"
+      className={embedded ? "bg-transparent py-0" : "bg-background py-16 lg:py-28"}
+    >
+      <div className={embedded ? "" : "container mx-auto px-4"}>
         {/* Trial Banner */}
         <div className="max-w-4xl mx-auto mb-10 lg:mb-14">
           <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-primary via-primary/90 to-accent p-6 sm:p-8">

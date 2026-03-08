@@ -93,7 +93,7 @@ export default async function BlogPostPageES({ params }: Props) {
 
         <main>
           <section className="relative overflow-hidden border-b border-stone-200/80 bg-[radial-gradient(circle_at_top_left,rgba(219,234,254,0.8),transparent_32%),radial-gradient(circle_at_top_right,rgba(226,232,240,0.72),transparent_32%),linear-gradient(180deg,#ffffff_0%,#f8fafc_100%)] pt-28 pb-14">
-            <div className="mx-auto max-w-6xl px-6">
+            <div className="mx-auto max-w-[1360px] px-6">
               <Link
                 href="/es/blog"
                 className="inline-flex items-center gap-2 text-sm font-medium text-stone-500 transition-colors hover:text-stone-900"
@@ -140,8 +140,8 @@ export default async function BlogPostPageES({ params }: Props) {
             </div>
           </section>
 
-          <section className="mx-auto max-w-6xl px-6 py-12">
-            <div className="grid gap-10 lg:grid-cols-[220px_minmax(0,1fr)]">
+          <section className="mx-auto max-w-[1360px] px-6 py-12">
+            <div className="grid gap-8 xl:gap-10 lg:grid-cols-[190px_minmax(0,1fr)]">
               <aside className="h-fit lg:sticky lg:top-24">
                 <div className="rounded-[1.5rem] border border-stone-200/80 bg-white/90 p-5 shadow-[0_18px_45px_rgba(15,23,42,0.05)]">
                   <p className="text-xs font-semibold uppercase tracking-[0.22em] text-stone-500">
@@ -196,7 +196,7 @@ export default async function BlogPostPageES({ params }: Props) {
                   </div>
                 )}
 
-                <article className="rounded-[2rem] border border-stone-200/80 bg-white px-6 py-8 shadow-[0_28px_70px_rgba(15,23,42,0.07)] md:px-10 md:py-12 lg:px-14">
+                <article className="rounded-[2rem] border border-stone-200/80 bg-white px-6 py-8 shadow-[0_28px_70px_rgba(15,23,42,0.07)] md:px-10 md:py-12 lg:px-14 xl:px-16">
                   <RichBlogContent
                     post={{
                       id: post.id,

@@ -7,6 +7,10 @@ const DemoPage = dynamic(() => import('@/components/demo/DemoPage'), {
   loading: () => <div className="py-16 text-center text-muted-foreground">Loading demo...</div>,
 });
 
-export default function BlogDemoEmbed() {
-  return <DemoPage />;
+interface BlogDemoEmbedProps {
+  embedded?: boolean;
+}
+
+export default function BlogDemoEmbed({ embedded = false }: BlogDemoEmbedProps) {
+  return <DemoPage embedded={embedded} />;
 }

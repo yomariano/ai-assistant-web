@@ -22,7 +22,11 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { trackEvent } from "@/lib/umami";
 
-export default function DemoPage() {
+interface DemoPageProps {
+  embedded?: boolean;
+}
+
+export default function DemoPage({ embedded = false }: DemoPageProps) {
   const [step, setStep] = useState<DemoStep>(1);
   const [scenarioId, setScenarioId] = useState<string | null>(null);
   const [availability, setAvailability] = useState<Record<string, boolean>>({});
@@ -142,11 +146,23 @@ export default function DemoPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className={embedded ? "bg-background" : "min-h-screen bg-background"}>
       {/* Hero */}
-      <div className="pt-24 pb-6 sm:pt-28 sm:pb-8 px-4">
+      <div
+        className={
+          embedded
+            ? "px-4 pt-10 pb-5 sm:px-6 sm:pt-12 sm:pb-6"
+            : "px-4 pt-24 pb-6 sm:pt-28 sm:pb-8"
+        }
+      >
         <div className="container mx-auto max-w-6xl text-center">
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-bold text-foreground mb-3">
+          <h1
+            className={`mb-3 font-heading font-bold text-foreground ${
+              embedded
+                ? "text-2xl sm:text-3xl lg:text-4xl"
+                : "text-3xl sm:text-4xl lg:text-5xl"
+            }`}
+          >
             See AI Booking in Action
           </h1>
           <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto">
@@ -156,14 +172,14 @@ export default function DemoPage() {
       </div>
 
       {/* Steps indicator */}
-      <div className="px-4 pb-6">
+      <div className={embedded ? "px-4 pb-5 sm:px-6" : "px-4 pb-6"}>
         <div className="container mx-auto max-w-6xl">
           <DemoSteps currentStep={step} />
         </div>
       </div>
 
       {/* Main content */}
-      <div className="px-4 pb-12">
+      <div className={embedded ? "px-4 pb-8 sm:px-6" : "px-4 pb-12"}>
         <div className="container mx-auto max-w-6xl">
           {/* Step 1: Industry Picker */}
           {step === 1 && (
@@ -287,35 +303,36 @@ export default function DemoPage() {
         </div>
       </div>
 
-      {/* Bottom CTA */}
-      <div className="border-t border-border bg-muted/30 py-12 px-4">
-        <div className="container mx-auto max-w-2xl text-center space-y-4">
-          <h2 className="text-2xl font-heading font-bold text-foreground">
-            Ready to automate your bookings?
-          </h2>
-          <p className="text-muted-foreground">
-            Get your AI receptionist live in under 5 minutes. 30-day free trial on all plans.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <Link href="/pricing" data-umami-event="cta_click" data-umami-event-location="demo_bottom">
-              <Button variant="hero" size="lg">
-                Start Free Trial <ArrowRight className="w-4 h-4" />
-              </Button>
-            </Link>
-            <a
-              href="https://calendly.com/voicefleet"
-              target="_blank"
-              rel="noopener noreferrer"
-              data-umami-event="cta_click"
-              data-umami-event-location="demo_bottom_calendly"
-            >
-              <Button variant="outline" size="lg">
-                Book a Guided Demo
-              </Button>
-            </a>
+      {!embedded && (
+        <div className="border-t border-border bg-muted/30 py-12 px-4">
+          <div className="container mx-auto max-w-2xl text-center space-y-4">
+            <h2 className="text-2xl font-heading font-bold text-foreground">
+              Ready to automate your bookings?
+            </h2>
+            <p className="text-muted-foreground">
+              Get your AI receptionist live in under 5 minutes. 30-day free trial on all plans.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+              <Link href="/pricing" data-umami-event="cta_click" data-umami-event-location="demo_bottom">
+                <Button variant="hero" size="lg">
+                  Start Free Trial <ArrowRight className="w-4 h-4" />
+                </Button>
+              </Link>
+              <a
+                href="https://calendly.com/voicefleet"
+                target="_blank"
+                rel="noopener noreferrer"
+                data-umami-event="cta_click"
+                data-umami-event-location="demo_bottom_calendly"
+              >
+                <Button variant="outline" size="lg">
+                  Book a Guided Demo
+                </Button>
+              </a>
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }

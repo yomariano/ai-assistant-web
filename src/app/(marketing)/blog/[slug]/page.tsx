@@ -84,7 +84,7 @@ export default async function BlogPostPage({ params }: Props) {
 
         <main>
           <section className="relative overflow-hidden border-b border-stone-200/80 bg-[radial-gradient(circle_at_top_left,rgba(219,234,254,0.8),transparent_32%),radial-gradient(circle_at_top_right,rgba(226,232,240,0.72),transparent_32%),linear-gradient(180deg,#ffffff_0%,#f8fafc_100%)] pt-28 pb-14">
-            <div className="mx-auto max-w-6xl px-6">
+            <div className="mx-auto max-w-[1360px] px-6">
               <Link
                 href="/blog"
                 className="inline-flex items-center gap-2 text-sm font-medium text-stone-500 transition-colors hover:text-stone-900"
@@ -131,8 +131,8 @@ export default async function BlogPostPage({ params }: Props) {
             </div>
           </section>
 
-          <section className="mx-auto max-w-6xl px-6 py-12">
-            <div className="grid gap-10 lg:grid-cols-[220px_minmax(0,1fr)]">
+          <section className="mx-auto max-w-[1360px] px-6 py-12">
+            <div className="grid gap-8 xl:gap-10 lg:grid-cols-[190px_minmax(0,1fr)]">
               <aside className="h-fit lg:sticky lg:top-24">
                 <div className="rounded-[1.5rem] border border-stone-200/80 bg-white/90 p-5 shadow-[0_18px_45px_rgba(15,23,42,0.05)]">
                   <p className="text-xs font-semibold uppercase tracking-[0.22em] text-stone-500">
@@ -197,7 +197,7 @@ export default async function BlogPostPage({ params }: Props) {
                   </div>
                 )}
 
-                <article className="rounded-[2rem] border border-stone-200/80 bg-white px-6 py-8 shadow-[0_28px_70px_rgba(15,23,42,0.07)] md:px-10 md:py-12 lg:px-14">
+                <article className="rounded-[2rem] border border-stone-200/80 bg-white px-6 py-8 shadow-[0_28px_70px_rgba(15,23,42,0.07)] md:px-10 md:py-12 lg:px-14 xl:px-16">
                   <RichBlogContent
                     post={{
                       id: post.id,
@@ -236,15 +236,29 @@ export default async function BlogPostPage({ params }: Props) {
                   )}
                 </article>
 
-                <div className="mt-8 rounded-[1.75rem] border border-blue-100 bg-[linear-gradient(135deg,rgba(239,246,255,0.95),rgba(248,250,252,0.95))] p-8 shadow-[0_18px_45px_rgba(37,99,235,0.08)]">
-                  <h2 className="font-heading text-2xl font-bold tracking-[-0.03em] text-stone-950">
-                    Hear the product behind the article
-                  </h2>
-                  <p className="mt-3 max-w-2xl text-base leading-7 text-stone-600">
-                    Try the live AI demo below, pick an industry, and hear how a
-                    VoiceFleet receptionist handles real inbound calls.
-                  </p>
-                </div>
+                <section className="mt-8 overflow-hidden rounded-[2rem] border border-stone-200/80 bg-white shadow-[0_28px_70px_rgba(15,23,42,0.07)]">
+                  <div className="border-b border-stone-200/80 bg-[linear-gradient(135deg,rgba(239,246,255,0.92),rgba(248,250,252,0.96))] px-6 py-8 md:px-10 lg:px-14 xl:px-16">
+                    <p className="text-xs font-semibold uppercase tracking-[0.24em] text-blue-700">
+                      Try It Live
+                    </p>
+                    <h2 className="mt-3 font-heading text-3xl font-bold tracking-[-0.03em] text-stone-950">
+                      Demo and pricing, right where the article makes the case
+                    </h2>
+                    <p className="mt-4 max-w-3xl text-base leading-7 text-stone-600">
+                      If this article got you to the pricing section, you should not
+                      have to scroll into a separate landing page. Try the live demo
+                      here and compare plans in the same flow.
+                    </p>
+                  </div>
+
+                  <div className="border-b border-stone-200/80 bg-[linear-gradient(180deg,rgba(248,250,252,0.88),rgba(255,255,255,0.98))]">
+                    <BlogDemoEmbed embedded />
+                  </div>
+
+                  <div className="px-6 py-8 md:px-10 lg:px-14 xl:px-16">
+                    <PricingSection embedded />
+                  </div>
+                </section>
 
                 {vertical && (
                   <div className="mt-8 rounded-[1.75rem] border border-emerald-100 bg-[linear-gradient(135deg,rgba(236,253,245,0.92),rgba(248,250,252,0.96))] p-7 shadow-[0_18px_45px_rgba(16,185,129,0.08)]">
@@ -274,12 +288,6 @@ export default async function BlogPostPage({ params }: Props) {
               </div>
             </div>
           </section>
-
-          <section className="border-t border-stone-200/80 bg-white [&>div]:min-h-0">
-            <BlogDemoEmbed />
-          </section>
-
-          <PricingSection />
 
           <CTASection
             title="Ready to Scale Your Support?"
