@@ -3,7 +3,7 @@ import Link from 'next/link';
 import HeaderES from '@/components/voicefleet/HeaderES';
 import FooterES from '@/components/voicefleet/FooterES';
 import BusinessCard from '@/components/directory/BusinessCard';
-import { getBusinessesByCity, verticalLabelsES, esSlugToVertical, capitalize, getLocalizedDescription } from '@/lib/directory-data';
+import { getBusinessesByCity, getVerticalLabelES, esSlugToVertical, capitalize, getLocalizedDescription } from '@/lib/directory-data';
 import { generateItemListSchema } from '@/lib/schema-generators';
 import { notFound } from 'next/navigation';
 
@@ -11,9 +11,10 @@ interface Props { params: Promise<{ vertical: string; city: string }> }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { vertical, city } = await params;
-  const enV = esSlugToVertical[vertical];
-  const label = enV ? verticalLabelsES[enV] : null;
-  if (!label) return {};
+  const enV = esSlugToVertical[vertical] || vertical;
+  const businesses = await getBusinessesByCity(enV, city);
+  if (!businesses.length) return {};
+  const label = getVerticalLabelES(enV);
   return {
     title: `Mejores ${label} en ${capitalize(city)} 2026`,
     description: `Encontrá los mejores ${label.toLowerCase()} en ${capitalize(city)}. Reseñas, datos de contacto y reservas con IA.`,
@@ -22,13 +23,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function CityPageES({ params }: Props) {
   const { vertical, city } = await params;
-  const enV = esSlugToVertical[vertical];
-  const label = enV ? verticalLabelsES[enV] : null;
-  if (!label || !enV) notFound();
-
+  const enV = esSlugToVertical[vertical] || vertical;
   const businesses = await getBusinessesByCity(enV, city);
   if (!businesses.length) notFound();
 
+  const label = getVerticalLabelES(enV);
   const cityName = businesses[0].city;
   const schema = generateItemListSchema(businesses, `Mejores ${label} en ${cityName}`);
 

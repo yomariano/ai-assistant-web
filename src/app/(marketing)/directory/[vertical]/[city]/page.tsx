@@ -3,7 +3,7 @@ import Link from 'next/link';
 import Header from '@/components/voicefleet/Header';
 import Footer from '@/components/voicefleet/Footer';
 import BusinessCard from '@/components/directory/BusinessCard';
-import { getBusinessesByCity, verticalLabels, capitalize, getLocalizedDescription } from '@/lib/directory-data';
+import { getBusinessesByCity, getVerticalLabel, capitalize, getLocalizedDescription } from '@/lib/directory-data';
 import { generateItemListSchema } from '@/lib/schema-generators';
 import { notFound } from 'next/navigation';
 
@@ -11,8 +11,9 @@ interface Props { params: Promise<{ vertical: string; city: string }> }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { vertical, city } = await params;
-  const label = verticalLabels[vertical];
-  if (!label) return {};
+  const businesses = await getBusinessesByCity(vertical, city);
+  if (!businesses.length) return {};
+  const label = getVerticalLabel(vertical);
   const cityName = capitalize(city);
   return {
     title: `Best ${label} in ${cityName} 2026`,
@@ -26,12 +27,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function CityPage({ params }: Props) {
   const { vertical, city } = await params;
-  const label = verticalLabels[vertical];
-  if (!label) notFound();
-
   const businesses = await getBusinessesByCity(vertical, city);
   if (!businesses.length) notFound();
 
+  const label = getVerticalLabel(vertical);
   const cityName = businesses[0].city;
   const schema = generateItemListSchema(businesses, `Best ${label} in ${cityName}`);
 
@@ -73,9 +72,9 @@ export default async function CityPage({ params }: Props) {
           <div className="text-center mt-16 pt-12 border-t border-slate-800">
             <h2 className="text-2xl font-semibold mb-4">Are you a {label.toLowerCase().replace(/s$/, '')} in {cityName}?</h2>
             <p className="text-slate-400 mb-6">Let AI answer your calls 24/7 and never miss a customer</p>
-            <a href="/demo" className="inline-flex items-center bg-gradient-to-r from-blue-500 to-cyan-400 text-white px-8 py-4 rounded-xl font-semibold hover:from-blue-600 hover:to-cyan-500 transition-all">
+            <Link href="/demo" className="inline-flex items-center bg-gradient-to-r from-blue-500 to-cyan-400 text-white px-8 py-4 rounded-xl font-semibold hover:from-blue-600 hover:to-cyan-500 transition-all">
               Try VoiceFleet Free →
-            </a>
+            </Link>
           </div>
         </div>
       </div>

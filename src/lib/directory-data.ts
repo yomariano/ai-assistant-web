@@ -102,6 +102,8 @@ export const verticalLabels: Record<string, string> = {
   salons: 'Hair Salons', plumbers: 'Plumbers', gyms: 'Gyms',
   mechanics: 'Mechanics', accountants: 'Professional Services',
   physios: 'Physiotherapy', barbers: 'Barber Shops',
+  solicitors: 'Solicitors', 'estate-agents': 'Estate Agents',
+  electricians: 'Electricians', contractors: 'Contractors', spas: 'Spas',
 };
 
 export const verticalLabelsES: Record<string, string> = {
@@ -109,6 +111,8 @@ export const verticalLabelsES: Record<string, string> = {
   salons: 'Peluquerias', plumbers: 'Plomeros', gyms: 'Gimnasios',
   mechanics: 'Mecanicos', accountants: 'Servicios Profesionales',
   physios: 'Fisioterapia', barbers: 'Barberias',
+  solicitors: 'Abogados', 'estate-agents': 'Inmobiliarias',
+  electricians: 'Electricistas', contractors: 'Contratistas', spas: 'Spas',
 };
 
 export const verticalIcons: Record<string, string> = {
@@ -121,12 +125,30 @@ export const verticalSlugsES: Record<string, string> = {
   salons: 'peluquerias', plumbers: 'plomeros', gyms: 'gimnasios',
   mechanics: 'mecanicos', accountants: 'servicios-profesionales',
   physios: 'fisioterapia', barbers: 'barberias',
+  solicitors: 'abogados', 'estate-agents': 'inmobiliarias',
+  electricians: 'electricistas', contractors: 'contratistas', spas: 'spas',
 };
 
 // Reverse map: ES slug → EN vertical
 export const esSlugToVertical: Record<string, string> = Object.fromEntries(
   Object.entries(verticalSlugsES).map(([en, es]) => [es, en])
 );
+
+export function getVerticalLabel(vertical: string): string {
+  return verticalLabels[vertical] || capitalize(vertical);
+}
+
+export function getVerticalLabelES(vertical: string): string {
+  return verticalLabelsES[vertical] || capitalize(verticalSlugsES[vertical] || vertical);
+}
+
+export function getVerticalIcon(vertical: string): string {
+  return verticalIcons[vertical] || 'ðŸ“Œ';
+}
+
+export function getVerticalSlugES(vertical: string): string {
+  return verticalSlugsES[vertical] || vertical;
+}
 
 export function capitalize(s: string): string {
   return s.split(/[\s-]+/).map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');

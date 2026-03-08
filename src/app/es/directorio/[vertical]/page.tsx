@@ -2,16 +2,17 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 import HeaderES from '@/components/voicefleet/HeaderES';
 import FooterES from '@/components/voicefleet/FooterES';
-import { getCitiesForVertical, verticalLabelsES, esSlugToVertical, capitalize } from '@/lib/directory-data';
+import { getCitiesForVertical, getVerticalLabelES, esSlugToVertical, capitalize } from '@/lib/directory-data';
 import { notFound } from 'next/navigation';
 
 interface Props { params: Promise<{ vertical: string }> }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { vertical } = await params;
-  const enV = esSlugToVertical[vertical];
-  const label = enV ? verticalLabelsES[enV] : null;
-  if (!label) return {};
+  const enV = esSlugToVertical[vertical] || vertical;
+  const cities = await getCitiesForVertical(enV);
+  if (!cities.length) return {};
+  const label = getVerticalLabelES(enV);
   return {
     title: `${label} — Directorio Argentina e Irlanda 2026`,
     description: `Encontrá los mejores ${label.toLowerCase()} en Argentina e Irlanda.`,
@@ -20,11 +21,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function VerticalPageES({ params }: Props) {
   const { vertical } = await params;
-  const enV = esSlugToVertical[vertical];
-  const label = enV ? verticalLabelsES[enV] : null;
-  if (!label || !enV) notFound();
-
+  const enV = esSlugToVertical[vertical] || vertical;
   const cities = await getCitiesForVertical(enV);
+  if (!cities.length) notFound();
+  const label = getVerticalLabelES(enV);
 
   return (
     <>

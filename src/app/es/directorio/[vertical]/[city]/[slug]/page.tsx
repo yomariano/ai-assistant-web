@@ -3,7 +3,7 @@ import Link from 'next/link';
 import HeaderES from '@/components/voicefleet/HeaderES';
 import FooterES from '@/components/voicefleet/FooterES';
 import BusinessProfile from '@/components/directory/BusinessProfile';
-import { getBusinessBySlug, verticalLabelsES, esSlugToVertical, capitalize } from '@/lib/directory-data';
+import { getBusinessBySlug, getVerticalLabelES, esSlugToVertical, capitalize } from '@/lib/directory-data';
 import { generateBusinessSchema, generateFAQSchema } from '@/lib/schema-generators';
 import { notFound } from 'next/navigation';
 
@@ -11,8 +11,7 @@ interface Props { params: Promise<{ vertical: string; city: string; slug: string
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { vertical, city, slug } = await params;
-  const enV = esSlugToVertical[vertical];
-  if (!enV) return {};
+  const enV = esSlugToVertical[vertical] || vertical;
   const b = await getBusinessBySlug(enV, city, slug);
   if (!b) return {};
   return {
@@ -28,12 +27,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function BusinessPageES({ params }: Props) {
   const { vertical, city, slug } = await params;
-  const enV = esSlugToVertical[vertical];
-  if (!enV) notFound();
+  const enV = esSlugToVertical[vertical] || vertical;
   const business = await getBusinessBySlug(enV, city, slug);
   if (!business) notFound();
 
-  const label = verticalLabelsES[enV] || enV;
+  const label = getVerticalLabelES(enV);
   const schema = generateBusinessSchema(business);
   const faqSchema = generateFAQSchema(business.faqs);
 

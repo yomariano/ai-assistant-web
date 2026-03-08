@@ -3,7 +3,7 @@ import Link from 'next/link';
 import Header from '@/components/voicefleet/Header';
 import Footer from '@/components/voicefleet/Footer';
 import BusinessProfile from '@/components/directory/BusinessProfile';
-import { getBusinessBySlug, verticalLabels, capitalize } from '@/lib/directory-data';
+import { getBusinessBySlug, getVerticalLabel, capitalize } from '@/lib/directory-data';
 import { generateBusinessSchema, generateFAQSchema } from '@/lib/schema-generators';
 import { notFound } from 'next/navigation';
 
@@ -13,7 +13,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { vertical, city, slug } = await params;
   const b = await getBusinessBySlug(vertical, city, slug);
   if (!b) return {};
-  const label = verticalLabels[vertical] || vertical;
+  const label = getVerticalLabel(vertical);
   return {
     title: `${b.name} — ${capitalize(b.city)} ${label}`,
     description: `${b.name} in ${b.city}. ${b.description.slice(0, 140)}`,
@@ -32,7 +32,7 @@ export default async function BusinessPage({ params }: Props) {
   const business = await getBusinessBySlug(vertical, city, slug);
   if (!business) notFound();
 
-  const label = verticalLabels[vertical] || vertical;
+  const label = getVerticalLabel(vertical);
   const schema = generateBusinessSchema(business);
   const faqSchema = generateFAQSchema(business.faqs);
 

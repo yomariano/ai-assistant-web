@@ -2,15 +2,16 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 import Header from '@/components/voicefleet/Header';
 import Footer from '@/components/voicefleet/Footer';
-import { getCitiesForVertical, verticalLabels, verticalIcons, capitalize } from '@/lib/directory-data';
+import { getCitiesForVertical, getVerticalLabel, verticalIcons, capitalize } from '@/lib/directory-data';
 import { notFound } from 'next/navigation';
 
 interface Props { params: Promise<{ vertical: string }> }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { vertical } = await params;
-  const label = verticalLabels[vertical];
-  if (!label) return {};
+  const cities = await getCitiesForVertical(vertical);
+  if (!cities.length) return {};
+  const label = getVerticalLabel(vertical);
   return {
     title: `${label} Directory — Ireland & Argentina 2026`,
     description: `Find the best ${label.toLowerCase()} across Ireland and Argentina. Browse by city.`,
@@ -23,10 +24,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function VerticalPage({ params }: Props) {
   const { vertical } = await params;
-  const label = verticalLabels[vertical];
-  if (!label) notFound();
-
   const cities = await getCitiesForVertical(vertical);
+  if (!cities.length) notFound();
+
+  const label = getVerticalLabel(vertical);
   const icon = verticalIcons[vertical] || '📌';
 
   return (

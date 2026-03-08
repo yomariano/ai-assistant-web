@@ -1,8 +1,9 @@
 import { Metadata } from 'next';
+import Link from 'next/link';
 import HeaderES from '@/components/voicefleet/HeaderES';
 import FooterES from '@/components/voicefleet/FooterES';
 import DirectoryGrid from '@/components/directory/DirectoryGrid';
-import { getVerticals, verticalLabelsES, verticalIcons, verticalSlugsES } from '@/lib/directory-data';
+import { getVerticals, getVerticalLabelES, verticalIcons, verticalSlugsES } from '@/lib/directory-data';
 
 export const metadata: Metadata = {
   title: 'Directorio de Negocios — Encontrá Servicios Locales',
@@ -27,7 +28,7 @@ export default async function DirectorioPage() {
           </div>
           <DirectoryGrid
             items={verticals.map(v => ({
-              label: verticalLabelsES[v.vertical] || v.vertical,
+              label: getVerticalLabelES(v.vertical),
               icon: verticalIcons[v.vertical] || '📌',
               count: v.count,
               href: `/es/directorio/${verticalSlugsES[v.vertical] || v.vertical}`,
@@ -36,9 +37,9 @@ export default async function DirectorioPage() {
           <div className="text-center mt-16 pt-12 border-t border-slate-800">
             <h2 className="text-2xl font-semibold mb-4">Queres que tu negocio aparezca aca?</h2>
             <p className="text-slate-400 mb-6">Deja que la IA atienda tus llamadas 24/7</p>
-            <a href="/demo" className="inline-flex items-center bg-gradient-to-r from-blue-500 to-cyan-400 text-white px-8 py-4 rounded-xl font-semibold hover:from-blue-600 hover:to-cyan-500 transition-all">
+            <Link href="/demo" className="inline-flex items-center bg-gradient-to-r from-blue-500 to-cyan-400 text-white px-8 py-4 rounded-xl font-semibold hover:from-blue-600 hover:to-cyan-500 transition-all">
               Empeza con VoiceFleet →
-            </a>
+            </Link>
           </div>
         </div>
       </div>

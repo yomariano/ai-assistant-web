@@ -1,8 +1,9 @@
 import { Metadata } from 'next';
+import Link from 'next/link';
 import Header from '@/components/voicefleet/Header';
 import Footer from '@/components/voicefleet/Footer';
 import DirectoryGrid from '@/components/directory/DirectoryGrid';
-import { getVerticals, verticalLabels, verticalIcons } from '@/lib/directory-data';
+import { getVerticals, getVerticalLabel, verticalIcons } from '@/lib/directory-data';
 
 export const metadata: Metadata = {
   title: 'Business Directory — Find Local Services',
@@ -35,7 +36,7 @@ export default async function DirectoryPage() {
           {/* Grid */}
           <DirectoryGrid
             items={verticals.map(v => ({
-              label: verticalLabels[v.vertical] || v.vertical,
+              label: getVerticalLabel(v.vertical),
               icon: verticalIcons[v.vertical] || '📌',
               count: v.count,
               href: `/directory/${v.vertical}`,
@@ -46,9 +47,9 @@ export default async function DirectoryPage() {
           <div className="text-center mt-16 pt-12 border-t border-slate-800">
             <h2 className="text-2xl font-semibold mb-4">Want your business listed here?</h2>
             <p className="text-slate-400 mb-6">Get found by customers and let AI handle your calls 24/7</p>
-            <a href="/demo" className="inline-flex items-center justify-center bg-gradient-to-r from-blue-500 to-cyan-400 text-white px-8 py-4 rounded-xl font-semibold hover:from-blue-600 hover:to-cyan-500 transition-all">
+            <Link href="/demo" className="inline-flex items-center justify-center bg-gradient-to-r from-blue-500 to-cyan-400 text-white px-8 py-4 rounded-xl font-semibold hover:from-blue-600 hover:to-cyan-500 transition-all">
               Get Started with VoiceFleet →
-            </a>
+            </Link>
           </div>
         </div>
       </div>

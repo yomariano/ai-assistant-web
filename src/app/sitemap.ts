@@ -1,6 +1,7 @@
 import { MetadataRoute } from 'next';
 import { INTEGRATIONS } from '@/lib/marketing/integrations';
 import { getReceptionistCitySlugs } from '@/lib/content/receptionist-cities';
+import { getVerticalSlugES, getVerticals } from '@/lib/directory-data';
 
 const BASE_URL = (process.env.NEXT_PUBLIC_SITE_URL || 'https://voicefleet.ai').replace(/\/+$/, '');
 
@@ -56,6 +57,7 @@ async function fetchSitemapData(): Promise<SitemapData | null> {
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const content = await fetchSitemapData();
+  const directoryVerticals = await getVerticals();
 
   // Static pages - always included
   const staticPages: MetadataRoute.Sitemap = [
@@ -144,7 +146,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'weekly',
       priority: 0.8,
     },
-    ...['restaurants', 'dentists', 'salons', 'vets', 'physios', 'gyms', 'mechanics'].map((vertical) => ({
+    ...directoryVerticals.map(({ vertical }) => ({
       url: `${BASE_URL}/directory/${vertical}`,
       lastModified: new Date(),
       changeFrequency: 'weekly' as const,
@@ -169,6 +171,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'weekly',
       priority: 0.8,
     },
+    {
+      url: `${BASE_URL}/es/directorio`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.8,
+    },
+    ...directoryVerticals.map(({ vertical }) => ({
+      url: `${BASE_URL}/es/directorio/${getVerticalSlugES(vertical)}`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly' as const,
+      priority: 0.7,
+    })),
     // City landing pages
     ...getReceptionistCitySlugs().map((slug) => ({
       url: `${BASE_URL}/ai-receptionist/${slug}`,
