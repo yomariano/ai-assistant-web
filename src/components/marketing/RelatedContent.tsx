@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, Clock3 } from "lucide-react";
 import { getRelatedPosts } from "@/lib/content/blog";
+import BlogImpressionTracker from "@/components/blog/BlogImpressionTracker";
 import {
   estimateReadingTime,
   formatBlogDate,
@@ -13,12 +14,14 @@ interface RelatedContentProps {
   category?: string | null;
   currentSlug: string;
   tags?: string[] | null;
+  locale?: "en" | "es";
 }
 
 export default async function RelatedContent({
   category,
   currentSlug,
   tags,
+  locale = "en",
 }: RelatedContentProps) {
   const posts = await getRelatedPosts(currentSlug, category, tags);
 
@@ -28,6 +31,10 @@ export default async function RelatedContent({
 
   return (
     <section className="mt-14 border-t border-stone-200/80 pt-10">
+      <BlogImpressionTracker
+        eventName="blog_section_viewed"
+        eventData={{ section: "related_articles", post_slug: currentSlug, locale }}
+      />
       <div className="mb-8 flex items-center justify-between gap-4">
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.22em] text-stone-500">
@@ -41,7 +48,16 @@ export default async function RelatedContent({
 
       <div className="grid gap-6 md:grid-cols-3">
         {posts.map((post) => (
-          <Link key={post.id} href={`/blog/${post.slug}`} className="group block">
+          <Link
+            key={post.id}
+            href={`/blog/${post.slug}`}
+            className="group block"
+            data-umami-event="blog_article_click"
+            data-umami-event-source="related_articles"
+            data-umami-event-origin={currentSlug}
+            data-umami-event-target={post.slug}
+            data-umami-event-locale={locale}
+          >
             <article className="flex h-full flex-col overflow-hidden rounded-[1.5rem] border border-stone-200/80 bg-white shadow-[0_18px_45px_rgba(15,23,42,0.05)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_24px_60px_rgba(15,23,42,0.09)]">
               <div className="relative h-44 overflow-hidden bg-[linear-gradient(135deg,#dbeafe_0%,#eff6ff_35%,#f8fafc_100%)]">
                 {post.featured_image_url ? (

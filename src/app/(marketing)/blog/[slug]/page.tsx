@@ -18,6 +18,7 @@ import Footer from "@/components/voicefleet/Footer";
 import RelatedContent from "@/components/marketing/RelatedContent";
 import CTASection from "@/components/marketing/CTASection";
 import { RichBlogContent } from "@/components/content";
+import BlogImpressionTracker from "@/components/blog/BlogImpressionTracker";
 import BlogDemoEmbed from "@/components/blog/BlogDemoEmbed";
 import { getDirectoryFromCategoryOrTags } from "@/lib/directory/verticals";
 
@@ -87,6 +88,10 @@ export default async function BlogPostPage({ params }: Props) {
               <Link
                 href="/blog"
                 className="inline-flex items-center gap-2 text-sm font-medium text-stone-500 transition-colors hover:text-stone-900"
+                data-umami-event="blog_navigation_click"
+                data-umami-event-location="post_hero_back"
+                data-umami-event-post={slug}
+                data-umami-event-locale="en"
               >
                 <ArrowLeft className="h-4 w-4" />
                 Back to Blog
@@ -132,6 +137,10 @@ export default async function BlogPostPage({ params }: Props) {
 
           <section className="mx-auto max-w-[1360px] px-6 pt-8">
             <div className="overflow-hidden rounded-[2rem] border border-stone-200/80 bg-white shadow-[0_28px_70px_rgba(15,23,42,0.07)]">
+              <BlogImpressionTracker
+                eventName="blog_section_viewed"
+                eventData={{ section: "product_preview", post_slug: slug, locale: "en" }}
+              />
               <div className="border-b border-stone-200/80 bg-[linear-gradient(135deg,rgba(239,246,255,0.92),rgba(248,250,252,0.96))] px-6 py-8 md:px-10 lg:px-14 xl:px-16">
                 <p className="text-xs font-semibold uppercase tracking-[0.24em] text-blue-700">
                   Product Preview
@@ -149,6 +158,11 @@ export default async function BlogPostPage({ params }: Props) {
                     <Link
                       href="/demo"
                       className="inline-flex items-center justify-center rounded-full bg-stone-950 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-stone-800"
+                      data-umami-event="blog_cta_click"
+                      data-umami-event-location="product_preview"
+                      data-umami-event-label="try_live_demo"
+                      data-umami-event-post={slug}
+                      data-umami-event-locale="en"
                     >
                       Try Live Demo
                     </Link>
@@ -157,6 +171,11 @@ export default async function BlogPostPage({ params }: Props) {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex items-center justify-center rounded-full border border-stone-300 bg-white px-5 py-2.5 text-sm font-semibold text-stone-900 transition-colors hover:bg-stone-50"
+                      data-umami-event="blog_cta_click"
+                      data-umami-event-location="product_preview"
+                      data-umami-event-label="book_guided_demo"
+                      data-umami-event-post={slug}
+                      data-umami-event-locale="en"
                     >
                       Book a Guided Demo
                     </a>
@@ -165,7 +184,10 @@ export default async function BlogPostPage({ params }: Props) {
               </div>
 
               <div className="bg-[linear-gradient(180deg,rgba(248,250,252,0.88),rgba(255,255,255,0.98))]">
-                <BlogDemoEmbed embedded />
+                <BlogDemoEmbed
+                  embedded
+                  trackingData={{ surface: "blog_post_preview", post_slug: slug, locale: "en" }}
+                />
               </div>
             </div>
           </section>
@@ -214,6 +236,11 @@ export default async function BlogPostPage({ params }: Props) {
                     <Link
                       href={`/directory/${vertical.slug}`}
                       className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-blue-700 transition-colors hover:text-blue-800"
+                      data-umami-event="blog_directory_click"
+                      data-umami-event-location="reading_notes"
+                      data-umami-event-post={slug}
+                      data-umami-event-locale="en"
+                      data-umami-event-target={vertical.slug}
                     >
                       Browse {vertical.label}
                       <ArrowRight className="h-4 w-4" />
@@ -253,6 +280,7 @@ export default async function BlogPostPage({ params }: Props) {
                       sources: post.sources,
                       expert_quotes: post.expert_quotes,
                     }}
+                    locale="en"
                   />
 
                   {post.tags && post.tags.length > 0 && (
@@ -280,6 +308,11 @@ export default async function BlogPostPage({ params }: Props) {
                     <Link
                       href={`/directory/${vertical.slug}`}
                       className="flex items-center justify-between gap-4 group"
+                      data-umami-event="blog_directory_click"
+                      data-umami-event-location="post_footer"
+                      data-umami-event-post={slug}
+                      data-umami-event-locale="en"
+                      data-umami-event-target={vertical.slug}
                     >
                       <div>
                         <p className="font-heading text-xl font-bold tracking-[-0.02em] text-stone-950">
@@ -299,6 +332,7 @@ export default async function BlogPostPage({ params }: Props) {
                   category={post.category}
                   currentSlug={slug}
                   tags={post.tags}
+                  locale="en"
                 />
               </div>
             </div>

@@ -1,10 +1,12 @@
 declare global {
   interface Window {
     umami?: {
-      track: (eventName: string, eventData?: Record<string, string | number | boolean>) => void;
+      track: (eventName: string, eventData?: UmamiEventData) => void;
     };
   }
 }
+
+export type UmamiEventData = Record<string, string | number | boolean>;
 
 /**
  * Track a custom event with Umami analytics
@@ -13,7 +15,7 @@ declare global {
  */
 export function trackEvent(
   eventName: string,
-  eventData?: Record<string, string | number | boolean>
+  eventData?: UmamiEventData
 ): void {
   if (typeof window !== "undefined" && window.umami) {
     window.umami.track(eventName, eventData);

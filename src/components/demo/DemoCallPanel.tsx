@@ -17,7 +17,7 @@ import {
   Volume2,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { trackEvent } from "@/lib/umami";
+import { trackEvent, type UmamiEventData } from "@/lib/umami";
 import type {
   Booking,
   CallStatus,
@@ -93,6 +93,7 @@ type DemoCallPanelProps = {
   availability: Record<string, boolean>;
   languageId: DemoLanguageId;
   selectedVoice: DemoVoice;
+  trackingData?: UmamiEventData;
   onBookingCreated: (booking: Booking) => void;
   onHighlightDate: (date: string | null) => void;
 };
@@ -103,6 +104,7 @@ export default function DemoCallPanel({
   availability,
   languageId,
   selectedVoice,
+  trackingData,
   onBookingCreated,
   onHighlightDate,
 }: DemoCallPanelProps) {
@@ -135,6 +137,13 @@ export default function DemoCallPanel({
   const assistantFirstMessage = useMemo(
     () => scenario.firstMessageByLanguage?.[languageId] || scenario.firstMessage,
     [languageId, scenario]
+  );
+
+  const emitEvent = useCallback(
+    (eventName: string, eventData?: UmamiEventData) => {
+      trackEvent(eventName, trackingData ? { ...trackingData, ...(eventData || {}) } : eventData);
+    },
+    [trackingData]
   );
 
   const suggestedPhrases = useMemo(
@@ -248,7 +257,7 @@ export default function DemoCallPanel({
           setError(null);
           callStartTimeRef.current = Date.now();
           bookingCountRef.current = 0;
-          trackEvent("demo_call_connected", { scenario: scenario.id });
+          emitEvent("demo_call_connected", { scenario: scenario.id });
           if (hardStopTimeoutRef.current) {
             window.clearTimeout(hardStopTimeoutRef.current);
           }
@@ -268,7 +277,7 @@ export default function DemoCallPanel({
           const durationSec = callStartTimeRef.current
             ? Math.round((Date.now() - callStartTimeRef.current) / 1000)
             : 0;
-          trackEvent("demo_call_ended", {
+          emitEvent("demo_call_ended", {
             duration_seconds: durationSec,
             bookings: bookingCountRef.current,
             scenario: scenario.id,
@@ -347,7 +356,7 @@ export default function DemoCallPanel({
                 // deduplicates by slot key so no visual double-up.
                 if (tc.function?.name === "create_booking" && args.date && args.time) {
                   bookingCountRef.current += 1;
-                  trackEvent("demo_booking_created", {
+                  emitEvent("demo_booking_created", {
                     scenario: scenario.id,
                     booking_number: bookingCountRef.current,
                   });
@@ -405,7 +414,7 @@ export default function DemoCallPanel({
           }
           setError(errorMessage);
           setCallStatus("error");
-          trackEvent("demo_call_error", { error: errorMessage.slice(0, 100) });
+          emitEvent("demo_call_error", { error: errorMessage.slice(0, 100) });
         });
 
         setCallStatus("idle");
@@ -441,7 +450,12 @@ export default function DemoCallPanel({
       setMessages([]);
       setIsMuted(false);
 
-      trackEvent("demo_call_started", { scenario: scenario.id, voice: selectedVoice.label, language: languageId, type: "booking" });
+      emitEvent("demo_call_started", {
+        scenario: scenario.id,
+        voice: selectedVoice.label,
+        language: languageId,
+        type: "booking",
+      });
 
       // Rate limit check
       const apiUrl = process.env.NEXT_PUBLIC_API_URL;
@@ -463,7 +477,7 @@ export default function DemoCallPanel({
             setIsDemoBlocked(true);
             setCallStatus("idle");
             setError("Live demo limit reached (10 calls per IP). Book a demo to try a full-length call.");
-            trackEvent("demo_call_blocked", { reason: "rate_limit" });
+            emitEvent("demo_call_blocked", { reason: "rate_limit" });
             return;
           }
         } catch {
@@ -621,12 +635,16 @@ export default function DemoCallPanel({
       setIsCheckingAllowance(false);
     }
   }, [
+    availability,
     assistantFirstMessage,
+    emitEvent,
     assistantSystemPrompt,
     bypassCode,
     demoSessionId,
     language.transcriberLanguage,
     languageId,
+    scenario.businessName,
+    scenario.id,
     scenario.label,
     selectedVoice,
   ]);
@@ -652,11 +670,11 @@ export default function DemoCallPanel({
   const copyPhrase = useCallback(async (text: string) => {
     try {
       await navigator.clipboard.writeText(text);
-      trackEvent("demo_phrase_copied", { phrase: text.slice(0, 50) });
+      emitEvent("demo_phrase_copied", { phrase: text.slice(0, 50) });
     } catch {
       // no-op
     }
-  }, []);
+  }, [emitEvent]);
 
   return (
     <div className="flex flex-col gap-4">

@@ -20,13 +20,14 @@ import AgentPicker from "./AgentPicker";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import Link from "next/link";
-import { trackEvent } from "@/lib/umami";
+import { trackEvent, type UmamiEventData } from "@/lib/umami";
 
 interface DemoPageProps {
   embedded?: boolean;
+  trackingData?: UmamiEventData;
 }
 
-export default function DemoPage({ embedded = false }: DemoPageProps) {
+export default function DemoPage({ embedded = false, trackingData }: DemoPageProps) {
   const [step, setStep] = useState<DemoStep>(1);
   const [scenarioId, setScenarioId] = useState<string | null>(null);
   const [availability, setAvailability] = useState<Record<string, boolean>>({});
@@ -50,6 +51,13 @@ export default function DemoPage({ embedded = false }: DemoPageProps) {
     [availability]
   );
 
+  const emitEvent = useCallback(
+    (eventName: string, eventData?: UmamiEventData) => {
+      trackEvent(eventName, trackingData ? { ...trackingData, ...(eventData || {}) } : eventData);
+    },
+    [trackingData]
+  );
+
   // Step 1: Select industry
   const handleSelectIndustry = useCallback(
     (id: string) => {
@@ -57,10 +65,10 @@ export default function DemoPage({ embedded = false }: DemoPageProps) {
       setAvailability(getIndustryDefaults(id, weekDays));
       setBookings([]);
       setStep(2);
-      trackEvent("demo_industry_selected", { industry: id });
-      trackEvent("demo_step_changed", { from: 1, to: 2 });
+      emitEvent("demo_industry_selected", { industry: id });
+      emitEvent("demo_step_changed", { from: 1, to: 2 });
     },
-    [weekDays]
+    [emitEvent, weekDays]
   );
 
   // Step 2: Toggle individual slot
@@ -87,22 +95,22 @@ export default function DemoPage({ embedded = false }: DemoPageProps) {
       }
     });
     setAvailability(newAvailability);
-    trackEvent("demo_availability_preset", { preset: "business_hours" });
-  }, [weekDays]);
+    emitEvent("demo_availability_preset", { preset: "business_hours" });
+  }, [emitEvent, weekDays]);
 
   // Step 2: Clear all
   const handleClearAll = useCallback(() => {
     setAvailability({});
-    trackEvent("demo_availability_preset", { preset: "clear_all" });
-  }, []);
+    emitEvent("demo_availability_preset", { preset: "clear_all" });
+  }, [emitEvent]);
 
   // Step 2 -> 3: Advance to agent picker
   const handleNextToAgentPicker = useCallback(() => {
     if (availableSlotCount === 0) return;
     setStep(3);
-    trackEvent("demo_availability_configured", { slots: availableSlotCount, industry: scenarioId || "" });
-    trackEvent("demo_step_changed", { from: 2, to: 3 });
-  }, [availableSlotCount, scenarioId]);
+    emitEvent("demo_availability_configured", { slots: availableSlotCount, industry: scenarioId || "" });
+    emitEvent("demo_step_changed", { from: 2, to: 3 });
+  }, [availableSlotCount, emitEvent, scenarioId]);
 
   // Step 3 -> 4: Create session and start call
   const handleStartCallMode = useCallback(async () => {
@@ -138,8 +146,8 @@ export default function DemoPage({ embedded = false }: DemoPageProps) {
     setBookings([]);
     setIsCreatingSession(false);
     setStep(4);
-    trackEvent("demo_step_changed", { from: 3, to: 4 });
-  }, [availability, availableSlotCount, scenario, scenarioId]);
+    emitEvent("demo_step_changed", { from: 3, to: 4 });
+  }, [availability, availableSlotCount, emitEvent, scenario, scenarioId]);
 
   const handleBookingCreated = useCallback((booking: Booking) => {
     setBookings((prev) => [...prev, booking]);
@@ -202,7 +210,7 @@ export default function DemoPage({ embedded = false }: DemoPageProps) {
               <div className="flex items-center justify-between">
                 <button
                   type="button"
-                  onClick={() => { setStep(1); trackEvent("demo_step_changed", { from: 2, to: 1 }); }}
+                  onClick={() => { setStep(1); emitEvent("demo_step_changed", { from: 2, to: 1 }); }}
                   className="flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors"
                 >
                   <ArrowLeft className="w-4 h-4" /> Change industry
@@ -246,10 +254,11 @@ export default function DemoPage({ embedded = false }: DemoPageProps) {
               isCreatingSession={isCreatingSession}
               onSelectVoice={setSelectedVoice}
               onLanguageChange={setLanguageId}
+              trackingData={trackingData}
               onStartCall={handleStartCallMode}
               onBack={() => {
                 setStep(2);
-                trackEvent("demo_step_changed", { from: 3, to: 2 });
+                emitEvent("demo_step_changed", { from: 3, to: 2 });
               }}
             />
           )}
@@ -264,7 +273,7 @@ export default function DemoPage({ embedded = false }: DemoPageProps) {
                     setStep(3);
                     setBookings([]);
                     setHighlightDate(null);
-                    trackEvent("demo_step_changed", { from: 4, to: 3 });
+                    emitEvent("demo_step_changed", { from: 4, to: 3 });
                   }}
                   className="flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors"
                 >
@@ -293,6 +302,7 @@ export default function DemoPage({ embedded = false }: DemoPageProps) {
                     availability={availability}
                     languageId={languageId}
                     selectedVoice={selectedVoice}
+                    trackingData={trackingData}
                     onBookingCreated={handleBookingCreated}
                     onHighlightDate={setHighlightDate}
                   />

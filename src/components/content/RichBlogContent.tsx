@@ -2,6 +2,7 @@
 
 import { type ReactNode, useMemo } from 'react';
 import Link from 'next/link';
+import BlogImpressionTracker from '@/components/blog/BlogImpressionTracker';
 import { ContentChart, type ChartConfig } from './ContentChart';
 import { StatCallout, type Statistic } from './StatCallout';
 import { ExpertQuote, type Quote } from './ExpertQuote';
@@ -27,6 +28,7 @@ export interface BlogPost {
 interface RichBlogContentProps {
   post: BlogPost;
   className?: string;
+  locale?: 'en' | 'es';
 }
 
 type MarkerType = 'CHART' | 'STAT' | 'QUOTE' | 'SOURCE' | 'INLINE_PRICING';
@@ -352,7 +354,35 @@ function normalizeInlineHref(label: string, href: string): string {
   return href;
 }
 
-function processInline(text: string): string {
+function getInlineLinkKind(href: string): string {
+  if (href.includes('calendly.com/voicefleet') || href.startsWith('/demo')) {
+    return 'demo';
+  }
+
+  if (href.startsWith('/pricing')) {
+    return 'pricing';
+  }
+
+  if (/^(?:https?:)?\/\//i.test(href) || href.startsWith('mailto:')) {
+    return 'external';
+  }
+
+  return 'internal';
+}
+
+function buildInlineLinkTrackingAttributes(label: string, href: string, postSlug: string, locale: string): string {
+  return [
+    'data-umami-event="blog_inline_link_click"',
+    'data-umami-event-location="article_body"',
+    `data-umami-event-kind="${escapeAttribute(getInlineLinkKind(href))}"`,
+    `data-umami-event-label="${escapeAttribute(label.trim().slice(0, 80) || 'inline_link')}"`,
+    `data-umami-event-post="${escapeAttribute(postSlug)}"`,
+    `data-umami-event-locale="${escapeAttribute(locale)}"`,
+    `data-umami-event-destination="${escapeAttribute(href.slice(0, 180))}"`,
+  ].join(' ');
+}
+
+function processInline(text: string, postSlug: string, locale: string): string {
   let html = escapeHtml(repairEncodingArtifacts(text.trim()));
 
   html = html.replace(/\*\*\*(.+?)\*\*\*/g, '<strong><em>$1</em></strong>');
@@ -363,14 +393,15 @@ function processInline(text: string): string {
     const cleanHref = normalizeInlineHref(label, href.trim());
     const external = /^(?:https?:)?\/\//i.test(cleanHref) || cleanHref.startsWith('mailto:');
     const target = external ? ' target="_blank" rel="noopener noreferrer"' : '';
+    const trackingAttributes = buildInlineLinkTrackingAttributes(label, cleanHref, postSlug, locale);
 
-    return `<a href="${escapeAttribute(cleanHref)}" class="blog-link"${target}>${label}</a>`;
+    return `<a href="${escapeAttribute(cleanHref)}" class="blog-link"${target} ${trackingAttributes}>${label}</a>`;
   });
 
   return html;
 }
 
-function convertMarkdownToHtml(markdown: string): string {
+function convertMarkdownToHtml(markdown: string, postSlug: string, locale: string): string {
   const lines = markdown.replace(/\r\n/g, '\n').split('\n');
   const output: string[] = [];
 
@@ -393,7 +424,7 @@ function convertMarkdownToHtml(markdown: string): string {
     }
 
     output.push(
-      `<p class="${isFirstParagraph ? 'blog-paragraph blog-first-paragraph' : 'blog-paragraph'}">${processInline(text)}</p>`
+      `<p class="${isFirstParagraph ? 'blog-paragraph blog-first-paragraph' : 'blog-paragraph'}">${processInline(text, postSlug, locale)}</p>`
     );
     isFirstParagraph = false;
     paragraphBuffer = [];
@@ -407,7 +438,7 @@ function convertMarkdownToHtml(markdown: string): string {
     const body = blockquoteBuffer
       .map((line) => line.replace(/^>\s?/, '').trim())
       .filter(Boolean)
-      .map((line) => `<p>${processInline(line)}</p>`)
+      .map((line) => `<p>${processInline(line, postSlug, locale)}</p>`)
       .join('');
 
     output.push(`<blockquote class="blog-blockquote">${body}</blockquote>`);
@@ -452,7 +483,7 @@ function convertMarkdownToHtml(markdown: string): string {
     if (headerRows.length > 0) {
       table += '<thead><tr>';
       for (const cell of parseCells(headerRows[0])) {
-        table += `<th>${processInline(cell)}</th>`;
+        table += `<th>${processInline(cell, postSlug, locale)}</th>`;
       }
       table += '</tr></thead>';
     }
@@ -462,7 +493,7 @@ function convertMarkdownToHtml(markdown: string): string {
       for (const row of bodyRows) {
         table += '<tr>';
         for (const cell of parseCells(row)) {
-          table += `<td>${processInline(cell)}</td>`;
+          table += `<td>${processInline(cell, postSlug, locale)}</td>`;
         }
         table += '</tr>';
       }
@@ -510,19 +541,19 @@ function convertMarkdownToHtml(markdown: string): string {
 
     if (trimmed.startsWith('## ')) {
       flushAll();
-      output.push(`<h2 class="blog-heading blog-heading-2">${processInline(trimmed.slice(3).trim())}</h2>`);
+      output.push(`<h2 class="blog-heading blog-heading-2">${processInline(trimmed.slice(3).trim(), postSlug, locale)}</h2>`);
       continue;
     }
 
     if (trimmed.startsWith('### ')) {
       flushAll();
-      output.push(`<h3 class="blog-heading blog-heading-3">${processInline(trimmed.slice(4).trim())}</h3>`);
+      output.push(`<h3 class="blog-heading blog-heading-3">${processInline(trimmed.slice(4).trim(), postSlug, locale)}</h3>`);
       continue;
     }
 
     if (trimmed.startsWith('#### ')) {
       flushAll();
-      output.push(`<h4 class="blog-heading blog-heading-4">${processInline(trimmed.slice(5).trim())}</h4>`);
+      output.push(`<h4 class="blog-heading blog-heading-4">${processInline(trimmed.slice(5).trim(), postSlug, locale)}</h4>`);
       continue;
     }
 
@@ -565,12 +596,12 @@ function convertMarkdownToHtml(markdown: string): string {
       flushParagraph();
       if (!inList || listType !== 'ul') {
         closeList();
-        output.push('<ul class="blog-list blog-list-ul">');
-        inList = true;
-        listType = 'ul';
-      }
+      output.push('<ul class="blog-list blog-list-ul">');
+      inList = true;
+      listType = 'ul';
+    }
 
-      output.push(`<li>${processInline(trimmed.slice(2).trim())}</li>`);
+      output.push(`<li>${processInline(trimmed.slice(2).trim(), postSlug, locale)}</li>`);
       continue;
     }
 
@@ -579,12 +610,12 @@ function convertMarkdownToHtml(markdown: string): string {
       flushParagraph();
       if (!inList || listType !== 'ol') {
         closeList();
-        output.push('<ol class="blog-list blog-list-ol">');
-        inList = true;
-        listType = 'ol';
-      }
+      output.push('<ol class="blog-list blog-list-ol">');
+      inList = true;
+      listType = 'ol';
+    }
 
-      output.push(`<li>${processInline(numberedMatch[2].trim())}</li>`);
+      output.push(`<li>${processInline(numberedMatch[2].trim(), postSlug, locale)}</li>`);
       continue;
     }
 
@@ -596,7 +627,7 @@ function convertMarkdownToHtml(markdown: string): string {
   return output.join('\n');
 }
 
-export function RichBlogContent({ post, className = '' }: RichBlogContentProps) {
+export function RichBlogContent({ post, className = '', locale = 'en' }: RichBlogContentProps) {
   const { content, chart_data = [], statistics = [], sources = [], expert_quotes = [] } = post;
 
   const chartMap = useMemo(() => new Map(chart_data.map((chart) => [chart.id, chart])), [chart_data]);
@@ -623,10 +654,10 @@ export function RichBlogContent({ post, className = '' }: RichBlogContentProps) 
       });
     }
 
-    const html = convertMarkdownToHtml(inlinePricing.text).replace(/\[[A-Z]+:[^\]]*\]/g, '');
+    const html = convertMarkdownToHtml(inlinePricing.text, post.slug, locale).replace(/\[[A-Z]+:[^\]]*\]/g, '');
 
     return { html, markers: nextMarkers };
-  }, [content, post.title]);
+  }, [content, locale, post.slug, post.title]);
 
   const renderContent = () => {
     const { html, markers } = processedContent;
@@ -697,6 +728,10 @@ export function RichBlogContent({ post, className = '' }: RichBlogContentProps) 
               key={`pricing-${partIndex}`}
               className="my-10 overflow-hidden rounded-[1.75rem] border border-stone-200 bg-[linear-gradient(180deg,#f8fafc_0%,#ffffff_18%,#ffffff_100%)] shadow-[0_20px_50px_rgba(15,23,42,0.08)]"
             >
+              <BlogImpressionTracker
+                eventName="blog_section_viewed"
+                eventData={{ section: 'inline_pricing_wall', post_slug: post.slug, locale }}
+              />
               <div className="border-b border-stone-200 bg-[linear-gradient(135deg,rgba(239,246,255,0.92),rgba(248,250,252,0.96))] px-5 py-6 md:px-8">
                 <p className="text-xs font-semibold uppercase tracking-[0.22em] text-blue-700">
                   Pricing and Demo
@@ -711,6 +746,11 @@ export function RichBlogContent({ post, className = '' }: RichBlogContentProps) 
                   <Link
                     href="/demo"
                     className="inline-flex items-center justify-center rounded-full bg-stone-950 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-stone-800"
+                    data-umami-event="blog_cta_click"
+                    data-umami-event-location="inline_pricing_wall"
+                    data-umami-event-label="try_live_demo"
+                    data-umami-event-post={post.slug}
+                    data-umami-event-locale={locale}
                   >
                     Try Live Demo
                   </Link>
@@ -719,6 +759,11 @@ export function RichBlogContent({ post, className = '' }: RichBlogContentProps) 
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center justify-center rounded-full border border-stone-300 bg-white px-5 py-2.5 text-sm font-semibold text-stone-900 transition-colors hover:bg-stone-50"
+                    data-umami-event="blog_cta_click"
+                    data-umami-event-location="inline_pricing_wall"
+                    data-umami-event-label="book_demo"
+                    data-umami-event-post={post.slug}
+                    data-umami-event-locale={locale}
                   >
                     Book a Demo
                   </a>
@@ -726,7 +771,10 @@ export function RichBlogContent({ post, className = '' }: RichBlogContentProps) 
               </div>
 
               <div className="px-5 py-6 md:px-8">
-                <PricingSection embedded />
+                <PricingSection
+                  embedded
+                  trackingData={{ surface: 'blog_inline_pricing', post_slug: post.slug, locale }}
+                />
               </div>
             </section>
           );

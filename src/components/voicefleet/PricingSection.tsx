@@ -1,12 +1,12 @@
 "use client";
 
-import { Fragment, useEffect, useRef, useState } from "react";
+import { Fragment, useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Check, Zap, Rocket, Crown, Gift, Clock, Shield, Phone, Sparkles, Globe, Star, X } from "lucide-react";
 import { useAuthStore } from "@/lib/store";
 import { signInWithGoogle } from "@/lib/supabase";
-import { trackEvent } from "@/lib/umami";
+import { trackEvent, type UmamiEventData } from "@/lib/umami";
 import { useRegion } from "@/hooks/useRegion";
 import { REVIEW_PLATFORMS } from "@/lib/marketing/review-platforms";
 
@@ -99,9 +99,10 @@ const REGIONAL_PRICING = {
 
 interface PricingSectionProps {
   embedded?: boolean;
+  trackingData?: UmamiEventData;
 }
 
-const PricingSection = ({ embedded = false }: PricingSectionProps) => {
+const PricingSection = ({ embedded = false, trackingData }: PricingSectionProps) => {
   const [isAnnual, setIsAnnual] = useState(false);
   const { region: detectedRegion } = useRegion();
   const region: Region = detectedRegion === 'AR' ? 'AR' : 'EU';
@@ -121,8 +122,15 @@ const PricingSection = ({ embedded = false }: PricingSectionProps) => {
     }
   }, [checkAuth]);
 
+  const emitEvent = useCallback(
+    (eventName: string, eventData?: UmamiEventData) => {
+      trackEvent(eventName, trackingData ? { ...trackingData, ...(eventData || {}) } : eventData);
+    },
+    [trackingData]
+  );
+
   const handleGetStarted = async (planId: string) => {
-    trackEvent("plan_selected", { plan: planId, region, billing: isAnnual ? "annual" : "monthly" });
+    emitEvent("plan_selected", { plan: planId, region, billing: isAnnual ? "annual" : "monthly" });
 
     // If user is not authenticated, go directly to Google OAuth
     if (!isAuthenticated) {
@@ -614,7 +622,7 @@ const PricingSection = ({ embedded = false }: PricingSectionProps) => {
                 className={`px-4 py-2 rounded-full text-sm font-medium transition ${
                   !isAnnual ? 'bg-primary text-white shadow-sm' : 'text-muted-foreground hover:text-foreground'
                 }`}
-                onClick={() => { setIsAnnual(false); trackEvent("billing_toggle", { period: "monthly" }); }}
+                onClick={() => { setIsAnnual(false); emitEvent("billing_toggle", { period: "monthly" }); }}
               >
                 Monthly
               </button>
@@ -622,7 +630,7 @@ const PricingSection = ({ embedded = false }: PricingSectionProps) => {
                 className={`px-4 py-2 rounded-full text-sm font-medium transition ${
                   isAnnual ? 'bg-primary text-white shadow-sm' : 'text-muted-foreground hover:text-foreground'
                 }`}
-                onClick={() => { setIsAnnual(true); trackEvent("billing_toggle", { period: "annual" }); }}
+                onClick={() => { setIsAnnual(true); emitEvent("billing_toggle", { period: "annual" }); }}
               >
                 Annual <span className="text-accent font-semibold">(Save 16%)</span>
               </button>

@@ -1,8 +1,9 @@
 "use client";
 
+import { useCallback } from "react";
 import { ArrowLeft, Mic, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { trackEvent } from "@/lib/umami";
+import { trackEvent, type UmamiEventData } from "@/lib/umami";
 import type { DemoLanguageId } from "@/lib/demo/types";
 import { DEMO_LANGUAGES } from "@/lib/demo/calendar-utils";
 import { VOICE_GROUPS, type DemoVoice } from "@/lib/demo/voices";
@@ -11,6 +12,7 @@ type AgentPickerProps = {
   selectedVoice: DemoVoice;
   languageId: DemoLanguageId;
   isCreatingSession: boolean;
+  trackingData?: UmamiEventData;
   onSelectVoice: (voice: DemoVoice) => void;
   onLanguageChange: (id: DemoLanguageId) => void;
   onStartCall: () => void;
@@ -21,11 +23,19 @@ export default function AgentPicker({
   selectedVoice,
   languageId,
   isCreatingSession,
+  trackingData,
   onSelectVoice,
   onLanguageChange,
   onStartCall,
   onBack,
 }: AgentPickerProps) {
+  const emitEvent = useCallback(
+    (eventName: string, eventData?: UmamiEventData) => {
+      trackEvent(eventName, trackingData ? { ...trackingData, ...(eventData || {}) } : eventData);
+    },
+    [trackingData]
+  );
+
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
@@ -63,7 +73,7 @@ export default function AgentPicker({
                     type="button"
                     onClick={() => {
                       onSelectVoice(voice);
-                      trackEvent("demo_voice_selected", { voice: voice.label });
+                      emitEvent("demo_voice_selected", { voice: voice.label });
                       if (voice.defaultLanguageId && voice.defaultLanguageId !== languageId) {
                         onLanguageChange(voice.defaultLanguageId);
                       }
@@ -103,7 +113,7 @@ export default function AgentPicker({
           onChange={(e) => {
             const lang = e.target.value as DemoLanguageId;
             onLanguageChange(lang);
-            trackEvent("demo_language_selected", { language: lang });
+            emitEvent("demo_language_selected", { language: lang });
           }}
           className="w-full px-3 py-2 rounded-lg border border-border bg-background text-foreground text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none"
           disabled={!!selectedVoice.enforceLanguage}

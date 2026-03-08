@@ -59,7 +59,14 @@ export default async function BlogPage() {
           ) : (
             <>
               {featuredPost && (
-                <Link href={`/blog/${featuredPost.slug}`} className="group block">
+                <Link
+                  href={`/blog/${featuredPost.slug}`}
+                  className="group block"
+                  data-umami-event="blog_article_click"
+                  data-umami-event-source="blog_index_featured"
+                  data-umami-event-target={featuredPost.slug}
+                  data-umami-event-locale="en"
+                >
                   <article className="grid overflow-hidden rounded-[2rem] border border-stone-200/80 bg-white shadow-[0_28px_70px_rgba(15,23,42,0.08)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_32px_90px_rgba(15,23,42,0.12)] lg:grid-cols-[1.05fr_0.95fr]">
                     <div className="relative min-h-[320px] bg-[radial-gradient(circle_at_top_left,rgba(59,130,246,0.5),transparent_32%),linear-gradient(135deg,#0f172a_0%,#1e293b_38%,#334155_100%)]">
                       {featuredPost.featured_image_url ? (
@@ -135,7 +142,15 @@ export default async function BlogPage() {
 
                   <div className="grid gap-6 md:grid-cols-2">
                     {otherPosts.map((post) => (
-                      <Link key={post.id} href={`/blog/${post.slug}`} className="group block">
+                      <Link
+                        key={post.id}
+                        href={`/blog/${post.slug}`}
+                        className="group block"
+                        data-umami-event="blog_article_click"
+                        data-umami-event-source="blog_index_grid"
+                        data-umami-event-target={post.slug}
+                        data-umami-event-locale="en"
+                      >
                         <article className="flex h-full flex-col overflow-hidden rounded-[1.75rem] border border-stone-200/80 bg-white shadow-[0_18px_45px_rgba(15,23,42,0.05)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_24px_60px_rgba(15,23,42,0.1)]">
                           <div className="relative h-56 overflow-hidden bg-[linear-gradient(135deg,#dbeafe_0%,#eff6ff_35%,#f8fafc_100%)]">
                             {post.featured_image_url ? (
