@@ -166,7 +166,7 @@ export default function DemoPage({ embedded = false }: DemoPageProps) {
             See AI Booking in Action
           </h1>
           <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto">
-            Pick your industry, set your availability, and watch the AI book real appointments on your calendar — live.
+            Pick your industry, set your availability, and watch the AI book real appointments on your calendar live.
           </p>
         </div>
       </div>
@@ -208,7 +208,7 @@ export default function DemoPage({ embedded = false }: DemoPageProps) {
                   <ArrowLeft className="w-4 h-4" /> Change industry
                 </button>
                 <span className="text-sm text-muted-foreground">
-                  {scenario.label} — {scenario.businessName}
+                  {scenario.label} - {scenario.businessName}
                 </span>
               </div>
 
@@ -336,3 +336,4 @@ export default function DemoPage({ embedded = false }: DemoPageProps) {
     </div>
   );
 }
+

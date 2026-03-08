@@ -15,6 +15,7 @@ import HeaderES from "@/components/voicefleet/HeaderES";
 import FooterES from "@/components/voicefleet/FooterES";
 import CTASection from "@/components/marketing/CTASection";
 import { RichBlogContent } from "@/components/content";
+import BlogDemoEmbed from "@/components/blog/BlogDemoEmbed";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -136,6 +137,46 @@ export default async function BlogPostPageES({ params }: Props) {
                     <span>{readTime} min de lectura</span>
                   </div>
                 </div>
+              </div>
+            </div>
+          </section>
+
+          <section className="mx-auto max-w-[1360px] px-6 pt-8">
+            <div className="overflow-hidden rounded-[2rem] border border-stone-200/80 bg-white shadow-[0_28px_70px_rgba(15,23,42,0.07)]">
+              <div className="border-b border-stone-200/80 bg-[linear-gradient(135deg,rgba(239,246,255,0.92),rgba(248,250,252,0.96))] px-6 py-8 md:px-10 lg:px-14 xl:px-16">
+                <p className="text-xs font-semibold uppercase tracking-[0.24em] text-blue-700">
+                  Product Preview
+                </p>
+                <div className="mt-3 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+                  <div className="max-w-3xl">
+                    <h2 className="font-heading text-3xl font-bold tracking-[-0.03em] text-stone-950">
+                      Mira como funciona VoiceFleet antes de seguir leyendo
+                    </h2>
+                    <p className="mt-3 text-base leading-7 text-stone-600">
+                      Quien llega desde un blog deberia ver el producto enseguida. Prueba el demo en vivo, escucha el flujo de IA y despues sigue con el articulo.
+                    </p>
+                  </div>
+                  <div className="flex flex-wrap gap-3">
+                    <Link
+                      href="/demo"
+                      className="inline-flex items-center justify-center rounded-full bg-stone-950 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-stone-800"
+                    >
+                      Probar Demo
+                    </Link>
+                    <a
+                      href="https://calendly.com/voicefleet"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center justify-center rounded-full border border-stone-300 bg-white px-5 py-2.5 text-sm font-semibold text-stone-900 transition-colors hover:bg-stone-50"
+                    >
+                      Reservar Demo
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-[linear-gradient(180deg,rgba(248,250,252,0.88),rgba(255,255,255,0.98))]">
+                <BlogDemoEmbed embedded />
               </div>
             </div>
           </section>
