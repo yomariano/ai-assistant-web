@@ -179,7 +179,7 @@ function preprocessMarkdown(raw: string, title?: string): string {
   text = text.replace(/^\s*---\s*$/gm, '\n---\n');
   text = text.replace(/(?:\n\s*){2,}(?=\|)/g, '\n');
   text = text.replace(/(?<=\|[^\n]+)\n{2,}(?=\|)/g, '\n');
-  text = text.replace(/\n?(-{3,})\n?/g, '\n\n$1\n\n');
+  text = text.replace(/^\s*(\*{3,}|-{3,})\s*$/gm, '\n$1\n');
   text = text.replace(/([^\n])\n(#{2,4}\s)/g, '$1\n\n$2');
   text = text.replace(/(#{2,4}\s.+)\n([^\n#])/g, '$1\n\n$2');
 
