@@ -56,7 +56,7 @@ const CountdownBanner = () => {
   };
 
   return (
-    <div className="relative z-50 bg-gradient-to-r from-primary via-primary/90 to-accent text-white">
+    <div className="relative z-50 hidden md:block bg-gradient-to-r from-primary via-primary/90 to-accent text-white">
       <div className="container mx-auto px-4 py-2.5 flex items-center justify-center gap-4 text-sm">
         <span className="font-semibold">
           Launch offer: 25% off Growth &amp; Pro plans &mdash; ends March 31

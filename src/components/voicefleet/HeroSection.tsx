@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Shield, Clock, Phone, PhoneForwarded, Settings, Bot, Link2, Globe2, Star, Play, ArrowRight, CheckCircle2, ShieldCheck } from "lucide-react";
+import { Shield, Clock, PhoneForwarded, Settings, Bot, Link2, Globe2, Star, ArrowRight, CheckCircle2, ShieldCheck } from "lucide-react";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
@@ -101,19 +101,19 @@ const HeroSection = () => {
 
   return (
     <>
-      <section className="relative pt-20 lg:pt-24 overflow-hidden">
+      <section className="relative pt-16 sm:pt-20 lg:pt-24 overflow-hidden">
         {/* Background */}
         <div className="absolute inset-0 bg-gradient-subtle" />
         <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-hero opacity-5 blur-3xl" />
 
         <div className="container mx-auto px-4 relative z-10">
           {/* Two-column: headline + demo card */}
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+          <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-16 items-start">
             {/* Left Content */}
-            <div className="py-12 lg:py-0">
+            <div className="flex flex-col pt-6 pb-6 sm:pt-8 sm:pb-8 lg:py-0">
               {/* Geo badge */}
               <div
-                className={`inline-flex items-center gap-2 px-4 py-2 bg-emerald-500/10 border border-emerald-500/20 rounded-full mb-6 transition-opacity duration-500 ${
+                className={`inline-flex w-fit items-center gap-2 px-4 py-2 bg-emerald-500/10 border border-emerald-500/20 rounded-full mb-5 sm:mb-6 transition-opacity duration-500 ${
                   geoReady ? "opacity-100" : "opacity-0"
                 }`}
               >
@@ -123,18 +123,22 @@ const HeroSection = () => {
                 </span>
               </div>
 
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-heading font-extrabold text-foreground leading-tight mb-6">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-heading font-extrabold text-foreground leading-tight mb-5 sm:mb-6">
                 The AI Receptionist That Answers Calls So You{" "}
                 <span className="text-gradient-primary">Never Lose a Customer</span>
               </h1>
 
-              <p className="text-base sm:text-lg lg:text-xl text-muted-foreground mb-8 leading-relaxed">
+              <p className="text-base sm:text-lg lg:text-xl text-muted-foreground mb-6 sm:mb-8 leading-relaxed">
                 The all-in-one AI phone agent that helps local businesses
                 capture every call, book appointments, and answer FAQs &mdash; 24/7, in any language.
               </p>
 
+              <div className="order-1 lg:order-2">
+                <HeroCTA />
+              </div>
+
               {/* Social proof stack */}
-              <div className="flex flex-wrap items-center gap-3 mb-8">
+              <div className="order-2 lg:order-1 flex flex-wrap items-center gap-3 mb-6 sm:mb-8">
                 {/* Overlapping avatars */}
                 <div className="flex -space-x-2">
                   {avatarInitials.map((initials, i) => (
@@ -156,12 +160,10 @@ const HeroSection = () => {
                   Used by dental clinics, restaurants &amp; salons across {regionName || "Ireland"}
                 </p>
               </div>
-
-              <HeroCTA />
             </div>
 
             {/* Right Content - Inline Demo Panel */}
-            <div className="relative animate-fade-up stagger-3 pt-12 lg:pt-0">
+            <div className="relative animate-fade-up stagger-3 pt-1 sm:pt-2 lg:pt-0">
               <LiveDemoCall inline />
             </div>
           </div>
