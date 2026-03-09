@@ -122,7 +122,7 @@ function LoginContent() {
     trackEvent("login_started", {
       method: "google",
       plan: selectedPlan || "none",
-      region: isSupportedRegion(selectedRegion) ? selectedRegion : undefined,
+      ...(isSupportedRegion(selectedRegion) && { region: selectedRegion }),
     });
 
     try {
