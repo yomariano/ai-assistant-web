@@ -33,7 +33,7 @@ function createMailtoHref(countryCode: string | null, from: string | null) {
     'Thanks,',
   ].join('\n');
 
-  return `mailto:sales@voicefleet.ai?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  return `mailto:support@voicefleet.ai?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 }
 
 export default async function WaitlistPage({ searchParams }: WaitlistPageProps) {
