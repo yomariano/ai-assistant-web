@@ -48,7 +48,8 @@ const Header = () => {
   const handleStartTrial = async () => {
     setIsTrialLoading(true);
     trackEvent("cta_click", { location: "header", label: "start_free_trial" });
-    sessionStorage.setItem("selectedPlan", "starter");
+    // Don't pre-select a plan — let the paywall modal show after auth so users can choose
+    sessionStorage.removeItem("selectedPlan");
     sessionStorage.setItem("selectedRegion", selectedRegion);
     try {
       const { signInWithGoogle } = await import("@/lib/supabase");

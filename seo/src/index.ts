@@ -147,7 +147,12 @@ app.notFound(async (c) => {
   const originRequest = new Request(c.req.url, c.req.raw);
   originRequest.headers.set('X-Country-Code', country);
 
-  return fetch(originRequest);
+  const response = await fetch(originRequest);
+
+  // Echo country in response header for debugging (visible in browser Network tab)
+  const proxied = new Response(response.body, response);
+  proxied.headers.set('X-CF-Country', country || 'EMPTY');
+  return proxied;
 });
 
 // Error handler
