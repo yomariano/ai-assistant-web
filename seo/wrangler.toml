@@ -94,7 +94,10 @@ routes = [
   { pattern = "voicefleet.ai/mechanic-voice-agent-in-*", zone_name = "voicefleet.ai" },
   { pattern = "voicefleet.ai/mechanics-voice-agent-in-*", zone_name = "voicefleet.ai" },
   { pattern = "voicefleet.ai/realtor-voice-agent-in-*", zone_name = "voicefleet.ai" },
-  { pattern = "voicefleet.ai/realtors-voice-agent-in-*", zone_name = "voicefleet.ai" }
+  { pattern = "voicefleet.ai/realtors-voice-agent-in-*", zone_name = "voicefleet.ai" },
+  # Catch-all: injects X-Country-Code header from CF geo data and passes through to origin.
+  # Required because Traefik (Coolify) strips cf-ipcountry before it reaches Next.js middleware.
+  { pattern = "voicefleet.ai/*", zone_name = "voicefleet.ai" }
 ]
 
 # Environment variables

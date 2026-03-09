@@ -27,14 +27,30 @@ function isAdminAuthorized(c: Context<{ Bindings: Bindings }>, secretFromBody?: 
   return secretFromHeader === adminSecret || secretFromQuery === adminSecret || secretFromBody === adminSecret;
 }
 
-// Cache middleware - only for GET requests on non-admin routes
+// Detect whether a path matches a known SEO route (served entirely by this worker).
+// Non-SEO paths are passed through to origin and must NOT be cached here.
+function isSEORoute(path: string): boolean {
+  return (
+    path === '/health' ||
+    path === '/robots.txt' ||
+    path === '/sitemap.xml' ||
+    path.startsWith('/sitemaps/') ||
+    path.startsWith('/industries') ||
+    path.startsWith('/locations') ||
+    path.startsWith('/es/asistente-ia-') ||
+    path.startsWith('/ai-receptionist-') ||
+    /-.+-voice-agent-in-.+/.test(path)
+  );
+}
+
+// Cache middleware - only for GET requests on SEO routes
 app.use('*', async (c, next) => {
-  // Skip caching for admin routes and non-GET requests
-  if (c.req.path.startsWith('/admin') || c.req.method !== 'GET') {
+  // Skip caching for admin routes, non-GET requests, and non-SEO routes (pass-through)
+  if (c.req.path.startsWith('/admin') || c.req.method !== 'GET' || !isSEORoute(c.req.path)) {
     return next();
   }
 
-  // Apply cache for GET requests on public routes
+  // Apply cache for GET requests on SEO routes only
   const cacheMiddleware = cache({
     cacheName: 'voicefleet-seo-v5',
     cacheControl: 'max-age=3600, stale-while-revalidate=86400',
@@ -121,33 +137,17 @@ app.get('/:industryLocation', async (c) => {
   return c.notFound();
 });
 
-// 404 handler
-app.notFound((c) => {
-  return c.html(`
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-      <meta charset="UTF-8">
-      <title>Page Not Found | VoiceFleet</title>
-      <meta name="robots" content="noindex">
-      <style>
-        body { font-family: system-ui; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; background: #f8fafc; }
-        .container { text-align: center; }
-        h1 { font-size: 4rem; margin: 0; color: #3b82f6; }
-        p { color: #666; margin: 20px 0; }
-        a { color: #3b82f6; text-decoration: none; font-weight: 600; }
-        a:hover { text-decoration: underline; }
-      </style>
-    </head>
-    <body>
-      <div class="container">
-        <h1>404</h1>
-        <p>Page not found</p>
-        <a href="/">Go to VoiceFleet</a>
-      </div>
-    </body>
-    </html>
-  `, 404);
+// Pass-through handler for non-SEO routes.
+// Adds X-Country-Code header from Cloudflare's geo data so the Next.js
+// middleware can gate access by country (cf-ipcountry may be stripped by Traefik).
+app.notFound(async (c) => {
+  const cf = (c.req.raw as any).cf as { country?: string } | undefined;
+  const country = cf?.country || '';
+
+  const originRequest = new Request(c.req.url, c.req.raw);
+  originRequest.headers.set('X-Country-Code', country);
+
+  return fetch(originRequest);
 });
 
 // Error handler
