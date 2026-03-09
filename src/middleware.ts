@@ -121,18 +121,13 @@ async function blogPostExists(slug: string, language?: string): Promise<boolean>
  * so hashed JS/CSS bundles keep their immutable cache headers.
  */
 export async function middleware(request: NextRequest) {
-  const countryCode = getRequestCountryCode(request);
-
-  // Debug: log country detection on gated paths
-  if (isCountryGatedPath(request.nextUrl.pathname)) {
-    console.log(`[COUNTRY GATE] path=${request.nextUrl.pathname} country=${countryCode ?? 'null'} cf-ipcountry=${request.headers.get('cf-ipcountry') ?? 'missing'} x-vercel=${request.headers.get('x-vercel-ip-country') ?? 'missing'} x-country=${request.headers.get('x-country-code') ?? 'missing'}`);
-  }
-
   if (
     !isLocallyBypassedHost(request.nextUrl.hostname) &&
     request.nextUrl.pathname !== '/waitlist' &&
     isCountryGatedPath(request.nextUrl.pathname)
   ) {
+    const countryCode = getRequestCountryCode(request);
+
     if (countryCode && !isSupportedCountryCode(countryCode)) {
       const redirectUrl = request.nextUrl.clone();
       const from = `${request.nextUrl.pathname}${request.nextUrl.search}`;
