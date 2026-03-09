@@ -24,6 +24,7 @@ export function OrganizationSchema() {
     areaServed: [
       { "@type": "Country", name: "Ireland" },
       { "@type": "Country", name: "Argentina" },
+      { "@type": "Country", name: "Australia" },
     ],
     contactPoint: {
       "@type": "ContactPoint",

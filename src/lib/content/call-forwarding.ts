@@ -4,7 +4,7 @@
  * This data is used in the onboarding flow to help users set up
  * call forwarding from their existing phone to their VoiceFleet number.
  *
- * Supported regions: IE (Ireland), UK (United Kingdom), AR (Argentina)
+ * Supported regions: IE (Ireland), UK (United Kingdom), AR (Argentina), AU (Australia)
  */
 
 export interface CallForwardingOption {
@@ -1348,13 +1348,151 @@ export const providerCategories = [
 /**
  * All providers combined (for lookup by ID)
  */
-const allProviders = [...callForwardingProviders, ...callForwardingProvidersAR, ...callForwardingProvidersUK];
+export const callForwardingProvidersAU: CallForwardingProvider[] = [
+  {
+    id: 'telstra-au',
+    name: 'Telstra',
+    type: 'mobile',
+    options: [
+      {
+        type: 'all',
+        label: 'Forward All Calls',
+        activateCode: '**21*{number}#',
+        deactivateCode: '##21#',
+        description: 'All incoming calls will be forwarded to your VoiceFleet number.',
+      },
+      {
+        type: 'no_answer',
+        label: 'Forward When No Answer',
+        activateCode: '**61*{number}#',
+        deactivateCode: '##61#',
+        description: 'If you do not answer, calls will forward to your AI receptionist.',
+      },
+    ],
+    notes: [
+      'Australian carriers often support standard GSM forwarding codes, but behaviour can vary by handset or plan.',
+      'If the dial code does not work, set forwarding in the carrier app or contact support.',
+      'Replace {number} with your VoiceFleet number including +61.',
+    ],
+    supportUrl: 'https://www.telstra.com.au/support',
+  },
+  {
+    id: 'optus-au',
+    name: 'Optus',
+    type: 'mobile',
+    options: [
+      {
+        type: 'all',
+        label: 'Forward All Calls',
+        activateCode: '**21*{number}#',
+        deactivateCode: '##21#',
+        description: 'All incoming calls will be forwarded to your VoiceFleet number.',
+      },
+      {
+        type: 'no_answer',
+        label: 'Forward When No Answer',
+        activateCode: '**61*{number}#',
+        deactivateCode: '##61#',
+        description: 'If you do not answer, calls will forward to your AI receptionist.',
+      },
+    ],
+    notes: [
+      'Replace {number} with your VoiceFleet number including +61.',
+      'If the dial code fails, use the Optus app or support portal to configure call forwarding.',
+    ],
+    supportUrl: 'https://www.optus.com.au/support',
+  },
+  {
+    id: 'vodafone-au',
+    name: 'Vodafone Australia',
+    type: 'mobile',
+    options: [
+      {
+        type: 'all',
+        label: 'Forward All Calls',
+        activateCode: '**21*{number}#',
+        deactivateCode: '##21#',
+        description: 'All incoming calls will be forwarded to your VoiceFleet number.',
+      },
+      {
+        type: 'no_answer',
+        label: 'Forward When No Answer',
+        activateCode: '**61*{number}#',
+        deactivateCode: '##61#',
+        description: 'If you do not answer, calls will forward to your AI receptionist.',
+      },
+    ],
+    notes: [
+      'Replace {number} with your VoiceFleet number including +61.',
+      'If needed, confirm forwarding settings in My Vodafone or with support.',
+    ],
+    supportUrl: 'https://www.vodafone.com.au/support',
+  },
+  {
+    id: 'landline-au',
+    name: 'Australian Landline',
+    type: 'landline',
+    options: [
+      {
+        type: 'all',
+        label: 'Forward All Calls',
+        activateCode: 'Use your carrier portal or handset menu',
+        deactivateCode: 'Disable in your carrier portal or handset menu',
+        description: 'Most Australian landline services support forwarding, but the exact setup varies by provider.',
+      },
+    ],
+    notes: [
+      'Check your carrier support portal for forwarding setup.',
+      'Use your VoiceFleet number in full international format (+61...).',
+    ],
+  },
+  {
+    id: 'generic-pbx-au',
+    name: 'Business PBX / VoIP',
+    type: 'business',
+    options: [
+      {
+        type: 'all',
+        label: 'Forward All Calls',
+        activateCode: 'Set forwarding in your PBX or VoIP admin panel',
+        deactivateCode: 'Disable forwarding in your PBX or VoIP admin panel',
+        description: 'Most business phone systems let you forward all calls or set no-answer rules per line or hunt group.',
+      },
+    ],
+    notes: [
+      'Look for call forwarding, failover, or destination rules in your phone system.',
+      'If you use an IT provider, send them your VoiceFleet number and ask for no-answer forwarding.',
+    ],
+  },
+];
+
+const allProviders = [...callForwardingProviders, ...callForwardingProvidersAR, ...callForwardingProvidersUK, ...callForwardingProvidersAU];
 
 /**
  * Provider categories by region
  */
 export const providerCategoriesByRegion: Record<string, typeof providerCategories> = {
   IE: providerCategories,
+  AU: [
+    {
+      id: 'mobile',
+      title: 'Mobile Networks',
+      description: 'Major Australian mobile operators',
+      providers: ['telstra-au', 'optus-au', 'vodafone-au'],
+    },
+    {
+      id: 'landline',
+      title: 'Landline / Home Phone',
+      description: 'Australian landline services',
+      providers: ['landline-au'],
+    },
+    {
+      id: 'business',
+      title: 'Business / VoIP',
+      description: 'Business phone systems and VoIP providers',
+      providers: ['generic-pbx-au'],
+    },
+  ],
   UK: [
     {
       id: 'mobile',
@@ -1421,6 +1559,7 @@ export function getProviderCategoriesForRegion(region: string) {
  */
 export function getProvidersForRegion(region: string): CallForwardingProvider[] {
   if (region === 'AR') return callForwardingProvidersAR;
+  if (region === 'AU') return callForwardingProvidersAU;
   if (region === 'UK') return callForwardingProvidersUK;
   return callForwardingProviders;
 }

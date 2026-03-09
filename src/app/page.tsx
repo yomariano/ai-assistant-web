@@ -26,6 +26,7 @@ export const metadata: Metadata = {
     languages: {
       "es-AR": "/es/",
       en: "/",
+      "en-AU": "/au/",
     },
   },
 };

@@ -15,7 +15,7 @@ export function PhoneNumberStep({ phoneNumbers, onNext, onBack }: PhoneNumberSte
   const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
   const [resolvedNumbers, setResolvedNumbers] = useState<{ number: string; label: string }[] | null>(null);
 
-  // Check if number is pending (Argentina/Ireland provisioning in progress)
+  // Check if number provisioning is still in progress
   const isPending = phoneNumbers.length === 1 && phoneNumbers[0].number === 'PENDING';
 
   // Poll for phone numbers when in pending state
@@ -53,12 +53,10 @@ export function PhoneNumberStep({ phoneNumbers, onNext, onBack }: PhoneNumberSte
   };
 
   const formatPhoneNumber = (number: string) => {
-    // Format Irish numbers nicely
     if (number.startsWith("+353")) {
       const local = number.slice(4);
       return `+353 ${local.slice(0, 2)} ${local.slice(2, 5)} ${local.slice(5)}`;
     }
-    // Format Argentine numbers
     if (number.startsWith("+54")) {
       return number;
     }
@@ -68,7 +66,7 @@ export function PhoneNumberStep({ phoneNumbers, onNext, onBack }: PhoneNumberSte
   // Use resolved numbers (from polling) or the original prop
   const displayNumbers = resolvedNumbers || phoneNumbers;
 
-  // Render pending state for Argentina users (only if not yet resolved)
+  // Render pending state while number provisioning completes
   if (isPending && !resolvedNumbers) {
     return (
       <div className="py-4">
@@ -81,7 +79,7 @@ export function PhoneNumberStep({ phoneNumbers, onNext, onBack }: PhoneNumberSte
             Setting Up Your Number
           </h2>
           <p className="text-muted-foreground text-sm">
-            Your Argentina phone number is being provisioned
+            Your phone number is being provisioned
           </p>
         </div>
 
@@ -92,7 +90,7 @@ export function PhoneNumberStep({ phoneNumbers, onNext, onBack }: PhoneNumberSte
             <p className="font-semibold text-amber-800">Provisioning in progress...</p>
           </div>
           <p className="text-sm text-amber-700">
-            We&apos;re setting up your Argentina (+54) phone number. This usually takes a few minutes.
+            We&apos;re setting up your local business number. This usually takes a few minutes.
             You&apos;ll receive an email once your number is ready.
           </p>
         </div>

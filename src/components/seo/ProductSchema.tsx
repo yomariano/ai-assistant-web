@@ -2,7 +2,21 @@ import { JsonLd } from "./JsonLd";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://voicefleet.ai";
 
-export function ProductSchema() {
+interface ProductSchemaProps {
+  lowPrice?: string;
+  highPrice?: string;
+  priceCurrency?: string;
+  url?: string;
+  inLanguage?: string[];
+}
+
+export function ProductSchema({
+  lowPrice = "99",
+  highPrice = "599",
+  priceCurrency = "EUR",
+  url = `${siteUrl}/pricing`,
+  inLanguage = ["en", "es-AR"],
+}: ProductSchemaProps = {}) {
   const schema = {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
@@ -12,16 +26,16 @@ export function ProductSchema() {
     url: siteUrl,
     offers: {
       "@type": "AggregateOffer",
-      lowPrice: "99",
-      highPrice: "599",
-      priceCurrency: "EUR",
+      lowPrice,
+      highPrice,
+      priceCurrency,
       offerCount: 3,
-      url: `${siteUrl}/pricing`,
+      url,
     },
     description:
       "AI voice receptionist for small businesses. Answer calls, take messages, and book appointments 24/7.",
     image: [`${siteUrl}/logo-mark.svg`],
-    inLanguage: ["en", "es-AR"],
+    inLanguage,
     featureList: [
       "AI-powered voice calls",
       "24/7 availability",

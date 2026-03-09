@@ -1,4 +1,5 @@
 import businessesData from '../data/businesses.json';
+import australiaBusinessesData from '../data/businesses-au';
 
 export interface Business {
   slug: string;
@@ -20,6 +21,9 @@ export interface Business {
 }
 
 const staticBusinesses: Business[] = businessesData as Business[];
+const australiaBusinesses: Business[] = australiaBusinessesData as Business[];
+
+export type DirectoryMarket = 'global' | 'AU' | 'all';
 
 // In-memory cache for CDN data
 let cachedBusinesses: Business[] | null = null;
@@ -48,6 +52,40 @@ async function fetchBusinesses(): Promise<Business[]> {
     // Fallback to static
   }
   return staticBusinesses;
+}
+
+function isAustralianBusiness(business: Business): boolean {
+  return business.country.trim().toLowerCase() === 'australia';
+}
+
+function dedupeBusinesses(businesses: Business[]): Business[] {
+  const seen = new Set<string>();
+
+  return businesses.filter((business) => {
+    const key = `${business.vertical}:${business.citySlug}:${business.slug}`;
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+}
+
+async function getBusinessesForMarket(market: DirectoryMarket = 'global'): Promise<Business[]> {
+  const businesses = await fetchBusinesses();
+
+  if (market === 'global') {
+    return businesses;
+  }
+
+  const mergedBusinesses = dedupeBusinesses([
+    ...businesses,
+    ...australiaBusinesses,
+  ]);
+
+  if (market === 'AU') {
+    return mergedBusinesses.filter(isAustralianBusiness);
+  }
+
+  return mergedBusinesses;
 }
 
 export async function getAllBusinesses(): Promise<Business[]> {
@@ -95,6 +133,84 @@ export async function getVerticals(): Promise<{ vertical: string; count: number 
 export async function getBusinessesByLocale(locale: 'en' | 'es'): Promise<Business[]> {
   const businesses = await fetchBusinesses();
   return businesses.filter(b => b.locale === locale);
+}
+
+export async function getAllBusinessesForMarket(market: DirectoryMarket): Promise<Business[]> {
+  return getBusinessesForMarket(market);
+}
+
+export async function getBusinessesBySlugForMarket(slug: string, market: DirectoryMarket): Promise<Business[]> {
+  const businesses = await getBusinessesForMarket(market);
+  return businesses.filter((business) => business.slug === slug);
+}
+
+export async function getBusinessBySlugForMarket(
+  vertical: string,
+  citySlug: string,
+  slug: string,
+  market: DirectoryMarket,
+): Promise<Business | undefined> {
+  const businesses = await getBusinessesForMarket(market);
+  return businesses.find((business) => (
+    business.vertical === vertical
+    && business.citySlug === citySlug
+    && business.slug === slug
+  ));
+}
+
+export async function getBusinessesByCityForMarket(
+  vertical: string,
+  citySlug: string,
+  market: DirectoryMarket,
+): Promise<Business[]> {
+  const businesses = await getBusinessesForMarket(market);
+  return businesses.filter((business) => business.vertical === vertical && business.citySlug === citySlug);
+}
+
+export async function getBusinessesByVerticalForMarket(
+  vertical: string,
+  market: DirectoryMarket,
+): Promise<Business[]> {
+  const businesses = await getBusinessesForMarket(market);
+  return businesses.filter((business) => business.vertical === vertical);
+}
+
+export async function getCitiesForVerticalForMarket(
+  vertical: string,
+  market: DirectoryMarket,
+): Promise<{ city: string; citySlug: string; count: number }[]> {
+  const businesses = await getBusinessesByVerticalForMarket(vertical, market);
+  const map = new Map<string, { city: string; citySlug: string; count: number }>();
+
+  for (const business of businesses) {
+    const existing = map.get(business.citySlug);
+    if (existing) {
+      existing.count += 1;
+    } else {
+      map.set(business.citySlug, {
+        city: business.city,
+        citySlug: business.citySlug,
+        count: 1,
+      });
+    }
+  }
+
+  return [...map.values()].sort((a, z) => z.count - a.count);
+}
+
+export async function getVerticalsForMarket(
+  market: DirectoryMarket,
+): Promise<{ vertical: string; count: number }[]> {
+  const businesses = await getBusinessesForMarket(market);
+  const map = new Map<string, number>();
+
+  for (const business of businesses) {
+    map.set(business.vertical, (map.get(business.vertical) || 0) + 1);
+  }
+
+  return [...map.entries()]
+    .map(([vertical, count]) => ({ vertical, count }))
+    .sort((a, z) => z.count - a.count);
 }
 
 export const verticalLabels: Record<string, string> = {

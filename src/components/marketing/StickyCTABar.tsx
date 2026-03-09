@@ -3,7 +3,9 @@
 import { useState, useEffect } from "react";
 import { X } from "lucide-react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useRegion } from "@/hooks/useRegion";
+import { buildRegisterPath, getRouteRegionOverride } from "@/lib/market";
 
 const WHATSAPP_NUMBER = "5491133869439";
 const WHATSAPP_MESSAGE = "Hola, me interesa saber mas sobre VoiceFleet";
@@ -15,6 +17,8 @@ export default function StickyCTABar() {
     return sessionStorage.getItem("stickyCTADismissed") === "1";
   });
   const { region } = useRegion();
+  const pathname = usePathname();
+  const routeRegion = getRouteRegionOverride(pathname) || region;
   const isArgentina = region === "AR";
 
   useEffect(() => {
@@ -62,7 +66,7 @@ export default function StickyCTABar() {
             </a>
           )}
           <Link
-            href="/register"
+            href={buildRegisterPath("starter", routeRegion)}
             className="inline-flex items-center rounded-lg bg-white text-primary px-4 py-2 text-sm font-semibold hover:bg-white/90 transition-colors"
             data-umami-event="sticky_cta_trial"
           >

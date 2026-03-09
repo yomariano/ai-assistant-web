@@ -6,22 +6,27 @@
 
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useCallback, useEffect, useState } from 'react';
+import { usePathname } from 'next/navigation';
+import {
+  getFallbackRegionData,
+  getRouteRegionOverride,
+  type SupportedRegion,
+} from '@/lib/market';
 
 interface Plan {
   id: string;
   price: number;
   formattedPrice: string;
-  monthlyMinutes: number;  // mapped from API's minutesIncluded
+  monthlyMinutes: number;
   paymentLink: string | null;
 }
 
-// API response plan structure (differs from our Plan interface)
 interface ApiPlan {
   id: string;
   price: number;
   formattedPrice: string;
-  minutesIncluded: number;  // API uses this name
+  minutesIncluded: number;
   paymentLink: string | null;
 }
 
@@ -52,21 +57,63 @@ interface UseRegionReturn {
 }
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
+const CACHE_DURATION_MS = 5 * 60 * 1000;
+const regionCache = new Map<string, { data: RegionData; timestamp: number }>();
 
-// Cache the region data to avoid repeated API calls
-// Keep short (5 min) so pricing updates after deployments aren't stale for long
-let cachedData: RegionData | null = null;
-let cacheTimestamp: number | null = null;
-const CACHE_DURATION_MS = 5 * 60 * 1000; // 5 minutes
+function getCacheKey(regionOverride: SupportedRegion | null): string {
+  return regionOverride ? `region:${regionOverride}` : 'region:auto';
+}
+
+function getCachedRegionData(cacheKey: string): RegionData | null {
+  const cachedEntry = regionCache.get(cacheKey);
+  if (!cachedEntry) return null;
+
+  if (Date.now() - cachedEntry.timestamp >= CACHE_DURATION_MS) {
+    regionCache.delete(cacheKey);
+    return null;
+  }
+
+  return cachedEntry.data;
+}
+
+function mapApiResponseToRegionData(apiResponse: {
+  city?: string | null;
+  plans: ApiPlan[];
+  [key: string]: unknown;
+}): RegionData {
+  return {
+    ...(apiResponse as Omit<RegionData, 'city' | 'plans'>),
+    city: apiResponse.city || null,
+    plans: apiResponse.plans.map((plan: ApiPlan) => ({
+      id: plan.id,
+      price: plan.price,
+      formattedPrice: plan.formattedPrice,
+      monthlyMinutes: plan.minutesIncluded,
+      paymentLink: plan.paymentLink,
+    })),
+  };
+}
+
+function getFallbackAsRegionData(regionOverride: SupportedRegion = 'EU'): RegionData {
+  const fallbackData = getFallbackRegionData(regionOverride);
+  return {
+    detected: false,
+    ...fallbackData,
+  };
+}
 
 export function useRegion(): UseRegionReturn {
-  const [data, setData] = useState<RegionData | null>(cachedData);
-  const [loading, setLoading] = useState(!cachedData);
+  const pathname = usePathname();
+  const routeRegion = getRouteRegionOverride(pathname);
+  const cacheKey = getCacheKey(routeRegion);
+
+  const [data, setData] = useState<RegionData | null>(() => getCachedRegionData(cacheKey));
+  const [loading, setLoading] = useState(!getCachedRegionData(cacheKey));
   const [error, setError] = useState<string | null>(null);
 
   const fetchRegion = useCallback(async (force = false) => {
-    // Use cache if available and not expired
-    if (!force && cachedData && cacheTimestamp && Date.now() - cacheTimestamp < CACHE_DURATION_MS) {
+    const cachedData = getCachedRegionData(cacheKey);
+    if (!force && cachedData) {
       setData(cachedData);
       setLoading(false);
       return;
@@ -76,7 +123,11 @@ export function useRegion(): UseRegionReturn {
     setError(null);
 
     try {
-      const response = await fetch(`${API_URL}/api/billing/region`, {
+      const endpoint = routeRegion
+        ? `${API_URL}/api/billing/region?region=${routeRegion}`
+        : `${API_URL}/api/billing/region`;
+
+      const response = await fetch(endpoint, {
         credentials: 'include',
         cache: 'no-store',
       });
@@ -85,54 +136,27 @@ export function useRegion(): UseRegionReturn {
         throw new Error('Failed to detect region');
       }
 
-      const apiResponse = await response.json();
-
-      // Map API response to our interface (API uses minutesIncluded, we use monthlyMinutes)
-      const regionData: RegionData = {
-        ...apiResponse,
-        city: apiResponse.city || null,
-        plans: apiResponse.plans.map((p: ApiPlan) => ({
-          id: p.id,
-          price: p.price,
-          formattedPrice: p.formattedPrice,
-          monthlyMinutes: p.minutesIncluded,  // Map API field name
-          paymentLink: p.paymentLink,
-        })),
-      };
-
-      // Update cache
-      cachedData = regionData;
-      cacheTimestamp = Date.now();
-
+      const regionData = mapApiResponseToRegionData(await response.json());
+      regionCache.set(cacheKey, { data: regionData, timestamp: Date.now() });
       setData(regionData);
     } catch (err) {
       console.error('Error fetching region:', err);
       setError(err instanceof Error ? err.message : 'Unknown error');
 
-      // Fallback to EU pricing (Feb 2026)
-      const fallbackData: RegionData = {
-        detected: false,
-        region: 'EU',
-        regionName: 'Europe',
-        currency: 'EUR',
-        currencySymbol: '€',
-        telephonyProvider: 'voipcloud',
-        city: null,
-        plans: [
-          { id: 'starter', price: 99, formattedPrice: '€99', monthlyMinutes: 500, paymentLink: null },
-          { id: 'growth', price: 299, formattedPrice: '€299', monthlyMinutes: 1000, paymentLink: null },
-          { id: 'pro', price: 599, formattedPrice: '€599', monthlyMinutes: 2000, paymentLink: null },
-        ],
-      };
+      const fallbackData = getFallbackAsRegionData(routeRegion || 'EU');
+      regionCache.set(cacheKey, { data: fallbackData, timestamp: Date.now() });
       setData(fallbackData);
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [cacheKey, routeRegion]);
 
   useEffect(() => {
-    fetchRegion();
-  }, [fetchRegion]);
+    const cachedData = getCachedRegionData(cacheKey);
+    setData(cachedData);
+    setLoading(!cachedData);
+    void fetchRegion();
+  }, [cacheKey, fetchRegion]);
 
   const formatPrice = useCallback(
     (price: number): string => {
@@ -144,14 +168,14 @@ export function useRegion(): UseRegionReturn {
 
   const getPlan = useCallback(
     (planId: string): Plan | undefined => {
-      return data?.plans.find((p) => p.id === planId);
+      return data?.plans.find((plan) => plan.id === planId);
     },
     [data]
   );
 
   const getPaymentLink = useCallback(
     (planId: string): string | null => {
-      return data?.plans.find((p) => p.id === planId)?.paymentLink || null;
+      return data?.plans.find((plan) => plan.id === planId)?.paymentLink || null;
     },
     [data]
   );
@@ -172,10 +196,13 @@ export function useRegion(): UseRegionReturn {
   };
 }
 
-// Static helper for server components
-export async function getRegionFromServer(): Promise<RegionData> {
+export async function getRegionFromServer(regionOverride?: SupportedRegion): Promise<RegionData> {
   try {
-    const response = await fetch(`${API_URL}/api/billing/region`, {
+    const endpoint = regionOverride
+      ? `${API_URL}/api/billing/region?region=${regionOverride}`
+      : `${API_URL}/api/billing/region`;
+
+    const response = await fetch(endpoint, {
       cache: 'no-store',
     });
 
@@ -183,22 +210,8 @@ export async function getRegionFromServer(): Promise<RegionData> {
       throw new Error('Failed to detect region');
     }
 
-    return response.json();
+    return mapApiResponseToRegionData(await response.json());
   } catch {
-    // Fallback to EU (Feb 2026 pricing)
-    return {
-      detected: false,
-      region: 'EU',
-      regionName: 'Europe',
-      currency: 'EUR',
-      currencySymbol: '€',
-      telephonyProvider: 'voipcloud',
-      city: null,
-      plans: [
-        { id: 'starter', price: 99, formattedPrice: '€99', monthlyMinutes: 500, paymentLink: null },
-        { id: 'growth', price: 299, formattedPrice: '€299', monthlyMinutes: 1000, paymentLink: null },
-        { id: 'pro', price: 599, formattedPrice: '€599', monthlyMinutes: 2000, paymentLink: null },
-      ],
-    };
+    return getFallbackAsRegionData(regionOverride || 'EU');
   }
 }

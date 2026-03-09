@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { CreditCard, ExternalLink, TrendingUp, AlertCircle, DollarSign, Clock } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
@@ -9,7 +9,7 @@ import { billingApi, emailApi } from '@/lib/api';
 import { useBillingStore } from '@/lib/store';
 import { trackEvent } from '@/lib/umami';
 
-type Region = 'EU' | 'AR';
+type Region = 'EU' | 'AR' | 'AU' | 'US';
 
 interface UsageData {
   // Minute-based data (Feb 2026)
@@ -59,6 +59,16 @@ const REGIONAL_PLAN_DETAILS: Record<Region, Record<string, { name: string; price
     growth: { name: 'Growth', price: '$149/mo', included: '500 minutes/month (~200 calls)', overage: '$0.30/min overage', color: 'bg-indigo-100 text-indigo-700' },
     pro: { name: 'Pro', price: '$299/mo', included: '1,000 minutes/month (~400 calls)', overage: '$0.30/min overage', color: 'bg-violet-100 text-violet-700' },
   },
+  US: {
+    starter: { name: 'Starter', price: '$99/mo', included: '500 minutes/month (~200 calls)', overage: '$0.20/min overage', color: 'bg-slate-100 text-slate-700' },
+    growth: { name: 'Growth', price: '$299/mo', included: '1,000 minutes/month (~400 calls)', overage: '$0.30/min overage', color: 'bg-indigo-100 text-indigo-700' },
+    pro: { name: 'Pro', price: '$599/mo', included: '2,000 minutes/month (~800 calls)', overage: '$0.30/min overage', color: 'bg-violet-100 text-violet-700' },
+  },
+  AU: {
+    starter: { name: 'Starter', price: 'A$140/mo', included: '500 minutes/month (~200 calls)', overage: 'A$0.28/min overage', color: 'bg-slate-100 text-slate-700' },
+    growth: { name: 'Growth', price: 'A$424/mo', included: '1,000 minutes/month (~400 calls)', overage: 'A$0.43/min overage', color: 'bg-indigo-100 text-indigo-700' },
+    pro: { name: 'Pro', price: 'A$851/mo', included: '2,000 minutes/month (~800 calls)', overage: 'A$0.43/min overage', color: 'bg-violet-100 text-violet-700' },
+  },
 };
 
 export default function BillingPage() {
@@ -69,14 +79,7 @@ export default function BillingPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [isRedirecting, setIsRedirecting] = useState(false);
 
-  useEffect(() => {
-    fetchData();
-    // Track pricing page view for abandoned upgrade triggers
-    emailApi.trackEvent('pricing_view');
-    trackEvent("billing_viewed");
-  }, []);
-
-  async function fetchData() {
+  const fetchData = useCallback(async () => {
     try {
       const [subRes, usageRes] = await Promise.all([
         billingApi.getSubscription(),
@@ -99,7 +102,14 @@ export default function BillingPage() {
     } finally {
       setIsLoading(false);
     }
-  }
+  }, [setUsageStore]);
+
+  useEffect(() => {
+    void fetchData();
+    // Track pricing page view for abandoned upgrade triggers
+    emailApi.trackEvent('pricing_view');
+    trackEvent("billing_viewed");
+  }, [fetchData]);
 
   const handleManageSubscription = async () => {
     setIsRedirecting(true);
@@ -123,7 +133,7 @@ export default function BillingPage() {
   // Get region from subscription, default to EU
   const region: Region = (subscription?.region as Region) || 'EU';
   const planDetails = REGIONAL_PLAN_DETAILS[region];
-  const currencySymbol = region === 'AR' ? '$' : '€';
+  const currencySymbol = region === 'AU' ? 'A$' : region === 'EU' ? '€' : '$';
 
   if (isLoading) {
     return (

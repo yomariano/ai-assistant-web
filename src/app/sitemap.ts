@@ -1,7 +1,12 @@
 import { MetadataRoute } from 'next';
 import { INTEGRATIONS } from '@/lib/marketing/integrations';
 import { getReceptionistCitySlugs } from '@/lib/content/receptionist-cities';
-import { getVerticalSlugES, getVerticals } from '@/lib/directory-data';
+import {
+  getAllBusinessesForMarket,
+  getVerticalSlugES,
+  getVerticals,
+  getVerticalsForMarket,
+} from '@/lib/directory-data';
 
 const BASE_URL = (process.env.NEXT_PUBLIC_SITE_URL || 'https://voicefleet.ai').replace(/\/+$/, '');
 
@@ -58,7 +63,14 @@ async function fetchSitemapData(): Promise<SitemapData | null> {
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const content = await fetchSitemapData();
-  const directoryVerticals = await getVerticals();
+  const [directoryVerticals, auDirectoryVerticals, auBusinesses] = await Promise.all([
+    getVerticals(),
+    getVerticalsForMarket('AU'),
+    getAllBusinessesForMarket('AU'),
+  ]);
+  const auDirectoryCities = [...new Set(
+    auBusinesses.map((business) => `${business.vertical}/${business.citySlug}`)
+  )];
 
   // Static pages - always included
   const staticPages: MetadataRoute.Sitemap = [
@@ -67,6 +79,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 1,
+    },
+    {
+      url: `${BASE_URL}/au`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.9,
     },
     {
       url: `${BASE_URL}/pricing`,
@@ -105,6 +123,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.8,
     },
     {
+      url: `${BASE_URL}/au/blog`,
+      lastModified: new Date(),
+      changeFrequency: 'daily',
+      priority: 0.8,
+    },
+    {
       url: `${BASE_URL}/es/blog`,
       lastModified: new Date(),
       changeFrequency: 'daily',
@@ -129,6 +153,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.8,
     },
     {
+      url: `${BASE_URL}/au/features`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.8,
+    },
+    {
       url: `${BASE_URL}/connect`,
       lastModified: new Date(),
       changeFrequency: 'weekly',
@@ -146,9 +176,21 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'weekly',
       priority: 0.7,
     },
+    {
+      url: `${BASE_URL}/au/compare`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.7,
+    },
     // Directory pages
     {
       url: `${BASE_URL}/directory`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.8,
+    },
+    {
+      url: `${BASE_URL}/au/directory`,
       lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 0.8,
@@ -158,6 +200,24 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: new Date(),
       changeFrequency: 'weekly' as const,
       priority: 0.7,
+    })),
+    ...auDirectoryVerticals.map(({ vertical }) => ({
+      url: `${BASE_URL}/au/directory/${vertical}`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly' as const,
+      priority: 0.7,
+    })),
+    ...auDirectoryCities.map((path) => ({
+      url: `${BASE_URL}/au/directory/${path}`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly' as const,
+      priority: 0.7,
+    })),
+    ...auBusinesses.map((business) => ({
+      url: `${BASE_URL}/au/directory/${business.vertical}/${business.citySlug}/${business.slug}`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly' as const,
+      priority: 0.6,
     })),
     // Spanish pages
     {
@@ -197,6 +257,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'monthly' as const,
       priority: 0.7,
     })),
+    ...getReceptionistCitySlugs('AU').map((slug) => ({
+      url: `${BASE_URL}/au/ai-receptionist/${slug}`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
+    })),
   ];
 
   // If no dynamic content yet, return only static pages
@@ -214,6 +280,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     changeFrequency: 'weekly',
     priority: 0.7,
   }));
+
+  const auBlogPosts: MetadataRoute.Sitemap = content.blogPosts
+    .filter((post) => (post.language || 'en') === 'en')
+    .map((post) => ({
+      url: `${BASE_URL}/au/blog/${s(post.slug)}`,
+      lastModified: new Date(post.updated_at),
+      changeFrequency: 'weekly',
+      priority: 0.7,
+    }));
 
   // Dynamic use case pages
   const useCases: MetadataRoute.Sitemap = content.useCases.map((page) => ({
@@ -255,5 +330,22 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.6,
   }));
 
-  return [...staticPages, ...blogPosts, ...useCases, ...locations, ...features, ...combos, ...comparisons];
+  const auComparisons: MetadataRoute.Sitemap = (content.comparisons || []).map((page) => ({
+    url: `${BASE_URL}/au/compare/${s(page.slug)}`,
+    lastModified: new Date(page.updated_at),
+    changeFrequency: 'monthly',
+    priority: 0.6,
+  }));
+
+  return [
+    ...staticPages,
+    ...blogPosts,
+    ...auBlogPosts,
+    ...useCases,
+    ...locations,
+    ...features,
+    ...combos,
+    ...comparisons,
+    ...auComparisons,
+  ];
 }

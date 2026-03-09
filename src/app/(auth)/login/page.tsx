@@ -6,6 +6,7 @@ import { Phone } from 'lucide-react';
 import { useAuthStore } from '@/lib/store';
 import Button from '@/components/ui/button';
 import { trackEvent } from '@/lib/umami';
+import { isSupportedRegion } from '@/lib/market';
 
 function LoginContent() {
   const router = useRouter();
@@ -19,6 +20,7 @@ function LoginContent() {
 
   // Get the plan from URL if user came from pricing
   const selectedPlan = searchParams.get('plan');
+  const selectedRegion = searchParams.get('region');
   // Show dev login on localhost OR dev tunnel
   const isDevEnvironment =
     typeof window !== 'undefined' &&
@@ -32,13 +34,16 @@ function LoginContent() {
     if (selectedPlan) {
       sessionStorage.setItem('selectedPlan', selectedPlan);
     }
+    if (isSupportedRegion(selectedRegion)) {
+      sessionStorage.setItem('selectedRegion', selectedRegion);
+    }
 
     // Only check auth once on mount
     if (!hasCheckedAuth.current) {
       hasCheckedAuth.current = true;
       checkAuth();
     }
-  }, [checkAuth, selectedPlan]);
+  }, [checkAuth, selectedPlan, selectedRegion]);
 
   useEffect(() => {
     const handlePostAuthRedirect = async () => {
@@ -62,6 +67,7 @@ function LoginContent() {
 
         // Check if user selected a plan from pricing page
         const plan = sessionStorage.getItem('selectedPlan') || selectedPlan;
+        const region = sessionStorage.getItem('selectedRegion') || selectedRegion;
         if (plan) {
           sessionStorage.removeItem('selectedPlan');
           sessionStorage.removeItem('pendingPaymentLink');
@@ -76,7 +82,12 @@ function LoginContent() {
               headers['Authorization'] = `Bearer ${token}`;
             }
 
-            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/billing/redirect?planId=${plan}`, {
+            const params = new URLSearchParams({ planId: plan });
+            if (isSupportedRegion(region) && region !== 'EU') {
+              params.set('region', region);
+            }
+
+            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/billing/redirect?${params.toString()}`, {
               credentials: 'include',
               headers
             });
@@ -103,15 +114,27 @@ function LoginContent() {
     };
 
     handlePostAuthRedirect();
-  }, [isLoading, isAuthenticated, router, selectedPlan, token, devMode, isDevEnvironment]);
+  }, [isLoading, isAuthenticated, router, selectedPlan, selectedRegion, token, devMode, isDevEnvironment]);
 
   const handleGoogleSignIn = async () => {
     setError('');
     setIsSigningIn(true);
-    trackEvent("login_started", { method: "google", plan: selectedPlan || "none" });
+    trackEvent("login_started", {
+      method: "google",
+      plan: selectedPlan || "none",
+      region: isSupportedRegion(selectedRegion) ? selectedRegion : undefined,
+    });
 
     try {
-      await loginWithGoogle();
+      const nextParams = new URLSearchParams();
+      if (selectedPlan) {
+        nextParams.set('plan', selectedPlan);
+      }
+      if (isSupportedRegion(selectedRegion) && selectedRegion !== 'EU') {
+        nextParams.set('region', selectedRegion);
+      }
+      const nextPath = nextParams.toString() ? `/login?${nextParams.toString()}` : '/login';
+      await loginWithGoogle(nextPath);
       // Redirect happens automatically via OAuth
     } catch (err: unknown) {
       const errorMessage = err instanceof Error ? err.message : 'Sign in failed';

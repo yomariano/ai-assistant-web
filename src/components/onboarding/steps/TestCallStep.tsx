@@ -26,6 +26,9 @@ export function TestCallStep({
       const local = number.slice(4);
       return `+353 ${local.slice(0, 2)} ${local.slice(2, 5)} ${local.slice(5)}`;
     }
+    if (number.startsWith("+61")) {
+      return number;
+    }
     return number;
   };
 

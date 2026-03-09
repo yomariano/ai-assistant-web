@@ -28,7 +28,7 @@ const FeaturesSection = () => {
     {
       icon: Globe,
       name: "Local Phone Numbers",
-      description: "Irish numbers (Dublin & regional) included",
+      description: "Local business numbers included",
       badge: "All plans",
     },
     {
@@ -53,8 +53,8 @@ const FeaturesSection = () => {
     },
     {
       icon: Shield,
-      name: "GDPR Compliant",
-      description: "EU data centres & full compliance",
+      name: "Privacy Controls",
+      description: "Regional deployment options and configurable controls",
       badge: "All plans",
     },
     {

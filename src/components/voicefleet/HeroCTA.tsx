@@ -1,13 +1,17 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Play } from "lucide-react";
 import Link from "next/link";
 import { trackEvent } from "@/lib/umami";
+import { buildRegisterPath, getRouteRegionOverride } from "@/lib/market";
 
 const HeroCTA = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const pathname = usePathname();
+  const routeRegion = getRouteRegionOverride(pathname);
 
   // Lazy-check auth after hydration to avoid pulling Supabase into the initial bundle
   useEffect(() => {
@@ -30,7 +34,7 @@ const HeroCTA = () => {
         </Link>
       ) : (
         <div className="flex flex-col sm:flex-row gap-3">
-          <Link href="/register?plan=starter" className="w-full sm:w-auto">
+          <Link href={buildRegisterPath("starter", routeRegion)} className="w-full sm:w-auto">
             <Button
               variant="hero"
               size="xl"

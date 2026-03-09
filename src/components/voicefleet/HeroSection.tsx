@@ -40,7 +40,7 @@ const VIDEO_ID = "XrPhV1WfluI";
 const THUMBNAIL = "https://cdn.voicefleet.ai/images/video-thumbnail.png";
 
 const trustBadges = [
-  { icon: Shield, label: "EU data residency options" },
+  { icon: Shield, label: "Regional deployment options" },
   { icon: Clock, label: "Setup support included" },
   { icon: Link2, label: "Calendar + booking integrations" },
   { icon: Globe2, label: "Multilingual agents" },
@@ -90,6 +90,7 @@ const HeroSection = () => {
   const [videoPlaying, setVideoPlaying] = useState(false);
   const { city, regionName, loading: regionLoading } = useRegion();
   const [geoReady, setGeoReady] = useState(false);
+  const marketLabel = regionName || "your market";
 
   // Fade in geo badge after load to avoid layout shift
   useEffect(() => {
@@ -157,7 +158,7 @@ const HeroSection = () => {
                   ))}
                 </div>
                 <p className="text-sm text-muted-foreground">
-                  Used by dental clinics, restaurants &amp; salons across {regionName || "Ireland"}
+                  Used by dental clinics, restaurants &amp; salons across {marketLabel}
                 </p>
               </div>
             </div>
@@ -237,10 +238,12 @@ const HeroSection = () => {
                     aria-label="Play video"
                   >
                     <div className="absolute inset-0 overflow-hidden">
-                      <img
+                      <Image
                         src={THUMBNAIL}
                         alt="VoiceFleet walkthrough video thumbnail"
-                        className="w-full h-full object-cover object-center"
+                        fill
+                        sizes="(max-width: 1024px) 100vw, 50vw"
+                        className="object-cover object-center"
                       />
                     </div>
                     <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors" />
@@ -311,7 +314,7 @@ const HeroSection = () => {
           {/* Social Proof */}
           <div className="text-center">
             <p className="text-sm text-muted-foreground mb-3">
-              Trusted by businesses in {regionName || "Ireland"}, UK, Argentina &amp; Egypt
+              Trusted by local service businesses across multiple markets
             </p>
             <div className="flex flex-wrap justify-center gap-2 mb-6">
               {industries.map((industry) => (

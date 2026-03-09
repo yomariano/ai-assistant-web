@@ -5,13 +5,13 @@ const TechnologySection = () => {
     { icon: Zap, label: "Sub-500ms response latency" },
     { icon: Server, label: "99.9% uptime SLA" },
     { icon: Shield, label: "SOC 2 Type II certified" },
-    { icon: Shield, label: "GDPR & CCPA compliant" },
+    { icon: Shield, label: "Privacy-ready deployment" },
     { icon: Shield, label: "PCI DSS ready" },
   ];
 
   const capabilities = [
     { category: "Voice", items: ["Natural language AI", "Multi-accent support", "Real-time processing"] },
-    { category: "Telephony", items: ["Local numbers (Ireland)", "Call forwarding", "Voicemail"] },
+    { category: "Telephony", items: ["Local business numbers", "Call forwarding", "Voicemail"] },
     { category: "Notifications", items: ["SMS alerts", "Email summaries", "Webhooks (Pro)"] },
   ];
 
@@ -37,17 +37,16 @@ const TechnologySection = () => {
                 <span className="text-sm font-medium text-accent">Multi-Region Architecture</span>
               </div>
 
-              {/* EU Data Centers */}
               <div className="grid grid-cols-2 gap-4 mb-8">
                 <div className="bg-primary-foreground/5 rounded-xl p-4 border border-primary-foreground/10">
                   <Server className="w-8 h-8 text-accent mb-3" />
-                  <p className="text-sm font-semibold">Ireland (eu-west-1)</p>
-                  <p className="text-xs text-primary-foreground/60">Primary EU Region</p>
+                  <p className="text-sm font-semibold">Regional telephony</p>
+                  <p className="text-xs text-primary-foreground/60">Local number provisioning by market</p>
                 </div>
                 <div className="bg-primary-foreground/5 rounded-xl p-4 border border-primary-foreground/10">
                   <Server className="w-8 h-8 text-accent mb-3" />
-                  <p className="text-sm font-semibold">Frankfurt (eu-central-1)</p>
-                  <p className="text-xs text-primary-foreground/60">Failover Region</p>
+                  <p className="text-sm font-semibold">Redundant failover</p>
+                  <p className="text-xs text-primary-foreground/60">Resilient call handling and routing</p>
                 </div>
               </div>
 

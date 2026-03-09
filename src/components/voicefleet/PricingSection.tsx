@@ -2,6 +2,7 @@
 
 import { Fragment, useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Check, Zap, Rocket, Crown, Gift, Clock, Shield, Phone, Sparkles, Globe, Star, X } from "lucide-react";
 import { useAuthStore } from "@/lib/store";
@@ -9,8 +10,9 @@ import { signInWithGoogle } from "@/lib/supabase";
 import { trackEvent, type UmamiEventData } from "@/lib/umami";
 import { useRegion } from "@/hooks/useRegion";
 import { REVIEW_PLATFORMS } from "@/lib/marketing/review-platforms";
+import { buildLoginPath, getRouteRegionOverride, isSupportedRegion } from "@/lib/market";
 
-type Region = 'EU' | 'AR';
+type Region = 'EU' | 'AR' | 'AU' | 'US';
 type ComparisonValue = boolean | string;
 
 interface ComparisonRow {
@@ -49,6 +51,52 @@ const getPaymentLinks = (isAnnual: boolean = false, region: Region = 'EU') => {
     };
   }
 
+  if (region === 'US') {
+    if (isAnnual) {
+      return isLiveMode ? {
+        starter: process.env.NEXT_PUBLIC_STRIPE_LIVE_LINK_STARTER_ANNUAL_US,
+        growth: process.env.NEXT_PUBLIC_STRIPE_LIVE_LINK_GROWTH_ANNUAL_US,
+        pro: process.env.NEXT_PUBLIC_STRIPE_LIVE_LINK_PRO_ANNUAL_US,
+      } : {
+        starter: process.env.NEXT_PUBLIC_STRIPE_TEST_LINK_STARTER_ANNUAL_US,
+        growth: process.env.NEXT_PUBLIC_STRIPE_TEST_LINK_GROWTH_ANNUAL_US,
+        pro: process.env.NEXT_PUBLIC_STRIPE_TEST_LINK_PRO_ANNUAL_US,
+      };
+    }
+    return isLiveMode ? {
+      starter: process.env.NEXT_PUBLIC_STRIPE_LIVE_LINK_STARTER_US,
+      growth: process.env.NEXT_PUBLIC_STRIPE_LIVE_LINK_GROWTH_US,
+      pro: process.env.NEXT_PUBLIC_STRIPE_LIVE_LINK_PRO_US,
+    } : {
+      starter: process.env.NEXT_PUBLIC_STRIPE_TEST_LINK_STARTER_US,
+      growth: process.env.NEXT_PUBLIC_STRIPE_TEST_LINK_GROWTH_US,
+      pro: process.env.NEXT_PUBLIC_STRIPE_TEST_LINK_PRO_US,
+    };
+  }
+
+  if (region === 'AU') {
+    if (isAnnual) {
+      return isLiveMode ? {
+        starter: process.env.NEXT_PUBLIC_STRIPE_LIVE_LINK_STARTER_ANNUAL_AU,
+        growth: process.env.NEXT_PUBLIC_STRIPE_LIVE_LINK_GROWTH_ANNUAL_AU,
+        pro: process.env.NEXT_PUBLIC_STRIPE_LIVE_LINK_PRO_ANNUAL_AU,
+      } : {
+        starter: process.env.NEXT_PUBLIC_STRIPE_TEST_LINK_STARTER_ANNUAL_AU,
+        growth: process.env.NEXT_PUBLIC_STRIPE_TEST_LINK_GROWTH_ANNUAL_AU,
+        pro: process.env.NEXT_PUBLIC_STRIPE_TEST_LINK_PRO_ANNUAL_AU,
+      };
+    }
+    return isLiveMode ? {
+      starter: process.env.NEXT_PUBLIC_STRIPE_LIVE_LINK_STARTER_AU,
+      growth: process.env.NEXT_PUBLIC_STRIPE_LIVE_LINK_GROWTH_AU,
+      pro: process.env.NEXT_PUBLIC_STRIPE_LIVE_LINK_PRO_AU,
+    } : {
+      starter: process.env.NEXT_PUBLIC_STRIPE_TEST_LINK_STARTER_AU,
+      growth: process.env.NEXT_PUBLIC_STRIPE_TEST_LINK_GROWTH_AU,
+      pro: process.env.NEXT_PUBLIC_STRIPE_TEST_LINK_PRO_AU,
+    };
+  }
+
   // Ireland/Europe (EUR) links - default
   if (isAnnual) {
     return isLiveMode ? {
@@ -76,24 +124,44 @@ const getPaymentLinks = (isAnnual: boolean = false, region: Region = 'EU') => {
 // Regional pricing configuration
 const REGIONAL_PRICING = {
   EU: {
-    currency: '€',
+    currency: '\u20AC',
     currencyCode: 'EUR',
     label: 'Ireland / Europe',
-    flag: '🇮🇪',
-    starter: { monthly: 99, annual: 999, minutes: 500, calls: '~200', overage: '€0.20' },
-    growth: { monthly: 299, annual: 2999, minutes: 1000, calls: '~400', overage: '€0.30' },
-    pro: { monthly: 599, annual: 5999, minutes: 2000, calls: '~800', overage: '€0.30' },
+    flag: 'IE',
+    starter: { monthly: 99, annual: 999, minutes: 500, calls: '~200', overage: '\u20AC0.20' },
+    growth: { monthly: 299, annual: 2999, minutes: 1000, calls: '~400', overage: '\u20AC0.30' },
+    pro: { monthly: 599, annual: 5999, minutes: 2000, calls: '~800', overage: '\u20AC0.30' },
     phoneNumber: 'Irish phone number',
   },
   AR: {
     currency: '$',
     currencyCode: 'USD',
     label: 'Argentina',
-    flag: '🇦🇷',
+    flag: 'AR',
     starter: { monthly: 49, annual: 499, minutes: 250, calls: '~100', overage: '$0.20' },
     growth: { monthly: 149, annual: 1499, minutes: 500, calls: '~200', overage: '$0.30' },
     pro: { monthly: 299, annual: 2999, minutes: 1000, calls: '~400', overage: '$0.30' },
     phoneNumber: 'Argentine phone number',
+  },
+  US: {
+    currency: '$',
+    currencyCode: 'USD',
+    label: 'United States',
+    flag: 'US',
+    starter: { monthly: 99, annual: 999, minutes: 500, calls: '~200', overage: '$0.20' },
+    growth: { monthly: 299, annual: 2999, minutes: 1000, calls: '~400', overage: '$0.30' },
+    pro: { monthly: 599, annual: 5999, minutes: 2000, calls: '~800', overage: '$0.30' },
+    phoneNumber: 'US phone number',
+  },
+  AU: {
+    currency: 'A$',
+    currencyCode: 'AUD',
+    label: 'Australia',
+    flag: 'AU',
+    starter: { monthly: 140, annual: 1419, minutes: 500, calls: '~200', overage: 'A$0.28' },
+    growth: { monthly: 424, annual: 4262, minutes: 1000, calls: '~400', overage: 'A$0.43' },
+    pro: { monthly: 851, annual: 8526, minutes: 2000, calls: '~800', overage: 'A$0.43' },
+    phoneNumber: 'Australian phone number',
   },
 };
 
@@ -104,8 +172,10 @@ interface PricingSectionProps {
 
 const PricingSection = ({ embedded = false, trackingData }: PricingSectionProps) => {
   const [isAnnual, setIsAnnual] = useState(false);
+  const pathname = usePathname();
   const { region: detectedRegion } = useRegion();
-  const region: Region = detectedRegion === 'AR' ? 'AR' : 'EU';
+  const routeRegion = getRouteRegionOverride(pathname);
+  const region: Region = routeRegion || (isSupportedRegion(detectedRegion) ? detectedRegion : 'EU');
   const paymentLinks = getPaymentLinks(isAnnual, region);
   const pricing = REGIONAL_PRICING[region];
   const { isAuthenticated, token } = useAuthStore();
@@ -136,9 +206,10 @@ const PricingSection = ({ embedded = false, trackingData }: PricingSectionProps)
     if (!isAuthenticated) {
       // Store the selected plan for after login
       sessionStorage.setItem('selectedPlan', planId);
+      sessionStorage.setItem('selectedRegion', region);
       setRedirectingPlan(planId);
       try {
-        await signInWithGoogle({ next: `/login?plan=${encodeURIComponent(planId)}` });
+        await signInWithGoogle({ next: buildLoginPath(planId, region) });
         // OAuth will redirect, so we don't need to handle success here
       } catch (error) {
         console.error("Failed to start Google OAuth:", error);
@@ -155,9 +226,13 @@ const PricingSection = ({ embedded = false, trackingData }: PricingSectionProps)
       if (token) {
         headers['Authorization'] = `Bearer ${token}`;
       }
+      const params = new URLSearchParams({ planId });
+      if (region !== 'EU') {
+        params.set('region', region);
+      }
 
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/billing/redirect?planId=${planId}`,
+        `${process.env.NEXT_PUBLIC_API_URL}/api/billing/redirect?${params.toString()}`,
         {
           credentials: 'include',
           headers
@@ -178,7 +253,7 @@ const PricingSection = ({ embedded = false, trackingData }: PricingSectionProps)
       if (link) {
         window.location.href = link;
       } else {
-        window.location.href = `/checkout?plan=${planId}`;
+        window.location.href = `/checkout?plan=${planId}${region !== 'EU' ? `&region=${region}` : ''}`;
       }
     } catch (error) {
       console.error('Failed to get redirect URL:', error);
@@ -522,21 +597,21 @@ const PricingSection = ({ embedded = false, trackingData }: PricingSectionProps)
     },
     {
       category: "Support & Compliance",
-      feature: "EU data residency options",
+      feature: "Regional data residency options",
       starter: true,
       growth: true,
       pro: true,
     },
     {
       category: "Support & Compliance",
-      feature: "GDPR-ready deployment",
+      feature: "Privacy-ready deployment",
       starter: true,
       growth: true,
       pro: true,
     },
     {
       category: "Support & Compliance",
-      feature: "EU AI Act-aligned workflows",
+      feature: "Structured governance workflows",
       starter: true,
       growth: true,
       pro: true,

@@ -1,11 +1,24 @@
 import { Business } from './directory-data';
 
-export function generateBusinessSchema(b: Business, baseUrl = 'https://voicefleet.ai') {
-  const path = b.locale === 'es'
-    ? `/es/directorio/${b.vertical}/${b.citySlug}/${b.slug}`
-    : `/directory/${b.vertical}/${b.citySlug}/${b.slug}`;
+function getBusinessCountryCode(country: string): string {
+  const normalizedCountry = country.toLowerCase();
+  if (normalizedCountry === 'argentina') return 'AR';
+  if (normalizedCountry === 'australia') return 'AU';
+  return 'IE';
+}
 
-  const schema: Record<string, any> = {
+export function generateBusinessSchema(
+  b: Business,
+  baseUrl = 'https://voicefleet.ai',
+  pathPrefix?: string
+) {
+  const path = pathPrefix
+    ? `${pathPrefix}/${b.vertical}/${b.citySlug}/${b.slug}`
+    : b.locale === 'es'
+      ? `/es/directorio/${b.vertical}/${b.citySlug}/${b.slug}`
+      : `/directory/${b.vertical}/${b.citySlug}/${b.slug}`;
+
+  const schema: Record<string, unknown> = {
     '@context': 'https://schema.org',
     '@type': b.schema_type,
     name: b.name,
@@ -13,7 +26,7 @@ export function generateBusinessSchema(b: Business, baseUrl = 'https://voiceflee
     address: {
       '@type': 'PostalAddress',
       addressLocality: b.city,
-      addressCountry: b.country === 'argentina' ? 'AR' : 'IE',
+      addressCountry: getBusinessCountryCode(b.country),
       streetAddress: b.address,
     },
     areaServed: { '@type': 'City', name: b.city },
@@ -36,7 +49,12 @@ export function generateBusinessSchema(b: Business, baseUrl = 'https://voiceflee
   return schema;
 }
 
-export function generateItemListSchema(items: Business[], title: string, baseUrl = 'https://voicefleet.ai') {
+export function generateItemListSchema(
+  items: Business[],
+  title: string,
+  baseUrl = 'https://voicefleet.ai',
+  pathPrefix = '/directory'
+) {
   return {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
@@ -46,7 +64,7 @@ export function generateItemListSchema(items: Business[], title: string, baseUrl
       '@type': 'ListItem',
       position: i + 1,
       name: b.name,
-      url: `${baseUrl}/directory/${b.vertical}/${b.citySlug}/${b.slug}`,
+      url: `${baseUrl}${pathPrefix}/${b.vertical}/${b.citySlug}/${b.slug}`,
     })),
   };
 }
