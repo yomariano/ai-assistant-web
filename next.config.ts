@@ -26,6 +26,10 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "voicefleet.ai",
       },
+      {
+        protocol: "https",
+        hostname: "cdn.voicefleet.ai",
+      },
     ],
     // Modern image formats for better compression
     formats: ["image/avif", "image/webp"],
