@@ -9,7 +9,7 @@ function getApiUrl(): string {
   return (process.env.API_URL || process.env.NEXT_PUBLIC_API_URL || DEFAULT_API_URL).replace(/\/+$/, '');
 }
 
-function getCanonicalBlogPath(pathname: string): { currentSlug: string; canonicalPath: string; canonicalSlug: string } | null {
+function getCanonicalBlogPath(pathname: string): { currentSlug: string; canonicalPath: string; canonicalSlug: string; language?: string } | null {
   const blogPrefixes = ['/blog/', '/es/blog/'];
 
   for (const prefix of blogPrefixes) {
@@ -28,6 +28,7 @@ function getCanonicalBlogPath(pathname: string): { currentSlug: string; canonica
         currentSlug: slug,
         canonicalPath: `${prefix}${suffixMatch[1]}`,
         canonicalSlug: suffixMatch[1],
+        language: prefix === '/es/blog/' ? 'es' : 'en',
       };
     }
 
@@ -37,6 +38,7 @@ function getCanonicalBlogPath(pathname: string): { currentSlug: string; canonica
         currentSlug: slug,
         canonicalPath: `${prefix}${segmentMatch[1]}`,
         canonicalSlug: segmentMatch[1],
+        language: prefix === '/es/blog/' ? 'es' : 'en',
       };
     }
   }
@@ -44,8 +46,13 @@ function getCanonicalBlogPath(pathname: string): { currentSlug: string; canonica
   return null;
 }
 
-async function blogPostExists(slug: string): Promise<boolean> {
-  const response = await fetch(`${getApiUrl()}/api/content/blog/${encodeURIComponent(slug)}`, {
+async function blogPostExists(slug: string, language?: string): Promise<boolean> {
+  const params = new URLSearchParams();
+  if (language) {
+    params.set('language', language);
+  }
+
+  const response = await fetch(`${getApiUrl()}/api/content/blog/${encodeURIComponent(slug)}${params.toString() ? `?${params.toString()}` : ''}`, {
     cache: 'no-store',
     headers: {
       Accept: 'application/json',
@@ -71,9 +78,9 @@ export async function middleware(request: NextRequest) {
 
   if (duplicateBlogPath) {
     const duplicateExists = !duplicateBlogPath.currentSlug.includes('/')
-      ? await blogPostExists(duplicateBlogPath.currentSlug)
+      ? await blogPostExists(duplicateBlogPath.currentSlug, duplicateBlogPath.language)
       : false;
-    const canonicalExists = await blogPostExists(duplicateBlogPath.canonicalSlug);
+    const canonicalExists = await blogPostExists(duplicateBlogPath.canonicalSlug, duplicateBlogPath.language);
 
     if (!duplicateExists && canonicalExists) {
       const redirectUrl = request.nextUrl.clone();

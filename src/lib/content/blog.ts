@@ -46,7 +46,12 @@ export async function getBlogPosts(options?: {
   }
 }
 
-export async function getBlogPost(slug: string): Promise<BlogPost | null> {
+async function fetchBlogPost(
+  slug: string,
+  options?: {
+    language?: string;
+  }
+): Promise<BlogPost | null> {
   const apiUrl = getApiUrl();
   if (!apiUrl) {
     console.warn('[blog] API_URL not configured');
@@ -54,7 +59,11 @@ export async function getBlogPost(slug: string): Promise<BlogPost | null> {
   }
 
   try {
-    const res = await fetch(`${apiUrl}/api/content/blog/${slug}`, {
+    const params = new URLSearchParams();
+    if (options?.language) params.set("language", options.language);
+    const query = params.toString();
+
+    const res = await fetch(`${apiUrl}/api/content/blog/${slug}${query ? `?${query}` : ""}`, {
       cache: 'no-store',
     });
 
@@ -74,7 +83,16 @@ export async function getBlogPost(slug: string): Promise<BlogPost | null> {
   }
 }
 
-export async function getBlogPostSlugs(): Promise<string[]> {
+export async function getBlogPost(
+  slug: string,
+  options?: {
+    language?: string;
+  }
+): Promise<BlogPost | null> {
+  return fetchBlogPost(slug, options);
+}
+
+export async function getBlogPostSlugs(language?: string): Promise<string[]> {
   const apiUrl = getApiUrl();
   if (!apiUrl) {
     console.warn('[blog] API_URL not configured');
@@ -88,7 +106,9 @@ export async function getBlogPostSlugs(): Promise<string[]> {
 
     if (res.ok) {
       const data = await res.json();
-      return data.blogPosts?.map((post: { slug: string }) => post.slug) || [];
+      return data.blogPosts
+        ?.filter((post: { slug: string; language?: string }) => !language || (post.language || "en") === language)
+        .map((post: { slug: string }) => post.slug) || [];
     }
 
     console.error("[blog] Failed to fetch blog post slugs:", res.status);
@@ -103,7 +123,8 @@ export async function getRelatedPosts(
   currentSlug: string,
   category?: string | null,
   tags?: string[] | null,
-  limit = 3
+  limit = 3,
+  language?: string
 ): Promise<BlogPost[]> {
   const apiUrl = getApiUrl();
   if (!apiUrl) {
@@ -116,6 +137,7 @@ export async function getRelatedPosts(
     params.set("exclude", currentSlug);
     params.set("limit", String(limit));
     if (category) params.set("category", category);
+    if (language) params.set("language", language);
 
     const res = await fetch(`${apiUrl}/api/content/blog/related?${params}`, {
       cache: 'no-store',

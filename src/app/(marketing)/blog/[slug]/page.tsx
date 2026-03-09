@@ -29,13 +29,13 @@ interface Props {
 export const dynamic = "force-dynamic";
 
 export async function generateStaticParams() {
-  const slugs = await getBlogPostSlugs();
+  const slugs = await getBlogPostSlugs("en");
   return slugs.map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const post = await getBlogPost(slug);
+  const post = await getBlogPost(slug, { language: "en" });
 
   if (!post) {
     return {};
@@ -46,7 +46,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function BlogPostPage({ params }: Props) {
   const { slug } = await params;
-  const post = await getBlogPost(slug);
+  const post = await getBlogPost(slug, { language: "en" });
 
   if (!post) {
     notFound();

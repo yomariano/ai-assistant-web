@@ -15,6 +15,7 @@ function getApiUrl(): string | undefined {
 interface ContentItem {
   slug: string;
   updated_at: string;
+  language?: string;
 }
 
 interface ComboItem {
@@ -99,6 +100,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
     {
       url: `${BASE_URL}/blog`,
+      lastModified: new Date(),
+      changeFrequency: 'daily',
+      priority: 0.8,
+    },
+    {
+      url: `${BASE_URL}/es/blog`,
       lastModified: new Date(),
       changeFrequency: 'daily',
       priority: 0.8,
@@ -202,7 +209,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   // Dynamic blog posts
   const blogPosts: MetadataRoute.Sitemap = content.blogPosts.map((post) => ({
-    url: `${BASE_URL}/blog/${s(post.slug)}`,
+    url: `${BASE_URL}/${post.language === 'es' ? 'es/blog' : 'blog'}/${s(post.slug)}`,
     lastModified: new Date(post.updated_at),
     changeFrequency: 'weekly',
     priority: 0.7,

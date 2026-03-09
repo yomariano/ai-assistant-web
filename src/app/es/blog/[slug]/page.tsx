@@ -27,7 +27,7 @@ export const revalidate = 0;
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const post = await getBlogPost(slug);
+  const post = await getBlogPost(slug, { language: "es" });
 
   if (!post) {
     return {};
@@ -59,7 +59,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function BlogPostPageES({ params }: Props) {
   const { slug } = await params;
-  const post = await getBlogPost(slug);
+  const post = await getBlogPost(slug, { language: "es" });
 
   if (!post) {
     notFound();
