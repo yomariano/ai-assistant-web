@@ -2210,6 +2210,1190 @@
     "openingHours": "Mo-Fr 09:00-18:00"
   },
   {
+    "slug": "consultorio-odontologico-oeste",
+    "name": "Consultorio Odontológico Oeste",
+    "vertical": "dentists",
+    "city": "Rosario",
+    "citySlug": "rosario",
+    "country": "argentina",
+    "address": "Rosario, Argentina",
+    "phone": "+54 341 458-5025",
+    "website": "https://www.odontologos.com.ar/rosario/consultorios",
+    "email": "",
+    "description": "Consultorio Odontológico Oeste is a trusted dentists located in Rosario, Argentina. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "¿Consultorio Odontológico Oeste acepta pacientes nuevos?",
+        "a": "Consultorio Odontológico Oeste recibe pacientes nuevos. Llamá para agendar tu primera consulta."
+      },
+      {
+        "q": "¿Consultorio Odontológico Oeste ofrece atención de emergencia?",
+        "a": "Contactá a Consultorio Odontológico Oeste para consultar disponibilidad de emergencias dentales."
+      },
+      {
+        "q": "¿Qué tratamientos ofrece Consultorio Odontológico Oeste?",
+        "a": "Consultorio Odontológico Oeste ofrece limpieza, empastes, ortodoncia, y odontología estética."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "es",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "veterinaria-planeta-animal",
+    "name": "Veterinaria Planeta Animal",
+    "vertical": "vets",
+    "city": "Córdoba",
+    "citySlug": "cordoba",
+    "country": "argentina",
+    "address": "Córdoba, Argentina",
+    "phone": "+54 351 4524442",
+    "website": "",
+    "email": "",
+    "description": "Veterinaria Planeta Animal is a trusted veterinary clinics located in Córdoba, Argentina. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Veterinaria Planeta Animal treat?",
+        "a": "Veterinaria Planeta Animal treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Veterinaria Planeta Animal offer emergency veterinary services?",
+        "a": "Contact Veterinaria Planeta Animal for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Veterinaria Planeta Animal provide vaccinations?",
+        "a": "Yes, Veterinaria Planeta Animal offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Veterinaria Planeta Animal?",
+        "a": "Veterinaria Planeta Animal can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "es",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "vet-krauss",
+    "name": "Vet Krauss",
+    "vertical": "vets",
+    "city": "San Isidro",
+    "citySlug": "san-isidro",
+    "country": "argentina",
+    "address": "San Isidro, Argentina",
+    "phone": "+54 11 7734 1540",
+    "website": "https://www.vetkrauss.com.ar",
+    "email": "",
+    "description": "Vet Krauss is a trusted veterinary clinics located in San Isidro, Argentina. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Vet Krauss treat?",
+        "a": "Vet Krauss treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Vet Krauss offer emergency veterinary services?",
+        "a": "Contact Vet Krauss for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Vet Krauss provide vaccinations?",
+        "a": "Yes, Vet Krauss offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Vet Krauss?",
+        "a": "Vet Krauss can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "es",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "apex-plumbing-services",
+    "name": "Apex Plumbing Services",
+    "vertical": "plumbers",
+    "city": "Sydney",
+    "citySlug": "sydney",
+    "country": "ireland",
+    "address": "Sydney, Ireland",
+    "phone": "1300 096 668",
+    "website": "https://apexplumbingservices.com.au/",
+    "email": "",
+    "description": "Apex Plumbing Services is a trusted plumbers located in Sydney, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Apex Plumbing Services offer emergency plumbing?",
+        "a": "Contact Apex Plumbing Services for emergency callout availability and response times."
+      },
+      {
+        "q": "What areas does Apex Plumbing Services cover?",
+        "a": "Apex Plumbing Services serves the local area and surrounding regions. Call to confirm coverage."
+      },
+      {
+        "q": "Does Apex Plumbing Services provide free quotes?",
+        "a": "Apex Plumbing Services can provide estimates for plumbing work. Contact them to discuss your needs."
+      }
+    ],
+    "schema_type": "Plumber",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "dial-up-plumbing",
+    "name": "Dial Up Plumbing",
+    "vertical": "plumbers",
+    "city": "Sydney",
+    "citySlug": "sydney",
+    "country": "ireland",
+    "address": "Sydney, Ireland",
+    "phone": "02 8999 6125",
+    "website": "https://dialupplumbing.com.au/",
+    "email": "",
+    "description": "Dial Up Plumbing is a trusted plumbers located in Sydney, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Dial Up Plumbing offer emergency plumbing?",
+        "a": "Contact Dial Up Plumbing for emergency callout availability and response times."
+      },
+      {
+        "q": "What areas does Dial Up Plumbing cover?",
+        "a": "Dial Up Plumbing serves the local area and surrounding regions. Call to confirm coverage."
+      },
+      {
+        "q": "Does Dial Up Plumbing provide free quotes?",
+        "a": "Dial Up Plumbing can provide estimates for plumbing work. Contact them to discuss your needs."
+      }
+    ],
+    "schema_type": "Plumber",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "plumbers-direct",
+    "name": "Plumbers Direct",
+    "vertical": "plumbers",
+    "city": "Sydney",
+    "citySlug": "sydney",
+    "country": "ireland",
+    "address": "Sydney, Ireland",
+    "phone": "1300 877 448",
+    "website": "https://plumbersdirect.com.au/",
+    "email": "",
+    "description": "Plumbers Direct is a trusted plumbers located in Sydney, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Plumbers Direct offer emergency plumbing?",
+        "a": "Contact Plumbers Direct for emergency callout availability and response times."
+      },
+      {
+        "q": "What areas does Plumbers Direct cover?",
+        "a": "Plumbers Direct serves the local area and surrounding regions. Call to confirm coverage."
+      },
+      {
+        "q": "Does Plumbers Direct provide free quotes?",
+        "a": "Plumbers Direct can provide estimates for plumbing work. Contact them to discuss your needs."
+      }
+    ],
+    "schema_type": "Plumber",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "proximity-plumbing",
+    "name": "Proximity Plumbing",
+    "vertical": "plumbers",
+    "city": "Sydney",
+    "citySlug": "sydney",
+    "country": "ireland",
+    "address": "Sydney, Ireland",
+    "phone": "9388 7292",
+    "website": "https://proximityplumbing.com.au/",
+    "email": "",
+    "description": "Proximity Plumbing is a trusted plumbers located in Sydney, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Proximity Plumbing offer emergency plumbing?",
+        "a": "Contact Proximity Plumbing for emergency callout availability and response times."
+      },
+      {
+        "q": "What areas does Proximity Plumbing cover?",
+        "a": "Proximity Plumbing serves the local area and surrounding regions. Call to confirm coverage."
+      },
+      {
+        "q": "Does Proximity Plumbing provide free quotes?",
+        "a": "Proximity Plumbing can provide estimates for plumbing work. Contact them to discuss your needs."
+      }
+    ],
+    "schema_type": "Plumber",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "the-pied-plumber",
+    "name": "The Pied Plumber",
+    "vertical": "plumbers",
+    "city": "Sydney",
+    "citySlug": "sydney",
+    "country": "ireland",
+    "address": "Sydney, Ireland",
+    "phone": "1300 138 080",
+    "website": "https://www.piedplumber.com.au/",
+    "email": "",
+    "description": "The Pied Plumber is a trusted plumbers located in Sydney, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does The Pied Plumber offer emergency plumbing?",
+        "a": "Contact The Pied Plumber for emergency callout availability and response times."
+      },
+      {
+        "q": "What areas does The Pied Plumber cover?",
+        "a": "The Pied Plumber serves the local area and surrounding regions. Call to confirm coverage."
+      },
+      {
+        "q": "Does The Pied Plumber provide free quotes?",
+        "a": "The Pied Plumber can provide estimates for plumbing work. Contact them to discuss your needs."
+      }
+    ],
+    "schema_type": "Plumber",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "network-plumbing",
+    "name": "Network Plumbing",
+    "vertical": "plumbers",
+    "city": "Sydney",
+    "citySlug": "sydney",
+    "country": "ireland",
+    "address": "Sydney, Ireland",
+    "phone": "0485 800 361",
+    "website": "https://networkplumbing.com.au/",
+    "email": "",
+    "description": "Network Plumbing is a trusted plumbers located in Sydney, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Network Plumbing offer emergency plumbing?",
+        "a": "Contact Network Plumbing for emergency callout availability and response times."
+      },
+      {
+        "q": "What areas does Network Plumbing cover?",
+        "a": "Network Plumbing serves the local area and surrounding regions. Call to confirm coverage."
+      },
+      {
+        "q": "Does Network Plumbing provide free quotes?",
+        "a": "Network Plumbing can provide estimates for plumbing work. Contact them to discuss your needs."
+      }
+    ],
+    "schema_type": "Plumber",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "all-day-plumbing",
+    "name": "All Day Plumbing",
+    "vertical": "plumbers",
+    "city": "Sydney",
+    "citySlug": "sydney",
+    "country": "ireland",
+    "address": "Sydney, Ireland",
+    "phone": "1300 071 280",
+    "website": "https://alldayplumbing.com.au/",
+    "email": "",
+    "description": "All Day Plumbing is a trusted plumbers located in Sydney, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does All Day Plumbing offer emergency plumbing?",
+        "a": "Contact All Day Plumbing for emergency callout availability and response times."
+      },
+      {
+        "q": "What areas does All Day Plumbing cover?",
+        "a": "All Day Plumbing serves the local area and surrounding regions. Call to confirm coverage."
+      },
+      {
+        "q": "Does All Day Plumbing provide free quotes?",
+        "a": "All Day Plumbing can provide estimates for plumbing work. Contact them to discuss your needs."
+      }
+    ],
+    "schema_type": "Plumber",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "the-clean-plumber",
+    "name": "The Clean Plumber",
+    "vertical": "plumbers",
+    "city": "Sydney",
+    "citySlug": "sydney",
+    "country": "ireland",
+    "address": "Sydney, Ireland",
+    "phone": "0488 854 186",
+    "website": "https://www.thecleanplumber.com.au/",
+    "email": "",
+    "description": "The Clean Plumber is a trusted plumbers located in Sydney, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does The Clean Plumber offer emergency plumbing?",
+        "a": "Contact The Clean Plumber for emergency callout availability and response times."
+      },
+      {
+        "q": "What areas does The Clean Plumber cover?",
+        "a": "The Clean Plumber serves the local area and surrounding regions. Call to confirm coverage."
+      },
+      {
+        "q": "Does The Clean Plumber provide free quotes?",
+        "a": "The Clean Plumber can provide estimates for plumbing work. Contact them to discuss your needs."
+      }
+    ],
+    "schema_type": "Plumber",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "pro-plumber",
+    "name": "Pro Plumber",
+    "vertical": "plumbers",
+    "city": "Sydney",
+    "citySlug": "sydney",
+    "country": "ireland",
+    "address": "Sydney, Ireland",
+    "phone": "0421 779 324",
+    "website": "https://www.proplumber.com.au/",
+    "email": "",
+    "description": "Pro Plumber is a trusted plumbers located in Sydney, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Pro Plumber offer emergency plumbing?",
+        "a": "Contact Pro Plumber for emergency callout availability and response times."
+      },
+      {
+        "q": "What areas does Pro Plumber cover?",
+        "a": "Pro Plumber serves the local area and surrounding regions. Call to confirm coverage."
+      },
+      {
+        "q": "Does Pro Plumber provide free quotes?",
+        "a": "Pro Plumber can provide estimates for plumbing work. Contact them to discuss your needs."
+      }
+    ],
+    "schema_type": "Plumber",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "omega-services",
+    "name": "Omega Services",
+    "vertical": "plumbers",
+    "city": "Sydney",
+    "citySlug": "sydney",
+    "country": "ireland",
+    "address": "Sydney, Ireland",
+    "phone": "1300 806 683",
+    "website": "https://omegaservices.com.au/",
+    "email": "",
+    "description": "Omega Services is a trusted plumbers located in Sydney, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Omega Services offer emergency plumbing?",
+        "a": "Contact Omega Services for emergency callout availability and response times."
+      },
+      {
+        "q": "What areas does Omega Services cover?",
+        "a": "Omega Services serves the local area and surrounding regions. Call to confirm coverage."
+      },
+      {
+        "q": "Does Omega Services provide free quotes?",
+        "a": "Omega Services can provide estimates for plumbing work. Contact them to discuss your needs."
+      }
+    ],
+    "schema_type": "Plumber",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "jpr-plumbing",
+    "name": "JPR Plumbing",
+    "vertical": "plumbers",
+    "city": "Brisbane",
+    "citySlug": "brisbane",
+    "country": "ireland",
+    "address": "Brisbane, Ireland",
+    "phone": "0404 290 905",
+    "website": "https://www.jprplumbing.com.au/",
+    "email": "",
+    "description": "JPR Plumbing is a trusted plumbers located in Brisbane, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does JPR Plumbing offer emergency plumbing?",
+        "a": "Contact JPR Plumbing for emergency callout availability and response times."
+      },
+      {
+        "q": "What areas does JPR Plumbing cover?",
+        "a": "JPR Plumbing serves the local area and surrounding regions. Call to confirm coverage."
+      },
+      {
+        "q": "Does JPR Plumbing provide free quotes?",
+        "a": "JPR Plumbing can provide estimates for plumbing work. Contact them to discuss your needs."
+      }
+    ],
+    "schema_type": "Plumber",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "akins-plumbing",
+    "name": "Akins Plumbing",
+    "vertical": "plumbers",
+    "city": "Brisbane",
+    "citySlug": "brisbane",
+    "country": "ireland",
+    "address": "Brisbane, Ireland",
+    "phone": "07 3891 7480",
+    "website": "https://akinsplumbing.com.au/",
+    "email": "",
+    "description": "Akins Plumbing is a trusted plumbers located in Brisbane, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Akins Plumbing offer emergency plumbing?",
+        "a": "Contact Akins Plumbing for emergency callout availability and response times."
+      },
+      {
+        "q": "What areas does Akins Plumbing cover?",
+        "a": "Akins Plumbing serves the local area and surrounding regions. Call to confirm coverage."
+      },
+      {
+        "q": "Does Akins Plumbing provide free quotes?",
+        "a": "Akins Plumbing can provide estimates for plumbing work. Contact them to discuss your needs."
+      }
+    ],
+    "schema_type": "Plumber",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "brisbane-city-plumbing-gas",
+    "name": "Brisbane City Plumbing & Gas",
+    "vertical": "plumbers",
+    "city": "Brisbane",
+    "citySlug": "brisbane",
+    "country": "ireland",
+    "address": "Brisbane, Ireland",
+    "phone": "0435 878 512",
+    "website": "https://brisbanecityplumbingandgas.com.au/",
+    "email": "",
+    "description": "Brisbane City Plumbing & Gas is a trusted plumbers located in Brisbane, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Brisbane City Plumbing & Gas offer emergency plumbing?",
+        "a": "Contact Brisbane City Plumbing & Gas for emergency callout availability and response times."
+      },
+      {
+        "q": "What areas does Brisbane City Plumbing & Gas cover?",
+        "a": "Brisbane City Plumbing & Gas serves the local area and surrounding regions. Call to confirm coverage."
+      },
+      {
+        "q": "Does Brisbane City Plumbing & Gas provide free quotes?",
+        "a": "Brisbane City Plumbing & Gas can provide estimates for plumbing work. Contact them to discuss your needs."
+      }
+    ],
+    "schema_type": "Plumber",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "l-w-plumbing",
+    "name": "L & W Plumbing",
+    "vertical": "plumbers",
+    "city": "Brisbane",
+    "citySlug": "brisbane",
+    "country": "ireland",
+    "address": "Brisbane, Ireland",
+    "phone": "07 3186 0583",
+    "website": "https://www.lwplumbing.com.au/",
+    "email": "",
+    "description": "L & W Plumbing is a trusted plumbers located in Brisbane, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does L & W Plumbing offer emergency plumbing?",
+        "a": "Contact L & W Plumbing for emergency callout availability and response times."
+      },
+      {
+        "q": "What areas does L & W Plumbing cover?",
+        "a": "L & W Plumbing serves the local area and surrounding regions. Call to confirm coverage."
+      },
+      {
+        "q": "Does L & W Plumbing provide free quotes?",
+        "a": "L & W Plumbing can provide estimates for plumbing work. Contact them to discuss your needs."
+      }
+    ],
+    "schema_type": "Plumber",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "the-brisbane-plumbers",
+    "name": "The Brisbane Plumbers",
+    "vertical": "plumbers",
+    "city": "Brisbane",
+    "citySlug": "brisbane",
+    "country": "ireland",
+    "address": "Brisbane, Ireland",
+    "phone": "1300 847 094",
+    "website": "https://thebrisbaneplumbers.com.au/",
+    "email": "",
+    "description": "The Brisbane Plumbers is a trusted plumbers located in Brisbane, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does The Brisbane Plumbers offer emergency plumbing?",
+        "a": "Contact The Brisbane Plumbers for emergency callout availability and response times."
+      },
+      {
+        "q": "What areas does The Brisbane Plumbers cover?",
+        "a": "The Brisbane Plumbers serves the local area and surrounding regions. Call to confirm coverage."
+      },
+      {
+        "q": "Does The Brisbane Plumbers provide free quotes?",
+        "a": "The Brisbane Plumbers can provide estimates for plumbing work. Contact them to discuss your needs."
+      }
+    ],
+    "schema_type": "Plumber",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "aba-plumbing",
+    "name": "ABA Plumbing",
+    "vertical": "plumbers",
+    "city": "Adelaide",
+    "citySlug": "adelaide",
+    "country": "ireland",
+    "address": "Adelaide, Ireland",
+    "phone": "",
+    "website": "",
+    "email": "https://www.abaplumbing.com.au/",
+    "description": "ABA Plumbing is a trusted plumbers located in Adelaide, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does ABA Plumbing offer emergency plumbing?",
+        "a": "Contact ABA Plumbing for emergency callout availability and response times."
+      },
+      {
+        "q": "What areas does ABA Plumbing cover?",
+        "a": "ABA Plumbing serves the local area and surrounding regions. Call to confirm coverage."
+      },
+      {
+        "q": "Does ABA Plumbing provide free quotes?",
+        "a": "ABA Plumbing can provide estimates for plumbing work. Contact them to discuss your needs."
+      }
+    ],
+    "schema_type": "Plumber",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "ben-the-plumber",
+    "name": "Ben The Plumber",
+    "vertical": "plumbers",
+    "city": "Adelaide",
+    "citySlug": "adelaide",
+    "country": "ireland",
+    "address": "Adelaide, Ireland",
+    "phone": "",
+    "website": "https://bentheplumber.com.au/",
+    "email": "",
+    "description": "Ben The Plumber is a trusted plumbers located in Adelaide, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Ben The Plumber offer emergency plumbing?",
+        "a": "Contact Ben The Plumber for emergency callout availability and response times."
+      },
+      {
+        "q": "What areas does Ben The Plumber cover?",
+        "a": "Ben The Plumber serves the local area and surrounding regions. Call to confirm coverage."
+      },
+      {
+        "q": "Does Ben The Plumber provide free quotes?",
+        "a": "Ben The Plumber can provide estimates for plumbing work. Contact them to discuss your needs."
+      }
+    ],
+    "schema_type": "Plumber",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "south-adelaide-plumbing-and-gas",
+    "name": "South Adelaide Plumbing and Gas",
+    "vertical": "plumbers",
+    "city": "Adelaide",
+    "citySlug": "adelaide",
+    "country": "ireland",
+    "address": "Adelaide, Ireland",
+    "phone": "",
+    "website": "https://www.southadelaidepg.com.au/",
+    "email": "",
+    "description": "South Adelaide Plumbing and Gas is a trusted plumbers located in Adelaide, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does South Adelaide Plumbing and Gas offer emergency plumbing?",
+        "a": "Contact South Adelaide Plumbing and Gas for emergency callout availability and response times."
+      },
+      {
+        "q": "What areas does South Adelaide Plumbing and Gas cover?",
+        "a": "South Adelaide Plumbing and Gas serves the local area and surrounding regions. Call to confirm coverage."
+      },
+      {
+        "q": "Does South Adelaide Plumbing and Gas provide free quotes?",
+        "a": "South Adelaide Plumbing and Gas can provide estimates for plumbing work. Contact them to discuss your needs."
+      }
+    ],
+    "schema_type": "Plumber",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "pa-plumbers",
+    "name": "PA Plumbers",
+    "vertical": "plumbers",
+    "city": "Adelaide",
+    "citySlug": "adelaide",
+    "country": "ireland",
+    "address": "Adelaide, Ireland",
+    "phone": "08 8251 1733",
+    "website": "https://www.paplumberssa.com.au/",
+    "email": "",
+    "description": "PA Plumbers is a trusted plumbers located in Adelaide, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does PA Plumbers offer emergency plumbing?",
+        "a": "Contact PA Plumbers for emergency callout availability and response times."
+      },
+      {
+        "q": "What areas does PA Plumbers cover?",
+        "a": "PA Plumbers serves the local area and surrounding regions. Call to confirm coverage."
+      },
+      {
+        "q": "Does PA Plumbers provide free quotes?",
+        "a": "PA Plumbers can provide estimates for plumbing work. Contact them to discuss your needs."
+      }
+    ],
+    "schema_type": "Plumber",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "anytime-plumbing-adelaide",
+    "name": "Anytime Plumbing Adelaide",
+    "vertical": "plumbers",
+    "city": "Adelaide",
+    "citySlug": "adelaide",
+    "country": "ireland",
+    "address": "Adelaide, Ireland",
+    "phone": "0499 913 174",
+    "website": "https://anytimeplumbingadelaide.com.au/",
+    "email": "",
+    "description": "Anytime Plumbing Adelaide is a trusted plumbers located in Adelaide, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Anytime Plumbing Adelaide offer emergency plumbing?",
+        "a": "Contact Anytime Plumbing Adelaide for emergency callout availability and response times."
+      },
+      {
+        "q": "What areas does Anytime Plumbing Adelaide cover?",
+        "a": "Anytime Plumbing Adelaide serves the local area and surrounding regions. Call to confirm coverage."
+      },
+      {
+        "q": "Does Anytime Plumbing Adelaide provide free quotes?",
+        "a": "Anytime Plumbing Adelaide can provide estimates for plumbing work. Contact them to discuss your needs."
+      }
+    ],
+    "schema_type": "Plumber",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "designa-plumbing",
+    "name": "Designa Plumbing",
+    "vertical": "plumbers",
+    "city": "Adelaide",
+    "citySlug": "adelaide",
+    "country": "ireland",
+    "address": "Adelaide, Ireland",
+    "phone": "",
+    "website": "https://designaplumbing.com.au/",
+    "email": "",
+    "description": "Designa Plumbing is a trusted plumbers located in Adelaide, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Designa Plumbing offer emergency plumbing?",
+        "a": "Contact Designa Plumbing for emergency callout availability and response times."
+      },
+      {
+        "q": "What areas does Designa Plumbing cover?",
+        "a": "Designa Plumbing serves the local area and surrounding regions. Call to confirm coverage."
+      },
+      {
+        "q": "Does Designa Plumbing provide free quotes?",
+        "a": "Designa Plumbing can provide estimates for plumbing work. Contact them to discuss your needs."
+      }
+    ],
+    "schema_type": "Plumber",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "broadbeach-dental-practice",
+    "name": "Broadbeach Dental Practice",
+    "vertical": "dentists",
+    "city": "Gold Coast",
+    "citySlug": "gold-coast",
+    "country": "ireland",
+    "address": "Gold Coast, Ireland",
+    "phone": "07 5539 8713",
+    "website": "https://www.broadbeachdental.com.au/",
+    "email": "",
+    "description": "Broadbeach Dental Practice is a trusted dentists located in Gold Coast, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Broadbeach Dental Practice accepting new patients?",
+        "a": "Broadbeach Dental Practice welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Broadbeach Dental Practice offer emergency dental care?",
+        "a": "Contact Broadbeach Dental Practice directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Broadbeach Dental Practice accept?",
+        "a": "Broadbeach Dental Practice works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Broadbeach Dental Practice offer?",
+        "a": "Broadbeach Dental Practice provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "dentists-on-the-gold-coast",
+    "name": "Dentists on the Gold Coast",
+    "vertical": "dentists",
+    "city": "Gold Coast",
+    "citySlug": "gold-coast",
+    "country": "ireland",
+    "address": "Gold Coast, Ireland",
+    "phone": "",
+    "website": "https://www.dentistsonthegoldcoast.com.au/",
+    "email": "",
+    "description": "Dentists on the Gold Coast is a trusted dentists located in Gold Coast, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Dentists on the Gold Coast accepting new patients?",
+        "a": "Dentists on the Gold Coast welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Dentists on the Gold Coast offer emergency dental care?",
+        "a": "Contact Dentists on the Gold Coast directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Dentists on the Gold Coast accept?",
+        "a": "Dentists on the Gold Coast works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Dentists on the Gold Coast offer?",
+        "a": "Dentists on the Gold Coast provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "mga-dental",
+    "name": "MGA Dental",
+    "vertical": "dentists",
+    "city": "Gold Coast",
+    "citySlug": "gold-coast",
+    "country": "ireland",
+    "address": "Gold Coast, Ireland",
+    "phone": "07 5539 9748",
+    "website": "https://www.mgadental.com.au/",
+    "email": "",
+    "description": "MGA Dental is a trusted dentists located in Gold Coast, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is MGA Dental accepting new patients?",
+        "a": "MGA Dental welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does MGA Dental offer emergency dental care?",
+        "a": "Contact MGA Dental directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does MGA Dental accept?",
+        "a": "MGA Dental works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does MGA Dental offer?",
+        "a": "MGA Dental provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "coastal-dental-care",
+    "name": "Coastal Dental Care",
+    "vertical": "dentists",
+    "city": "Gold Coast",
+    "citySlug": "gold-coast",
+    "country": "ireland",
+    "address": "Gold Coast, Ireland",
+    "phone": "",
+    "website": "https://coastaldentalcare.com.au/",
+    "email": "",
+    "description": "Coastal Dental Care is a trusted dentists located in Gold Coast, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Coastal Dental Care accepting new patients?",
+        "a": "Coastal Dental Care welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Coastal Dental Care offer emergency dental care?",
+        "a": "Contact Coastal Dental Care directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Coastal Dental Care accept?",
+        "a": "Coastal Dental Care works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Coastal Dental Care offer?",
+        "a": "Coastal Dental Care provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "concord-vets",
+    "name": "Concord Vets",
+    "vertical": "vets",
+    "city": "Sydney",
+    "citySlug": "sydney",
+    "country": "ireland",
+    "address": "Sydney, Ireland",
+    "phone": "02 9743 1715",
+    "website": "https://www.concordvets.com.au/",
+    "email": "",
+    "description": "Concord Vets is a trusted veterinary clinics located in Sydney, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Concord Vets treat?",
+        "a": "Concord Vets treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Concord Vets offer emergency veterinary services?",
+        "a": "Contact Concord Vets for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Concord Vets provide vaccinations?",
+        "a": "Yes, Concord Vets offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Concord Vets?",
+        "a": "Concord Vets can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "animal-tracks-vet-clinic",
+    "name": "Animal Tracks Vet Clinic",
+    "vertical": "vets",
+    "city": "Sydney",
+    "citySlug": "sydney",
+    "country": "ireland",
+    "address": "Sydney, Ireland",
+    "phone": "02 9764 6066",
+    "website": "https://www.animaltracksvet.com.au/",
+    "email": "",
+    "description": "Animal Tracks Vet Clinic is a trusted veterinary clinics located in Sydney, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Animal Tracks Vet Clinic treat?",
+        "a": "Animal Tracks Vet Clinic treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Animal Tracks Vet Clinic offer emergency veterinary services?",
+        "a": "Contact Animal Tracks Vet Clinic for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Animal Tracks Vet Clinic provide vaccinations?",
+        "a": "Yes, Animal Tracks Vet Clinic offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Animal Tracks Vet Clinic?",
+        "a": "Animal Tracks Vet Clinic can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "sylvania-veterinary-hospital",
+    "name": "Sylvania Veterinary Hospital",
+    "vertical": "vets",
+    "city": "Sydney",
+    "citySlug": "sydney",
+    "country": "ireland",
+    "address": "Sydney, Ireland",
+    "phone": "02 9484 7418",
+    "website": "https://sylvaniavet.com.au/",
+    "email": "",
+    "description": "Sylvania Veterinary Hospital is a trusted veterinary clinics located in Sydney, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Sylvania Veterinary Hospital treat?",
+        "a": "Sylvania Veterinary Hospital treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Sylvania Veterinary Hospital offer emergency veterinary services?",
+        "a": "Contact Sylvania Veterinary Hospital for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Sylvania Veterinary Hospital provide vaccinations?",
+        "a": "Yes, Sylvania Veterinary Hospital offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Sylvania Veterinary Hospital?",
+        "a": "Sylvania Veterinary Hospital can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "north-shore-veterinary-hospital",
+    "name": "North Shore Veterinary Hospital",
+    "vertical": "vets",
+    "city": "Sydney",
+    "citySlug": "sydney",
+    "country": "ireland",
+    "address": "Sydney, Ireland",
+    "phone": "02 9436 1213",
+    "website": "https://www.northshorevet.com.au/",
+    "email": "",
+    "description": "North Shore Veterinary Hospital is a trusted veterinary clinics located in Sydney, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does North Shore Veterinary Hospital treat?",
+        "a": "North Shore Veterinary Hospital treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does North Shore Veterinary Hospital offer emergency veterinary services?",
+        "a": "Contact North Shore Veterinary Hospital for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does North Shore Veterinary Hospital provide vaccinations?",
+        "a": "Yes, North Shore Veterinary Hospital offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from North Shore Veterinary Hospital?",
+        "a": "North Shore Veterinary Hospital can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "sandown-vet-clinic",
+    "name": "Sandown Vet Clinic",
+    "vertical": "vets",
+    "city": "Melbourne",
+    "citySlug": "melbourne",
+    "country": "ireland",
+    "address": "Melbourne, Ireland",
+    "phone": "03 9547 6666",
+    "website": "https://sandownvet.com.au/",
+    "email": "",
+    "description": "Sandown Vet Clinic is a trusted veterinary clinics located in Melbourne, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Sandown Vet Clinic treat?",
+        "a": "Sandown Vet Clinic treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Sandown Vet Clinic offer emergency veterinary services?",
+        "a": "Contact Sandown Vet Clinic for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Sandown Vet Clinic provide vaccinations?",
+        "a": "Yes, Sandown Vet Clinic offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Sandown Vet Clinic?",
+        "a": "Sandown Vet Clinic can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "roji-hair-salon",
+    "name": "ROJI Hair Salon",
+    "vertical": "salons",
+    "city": "Canberra",
+    "citySlug": "canberra",
+    "country": "ireland",
+    "address": "Canberra, Ireland",
+    "phone": "02 6257 7559",
+    "website": "http://roji.com.au/",
+    "email": "",
+    "description": "ROJI Hair Salon is a trusted hair salons located in Canberra, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does ROJI Hair Salon accept walk-ins?",
+        "a": "ROJI Hair Salon welcomes walk-ins subject to availability. Booking in advance is recommended."
+      },
+      {
+        "q": "What services does ROJI Hair Salon offer?",
+        "a": "ROJI Hair Salon offers cuts, colour, styling, treatments, and more. Contact them for a full service menu."
+      },
+      {
+        "q": "What products does ROJI Hair Salon use?",
+        "a": "ROJI Hair Salon uses premium, professional-grade hair care products. Ask your stylist for details."
+      }
+    ],
+    "schema_type": "HairSalon",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "salt-hair",
+    "name": "Salt Hair",
+    "vertical": "salons",
+    "city": "Newcastle",
+    "citySlug": "newcastle",
+    "country": "ireland",
+    "address": "Newcastle, Ireland",
+    "phone": "",
+    "website": "https://www.salthairsalon.com.au/",
+    "email": "",
+    "description": "Salt Hair is a trusted hair salons located in Newcastle, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Salt Hair accept walk-ins?",
+        "a": "Salt Hair welcomes walk-ins subject to availability. Booking in advance is recommended."
+      },
+      {
+        "q": "What services does Salt Hair offer?",
+        "a": "Salt Hair offers cuts, colour, styling, treatments, and more. Contact them for a full service menu."
+      },
+      {
+        "q": "What products does Salt Hair use?",
+        "a": "Salt Hair uses premium, professional-grade hair care products. Ask your stylist for details."
+      }
+    ],
+    "schema_type": "HairSalon",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "elluca",
+    "name": "Elluca",
+    "vertical": "salons",
+    "city": "Canberra",
+    "citySlug": "canberra",
+    "country": "ireland",
+    "address": "Canberra, Ireland",
+    "phone": "0413 443 382",
+    "website": "https://www.elluca.com.au/",
+    "email": "",
+    "description": "Elluca is a trusted hair salons located in Canberra, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Elluca accept walk-ins?",
+        "a": "Elluca welcomes walk-ins subject to availability. Booking in advance is recommended."
+      },
+      {
+        "q": "What services does Elluca offer?",
+        "a": "Elluca offers cuts, colour, styling, treatments, and more. Contact them for a full service menu."
+      },
+      {
+        "q": "What products does Elluca use?",
+        "a": "Elluca uses premium, professional-grade hair care products. Ask your stylist for details."
+      }
+    ],
+    "schema_type": "HairSalon",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "sublime-hair-design",
+    "name": "Sublime Hair Design",
+    "vertical": "salons",
+    "city": "Newcastle",
+    "citySlug": "newcastle",
+    "country": "ireland",
+    "address": "Newcastle, Ireland",
+    "phone": "",
+    "website": "https://www.sublimehairdesign.com.au/",
+    "email": "",
+    "description": "Sublime Hair Design is a trusted hair salons located in Newcastle, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Sublime Hair Design accept walk-ins?",
+        "a": "Sublime Hair Design welcomes walk-ins subject to availability. Booking in advance is recommended."
+      },
+      {
+        "q": "What services does Sublime Hair Design offer?",
+        "a": "Sublime Hair Design offers cuts, colour, styling, treatments, and more. Contact them for a full service menu."
+      },
+      {
+        "q": "What products does Sublime Hair Design use?",
+        "a": "Sublime Hair Design uses premium, professional-grade hair care products. Ask your stylist for details."
+      }
+    ],
+    "schema_type": "HairSalon",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "pura-holistic-hair-studio",
+    "name": "Pura Holistic Hair Studio",
+    "vertical": "salons",
+    "city": "Canberra",
+    "citySlug": "canberra",
+    "country": "ireland",
+    "address": "Canberra, Ireland",
+    "phone": "",
+    "website": "https://www.puraholisticstudio.com.au/",
+    "email": "",
+    "description": "Pura Holistic Hair Studio is a trusted hair salons located in Canberra, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Pura Holistic Hair Studio accept walk-ins?",
+        "a": "Pura Holistic Hair Studio welcomes walk-ins subject to availability. Booking in advance is recommended."
+      },
+      {
+        "q": "What services does Pura Holistic Hair Studio offer?",
+        "a": "Pura Holistic Hair Studio offers cuts, colour, styling, treatments, and more. Contact them for a full service menu."
+      },
+      {
+        "q": "What products does Pura Holistic Hair Studio use?",
+        "a": "Pura Holistic Hair Studio uses premium, professional-grade hair care products. Ask your stylist for details."
+      }
+    ],
+    "schema_type": "HairSalon",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
     "slug": "fitzwilliam-medical-centre",
     "name": "Fitzwilliam Medical Centre",
     "vertical": "physios",
@@ -24443,6 +25627,710 @@
       {
         "q": "Does Physio South East accept health insurance?",
         "a": "Physio South East is covered by most major health insurers. Confirm your plan when booking."
+      }
+    ],
+    "schema_type": "PhysicalTherapy",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "douglas-law-solicitors",
+    "name": "Douglas Law Solicitors",
+    "vertical": "accountants",
+    "city": "Cork",
+    "citySlug": "cork",
+    "country": "ireland",
+    "address": "Cork, Ireland",
+    "phone": "021 489 7256",
+    "website": "https://douglaslawsolicitors.ie",
+    "email": "",
+    "description": "Douglas Law Solicitors is a trusted professional services located in Cork, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Douglas Law Solicitors offer free consultations?",
+        "a": "Contact Douglas Law Solicitors to enquire about initial consultation availability."
+      },
+      {
+        "q": "What services does Douglas Law Solicitors provide?",
+        "a": "Douglas Law Solicitors offers a range of professional services. Contact them for details."
+      },
+      {
+        "q": "Does Douglas Law Solicitors work with small businesses?",
+        "a": "Yes, Douglas Law Solicitors works with businesses of all sizes. Get in touch to discuss your needs."
+      }
+    ],
+    "schema_type": "AccountingService",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "mary-murphy-solicitors",
+    "name": "Mary Murphy Solicitors",
+    "vertical": "accountants",
+    "city": "Limerick",
+    "citySlug": "limerick",
+    "country": "ireland",
+    "address": "Limerick, Ireland",
+    "phone": "061 774316",
+    "website": "https://marymurphysolicitors.ie",
+    "email": "",
+    "description": "Mary Murphy Solicitors is a trusted professional services located in Limerick, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Mary Murphy Solicitors offer free consultations?",
+        "a": "Contact Mary Murphy Solicitors to enquire about initial consultation availability."
+      },
+      {
+        "q": "What services does Mary Murphy Solicitors provide?",
+        "a": "Mary Murphy Solicitors offers a range of professional services. Contact them for details."
+      },
+      {
+        "q": "Does Mary Murphy Solicitors work with small businesses?",
+        "a": "Yes, Mary Murphy Solicitors works with businesses of all sizes. Get in touch to discuss your needs."
+      }
+    ],
+    "schema_type": "AccountingService",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "holmes-solicitors",
+    "name": "Holmes Solicitors",
+    "vertical": "accountants",
+    "city": "Limerick",
+    "citySlug": "limerick",
+    "country": "ireland",
+    "address": "Limerick, Ireland",
+    "phone": "+353 61 313222",
+    "website": "https://holmeslaw.ie",
+    "email": "",
+    "description": "Holmes Solicitors is a trusted professional services located in Limerick, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Holmes Solicitors offer free consultations?",
+        "a": "Contact Holmes Solicitors to enquire about initial consultation availability."
+      },
+      {
+        "q": "What services does Holmes Solicitors provide?",
+        "a": "Holmes Solicitors offers a range of professional services. Contact them for details."
+      },
+      {
+        "q": "Does Holmes Solicitors work with small businesses?",
+        "a": "Yes, Holmes Solicitors works with businesses of all sizes. Get in touch to discuss your needs."
+      }
+    ],
+    "schema_type": "AccountingService",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "ocf-accountants",
+    "name": "OCF Accountants",
+    "vertical": "accountants",
+    "city": "Galway",
+    "citySlug": "galway",
+    "country": "ireland",
+    "address": "Galway, Ireland",
+    "phone": "091 765646",
+    "website": "https://www.ocfaccountants.ie",
+    "email": "info@ocfaccountants.ie",
+    "description": "OCF Accountants is a trusted professional services located in Galway, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does OCF Accountants offer free consultations?",
+        "a": "Contact OCF Accountants to enquire about initial consultation availability."
+      },
+      {
+        "q": "What services does OCF Accountants provide?",
+        "a": "OCF Accountants offers a range of professional services. Contact them for details."
+      },
+      {
+        "q": "Does OCF Accountants work with small businesses?",
+        "a": "Yes, OCF Accountants works with businesses of all sizes. Get in touch to discuss your needs."
+      }
+    ],
+    "schema_type": "AccountingService",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "pat-carroll-company-accountants",
+    "name": "Pat Carroll & Company Accountants",
+    "vertical": "accountants",
+    "city": "Limerick",
+    "citySlug": "limerick",
+    "country": "ireland",
+    "address": "Limerick, Ireland",
+    "phone": "061 444200",
+    "website": "https://pcco.ie",
+    "email": "pa@patcarroll.ie",
+    "description": "Pat Carroll & Company Accountants is a trusted professional services located in Limerick, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Pat Carroll & Company Accountants offer free consultations?",
+        "a": "Contact Pat Carroll & Company Accountants to enquire about initial consultation availability."
+      },
+      {
+        "q": "What services does Pat Carroll & Company Accountants provide?",
+        "a": "Pat Carroll & Company Accountants offers a range of professional services. Contact them for details."
+      },
+      {
+        "q": "Does Pat Carroll & Company Accountants work with small businesses?",
+        "a": "Yes, Pat Carroll & Company Accountants works with businesses of all sizes. Get in touch to discuss your needs."
+      }
+    ],
+    "schema_type": "AccountingService",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "western-dental",
+    "name": "Western Dental",
+    "vertical": "dentists",
+    "city": "Carlow / Clonmel",
+    "citySlug": "carlow-clonmel",
+    "country": "ireland",
+    "address": "Carlow / Clonmel, Ireland",
+    "phone": "",
+    "website": "https://www.westerndental.ie",
+    "email": "",
+    "description": "Western Dental is a trusted dentists located in Carlow / Clonmel, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Western Dental accepting new patients?",
+        "a": "Western Dental welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Western Dental offer emergency dental care?",
+        "a": "Contact Western Dental directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Western Dental accept?",
+        "a": "Western Dental works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Western Dental offer?",
+        "a": "Western Dental provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "smiles-dental-bray",
+    "name": "Smiles Dental Bray",
+    "vertical": "dentists",
+    "city": "Bray",
+    "citySlug": "bray",
+    "country": "ireland",
+    "address": "Bray, Ireland",
+    "phone": "",
+    "website": "https://www.smiles.ie/clinic/smiles-dental-bray/",
+    "email": "",
+    "description": "Smiles Dental Bray is a trusted dentists located in Bray, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Smiles Dental Bray accepting new patients?",
+        "a": "Smiles Dental Bray welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Smiles Dental Bray offer emergency dental care?",
+        "a": "Contact Smiles Dental Bray directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Smiles Dental Bray accept?",
+        "a": "Smiles Dental Bray works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Smiles Dental Bray offer?",
+        "a": "Smiles Dental Bray provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "navan-road-dental-practice",
+    "name": "Navan Road Dental Practice",
+    "vertical": "dentists",
+    "city": "Navan",
+    "citySlug": "navan",
+    "country": "ireland",
+    "address": "Navan, Ireland",
+    "phone": "+353 1 513 2888",
+    "website": "http://navanroaddentalpractice.ie",
+    "email": "",
+    "description": "Navan Road Dental Practice is a trusted dentists located in Navan, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Navan Road Dental Practice accepting new patients?",
+        "a": "Navan Road Dental Practice welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Navan Road Dental Practice offer emergency dental care?",
+        "a": "Contact Navan Road Dental Practice directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Navan Road Dental Practice accept?",
+        "a": "Navan Road Dental Practice works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Navan Road Dental Practice offer?",
+        "a": "Navan Road Dental Practice provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "the-dark-horse-bar-kitchen",
+    "name": "The Dark Horse Bar & Kitchen",
+    "vertical": "restaurants",
+    "city": "Athlone",
+    "citySlug": "athlone",
+    "country": "ireland",
+    "address": "Athlone, Ireland",
+    "phone": "+353 90 648 7986",
+    "website": "https://www.opentable.ie/r/the-dark-horse-bar-and-kitchen-loughanaskin-athlone",
+    "email": "",
+    "description": "The Dark Horse Bar & Kitchen is a trusted restaurants located in Athlone, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does The Dark Horse Bar & Kitchen take reservations?",
+        "a": "Yes, The Dark Horse Bar & Kitchen accepts reservations. Call ahead or book online for the best experience."
+      },
+      {
+        "q": "What type of cuisine does The Dark Horse Bar & Kitchen serve?",
+        "a": "The Dark Horse Bar & Kitchen offers a carefully curated menu featuring local and international dishes."
+      },
+      {
+        "q": "Does The Dark Horse Bar & Kitchen have parking?",
+        "a": "Please contact The Dark Horse Bar & Kitchen directly for parking information and availability."
+      },
+      {
+        "q": "Is there a dress code at The Dark Horse Bar & Kitchen?",
+        "a": "Smart casual attire is recommended. Contact the restaurant for specific event requirements."
+      },
+      {
+        "q": "Does The Dark Horse Bar & Kitchen offer private dining?",
+        "a": "The Dark Horse Bar & Kitchen may offer private dining options for special events. Contact them for details."
+      }
+    ],
+    "schema_type": "Restaurant",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "ruby-s-pizza-grill",
+    "name": "Ruby's Pizza & Grill",
+    "vertical": "restaurants",
+    "city": "Swords",
+    "citySlug": "swords",
+    "country": "ireland",
+    "address": "Swords, Ireland",
+    "phone": "+353 1 890 2254",
+    "website": "https://rubys.ie/swords/",
+    "email": "",
+    "description": "Ruby's Pizza & Grill is a trusted restaurants located in Swords, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Ruby's Pizza & Grill take reservations?",
+        "a": "Yes, Ruby's Pizza & Grill accepts reservations. Call ahead or book online for the best experience."
+      },
+      {
+        "q": "What type of cuisine does Ruby's Pizza & Grill serve?",
+        "a": "Ruby's Pizza & Grill offers a carefully curated menu featuring local and international dishes."
+      },
+      {
+        "q": "Does Ruby's Pizza & Grill have parking?",
+        "a": "Please contact Ruby's Pizza & Grill directly for parking information and availability."
+      },
+      {
+        "q": "Is there a dress code at Ruby's Pizza & Grill?",
+        "a": "Smart casual attire is recommended. Contact the restaurant for specific event requirements."
+      },
+      {
+        "q": "Does Ruby's Pizza & Grill offer private dining?",
+        "a": "Ruby's Pizza & Grill may offer private dining options for special events. Contact them for details."
+      }
+    ],
+    "schema_type": "Restaurant",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "highfield-veterinary-navan",
+    "name": "Highfield Veterinary Navan",
+    "vertical": "vets",
+    "city": "Navan",
+    "citySlug": "navan",
+    "country": "ireland",
+    "address": "Navan, Ireland",
+    "phone": "",
+    "website": "https://highfield.ie",
+    "email": "",
+    "description": "Highfield Veterinary Navan is a trusted veterinary clinics located in Navan, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Highfield Veterinary Navan treat?",
+        "a": "Highfield Veterinary Navan treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Highfield Veterinary Navan offer emergency veterinary services?",
+        "a": "Contact Highfield Veterinary Navan for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Highfield Veterinary Navan provide vaccinations?",
+        "a": "Yes, Highfield Veterinary Navan offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Highfield Veterinary Navan?",
+        "a": "Highfield Veterinary Navan can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "smith-and-foley-vet-navan",
+    "name": "Smith and Foley Vet Navan",
+    "vertical": "vets",
+    "city": "Navan",
+    "citySlug": "navan",
+    "country": "ireland",
+    "address": "Navan, Ireland",
+    "phone": "",
+    "website": "https://www.smithfoleyvet.com/navan/",
+    "email": "",
+    "description": "Smith and Foley Vet Navan is a trusted veterinary clinics located in Navan, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Smith and Foley Vet Navan treat?",
+        "a": "Smith and Foley Vet Navan treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Smith and Foley Vet Navan offer emergency veterinary services?",
+        "a": "Contact Smith and Foley Vet Navan for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Smith and Foley Vet Navan provide vaccinations?",
+        "a": "Yes, Smith and Foley Vet Navan offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Smith and Foley Vet Navan?",
+        "a": "Smith and Foley Vet Navan can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "dbc-physio-naas",
+    "name": "DBC Physio Naas",
+    "vertical": "physios",
+    "city": "Naas",
+    "citySlug": "naas",
+    "country": "ireland",
+    "address": "Naas, Ireland",
+    "phone": "+353 1 465 2454",
+    "website": "https://www.naasphysiotherapy.ie",
+    "email": "hello@dbc.ie",
+    "description": "DBC Physio Naas is a trusted physiotherapy located in Naas, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Do I need a referral for DBC Physio Naas?",
+        "a": "In most cases, you don't need a referral. Contact DBC Physio Naas to book directly."
+      },
+      {
+        "q": "What conditions does DBC Physio Naas treat?",
+        "a": "DBC Physio Naas treats sports injuries, back pain, rehabilitation, and more."
+      },
+      {
+        "q": "Does DBC Physio Naas accept health insurance?",
+        "a": "DBC Physio Naas is covered by most major health insurers. Confirm your plan when booking."
+      }
+    ],
+    "schema_type": "PhysicalTherapy",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "naas-physio-clinic-physioclinic",
+    "name": "Naas Physio Clinic (Physioclinic)",
+    "vertical": "physios",
+    "city": "Naas",
+    "citySlug": "naas",
+    "country": "ireland",
+    "address": "Naas, Ireland",
+    "phone": "",
+    "website": "https://www.physioclinic.ie",
+    "email": "",
+    "description": "Naas Physio Clinic (Physioclinic) is a trusted physiotherapy located in Naas, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Do I need a referral for Naas Physio Clinic (Physioclinic)?",
+        "a": "In most cases, you don't need a referral. Contact Naas Physio Clinic (Physioclinic) to book directly."
+      },
+      {
+        "q": "What conditions does Naas Physio Clinic (Physioclinic) treat?",
+        "a": "Naas Physio Clinic (Physioclinic) treats sports injuries, back pain, rehabilitation, and more."
+      },
+      {
+        "q": "Does Naas Physio Clinic (Physioclinic) accept health insurance?",
+        "a": "Naas Physio Clinic (Physioclinic) is covered by most major health insurers. Confirm your plan when booking."
+      }
+    ],
+    "schema_type": "PhysicalTherapy",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "physiotherapy-works",
+    "name": "Physiotherapy Works",
+    "vertical": "physios",
+    "city": "Naas",
+    "citySlug": "naas",
+    "country": "ireland",
+    "address": "Naas, Ireland",
+    "phone": "",
+    "website": "https://physiotherapyworks.ie",
+    "email": "",
+    "description": "Physiotherapy Works is a trusted physiotherapy located in Naas, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Do I need a referral for Physiotherapy Works?",
+        "a": "In most cases, you don't need a referral. Contact Physiotherapy Works to book directly."
+      },
+      {
+        "q": "What conditions does Physiotherapy Works treat?",
+        "a": "Physiotherapy Works treats sports injuries, back pain, rehabilitation, and more."
+      },
+      {
+        "q": "Does Physiotherapy Works accept health insurance?",
+        "a": "Physiotherapy Works is covered by most major health insurers. Confirm your plan when booking."
+      }
+    ],
+    "schema_type": "PhysicalTherapy",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "dbc-physio-bray",
+    "name": "DBC Physio Bray",
+    "vertical": "physios",
+    "city": "Bray",
+    "citySlug": "bray",
+    "country": "ireland",
+    "address": "Bray, Ireland",
+    "phone": "+353 1 465 2454",
+    "website": "https://www.dbc.ie",
+    "email": "hello@dbc.ie",
+    "description": "DBC Physio Bray is a trusted physiotherapy located in Bray, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Do I need a referral for DBC Physio Bray?",
+        "a": "In most cases, you don't need a referral. Contact DBC Physio Bray to book directly."
+      },
+      {
+        "q": "What conditions does DBC Physio Bray treat?",
+        "a": "DBC Physio Bray treats sports injuries, back pain, rehabilitation, and more."
+      },
+      {
+        "q": "Does DBC Physio Bray accept health insurance?",
+        "a": "DBC Physio Bray is covered by most major health insurers. Confirm your plan when booking."
+      }
+    ],
+    "schema_type": "PhysicalTherapy",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "kilford-arms-restaurant",
+    "name": "Kilford Arms Restaurant",
+    "vertical": "restaurants",
+    "city": "Kilkenny",
+    "citySlug": "kilkenny",
+    "country": "ireland",
+    "address": "Kilkenny, Ireland",
+    "phone": "056 7761018",
+    "website": "https://www.kilfordarms.ie/dining.html",
+    "email": "",
+    "description": "Kilford Arms Restaurant is a trusted restaurants located in Kilkenny, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Kilford Arms Restaurant take reservations?",
+        "a": "Yes, Kilford Arms Restaurant accepts reservations. Call ahead or book online for the best experience."
+      },
+      {
+        "q": "What type of cuisine does Kilford Arms Restaurant serve?",
+        "a": "Kilford Arms Restaurant offers a carefully curated menu featuring local and international dishes."
+      },
+      {
+        "q": "Does Kilford Arms Restaurant have parking?",
+        "a": "Please contact Kilford Arms Restaurant directly for parking information and availability."
+      },
+      {
+        "q": "Is there a dress code at Kilford Arms Restaurant?",
+        "a": "Smart casual attire is recommended. Contact the restaurant for specific event requirements."
+      },
+      {
+        "q": "Does Kilford Arms Restaurant offer private dining?",
+        "a": "Kilford Arms Restaurant may offer private dining options for special events. Contact them for details."
+      }
+    ],
+    "schema_type": "Restaurant",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "the-collective-by-lloyds-wexford",
+    "name": "The Collective by Lloyds Wexford",
+    "vertical": "salons",
+    "city": "Wexford",
+    "citySlug": "wexford",
+    "country": "ireland",
+    "address": "Wexford, Ireland",
+    "phone": "",
+    "website": "https://thecollectivebylloyds.ie/wexford-salon/",
+    "email": "",
+    "description": "The Collective by Lloyds Wexford is a trusted hair salons located in Wexford, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does The Collective by Lloyds Wexford accept walk-ins?",
+        "a": "The Collective by Lloyds Wexford welcomes walk-ins subject to availability. Booking in advance is recommended."
+      },
+      {
+        "q": "What services does The Collective by Lloyds Wexford offer?",
+        "a": "The Collective by Lloyds Wexford offers cuts, colour, styling, treatments, and more. Contact them for a full service menu."
+      },
+      {
+        "q": "What products does The Collective by Lloyds Wexford use?",
+        "a": "The Collective by Lloyds Wexford uses premium, professional-grade hair care products. Ask your stylist for details."
+      }
+    ],
+    "schema_type": "HairSalon",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "salon-2-hair-beauty",
+    "name": "Salon 2 Hair & Beauty",
+    "vertical": "salons",
+    "city": "Sligo",
+    "citySlug": "sligo",
+    "country": "ireland",
+    "address": "Sligo, Ireland",
+    "phone": "071 91 60341",
+    "website": "https://salon2hairdressing.ie/",
+    "email": "info@salon2hairdressing.ie",
+    "description": "Salon 2 Hair & Beauty is a trusted hair salons located in Sligo, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Salon 2 Hair & Beauty accept walk-ins?",
+        "a": "Salon 2 Hair & Beauty welcomes walk-ins subject to availability. Booking in advance is recommended."
+      },
+      {
+        "q": "What services does Salon 2 Hair & Beauty offer?",
+        "a": "Salon 2 Hair & Beauty offers cuts, colour, styling, treatments, and more. Contact them for a full service menu."
+      },
+      {
+        "q": "What products does Salon 2 Hair & Beauty use?",
+        "a": "Salon 2 Hair & Beauty uses premium, professional-grade hair care products. Ask your stylist for details."
+      }
+    ],
+    "schema_type": "HairSalon",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "the-beauty-suite-sligo",
+    "name": "The Beauty Suite Sligo",
+    "vertical": "salons",
+    "city": "Sligo",
+    "citySlug": "sligo",
+    "country": "ireland",
+    "address": "Sligo, Ireland",
+    "phone": "+353 71 916 9586",
+    "website": "",
+    "email": "",
+    "description": "The Beauty Suite Sligo is a trusted hair salons located in Sligo, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does The Beauty Suite Sligo accept walk-ins?",
+        "a": "The Beauty Suite Sligo welcomes walk-ins subject to availability. Booking in advance is recommended."
+      },
+      {
+        "q": "What services does The Beauty Suite Sligo offer?",
+        "a": "The Beauty Suite Sligo offers cuts, colour, styling, treatments, and more. Contact them for a full service menu."
+      },
+      {
+        "q": "What products does The Beauty Suite Sligo use?",
+        "a": "The Beauty Suite Sligo uses premium, professional-grade hair care products. Ask your stylist for details."
+      }
+    ],
+    "schema_type": "HairSalon",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "polished-ireland-sligo",
+    "name": "Polished Ireland Sligo",
+    "vertical": "salons",
+    "city": "Sligo",
+    "citySlug": "sligo",
+    "country": "ireland",
+    "address": "Sligo, Ireland",
+    "phone": "086 843 9979",
+    "website": "https://polished.ie/sligo-salon/",
+    "email": "",
+    "description": "Polished Ireland Sligo is a trusted hair salons located in Sligo, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Polished Ireland Sligo accept walk-ins?",
+        "a": "Polished Ireland Sligo welcomes walk-ins subject to availability. Booking in advance is recommended."
+      },
+      {
+        "q": "What services does Polished Ireland Sligo offer?",
+        "a": "Polished Ireland Sligo offers cuts, colour, styling, treatments, and more. Contact them for a full service menu."
+      },
+      {
+        "q": "What products does Polished Ireland Sligo use?",
+        "a": "Polished Ireland Sligo uses premium, professional-grade hair care products. Ask your stylist for details."
+      }
+    ],
+    "schema_type": "HairSalon",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "inishowen-physiotherapy-sports-injury-clinic",
+    "name": "Inishowen Physiotherapy & Sports Injury Clinic",
+    "vertical": "physios",
+    "city": "Letterkenny",
+    "citySlug": "letterkenny",
+    "country": "ireland",
+    "address": "Letterkenny, Ireland",
+    "phone": "",
+    "website": "https://www.inishowenphysio.com/",
+    "email": "",
+    "description": "Inishowen Physiotherapy & Sports Injury Clinic is a trusted physiotherapy located in Letterkenny, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Do I need a referral for Inishowen Physiotherapy & Sports Injury Clinic?",
+        "a": "In most cases, you don't need a referral. Contact Inishowen Physiotherapy & Sports Injury Clinic to book directly."
+      },
+      {
+        "q": "What conditions does Inishowen Physiotherapy & Sports Injury Clinic treat?",
+        "a": "Inishowen Physiotherapy & Sports Injury Clinic treats sports injuries, back pain, rehabilitation, and more."
+      },
+      {
+        "q": "Does Inishowen Physiotherapy & Sports Injury Clinic accept health insurance?",
+        "a": "Inishowen Physiotherapy & Sports Injury Clinic is covered by most major health insurers. Confirm your plan when booking."
       }
     ],
     "schema_type": "PhysicalTherapy",
