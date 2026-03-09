@@ -30,9 +30,11 @@ function LoginContent() {
      window.location.hostname.includes('dev-'));
 
   useEffect(() => {
-    // Store selected plan in sessionStorage for after OAuth redirect
     if (selectedPlan) {
       sessionStorage.setItem('selectedPlan', selectedPlan);
+    } else {
+      sessionStorage.removeItem('selectedPlan');
+      sessionStorage.removeItem('pendingPaymentLink');
     }
     if (isSupportedRegion(selectedRegion)) {
       sessionStorage.setItem('selectedRegion', selectedRegion);
@@ -66,7 +68,7 @@ function LoginContent() {
         }
 
         // Check if user selected a plan from pricing page
-        const plan = sessionStorage.getItem('selectedPlan') || selectedPlan;
+        const plan = selectedPlan;
         const region = sessionStorage.getItem('selectedRegion') || selectedRegion;
         if (plan) {
           sessionStorage.removeItem('selectedPlan');
@@ -109,6 +111,8 @@ function LoginContent() {
         }
 
         // No plan selected - go to dashboard
+        sessionStorage.removeItem('selectedPlan');
+        sessionStorage.removeItem('pendingPaymentLink');
         router.push('/dashboard');
       }
     };
