@@ -120,7 +120,7 @@ export function OnboardingTour({
     (planId: PlanId) => {
       // Close modal before navigating so /checkout can run its redirect effect unobstructed.
       onOpenChange(false);
-      router.push(`/checkout?plan=${planId}`);
+      router.push(`/checkout?plan=${planId}${region ? `&region=${region}` : ''}`);
     },
     [onOpenChange, router]
   );
