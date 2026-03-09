@@ -15,6 +15,7 @@ interface RelatedContentProps {
   currentSlug: string;
   tags?: string[] | null;
   locale?: "en" | "es";
+  articleHrefPrefix?: string;
 }
 
 export default async function RelatedContent({
@@ -22,9 +23,10 @@ export default async function RelatedContent({
   currentSlug,
   tags,
   locale = "en",
+  articleHrefPrefix,
 }: RelatedContentProps) {
   const posts = await getRelatedPosts(currentSlug, category, tags, 3, locale);
-  const articleHrefPrefix = locale === "es" ? "/es/blog" : "/blog";
+  const resolvedArticleHrefPrefix = articleHrefPrefix || (locale === "es" ? "/es/blog" : "/blog");
 
   if (!posts.length) {
     return null;
@@ -51,7 +53,7 @@ export default async function RelatedContent({
         {posts.map((post) => (
           <Link
             key={post.id}
-            href={`${articleHrefPrefix}/${post.slug}`}
+            href={`${resolvedArticleHrefPrefix}/${post.slug}`}
             className="group block"
             data-umami-event="blog_article_click"
             data-umami-event-source="related_articles"

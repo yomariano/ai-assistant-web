@@ -5,7 +5,6 @@ import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import {
   Phone,
-  History,
   Settings,
   LogOut,
   LayoutDashboard,
@@ -15,7 +14,6 @@ import {
   Bot,
   CreditCard,
   Bell,
-  MessageSquare,
   Plug,
   Mail,
   Shield,
@@ -25,6 +23,7 @@ import {
 import { useAuthStore, useBillingStore, getPlanDisplayName, getPlanBadgeColor } from '@/lib/store';
 import { adminApi } from '@/lib/api';
 import { useRegion } from '@/hooks/useRegion';
+import { getRegionLabel, isSupportedRegion } from '@/lib/market';
 
 const navItems = [
   { href: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
@@ -50,7 +49,7 @@ interface SidebarProps {
 export default function Sidebar({ isOpen, onClose }: SidebarProps) {
   const pathname = usePathname();
   const router = useRouter();
-  const { user, logout, isAuthenticated, isLoading } = useAuthStore();
+  const { logout, isAuthenticated, isLoading } = useAuthStore();
   const { region } = useRegion();
   const subscription = useBillingStore((state) => state.subscription);
   const usage = useBillingStore((state) => state.usage);
@@ -92,8 +91,27 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
   }, [pathname, onClose]);
 
   const sidebarWidth = isCollapsed ? 'w-20' : 'w-64';
-  const isArgentina = region === 'AR';
-  const countryLabel = region === 'AR' ? 'Argentina' : 'Ireland';
+  const selectedRegion = isSupportedRegion(region) ? region : 'EU';
+  const badgeStyles = selectedRegion === 'AR'
+    ? {
+        container: 'border-sky-400/40 bg-sky-400/15 text-sky-200',
+        dot: 'bg-sky-300',
+      }
+    : selectedRegion === 'US'
+      ? {
+          container: 'border-blue-400/40 bg-blue-400/15 text-blue-200',
+          dot: 'bg-blue-300',
+        }
+    : selectedRegion === 'AU'
+      ? {
+          container: 'border-amber-400/40 bg-amber-400/15 text-amber-200',
+          dot: 'bg-amber-300',
+        }
+      : {
+          container: 'border-emerald-400/40 bg-emerald-400/15 text-emerald-200',
+          dot: 'bg-emerald-300',
+        };
+  const countryLabel = getRegionLabel(selectedRegion);
 
   return (
     <>
@@ -125,17 +143,9 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
                   VoiceFleet
                 </span>
                 <span
-                  className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[10px] font-semibold leading-none whitespace-nowrap ${
-                    isArgentina
-                      ? 'border-sky-400/40 bg-sky-400/15 text-sky-200'
-                      : 'border-emerald-400/40 bg-emerald-400/15 text-emerald-200'
-                  }`}
+                  className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[10px] font-semibold leading-none whitespace-nowrap ${badgeStyles.container}`}
                 >
-                  <span
-                    className={`h-1.5 w-1.5 rounded-full ${
-                      isArgentina ? 'bg-sky-300' : 'bg-emerald-300'
-                    }`}
-                  />
+                  <span className={`h-1.5 w-1.5 rounded-full ${badgeStyles.dot}`} />
                   {countryLabel}
                 </span>
               </div>

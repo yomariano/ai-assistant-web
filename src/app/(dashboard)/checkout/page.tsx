@@ -5,6 +5,7 @@ import { useSearchParams, useRouter } from 'next/navigation';
 import { Loader2, AlertCircle } from 'lucide-react';
 import { billingApi } from '@/lib/api';
 import { trackEvent } from '@/lib/umami';
+import { isSupportedRegion } from '@/lib/market';
 
 function CheckoutContent() {
   const searchParams = useSearchParams();
@@ -13,6 +14,7 @@ function CheckoutContent() {
   const [isLoading, setIsLoading] = useState(true);
 
   const planId = searchParams.get('plan');
+  const selectedRegion = searchParams.get('region');
 
   useEffect(() => {
     async function redirectToStripe() {
@@ -23,6 +25,9 @@ function CheckoutContent() {
       }
 
       trackEvent("checkout_started", { plan: planId });
+      if (isSupportedRegion(selectedRegion)) {
+        sessionStorage.setItem('selectedRegion', selectedRegion);
+      }
 
       // Validate plan ID
       if (!['starter', 'growth', 'pro'].includes(planId)) {
@@ -54,7 +59,10 @@ function CheckoutContent() {
         }
 
         // Get the payment link from the API
-        const { url } = await billingApi.getPaymentLink(planId);
+        const region = isSupportedRegion(selectedRegion)
+          ? selectedRegion
+          : sessionStorage.getItem('selectedRegion');
+        const { url } = await billingApi.getPaymentLink(planId, region);
 
         if (url) {
           // Mark that we initiated Stripe checkout so /dashboard can auto-refresh subscription on return
@@ -90,7 +98,7 @@ function CheckoutContent() {
     }
 
     redirectToStripe();
-  }, [planId, router]);
+  }, [planId, selectedRegion, router]);
 
   if (isLoading) {
     return (

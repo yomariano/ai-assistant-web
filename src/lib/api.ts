@@ -388,9 +388,13 @@ export const billingApi = {
     return data;
   },
 
-  getPaymentLink: async (planId: string): Promise<{ url: string }> => {
+  getPaymentLink: async (planId: string, region?: string | null): Promise<{ url: string }> => {
     // Cache-bust to prevent browser from serving stale payment links
-    const { data } = await api.get(`/api/billing/payment-link/${planId}?_t=${Date.now()}`);
+    const params = new URLSearchParams({ _t: Date.now().toString() });
+    if (region) {
+      params.set('region', region);
+    }
+    const { data } = await api.get(`/api/billing/payment-link/${planId}?${params.toString()}`);
     return data;
   },
 

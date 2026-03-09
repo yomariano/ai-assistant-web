@@ -4,9 +4,22 @@ import { Button } from "@/components/ui/button";
 import { Phone, Menu, X, Sparkles, Loader2 } from "lucide-react";
 import { useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import dynamic from "next/dynamic";
 import { useRegion } from "@/hooks/useRegion";
 import { trackEvent } from "@/lib/umami";
+import {
+  buildLoginPath,
+  getBlogPath,
+  getComparePath,
+  getDirectoryPath,
+  getFeaturesPath,
+  getMarketBasePath,
+  getPricingPath,
+  getRegionLabel,
+  getRouteRegionOverride,
+  isSupportedRegion,
+} from "@/lib/market";
 
 const LiveDemoCall = dynamic(
   () => import("@/components/voicefleet/LiveDemoCall"),
@@ -17,31 +30,59 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isTrialLoading, setIsTrialLoading] = useState(false);
   const { region, loading: regionLoading } = useRegion();
+  const pathname = usePathname();
+  const marketBasePath = getMarketBasePath(pathname);
+  const routeRegion = getRouteRegionOverride(pathname);
+  const selectedRegion = routeRegion || (isSupportedRegion(region) ? region : "EU");
+  const featuresHref = getFeaturesPath(marketBasePath);
+  const directoryHref = getDirectoryPath(marketBasePath);
+  const compareHref = getComparePath(marketBasePath);
+  const pricingHref = getPricingPath(marketBasePath);
+  const blogHref = getBlogPath(marketBasePath);
 
   const handleStartTrial = async () => {
     setIsTrialLoading(true);
     trackEvent("cta_click", { location: "header", label: "start_free_trial" });
     sessionStorage.setItem("selectedPlan", "starter");
+    sessionStorage.setItem("selectedRegion", selectedRegion);
     try {
       const { signInWithGoogle } = await import("@/lib/supabase");
-      await signInWithGoogle({ next: "/login?plan=starter" });
+      await signInWithGoogle({ next: buildLoginPath("starter", selectedRegion) });
     } catch (error) {
       console.error("Failed to start Google OAuth:", error);
       setIsTrialLoading(false);
     }
   };
-  const isArgentina = region === "AR";
-  const countryLabel = region === "AR" ? "Argentina" : "Ireland";
+  const badgeStyles = selectedRegion === "AR"
+    ? {
+        container: "border-sky-200 bg-sky-50 text-sky-700",
+        dot: "bg-sky-500",
+      }
+    : selectedRegion === "US"
+      ? {
+          container: "border-blue-200 bg-blue-50 text-blue-700",
+          dot: "bg-blue-500",
+        }
+    : selectedRegion === "AU"
+      ? {
+          container: "border-amber-200 bg-amber-50 text-amber-700",
+          dot: "bg-amber-500",
+        }
+      : {
+          container: "border-emerald-200 bg-emerald-50 text-emerald-700",
+          dot: "bg-emerald-500",
+        };
+  const countryLabel = getRegionLabel(selectedRegion);
 
   const navLinks = [
-    { label: "Features", href: "/features" },
+    { label: "Features", href: featuresHref },
     { label: "Industries", href: "/for" },
     { label: "Demo", href: "/demo" },
     { label: "Integrations", href: "/connect" },
-    { label: "Directory", href: "/directory" },
-    { label: "Compare", href: "/compare" },
-    { label: "Pricing", href: "/pricing" },
-    { label: "Blog", href: "/blog" },
+    { label: "Directory", href: directoryHref },
+    { label: "Compare", href: compareHref },
+    { label: "Pricing", href: pricingHref },
+    { label: "Blog", href: blogHref },
   ];
 
   return (
@@ -49,7 +90,7 @@ const Header = () => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16 lg:h-20">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2">
+          <Link href={marketBasePath} className="flex items-center gap-2">
             <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-emerald-500 rounded-xl flex items-center justify-center shadow-md">
               <svg width="24" height="24" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M166 172L256 318L346 172" stroke="white" strokeWidth="52" strokeLinecap="round" strokeLinejoin="round" />
@@ -60,17 +101,9 @@ const Header = () => {
               <span className="text-xl font-heading font-bold text-foreground">VoiceFleet</span>
               {!regionLoading && (
                 <span
-                  className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[10px] font-semibold leading-none transition-colors ${
-                    isArgentina
-                      ? "border-sky-200 bg-sky-50 text-sky-700"
-                      : "border-emerald-200 bg-emerald-50 text-emerald-700"
-                  }`}
+                  className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[10px] font-semibold leading-none transition-colors ${badgeStyles.container}`}
                 >
-                  <span
-                    className={`h-1.5 w-1.5 rounded-full ${
-                      isArgentina ? "bg-sky-500" : "bg-emerald-500"
-                    }`}
-                  />
+                  <span className={`h-1.5 w-1.5 rounded-full ${badgeStyles.dot}`} />
                   {countryLabel}
                 </span>
               )}

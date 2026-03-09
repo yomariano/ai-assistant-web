@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import {
   Dialog,
@@ -61,14 +61,26 @@ export function OnboardingTour({
   // Get region-based pricing
   const { plans: regionPlans, currencySymbol, loading: isLoadingRegion, region } = useRegion();
 
-  const voicefleetNumber = data.phoneNumbers[0]?.number || "+353 1 234 5678";
+  const fallbackNumber = region === 'US'
+    ? "+1 (415) 555-0123"
+    : region === 'AU'
+    ? "+61 2 1234 5678"
+    : region === 'AR'
+      ? "+54 11 1234 5678"
+      : "+353 1 234 5678";
+  const voicefleetNumber = data.phoneNumbers[0]?.number || fallbackNumber;
 
   // Detect region from phone number prefix for call forwarding providers
   const normalizedNumber = voicefleetNumber.replace(/\s/g, '');
-  const phoneRegion = normalizedNumber.startsWith('+54') ? 'AR'
+  const phoneRegion = normalizedNumber.startsWith('+61') ? 'AU'
+    : normalizedNumber.startsWith('+54') ? 'AR'
+    : normalizedNumber.startsWith('+1') ? 'US'
     : normalizedNumber.startsWith('+44') ? 'UK'
     : normalizedNumber.startsWith('+353') ? 'IE'
-    : region || 'IE';
+    : region === 'US' ? 'US'
+      : region === 'AU' ? 'AU'
+      : region === 'AR' ? 'AR'
+        : 'IE';
 
   const markStepComplete = useCallback((stepName: string) => {
     setStepsCompleted((prev) => {
@@ -82,9 +94,12 @@ export function OnboardingTour({
     onProgressUpdate?.(step, stepsCompleted, selectedProvider || undefined, testCallMade);
   }, [stepsCompleted, selectedProvider, testCallMade, onProgressUpdate]);
 
-  const stepTitles = requiresSubscription
-    ? ["Plan", "Welcome", "Phone Number", "Call Forwarding", "Industry", "Business", "Integration", "Test Call", "Complete"]
-    : ["Welcome", "Phone Number", "Call Forwarding", "Industry", "Business", "Integration", "Test Call", "Complete"];
+  const stepTitles = useMemo(
+    () => requiresSubscription
+      ? ["Plan", "Welcome", "Phone Number", "Call Forwarding", "Industry", "Business", "Integration", "Test Call", "Complete"]
+      : ["Welcome", "Phone Number", "Call Forwarding", "Industry", "Business", "Integration", "Test Call", "Complete"],
+    [requiresSubscription]
+  );
 
   const totalSteps = stepTitles.length;
 
@@ -105,7 +120,7 @@ export function OnboardingTour({
     (planId: PlanId) => {
       // Close modal before navigating so /checkout can run its redirect effect unobstructed.
       onOpenChange(false);
-      router.push(`/checkout?plan=${planId}`);
+      router.push(`/checkout?plan=${planId}${region ? `&region=${region}` : ''}`);
     },
     [onOpenChange, router]
   );

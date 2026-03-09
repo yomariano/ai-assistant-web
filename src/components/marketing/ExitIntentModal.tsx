@@ -2,8 +2,10 @@
 
 import { useState, useEffect, useCallback, useRef } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import dynamic from "next/dynamic";
 import { useRegion } from "@/hooks/useRegion";
+import { getMarketBasePath } from "@/lib/market";
 import {
   Dialog,
   DialogContent,
@@ -25,6 +27,8 @@ export default function ExitIntentModal() {
   const shownRef = useRef(false);
   const inactivityTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const { region } = useRegion();
+  const pathname = usePathname();
+  const marketBasePath = getMarketBasePath(pathname);
   const isArgentina = region === "AR";
 
   const showModal = useCallback(() => {
@@ -94,7 +98,7 @@ export default function ExitIntentModal() {
           />
 
           <Link
-            href="/pricing"
+            href={marketBasePath === "/" ? "/pricing" : `${marketBasePath}#pricing`}
             className="w-full inline-flex items-center justify-center rounded-xl border border-border px-6 py-3 text-sm font-semibold text-foreground hover:bg-muted transition-colors"
             data-umami-event="exit_intent_pricing"
             onClick={() => setOpen(false)}

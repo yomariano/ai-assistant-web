@@ -13,6 +13,20 @@ interface DashboardLayoutProps {
   children: React.ReactNode;
 }
 
+function getDemoPhoneNumber(region?: string | null) {
+  if (region === 'US') return '+1 (415) 555-0123';
+  if (region === 'AU') return '+61 2 1234 5678';
+  if (region === 'AR') return '+54 11 1234 5678';
+  return '+353 1 234 5678';
+}
+
+function getPendingProvisioningLabel(region?: string | null) {
+  if (region === 'US') return 'US number being set up...';
+  if (region === 'AU') return 'Australian number being set up...';
+  if (region === 'AR') return 'Argentina number being set up...';
+  return 'Number being set up...';
+}
+
 export default function DashboardLayout({ children }: DashboardLayoutProps) {
   const router = useRouter();
   const pathname = usePathname();
@@ -20,6 +34,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
   // Get checkAuth with a stable reference to avoid infinite loops
   const checkAuth = useAuthStore((state) => state.checkAuth);
   const retryAuth = useAuthStore((state) => state.retryAuth);
+  const subscriptionRegion = useBillingStore((state) => state.subscription?.region);
   const setSubscriptionStore = useBillingStore((state) => state.setSubscription);
   const setUsageStore = useBillingStore((state) => state.setUsage);
   const hasCheckedAuth = useRef(false);
@@ -34,15 +49,23 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
   const [onboardingData, setOnboardingData] = useState<OnboardingData | null>(null);
   const [onboardingChecked, setOnboardingChecked] = useState(false);
 
+  const getFallbackPhoneNumber = useCallback(() => {
+    if (typeof window !== 'undefined') {
+      return getDemoPhoneNumber(subscriptionRegion || window.sessionStorage.getItem('selectedRegion'));
+    }
+
+    return getDemoPhoneNumber(subscriptionRegion);
+  }, [subscriptionRegion]);
+
   const openPaywallOnboarding = useCallback(() => {
     setOnboardingData({
       userId: user?.id || '',
       userName: user?.fullName?.split(' ')[0] || user?.email?.split('@')[0],
-      phoneNumbers: [{ number: '+353 1 234 5678', label: 'Primary (Demo)' }],
+      phoneNumbers: [{ number: getFallbackPhoneNumber(), label: 'Primary (Demo)' }],
       hasExistingAssistant: false,
     });
     setShowOnboarding(true);
-  }, [user]);
+  }, [getFallbackPhoneNumber, user]);
 
   const isCheckoutRoute = pathname === '/checkout';
   const isDashboardRoute = pathname === '/dashboard';
@@ -129,7 +152,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
     return () => {
       isCancelled = true;
     };
-  }, [isDashboardRoute, devMode, isAuthenticated, isLoading]);
+  }, [devMode, isAuthenticated, isDashboardRoute, isLoading, setSubscriptionStore]);
 
   console.log('[DASHBOARD] ====== DashboardLayout render ======');
   console.log('[DASHBOARD] State:', { isLoading, isAuthenticated, devMode, userEmail: user?.email, hasSubscription });
@@ -219,9 +242,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const subscriptionResponse: any = await billingApi.getSubscription();
         const subscription =
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
           subscriptionResponse && typeof subscriptionResponse === 'object' && 'subscription' in subscriptionResponse
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
             ? subscriptionResponse.subscription
             : subscriptionResponse;
         console.log('[DASHBOARD] Subscription data:', subscription);
@@ -240,7 +261,6 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
               // eslint-disable-next-line @typescript-eslint/no-explicit-any
               .then((usageData: any) => {
                 console.log('[DASHBOARD] Dev usage data received:', usageData?.minutesIncluded);
-                // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
                 setUsageStore(usageData);
               })
               .catch((err: unknown) => console.error('[DASHBOARD] Failed to fetch usage:', err));
@@ -259,7 +279,6 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
               // eslint-disable-next-line @typescript-eslint/no-explicit-any
               .then((usageData: any) => {
                 console.log('[DASHBOARD] Usage data received:', usageData?.minutesIncluded, usageData?.minutesUsed);
-                // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
                 setUsageStore(usageData);
               })
               .catch((err: unknown) => {
@@ -271,7 +290,6 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
                     // eslint-disable-next-line @typescript-eslint/no-explicit-any
                     .then((usageData: any) => {
                       console.log('[DASHBOARD] Usage retry succeeded:', usageData?.minutesIncluded);
-                      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
                       setUsageStore(usageData);
                     })
                     .catch((retryErr: unknown) => console.error('[DASHBOARD] Usage retry also failed:', retryErr));
@@ -306,7 +324,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
     };
 
     checkSubscription();
-  }, [isHydrated, isAuthenticated, isLoading, subscriptionChecked, devMode, openPaywallOnboarding, isCheckoutRoute]);
+  }, [isHydrated, isAuthenticated, isLoading, subscriptionChecked, devMode, openPaywallOnboarding, isCheckoutRoute, setSubscriptionStore, setUsageStore]);
 
   // Check onboarding status after authentication and subscription verification
   useEffect(() => {
@@ -351,28 +369,28 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
                   },
                 ];
               }
-            } catch (e) {
+            } catch {
               // ignore; fall back below
             }
           }
 
           if (onboardingPhoneNumbers.length === 0) {
-            // Check if this is an AR user with pending provisioning
+            // Show a pending state for Voximplant regions instead of an IE demo number.
             try {
               // eslint-disable-next-line @typescript-eslint/no-explicit-any
               const provisioningStatus: any = await billingApi.getProvisioningStatus();
-              if (provisioningStatus?.provisioning?.region === 'AR' &&
+              const provisioningRegion = provisioningStatus?.provisioning?.region;
+              if (['AR', 'AU'].includes(provisioningRegion) &&
                   ['pending', 'failed', 'processing'].includes(provisioningStatus?.provisioning?.status)) {
-                // AR user with pending provisioning - show pending state instead of demo number
                 onboardingPhoneNumbers = [{
                   number: 'PENDING',
-                  label: 'Argentina number being set up...'
+                  label: getPendingProvisioningLabel(provisioningRegion)
                 }];
               } else {
-                onboardingPhoneNumbers = [{ number: '+353 1 234 5678', label: 'Primary (Demo)' }];
+                onboardingPhoneNumbers = [{ number: getFallbackPhoneNumber(), label: 'Primary (Demo)' }];
               }
             } catch {
-              onboardingPhoneNumbers = [{ number: '+353 1 234 5678', label: 'Primary (Demo)' }];
+              onboardingPhoneNumbers = [{ number: getFallbackPhoneNumber(), label: 'Primary (Demo)' }];
             }
           }
 
@@ -397,7 +415,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
     };
 
     checkOnboarding();
-  }, [isHydrated, isAuthenticated, isLoading, onboardingChecked, hasSubscription, user]);
+  }, [getFallbackPhoneNumber, hasSubscription, isAuthenticated, isHydrated, isLoading, onboardingChecked, user]);
 
   const handleOnboardingComplete = useCallback(async () => {
     try {

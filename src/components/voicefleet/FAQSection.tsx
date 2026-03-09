@@ -10,10 +10,11 @@ import { HOMEPAGE_FAQS, PRICING_FAQS } from "@/lib/marketing/faqs";
 
 interface FAQSectionProps {
   variant?: "homepage" | "pricing";
+  items?: ReadonlyArray<{ question: string; answer: string }>;
 }
 
-const FAQSection = ({ variant = "homepage" }: FAQSectionProps) => {
-  const faqs = variant === "pricing" ? PRICING_FAQS : HOMEPAGE_FAQS;
+const FAQSection = ({ variant = "homepage", items }: FAQSectionProps) => {
+  const faqs = items || (variant === "pricing" ? PRICING_FAQS : HOMEPAGE_FAQS);
   const defaultOpen = variant === "pricing" && faqs.length > 0 ? "item-0" : undefined;
 
   return (

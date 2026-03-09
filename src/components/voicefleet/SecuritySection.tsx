@@ -9,8 +9,8 @@ const SecuritySection = () => {
     },
     {
       icon: Lock,
-      title: "GDPR Compliant",
-      description: "EU data residency, DPA available",
+      title: "Privacy Ready",
+      description: "Regional deployment options and DPA support",
     },
     {
       icon: FileCheck,
@@ -56,8 +56,8 @@ const SecuritySection = () => {
         <div className="bg-card rounded-2xl border border-border p-8 text-center max-w-2xl mx-auto">
           <p className="text-muted-foreground">
             <span className="font-semibold text-foreground">All calls encrypted</span> in transit and at rest.{" "}
-            <span className="font-semibold text-foreground">Data never leaves the EU</span>.{" "}
-            Full audit logging for compliance.
+            <span className="font-semibold text-foreground">Regional routing and storage options</span> support market-specific compliance needs.{" "}
+            Full audit logging for compliance reviews.
           </p>
         </div>
       </div>

@@ -1,17 +1,56 @@
+"use client";
+
 import { Phone } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { REVIEW_PLATFORMS } from "@/lib/marketing/review-platforms";
 import SocialLinks from "@/components/voicefleet/SocialLinks";
+import {
+  getBlogPath,
+  getComparePath,
+  getDirectoryPath,
+  getFeaturesPath,
+  getMarketBasePath,
+  getPricingPath,
+  getReceptionistCityPath,
+} from "@/lib/market";
 
 const Footer = () => {
+  const pathname = usePathname();
+  const marketBasePath = getMarketBasePath(pathname);
+  const featuresHref = getFeaturesPath(marketBasePath);
+  const directoryHref = getDirectoryPath(marketBasePath);
+  const compareHref = getComparePath(marketBasePath);
+  const pricingHref = getPricingPath(marketBasePath);
+  const blogHref = getBlogPath(marketBasePath);
+  const directoryVerticalPrefix = marketBasePath === "/au" ? "/au/directory" : "/directory";
+  const featuredCities =
+    marketBasePath === "/au"
+      ? [
+          { name: "Sydney", slug: "sydney" },
+          { name: "Melbourne", slug: "melbourne" },
+          { name: "Brisbane", slug: "brisbane" },
+          { name: "Perth", slug: "perth" },
+          { name: "Adelaide", slug: "adelaide" },
+          { name: "Gold Coast", slug: "gold-coast" },
+        ]
+      : [
+          { name: "Dublin", slug: "dublin" },
+          { name: "London", slug: "london" },
+          { name: "New York", slug: "new-york" },
+          { name: "Cork", slug: "cork" },
+          { name: "Manchester", slug: "manchester" },
+          { name: "Miami", slug: "miami" },
+        ];
+
   return (
     <footer className="bg-gradient-dark text-primary-foreground">
       <div className="container mx-auto px-4 py-12">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-8">
           {/* Brand */}
           <div className="flex flex-col gap-4">
-            <Link href="/" className="flex items-center gap-2">
+            <Link href={marketBasePath} className="flex items-center gap-2">
               <div className="w-10 h-10 bg-primary-foreground/10 rounded-xl flex items-center justify-center">
                 <Image
                   src="/logo-mark.svg"
@@ -27,7 +66,7 @@ const Footer = () => {
               AI voice receptionist for small businesses. Answer calls, take messages, and book appointments.
             </p>
             <Link
-              href="/#demo"
+              href={`${marketBasePath}#product-tour`}
               className="flex items-center gap-2 text-sm text-primary-foreground/70 hover:text-primary-foreground transition-colors"
             >
               <Phone className="w-4 h-4" />
@@ -42,7 +81,7 @@ const Footer = () => {
           {/* Links */}
           <div className="flex flex-col gap-6">
             <div className="flex flex-wrap gap-x-8 gap-y-4 text-sm">
-              <Link href="/features" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
+              <Link href={featuresHref} className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
                 Features
               </Link>
               <Link href="/for" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
@@ -51,16 +90,16 @@ const Footer = () => {
               <Link href="/connect" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
                 Integrations
               </Link>
-              <Link href="/compare" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
+              <Link href={compareHref} className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
                 Compare
               </Link>
-              <Link href="/pricing" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
+              <Link href={pricingHref} className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
                 Pricing
               </Link>
-              <Link href="/blog" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
+              <Link href={blogHref} className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
                 Blog
               </Link>
-              <Link href="/directory" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
+              <Link href={directoryHref} className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
                 Directory
               </Link>
               <Link href="/privacy" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
@@ -77,19 +116,19 @@ const Footer = () => {
                 Directory
               </p>
               <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm">
-                <Link href="/directory/restaurants" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
+                <Link href={`${directoryVerticalPrefix}/restaurants`} className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
                   Restaurants
                 </Link>
-                <Link href="/directory/dentists" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
+                <Link href={`${directoryVerticalPrefix}/dentists`} className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
                   Dental Practices
                 </Link>
-                <Link href="/directory/salons" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
+                <Link href={`${directoryVerticalPrefix}/salons`} className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
                   Hair Salons
                 </Link>
-                <Link href="/directory/vets" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
+                <Link href={`${directoryVerticalPrefix}/vets`} className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
                   Veterinary Clinics
                 </Link>
-                <Link href="/directory/physios" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
+                <Link href={`${directoryVerticalPrefix}/physios`} className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
                   Physiotherapy
                 </Link>
               </div>
@@ -98,27 +137,18 @@ const Footer = () => {
             {/* Top Cities */}
             <div>
               <p className="text-xs font-semibold text-primary-foreground/50 uppercase tracking-wider mb-2">
-                Top Cities
+                Featured Cities
               </p>
               <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm">
-                <Link href="/ai-receptionist/dublin" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
-                  Dublin
-                </Link>
-                <Link href="/ai-receptionist/london" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
-                  London
-                </Link>
-                <Link href="/ai-receptionist/new-york" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
-                  New York
-                </Link>
-                <Link href="/ai-receptionist/cork" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
-                  Cork
-                </Link>
-                <Link href="/ai-receptionist/manchester" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
-                  Manchester
-                </Link>
-                <Link href="/ai-receptionist/miami" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
-                  Miami
-                </Link>
+                {featuredCities.map((city) => (
+                  <Link
+                    key={city.slug}
+                    href={getReceptionistCityPath(marketBasePath, city.slug)}
+                    className="text-primary-foreground/70 hover:text-primary-foreground transition-colors"
+                  >
+                    {city.name}
+                  </Link>
+                ))}
               </div>
             </div>
 

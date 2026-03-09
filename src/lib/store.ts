@@ -21,7 +21,7 @@ interface AuthState {
   isHydrated: boolean; // True when Zustand has finished rehydrating from localStorage
   setHydrated: (hydrated: boolean) => void;
 
-  loginWithGoogle: () => Promise<void>;
+  loginWithGoogle: (next?: string) => Promise<void>;
   devLogin: () => Promise<void>;
   logout: () => Promise<void>;
   setUser: (user: User) => void;
@@ -43,9 +43,9 @@ export const useAuthStore = create<AuthState>()(
       isHydrated: false,
       setHydrated: (hydrated: boolean) => set({ isHydrated: hydrated }),
 
-      loginWithGoogle: async () => {
+      loginWithGoogle: async (next?: string) => {
         set({ hasExplicitlyLoggedOut: false });
-        await signInWithGoogle();
+        await signInWithGoogle({ next });
         // The redirect will happen automatically
       },
 
@@ -380,14 +380,14 @@ interface Subscription {
   current_period_start?: string;
   current_period_end?: string;
   cancel_at_period_end?: boolean;
-  region?: 'EU' | 'AR';
-  currency?: 'EUR' | 'USD';
+  region?: 'EU' | 'AR' | 'AU' | 'US';
+  currency?: 'EUR' | 'USD' | 'AUD';
 }
 
 interface UsageData {
   // Regional info
-  region?: 'EU' | 'AR';
-  currency?: 'EUR' | 'USD';
+  region?: 'EU' | 'AR' | 'AU' | 'US';
+  currency?: 'EUR' | 'USD' | 'AUD';
   currencySymbol?: string;
   // Minute-based data (Feb 2026)
   minutesUsed?: number;

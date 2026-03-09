@@ -1,10 +1,24 @@
+import Image from 'next/image';
 import CTAButton from './CTAButton';
 import { Business, getLocalizedDescription, getLocalizedHours } from '@/lib/directory-data';
 import { buildTrackedDirectoryPath } from '@/lib/directory-tracking';
 
-export default function BusinessProfile({ business, locale = 'en' }: { business: Business; locale?: string }) {
+interface BusinessProfileProps {
+  business: Business;
+  locale?: string;
+  demoHref?: string;
+  trialHref?: string;
+}
+
+export default function BusinessProfile({
+  business,
+  locale = 'en',
+  demoHref,
+  trialHref,
+}: BusinessProfileProps) {
   const isES = locale === 'es';
-  const demoHref = isES ? '/es/demo' : '/demo';
+  const resolvedDemoHref = demoHref || (isES ? '/es/demo' : '/demo');
+  const resolvedTrialHref = trialHref || resolvedDemoHref;
   const description = getLocalizedDescription(business, locale);
   const hours = getLocalizedHours(business, locale);
   const trackedWebsiteHref = buildTrackedDirectoryPath('go', business);
@@ -21,9 +35,11 @@ export default function BusinessProfile({ business, locale = 'en' }: { business:
       {/* Business Photo */}
       {business.image_url && (
         <div className="mb-8 rounded-2xl overflow-hidden">
-          <img
+          <Image
             src={business.image_url}
             alt={business.name}
+            width={1280}
+            height={720}
             className="w-full h-64 md:h-80 object-cover"
           />
         </div>
@@ -78,7 +94,7 @@ export default function BusinessProfile({ business, locale = 'en' }: { business:
             📞 {isES ? 'Llamar Ahora — IA 24/7' : 'Call Now — AI Answers 24/7'}
           </CTAButton>
         )}
-        <CTAButton href={demoHref} variant="secondary">
+        <CTAButton href={resolvedDemoHref} variant="secondary">
           {isES ? 'Solicitar Demo' : 'Book a Demo'}
         </CTAButton>
       </div>
@@ -114,7 +130,7 @@ export default function BusinessProfile({ business, locale = 'en' }: { business:
           <li>✅ {isES ? 'Configuración en 5 minutos' : 'Set up in 5 minutes'}</li>
           <li>✅ {isES ? 'Funciona con tu número actual' : 'Works with your existing number'}</li>
         </ul>
-        <CTAButton href={demoHref} variant="primary">
+        <CTAButton href={resolvedTrialHref} variant="primary">
           🚀 {isES ? 'Probá VoiceFleet Gratis' : 'Try VoiceFleet Free'}
         </CTAButton>
       </div>

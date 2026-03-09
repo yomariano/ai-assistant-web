@@ -1,6 +1,8 @@
 /**
  * City data for /ai-receptionist/[city] landing pages.
- * Source: seo/src/data/locations.ts — 34 cities across Ireland, UK, USA.
+ * Source: seo/src/data/locations.ts - 34 cities across Ireland, UK, USA.
+ * Australia-specific cities are kept separate so AU routes can opt in
+ * without changing the default global landing-page inventory.
  */
 
 export interface ReceptionistCity {
@@ -11,6 +13,8 @@ export interface ReceptionistCity {
   population: number;
   region: string;
 }
+
+export type ReceptionistCityMarket = "global" | "AU";
 
 export const RECEPTIONIST_CITIES: ReceptionistCity[] = [
   // Ireland (8)
@@ -54,12 +58,36 @@ export const RECEPTIONIST_CITIES: ReceptionistCity[] = [
   { slug: "las-vegas", name: "Las Vegas", country: "United States", countryCode: "US", population: 640000, region: "Nevada" },
 ];
 
-export function getReceptionistCity(slug: string): ReceptionistCity | undefined {
-  return RECEPTIONIST_CITIES.find((c) => c.slug === slug);
+export const AU_RECEPTIONIST_CITIES: ReceptionistCity[] = [
+  { slug: "sydney", name: "Sydney", country: "Australia", countryCode: "AU", population: 5300000, region: "New South Wales" },
+  { slug: "melbourne", name: "Melbourne", country: "Australia", countryCode: "AU", population: 5100000, region: "Victoria" },
+  { slug: "brisbane", name: "Brisbane", country: "Australia", countryCode: "AU", population: 2600000, region: "Queensland" },
+  { slug: "perth", name: "Perth", country: "Australia", countryCode: "AU", population: 2200000, region: "Western Australia" },
+  { slug: "adelaide", name: "Adelaide", country: "Australia", countryCode: "AU", population: 1400000, region: "South Australia" },
+  { slug: "gold-coast", name: "Gold Coast", country: "Australia", countryCode: "AU", population: 640000, region: "Queensland" },
+  { slug: "canberra", name: "Canberra", country: "Australia", countryCode: "AU", population: 470000, region: "Australian Capital Territory" },
+  { slug: "newcastle", name: "Newcastle", country: "Australia", countryCode: "AU", population: 510000, region: "New South Wales" },
+];
+
+export function getReceptionistCities(market: ReceptionistCityMarket = "global"): ReceptionistCity[] {
+  if (market === "AU") {
+    return AU_RECEPTIONIST_CITIES;
+  }
+
+  return RECEPTIONIST_CITIES;
 }
 
-export function getReceptionistCitySlugs(): string[] {
-  return RECEPTIONIST_CITIES.map((c) => c.slug);
+export function getReceptionistCity(
+  slug: string,
+  market: ReceptionistCityMarket = "global",
+): ReceptionistCity | undefined {
+  return getReceptionistCities(market).find((city) => city.slug === slug);
+}
+
+export function getReceptionistCitySlugs(
+  market: ReceptionistCityMarket = "global",
+): string[] {
+  return getReceptionistCities(market).map((city) => city.slug);
 }
 
 export interface CityFAQ {
@@ -68,22 +96,30 @@ export interface CityFAQ {
 }
 
 export function getCityFAQs(city: ReceptionistCity): CityFAQ[] {
+  const isAustralia = city.countryCode === "AU";
+  const starterPrice = isAustralia ? "A$140/month" : "\u20AC99/month";
+  const growthPrice = isAustralia ? "A$424/mo" : "\u20AC299/mo";
+  const proPrice = isAustralia ? "A$851/mo" : "\u20AC599/mo";
+  const accentLabel = isAustralia
+    ? "Australian English accents"
+    : `regional ${city.country} dialects`;
+
   return [
     {
       question: `How does an AI receptionist work for ${city.name} businesses?`,
-      answer: `VoiceFleet\u2019s AI receptionist answers your business phone calls 24/7 using natural-sounding AI. When a customer in ${city.name} calls, the AI greets them, handles enquiries, books appointments, and takes messages \u2014 just like a human receptionist, but available around the clock with no sick days.`,
+      answer: `VoiceFleet's AI receptionist answers your business phone calls 24/7 using natural-sounding AI. When a customer in ${city.name} calls, the AI greets them, handles enquiries, books appointments, and takes messages - just like a human receptionist, but available around the clock with no sick days.`,
     },
     {
       question: `How much does an AI receptionist cost in ${city.name}?`,
-      answer: `VoiceFleet plans start at \u20ac99/month (Starter) with 500 minutes included. Growth (\u20ac299/mo) includes 1,000 minutes, and Pro (\u20ac599/mo) includes 2,000 minutes. Every plan includes a 30-day free trial. That\u2019s over 95% cheaper than hiring a full-time receptionist in ${city.name}.`,
+      answer: `VoiceFleet plans start at ${starterPrice} (Starter) with 500 minutes included. Growth (${growthPrice}) includes 1,000 minutes, and Pro (${proPrice}) includes 2,000 minutes. Every plan includes a 30-day free trial. That's over 95% cheaper than hiring a full-time receptionist in ${city.name}.`,
     },
     {
       question: `Does VoiceFleet understand local ${city.name} accents?`,
-      answer: `Yes. VoiceFleet uses advanced speech recognition trained on diverse English accents, including regional ${city.country} dialects. Our AI accurately understands callers from ${city.name} and the surrounding ${city.region} area, ensuring smooth conversations and correct message-taking.`,
+      answer: `Yes. VoiceFleet uses advanced speech recognition trained on diverse English accents, including ${accentLabel}. Our AI accurately understands callers from ${city.name} and the surrounding ${city.region} area, ensuring smooth conversations and correct message-taking.`,
     },
     {
       question: `How quickly can I set up VoiceFleet in ${city.name}?`,
-      answer: `Setup takes under 5 minutes. Sign up, choose your plan, and forward your existing ${city.name} business number to your new VoiceFleet number. Your AI receptionist starts answering calls immediately \u2014 no hardware, no contracts, no technical skills required.`,
+      answer: `Setup takes under 5 minutes. Sign up, choose your plan, and forward your existing ${city.name} business number to your new VoiceFleet number. Your AI receptionist starts answering calls immediately - no hardware, no contracts, no technical skills required.`,
     },
     {
       question: `What integrations does VoiceFleet support for ${city.name} businesses?`,

@@ -3,6 +3,7 @@
 import { useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { getSessionResult, signInWithGoogle } from '@/lib/supabase';
+import { buildLoginPath, isSupportedRegion } from '@/lib/market';
 
 const DEFAULT_TRIAL_PLAN = 'starter';
 
@@ -19,10 +20,14 @@ export default function RegisterPage() {
 
     const params = new URLSearchParams(window.location.search);
     const plan = params.get('plan') || DEFAULT_TRIAL_PLAN;
-    const loginRedirect = `/login?plan=${encodeURIComponent(plan)}`;
+    const region = params.get('region');
+    const loginRedirect = buildLoginPath(plan, region);
 
     const startRegistration = async () => {
       sessionStorage.setItem('selectedPlan', plan);
+      if (isSupportedRegion(region)) {
+        sessionStorage.setItem('selectedRegion', region);
+      }
 
       const { session } = await getSessionResult({ timeoutMs: 3000 });
       if (session?.access_token) {

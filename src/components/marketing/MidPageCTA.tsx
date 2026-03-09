@@ -1,8 +1,10 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import dynamic from "next/dynamic";
 import { useRegion } from "@/hooks/useRegion";
+import { getMarketBasePath } from "@/lib/market";
 
 const LiveDemoCall = dynamic(
   () => import("@/components/voicefleet/LiveDemoCall"),
@@ -14,14 +16,19 @@ const WHATSAPP_MESSAGE = "Hola, me interesa saber más sobre VoiceFleet";
 
 export default function MidPageCTA() {
   const { region, currencySymbol, plans } = useRegion();
+  const pathname = usePathname();
+  const marketBasePath = getMarketBasePath(pathname);
   const isArgentina = region === "AR";
+  const isAustralia = region === "AU";
 
   const starterPrice = plans.find((p) => p.id === "starter");
   const priceLabel = starterPrice
     ? `${currencySymbol}${starterPrice.price}/mo`
     : isArgentina
       ? "$49/mo"
-      : "\u20ac99/mo";
+      : isAustralia
+        ? "A$140/mo"
+        : "\u20ac99/mo";
 
   return (
     <section className="py-12 px-6">
@@ -46,7 +53,7 @@ export default function MidPageCTA() {
           />
 
           <Link
-            href="/pricing"
+            href={marketBasePath === "/" ? "/pricing" : `${marketBasePath}#pricing`}
             className="inline-flex items-center justify-center rounded-xl border border-border px-6 py-3 text-sm font-semibold text-foreground hover:bg-muted transition-colors"
             data-umami-event="midpage_cta_pricing"
           >

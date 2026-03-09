@@ -9,6 +9,18 @@ function getApiUrl(): string {
   return (process.env.API_URL || process.env.NEXT_PUBLIC_API_URL || DEFAULT_API_URL).replace(/\/+$/, '');
 }
 
+function getMarketRedirectPath(request: NextRequest): '/es' | '/au' | null {
+  const countryCode = (
+    request.headers.get('x-vercel-ip-country') ||
+    request.headers.get('cf-ipcountry') ||
+    ''
+  ).toUpperCase();
+
+  if (countryCode === 'AR') return '/es';
+  if (countryCode === 'AU') return '/au';
+  return null;
+}
+
 function getCanonicalBlogPath(pathname: string): { currentSlug: string; canonicalPath: string; canonicalSlug: string; language?: string } | null {
   const blogPrefixes = ['/blog/', '/es/blog/'];
 
@@ -74,6 +86,15 @@ async function blogPostExists(slug: string, language?: string): Promise<boolean>
  * so hashed JS/CSS bundles keep their immutable cache headers.
  */
 export async function middleware(request: NextRequest) {
+  if (request.nextUrl.pathname === '/') {
+    const marketRedirectPath = getMarketRedirectPath(request);
+    if (marketRedirectPath) {
+      const redirectUrl = request.nextUrl.clone();
+      redirectUrl.pathname = marketRedirectPath;
+      return NextResponse.redirect(redirectUrl, 307);
+    }
+  }
+
   const duplicateBlogPath = getCanonicalBlogPath(request.nextUrl.pathname);
 
   if (duplicateBlogPath) {

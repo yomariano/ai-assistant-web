@@ -46,7 +46,7 @@ const reviewBrands: BrandItem[] = REVIEW_PLATFORMS.map((platform) => ({
 
 const brands = [...integrationBrands, ...reviewBrands];
 const marqueeBrands = [...brands, ...brands];
-const complianceBadges = ["GDPR compliant", "EU AI Act compliant"];
+const complianceBadges = ["Privacy-ready workflows", "Booking integrations"];
 
 const IntegrationBrandsCarousel = () => {
   return (

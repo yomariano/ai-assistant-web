@@ -92,12 +92,13 @@ export function generateBlogMetadata(
     | "updated_at"
     | "author_name"
     | "tags"
-  >
+  >,
+  pathPrefix = "/blog"
 ): Metadata {
   return generatePageMetadata({
     title: post.meta_title || post.title,
     description: post.meta_description || post.excerpt || "",
-    path: `/blog/${post.slug}`,
+    path: `${pathPrefix}/${post.slug}`,
     ogImage: post.og_image_url || post.featured_image_url || undefined,
     type: "article",
     publishedTime: post.published_at || undefined,
