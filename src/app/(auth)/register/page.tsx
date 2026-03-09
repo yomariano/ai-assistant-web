@@ -5,8 +5,6 @@ import { useRouter } from 'next/navigation';
 import { getSessionResult, signInWithGoogle } from '@/lib/supabase';
 import { buildLoginPath, isSupportedRegion } from '@/lib/market';
 
-const DEFAULT_TRIAL_PLAN = 'starter';
-
 export default function RegisterPage() {
   const router = useRouter();
   const hasStarted = useRef(false);
@@ -19,12 +17,17 @@ export default function RegisterPage() {
     hasStarted.current = true;
 
     const params = new URLSearchParams(window.location.search);
-    const plan = params.get('plan') || DEFAULT_TRIAL_PLAN;
+    const plan = params.get('plan');
     const region = params.get('region');
     const loginRedirect = buildLoginPath(plan, region);
 
     const startRegistration = async () => {
-      sessionStorage.setItem('selectedPlan', plan);
+      if (plan) {
+        sessionStorage.setItem('selectedPlan', plan);
+      } else {
+        sessionStorage.removeItem('selectedPlan');
+        sessionStorage.removeItem('pendingPaymentLink');
+      }
       if (isSupportedRegion(region)) {
         sessionStorage.setItem('selectedRegion', region);
       }

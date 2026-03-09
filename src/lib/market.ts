@@ -67,6 +67,11 @@ export function getDirectoryPath(basePath: MarketBasePath): string {
   return "/directory";
 }
 
+export function getUseCasesPath(basePath: MarketBasePath): string {
+  if (basePath === "/au") return "/au/for";
+  return "/for";
+}
+
 export function getBlogPath(basePath: MarketBasePath): string {
   if (basePath === "/es") return "/es/blog";
   if (basePath === "/au") return "/au/blog";
@@ -80,29 +85,51 @@ export function getComparePath(basePath: MarketBasePath): string {
 
 export function getPricingPath(basePath: MarketBasePath): string {
   if (basePath === "/es") return "/es/precios";
-  if (basePath === "/au") return "/au#pricing";
+  if (basePath === "/au") return "/au/pricing";
   return "/pricing";
 }
 
+export function getDemoPath(basePath: MarketBasePath): string {
+  if (basePath === "/au") return "/au/demo";
+  return "/demo";
+}
+
+export function getConnectPath(basePath: MarketBasePath): string {
+  if (basePath === "/au") return "/au/connect";
+  return "/connect";
+}
+
+export function getConnectProviderPath(basePath: MarketBasePath, slug: string): string {
+  return `${getConnectPath(basePath)}/${slug}`;
+}
+
 export function getReceptionistCityPath(basePath: MarketBasePath, slug: string): string {
-  if (basePath === "/au") return `/au/ai-receptionist/${slug}`;
+  if (basePath === "/au") return `/au/locations/${slug}`;
   return `/ai-receptionist/${slug}`;
 }
 
-export function buildLoginPath(planId: string, region?: string | null): string {
-  const params = new URLSearchParams({ plan: planId });
+export function buildLoginPath(planId?: string | null, region?: string | null): string {
+  const params = new URLSearchParams();
+  if (planId) {
+    params.set("plan", planId);
+  }
   if (isSupportedRegion(region) && region !== "EU") {
     params.set("region", region);
   }
-  return `/login?${params.toString()}`;
+  const query = params.toString();
+  return query ? `/login?${query}` : "/login";
 }
 
-export function buildRegisterPath(planId: string, region?: string | null): string {
-  const params = new URLSearchParams({ plan: planId });
+export function buildRegisterPath(planId?: string | null, region?: string | null): string {
+  const params = new URLSearchParams();
+  if (planId) {
+    params.set("plan", planId);
+  }
   if (isSupportedRegion(region) && region !== "EU") {
     params.set("region", region);
   }
-  return `/register?${params.toString()}`;
+  const query = params.toString();
+  return query ? `/register?${query}` : "/register";
 }
 
 export function getRegionLabel(region?: string | null): string {
