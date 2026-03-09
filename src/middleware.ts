@@ -1,20 +1,55 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
+import { buildWaitlistPath, isSupportedCountryCode, normalizeCountryCode } from '@/lib/country-access';
 
 const BLOG_DUPLICATE_SUFFIX = /^(.+?)-([2-9]|[1-9]\d)$/;
 const BLOG_DUPLICATE_SEGMENT = /^(.+?)\/-([2-9]|[1-9]\d)$/;
 const DEFAULT_API_URL = 'https://api.voicefleet.ai';
+const COUNTRY_GATED_PATHS = [
+  '/login',
+  '/register',
+  '/checkout',
+  '/dashboard',
+  '/assistant',
+  '/billing',
+  '/call',
+  '/history',
+  '/integrations',
+  '/knowledge-gaps',
+  '/notifications',
+  '/scheduled',
+  '/settings',
+  '/agenda',
+  '/admin',
+];
 
 function getApiUrl(): string {
   return (process.env.API_URL || process.env.NEXT_PUBLIC_API_URL || DEFAULT_API_URL).replace(/\/+$/, '');
 }
 
-function getMarketRedirectPath(request: NextRequest): '/es' | '/au' | null {
-  const countryCode = (
+function getRequestCountryCode(request: NextRequest): string | null {
+  return normalizeCountryCode(
     request.headers.get('x-vercel-ip-country') ||
     request.headers.get('cf-ipcountry') ||
-    ''
-  ).toUpperCase();
+    request.headers.get('x-country-code')
+  );
+}
+
+function isLocallyBypassedHost(hostname: string): boolean {
+  return (
+    hostname === 'localhost' ||
+    hostname === '127.0.0.1' ||
+    hostname === 'dev-app.voicefleet.ai' ||
+    hostname.includes('dev-')
+  );
+}
+
+function isCountryGatedPath(pathname: string): boolean {
+  return COUNTRY_GATED_PATHS.some((prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`));
+}
+
+function getMarketRedirectPath(request: NextRequest): '/es' | '/au' | null {
+  const countryCode = getRequestCountryCode(request) || '';
 
   if (countryCode === 'AR') return '/es';
   if (countryCode === 'AU') return '/au';
@@ -86,6 +121,24 @@ async function blogPostExists(slug: string, language?: string): Promise<boolean>
  * so hashed JS/CSS bundles keep their immutable cache headers.
  */
 export async function middleware(request: NextRequest) {
+  if (
+    !isLocallyBypassedHost(request.nextUrl.hostname) &&
+    request.nextUrl.pathname !== '/waitlist' &&
+    isCountryGatedPath(request.nextUrl.pathname)
+  ) {
+    const countryCode = getRequestCountryCode(request);
+
+    if (countryCode && !isSupportedCountryCode(countryCode)) {
+      const redirectUrl = request.nextUrl.clone();
+      const from = `${request.nextUrl.pathname}${request.nextUrl.search}`;
+
+      redirectUrl.pathname = '/waitlist';
+      redirectUrl.search = buildWaitlistPath(countryCode, from).replace('/waitlist', '');
+
+      return NextResponse.redirect(redirectUrl, 307);
+    }
+  }
+
   if (request.nextUrl.pathname === '/') {
     const marketRedirectPath = getMarketRedirectPath(request);
     if (marketRedirectPath) {
