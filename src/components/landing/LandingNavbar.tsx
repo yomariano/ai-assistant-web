@@ -37,7 +37,7 @@ export default function LandingNavbar() {
                         Log in
                     </Link>
                     <Link
-                        href="/register?plan=starter"
+                        href="/register"
                         className="rounded-lg bg-orange-500 px-4 py-2 text-sm font-medium text-white hover:bg-orange-600 transition-colors"
                         data-umami-event="cta_click"
                         data-umami-event-location="navbar"
