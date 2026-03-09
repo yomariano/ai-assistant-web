@@ -9,15 +9,17 @@ import dynamic from "next/dynamic";
 import { useRegion } from "@/hooks/useRegion";
 import { trackEvent } from "@/lib/umami";
 import {
-  buildLoginPath,
   getBlogPath,
   getComparePath,
+  getConnectPath,
+  getDemoPath,
   getDirectoryPath,
   getFeaturesPath,
   getMarketBasePath,
   getPricingPath,
   getRegionLabel,
   getRouteRegionOverride,
+  getUseCasesPath,
   isSupportedRegion,
 } from "@/lib/market";
 
@@ -37,6 +39,9 @@ const Header = () => {
   const featuresHref = getFeaturesPath(marketBasePath);
   const directoryHref = getDirectoryPath(marketBasePath);
   const compareHref = getComparePath(marketBasePath);
+  const industriesHref = getUseCasesPath(marketBasePath);
+  const demoHref = getDemoPath(marketBasePath);
+  const connectHref = getConnectPath(marketBasePath);
   const pricingHref = getPricingPath(marketBasePath);
   const blogHref = getBlogPath(marketBasePath);
 
@@ -47,7 +52,7 @@ const Header = () => {
     sessionStorage.setItem("selectedRegion", selectedRegion);
     try {
       const { signInWithGoogle } = await import("@/lib/supabase");
-      await signInWithGoogle({ next: buildLoginPath("starter", selectedRegion) });
+      await signInWithGoogle({ next: '/dashboard' });
     } catch (error) {
       console.error("Failed to start Google OAuth:", error);
       setIsTrialLoading(false);
@@ -76,9 +81,9 @@ const Header = () => {
 
   const navLinks = [
     { label: "Features", href: featuresHref },
-    { label: "Industries", href: "/for" },
-    { label: "Demo", href: "/demo" },
-    { label: "Integrations", href: "/connect" },
+    { label: "Industries", href: industriesHref },
+    { label: "Demo", href: demoHref },
+    { label: "Integrations", href: connectHref },
     { label: "Directory", href: directoryHref },
     { label: "Compare", href: compareHref },
     { label: "Pricing", href: pricingHref },

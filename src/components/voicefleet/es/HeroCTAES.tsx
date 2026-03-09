@@ -30,7 +30,7 @@ const HeroCTAES = () => {
     trackEvent("cta_click", { location: "hero_es", label: "start_free_trial" });
     try {
       const { signInWithGoogle } = await import("@/lib/supabase");
-      await signInWithGoogle({ next: "/login?plan=starter" });
+      await signInWithGoogle({ next: '/dashboard' });
     } catch (error) {
       console.error("Failed to start Google OAuth:", error);
       setIsLoading(false);

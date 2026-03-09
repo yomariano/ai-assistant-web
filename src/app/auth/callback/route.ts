@@ -28,7 +28,7 @@ export async function GET(request: NextRequest) {
   if (error) {
     console.error('[AUTH CALLBACK] OAuth error:', error, errorDescription);
     // Redirect to login with error
-    return NextResponse.redirect(new URL(`/login?error=${encodeURIComponent(error)}`, origin));
+    return NextResponse.redirect(new URL(`/?auth_error=${encodeURIComponent(error)}`, origin));
   }
 
   if (code) {
@@ -46,7 +46,7 @@ export async function GET(request: NextRequest) {
 
     if (sessionError) {
       console.error('[AUTH CALLBACK] Session exchange failed:', sessionError);
-      return NextResponse.redirect(new URL(`/login?error=${encodeURIComponent(sessionError.message)}`, origin));
+      return NextResponse.redirect(new URL(`/?auth_error=${encodeURIComponent(sessionError.message)}`, origin));
     }
 
     // Handle reverse proxy environments (Traefik, etc.)
@@ -80,5 +80,5 @@ export async function GET(request: NextRequest) {
 
   // No code provided - redirect to login
   console.log('[AUTH CALLBACK] No code provided, redirecting to login');
-  return NextResponse.redirect(new URL('/login', origin));
+  return NextResponse.redirect(new URL('/', origin));
 }

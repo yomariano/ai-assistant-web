@@ -10,7 +10,7 @@ import { signInWithGoogle } from "@/lib/supabase";
 import { trackEvent, type UmamiEventData } from "@/lib/umami";
 import { useRegion } from "@/hooks/useRegion";
 import { REVIEW_PLATFORMS } from "@/lib/marketing/review-platforms";
-import { buildLoginPath, getRouteRegionOverride, isSupportedRegion } from "@/lib/market";
+import { getRouteRegionOverride, isSupportedRegion } from "@/lib/market";
 
 type Region = 'EU' | 'AR' | 'AU' | 'US';
 type ComparisonValue = boolean | string;
@@ -209,7 +209,7 @@ const PricingSection = ({ embedded = false, trackingData }: PricingSectionProps)
       sessionStorage.setItem('selectedRegion', region);
       setRedirectingPlan(planId);
       try {
-        await signInWithGoogle({ next: buildLoginPath(planId, region) });
+        await signInWithGoogle({ next: '/dashboard' });
         // OAuth will redirect, so we don't need to handle success here
       } catch (error) {
         console.error("Failed to start Google OAuth:", error);
@@ -356,26 +356,47 @@ const PricingSection = ({ embedded = false, trackingData }: PricingSectionProps)
     { icon: Phone, text: `Your own ${pricing.phoneNumber}` },
   ];
 
-  const testimonials = [
-    {
-      quote: "We no longer miss booking calls while the team is busy with patients.",
-      source: "Practice manager",
-      segment: "Dental clinic",
-      impact: "Fewer dropped opportunities during peak hours",
-    },
-    {
-      quote: "Evening and weekend callers now get a real answer instead of voicemail.",
-      source: "Restaurant owner",
-      segment: "Hospitality",
-      impact: "Improved reservation capture after hours",
-    },
-    {
-      quote: "Urgent calls are routed fast, while routine questions are handled automatically.",
-      source: "Operations lead",
-      segment: "Home services",
-      impact: "Faster triage with cleaner call notes",
-    },
-  ];
+  const testimonials = region === "AU"
+    ? [
+        {
+          quote: "We stopped missing new-patient bookings during the lunch rush.",
+          source: "Practice manager",
+          segment: "Sydney dental clinic",
+          impact: "More consults booked without extending front-desk hours",
+        },
+        {
+          quote: "Weekend callers can still reserve or ask questions when the venue is flat out.",
+          source: "Venue owner",
+          segment: "Melbourne restaurant group",
+          impact: "More reservations captured after hours",
+        },
+        {
+          quote: "Emergency jobs now reach the right technician with the right details the first time.",
+          source: "Operations lead",
+          segment: "Brisbane plumbing team",
+          impact: "Faster dispatch with cleaner call summaries",
+        },
+      ]
+    : [
+        {
+          quote: "We no longer miss booking calls while the team is busy with patients.",
+          source: "Practice manager",
+          segment: "Dental clinic",
+          impact: "Fewer dropped opportunities during peak hours",
+        },
+        {
+          quote: "Evening and weekend callers now get a real answer instead of voicemail.",
+          source: "Restaurant owner",
+          segment: "Hospitality",
+          impact: "Improved reservation capture after hours",
+        },
+        {
+          quote: "Urgent calls are routed fast, while routine questions are handled automatically.",
+          source: "Operations lead",
+          segment: "Home services",
+          impact: "Faster triage with cleaner call notes",
+        },
+      ];
 
   const comparisonRows: ComparisonRow[] = [
     {

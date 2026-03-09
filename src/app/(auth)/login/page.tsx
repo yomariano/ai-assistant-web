@@ -1,262 +1,66 @@
 'use client';
 
-import { useState, useEffect, Suspense, useRef } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
-import { Phone } from 'lucide-react';
-import { useAuthStore } from '@/lib/store';
-import Button from '@/components/ui/button';
-import { trackEvent } from '@/lib/umami';
+import { useEffect, useRef } from 'react';
+import { useRouter } from 'next/navigation';
+import { getSessionResult, signInWithGoogle } from '@/lib/supabase';
 import { isSupportedRegion } from '@/lib/market';
 
-function LoginContent() {
+export default function LoginPage() {
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const { loginWithGoogle, devLogin, isAuthenticated, isLoading, token, devMode } = useAuthStore();
-  // Get checkAuth with a stable reference to avoid infinite loops
-  const checkAuth = useAuthStore((state) => state.checkAuth);
-  const [error, setError] = useState('');
-  const [isSigningIn, setIsSigningIn] = useState(false);
-  const hasCheckedAuth = useRef(false);
-
-  // Get the plan from URL if user came from pricing
-  const selectedPlan = searchParams.get('plan');
-  const selectedRegion = searchParams.get('region');
-  // Show dev login on localhost OR dev tunnel
-  const isDevEnvironment =
-    typeof window !== 'undefined' &&
-    (window.location.hostname === 'localhost' ||
-     window.location.hostname === '127.0.0.1' ||
-     window.location.hostname === 'dev-app.voicefleet.ai' ||
-     window.location.hostname.includes('dev-'));
+  const hasStarted = useRef(false);
 
   useEffect(() => {
-    if (selectedPlan) {
-      sessionStorage.setItem('selectedPlan', selectedPlan);
-    } else {
-      sessionStorage.removeItem('selectedPlan');
-      sessionStorage.removeItem('pendingPaymentLink');
-    }
-    if (isSupportedRegion(selectedRegion)) {
-      sessionStorage.setItem('selectedRegion', selectedRegion);
+    if (hasStarted.current) {
+      return;
     }
 
-    // Only check auth once on mount
-    if (!hasCheckedAuth.current) {
-      hasCheckedAuth.current = true;
-      checkAuth();
-    }
-  }, [checkAuth, selectedPlan, selectedRegion]);
+    hasStarted.current = true;
 
-  useEffect(() => {
-    const handlePostAuthRedirect = async () => {
-      if (!isLoading && isAuthenticated) {
-        // Check if user was trying to go somewhere before login
-        const redirectPath = sessionStorage.getItem('redirectAfterLogin');
-        if (redirectPath) {
-          sessionStorage.removeItem('redirectAfterLogin');
-          router.push(redirectPath);
-          return;
-        }
+    const params = new URLSearchParams(window.location.search);
+    const plan = params.get('plan');
+    const region = params.get('region');
 
-        // In dev mode, skip Stripe payment flow entirely - go straight to dashboard
-        if (devMode || isDevEnvironment) {
-          console.log('[LOGIN] Dev mode - skipping Stripe redirect, going to dashboard');
-          sessionStorage.removeItem('selectedPlan');
-          sessionStorage.removeItem('pendingPaymentLink');
-          router.push('/dashboard');
-          return;
-        }
-
-        // Check if user selected a plan from pricing page
-        const plan = selectedPlan;
-        const region = sessionStorage.getItem('selectedRegion') || selectedRegion;
-        if (plan) {
-          sessionStorage.removeItem('selectedPlan');
-          sessionStorage.removeItem('pendingPaymentLink');
-
-          try {
-            // Call the redirect API to determine where to send the user
-            // This checks subscription status and returns either:
-            // - Payment link URL (new user)
-            // - Customer Portal URL (existing subscriber)
-            const headers: Record<string, string> = {};
-            if (token) {
-              headers['Authorization'] = `Bearer ${token}`;
-            }
-
-            const params = new URLSearchParams({ planId: plan });
-            if (isSupportedRegion(region) && region !== 'EU') {
-              params.set('region', region);
-            }
-
-            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/billing/redirect?${params.toString()}`, {
-              credentials: 'include',
-              headers
-            });
-
-            if (response.ok) {
-              const data = await response.json();
-              if (data.url) {
-                window.location.href = data.url;
-                return;
-              }
-            }
-          } catch (error) {
-            console.error('Failed to get redirect URL:', error);
-          }
-
-          // Fallback: if redirect API fails, go to dashboard
-          router.push('/dashboard');
-          return;
-        }
-
-        // No plan selected - go to dashboard
-        sessionStorage.removeItem('selectedPlan');
-        sessionStorage.removeItem('pendingPaymentLink');
-        router.push('/dashboard');
+    const startLogin = async () => {
+      // Save plan/region for DashboardLayout to pick up after auth
+      if (plan) {
+        sessionStorage.setItem('selectedPlan', plan);
       }
+      if (isSupportedRegion(region)) {
+        sessionStorage.setItem('selectedRegion', region);
+      }
+
+      // Dev environment: go straight to dashboard (dev login handled by DashboardLayout)
+      const isDevEnvironment =
+        window.location.hostname === 'localhost' ||
+        window.location.hostname === '127.0.0.1' ||
+        window.location.hostname === 'dev-app.voicefleet.ai' ||
+        window.location.hostname.includes('dev-');
+
+      if (isDevEnvironment) {
+        router.replace('/dashboard');
+        return;
+      }
+
+      // Check for existing session
+      const { session } = await getSessionResult({ timeoutMs: 3000 });
+      if (session?.access_token) {
+        router.replace('/dashboard');
+        return;
+      }
+
+      // No session — trigger Google OAuth
+      await signInWithGoogle({ next: '/dashboard' });
     };
 
-    handlePostAuthRedirect();
-  }, [isLoading, isAuthenticated, router, selectedPlan, selectedRegion, token, devMode, isDevEnvironment]);
-
-  const handleGoogleSignIn = async () => {
-    setError('');
-    setIsSigningIn(true);
-    trackEvent("login_started", {
-      method: "google",
-      plan: selectedPlan || "none",
-      ...(isSupportedRegion(selectedRegion) && { region: selectedRegion }),
+    void startLogin().catch((error) => {
+      console.error('[LOGIN] Failed to start Google OAuth:', error);
+      router.replace('/?auth_error=signin_failed');
     });
-
-    try {
-      const nextParams = new URLSearchParams();
-      if (selectedPlan) {
-        nextParams.set('plan', selectedPlan);
-      }
-      if (isSupportedRegion(selectedRegion) && selectedRegion !== 'EU') {
-        nextParams.set('region', selectedRegion);
-      }
-      const nextPath = nextParams.toString() ? `/login?${nextParams.toString()}` : '/login';
-      await loginWithGoogle(nextPath);
-      // Redirect happens automatically via OAuth
-    } catch (err: unknown) {
-      const errorMessage = err instanceof Error ? err.message : 'Sign in failed';
-      setError(errorMessage);
-      setIsSigningIn(false);
-    }
-  };
-
-  const handleDevLogin = async () => {
-    setError('');
-    setIsSigningIn(true);
-
-    try {
-      await devLogin();
-      // The useEffect will handle redirect after isAuthenticated becomes true
-      // Just need to trigger a re-check of auth state
-      await checkAuth();
-    } catch (err: unknown) {
-      const errorMessage = err instanceof Error ? err.message : 'Dev login failed';
-      setError(errorMessage);
-      setIsSigningIn(false);
-    }
-  };
-
-  if (isLoading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-600 to-indigo-800">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-white"></div>
-      </div>
-    );
-  }
+  }, [router]);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-600 to-indigo-800 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-8 bg-white rounded-2xl shadow-xl p-8">
-        <div className="text-center">
-          <div className="mx-auto w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center">
-            <Phone className="w-8 h-8 text-purple-600" />
-          </div>
-          <h2 className="mt-6 text-3xl font-bold text-gray-900">Welcome</h2>
-          <p className="mt-2 text-sm text-gray-600">
-            Sign in to your AI Assistant account
-          </p>
-        </div>
-
-        <div className="mt-8 space-y-6">
-          {error && (
-            <div className="bg-red-50 text-red-600 p-4 rounded-lg text-sm">
-              {error}
-            </div>
-          )}
-
-          <Button
-            type="button"
-            onClick={handleGoogleSignIn}
-            className="w-full flex items-center justify-center gap-3"
-            size="lg"
-            variant="outline"
-            isLoading={isSigningIn}
-          >
-            <svg className="w-5 h-5" viewBox="0 0 24 24">
-              <path
-                fill="currentColor"
-                d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
-              />
-              <path
-                fill="currentColor"
-                d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
-              />
-              <path
-                fill="currentColor"
-                d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"
-              />
-              <path
-                fill="currentColor"
-                d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
-              />
-            </svg>
-            Sign in with Google
-          </Button>
-
-          {isDevEnvironment && (
-            <>
-              <div className="relative">
-                <div className="absolute inset-0 flex items-center">
-                  <div className="w-full border-t border-gray-300" />
-                </div>
-                <div className="relative flex justify-center text-sm">
-                  <span className="px-2 bg-white text-gray-500">Development Only</span>
-                </div>
-              </div>
-
-              <Button
-                type="button"
-                onClick={handleDevLogin}
-                className="w-full"
-                size="lg"
-                variant="secondary"
-                isLoading={isSigningIn}
-              >
-                Dev Login (Bypass Auth)
-              </Button>
-            </>
-          )}
-        </div>
-      </div>
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-600 to-indigo-800">
+      <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-white"></div>
     </div>
-  );
-}
-
-export default function LoginPage() {
-  return (
-    <Suspense fallback={
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-600 to-indigo-800">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-white"></div>
-      </div>
-    }>
-      <LoginContent />
-    </Suspense>
   );
 }

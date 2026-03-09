@@ -301,6 +301,15 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
 
         if (!isActive) {
           if (!isCheckoutRoute) {
+            // Check if user just completed OAuth with a pending plan selection
+            const pendingPlan = sessionStorage.getItem('selectedPlan');
+            if (pendingPlan) {
+              const pendingRegion = sessionStorage.getItem('selectedRegion') || '';
+              sessionStorage.removeItem('selectedPlan');
+              console.log('[DASHBOARD] Pending plan found after auth - redirecting to checkout:', pendingPlan);
+              router.push(`/checkout?plan=${encodeURIComponent(pendingPlan)}&region=${encodeURIComponent(pendingRegion)}`);
+              return;
+            }
             console.log('[DASHBOARD] No active subscription - opening onboarding paywall');
             openPaywallOnboarding();
           }
@@ -324,7 +333,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
     };
 
     checkSubscription();
-  }, [isHydrated, isAuthenticated, isLoading, subscriptionChecked, devMode, openPaywallOnboarding, isCheckoutRoute, setSubscriptionStore, setUsageStore]);
+  }, [isHydrated, isAuthenticated, isLoading, subscriptionChecked, devMode, openPaywallOnboarding, isCheckoutRoute, setSubscriptionStore, setUsageStore, router]);
 
   // Check onboarding status after authentication and subscription verification
   useEffect(() => {

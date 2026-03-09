@@ -3,7 +3,7 @@
 import { useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { getSessionResult, signInWithGoogle } from '@/lib/supabase';
-import { buildLoginPath, isSupportedRegion } from '@/lib/market';
+import { isSupportedRegion } from '@/lib/market';
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -19,7 +19,6 @@ export default function RegisterPage() {
     const params = new URLSearchParams(window.location.search);
     const plan = params.get('plan');
     const region = params.get('region');
-    const loginRedirect = buildLoginPath(plan, region);
 
     const startRegistration = async () => {
       if (plan) {
@@ -34,16 +33,16 @@ export default function RegisterPage() {
 
       const { session } = await getSessionResult({ timeoutMs: 3000 });
       if (session?.access_token) {
-        router.replace(loginRedirect);
+        router.replace('/dashboard');
         return;
       }
 
-      await signInWithGoogle({ next: loginRedirect });
+      await signInWithGoogle({ next: '/dashboard' });
     };
 
     void startRegistration().catch((error) => {
       console.error('[REGISTER] Failed to start Google OAuth:', error);
-      router.replace(loginRedirect);
+      router.replace('/?auth_error=register_failed');
     });
   }, [router]);
 
