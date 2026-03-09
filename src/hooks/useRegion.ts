@@ -82,7 +82,7 @@ function mapApiResponseToRegionData(apiResponse: {
   [key: string]: unknown;
 }): RegionData {
   return {
-    ...(apiResponse as Omit<RegionData, 'city' | 'plans'>),
+    ...(apiResponse as unknown as Omit<RegionData, 'city' | 'plans'>),
     city: apiResponse.city || null,
     plans: apiResponse.plans.map((plan: ApiPlan) => ({
       id: plan.id,
