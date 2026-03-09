@@ -58,7 +58,7 @@ export default async function AustraliaDirectoryPage() {
               Get local AU traffic and let VoiceFleet answer calls, qualify leads, and book appointments 24/7.
             </p>
             <Link
-              href="/register?plan=starter&region=AU"
+              href="/register?region=AU"
               className="inline-flex items-center justify-center bg-gradient-to-r from-blue-500 to-cyan-400 text-white px-8 py-4 rounded-xl font-semibold hover:from-blue-600 hover:to-cyan-500 transition-all"
             >
               Start VoiceFleet in Australia {"->"}

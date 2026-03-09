@@ -48,7 +48,7 @@ export default async function CompareIndexPage() {
               </p>
               <div className="mt-8 flex flex-col sm:flex-row gap-4">
                 <Link
-                  href="/register?plan=starter"
+                  href="/register"
                   className="inline-flex items-center justify-center px-8 py-4 bg-white text-slate-900 rounded-lg font-semibold hover:bg-slate-50 transition-colors shadow-lg"
                   data-umami-event="cta_click"
                   data-umami-event-location="compare_index"

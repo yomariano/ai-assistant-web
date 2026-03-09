@@ -71,7 +71,7 @@ export default function Home() {
           {
             name: "Sign Up & Configure",
             text: "Create your VoiceFleet account, choose a plan starting at \u20ac99/mo, and configure your AI receptionist with your business name, greeting, and call-handling rules.",
-            url: "/register?plan=starter",
+            url: "/register",
           },
           {
             name: "Forward Your Number",

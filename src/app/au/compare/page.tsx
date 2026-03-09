@@ -47,7 +47,7 @@ export default async function AustraliaCompareIndexPage() {
               </p>
               <div className="mt-8 flex flex-col sm:flex-row gap-4">
                 <Link
-                  href="/register?plan=starter&region=AU"
+                  href="/register?region=AU"
                   className="inline-flex items-center justify-center px-8 py-4 bg-white text-slate-900 rounded-lg font-semibold hover:bg-slate-50 transition-colors shadow-lg"
                   data-umami-event="cta_click"
                   data-umami-event-location="compare_index_au"
@@ -95,7 +95,7 @@ export default async function AustraliaCompareIndexPage() {
           title="Want local numbers and AI call handling in Australia?"
           description="See how VoiceFleet compares when you care about local provisioning, 24/7 coverage, and AUD pricing."
           primaryButtonText="Start Free Trial"
-          primaryButtonHref="/register?plan=starter&region=AU"
+          primaryButtonHref="/register?region=AU"
           secondaryButtonText="See AU Pricing"
           secondaryButtonHref="/au#pricing"
         />

@@ -155,7 +155,7 @@ export default async function AustraliaReceptionistCityPage({ params }: Props) {
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link
-                href="/register?plan=starter&region=AU"
+                href="/register?region=AU"
                 className="inline-flex items-center justify-center px-8 py-4 bg-white text-slate-950 rounded-xl font-semibold hover:bg-white/90 transition-colors shadow-lg hover:shadow-xl"
               >
                 Start Free Trial
@@ -322,7 +322,7 @@ export default async function AustraliaReceptionistCityPage({ params }: Props) {
                     </Link>
                   </li>
                   <li>
-                    <Link href="/register?plan=starter&region=AU" className="text-blue-600 hover:underline">
+                    <Link href="/register?region=AU" className="text-blue-600 hover:underline">
                       Free Trial
                     </Link>
                   </li>
@@ -341,7 +341,7 @@ export default async function AustraliaReceptionistCityPage({ params }: Props) {
           title={`Ready to automate your ${city.name} business calls?`}
           description={`Start with AU pricing, local number provisioning, and an AI receptionist that keeps ${city.name} leads from slipping through.`}
           primaryButtonText="Start Free Trial"
-          primaryButtonHref="/register?plan=starter&region=AU"
+          primaryButtonHref="/register?region=AU"
           secondaryButtonText="See AU Pricing"
           secondaryButtonHref="/au#pricing"
         />

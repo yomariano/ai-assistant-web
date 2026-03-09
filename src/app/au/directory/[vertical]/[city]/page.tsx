@@ -94,7 +94,7 @@ export default async function AustraliaDirectoryCityPage({ params }: Props) {
               Let VoiceFleet answer your calls 24/7 with an Australian number and local routing.
             </p>
             <Link
-              href="/register?plan=starter&region=AU"
+              href="/register?region=AU"
               className="inline-flex items-center bg-gradient-to-r from-blue-500 to-cyan-400 text-white px-8 py-4 rounded-xl font-semibold hover:from-blue-600 hover:to-cyan-500 transition-all"
             >
               Try VoiceFleet Free {"->"}

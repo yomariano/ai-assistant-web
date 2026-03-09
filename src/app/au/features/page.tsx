@@ -294,7 +294,7 @@ export default function AustraliaFeaturesPage() {
           title="Ready to launch in Australia?"
           description="Start your free trial with local Australian pricing and number provisioning."
           primaryButtonText="Start Free Trial"
-          primaryButtonHref="/register?plan=starter&region=AU"
+          primaryButtonHref="/register?region=AU"
           secondaryButtonText="See AU Pricing"
           secondaryButtonHref="/au#pricing"
         />

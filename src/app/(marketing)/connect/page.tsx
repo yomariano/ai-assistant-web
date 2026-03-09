@@ -40,7 +40,7 @@ export default function ConnectIndexPage() {
               </p>
               <div className="mt-8 flex flex-col sm:flex-row gap-4">
                 <Link
-                  href="/register?plan=starter"
+                  href="/register"
                   className="inline-flex items-center justify-center px-8 py-4 bg-white text-indigo-600 rounded-lg font-semibold hover:bg-indigo-50 transition-colors shadow-lg"
                 >
                   Start Free Trial

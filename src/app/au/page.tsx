@@ -111,7 +111,7 @@ export default function AustraliaHome() {
           {
             name: "Sign Up & Configure",
             text: "Create your VoiceFleet account, choose a plan starting at A$140/mo, and configure your AI receptionist with your business name, greeting, and call-handling rules.",
-            url: "/register?plan=starter&region=AU",
+            url: "/register?region=AU",
           },
           {
             name: "Forward Your Number",

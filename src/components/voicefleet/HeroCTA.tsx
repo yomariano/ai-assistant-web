@@ -34,7 +34,7 @@ const HeroCTA = () => {
         </Link>
       ) : (
         <div className="flex flex-col sm:flex-row gap-3">
-          <Link href={buildRegisterPath("starter", routeRegion)} className="w-full sm:w-auto">
+          <Link href={buildRegisterPath(undefined, routeRegion)} className="w-full sm:w-auto">
             <Button
               variant="hero"
               size="xl"

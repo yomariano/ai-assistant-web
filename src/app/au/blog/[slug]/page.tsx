@@ -352,7 +352,7 @@ export default async function AustraliaBlogPostPage({ params }: Props) {
             title="Ready to automate your Australian call flow?"
             description="Start with AU pricing, local number provisioning, and a guided setup path."
             primaryButtonText="Start Free Trial"
-            primaryButtonHref="/register?plan=starter&region=AU"
+            primaryButtonHref="/register?region=AU"
             secondaryButtonText="See AU Pricing"
             secondaryButtonHref="/au#pricing"
           />

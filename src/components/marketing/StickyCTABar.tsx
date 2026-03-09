@@ -66,7 +66,7 @@ export default function StickyCTABar() {
             </a>
           )}
           <Link
-            href={buildRegisterPath("starter", routeRegion)}
+            href={buildRegisterPath(undefined, routeRegion)}
             className="inline-flex items-center rounded-lg bg-white text-primary px-4 py-2 text-sm font-semibold hover:bg-white/90 transition-colors"
             data-umami-event="sticky_cta_trial"
           >

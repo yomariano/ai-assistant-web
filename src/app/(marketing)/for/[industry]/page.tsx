@@ -79,9 +79,9 @@ export default async function UseCasePage({ params }: Props) {
     },
   ];
   const primaryTrialHref =
-    page.cta_url?.startsWith("/login") || page.cta_url === "/register"
-      ? "/register?plan=starter"
-      : page.cta_url || "/register?plan=starter";
+    !page.cta_url || page.cta_url.startsWith("/login") || page.cta_url.startsWith("/register")
+      ? "/register"
+      : page.cta_url;
 
   return (
     <>
@@ -347,7 +347,7 @@ export default async function UseCasePage({ params }: Props) {
                             <Sparkles className="h-4 w-4" />
                             <span>All Features</span>
                           </Link>
-                          <Link href="/register?plan=starter" className="inline-flex items-center gap-2 px-4 py-2 bg-indigo-100 text-indigo-700 rounded-lg text-sm font-medium hover:bg-indigo-200 transition-colors">
+                          <Link href="/register" className="inline-flex items-center gap-2 px-4 py-2 bg-indigo-100 text-indigo-700 rounded-lg text-sm font-medium hover:bg-indigo-200 transition-colors">
                             <Phone className="h-4 w-4" />
                             <span>Start Free Trial</span>
                           </Link>
@@ -398,7 +398,7 @@ export default async function UseCasePage({ params }: Props) {
                         <p className="mt-3 text-xs text-slate-400">Including holidays & weekends</p>
                       </div>
 
-                      <Link href="/register?plan=starter" className="bg-white rounded-2xl p-6 shadow-lg shadow-emerald-100 border border-emerald-100 hover:shadow-xl hover:shadow-emerald-200 hover:border-emerald-300 transition-all group">
+                      <Link href="/register" className="bg-white rounded-2xl p-6 shadow-lg shadow-emerald-100 border border-emerald-100 hover:shadow-xl hover:shadow-emerald-200 hover:border-emerald-300 transition-all group">
                         <div className="flex items-center gap-2 mb-2">
                           <Sparkles className="h-5 w-5 text-emerald-600" />
                           <span className="text-slate-500 text-sm">Setup Time</span>

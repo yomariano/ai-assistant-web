@@ -75,7 +75,7 @@ export default async function AustraliaBusinessPage({ params }: Props) {
           <BusinessProfile
             business={business}
             demoHref="/au#demo"
-            trialHref="/register?plan=starter&region=AU"
+            trialHref="/register?region=AU"
           />
         </div>
       </div>

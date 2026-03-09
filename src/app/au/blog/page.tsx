@@ -196,7 +196,7 @@ export default async function AustraliaBlogPage() {
         title="Ready to scale your phone support in Australia?"
         description="See how VoiceFleet AI voice agents can answer calls, qualify leads, and book appointments with local AU pricing."
         primaryButtonText="Start Free Trial"
-        primaryButtonHref="/register?plan=starter&region=AU"
+        primaryButtonHref="/register?region=AU"
         secondaryButtonText="See AU Pricing"
         secondaryButtonHref="/au#pricing"
       />
