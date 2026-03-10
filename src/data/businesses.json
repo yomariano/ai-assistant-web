@@ -2308,6 +2308,108 @@
     "openingHours": "Mo-Fr 09:00-18:00"
   },
   {
+    "slug": "bis-odontologia",
+    "name": "Bis Odontología",
+    "vertical": "dentists",
+    "city": "Córdoba",
+    "citySlug": "cordoba",
+    "country": "ireland",
+    "address": "Córdoba, Ireland",
+    "phone": "+54 351 595-1025",
+    "website": "https://bisodontologia.com/",
+    "email": "",
+    "description": "Bis Odontología is a trusted dentists located in Córdoba, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Bis Odontología accepting new patients?",
+        "a": "Bis Odontología welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Bis Odontología offer emergency dental care?",
+        "a": "Contact Bis Odontología directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Bis Odontología accept?",
+        "a": "Bis Odontología works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Bis Odontología offer?",
+        "a": "Bis Odontología provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "veterinaria-mi-granja",
+    "name": "Veterinaria Mi Granja",
+    "vertical": "vets",
+    "city": "Córdoba",
+    "citySlug": "cordoba",
+    "country": "ireland",
+    "address": "Córdoba, Ireland",
+    "phone": "0351 452-5589",
+    "website": "",
+    "email": "",
+    "description": "Veterinaria Mi Granja is a trusted veterinary clinics located in Córdoba, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Veterinaria Mi Granja treat?",
+        "a": "Veterinaria Mi Granja treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Veterinaria Mi Granja offer emergency veterinary services?",
+        "a": "Contact Veterinaria Mi Granja for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Veterinaria Mi Granja provide vaccinations?",
+        "a": "Yes, Veterinaria Mi Granja offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Veterinaria Mi Granja?",
+        "a": "Veterinaria Mi Granja can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "veterinaria-neozoo",
+    "name": "Veterinaria NeoZoo",
+    "vertical": "vets",
+    "city": "Córdoba",
+    "citySlug": "cordoba",
+    "country": "ireland",
+    "address": "Córdoba, Ireland",
+    "phone": "0351 684-5031",
+    "website": "",
+    "email": "",
+    "description": "Veterinaria NeoZoo is a trusted veterinary clinics located in Córdoba, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Veterinaria NeoZoo treat?",
+        "a": "Veterinaria NeoZoo treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Veterinaria NeoZoo offer emergency veterinary services?",
+        "a": "Contact Veterinaria NeoZoo for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Veterinaria NeoZoo provide vaccinations?",
+        "a": "Yes, Veterinaria NeoZoo offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Veterinaria NeoZoo?",
+        "a": "Veterinaria NeoZoo can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
     "slug": "apex-plumbing-services",
     "name": "Apex Plumbing Services",
     "vertical": "plumbers",
@@ -3390,6 +3492,812 @@
       }
     ],
     "schema_type": "HairSalon",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "pro-plumber-sydney",
+    "name": "Pro Plumber Sydney",
+    "vertical": "plumbers",
+    "city": "Sydney",
+    "citySlug": "sydney",
+    "country": "ireland",
+    "address": "Sydney, Ireland",
+    "phone": "0421 779 324",
+    "website": "https://www.proplumber.com.au/",
+    "email": "",
+    "description": "Pro Plumber Sydney is a trusted plumbers located in Sydney, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Pro Plumber Sydney offer emergency plumbing?",
+        "a": "Contact Pro Plumber Sydney for emergency callout availability and response times."
+      },
+      {
+        "q": "What areas does Pro Plumber Sydney cover?",
+        "a": "Pro Plumber Sydney serves the local area and surrounding regions. Call to confirm coverage."
+      },
+      {
+        "q": "Does Pro Plumber Sydney provide free quotes?",
+        "a": "Pro Plumber Sydney can provide estimates for plumbing work. Contact them to discuss your needs."
+      }
+    ],
+    "schema_type": "Plumber",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "hero-plumbing",
+    "name": "Hero Plumbing",
+    "vertical": "plumbers",
+    "city": "Sydney",
+    "citySlug": "sydney",
+    "country": "ireland",
+    "address": "Sydney, Ireland",
+    "phone": "(02) 9137 8549",
+    "website": "https://www.heroplumbing.com.au/",
+    "email": "",
+    "description": "Hero Plumbing is a trusted plumbers located in Sydney, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Hero Plumbing offer emergency plumbing?",
+        "a": "Contact Hero Plumbing for emergency callout availability and response times."
+      },
+      {
+        "q": "What areas does Hero Plumbing cover?",
+        "a": "Hero Plumbing serves the local area and surrounding regions. Call to confirm coverage."
+      },
+      {
+        "q": "Does Hero Plumbing provide free quotes?",
+        "a": "Hero Plumbing can provide estimates for plumbing work. Contact them to discuss your needs."
+      }
+    ],
+    "schema_type": "Plumber",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "mr-splash-plumbing",
+    "name": "Mr Splash Plumbing",
+    "vertical": "plumbers",
+    "city": "Sydney",
+    "citySlug": "sydney",
+    "country": "ireland",
+    "address": "Sydney, Ireland",
+    "phone": "1300 677 752",
+    "website": "https://www.mrsplashplumbing.com.au/",
+    "email": "",
+    "description": "Mr Splash Plumbing is a trusted plumbers located in Sydney, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Mr Splash Plumbing offer emergency plumbing?",
+        "a": "Contact Mr Splash Plumbing for emergency callout availability and response times."
+      },
+      {
+        "q": "What areas does Mr Splash Plumbing cover?",
+        "a": "Mr Splash Plumbing serves the local area and surrounding regions. Call to confirm coverage."
+      },
+      {
+        "q": "Does Mr Splash Plumbing provide free quotes?",
+        "a": "Mr Splash Plumbing can provide estimates for plumbing work. Contact them to discuss your needs."
+      }
+    ],
+    "schema_type": "Plumber",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "ac-plumbing",
+    "name": "AC Plumbing",
+    "vertical": "plumbers",
+    "city": "Brisbane",
+    "citySlug": "brisbane",
+    "country": "ireland",
+    "address": "Brisbane, Ireland",
+    "phone": "1300 161 615",
+    "website": "https://www.acplumbing.com.au/",
+    "email": "",
+    "description": "AC Plumbing is a trusted plumbers located in Brisbane, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does AC Plumbing offer emergency plumbing?",
+        "a": "Contact AC Plumbing for emergency callout availability and response times."
+      },
+      {
+        "q": "What areas does AC Plumbing cover?",
+        "a": "AC Plumbing serves the local area and surrounding regions. Call to confirm coverage."
+      },
+      {
+        "q": "Does AC Plumbing provide free quotes?",
+        "a": "AC Plumbing can provide estimates for plumbing work. Contact them to discuss your needs."
+      }
+    ],
+    "schema_type": "Plumber",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "brisbane-city-plumbing-and-gas",
+    "name": "Brisbane City Plumbing and Gas",
+    "vertical": "plumbers",
+    "city": "Brisbane",
+    "citySlug": "brisbane",
+    "country": "ireland",
+    "address": "Brisbane, Ireland",
+    "phone": "0435 878 512",
+    "website": "https://brisbanecityplumbingandgas.com.au/",
+    "email": "",
+    "description": "Brisbane City Plumbing and Gas is a trusted plumbers located in Brisbane, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Brisbane City Plumbing and Gas offer emergency plumbing?",
+        "a": "Contact Brisbane City Plumbing and Gas for emergency callout availability and response times."
+      },
+      {
+        "q": "What areas does Brisbane City Plumbing and Gas cover?",
+        "a": "Brisbane City Plumbing and Gas serves the local area and surrounding regions. Call to confirm coverage."
+      },
+      {
+        "q": "Does Brisbane City Plumbing and Gas provide free quotes?",
+        "a": "Brisbane City Plumbing and Gas can provide estimates for plumbing work. Contact them to discuss your needs."
+      }
+    ],
+    "schema_type": "Plumber",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "salmon-plumbing",
+    "name": "Salmon Plumbing",
+    "vertical": "plumbers",
+    "city": "Brisbane",
+    "citySlug": "brisbane",
+    "country": "ireland",
+    "address": "Brisbane, Ireland",
+    "phone": "(07) 3862 2600",
+    "website": "https://salmonplumbing.com.au/",
+    "email": "",
+    "description": "Salmon Plumbing is a trusted plumbers located in Brisbane, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Salmon Plumbing offer emergency plumbing?",
+        "a": "Contact Salmon Plumbing for emergency callout availability and response times."
+      },
+      {
+        "q": "What areas does Salmon Plumbing cover?",
+        "a": "Salmon Plumbing serves the local area and surrounding regions. Call to confirm coverage."
+      },
+      {
+        "q": "Does Salmon Plumbing provide free quotes?",
+        "a": "Salmon Plumbing can provide estimates for plumbing work. Contact them to discuss your needs."
+      }
+    ],
+    "schema_type": "Plumber",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "about-smiles-dental",
+    "name": "About Smiles Dental",
+    "vertical": "dentists",
+    "city": "Sydney",
+    "citySlug": "sydney",
+    "country": "ireland",
+    "address": "Sydney, Ireland",
+    "phone": "(02) 8319 2323",
+    "website": "https://www.aboutsmiles.com.au/",
+    "email": "quay@aboutsmiles.com.au",
+    "description": "About Smiles Dental is a trusted dentists located in Sydney, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is About Smiles Dental accepting new patients?",
+        "a": "About Smiles Dental welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does About Smiles Dental offer emergency dental care?",
+        "a": "Contact About Smiles Dental directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does About Smiles Dental accept?",
+        "a": "About Smiles Dental works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does About Smiles Dental offer?",
+        "a": "About Smiles Dental provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "quay-dental",
+    "name": "Quay Dental",
+    "vertical": "dentists",
+    "city": "Sydney",
+    "citySlug": "sydney",
+    "country": "ireland",
+    "address": "Sydney, Ireland",
+    "phone": "02 9241 2038",
+    "website": "https://quaydental.com.au/",
+    "email": "",
+    "description": "Quay Dental is a trusted dentists located in Sydney, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Quay Dental accepting new patients?",
+        "a": "Quay Dental welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Quay Dental offer emergency dental care?",
+        "a": "Contact Quay Dental directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Quay Dental accept?",
+        "a": "Quay Dental works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Quay Dental offer?",
+        "a": "Quay Dental provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "the-dental-practice-burwood",
+    "name": "The Dental Practice Burwood",
+    "vertical": "dentists",
+    "city": "Sydney",
+    "citySlug": "sydney",
+    "country": "ireland",
+    "address": "Sydney, Ireland",
+    "phone": "(02) 9739 1400",
+    "website": "https://thedentalpractice.com.au/",
+    "email": "",
+    "description": "The Dental Practice Burwood is a trusted dentists located in Sydney, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is The Dental Practice Burwood accepting new patients?",
+        "a": "The Dental Practice Burwood welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does The Dental Practice Burwood offer emergency dental care?",
+        "a": "Contact The Dental Practice Burwood directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does The Dental Practice Burwood accept?",
+        "a": "The Dental Practice Burwood works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does The Dental Practice Burwood offer?",
+        "a": "The Dental Practice Burwood provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "sydney-cbd-dentistry",
+    "name": "Sydney CBD Dentistry",
+    "vertical": "dentists",
+    "city": "Sydney",
+    "citySlug": "sydney",
+    "country": "ireland",
+    "address": "Sydney, Ireland",
+    "phone": "(02) 8090 1109",
+    "website": "https://www.sydneycbddentistry.com.au/",
+    "email": "",
+    "description": "Sydney CBD Dentistry is a trusted dentists located in Sydney, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Sydney CBD Dentistry accepting new patients?",
+        "a": "Sydney CBD Dentistry welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Sydney CBD Dentistry offer emergency dental care?",
+        "a": "Contact Sydney CBD Dentistry directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Sydney CBD Dentistry accept?",
+        "a": "Sydney CBD Dentistry works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Sydney CBD Dentistry offer?",
+        "a": "Sydney CBD Dentistry provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "south-melbourne-dental-group",
+    "name": "South Melbourne Dental Group",
+    "vertical": "dentists",
+    "city": "Melbourne",
+    "citySlug": "melbourne",
+    "country": "ireland",
+    "address": "Melbourne, Ireland",
+    "phone": "03 9690 6388",
+    "website": "https://www.southmelbournedental.com.au/",
+    "email": "",
+    "description": "South Melbourne Dental Group is a trusted dentists located in Melbourne, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is South Melbourne Dental Group accepting new patients?",
+        "a": "South Melbourne Dental Group welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does South Melbourne Dental Group offer emergency dental care?",
+        "a": "Contact South Melbourne Dental Group directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does South Melbourne Dental Group accept?",
+        "a": "South Melbourne Dental Group works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does South Melbourne Dental Group offer?",
+        "a": "South Melbourne Dental Group provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "melbourne-dentistry-collins-st",
+    "name": "Melbourne Dentistry Collins St",
+    "vertical": "dentists",
+    "city": "Melbourne",
+    "citySlug": "melbourne",
+    "country": "ireland",
+    "address": "Melbourne, Ireland",
+    "phone": "03 9650 0033",
+    "website": "https://www.melbournedentistry.com/",
+    "email": "",
+    "description": "Melbourne Dentistry Collins St is a trusted dentists located in Melbourne, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Melbourne Dentistry Collins St accepting new patients?",
+        "a": "Melbourne Dentistry Collins St welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Melbourne Dentistry Collins St offer emergency dental care?",
+        "a": "Contact Melbourne Dentistry Collins St directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Melbourne Dentistry Collins St accept?",
+        "a": "Melbourne Dentistry Collins St works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Melbourne Dentistry Collins St offer?",
+        "a": "Melbourne Dentistry Collins St provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "women-in-dentistry",
+    "name": "Women in Dentistry",
+    "vertical": "dentists",
+    "city": "Melbourne",
+    "citySlug": "melbourne",
+    "country": "ireland",
+    "address": "Melbourne, Ireland",
+    "phone": "(03) 9650 2863",
+    "website": "https://womenindentistry.com.au/",
+    "email": "",
+    "description": "Women in Dentistry is a trusted dentists located in Melbourne, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Women in Dentistry accepting new patients?",
+        "a": "Women in Dentistry welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Women in Dentistry offer emergency dental care?",
+        "a": "Contact Women in Dentistry directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Women in Dentistry accept?",
+        "a": "Women in Dentistry works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Women in Dentistry offer?",
+        "a": "Women in Dentistry provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "dental-on-clarendon",
+    "name": "Dental on Clarendon",
+    "vertical": "dentists",
+    "city": "Melbourne",
+    "citySlug": "melbourne",
+    "country": "ireland",
+    "address": "Melbourne, Ireland",
+    "phone": "(03) 9690 3285",
+    "website": "https://dentalonclarendon.com.au/",
+    "email": "",
+    "description": "Dental on Clarendon is a trusted dentists located in Melbourne, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Dental on Clarendon accepting new patients?",
+        "a": "Dental on Clarendon welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Dental on Clarendon offer emergency dental care?",
+        "a": "Contact Dental on Clarendon directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Dental on Clarendon accept?",
+        "a": "Dental on Clarendon works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Dental on Clarendon offer?",
+        "a": "Dental on Clarendon provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "mc-dental-melbourne-central",
+    "name": "MC Dental Melbourne Central",
+    "vertical": "dentists",
+    "city": "Melbourne",
+    "citySlug": "melbourne",
+    "country": "ireland",
+    "address": "Melbourne, Ireland",
+    "phone": "03 8608 8971",
+    "website": "https://www.mcdental.com.au/",
+    "email": "",
+    "description": "MC Dental Melbourne Central is a trusted dentists located in Melbourne, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is MC Dental Melbourne Central accepting new patients?",
+        "a": "MC Dental Melbourne Central welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does MC Dental Melbourne Central offer emergency dental care?",
+        "a": "Contact MC Dental Melbourne Central directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does MC Dental Melbourne Central accept?",
+        "a": "MC Dental Melbourne Central works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does MC Dental Melbourne Central offer?",
+        "a": "MC Dental Melbourne Central provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "evervet",
+    "name": "Evervet",
+    "vertical": "vets",
+    "city": "Melbourne",
+    "citySlug": "melbourne",
+    "country": "ireland",
+    "address": "Melbourne, Ireland",
+    "phone": "03 9510 1335",
+    "website": "https://www.evervet.com.au/",
+    "email": "",
+    "description": "Evervet is a trusted veterinary clinics located in Melbourne, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Evervet treat?",
+        "a": "Evervet treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Evervet offer emergency veterinary services?",
+        "a": "Contact Evervet for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Evervet provide vaccinations?",
+        "a": "Yes, Evervet offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Evervet?",
+        "a": "Evervet can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "albert-park-vet",
+    "name": "Albert Park Vet",
+    "vertical": "vets",
+    "city": "Melbourne",
+    "citySlug": "melbourne",
+    "country": "ireland",
+    "address": "Melbourne, Ireland",
+    "phone": "03 9699 7841",
+    "website": "https://www.albertparkvet.com.au/",
+    "email": "",
+    "description": "Albert Park Vet is a trusted veterinary clinics located in Melbourne, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Albert Park Vet treat?",
+        "a": "Albert Park Vet treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Albert Park Vet offer emergency veterinary services?",
+        "a": "Contact Albert Park Vet for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Albert Park Vet provide vaccinations?",
+        "a": "Yes, Albert Park Vet offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Albert Park Vet?",
+        "a": "Albert Park Vet can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "nundah-village-vet",
+    "name": "Nundah Village Vet",
+    "vertical": "vets",
+    "city": "Brisbane",
+    "citySlug": "brisbane",
+    "country": "ireland",
+    "address": "Brisbane, Ireland",
+    "phone": "07 3266 9992",
+    "website": "https://nundahvillagevet.com.au/",
+    "email": "",
+    "description": "Nundah Village Vet is a trusted veterinary clinics located in Brisbane, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Nundah Village Vet treat?",
+        "a": "Nundah Village Vet treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Nundah Village Vet offer emergency veterinary services?",
+        "a": "Contact Nundah Village Vet for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Nundah Village Vet provide vaccinations?",
+        "a": "Yes, Nundah Village Vet offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Nundah Village Vet?",
+        "a": "Nundah Village Vet can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "cleveland-vet",
+    "name": "Cleveland Vet",
+    "vertical": "vets",
+    "city": "Brisbane",
+    "citySlug": "brisbane",
+    "country": "ireland",
+    "address": "Brisbane, Ireland",
+    "phone": "07 3264 9400",
+    "website": "https://clevelandvet.com.au/",
+    "email": "",
+    "description": "Cleveland Vet is a trusted veterinary clinics located in Brisbane, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Cleveland Vet treat?",
+        "a": "Cleveland Vet treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Cleveland Vet offer emergency veterinary services?",
+        "a": "Contact Cleveland Vet for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Cleveland Vet provide vaccinations?",
+        "a": "Yes, Cleveland Vet offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Cleveland Vet?",
+        "a": "Cleveland Vet can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "northgate-vet-surgery",
+    "name": "Northgate Vet Surgery",
+    "vertical": "vets",
+    "city": "Brisbane",
+    "citySlug": "brisbane",
+    "country": "ireland",
+    "address": "Brisbane, Ireland",
+    "phone": "07 3266 9992",
+    "website": "https://www.northgatevet.com.au/",
+    "email": "",
+    "description": "Northgate Vet Surgery is a trusted veterinary clinics located in Brisbane, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Northgate Vet Surgery treat?",
+        "a": "Northgate Vet Surgery treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Northgate Vet Surgery offer emergency veterinary services?",
+        "a": "Contact Northgate Vet Surgery for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Northgate Vet Surgery provide vaccinations?",
+        "a": "Yes, Northgate Vet Surgery offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Northgate Vet Surgery?",
+        "a": "Northgate Vet Surgery can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "lueur-hair-studio",
+    "name": "Lueur Hair Studio",
+    "vertical": "salons",
+    "city": "Newcastle",
+    "citySlug": "newcastle",
+    "country": "ireland",
+    "address": "Newcastle, Ireland",
+    "phone": "0412 664 802",
+    "website": "https://lueurhairstudio.com.au/",
+    "email": "",
+    "description": "Lueur Hair Studio is a trusted hair salons located in Newcastle, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Lueur Hair Studio accept walk-ins?",
+        "a": "Lueur Hair Studio welcomes walk-ins subject to availability. Booking in advance is recommended."
+      },
+      {
+        "q": "What services does Lueur Hair Studio offer?",
+        "a": "Lueur Hair Studio offers cuts, colour, styling, treatments, and more. Contact them for a full service menu."
+      },
+      {
+        "q": "What products does Lueur Hair Studio use?",
+        "a": "Lueur Hair Studio uses premium, professional-grade hair care products. Ask your stylist for details."
+      }
+    ],
+    "schema_type": "HairSalon",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "plumbing-electrical-doctor",
+    "name": "Plumbing & Electrical Doctor",
+    "vertical": "plumbers",
+    "city": "Canberra",
+    "citySlug": "canberra",
+    "country": "ireland",
+    "address": "Canberra, Ireland",
+    "phone": "131091",
+    "website": "https://plumbingandelectrical.net.au/",
+    "email": "",
+    "description": "Plumbing & Electrical Doctor is a trusted plumbers located in Canberra, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Plumbing & Electrical Doctor offer emergency plumbing?",
+        "a": "Contact Plumbing & Electrical Doctor for emergency callout availability and response times."
+      },
+      {
+        "q": "What areas does Plumbing & Electrical Doctor cover?",
+        "a": "Plumbing & Electrical Doctor serves the local area and surrounding regions. Call to confirm coverage."
+      },
+      {
+        "q": "Does Plumbing & Electrical Doctor provide free quotes?",
+        "a": "Plumbing & Electrical Doctor can provide estimates for plumbing work. Contact them to discuss your needs."
+      }
+    ],
+    "schema_type": "Plumber",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "all-day-group",
+    "name": "All Day Group",
+    "vertical": "plumbers",
+    "city": "Canberra",
+    "citySlug": "canberra",
+    "country": "ireland",
+    "address": "Canberra, Ireland",
+    "phone": "",
+    "website": "https://alldaygroup.com.au/",
+    "email": "",
+    "description": "All Day Group is a trusted plumbers located in Canberra, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does All Day Group offer emergency plumbing?",
+        "a": "Contact All Day Group for emergency callout availability and response times."
+      },
+      {
+        "q": "What areas does All Day Group cover?",
+        "a": "All Day Group serves the local area and surrounding regions. Call to confirm coverage."
+      },
+      {
+        "q": "Does All Day Group provide free quotes?",
+        "a": "All Day Group can provide estimates for plumbing work. Contact them to discuss your needs."
+      }
+    ],
+    "schema_type": "Plumber",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "precise-services",
+    "name": "Precise Services",
+    "vertical": "plumbers",
+    "city": "Adelaide",
+    "citySlug": "adelaide",
+    "country": "ireland",
+    "address": "Adelaide, Ireland",
+    "phone": "",
+    "website": "https://preciseservices.com.au/",
+    "email": "",
+    "description": "Precise Services is a trusted plumbers located in Adelaide, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Precise Services offer emergency plumbing?",
+        "a": "Contact Precise Services for emergency callout availability and response times."
+      },
+      {
+        "q": "What areas does Precise Services cover?",
+        "a": "Precise Services serves the local area and surrounding regions. Call to confirm coverage."
+      },
+      {
+        "q": "Does Precise Services provide free quotes?",
+        "a": "Precise Services can provide estimates for plumbing work. Contact them to discuss your needs."
+      }
+    ],
+    "schema_type": "Plumber",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "ken-hall-plumbers",
+    "name": "Ken Hall Plumbers",
+    "vertical": "plumbers",
+    "city": "Adelaide",
+    "citySlug": "adelaide",
+    "country": "ireland",
+    "address": "Adelaide, Ireland",
+    "phone": "",
+    "website": "https://www.kenhallplumbers.com.au/",
+    "email": "",
+    "description": "Ken Hall Plumbers is a trusted plumbers located in Adelaide, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Ken Hall Plumbers offer emergency plumbing?",
+        "a": "Contact Ken Hall Plumbers for emergency callout availability and response times."
+      },
+      {
+        "q": "What areas does Ken Hall Plumbers cover?",
+        "a": "Ken Hall Plumbers serves the local area and surrounding regions. Call to confirm coverage."
+      },
+      {
+        "q": "Does Ken Hall Plumbers provide free quotes?",
+        "a": "Ken Hall Plumbers can provide estimates for plumbing work. Contact them to discuss your needs."
+      }
+    ],
+    "schema_type": "Plumber",
     "locale": "en",
     "openingHours": "Mo-Fr 09:00-18:00"
   },
@@ -26338,6 +27246,1030 @@
     "openingHours": "Mo-Fr 09:00-18:00"
   },
   {
+    "slug": "kennedys-law",
+    "name": "Kennedys Law",
+    "vertical": "accountants",
+    "city": "Dublin",
+    "citySlug": "dublin",
+    "country": "ireland",
+    "address": "Dublin, Ireland",
+    "phone": "+353 1 878 0055",
+    "website": "https://www.kennedyslaw.com/en/where-we-are/emea/ireland/",
+    "email": "",
+    "description": "Kennedys Law is a trusted professional services located in Dublin, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Kennedys Law offer free consultations?",
+        "a": "Contact Kennedys Law to enquire about initial consultation availability."
+      },
+      {
+        "q": "What services does Kennedys Law provide?",
+        "a": "Kennedys Law offers a range of professional services. Contact them for details."
+      },
+      {
+        "q": "Does Kennedys Law work with small businesses?",
+        "a": "Yes, Kennedys Law works with businesses of all sizes. Get in touch to discuss your needs."
+      }
+    ],
+    "schema_type": "AccountingService",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "browne-jacobson-ireland-llp",
+    "name": "Browne Jacobson Ireland LLP",
+    "vertical": "accountants",
+    "city": "Dublin",
+    "citySlug": "dublin",
+    "country": "ireland",
+    "address": "Dublin, Ireland",
+    "phone": "",
+    "website": "https://www.brownejacobson.com/locations/dublin-office",
+    "email": "",
+    "description": "Browne Jacobson Ireland LLP is a trusted professional services located in Dublin, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Browne Jacobson Ireland LLP offer free consultations?",
+        "a": "Contact Browne Jacobson Ireland LLP to enquire about initial consultation availability."
+      },
+      {
+        "q": "What services does Browne Jacobson Ireland LLP provide?",
+        "a": "Browne Jacobson Ireland LLP offers a range of professional services. Contact them for details."
+      },
+      {
+        "q": "Does Browne Jacobson Ireland LLP work with small businesses?",
+        "a": "Yes, Browne Jacobson Ireland LLP works with businesses of all sizes. Get in touch to discuss your needs."
+      }
+    ],
+    "schema_type": "AccountingService",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "joyce-co-solicitors",
+    "name": "Joyce & Co Solicitors",
+    "vertical": "accountants",
+    "city": "Cork",
+    "citySlug": "cork",
+    "country": "ireland",
+    "address": "Cork, Ireland",
+    "phone": "",
+    "website": "https://joycecosolicitors.ie/",
+    "email": "",
+    "description": "Joyce & Co Solicitors is a trusted professional services located in Cork, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Joyce & Co Solicitors offer free consultations?",
+        "a": "Contact Joyce & Co Solicitors to enquire about initial consultation availability."
+      },
+      {
+        "q": "What services does Joyce & Co Solicitors provide?",
+        "a": "Joyce & Co Solicitors offers a range of professional services. Contact them for details."
+      },
+      {
+        "q": "Does Joyce & Co Solicitors work with small businesses?",
+        "a": "Yes, Joyce & Co Solicitors works with businesses of all sizes. Get in touch to discuss your needs."
+      }
+    ],
+    "schema_type": "AccountingService",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "callan-tansey-solicitors",
+    "name": "Callan Tansey Solicitors",
+    "vertical": "accountants",
+    "city": "Galway",
+    "citySlug": "galway",
+    "country": "ireland",
+    "address": "Galway, Ireland",
+    "phone": "",
+    "website": "https://callantansey.ie/",
+    "email": "",
+    "description": "Callan Tansey Solicitors is a trusted professional services located in Galway, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Callan Tansey Solicitors offer free consultations?",
+        "a": "Contact Callan Tansey Solicitors to enquire about initial consultation availability."
+      },
+      {
+        "q": "What services does Callan Tansey Solicitors provide?",
+        "a": "Callan Tansey Solicitors offers a range of professional services. Contact them for details."
+      },
+      {
+        "q": "Does Callan Tansey Solicitors work with small businesses?",
+        "a": "Yes, Callan Tansey Solicitors works with businesses of all sizes. Get in touch to discuss your needs."
+      }
+    ],
+    "schema_type": "AccountingService",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "shanahan-o-sullivan-legal-llp",
+    "name": "Shanahan O'Sullivan Legal LLP",
+    "vertical": "accountants",
+    "city": "Limerick",
+    "citySlug": "limerick",
+    "country": "ireland",
+    "address": "Limerick, Ireland",
+    "phone": "",
+    "website": "https://soslegal.ie/",
+    "email": "",
+    "description": "Shanahan O'Sullivan Legal LLP is a trusted professional services located in Limerick, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Shanahan O'Sullivan Legal LLP offer free consultations?",
+        "a": "Contact Shanahan O'Sullivan Legal LLP to enquire about initial consultation availability."
+      },
+      {
+        "q": "What services does Shanahan O'Sullivan Legal LLP provide?",
+        "a": "Shanahan O'Sullivan Legal LLP offers a range of professional services. Contact them for details."
+      },
+      {
+        "q": "Does Shanahan O'Sullivan Legal LLP work with small businesses?",
+        "a": "Yes, Shanahan O'Sullivan Legal LLP works with businesses of all sizes. Get in touch to discuss your needs."
+      }
+    ],
+    "schema_type": "AccountingService",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "martina-murphy-solicitors",
+    "name": "Martina Murphy Solicitors",
+    "vertical": "accountants",
+    "city": "Limerick",
+    "citySlug": "limerick",
+    "country": "ireland",
+    "address": "Limerick, Ireland",
+    "phone": "",
+    "website": "https://www.hg.org/lawfirms/ireland",
+    "email": "",
+    "description": "Martina Murphy Solicitors is a trusted professional services located in Limerick, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Martina Murphy Solicitors offer free consultations?",
+        "a": "Contact Martina Murphy Solicitors to enquire about initial consultation availability."
+      },
+      {
+        "q": "What services does Martina Murphy Solicitors provide?",
+        "a": "Martina Murphy Solicitors offers a range of professional services. Contact them for details."
+      },
+      {
+        "q": "Does Martina Murphy Solicitors work with small businesses?",
+        "a": "Yes, Martina Murphy Solicitors works with businesses of all sizes. Get in touch to discuss your needs."
+      }
+    ],
+    "schema_type": "AccountingService",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "roberts-nathan",
+    "name": "Roberts Nathan",
+    "vertical": "accountants",
+    "city": "Cork",
+    "citySlug": "cork",
+    "country": "ireland",
+    "address": "Cork, Ireland",
+    "phone": "+353 21 421 7940",
+    "website": "https://www.robertsnathan.com/",
+    "email": "info@robertsnathan.com",
+    "description": "Roberts Nathan is a trusted professional services located in Cork, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Roberts Nathan offer free consultations?",
+        "a": "Contact Roberts Nathan to enquire about initial consultation availability."
+      },
+      {
+        "q": "What services does Roberts Nathan provide?",
+        "a": "Roberts Nathan offers a range of professional services. Contact them for details."
+      },
+      {
+        "q": "Does Roberts Nathan work with small businesses?",
+        "a": "Yes, Roberts Nathan works with businesses of all sizes. Get in touch to discuss your needs."
+      }
+    ],
+    "schema_type": "AccountingService",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "chk-partnership",
+    "name": "CHK Partnership",
+    "vertical": "accountants",
+    "city": "Cork",
+    "citySlug": "cork",
+    "country": "ireland",
+    "address": "Cork, Ireland",
+    "phone": "",
+    "website": "https://chk.ie/",
+    "email": "",
+    "description": "CHK Partnership is a trusted professional services located in Cork, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does CHK Partnership offer free consultations?",
+        "a": "Contact CHK Partnership to enquire about initial consultation availability."
+      },
+      {
+        "q": "What services does CHK Partnership provide?",
+        "a": "CHK Partnership offers a range of professional services. Contact them for details."
+      },
+      {
+        "q": "Does CHK Partnership work with small businesses?",
+        "a": "Yes, CHK Partnership works with businesses of all sizes. Get in touch to discuss your needs."
+      }
+    ],
+    "schema_type": "AccountingService",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "fitzgerald-power",
+    "name": "Fitzgerald Power",
+    "vertical": "accountants",
+    "city": "Waterford",
+    "citySlug": "waterford",
+    "country": "ireland",
+    "address": "Waterford, Ireland",
+    "phone": "",
+    "website": "https://fitzgeraldpower.ie/",
+    "email": "",
+    "description": "Fitzgerald Power is a trusted professional services located in Waterford, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Fitzgerald Power offer free consultations?",
+        "a": "Contact Fitzgerald Power to enquire about initial consultation availability."
+      },
+      {
+        "q": "What services does Fitzgerald Power provide?",
+        "a": "Fitzgerald Power offers a range of professional services. Contact them for details."
+      },
+      {
+        "q": "Does Fitzgerald Power work with small businesses?",
+        "a": "Yes, Fitzgerald Power works with businesses of all sizes. Get in touch to discuss your needs."
+      }
+    ],
+    "schema_type": "AccountingService",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "goldstone-fitness",
+    "name": "Goldstone Fitness",
+    "vertical": "gyms",
+    "city": "Waterford",
+    "citySlug": "waterford",
+    "country": "ireland",
+    "address": "Waterford, Ireland",
+    "phone": "051 354 802",
+    "website": "https://www.goldstonefitness.ie/",
+    "email": "",
+    "description": "Goldstone Fitness is a trusted gyms located in Waterford, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Goldstone Fitness offer trial memberships?",
+        "a": "Contact Goldstone Fitness to ask about trial passes and membership options."
+      },
+      {
+        "q": "What classes does Goldstone Fitness offer?",
+        "a": "Goldstone Fitness offers a range of fitness classes. Check their schedule for availability."
+      },
+      {
+        "q": "Does Goldstone Fitness have personal trainers?",
+        "a": "Yes, Goldstone Fitness has qualified personal trainers available. Enquire about packages."
+      }
+    ],
+    "schema_type": "HealthClub",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "crossfit-waterford",
+    "name": "Crossfit Waterford",
+    "vertical": "gyms",
+    "city": "Waterford",
+    "citySlug": "waterford",
+    "country": "ireland",
+    "address": "Waterford, Ireland",
+    "phone": "085 2119780",
+    "website": "https://www.crossfitwaterford.com/",
+    "email": "",
+    "description": "Crossfit Waterford is a trusted gyms located in Waterford, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Crossfit Waterford offer trial memberships?",
+        "a": "Contact Crossfit Waterford to ask about trial passes and membership options."
+      },
+      {
+        "q": "What classes does Crossfit Waterford offer?",
+        "a": "Crossfit Waterford offers a range of fitness classes. Check their schedule for availability."
+      },
+      {
+        "q": "Does Crossfit Waterford have personal trainers?",
+        "a": "Yes, Crossfit Waterford has qualified personal trainers available. Enquire about packages."
+      }
+    ],
+    "schema_type": "HealthClub",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "energie-fitness-clarehall",
+    "name": "Energie Fitness Clarehall",
+    "vertical": "gyms",
+    "city": "Dublin",
+    "citySlug": "dublin",
+    "country": "ireland",
+    "address": "Dublin, Ireland",
+    "phone": "353 1 903 8439",
+    "website": "https://www.energiefitness.com/gym/clarehall",
+    "email": "clarehall@energiefitness.com",
+    "description": "Energie Fitness Clarehall is a trusted gyms located in Dublin, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Energie Fitness Clarehall offer trial memberships?",
+        "a": "Contact Energie Fitness Clarehall to ask about trial passes and membership options."
+      },
+      {
+        "q": "What classes does Energie Fitness Clarehall offer?",
+        "a": "Energie Fitness Clarehall offers a range of fitness classes. Check their schedule for availability."
+      },
+      {
+        "q": "Does Energie Fitness Clarehall have personal trainers?",
+        "a": "Yes, Energie Fitness Clarehall has qualified personal trainers available. Enquire about packages."
+      }
+    ],
+    "schema_type": "HealthClub",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "zucchinis-restaurant",
+    "name": "Zucchinis Restaurant",
+    "vertical": "restaurants",
+    "city": "Navan",
+    "citySlug": "navan",
+    "country": "ireland",
+    "address": "Navan, Ireland",
+    "phone": "+353 46 906 0459",
+    "website": "zucchinisnavan.ie",
+    "email": "",
+    "description": "Zucchinis Restaurant is a trusted restaurants located in Navan, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Zucchinis Restaurant take reservations?",
+        "a": "Yes, Zucchinis Restaurant accepts reservations. Call ahead or book online for the best experience."
+      },
+      {
+        "q": "What type of cuisine does Zucchinis Restaurant serve?",
+        "a": "Zucchinis Restaurant offers a carefully curated menu featuring local and international dishes."
+      },
+      {
+        "q": "Does Zucchinis Restaurant have parking?",
+        "a": "Please contact Zucchinis Restaurant directly for parking information and availability."
+      },
+      {
+        "q": "Is there a dress code at Zucchinis Restaurant?",
+        "a": "Smart casual attire is recommended. Contact the restaurant for specific event requirements."
+      },
+      {
+        "q": "Does Zucchinis Restaurant offer private dining?",
+        "a": "Zucchinis Restaurant may offer private dining options for special events. Contact them for details."
+      }
+    ],
+    "schema_type": "Restaurant",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "prestons-restaurant-bellinter-house",
+    "name": "Prestons Restaurant Bellinter House",
+    "vertical": "restaurants",
+    "city": "Navan",
+    "citySlug": "navan",
+    "country": "ireland",
+    "address": "Navan, Ireland",
+    "phone": "+353 46 903 0900",
+    "website": "bellinterhouse.com",
+    "email": "reservations@bellinterhouse.com",
+    "description": "Prestons Restaurant Bellinter House is a trusted restaurants located in Navan, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Prestons Restaurant Bellinter House take reservations?",
+        "a": "Yes, Prestons Restaurant Bellinter House accepts reservations. Call ahead or book online for the best experience."
+      },
+      {
+        "q": "What type of cuisine does Prestons Restaurant Bellinter House serve?",
+        "a": "Prestons Restaurant Bellinter House offers a carefully curated menu featuring local and international dishes."
+      },
+      {
+        "q": "Does Prestons Restaurant Bellinter House have parking?",
+        "a": "Please contact Prestons Restaurant Bellinter House directly for parking information and availability."
+      },
+      {
+        "q": "Is there a dress code at Prestons Restaurant Bellinter House?",
+        "a": "Smart casual attire is recommended. Contact the restaurant for specific event requirements."
+      },
+      {
+        "q": "Does Prestons Restaurant Bellinter House offer private dining?",
+        "a": "Prestons Restaurant Bellinter House may offer private dining options for special events. Contact them for details."
+      }
+    ],
+    "schema_type": "Restaurant",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "fortes-valley-cafe",
+    "name": "Fortes Valley Cafe",
+    "vertical": "restaurants",
+    "city": "Navan",
+    "citySlug": "navan",
+    "country": "ireland",
+    "address": "Navan, Ireland",
+    "phone": "+353 46 902 1322",
+    "website": "valleycafe.ie",
+    "email": "valleycafe43@gmail.com",
+    "description": "Fortes Valley Cafe is a trusted restaurants located in Navan, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Fortes Valley Cafe take reservations?",
+        "a": "Yes, Fortes Valley Cafe accepts reservations. Call ahead or book online for the best experience."
+      },
+      {
+        "q": "What type of cuisine does Fortes Valley Cafe serve?",
+        "a": "Fortes Valley Cafe offers a carefully curated menu featuring local and international dishes."
+      },
+      {
+        "q": "Does Fortes Valley Cafe have parking?",
+        "a": "Please contact Fortes Valley Cafe directly for parking information and availability."
+      },
+      {
+        "q": "Is there a dress code at Fortes Valley Cafe?",
+        "a": "Smart casual attire is recommended. Contact the restaurant for specific event requirements."
+      },
+      {
+        "q": "Does Fortes Valley Cafe offer private dining?",
+        "a": "Fortes Valley Cafe may offer private dining options for special events. Contact them for details."
+      }
+    ],
+    "schema_type": "Restaurant",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "niamhs-restaurant",
+    "name": "Niamhs Restaurant",
+    "vertical": "restaurants",
+    "city": "Clonmel",
+    "citySlug": "clonmel",
+    "country": "ireland",
+    "address": "Clonmel, Ireland",
+    "phone": "+353 52 612 5698",
+    "website": "niamhs.com",
+    "email": "",
+    "description": "Niamhs Restaurant is a trusted restaurants located in Clonmel, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Niamhs Restaurant take reservations?",
+        "a": "Yes, Niamhs Restaurant accepts reservations. Call ahead or book online for the best experience."
+      },
+      {
+        "q": "What type of cuisine does Niamhs Restaurant serve?",
+        "a": "Niamhs Restaurant offers a carefully curated menu featuring local and international dishes."
+      },
+      {
+        "q": "Does Niamhs Restaurant have parking?",
+        "a": "Please contact Niamhs Restaurant directly for parking information and availability."
+      },
+      {
+        "q": "Is there a dress code at Niamhs Restaurant?",
+        "a": "Smart casual attire is recommended. Contact the restaurant for specific event requirements."
+      },
+      {
+        "q": "Does Niamhs Restaurant offer private dining?",
+        "a": "Niamhs Restaurant may offer private dining options for special events. Contact them for details."
+      }
+    ],
+    "schema_type": "Restaurant",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "the-beeches-restaurant",
+    "name": "The Beeches Restaurant",
+    "vertical": "restaurants",
+    "city": "Clonmel",
+    "citySlug": "clonmel",
+    "country": "ireland",
+    "address": "Clonmel, Ireland",
+    "phone": "+353 52 612 3294",
+    "website": "",
+    "email": "thebeechesclonmel@gmail.com",
+    "description": "The Beeches Restaurant is a trusted restaurants located in Clonmel, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does The Beeches Restaurant take reservations?",
+        "a": "Yes, The Beeches Restaurant accepts reservations. Call ahead or book online for the best experience."
+      },
+      {
+        "q": "What type of cuisine does The Beeches Restaurant serve?",
+        "a": "The Beeches Restaurant offers a carefully curated menu featuring local and international dishes."
+      },
+      {
+        "q": "Does The Beeches Restaurant have parking?",
+        "a": "Please contact The Beeches Restaurant directly for parking information and availability."
+      },
+      {
+        "q": "Is there a dress code at The Beeches Restaurant?",
+        "a": "Smart casual attire is recommended. Contact the restaurant for specific event requirements."
+      },
+      {
+        "q": "Does The Beeches Restaurant offer private dining?",
+        "a": "The Beeches Restaurant may offer private dining options for special events. Contact them for details."
+      }
+    ],
+    "schema_type": "Restaurant",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "befanis-restaurant",
+    "name": "Befanis Restaurant",
+    "vertical": "restaurants",
+    "city": "Clonmel",
+    "citySlug": "clonmel",
+    "country": "ireland",
+    "address": "Clonmel, Ireland",
+    "phone": "",
+    "website": "befani.com",
+    "email": "",
+    "description": "Befanis Restaurant is a trusted restaurants located in Clonmel, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Befanis Restaurant take reservations?",
+        "a": "Yes, Befanis Restaurant accepts reservations. Call ahead or book online for the best experience."
+      },
+      {
+        "q": "What type of cuisine does Befanis Restaurant serve?",
+        "a": "Befanis Restaurant offers a carefully curated menu featuring local and international dishes."
+      },
+      {
+        "q": "Does Befanis Restaurant have parking?",
+        "a": "Please contact Befanis Restaurant directly for parking information and availability."
+      },
+      {
+        "q": "Is there a dress code at Befanis Restaurant?",
+        "a": "Smart casual attire is recommended. Contact the restaurant for specific event requirements."
+      },
+      {
+        "q": "Does Befanis Restaurant offer private dining?",
+        "a": "Befanis Restaurant may offer private dining options for special events. Contact them for details."
+      }
+    ],
+    "schema_type": "Restaurant",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "elise-ocallaghan-dental-practice",
+    "name": "Elise OCallaghan Dental Practice",
+    "vertical": "dentists",
+    "city": "Malahide",
+    "citySlug": "malahide",
+    "country": "ireland",
+    "address": "Malahide, Ireland",
+    "phone": "",
+    "website": "dentistmalahide.com",
+    "email": "",
+    "description": "Elise OCallaghan Dental Practice is a trusted dentists located in Malahide, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Elise OCallaghan Dental Practice accepting new patients?",
+        "a": "Elise OCallaghan Dental Practice welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Elise OCallaghan Dental Practice offer emergency dental care?",
+        "a": "Contact Elise OCallaghan Dental Practice directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Elise OCallaghan Dental Practice accept?",
+        "a": "Elise OCallaghan Dental Practice works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Elise OCallaghan Dental Practice offer?",
+        "a": "Elise OCallaghan Dental Practice provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "mcgoverns-restaurant",
+    "name": "McGoverns Restaurant",
+    "vertical": "restaurants",
+    "city": "Malahide",
+    "citySlug": "malahide",
+    "country": "ireland",
+    "address": "Malahide, Ireland",
+    "phone": "+353 1 828 3906",
+    "website": "mcgovernsmalahide.ie",
+    "email": "",
+    "description": "McGoverns Restaurant is a trusted restaurants located in Malahide, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does McGoverns Restaurant take reservations?",
+        "a": "Yes, McGoverns Restaurant accepts reservations. Call ahead or book online for the best experience."
+      },
+      {
+        "q": "What type of cuisine does McGoverns Restaurant serve?",
+        "a": "McGoverns Restaurant offers a carefully curated menu featuring local and international dishes."
+      },
+      {
+        "q": "Does McGoverns Restaurant have parking?",
+        "a": "Please contact McGoverns Restaurant directly for parking information and availability."
+      },
+      {
+        "q": "Is there a dress code at McGoverns Restaurant?",
+        "a": "Smart casual attire is recommended. Contact the restaurant for specific event requirements."
+      },
+      {
+        "q": "Does McGoverns Restaurant offer private dining?",
+        "a": "McGoverns Restaurant may offer private dining options for special events. Contact them for details."
+      }
+    ],
+    "schema_type": "Restaurant",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "siennas-italian-restaurant",
+    "name": "Siennas Italian Restaurant",
+    "vertical": "restaurants",
+    "city": "Malahide",
+    "citySlug": "malahide",
+    "country": "ireland",
+    "address": "Malahide, Ireland",
+    "phone": "+353 1 845 1233",
+    "website": "siennas.ie",
+    "email": "",
+    "description": "Siennas Italian Restaurant is a trusted restaurants located in Malahide, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Siennas Italian Restaurant take reservations?",
+        "a": "Yes, Siennas Italian Restaurant accepts reservations. Call ahead or book online for the best experience."
+      },
+      {
+        "q": "What type of cuisine does Siennas Italian Restaurant serve?",
+        "a": "Siennas Italian Restaurant offers a carefully curated menu featuring local and international dishes."
+      },
+      {
+        "q": "Does Siennas Italian Restaurant have parking?",
+        "a": "Please contact Siennas Italian Restaurant directly for parking information and availability."
+      },
+      {
+        "q": "Is there a dress code at Siennas Italian Restaurant?",
+        "a": "Smart casual attire is recommended. Contact the restaurant for specific event requirements."
+      },
+      {
+        "q": "Does Siennas Italian Restaurant offer private dining?",
+        "a": "Siennas Italian Restaurant may offer private dining options for special events. Contact them for details."
+      }
+    ],
+    "schema_type": "Restaurant",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "carpediem-bray",
+    "name": "Carpediem Bray",
+    "vertical": "restaurants",
+    "city": "Bray",
+    "citySlug": "bray",
+    "country": "ireland",
+    "address": "Bray, Ireland",
+    "phone": "+353 1 276 2697",
+    "website": "",
+    "email": "",
+    "description": "Carpediem Bray is a trusted restaurants located in Bray, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Carpediem Bray take reservations?",
+        "a": "Yes, Carpediem Bray accepts reservations. Call ahead or book online for the best experience."
+      },
+      {
+        "q": "What type of cuisine does Carpediem Bray serve?",
+        "a": "Carpediem Bray offers a carefully curated menu featuring local and international dishes."
+      },
+      {
+        "q": "Does Carpediem Bray have parking?",
+        "a": "Please contact Carpediem Bray directly for parking information and availability."
+      },
+      {
+        "q": "Is there a dress code at Carpediem Bray?",
+        "a": "Smart casual attire is recommended. Contact the restaurant for specific event requirements."
+      },
+      {
+        "q": "Does Carpediem Bray offer private dining?",
+        "a": "Carpediem Bray may offer private dining options for special events. Contact them for details."
+      }
+    ],
+    "schema_type": "Restaurant",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "oscanaill-veterinary-hospital",
+    "name": "OScanaill Veterinary Hospital",
+    "vertical": "vets",
+    "city": "Swords",
+    "citySlug": "swords",
+    "country": "ireland",
+    "address": "Swords, Ireland",
+    "phone": "+353 1 890 0380",
+    "website": "oscanaillvets.ie",
+    "email": "info@oscanaillvets.ie",
+    "description": "OScanaill Veterinary Hospital is a trusted veterinary clinics located in Swords, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does OScanaill Veterinary Hospital treat?",
+        "a": "OScanaill Veterinary Hospital treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does OScanaill Veterinary Hospital offer emergency veterinary services?",
+        "a": "Contact OScanaill Veterinary Hospital for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does OScanaill Veterinary Hospital provide vaccinations?",
+        "a": "Yes, OScanaill Veterinary Hospital offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from OScanaill Veterinary Hospital?",
+        "a": "OScanaill Veterinary Hospital can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "tani-japanese-restaurant",
+    "name": "Tani Japanese Restaurant",
+    "vertical": "restaurants",
+    "city": "Naas",
+    "citySlug": "naas",
+    "country": "ireland",
+    "address": "Naas, Ireland",
+    "phone": "+353 45 874 229",
+    "website": "tani.ie",
+    "email": "info@tani.ie",
+    "description": "Tani Japanese Restaurant is a trusted restaurants located in Naas, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Tani Japanese Restaurant take reservations?",
+        "a": "Yes, Tani Japanese Restaurant accepts reservations. Call ahead or book online for the best experience."
+      },
+      {
+        "q": "What type of cuisine does Tani Japanese Restaurant serve?",
+        "a": "Tani Japanese Restaurant offers a carefully curated menu featuring local and international dishes."
+      },
+      {
+        "q": "Does Tani Japanese Restaurant have parking?",
+        "a": "Please contact Tani Japanese Restaurant directly for parking information and availability."
+      },
+      {
+        "q": "Is there a dress code at Tani Japanese Restaurant?",
+        "a": "Smart casual attire is recommended. Contact the restaurant for specific event requirements."
+      },
+      {
+        "q": "Does Tani Japanese Restaurant offer private dining?",
+        "a": "Tani Japanese Restaurant may offer private dining options for special events. Contact them for details."
+      }
+    ],
+    "schema_type": "Restaurant",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "bridge-place-dental-practice",
+    "name": "Bridge Place Dental Practice",
+    "vertical": "dentists",
+    "city": "Tralee",
+    "citySlug": "tralee",
+    "country": "ireland",
+    "address": "Tralee, Ireland",
+    "phone": "",
+    "website": "",
+    "email": "",
+    "description": "Bridge Place Dental Practice is a trusted dentists located in Tralee, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Bridge Place Dental Practice accepting new patients?",
+        "a": "Bridge Place Dental Practice welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Bridge Place Dental Practice offer emergency dental care?",
+        "a": "Contact Bridge Place Dental Practice directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Bridge Place Dental Practice accept?",
+        "a": "Bridge Place Dental Practice works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Bridge Place Dental Practice offer?",
+        "a": "Bridge Place Dental Practice provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "langtons-hotel-dining",
+    "name": "Langtons Hotel Dining",
+    "vertical": "restaurants",
+    "city": "Kilkenny",
+    "citySlug": "kilkenny",
+    "country": "ireland",
+    "address": "Kilkenny, Ireland",
+    "phone": "056 776 5133",
+    "website": "https://www.langtons.ie/",
+    "email": "dining@langtons.ie",
+    "description": "Langtons Hotel Dining is a trusted restaurants located in Kilkenny, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Langtons Hotel Dining take reservations?",
+        "a": "Yes, Langtons Hotel Dining accepts reservations. Call ahead or book online for the best experience."
+      },
+      {
+        "q": "What type of cuisine does Langtons Hotel Dining serve?",
+        "a": "Langtons Hotel Dining offers a carefully curated menu featuring local and international dishes."
+      },
+      {
+        "q": "Does Langtons Hotel Dining have parking?",
+        "a": "Please contact Langtons Hotel Dining directly for parking information and availability."
+      },
+      {
+        "q": "Is there a dress code at Langtons Hotel Dining?",
+        "a": "Smart casual attire is recommended. Contact the restaurant for specific event requirements."
+      },
+      {
+        "q": "Does Langtons Hotel Dining offer private dining?",
+        "a": "Langtons Hotel Dining may offer private dining options for special events. Contact them for details."
+      }
+    ],
+    "schema_type": "Restaurant",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "imperial-hotel-tralee-dining",
+    "name": "Imperial Hotel Tralee Dining",
+    "vertical": "restaurants",
+    "city": "Tralee",
+    "citySlug": "tralee",
+    "country": "ireland",
+    "address": "Tralee, Ireland",
+    "phone": "+353 66 7127755",
+    "website": "https://www.imperialhoteltralee.ie/",
+    "email": "",
+    "description": "Imperial Hotel Tralee Dining is a trusted restaurants located in Tralee, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Imperial Hotel Tralee Dining take reservations?",
+        "a": "Yes, Imperial Hotel Tralee Dining accepts reservations. Call ahead or book online for the best experience."
+      },
+      {
+        "q": "What type of cuisine does Imperial Hotel Tralee Dining serve?",
+        "a": "Imperial Hotel Tralee Dining offers a carefully curated menu featuring local and international dishes."
+      },
+      {
+        "q": "Does Imperial Hotel Tralee Dining have parking?",
+        "a": "Please contact Imperial Hotel Tralee Dining directly for parking information and availability."
+      },
+      {
+        "q": "Is there a dress code at Imperial Hotel Tralee Dining?",
+        "a": "Smart casual attire is recommended. Contact the restaurant for specific event requirements."
+      },
+      {
+        "q": "Does Imperial Hotel Tralee Dining offer private dining?",
+        "a": "Imperial Hotel Tralee Dining may offer private dining options for special events. Contact them for details."
+      }
+    ],
+    "schema_type": "Restaurant",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "vine-restaurant",
+    "name": "Vine Restaurant",
+    "vertical": "restaurants",
+    "city": "Wexford",
+    "citySlug": "wexford",
+    "country": "ireland",
+    "address": "Wexford, Ireland",
+    "phone": "+353 53 912 2388",
+    "website": "",
+    "email": "",
+    "description": "Vine Restaurant is a trusted restaurants located in Wexford, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Vine Restaurant take reservations?",
+        "a": "Yes, Vine Restaurant accepts reservations. Call ahead or book online for the best experience."
+      },
+      {
+        "q": "What type of cuisine does Vine Restaurant serve?",
+        "a": "Vine Restaurant offers a carefully curated menu featuring local and international dishes."
+      },
+      {
+        "q": "Does Vine Restaurant have parking?",
+        "a": "Please contact Vine Restaurant directly for parking information and availability."
+      },
+      {
+        "q": "Is there a dress code at Vine Restaurant?",
+        "a": "Smart casual attire is recommended. Contact the restaurant for specific event requirements."
+      },
+      {
+        "q": "Does Vine Restaurant offer private dining?",
+        "a": "Vine Restaurant may offer private dining options for special events. Contact them for details."
+      }
+    ],
+    "schema_type": "Restaurant",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "flipside",
+    "name": "Flipside",
+    "vertical": "restaurants",
+    "city": "Sligo",
+    "citySlug": "sligo",
+    "country": "ireland",
+    "address": "Sligo, Ireland",
+    "phone": "",
+    "website": "https://www.flipside.ie/",
+    "email": "",
+    "description": "Flipside is a trusted restaurants located in Sligo, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Flipside take reservations?",
+        "a": "Yes, Flipside accepts reservations. Call ahead or book online for the best experience."
+      },
+      {
+        "q": "What type of cuisine does Flipside serve?",
+        "a": "Flipside offers a carefully curated menu featuring local and international dishes."
+      },
+      {
+        "q": "Does Flipside have parking?",
+        "a": "Please contact Flipside directly for parking information and availability."
+      },
+      {
+        "q": "Is there a dress code at Flipside?",
+        "a": "Smart casual attire is recommended. Contact the restaurant for specific event requirements."
+      },
+      {
+        "q": "Does Flipside offer private dining?",
+        "a": "Flipside may offer private dining options for special events. Contact them for details."
+      }
+    ],
+    "schema_type": "Restaurant",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "hair-salon-sligo-fresha",
+    "name": "Hair Salon Sligo (Fresha)",
+    "vertical": "salons",
+    "city": "Sligo",
+    "citySlug": "sligo",
+    "country": "ireland",
+    "address": "Sligo, Ireland",
+    "phone": "+353 71 915 4757",
+    "website": "",
+    "email": "",
+    "description": "Hair Salon Sligo (Fresha) is a trusted hair salons located in Sligo, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Hair Salon Sligo (Fresha) accept walk-ins?",
+        "a": "Hair Salon Sligo (Fresha) welcomes walk-ins subject to availability. Booking in advance is recommended."
+      },
+      {
+        "q": "What services does Hair Salon Sligo (Fresha) offer?",
+        "a": "Hair Salon Sligo (Fresha) offers cuts, colour, styling, treatments, and more. Contact them for a full service menu."
+      },
+      {
+        "q": "What products does Hair Salon Sligo (Fresha) use?",
+        "a": "Hair Salon Sligo (Fresha) uses premium, professional-grade hair care products. Ask your stylist for details."
+      }
+    ],
+    "schema_type": "HairSalon",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
     "slug": "don-julio",
     "name": "Don Julio",
     "vertical": "restaurants",
@@ -34352,6 +36284,1502 @@
       }
     ],
     "schema_type": "HairSalon",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "cbd-dental",
+    "name": "CBD Dental",
+    "vertical": "dentists",
+    "city": "Sydney",
+    "citySlug": "sydney",
+    "country": "ireland",
+    "address": "Sydney, Ireland",
+    "phone": "(02) 9221 2453",
+    "website": "https://www.cbddental.com.au/",
+    "email": "reception.sydneycbd@nationaldentalcare.com.au",
+    "description": "CBD Dental is a trusted dentists located in Sydney, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is CBD Dental accepting new patients?",
+        "a": "CBD Dental welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does CBD Dental offer emergency dental care?",
+        "a": "Contact CBD Dental directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does CBD Dental accept?",
+        "a": "CBD Dental works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does CBD Dental offer?",
+        "a": "CBD Dental provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "tlc-dental",
+    "name": "TLC Dental",
+    "vertical": "dentists",
+    "city": "Sydney",
+    "citySlug": "sydney",
+    "country": "ireland",
+    "address": "Sydney, Ireland",
+    "phone": "(02) 9223 1457",
+    "website": "https://www.tlcdental.com.au/",
+    "email": "",
+    "description": "TLC Dental is a trusted dentists located in Sydney, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is TLC Dental accepting new patients?",
+        "a": "TLC Dental welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does TLC Dental offer emergency dental care?",
+        "a": "Contact TLC Dental directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does TLC Dental accept?",
+        "a": "TLC Dental works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does TLC Dental offer?",
+        "a": "TLC Dental provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "today-s-dental-sydney-cbd",
+    "name": "Today's Dental Sydney CBD",
+    "vertical": "dentists",
+    "city": "Sydney",
+    "citySlug": "sydney",
+    "country": "ireland",
+    "address": "Sydney, Ireland",
+    "phone": "(02) 9223 6622",
+    "website": "https://todaysdental.au/locations/sydney-cbd-dentist/",
+    "email": "city@todaysdental.au",
+    "description": "Today's Dental Sydney CBD is a trusted dentists located in Sydney, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Today's Dental Sydney CBD accepting new patients?",
+        "a": "Today's Dental Sydney CBD welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Today's Dental Sydney CBD offer emergency dental care?",
+        "a": "Contact Today's Dental Sydney CBD directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Today's Dental Sydney CBD accept?",
+        "a": "Today's Dental Sydney CBD works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Today's Dental Sydney CBD offer?",
+        "a": "Today's Dental Sydney CBD provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "spa-dental-sydney-cbd",
+    "name": "Spa Dental Sydney CBD",
+    "vertical": "dentists",
+    "city": "Sydney",
+    "citySlug": "sydney",
+    "country": "ireland",
+    "address": "Sydney, Ireland",
+    "phone": "(02) 9221 8348",
+    "website": "https://www.spadentalsydneycbd.com.au/",
+    "email": "",
+    "description": "Spa Dental Sydney CBD is a trusted dentists located in Sydney, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Spa Dental Sydney CBD accepting new patients?",
+        "a": "Spa Dental Sydney CBD welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Spa Dental Sydney CBD offer emergency dental care?",
+        "a": "Contact Spa Dental Sydney CBD directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Spa Dental Sydney CBD accept?",
+        "a": "Spa Dental Sydney CBD works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Spa Dental Sydney CBD offer?",
+        "a": "Spa Dental Sydney CBD provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "cdc-dental",
+    "name": "CDC Dental",
+    "vertical": "dentists",
+    "city": "Sydney",
+    "citySlug": "sydney",
+    "country": "ireland",
+    "address": "Sydney, Ireland",
+    "phone": "(02) 9231 3822",
+    "website": "https://www.cdcdental.com.au/",
+    "email": "reception@cdcdental.com.au",
+    "description": "CDC Dental is a trusted dentists located in Sydney, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is CDC Dental accepting new patients?",
+        "a": "CDC Dental welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does CDC Dental offer emergency dental care?",
+        "a": "Contact CDC Dental directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does CDC Dental accept?",
+        "a": "CDC Dental works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does CDC Dental offer?",
+        "a": "CDC Dental provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "pitt-street-dental-centre",
+    "name": "Pitt Street Dental Centre",
+    "vertical": "dentists",
+    "city": "Sydney",
+    "citySlug": "sydney",
+    "country": "ireland",
+    "address": "Sydney, Ireland",
+    "phone": "(02) 9223 4767",
+    "website": "https://pittstdentalcentre.com.au/",
+    "email": "info@pittstdentalcentre.com.au",
+    "description": "Pitt Street Dental Centre is a trusted dentists located in Sydney, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Pitt Street Dental Centre accepting new patients?",
+        "a": "Pitt Street Dental Centre welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Pitt Street Dental Centre offer emergency dental care?",
+        "a": "Contact Pitt Street Dental Centre directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Pitt Street Dental Centre accept?",
+        "a": "Pitt Street Dental Centre works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Pitt Street Dental Centre offer?",
+        "a": "Pitt Street Dental Centre provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "bondi-dental",
+    "name": "Bondi Dental",
+    "vertical": "dentists",
+    "city": "Sydney",
+    "citySlug": "sydney",
+    "country": "ireland",
+    "address": "Sydney, Ireland",
+    "phone": "(02) 9365 3988",
+    "website": "https://www.dentistbondisydney.com.au/",
+    "email": "",
+    "description": "Bondi Dental is a trusted dentists located in Sydney, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Bondi Dental accepting new patients?",
+        "a": "Bondi Dental welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Bondi Dental offer emergency dental care?",
+        "a": "Contact Bondi Dental directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Bondi Dental accept?",
+        "a": "Bondi Dental works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Bondi Dental offer?",
+        "a": "Bondi Dental provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "abc-dental-bondi-junction",
+    "name": "ABC Dental Bondi Junction",
+    "vertical": "dentists",
+    "city": "Sydney",
+    "citySlug": "sydney",
+    "country": "ireland",
+    "address": "Sydney, Ireland",
+    "phone": "(02) 8383 1400",
+    "website": "https://www.abc-dental.com.au/bondi-junction",
+    "email": "",
+    "description": "ABC Dental Bondi Junction is a trusted dentists located in Sydney, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is ABC Dental Bondi Junction accepting new patients?",
+        "a": "ABC Dental Bondi Junction welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does ABC Dental Bondi Junction offer emergency dental care?",
+        "a": "Contact ABC Dental Bondi Junction directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does ABC Dental Bondi Junction accept?",
+        "a": "ABC Dental Bondi Junction works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does ABC Dental Bondi Junction offer?",
+        "a": "ABC Dental Bondi Junction provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "boutique-dental-bondi",
+    "name": "Boutique Dental Bondi",
+    "vertical": "dentists",
+    "city": "Sydney",
+    "citySlug": "sydney",
+    "country": "ireland",
+    "address": "Sydney, Ireland",
+    "phone": "(02) 9387 2851",
+    "website": "http://www.boutiquedental.com.au/",
+    "email": "info@boutiquedental.com.au",
+    "description": "Boutique Dental Bondi is a trusted dentists located in Sydney, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Boutique Dental Bondi accepting new patients?",
+        "a": "Boutique Dental Bondi welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Boutique Dental Bondi offer emergency dental care?",
+        "a": "Contact Boutique Dental Bondi directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Boutique Dental Bondi accept?",
+        "a": "Boutique Dental Bondi works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Boutique Dental Bondi offer?",
+        "a": "Boutique Dental Bondi provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "the-dental-spa-bondi",
+    "name": "The Dental Spa Bondi",
+    "vertical": "dentists",
+    "city": "Sydney",
+    "citySlug": "sydney",
+    "country": "ireland",
+    "address": "Sydney, Ireland",
+    "phone": "(02) 9389 8578",
+    "website": "https://www.thedentalspa.com.au/",
+    "email": "",
+    "description": "The Dental Spa Bondi is a trusted dentists located in Sydney, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is The Dental Spa Bondi accepting new patients?",
+        "a": "The Dental Spa Bondi welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does The Dental Spa Bondi offer emergency dental care?",
+        "a": "Contact The Dental Spa Bondi directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does The Dental Spa Bondi accept?",
+        "a": "The Dental Spa Bondi works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does The Dental Spa Bondi offer?",
+        "a": "The Dental Spa Bondi provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "optimal-dental-care",
+    "name": "Optimal Dental Care",
+    "vertical": "dentists",
+    "city": "Sydney",
+    "citySlug": "sydney",
+    "country": "ireland",
+    "address": "Sydney, Ireland",
+    "phone": "",
+    "website": "https://www.optimaldentalcare.com.au/",
+    "email": "",
+    "description": "Optimal Dental Care is a trusted dentists located in Sydney, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Optimal Dental Care accepting new patients?",
+        "a": "Optimal Dental Care welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Optimal Dental Care offer emergency dental care?",
+        "a": "Contact Optimal Dental Care directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Optimal Dental Care accept?",
+        "a": "Optimal Dental Care works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Optimal Dental Care offer?",
+        "a": "Optimal Dental Care provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "akoya-dental-boutique",
+    "name": "Akoya Dental Boutique",
+    "vertical": "dentists",
+    "city": "Sydney",
+    "citySlug": "sydney",
+    "country": "ireland",
+    "address": "Sydney, Ireland",
+    "phone": "(02) 9386 0700",
+    "website": "https://www.akoyadental.com.au/",
+    "email": "info@akoyadental.com.au",
+    "description": "Akoya Dental Boutique is a trusted dentists located in Sydney, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Akoya Dental Boutique accepting new patients?",
+        "a": "Akoya Dental Boutique welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Akoya Dental Boutique offer emergency dental care?",
+        "a": "Contact Akoya Dental Boutique directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Akoya Dental Boutique accept?",
+        "a": "Akoya Dental Boutique works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Akoya Dental Boutique offer?",
+        "a": "Akoya Dental Boutique provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "bondi-junction-dental",
+    "name": "Bondi Junction Dental",
+    "vertical": "dentists",
+    "city": "Sydney",
+    "citySlug": "sydney",
+    "country": "ireland",
+    "address": "Sydney, Ireland",
+    "phone": "",
+    "website": "https://bondijunctiondental.com.au/",
+    "email": "",
+    "description": "Bondi Junction Dental is a trusted dentists located in Sydney, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Bondi Junction Dental accepting new patients?",
+        "a": "Bondi Junction Dental welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Bondi Junction Dental offer emergency dental care?",
+        "a": "Contact Bondi Junction Dental directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Bondi Junction Dental accept?",
+        "a": "Bondi Junction Dental works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Bondi Junction Dental offer?",
+        "a": "Bondi Junction Dental provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "clear-dental-chatswood",
+    "name": "Clear Dental Chatswood",
+    "vertical": "dentists",
+    "city": "Sydney",
+    "citySlug": "sydney",
+    "country": "ireland",
+    "address": "Sydney, Ireland",
+    "phone": "(02) 9411 5663",
+    "website": "https://www.cleardental.com.au/chatswood-dentist.html",
+    "email": "",
+    "description": "Clear Dental Chatswood is a trusted dentists located in Sydney, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Clear Dental Chatswood accepting new patients?",
+        "a": "Clear Dental Chatswood welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Clear Dental Chatswood offer emergency dental care?",
+        "a": "Contact Clear Dental Chatswood directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Clear Dental Chatswood accept?",
+        "a": "Clear Dental Chatswood works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Clear Dental Chatswood offer?",
+        "a": "Clear Dental Chatswood provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "crown-dental-surgery",
+    "name": "Crown Dental Surgery",
+    "vertical": "dentists",
+    "city": "Sydney",
+    "citySlug": "sydney",
+    "country": "ireland",
+    "address": "Sydney, Ireland",
+    "phone": "(02) 9090 2059",
+    "website": "https://www.crowndentalsurgery.com.au/",
+    "email": "",
+    "description": "Crown Dental Surgery is a trusted dentists located in Sydney, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Crown Dental Surgery accepting new patients?",
+        "a": "Crown Dental Surgery welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Crown Dental Surgery offer emergency dental care?",
+        "a": "Contact Crown Dental Surgery directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Crown Dental Surgery accept?",
+        "a": "Crown Dental Surgery works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Crown Dental Surgery offer?",
+        "a": "Crown Dental Surgery provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "about-smiles-dental-chatswood",
+    "name": "About Smiles Dental Chatswood",
+    "vertical": "dentists",
+    "city": "Sydney",
+    "citySlug": "sydney",
+    "country": "ireland",
+    "address": "Sydney, Ireland",
+    "phone": "(02) 9415 3555",
+    "website": "https://www.aboutsmiles.com.au/",
+    "email": "chatswood@aboutsmiles.com.au",
+    "description": "About Smiles Dental Chatswood is a trusted dentists located in Sydney, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is About Smiles Dental Chatswood accepting new patients?",
+        "a": "About Smiles Dental Chatswood welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does About Smiles Dental Chatswood offer emergency dental care?",
+        "a": "Contact About Smiles Dental Chatswood directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does About Smiles Dental Chatswood accept?",
+        "a": "About Smiles Dental Chatswood works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does About Smiles Dental Chatswood offer?",
+        "a": "About Smiles Dental Chatswood provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "so-dental-chatswood",
+    "name": "So Dental Chatswood",
+    "vertical": "dentists",
+    "city": "Sydney",
+    "citySlug": "sydney",
+    "country": "ireland",
+    "address": "Sydney, Ireland",
+    "phone": "",
+    "website": "https://www.sodental.com.au/",
+    "email": "",
+    "description": "So Dental Chatswood is a trusted dentists located in Sydney, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is So Dental Chatswood accepting new patients?",
+        "a": "So Dental Chatswood welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does So Dental Chatswood offer emergency dental care?",
+        "a": "Contact So Dental Chatswood directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does So Dental Chatswood accept?",
+        "a": "So Dental Chatswood works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does So Dental Chatswood offer?",
+        "a": "So Dental Chatswood provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "chatswood-dental-care",
+    "name": "Chatswood Dental Care",
+    "vertical": "dentists",
+    "city": "Sydney",
+    "citySlug": "sydney",
+    "country": "ireland",
+    "address": "Sydney, Ireland",
+    "phone": "(02) 9412 2295",
+    "website": "https://www.chatswooddentalcare.com.au/",
+    "email": "info@chatswooddentalcare.com.au",
+    "description": "Chatswood Dental Care is a trusted dentists located in Sydney, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Chatswood Dental Care accepting new patients?",
+        "a": "Chatswood Dental Care welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Chatswood Dental Care offer emergency dental care?",
+        "a": "Contact Chatswood Dental Care directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Chatswood Dental Care accept?",
+        "a": "Chatswood Dental Care works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Chatswood Dental Care offer?",
+        "a": "Chatswood Dental Care provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "chats-dental",
+    "name": "Chats Dental",
+    "vertical": "dentists",
+    "city": "Sydney",
+    "citySlug": "sydney",
+    "country": "ireland",
+    "address": "Sydney, Ireland",
+    "phone": "",
+    "website": "https://chatsdental.com.au/",
+    "email": "",
+    "description": "Chats Dental is a trusted dentists located in Sydney, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Chats Dental accepting new patients?",
+        "a": "Chats Dental welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Chats Dental offer emergency dental care?",
+        "a": "Contact Chats Dental directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Chats Dental accept?",
+        "a": "Chats Dental works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Chats Dental offer?",
+        "a": "Chats Dental provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "chatswood-family-dental-care",
+    "name": "Chatswood Family Dental Care",
+    "vertical": "dentists",
+    "city": "Sydney",
+    "citySlug": "sydney",
+    "country": "ireland",
+    "address": "Sydney, Ireland",
+    "phone": "(02) 9411 8370",
+    "website": "https://dentistchatswood.com.au/",
+    "email": "",
+    "description": "Chatswood Family Dental Care is a trusted dentists located in Sydney, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Chatswood Family Dental Care accepting new patients?",
+        "a": "Chatswood Family Dental Care welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Chatswood Family Dental Care offer emergency dental care?",
+        "a": "Contact Chatswood Family Dental Care directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Chatswood Family Dental Care accept?",
+        "a": "Chatswood Family Dental Care works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Chatswood Family Dental Care offer?",
+        "a": "Chatswood Family Dental Care provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "dr-chen-dental-chatswood",
+    "name": "Dr Chen Dental Chatswood",
+    "vertical": "dentists",
+    "city": "Sydney",
+    "citySlug": "sydney",
+    "country": "ireland",
+    "address": "Sydney, Ireland",
+    "phone": "(02) 9411 4455",
+    "website": "http://drchen.com.au/",
+    "email": "",
+    "description": "Dr Chen Dental Chatswood is a trusted dentists located in Sydney, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Dr Chen Dental Chatswood accepting new patients?",
+        "a": "Dr Chen Dental Chatswood welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Dr Chen Dental Chatswood offer emergency dental care?",
+        "a": "Contact Dr Chen Dental Chatswood directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Dr Chen Dental Chatswood accept?",
+        "a": "Dr Chen Dental Chatswood works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Dr Chen Dental Chatswood offer?",
+        "a": "Dr Chen Dental Chatswood provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "sydney-smiles-dental",
+    "name": "Sydney Smiles Dental",
+    "vertical": "dentists",
+    "city": "Sydney",
+    "citySlug": "sydney",
+    "country": "ireland",
+    "address": "Sydney, Ireland",
+    "phone": "(02) 9410 2001",
+    "website": "https://sydneysmilesdental.com.au/",
+    "email": "reception@ssdental.com.au",
+    "description": "Sydney Smiles Dental is a trusted dentists located in Sydney, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Sydney Smiles Dental accepting new patients?",
+        "a": "Sydney Smiles Dental welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Sydney Smiles Dental offer emergency dental care?",
+        "a": "Contact Sydney Smiles Dental directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Sydney Smiles Dental accept?",
+        "a": "Sydney Smiles Dental works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Sydney Smiles Dental offer?",
+        "a": "Sydney Smiles Dental provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "dentists-manly",
+    "name": "Dentists Manly",
+    "vertical": "dentists",
+    "city": "Sydney",
+    "citySlug": "sydney",
+    "country": "ireland",
+    "address": "Sydney, Ireland",
+    "phone": "(02) 9977 3374",
+    "website": "https://www.dentistsmanly.com.au/",
+    "email": "",
+    "description": "Dentists Manly is a trusted dentists located in Sydney, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Dentists Manly accepting new patients?",
+        "a": "Dentists Manly welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Dentists Manly offer emergency dental care?",
+        "a": "Contact Dentists Manly directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Dentists Manly accept?",
+        "a": "Dentists Manly works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Dentists Manly offer?",
+        "a": "Dentists Manly provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "sydney-road-dental-care",
+    "name": "Sydney Road Dental Care",
+    "vertical": "dentists",
+    "city": "Sydney",
+    "citySlug": "sydney",
+    "country": "ireland",
+    "address": "Sydney, Ireland",
+    "phone": "(02) 9977 2442",
+    "website": "https://sydneyroaddentalcare.com.au/",
+    "email": "",
+    "description": "Sydney Road Dental Care is a trusted dentists located in Sydney, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Sydney Road Dental Care accepting new patients?",
+        "a": "Sydney Road Dental Care welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Sydney Road Dental Care offer emergency dental care?",
+        "a": "Contact Sydney Road Dental Care directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Sydney Road Dental Care accept?",
+        "a": "Sydney Road Dental Care works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Sydney Road Dental Care offer?",
+        "a": "Sydney Road Dental Care provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "manly-smiles",
+    "name": "Manly Smiles",
+    "vertical": "dentists",
+    "city": "Sydney",
+    "citySlug": "sydney",
+    "country": "ireland",
+    "address": "Sydney, Ireland",
+    "phone": "(02) 9977 7056",
+    "website": "http://www.manly-dentist.com.au/",
+    "email": "",
+    "description": "Manly Smiles is a trusted dentists located in Sydney, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Manly Smiles accepting new patients?",
+        "a": "Manly Smiles welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Manly Smiles offer emergency dental care?",
+        "a": "Contact Manly Smiles directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Manly Smiles accept?",
+        "a": "Manly Smiles works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Manly Smiles offer?",
+        "a": "Manly Smiles provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "mosman-dental-clinic",
+    "name": "Mosman Dental Clinic",
+    "vertical": "dentists",
+    "city": "Sydney",
+    "citySlug": "sydney",
+    "country": "ireland",
+    "address": "Sydney, Ireland",
+    "phone": "(02) 9969 5765",
+    "website": "https://mosmandentalclinic.com.au/",
+    "email": "info@mosmandentalclinic.com.au",
+    "description": "Mosman Dental Clinic is a trusted dentists located in Sydney, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Mosman Dental Clinic accepting new patients?",
+        "a": "Mosman Dental Clinic welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Mosman Dental Clinic offer emergency dental care?",
+        "a": "Contact Mosman Dental Clinic directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Mosman Dental Clinic accept?",
+        "a": "Mosman Dental Clinic works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Mosman Dental Clinic offer?",
+        "a": "Mosman Dental Clinic provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "mosman-smiles-dental",
+    "name": "Mosman Smiles Dental",
+    "vertical": "dentists",
+    "city": "Sydney",
+    "citySlug": "sydney",
+    "country": "ireland",
+    "address": "Sydney, Ireland",
+    "phone": "(02) 7258 9033",
+    "website": "https://mosmansmiles.com.au/",
+    "email": "info@mosmansmiles.com.au",
+    "description": "Mosman Smiles Dental is a trusted dentists located in Sydney, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Mosman Smiles Dental accepting new patients?",
+        "a": "Mosman Smiles Dental welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Mosman Smiles Dental offer emergency dental care?",
+        "a": "Contact Mosman Smiles Dental directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Mosman Smiles Dental accept?",
+        "a": "Mosman Smiles Dental works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Mosman Smiles Dental offer?",
+        "a": "Mosman Smiles Dental provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "mosman-dentistry-24-7",
+    "name": "Mosman Dentistry (24/7)",
+    "vertical": "dentists",
+    "city": "Sydney",
+    "citySlug": "sydney",
+    "country": "ireland",
+    "address": "Sydney, Ireland",
+    "phone": "(02) 9969 5933",
+    "website": "https://mosmandentistry.com.au/",
+    "email": "",
+    "description": "Mosman Dentistry (24/7) is a trusted dentists located in Sydney, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Mosman Dentistry (24/7) accepting new patients?",
+        "a": "Mosman Dentistry (24/7) welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Mosman Dentistry (24/7) offer emergency dental care?",
+        "a": "Contact Mosman Dentistry (24/7) directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Mosman Dentistry (24/7) accept?",
+        "a": "Mosman Dentistry (24/7) works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Mosman Dentistry (24/7) offer?",
+        "a": "Mosman Dentistry (24/7) provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "surry-hills-dental-centre",
+    "name": "Surry Hills Dental Centre",
+    "vertical": "dentists",
+    "city": "Sydney",
+    "citySlug": "sydney",
+    "country": "ireland",
+    "address": "Sydney, Ireland",
+    "phone": "(02) 9319 7244",
+    "website": "https://www.surryhillsdentalcentre.com.au/",
+    "email": "",
+    "description": "Surry Hills Dental Centre is a trusted dentists located in Sydney, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Surry Hills Dental Centre accepting new patients?",
+        "a": "Surry Hills Dental Centre welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Surry Hills Dental Centre offer emergency dental care?",
+        "a": "Contact Surry Hills Dental Centre directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Surry Hills Dental Centre accept?",
+        "a": "Surry Hills Dental Centre works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Surry Hills Dental Centre offer?",
+        "a": "Surry Hills Dental Centre provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "surry-hills-dental-care",
+    "name": "Surry Hills Dental Care",
+    "vertical": "dentists",
+    "city": "Sydney",
+    "citySlug": "sydney",
+    "country": "ireland",
+    "address": "Sydney, Ireland",
+    "phone": "",
+    "website": "https://www.surryhillsdentalcare.com.au/",
+    "email": "",
+    "description": "Surry Hills Dental Care is a trusted dentists located in Sydney, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Surry Hills Dental Care accepting new patients?",
+        "a": "Surry Hills Dental Care welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Surry Hills Dental Care offer emergency dental care?",
+        "a": "Contact Surry Hills Dental Care directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Surry Hills Dental Care accept?",
+        "a": "Surry Hills Dental Care works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Surry Hills Dental Care offer?",
+        "a": "Surry Hills Dental Care provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "the-whole-tooth",
+    "name": "The Whole Tooth",
+    "vertical": "dentists",
+    "city": "Sydney",
+    "citySlug": "sydney",
+    "country": "ireland",
+    "address": "Sydney, Ireland",
+    "phone": "",
+    "website": "https://www.thewholetooth.com.au/",
+    "email": "",
+    "description": "The Whole Tooth is a trusted dentists located in Sydney, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is The Whole Tooth accepting new patients?",
+        "a": "The Whole Tooth welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does The Whole Tooth offer emergency dental care?",
+        "a": "Contact The Whole Tooth directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does The Whole Tooth accept?",
+        "a": "The Whole Tooth works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does The Whole Tooth offer?",
+        "a": "The Whole Tooth provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "coogee-dental",
+    "name": "Coogee Dental",
+    "vertical": "dentists",
+    "city": "Sydney",
+    "citySlug": "sydney",
+    "country": "ireland",
+    "address": "Sydney, Ireland",
+    "phone": "(02) 9315 7420",
+    "website": "https://coogeedental.com.au/",
+    "email": "dental@coogeedental.com.au",
+    "description": "Coogee Dental is a trusted dentists located in Sydney, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Coogee Dental accepting new patients?",
+        "a": "Coogee Dental welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Coogee Dental offer emergency dental care?",
+        "a": "Contact Coogee Dental directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Coogee Dental accept?",
+        "a": "Coogee Dental works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Coogee Dental offer?",
+        "a": "Coogee Dental provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "randwick-city-dental",
+    "name": "Randwick City Dental",
+    "vertical": "dentists",
+    "city": "Sydney",
+    "citySlug": "sydney",
+    "country": "ireland",
+    "address": "Sydney, Ireland",
+    "phone": "(02) 9398 5251",
+    "website": "https://www.randwickcitydental.com.au/",
+    "email": "",
+    "description": "Randwick City Dental is a trusted dentists located in Sydney, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Randwick City Dental accepting new patients?",
+        "a": "Randwick City Dental welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Randwick City Dental offer emergency dental care?",
+        "a": "Contact Randwick City Dental directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Randwick City Dental accept?",
+        "a": "Randwick City Dental works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Randwick City Dental offer?",
+        "a": "Randwick City Dental provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "randwick-dental-clinic",
+    "name": "Randwick Dental Clinic",
+    "vertical": "dentists",
+    "city": "Sydney",
+    "citySlug": "sydney",
+    "country": "ireland",
+    "address": "Sydney, Ireland",
+    "phone": "",
+    "website": "https://www.randwickdentalclinic.com.au/",
+    "email": "",
+    "description": "Randwick Dental Clinic is a trusted dentists located in Sydney, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Randwick Dental Clinic accepting new patients?",
+        "a": "Randwick Dental Clinic welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Randwick Dental Clinic offer emergency dental care?",
+        "a": "Contact Randwick Dental Clinic directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Randwick Dental Clinic accept?",
+        "a": "Randwick Dental Clinic works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Randwick Dental Clinic offer?",
+        "a": "Randwick Dental Clinic provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "dental-plus-maroubra",
+    "name": "Dental Plus Maroubra",
+    "vertical": "dentists",
+    "city": "Sydney",
+    "citySlug": "sydney",
+    "country": "ireland",
+    "address": "Sydney, Ireland",
+    "phone": "",
+    "website": "https://www.dentalplusmaroubra.com.au/",
+    "email": "",
+    "description": "Dental Plus Maroubra is a trusted dentists located in Sydney, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Dental Plus Maroubra accepting new patients?",
+        "a": "Dental Plus Maroubra welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Dental Plus Maroubra offer emergency dental care?",
+        "a": "Contact Dental Plus Maroubra directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Dental Plus Maroubra accept?",
+        "a": "Dental Plus Maroubra works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Dental Plus Maroubra offer?",
+        "a": "Dental Plus Maroubra provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "maroubra-dental-avenue",
+    "name": "Maroubra Dental Avenue",
+    "vertical": "dentists",
+    "city": "Sydney",
+    "citySlug": "sydney",
+    "country": "ireland",
+    "address": "Sydney, Ireland",
+    "phone": "(02) 9344 8822",
+    "website": "https://maroubradentalavenue.com.au/",
+    "email": "Maroubra@dentalavenue.com.au",
+    "description": "Maroubra Dental Avenue is a trusted dentists located in Sydney, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Maroubra Dental Avenue accepting new patients?",
+        "a": "Maroubra Dental Avenue welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Maroubra Dental Avenue offer emergency dental care?",
+        "a": "Contact Maroubra Dental Avenue directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Maroubra Dental Avenue accept?",
+        "a": "Maroubra Dental Avenue works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Maroubra Dental Avenue offer?",
+        "a": "Maroubra Dental Avenue provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "maroubra-dental-clinic",
+    "name": "Maroubra Dental Clinic",
+    "vertical": "dentists",
+    "city": "Sydney",
+    "citySlug": "sydney",
+    "country": "ireland",
+    "address": "Sydney, Ireland",
+    "phone": "(02) 8789 2177",
+    "website": "https://maroubradentalclinic.com.au/",
+    "email": "",
+    "description": "Maroubra Dental Clinic is a trusted dentists located in Sydney, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Maroubra Dental Clinic accepting new patients?",
+        "a": "Maroubra Dental Clinic welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Maroubra Dental Clinic offer emergency dental care?",
+        "a": "Contact Maroubra Dental Clinic directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Maroubra Dental Clinic accept?",
+        "a": "Maroubra Dental Clinic works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Maroubra Dental Clinic offer?",
+        "a": "Maroubra Dental Clinic provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "total-dental-care-maroubra",
+    "name": "Total Dental Care Maroubra",
+    "vertical": "dentists",
+    "city": "Sydney",
+    "citySlug": "sydney",
+    "country": "ireland",
+    "address": "Sydney, Ireland",
+    "phone": "",
+    "website": "https://totaldentalcare.net.au/",
+    "email": "",
+    "description": "Total Dental Care Maroubra is a trusted dentists located in Sydney, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Total Dental Care Maroubra accepting new patients?",
+        "a": "Total Dental Care Maroubra welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Total Dental Care Maroubra offer emergency dental care?",
+        "a": "Contact Total Dental Care Maroubra directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Total Dental Care Maroubra accept?",
+        "a": "Total Dental Care Maroubra works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Total Dental Care Maroubra offer?",
+        "a": "Total Dental Care Maroubra provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "parramatta-dental-surgery",
+    "name": "Parramatta Dental Surgery",
+    "vertical": "dentists",
+    "city": "Sydney",
+    "citySlug": "sydney",
+    "country": "ireland",
+    "address": "Sydney, Ireland",
+    "phone": "(02) 9689 2988",
+    "website": "https://www.parramattadental.com.au/",
+    "email": "info@parramattadental.com.au",
+    "description": "Parramatta Dental Surgery is a trusted dentists located in Sydney, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Parramatta Dental Surgery accepting new patients?",
+        "a": "Parramatta Dental Surgery welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Parramatta Dental Surgery offer emergency dental care?",
+        "a": "Contact Parramatta Dental Surgery directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Parramatta Dental Surgery accept?",
+        "a": "Parramatta Dental Surgery works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Parramatta Dental Surgery offer?",
+        "a": "Parramatta Dental Surgery provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "the-dental-practice-parramatta",
+    "name": "The Dental Practice Parramatta",
+    "vertical": "dentists",
+    "city": "Sydney",
+    "citySlug": "sydney",
+    "country": "ireland",
+    "address": "Sydney, Ireland",
+    "phone": "(02) 9739 1400",
+    "website": "https://thedentalpractice.com.au/clinics/dentist-parramatta/",
+    "email": "",
+    "description": "The Dental Practice Parramatta is a trusted dentists located in Sydney, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is The Dental Practice Parramatta accepting new patients?",
+        "a": "The Dental Practice Parramatta welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does The Dental Practice Parramatta offer emergency dental care?",
+        "a": "Contact The Dental Practice Parramatta directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does The Dental Practice Parramatta accept?",
+        "a": "The Dental Practice Parramatta works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does The Dental Practice Parramatta offer?",
+        "a": "The Dental Practice Parramatta provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "painfree-dentistry",
+    "name": "Painfree Dentistry",
+    "vertical": "dentists",
+    "city": "Sydney",
+    "citySlug": "sydney",
+    "country": "ireland",
+    "address": "Sydney, Ireland",
+    "phone": "(02) 9635 5166",
+    "website": "https://www.painfreedentistry.com.au/",
+    "email": "info@painfreedentistry.com.au",
+    "description": "Painfree Dentistry is a trusted dentists located in Sydney, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Painfree Dentistry accepting new patients?",
+        "a": "Painfree Dentistry welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Painfree Dentistry offer emergency dental care?",
+        "a": "Contact Painfree Dentistry directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Painfree Dentistry accept?",
+        "a": "Painfree Dentistry works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Painfree Dentistry offer?",
+        "a": "Painfree Dentistry provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "parramatta-green-dental",
+    "name": "Parramatta Green Dental",
+    "vertical": "dentists",
+    "city": "Sydney",
+    "citySlug": "sydney",
+    "country": "ireland",
+    "address": "Sydney, Ireland",
+    "phone": "(02) 9687 2899",
+    "website": "https://parramattagreendental.com.au/",
+    "email": "",
+    "description": "Parramatta Green Dental is a trusted dentists located in Sydney, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Parramatta Green Dental accepting new patients?",
+        "a": "Parramatta Green Dental welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Parramatta Green Dental offer emergency dental care?",
+        "a": "Contact Parramatta Green Dental directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Parramatta Green Dental accept?",
+        "a": "Parramatta Green Dental works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Parramatta Green Dental offer?",
+        "a": "Parramatta Green Dental provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "apex-dental-centre-liverpool",
+    "name": "Apex Dental Centre Liverpool",
+    "vertical": "dentists",
+    "city": "Sydney",
+    "citySlug": "sydney",
+    "country": "ireland",
+    "address": "Sydney, Ireland",
+    "phone": "1300 273 933",
+    "website": "https://apexdentalcentre.com.au/",
+    "email": "",
+    "description": "Apex Dental Centre Liverpool is a trusted dentists located in Sydney, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Apex Dental Centre Liverpool accepting new patients?",
+        "a": "Apex Dental Centre Liverpool welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Apex Dental Centre Liverpool offer emergency dental care?",
+        "a": "Contact Apex Dental Centre Liverpool directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Apex Dental Centre Liverpool accept?",
+        "a": "Apex Dental Centre Liverpool works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Apex Dental Centre Liverpool offer?",
+        "a": "Apex Dental Centre Liverpool provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "gentle-dental-care-7-days-campbelltown",
+    "name": "Gentle Dental Care 7 Days (Campbelltown)",
+    "vertical": "dentists",
+    "city": "Sydney",
+    "citySlug": "sydney",
+    "country": "ireland",
+    "address": "Sydney, Ireland",
+    "phone": "",
+    "website": "https://gentledentalcare7days.com.au/",
+    "email": "",
+    "description": "Gentle Dental Care 7 Days (Campbelltown) is a trusted dentists located in Sydney, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Gentle Dental Care 7 Days (Campbelltown) accepting new patients?",
+        "a": "Gentle Dental Care 7 Days (Campbelltown) welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Gentle Dental Care 7 Days (Campbelltown) offer emergency dental care?",
+        "a": "Contact Gentle Dental Care 7 Days (Campbelltown) directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Gentle Dental Care 7 Days (Campbelltown) accept?",
+        "a": "Gentle Dental Care 7 Days (Campbelltown) works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Gentle Dental Care 7 Days (Campbelltown) offer?",
+        "a": "Gentle Dental Care 7 Days (Campbelltown) provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
     "locale": "en",
     "openingHours": "Mo-Fr 09:00-18:00"
   }
