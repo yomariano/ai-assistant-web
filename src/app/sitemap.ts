@@ -2,6 +2,7 @@ import { MetadataRoute } from 'next';
 import { INTEGRATIONS } from '@/lib/marketing/integrations';
 import { getReceptionistCitySlugs } from '@/lib/content/receptionist-cities';
 import {
+  getAllBusinesses,
   getAllBusinessesForMarket,
   getVerticalSlugES,
   getVerticals,
@@ -63,11 +64,15 @@ async function fetchSitemapData(): Promise<SitemapData | null> {
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const content = await fetchSitemapData();
-  const [directoryVerticals, auDirectoryVerticals, auBusinesses] = await Promise.all([
+  const [directoryVerticals, directoryBusinesses, auDirectoryVerticals, auBusinesses] = await Promise.all([
     getVerticals(),
+    getAllBusinesses(),
     getVerticalsForMarket('AU'),
     getAllBusinessesForMarket('AU'),
   ]);
+  const directoryCities = [...new Set(
+    directoryBusinesses.map((business) => `${business.vertical}/${business.citySlug}`)
+  )];
   const auDirectoryCities = [...new Set(
     auBusinesses.map((business) => `${business.vertical}/${business.citySlug}`)
   )];
@@ -189,6 +194,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'weekly',
       priority: 0.8,
     },
+    ...directoryVerticals.map(({ vertical }) => ({
+      url: `${BASE_URL}/${vertical}`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly' as const,
+      priority: 0.8,
+    })),
     {
       url: `${BASE_URL}/au/directory`,
       lastModified: new Date(),
@@ -200,6 +211,30 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: new Date(),
       changeFrequency: 'weekly' as const,
       priority: 0.7,
+    })),
+    ...directoryCities.map((path) => ({
+      url: `${BASE_URL}/${path}`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly' as const,
+      priority: 0.7,
+    })),
+    ...directoryBusinesses.map((business) => ({
+      url: `${BASE_URL}/${business.vertical}/${business.citySlug}/${business.slug}`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly' as const,
+      priority: 0.6,
+    })),
+    ...directoryCities.map((path) => ({
+      url: `${BASE_URL}/directory/${path}`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly' as const,
+      priority: 0.7,
+    })),
+    ...directoryBusinesses.map((business) => ({
+      url: `${BASE_URL}/directory/${business.vertical}/${business.citySlug}/${business.slug}`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly' as const,
+      priority: 0.6,
     })),
     ...auDirectoryVerticals.map(({ vertical }) => ({
       url: `${BASE_URL}/au/directory/${vertical}`,

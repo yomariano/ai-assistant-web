@@ -59,7 +59,7 @@ const nextConfig: NextConfig = {
   // Strict mode for better development experience
   reactStrictMode: true,
 
-  // Redirect bare industry slugs to /for/[industry] pages
+  // Redirect legacy industry aliases to their canonical marketing pages
   async redirects() {
     return [
       // /industries/:slug → /for/:slug (old URL format)
@@ -68,18 +68,13 @@ const nextConfig: NextConfig = {
       // /blog/es/ → /es/blog/ (Spanish blog canonical URL)
       { source: "/blog/es", destination: "/es/blog", permanent: true },
       { source: "/blog/es/:path*", destination: "/es/blog/:path*", permanent: true },
-      { source: "/restaurants", destination: "/for/restaurants", permanent: true },
       { source: "/dental", destination: "/for/dental-practices", permanent: true },
       { source: "/dental-clinics", destination: "/for/dental-practices", permanent: true },
       { source: "/dental-practices", destination: "/for/dental-practices", permanent: true },
-      { source: "/plumbers", destination: "/for/plumbers", permanent: true },
-      { source: "/electricians", destination: "/for/electricians", permanent: true },
       { source: "/for/dental-clinics", destination: "/for/dental-practices", permanent: true },
       { source: "/for/real-estate", destination: "/for/real-estate-agencies", permanent: true },
       { source: "/for/hvac", destination: "/for/hvac-services", permanent: true },
-      { source: "/salons", destination: "/for/hair-salons", permanent: true },
       { source: "/hair-salons", destination: "/for/hair-salons", permanent: true },
-      { source: "/spas", destination: "/for/spas", permanent: true },
       { source: "/real-estate", destination: "/for/real-estate-agencies", permanent: true },
       { source: "/real-estate-agencies", destination: "/for/real-estate-agencies", permanent: true },
       { source: "/hvac", destination: "/for/hvac-services", permanent: true },

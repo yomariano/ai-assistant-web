@@ -3,6 +3,9 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { getComboPage, getComboSlugs, getComboPages } from "@/lib/content/combo";
+import BusinessCard from "@/components/directory/BusinessCard";
+import Header from "@/components/voicefleet/Header";
+import DirectoryFooter from "@/components/voicefleet/Footer";
 import { BreadcrumbSchema } from "@/components/seo";
 import Breadcrumbs from "@/components/marketing/Breadcrumbs";
 import CTASection from "@/components/marketing/CTASection";
@@ -10,6 +13,13 @@ import MidPageCTA from "@/components/marketing/MidPageCTA";
 import Footer from "@/components/landing/Footer";
 import { MapPin, Building2, Check, ChevronRight, Quote, ArrowRight } from "lucide-react";
 import { getDirectoryVertical } from "@/lib/directory/verticals";
+import {
+  getAllBusinesses,
+  getBusinessesByCity,
+  getLocalizedDescription,
+  getVerticalLabel,
+} from "@/lib/directory-data";
+import { generateItemListSchema } from "@/lib/schema-generators";
 
 export const dynamic = "force-dynamic";
 
@@ -18,12 +28,44 @@ interface Props {
 }
 
 export async function generateStaticParams() {
-  const slugs = await getComboSlugs();
-  return slugs.map(({ industry, location }) => ({ industry, location }));
+  const [slugs, businesses] = await Promise.all([
+    getComboSlugs(),
+    getAllBusinesses(),
+  ]);
+  const params = new Map<string, { industry: string; location: string }>();
+
+  for (const business of businesses) {
+    params.set(`${business.vertical}:${business.citySlug}`, {
+      industry: business.vertical,
+      location: business.citySlug,
+    });
+  }
+
+  for (const { industry, location } of slugs) {
+    params.set(`${industry}:${location}`, { industry, location });
+  }
+
+  return Array.from(params.values());
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { industry, location } = await params;
+  const directoryBusinesses = await getBusinessesByCity(industry, location);
+
+  if (directoryBusinesses.length) {
+    const label = getVerticalLabel(industry);
+    const cityName = directoryBusinesses[0].city;
+
+    return {
+      title: `Best ${label} in ${cityName} 2026`,
+      description: `Find the best ${label.toLowerCase()} in ${cityName}. Reviews, contact info, and AI-powered booking.`,
+      openGraph: {
+        title: `Best ${label} in ${cityName}`,
+        description: `Top ${label.toLowerCase()} in ${cityName} with AI-powered call handling.`,
+      },
+    };
+  }
+
   const page = await getComboPage(industry, location);
 
   if (!page) {
@@ -48,6 +90,64 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function ComboPage({ params }: Props) {
   const { industry, location } = await params;
+  const directoryBusinesses = await getBusinessesByCity(industry, location);
+
+  if (directoryBusinesses.length) {
+    const label = getVerticalLabel(industry);
+    const cityName = directoryBusinesses[0].city;
+    const schema = generateItemListSchema(directoryBusinesses, `Best ${label} in ${cityName}`);
+
+    return (
+      <>
+        <Header />
+        <div className="min-h-screen bg-slate-950 text-white pt-20">
+          <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+          <div className="max-w-6xl mx-auto px-4 py-16">
+            <nav className="text-sm text-slate-400 mb-8">
+              <Link href="/directory" className="hover:text-blue-400">Directory</Link>
+              <span className="mx-2">/</span>
+              <Link href={`/${industry}`} className="hover:text-blue-400">{label}</Link>
+              <span className="mx-2">/</span>
+              <span className="text-white">{cityName}</span>
+            </nav>
+
+            <h1 className="text-4xl md:text-5xl font-bold mb-4">
+              Best {label} in {cityName}
+            </h1>
+            <p className="text-xl text-slate-400 mb-12">
+              {directoryBusinesses.length} {label.toLowerCase()} found in {cityName}
+            </p>
+
+            <div className="grid md:grid-cols-2 gap-4">
+              {directoryBusinesses.map((business) => (
+                <BusinessCard
+                  key={business.slug}
+                  name={business.name}
+                  address={business.address}
+                  description={getLocalizedDescription(business, "en")}
+                  phone={business.phone}
+                  href={`/${industry}/${location}/${business.slug}`}
+                  image_url={business.image_url}
+                />
+              ))}
+            </div>
+
+            <div className="text-center mt-16 pt-12 border-t border-slate-800">
+              <h2 className="text-2xl font-semibold mb-4">
+                Are you a {label.toLowerCase().replace(/s$/, "")} in {cityName}?
+              </h2>
+              <p className="text-slate-400 mb-6">Let AI answer your calls 24/7 and never miss a customer</p>
+              <Link href="/demo" className="inline-flex items-center bg-gradient-to-r from-blue-500 to-cyan-400 text-white px-8 py-4 rounded-xl font-semibold hover:from-blue-600 hover:to-cyan-500 transition-all">
+                Try VoiceFleet Free →
+              </Link>
+            </div>
+          </div>
+        </div>
+        <DirectoryFooter />
+      </>
+    );
+  }
+
   const page = await getComboPage(industry, location);
 
   if (!page) {

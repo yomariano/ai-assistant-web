@@ -19,9 +19,105 @@ interface SitemapApiData {
   comparisons: ContentItem[];
 }
 
+interface DirectoryBusiness {
+  vertical: string;
+  citySlug: string;
+  slug: string;
+}
+
+const DIRECTORY_DATA_URL = 'https://cdn.voicefleet.ai/directory/businesses.json';
+
+const BLOG_DUPLICATE_SUFFIX = /^(.*?)-([2-9]|[1-9]\d+)$/;
+const BLOG_DUPLICATE_PATH_SUFFIX = /\/-([2-9]|[1-9]\d+)$/;
+const BLOG_PATH_PREFIX = /^(?:es\/)?blog\//i;
+const BLOG_URL_PREFIX = /^https?:\/\/[^/]+\/(?:es\/)?blog\//i;
+
 /** Strip trailing slashes from a URL base and leading slashes from a slug */
 function normalizeUrl(base: string, path: string): string {
   return `${base.replace(/\/+$/, '')}/${path.replace(/^\/+/, '')}`;
+}
+
+function normalizeBlogSlug(slug: string): string {
+  return slug
+    .trim()
+    .replace(BLOG_URL_PREFIX, '')
+    .replace(/^\/+/, '')
+    .replace(BLOG_PATH_PREFIX, '')
+    .replace(/\/+$/, '')
+    .replace(BLOG_DUPLICATE_PATH_SUFFIX, (_match, suffix) => `-${suffix}`);
+}
+
+function getCanonicalBlogSlug(slug: string): string {
+  const normalized = normalizeBlogSlug(slug);
+  const match = normalized.match(BLOG_DUPLICATE_SUFFIX);
+  return match?.[1] || normalized;
+}
+
+function getPublicSlugScore(rawSlug: string, normalizedSlug: string, publicSlug: string): number {
+  let score = 0;
+
+  if (rawSlug === publicSlug) {
+    score += 6;
+  }
+  if (normalizedSlug === publicSlug) {
+    score += 4;
+  }
+  if (getCanonicalBlogSlug(normalizedSlug) === normalizedSlug) {
+    score += 2;
+  }
+
+  return score;
+}
+
+function selectPublicBlogPosts(posts: ContentItem[]): ContentItem[] {
+  const normalizedSlugs = posts.map((post) => normalizeBlogSlug(post.slug)).filter(Boolean);
+  const normalizedSet = new Set(normalizedSlugs);
+  const bestBySlug = new Map<string, { post: ContentItem; score: number }>();
+
+  for (const post of posts) {
+    const normalizedSlug = normalizeBlogSlug(post.slug);
+    if (!normalizedSlug || normalizedSlug.includes('/')) {
+      continue;
+    }
+
+    const canonicalSlug = getCanonicalBlogSlug(normalizedSlug);
+    const publicSlug =
+      canonicalSlug !== normalizedSlug && normalizedSet.has(canonicalSlug)
+        ? canonicalSlug
+        : normalizedSlug;
+
+    const score = getPublicSlugScore(post.slug, normalizedSlug, publicSlug);
+    const existing = bestBySlug.get(publicSlug);
+
+    if (!existing) {
+      bestBySlug.set(publicSlug, {
+        post: { ...post, slug: publicSlug },
+        score,
+      });
+      continue;
+    }
+
+    if (score > existing.score) {
+      bestBySlug.set(publicSlug, {
+        post: { ...post, slug: publicSlug },
+        score,
+      });
+      continue;
+    }
+
+    if (score === existing.score) {
+      const candidateUpdatedAt = post.updated_at ? new Date(post.updated_at).getTime() : 0;
+      const existingUpdatedAt = existing.post.updated_at ? new Date(existing.post.updated_at).getTime() : 0;
+      if (candidateUpdatedAt > existingUpdatedAt) {
+        bestBySlug.set(publicSlug, {
+          post: { ...post, slug: publicSlug },
+          score,
+        });
+      }
+    }
+  }
+
+  return Array.from(bestBySlug.values()).map((entry) => entry.post);
 }
 
 async function fetchSitemapApiData(apiUrl: string): Promise<SitemapApiData | null> {
@@ -36,6 +132,26 @@ async function fetchSitemapApiData(apiUrl: string): Promise<SitemapApiData | nul
   }
 }
 
+async function fetchDirectoryBusinesses(): Promise<DirectoryBusiness[]> {
+  try {
+    const response = await fetch(DIRECTORY_DATA_URL, {
+      headers: { 'Accept': 'application/json' },
+    });
+    if (!response.ok) return [];
+
+    const data = await response.json();
+    if (!Array.isArray(data)) return [];
+
+    return data.filter((business): business is DirectoryBusiness => (
+      typeof business?.vertical === 'string'
+      && typeof business?.citySlug === 'string'
+      && typeof business?.slug === 'string'
+    ));
+  } catch {
+    return [];
+  }
+}
+
 /**
  * Sitemap index handler - lists all sub-sitemaps
  */
@@ -44,6 +160,7 @@ export async function sitemapIndexHandler(c: Context<{ Bindings: Bindings }>) {
 
   const sitemaps = [
     'static',
+    'directory',
     'blog',
     'comparisons',
     'indexes',
@@ -81,6 +198,9 @@ export async function sitemapHandler(c: Context<{ Bindings: Bindings }>) {
   let urls: Array<{ loc: string; priority: string; changefreq: string }> = [];
 
   switch (type) {
+    case 'directory':
+      urls = await generateDirectorySitemap(siteUrl);
+      break;
     case 'indexes':
       urls = generateIndexesSitemap(siteUrl);
       break;
@@ -139,6 +259,9 @@ export async function sitemapHandlerWithType(
   switch (type) {
     case 'static':
       urls = generateStaticSitemap(siteUrl);
+      break;
+    case 'directory':
+      urls = await generateDirectorySitemap(siteUrl);
       break;
     case 'blog':
       urls = await generateBlogSitemap(siteUrl, apiUrl);
@@ -289,6 +412,53 @@ function generateStaticSitemap(siteUrl: string) {
   ];
 }
 
+async function generateDirectorySitemap(siteUrl: string) {
+  const businesses = await fetchDirectoryBusinesses();
+  if (!businesses.length) return [];
+
+  const urls: Array<{ loc: string; priority: string; changefreq: string }> = [
+    { loc: `${siteUrl}/directory`, priority: '0.8', changefreq: 'weekly' },
+  ];
+  const verticals = new Set<string>();
+  const cityPaths = new Set<string>();
+
+  for (const business of businesses) {
+    verticals.add(business.vertical);
+    cityPaths.add(`${business.vertical}/${business.citySlug}`);
+  }
+
+  for (const vertical of verticals) {
+    urls.push(
+      { loc: `${siteUrl}/${vertical}`, priority: '0.8', changefreq: 'weekly' },
+      { loc: `${siteUrl}/directory/${vertical}`, priority: '0.7', changefreq: 'weekly' },
+    );
+  }
+
+  for (const path of cityPaths) {
+    urls.push(
+      { loc: `${siteUrl}/${path}`, priority: '0.7', changefreq: 'weekly' },
+      { loc: `${siteUrl}/directory/${path}`, priority: '0.7', changefreq: 'weekly' },
+    );
+  }
+
+  for (const business of businesses) {
+    urls.push(
+      {
+        loc: `${siteUrl}/${business.vertical}/${business.citySlug}/${business.slug}`,
+        priority: '0.6',
+        changefreq: 'monthly',
+      },
+      {
+        loc: `${siteUrl}/directory/${business.vertical}/${business.citySlug}/${business.slug}`,
+        priority: '0.6',
+        changefreq: 'monthly',
+      },
+    );
+  }
+
+  return urls;
+}
+
 /**
  * Generate blog posts sitemap (fetched from API)
  */
@@ -296,14 +466,9 @@ async function generateBlogSitemap(siteUrl: string, apiUrl: string) {
   const data = await fetchSitemapApiData(apiUrl);
   if (!data?.blogPosts?.length) return [];
 
-  return data.blogPosts
-    .filter(post => {
-      // Skip posts with malformed slugs (leading slashes, path prefixes)
-      const clean = post.slug.replace(/^\/+/, '');
-      return clean && !clean.includes('/');
-    })
+  return selectPublicBlogPosts(data.blogPosts)
     .map(post => {
-      const slug = post.slug.replace(/^\/+/, '').replace(/\/+$/, '');
+      const slug = normalizeBlogSlug(post.slug);
       const prefix = post.language === 'es' ? 'es/blog' : 'blog';
       return {
         loc: normalizeUrl(siteUrl, `${prefix}/${slug}`),
