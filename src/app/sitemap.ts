@@ -1,6 +1,7 @@
 import { MetadataRoute } from 'next';
 import { INTEGRATIONS } from '@/lib/marketing/integrations';
 import { getReceptionistCitySlugs } from '@/lib/content/receptionist-cities';
+import { getReceptionistIndustrySlugs } from '@/lib/content/receptionist-industries';
 import {
   getAllBusinesses,
   getAllBusinessesForMarket,
@@ -292,6 +293,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'monthly' as const,
       priority: 0.7,
     })),
+    ...getReceptionistIndustrySlugs().flatMap((industry) =>
+      getReceptionistCitySlugs().map((slug) => ({
+        url: `${BASE_URL}/ai-receptionist/${industry}/${slug}`,
+        lastModified: new Date(),
+        changeFrequency: 'monthly' as const,
+        priority: 0.7,
+      }))
+    ),
     ...getReceptionistCitySlugs('AU').map((slug) => ({
       url: `${BASE_URL}/au/ai-receptionist/${slug}`,
       lastModified: new Date(),

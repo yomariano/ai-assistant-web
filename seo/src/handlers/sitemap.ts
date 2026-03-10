@@ -499,6 +499,7 @@ async function generateComparisonsSitemap(siteUrl: string, apiUrl: string) {
  */
 function generateAiReceptionistSitemap(siteUrl: string) {
   const urls: Array<{ loc: string; priority: string; changefreq: string }> = [];
+  const nestedIndustrySlugs = ['dental', 'restaurants', 'salons', 'plumbers'];
 
   // EN industry short slugs → canonical slugs
   const enMap: Record<string, string> = {
@@ -519,6 +520,16 @@ function generateAiReceptionistSitemap(siteUrl: string) {
       urls.push({
         loc: `${siteUrl}/ai-receptionist-${shortKey}-${city.slug}`,
         priority: '0.6',
+        changefreq: 'weekly'
+      });
+    }
+  }
+
+  for (const industry of nestedIndustrySlugs) {
+    for (const city of allCities) {
+      urls.push({
+        loc: `${siteUrl}/ai-receptionist/${industry}/${city.slug}`,
+        priority: '0.7',
         changefreq: 'weekly'
       });
     }

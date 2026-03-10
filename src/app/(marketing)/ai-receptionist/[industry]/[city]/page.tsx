@@ -1,11 +1,14 @@
 import { Metadata } from "next";
-import { notFound } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
 import Link from "next/link";
 import {
   getReceptionistCity,
   getReceptionistCitySlugs,
-  getCityFAQs,
 } from "@/lib/content/receptionist-cities";
+import {
+  getReceptionistIndustry,
+  getReceptionistIndustrySlugs,
+} from "@/lib/content/receptionist-industries";
 import {
   LocalBusinessSchema,
   BreadcrumbSchema,
@@ -27,20 +30,26 @@ import {
 } from "lucide-react";
 
 interface Props {
-  params: Promise<{ city: string }>;
+  params: Promise<{ industry: string; city: string }>;
 }
 
 export async function generateStaticParams() {
-  return getReceptionistCitySlugs().map((city) => ({ city }));
+  return getReceptionistIndustrySlugs().flatMap((industry) =>
+    getReceptionistCitySlugs().map((city) => ({ industry, city })),
+  );
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { city: slug } = await params;
-  const city = getReceptionistCity(slug);
-  if (!city) return {};
+  const { industry: rawIndustry, city: citySlug } = await params;
+  const industry = getReceptionistIndustry(rawIndustry);
+  const city = getReceptionistCity(citySlug);
 
-  const title = `AI Receptionist in ${city.name} | VoiceFleet`;
-  const description = `24/7 AI receptionist for ${city.name} businesses. Answer calls, book appointments, and take messages automatically. Plans from \u20ac99/mo. Try free for 30 days.`;
+  if (!industry || !city) {
+    return {};
+  }
+
+  const title = `AI Receptionist for ${industry.label} in ${city.name} | VoiceFleet`;
+  const description = `24/7 AI receptionist for ${industry.label.toLowerCase()} in ${city.name}. Answer calls, book appointments, and take messages automatically.`;
 
   return {
     title,
@@ -49,10 +58,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title,
       description,
       type: "website",
-      url: `/ai-receptionist/${slug}`,
+      url: `/ai-receptionist/${industry.slug}/${citySlug}`,
     },
     alternates: {
-      canonical: `/ai-receptionist/${slug}`,
+      canonical: `/ai-receptionist/${industry.slug}/${citySlug}`,
     },
   };
 }
@@ -62,25 +71,25 @@ const VALUE_PROPS = [
     icon: Clock,
     title: "24/7 Availability",
     description:
-      "Never miss a call again. Your AI receptionist answers every call, day or night, weekends and holidays included.",
+      "Never miss a call again. Your AI receptionist answers every call after hours, on weekends, and during busy periods.",
   },
   {
     icon: CalendarCheck,
-    title: "Appointment Booking",
+    title: "Booking & Intake",
     description:
-      "Automatically schedule appointments into your calendar. Customers get instant confirmation without waiting on hold.",
+      "Capture appointments, quote requests, and new enquiries automatically so callers get an immediate next step.",
   },
   {
     icon: Globe,
-    title: "Multilingual Support",
+    title: "Natural Conversations",
     description:
-      "Handle calls in English, Spanish, French, German, and Italian. Serve diverse customers in their preferred language.",
+      "Handle customer questions in a natural voice, qualify leads, and route urgent calls when a human needs to step in.",
   },
   {
     icon: PiggyBank,
-    title: "95% Cost Savings",
+    title: "Lower Front Desk Costs",
     description:
-      "Plans from \u20ac99/mo vs \u20ac56,000/year for a human receptionist. Same quality service at a fraction of the cost.",
+      "Plans start from €99/mo instead of staffing every call window with manual coverage just to avoid missed leads.",
   },
 ];
 
@@ -88,47 +97,75 @@ const STEPS = [
   {
     icon: UserPlus,
     step: "1",
-    title: "Sign Up",
+    title: "Set Up Your Workflow",
     description:
-      "Create your account in under 2 minutes. Choose your plan and customise your AI receptionist\u2019s greeting and responses.",
+      "Configure your greeting, booking questions, escalation rules, and the specific details your team needs after each call.",
   },
   {
     icon: PhoneForwarded,
     step: "2",
     title: "Forward Your Number",
     description:
-      "Forward your existing business phone number to your new VoiceFleet number. No new number needed \u2014 keep the one your customers know.",
+      "Forward your business number to VoiceFleet so callers keep using the number they already know.",
   },
   {
     icon: Bot,
     step: "3",
-    title: "AI Answers Calls",
+    title: "Start Handling Calls",
     description:
-      "Your AI receptionist starts answering calls immediately. It greets callers, handles enquiries, books appointments, and sends you summaries.",
+      "VoiceFleet answers immediately, captures every enquiry, and sends call summaries to your team in real time.",
   },
 ];
 
-export default async function CityPage({ params }: Props) {
-  const { city: slug } = await params;
-  const city = getReceptionistCity(slug);
+export default async function IndustryReceptionistCityPage({ params }: Props) {
+  const { industry: rawIndustry, city: citySlug } = await params;
+  const industry = getReceptionistIndustry(rawIndustry);
+  const city = getReceptionistCity(citySlug);
 
-  if (!city) {
+  if (!industry || !city) {
     notFound();
   }
 
-  const faqs = getCityFAQs(city);
+  if (rawIndustry !== industry.slug) {
+    permanentRedirect(`/ai-receptionist/${industry.slug}/${citySlug}`);
+  }
 
+  const faqs = [
+    {
+      question: `How does an AI receptionist help ${industry.label.toLowerCase()} in ${city.name}?`,
+      answer: `VoiceFleet answers inbound calls for ${industry.label.toLowerCase()} in ${city.name}, handles common questions, captures new leads, and books appointments or callbacks automatically.`,
+    },
+    {
+      question: `Can VoiceFleet book appointments for a ${industry.singular} in ${city.name}?`,
+      answer: `Yes. VoiceFleet can collect the caller's details, capture booking preferences, and push the request into your calendar or handoff workflow so your team can confirm the appointment quickly.`,
+    },
+    {
+      question: `What happens if a ${industry.singular} caller needs a person immediately?`,
+      answer: `You control escalation. VoiceFleet can transfer urgent calls, take a detailed message, or flag time-sensitive requests for immediate follow-up from your team.`,
+    },
+    {
+      question: `Does VoiceFleet work outside business hours in ${city.name}?`,
+      answer: `Yes. VoiceFleet answers 24/7, so your ${industry.singular} keeps capturing calls in ${city.name} even when your front desk or staff are unavailable.`,
+    },
+  ];
+
+  const relatedCities = getReceptionistCitySlugs()
+    .filter((slug) => slug !== citySlug)
+    .slice(0, 6);
+  const relatedIndustries = getReceptionistIndustrySlugs()
+    .filter((slug) => slug !== industry.slug);
   const breadcrumbs = [
     { name: "Home", href: "/" },
     { name: "AI Receptionist", href: "/features" },
-    { name: city.name, href: `/ai-receptionist/${slug}` },
+    { name: industry.label, href: industry.useCaseHref },
+    { name: city.name, href: `/ai-receptionist/${industry.slug}/${citySlug}` },
   ];
 
   return (
     <>
       <BreadcrumbSchema items={breadcrumbs} />
       <LocalBusinessSchema
-        name={`VoiceFleet AI Receptionist — ${city.name}`}
+        name={`VoiceFleet AI Receptionist - ${industry.label} in ${city.name}`}
         city={city.name}
         state={city.region}
       />
@@ -137,20 +174,17 @@ export default async function CityPage({ params }: Props) {
       <div className="min-h-screen bg-white">
         <Header />
 
-        {/* Breadcrumbs */}
         <div className="pt-20">
           <Breadcrumbs items={breadcrumbs} />
         </div>
 
-        {/* Hero */}
         <section className="bg-gradient-to-br from-blue-600 to-emerald-500 py-20">
           <div className="max-w-5xl mx-auto px-6 text-center text-white">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold mb-6">
-              AI Receptionist for {city.name} Businesses
+              AI Receptionist for {industry.label} in {city.name}
             </h1>
             <p className="text-xl text-white/90 mb-8 max-w-3xl mx-auto">
-              Answer every call 24/7, book appointments automatically, and never
-              lose a customer in {city.name} again. Set up in under 5 minutes.
+              Answer every call 24/7, capture more enquiries, and streamline intake for your {industry.singular} in {city.name}.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link
@@ -160,20 +194,19 @@ export default async function CityPage({ params }: Props) {
                 Start Free Trial
               </Link>
               <Link
-                href="/pricing"
+                href={industry.useCaseHref}
                 className="inline-flex items-center justify-center px-8 py-4 border-2 border-white text-white rounded-xl font-semibold hover:bg-white/10 transition-colors"
               >
-                See Pricing
+                Explore Use Case
               </Link>
             </div>
           </div>
         </section>
 
-        {/* Value Props */}
         <section className="py-16">
           <div className="max-w-7xl mx-auto px-6">
             <h2 className="text-3xl font-heading font-bold text-center text-gray-900 mb-12">
-              Why {city.name} Businesses Choose VoiceFleet
+              Why {industry.label} in {city.name} Choose VoiceFleet
             </h2>
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
               {VALUE_PROPS.map((prop) => (
@@ -194,41 +227,38 @@ export default async function CityPage({ params }: Props) {
           </div>
         </section>
 
-        {/* How It Works */}
         <section className="bg-gray-50 py-16">
           <div className="max-w-5xl mx-auto px-6">
             <h2 className="text-3xl font-heading font-bold text-center text-gray-900 mb-12">
               How It Works
             </h2>
             <div className="grid md:grid-cols-3 gap-8">
-              {STEPS.map((s) => (
-                <div key={s.step} className="text-center">
+              {STEPS.map((step) => (
+                <div key={step.step} className="text-center">
                   <div className="mx-auto mb-4 h-14 w-14 rounded-full bg-gradient-to-br from-blue-600 to-emerald-500 flex items-center justify-center text-white text-xl font-bold">
-                    {s.step}
+                    {step.step}
                   </div>
                   <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                    {s.title}
+                    {step.title}
                   </h3>
-                  <p className="text-sm text-gray-600">{s.description}</p>
+                  <p className="text-sm text-gray-600">{step.description}</p>
                 </div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* MidPageCTA */}
         <MidPageCTA />
 
-        {/* FAQ */}
         <section className="py-16">
           <div className="max-w-3xl mx-auto px-6">
             <h2 className="text-3xl font-heading font-bold text-center text-gray-900 mb-12">
               Frequently Asked Questions
             </h2>
             <div className="space-y-6">
-              {faqs.map((faq, i) => (
+              {faqs.map((faq, index) => (
                 <details
-                  key={i}
+                  key={index}
                   className="group border border-gray-200 rounded-xl p-6 open:shadow-sm transition-shadow"
                 >
                   <summary className="cursor-pointer text-lg font-semibold text-gray-900 list-none flex items-center justify-between gap-4">
@@ -246,7 +276,6 @@ export default async function CityPage({ params }: Props) {
           </div>
         </section>
 
-        {/* Internal Links */}
         <section className="bg-gray-50 py-12">
           <div className="max-w-5xl mx-auto px-6">
             <h2 className="text-xl font-semibold text-gray-900 mb-6">
@@ -255,65 +284,44 @@ export default async function CityPage({ params }: Props) {
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 text-sm">
               <div>
                 <h3 className="font-semibold text-gray-700 mb-2">
-                  By Location
+                  More Cities
                 </h3>
                 <ul className="space-y-1">
-                  {["dublin", "london", "new-york", "cork", "manchester"].map(
-                    (s) => {
-                      if (s === slug) return null;
-                      const c = getReceptionistCity(s);
-                      if (!c) return null;
-                      return (
-                        <li key={s}>
-                          <Link
-                            href={`/ai-receptionist/${s}`}
-                            className="text-blue-600 hover:underline"
-                          >
-                            AI Receptionist {c.name}
-                          </Link>
-                        </li>
-                      );
-                    }
-                  )}
+                  {relatedCities.map((slug) => {
+                    const relatedCity = getReceptionistCity(slug);
+                    if (!relatedCity) return null;
+                    return (
+                      <li key={slug}>
+                        <Link
+                          href={`/ai-receptionist/${industry.slug}/${slug}`}
+                          className="text-blue-600 hover:underline"
+                        >
+                          {industry.label} in {relatedCity.name}
+                        </Link>
+                      </li>
+                    );
+                  })}
                 </ul>
               </div>
               <div>
                 <h3 className="font-semibold text-gray-700 mb-2">
-                  By Industry
+                  Other Industries
                 </h3>
                 <ul className="space-y-1">
-                  <li>
-                    <Link
-                      href={`/ai-receptionist/dental/${slug}`}
-                      className="text-blue-600 hover:underline"
-                    >
-                      Dental Practices
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href={`/ai-receptionist/restaurants/${slug}`}
-                      className="text-blue-600 hover:underline"
-                    >
-                      Restaurants
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href={`/ai-receptionist/salons/${slug}`}
-                      className="text-blue-600 hover:underline"
-                    >
-                      Beauty Salons
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href={`/ai-receptionist/plumbers/${slug}`}
-                      className="text-blue-600 hover:underline"
-                    >
-                      Plumbers
-                    </Link>
-                  </li>
+                  {relatedIndustries.map((slug) => {
+                    const relatedIndustry = getReceptionistIndustry(slug);
+                    if (!relatedIndustry) return null;
+                    return (
+                      <li key={slug}>
+                        <Link
+                          href={`/ai-receptionist/${slug}/${citySlug}`}
+                          className="text-blue-600 hover:underline"
+                        >
+                          {relatedIndustry.label}
+                        </Link>
+                      </li>
+                    );
+                  })}
                 </ul>
               </div>
               <div>
@@ -323,63 +331,26 @@ export default async function CityPage({ params }: Props) {
                 <ul className="space-y-1">
                   <li>
                     <Link
+                      href={industry.directoryHref}
+                      className="text-blue-600 hover:underline"
+                    >
+                      Browse {industry.label}
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href={`${industry.directoryHref}/${citySlug}`}
+                      className="text-blue-600 hover:underline"
+                    >
+                      {industry.label} in {city.name}
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
                       href="/directory"
                       className="text-blue-600 hover:underline"
                     >
                       All Businesses
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href="/directory/dentists"
-                      className="text-blue-600 hover:underline"
-                    >
-                      Dentists
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href="/directory/restaurants"
-                      className="text-blue-600 hover:underline"
-                    >
-                      Restaurants
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href="/directory/salons"
-                      className="text-blue-600 hover:underline"
-                    >
-                      Salons
-                    </Link>
-                  </li>
-                </ul>
-              </div>
-              <div>
-                <h3 className="font-semibold text-gray-700 mb-2">Features</h3>
-                <ul className="space-y-1">
-                  <li>
-                    <Link
-                      href="/features"
-                      className="text-blue-600 hover:underline"
-                    >
-                      All Features
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href="/connect"
-                      className="text-blue-600 hover:underline"
-                    >
-                      Integrations
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href="/compare"
-                      className="text-blue-600 hover:underline"
-                    >
-                      Compare
                     </Link>
                   </li>
                 </ul>
@@ -417,10 +388,9 @@ export default async function CityPage({ params }: Props) {
           </div>
         </section>
 
-        {/* CTA */}
         <CTASection
-          title={`Ready to automate your ${city.name} business calls?`}
-          description={`Join businesses in ${city.name} saving hours every week with AI-powered voice agents.`}
+          title={`Ready to automate calls for your ${city.name} ${industry.singular}?`}
+          description={`Join ${industry.label.toLowerCase()} in ${city.name} already saving time with VoiceFleet.`}
           primaryButtonText="Start Free Trial"
           primaryButtonHref="/register"
         />
