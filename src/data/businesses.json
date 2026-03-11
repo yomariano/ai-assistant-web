@@ -2410,6 +2410,326 @@
     "openingHours": "Mo-Fr 09:00-18:00"
   },
   {
+    "slug": "bruquetas",
+    "name": "Bruquetas",
+    "vertical": "dentists",
+    "city": "Buenos Aires",
+    "citySlug": "buenos-aires",
+    "country": "argentina",
+    "address": "Buenos Aires, Argentina",
+    "phone": "+54 11 4825-8326",
+    "website": "http://dentistaentuciudad.com/ar/bruquetas-palermo/",
+    "email": "",
+    "description": "Bruquetas is a trusted dentists located in Buenos Aires, Argentina. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "¿Bruquetas acepta pacientes nuevos?",
+        "a": "Bruquetas recibe pacientes nuevos. Llamá para agendar tu primera consulta."
+      },
+      {
+        "q": "¿Bruquetas ofrece atención de emergencia?",
+        "a": "Contactá a Bruquetas para consultar disponibilidad de emergencias dentales."
+      },
+      {
+        "q": "¿Qué tratamientos ofrece Bruquetas?",
+        "a": "Bruquetas ofrece limpieza, empastes, ortodoncia, y odontología estética."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "es",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "borean",
+    "name": "Borean",
+    "vertical": "dentists",
+    "city": "Buenos Aires",
+    "citySlug": "buenos-aires",
+    "country": "argentina",
+    "address": "Buenos Aires, Argentina",
+    "phone": "+54 11 4825-9090",
+    "website": "http://dentistaentuciudad.com/ar/borean-palermo/",
+    "email": "",
+    "description": "Borean is a trusted dentists located in Buenos Aires, Argentina. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "¿Borean acepta pacientes nuevos?",
+        "a": "Borean recibe pacientes nuevos. Llamá para agendar tu primera consulta."
+      },
+      {
+        "q": "¿Borean ofrece atención de emergencia?",
+        "a": "Contactá a Borean para consultar disponibilidad de emergencias dentales."
+      },
+      {
+        "q": "¿Qué tratamientos ofrece Borean?",
+        "a": "Borean ofrece limpieza, empastes, ortodoncia, y odontología estética."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "es",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "dentis",
+    "name": "Dentis",
+    "vertical": "dentists",
+    "city": "Córdoba",
+    "citySlug": "cordoba",
+    "country": "argentina",
+    "address": "Córdoba, Argentina",
+    "phone": "0351 5694848",
+    "website": "https://www.dentis-cba.com.ar/",
+    "email": "",
+    "description": "Dentis is a trusted dentists located in Córdoba, Argentina. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "¿Dentis acepta pacientes nuevos?",
+        "a": "Dentis recibe pacientes nuevos. Llamá para agendar tu primera consulta."
+      },
+      {
+        "q": "¿Dentis ofrece atención de emergencia?",
+        "a": "Contactá a Dentis para consultar disponibilidad de emergencias dentales."
+      },
+      {
+        "q": "¿Qué tratamientos ofrece Dentis?",
+        "a": "Dentis ofrece limpieza, empastes, ortodoncia, y odontología estética."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "es",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "centro-garden-odontologico",
+    "name": "Centro Garden Odontológico",
+    "vertical": "dentists",
+    "city": "Córdoba",
+    "citySlug": "cordoba",
+    "country": "argentina",
+    "address": "Córdoba, Argentina",
+    "phone": "0351 5694848",
+    "website": "https://centrogarden.com.ar/",
+    "email": "",
+    "description": "Centro Garden Odontológico is a trusted dentists located in Córdoba, Argentina. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "¿Centro Garden Odontológico acepta pacientes nuevos?",
+        "a": "Centro Garden Odontológico recibe pacientes nuevos. Llamá para agendar tu primera consulta."
+      },
+      {
+        "q": "¿Centro Garden Odontológico ofrece atención de emergencia?",
+        "a": "Contactá a Centro Garden Odontológico para consultar disponibilidad de emergencias dentales."
+      },
+      {
+        "q": "¿Qué tratamientos ofrece Centro Garden Odontológico?",
+        "a": "Centro Garden Odontológico ofrece limpieza, empastes, ortodoncia, y odontología estética."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "es",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "docoral",
+    "name": "DocOral",
+    "vertical": "dentists",
+    "city": "Córdoba",
+    "citySlug": "cordoba",
+    "country": "argentina",
+    "address": "Córdoba, Argentina",
+    "phone": "0351-8930193",
+    "website": "https://docoral.com.ar/",
+    "email": "",
+    "description": "DocOral is a trusted dentists located in Córdoba, Argentina. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "¿DocOral acepta pacientes nuevos?",
+        "a": "DocOral recibe pacientes nuevos. Llamá para agendar tu primera consulta."
+      },
+      {
+        "q": "¿DocOral ofrece atención de emergencia?",
+        "a": "Contactá a DocOral para consultar disponibilidad de emergencias dentales."
+      },
+      {
+        "q": "¿Qué tratamientos ofrece DocOral?",
+        "a": "DocOral ofrece limpieza, empastes, ortodoncia, y odontología estética."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "es",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "eva-inguerman-veterinaria",
+    "name": "Eva Inguerman Veterinaria",
+    "vertical": "vets",
+    "city": "Córdoba",
+    "citySlug": "cordoba",
+    "country": "argentina",
+    "address": "Córdoba, Argentina",
+    "phone": "",
+    "website": "https://evainguerman.com/clinicas-veterinarias/",
+    "email": "",
+    "description": "Eva Inguerman Veterinaria is a trusted veterinary clinics located in Córdoba, Argentina. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Eva Inguerman Veterinaria treat?",
+        "a": "Eva Inguerman Veterinaria treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Eva Inguerman Veterinaria offer emergency veterinary services?",
+        "a": "Contact Eva Inguerman Veterinaria for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Eva Inguerman Veterinaria provide vaccinations?",
+        "a": "Yes, Eva Inguerman Veterinaria offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Eva Inguerman Veterinaria?",
+        "a": "Eva Inguerman Veterinaria can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "es",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "hvep-hospital-veterinario-pueyrredon",
+    "name": "HVEP Hospital Veterinario Pueyrredón",
+    "vertical": "vets",
+    "city": "Mar del Plata",
+    "citySlug": "mar-del-plata",
+    "country": "argentina",
+    "address": "Mar del Plata, Argentina",
+    "phone": "+54 223 668-8158",
+    "website": "https://hvep.com.ar/",
+    "email": "",
+    "description": "HVEP Hospital Veterinario Pueyrredón is a trusted veterinary clinics located in Mar del Plata, Argentina. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does HVEP Hospital Veterinario Pueyrredón treat?",
+        "a": "HVEP Hospital Veterinario Pueyrredón treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does HVEP Hospital Veterinario Pueyrredón offer emergency veterinary services?",
+        "a": "Contact HVEP Hospital Veterinario Pueyrredón for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does HVEP Hospital Veterinario Pueyrredón provide vaccinations?",
+        "a": "Yes, HVEP Hospital Veterinario Pueyrredón offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from HVEP Hospital Veterinario Pueyrredón?",
+        "a": "HVEP Hospital Veterinario Pueyrredón can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "es",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "veterinaria-estravis",
+    "name": "Veterinaria Estravis",
+    "vertical": "vets",
+    "city": "Mar del Plata",
+    "citySlug": "mar-del-plata",
+    "country": "argentina",
+    "address": "Mar del Plata, Argentina",
+    "phone": "+54 223 479-1964",
+    "website": "https://www.veterinariaestravis.com/",
+    "email": "",
+    "description": "Veterinaria Estravis is a trusted veterinary clinics located in Mar del Plata, Argentina. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Veterinaria Estravis treat?",
+        "a": "Veterinaria Estravis treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Veterinaria Estravis offer emergency veterinary services?",
+        "a": "Contact Veterinaria Estravis for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Veterinaria Estravis provide vaccinations?",
+        "a": "Yes, Veterinaria Estravis offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Veterinaria Estravis?",
+        "a": "Veterinaria Estravis can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "es",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "veterinaria-crena",
+    "name": "Veterinaria Crena",
+    "vertical": "vets",
+    "city": "Mar del Plata",
+    "citySlug": "mar-del-plata",
+    "country": "argentina",
+    "address": "Mar del Plata, Argentina",
+    "phone": "+54 223 470-0605",
+    "website": "https://www.veterinariacrena.com.ar/",
+    "email": "",
+    "description": "Veterinaria Crena is a trusted veterinary clinics located in Mar del Plata, Argentina. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Veterinaria Crena treat?",
+        "a": "Veterinaria Crena treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Veterinaria Crena offer emergency veterinary services?",
+        "a": "Contact Veterinaria Crena for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Veterinaria Crena provide vaccinations?",
+        "a": "Yes, Veterinaria Crena offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Veterinaria Crena?",
+        "a": "Veterinaria Crena can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "es",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "veterinaria-alberti",
+    "name": "Veterinaria Alberti",
+    "vertical": "vets",
+    "city": "Mar del Plata",
+    "citySlug": "mar-del-plata",
+    "country": "argentina",
+    "address": "Mar del Plata, Argentina",
+    "phone": "",
+    "website": "https://veterinariaalberti.com.ar/",
+    "email": "",
+    "description": "Veterinaria Alberti is a trusted veterinary clinics located in Mar del Plata, Argentina. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Veterinaria Alberti treat?",
+        "a": "Veterinaria Alberti treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Veterinaria Alberti offer emergency veterinary services?",
+        "a": "Contact Veterinaria Alberti for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Veterinaria Alberti provide vaccinations?",
+        "a": "Yes, Veterinaria Alberti offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Veterinaria Alberti?",
+        "a": "Veterinaria Alberti can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "es",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
     "slug": "apex-plumbing-services",
     "name": "Apex Plumbing Services",
     "vertical": "plumbers",
@@ -4295,6 +4615,232 @@
       {
         "q": "Does Ken Hall Plumbers provide free quotes?",
         "a": "Ken Hall Plumbers can provide estimates for plumbing work. Contact them to discuss your needs."
+      }
+    ],
+    "schema_type": "Plumber",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "pro-plumber-brisbane",
+    "name": "Pro Plumber Brisbane",
+    "vertical": "plumbers",
+    "city": "Brisbane",
+    "citySlug": "brisbane",
+    "country": "ireland",
+    "address": "Brisbane, Ireland",
+    "phone": "07 3555 7922",
+    "website": "https://www.proplumberbrisbane.com.au/",
+    "email": "",
+    "description": "Pro Plumber Brisbane is a trusted plumbers located in Brisbane, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Pro Plumber Brisbane offer emergency plumbing?",
+        "a": "Contact Pro Plumber Brisbane for emergency callout availability and response times."
+      },
+      {
+        "q": "What areas does Pro Plumber Brisbane cover?",
+        "a": "Pro Plumber Brisbane serves the local area and surrounding regions. Call to confirm coverage."
+      },
+      {
+        "q": "Does Pro Plumber Brisbane provide free quotes?",
+        "a": "Pro Plumber Brisbane can provide estimates for plumbing work. Contact them to discuss your needs."
+      }
+    ],
+    "schema_type": "Plumber",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "trusted-dental",
+    "name": "Trusted Dental",
+    "vertical": "dentists",
+    "city": "Gold Coast",
+    "citySlug": "gold-coast",
+    "country": "ireland",
+    "address": "Gold Coast, Ireland",
+    "phone": "",
+    "website": "https://www.trusteddental.com.au/",
+    "email": "",
+    "description": "Trusted Dental is a trusted dentists located in Gold Coast, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Trusted Dental accepting new patients?",
+        "a": "Trusted Dental welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Trusted Dental offer emergency dental care?",
+        "a": "Contact Trusted Dental directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Trusted Dental accept?",
+        "a": "Trusted Dental works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Trusted Dental offer?",
+        "a": "Trusted Dental provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "sydney-animal-hospitals",
+    "name": "Sydney Animal Hospitals",
+    "vertical": "vets",
+    "city": "Sydney",
+    "citySlug": "sydney",
+    "country": "ireland",
+    "address": "Sydney, Ireland",
+    "phone": "02 8319 5555",
+    "website": "https://www.sydneyanimalhospitals.com.au/",
+    "email": "",
+    "description": "Sydney Animal Hospitals is a trusted veterinary clinics located in Sydney, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Sydney Animal Hospitals treat?",
+        "a": "Sydney Animal Hospitals treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Sydney Animal Hospitals offer emergency veterinary services?",
+        "a": "Contact Sydney Animal Hospitals for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Sydney Animal Hospitals provide vaccinations?",
+        "a": "Yes, Sydney Animal Hospitals offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Sydney Animal Hospitals?",
+        "a": "Sydney Animal Hospitals can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "animal-tracks-vet",
+    "name": "Animal Tracks Vet",
+    "vertical": "vets",
+    "city": "Sydney",
+    "citySlug": "sydney",
+    "country": "ireland",
+    "address": "Sydney, Ireland",
+    "phone": "02 9764 6066",
+    "website": "https://www.animaltracksvet.com.au/",
+    "email": "",
+    "description": "Animal Tracks Vet is a trusted veterinary clinics located in Sydney, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Animal Tracks Vet treat?",
+        "a": "Animal Tracks Vet treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Animal Tracks Vet offer emergency veterinary services?",
+        "a": "Contact Animal Tracks Vet for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Animal Tracks Vet provide vaccinations?",
+        "a": "Yes, Animal Tracks Vet offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Animal Tracks Vet?",
+        "a": "Animal Tracks Vet can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "north-shore-vet-hospital",
+    "name": "North Shore Vet Hospital",
+    "vertical": "vets",
+    "city": "Sydney",
+    "citySlug": "sydney",
+    "country": "ireland",
+    "address": "Sydney, Ireland",
+    "phone": "02 9436 1213",
+    "website": "https://www.northshorevet.com.au/",
+    "email": "",
+    "description": "North Shore Vet Hospital is a trusted veterinary clinics located in Sydney, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does North Shore Vet Hospital treat?",
+        "a": "North Shore Vet Hospital treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does North Shore Vet Hospital offer emergency veterinary services?",
+        "a": "Contact North Shore Vet Hospital for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does North Shore Vet Hospital provide vaccinations?",
+        "a": "Yes, North Shore Vet Hospital offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from North Shore Vet Hospital?",
+        "a": "North Shore Vet Hospital can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "dcm-plumbing",
+    "name": "DCM Plumbing",
+    "vertical": "plumbers",
+    "city": "Gold Coast",
+    "citySlug": "gold-coast",
+    "country": "ireland",
+    "address": "Gold Coast, Ireland",
+    "phone": "07 5576 5305",
+    "website": "https://dcmplumbing.com.au/",
+    "email": "",
+    "description": "DCM Plumbing is a trusted plumbers located in Gold Coast, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does DCM Plumbing offer emergency plumbing?",
+        "a": "Contact DCM Plumbing for emergency callout availability and response times."
+      },
+      {
+        "q": "What areas does DCM Plumbing cover?",
+        "a": "DCM Plumbing serves the local area and surrounding regions. Call to confirm coverage."
+      },
+      {
+        "q": "Does DCM Plumbing provide free quotes?",
+        "a": "DCM Plumbing can provide estimates for plumbing work. Contact them to discuss your needs."
+      }
+    ],
+    "schema_type": "Plumber",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "capital-plumbing",
+    "name": "Capital Plumbing",
+    "vertical": "plumbers",
+    "city": "Gold Coast",
+    "citySlug": "gold-coast",
+    "country": "ireland",
+    "address": "Gold Coast, Ireland",
+    "phone": "07 5528 4449",
+    "website": "https://capitalplumbing.com.au/",
+    "email": "",
+    "description": "Capital Plumbing is a trusted plumbers located in Gold Coast, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Capital Plumbing offer emergency plumbing?",
+        "a": "Contact Capital Plumbing for emergency callout availability and response times."
+      },
+      {
+        "q": "What areas does Capital Plumbing cover?",
+        "a": "Capital Plumbing serves the local area and surrounding regions. Call to confirm coverage."
+      },
+      {
+        "q": "Does Capital Plumbing provide free quotes?",
+        "a": "Capital Plumbing can provide estimates for plumbing work. Contact them to discuss your needs."
       }
     ],
     "schema_type": "Plumber",
@@ -28270,6 +28816,620 @@
     "openingHours": "Mo-Fr 09:00-18:00"
   },
   {
+    "slug": "gartlan-furey-llp",
+    "name": "Gartlan Furey LLP",
+    "vertical": "accountants",
+    "city": "Dublin",
+    "citySlug": "dublin",
+    "country": "ireland",
+    "address": "Dublin, Ireland",
+    "phone": "",
+    "website": "https://www.gartlanfurey.ie/",
+    "email": "",
+    "description": "Gartlan Furey LLP is a trusted professional services located in Dublin, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Gartlan Furey LLP offer free consultations?",
+        "a": "Contact Gartlan Furey LLP to enquire about initial consultation availability."
+      },
+      {
+        "q": "What services does Gartlan Furey LLP provide?",
+        "a": "Gartlan Furey LLP offers a range of professional services. Contact them for details."
+      },
+      {
+        "q": "Does Gartlan Furey LLP work with small businesses?",
+        "a": "Yes, Gartlan Furey LLP works with businesses of all sizes. Get in touch to discuss your needs."
+      }
+    ],
+    "schema_type": "AccountingService",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "hayes-solicitors-llp",
+    "name": "Hayes Solicitors LLP",
+    "vertical": "accountants",
+    "city": "Dublin",
+    "citySlug": "dublin",
+    "country": "ireland",
+    "address": "Dublin, Ireland",
+    "phone": "",
+    "website": "https://hayes-solicitors.ie/",
+    "email": "",
+    "description": "Hayes Solicitors LLP is a trusted professional services located in Dublin, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Hayes Solicitors LLP offer free consultations?",
+        "a": "Contact Hayes Solicitors LLP to enquire about initial consultation availability."
+      },
+      {
+        "q": "What services does Hayes Solicitors LLP provide?",
+        "a": "Hayes Solicitors LLP offers a range of professional services. Contact them for details."
+      },
+      {
+        "q": "Does Hayes Solicitors LLP work with small businesses?",
+        "a": "Yes, Hayes Solicitors LLP works with businesses of all sizes. Get in touch to discuss your needs."
+      }
+    ],
+    "schema_type": "AccountingService",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "flynn-o-driscoll",
+    "name": "Flynn O'Driscoll",
+    "vertical": "accountants",
+    "city": "Dublin",
+    "citySlug": "dublin",
+    "country": "ireland",
+    "address": "Dublin, Ireland",
+    "phone": "",
+    "website": "https://www.fod.ie/",
+    "email": "",
+    "description": "Flynn O'Driscoll is a trusted professional services located in Dublin, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Flynn O'Driscoll offer free consultations?",
+        "a": "Contact Flynn O'Driscoll to enquire about initial consultation availability."
+      },
+      {
+        "q": "What services does Flynn O'Driscoll provide?",
+        "a": "Flynn O'Driscoll offers a range of professional services. Contact them for details."
+      },
+      {
+        "q": "Does Flynn O'Driscoll work with small businesses?",
+        "a": "Yes, Flynn O'Driscoll works with businesses of all sizes. Get in touch to discuss your needs."
+      }
+    ],
+    "schema_type": "AccountingService",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "emerson-conway-solicitors",
+    "name": "Emerson & Conway Solicitors",
+    "vertical": "accountants",
+    "city": "Galway",
+    "citySlug": "galway",
+    "country": "ireland",
+    "address": "Galway, Ireland",
+    "phone": "(091) 562531",
+    "website": "http://ecsolicitors.com/",
+    "email": "",
+    "description": "Emerson & Conway Solicitors is a trusted professional services located in Galway, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Emerson & Conway Solicitors offer free consultations?",
+        "a": "Contact Emerson & Conway Solicitors to enquire about initial consultation availability."
+      },
+      {
+        "q": "What services does Emerson & Conway Solicitors provide?",
+        "a": "Emerson & Conway Solicitors offers a range of professional services. Contact them for details."
+      },
+      {
+        "q": "Does Emerson & Conway Solicitors work with small businesses?",
+        "a": "Yes, Emerson & Conway Solicitors works with businesses of all sizes. Get in touch to discuss your needs."
+      }
+    ],
+    "schema_type": "AccountingService",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "parfrey-murphy",
+    "name": "Parfrey Murphy",
+    "vertical": "accountants",
+    "city": "Cork",
+    "citySlug": "cork",
+    "country": "ireland",
+    "address": "Cork, Ireland",
+    "phone": "",
+    "website": "https://parfreymurphy.ie/",
+    "email": "",
+    "description": "Parfrey Murphy is a trusted professional services located in Cork, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Parfrey Murphy offer free consultations?",
+        "a": "Contact Parfrey Murphy to enquire about initial consultation availability."
+      },
+      {
+        "q": "What services does Parfrey Murphy provide?",
+        "a": "Parfrey Murphy offers a range of professional services. Contact them for details."
+      },
+      {
+        "q": "Does Parfrey Murphy work with small businesses?",
+        "a": "Yes, Parfrey Murphy works with businesses of all sizes. Get in touch to discuss your needs."
+      }
+    ],
+    "schema_type": "AccountingService",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "hartnett-and-company",
+    "name": "Hartnett and Company",
+    "vertical": "accountants",
+    "city": "Cork",
+    "citySlug": "cork",
+    "country": "ireland",
+    "address": "Cork, Ireland",
+    "phone": "",
+    "website": "",
+    "email": "",
+    "description": "Hartnett and Company is a trusted professional services located in Cork, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Hartnett and Company offer free consultations?",
+        "a": "Contact Hartnett and Company to enquire about initial consultation availability."
+      },
+      {
+        "q": "What services does Hartnett and Company provide?",
+        "a": "Hartnett and Company offers a range of professional services. Contact them for details."
+      },
+      {
+        "q": "Does Hartnett and Company work with small businesses?",
+        "a": "Yes, Hartnett and Company works with businesses of all sizes. Get in touch to discuss your needs."
+      }
+    ],
+    "schema_type": "AccountingService",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "galway-autos",
+    "name": "Galway Autos",
+    "vertical": "mechanics",
+    "city": "Galway",
+    "citySlug": "galway",
+    "country": "ireland",
+    "address": "Galway, Ireland",
+    "phone": "",
+    "website": "https://www.galwayautos.ie/",
+    "email": "",
+    "description": "Galway Autos is a trusted mechanics located in Galway, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Galway Autos service all car brands?",
+        "a": "Galway Autos works on most vehicle makes and models. Call to confirm your car."
+      },
+      {
+        "q": "Does Galway Autos offer free estimates?",
+        "a": "Contact Galway Autos for pricing information and repair estimates."
+      },
+      {
+        "q": "Does Galway Autos handle NCT prep?",
+        "a": "Galway Autos can help prepare your car for NCT testing. Book an appointment."
+      }
+    ],
+    "schema_type": "AutoRepair",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "ward-s-garage-oranmore",
+    "name": "Ward's Garage Oranmore",
+    "vertical": "mechanics",
+    "city": "Galway",
+    "citySlug": "galway",
+    "country": "ireland",
+    "address": "Galway, Ireland",
+    "phone": "",
+    "website": "https://www.wardsgarage.ie/",
+    "email": "",
+    "description": "Ward's Garage Oranmore is a trusted mechanics located in Galway, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Ward's Garage Oranmore service all car brands?",
+        "a": "Ward's Garage Oranmore works on most vehicle makes and models. Call to confirm your car."
+      },
+      {
+        "q": "Does Ward's Garage Oranmore offer free estimates?",
+        "a": "Contact Ward's Garage Oranmore for pricing information and repair estimates."
+      },
+      {
+        "q": "Does Ward's Garage Oranmore handle NCT prep?",
+        "a": "Ward's Garage Oranmore can help prepare your car for NCT testing. Book an appointment."
+      }
+    ],
+    "schema_type": "AutoRepair",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "cunningham-s-garage",
+    "name": "Cunningham's Garage",
+    "vertical": "mechanics",
+    "city": "Galway",
+    "citySlug": "galway",
+    "country": "ireland",
+    "address": "Galway, Ireland",
+    "phone": "",
+    "website": "https://cunninghamsgarage.com",
+    "email": "",
+    "description": "Cunningham's Garage is a trusted mechanics located in Galway, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Cunningham's Garage service all car brands?",
+        "a": "Cunningham's Garage works on most vehicle makes and models. Call to confirm your car."
+      },
+      {
+        "q": "Does Cunningham's Garage offer free estimates?",
+        "a": "Contact Cunningham's Garage for pricing information and repair estimates."
+      },
+      {
+        "q": "Does Cunningham's Garage handle NCT prep?",
+        "a": "Cunningham's Garage can help prepare your car for NCT testing. Book an appointment."
+      }
+    ],
+    "schema_type": "AutoRepair",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "fota-auto-parts",
+    "name": "Fota Auto Parts",
+    "vertical": "mechanics",
+    "city": "Limerick",
+    "citySlug": "limerick",
+    "country": "ireland",
+    "address": "Limerick, Ireland",
+    "phone": "061 603 269",
+    "website": "https://www.fotaautoparts.ie/",
+    "email": "",
+    "description": "Fota Auto Parts is a trusted mechanics located in Limerick, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Fota Auto Parts service all car brands?",
+        "a": "Fota Auto Parts works on most vehicle makes and models. Call to confirm your car."
+      },
+      {
+        "q": "Does Fota Auto Parts offer free estimates?",
+        "a": "Contact Fota Auto Parts for pricing information and repair estimates."
+      },
+      {
+        "q": "Does Fota Auto Parts handle NCT prep?",
+        "a": "Fota Auto Parts can help prepare your car for NCT testing. Book an appointment."
+      }
+    ],
+    "schema_type": "AutoRepair",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "sebastian-s-garage",
+    "name": "Sebastian's Garage",
+    "vertical": "mechanics",
+    "city": "Limerick",
+    "citySlug": "limerick",
+    "country": "ireland",
+    "address": "Limerick, Ireland",
+    "phone": "",
+    "website": "https://www.sebastiansgarage.ie",
+    "email": "",
+    "description": "Sebastian's Garage is a trusted mechanics located in Limerick, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Sebastian's Garage service all car brands?",
+        "a": "Sebastian's Garage works on most vehicle makes and models. Call to confirm your car."
+      },
+      {
+        "q": "Does Sebastian's Garage offer free estimates?",
+        "a": "Contact Sebastian's Garage for pricing information and repair estimates."
+      },
+      {
+        "q": "Does Sebastian's Garage handle NCT prep?",
+        "a": "Sebastian's Garage can help prepare your car for NCT testing. Book an appointment."
+      }
+    ],
+    "schema_type": "AutoRepair",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "54-degrees-restaurant",
+    "name": "54 Degrees Restaurant",
+    "vertical": "restaurants",
+    "city": "Dundalk",
+    "citySlug": "dundalk",
+    "country": "ireland",
+    "address": "Dundalk, Ireland",
+    "phone": "",
+    "website": "https://www.gatewayhotel.ie/54degrees/",
+    "email": "",
+    "description": "54 Degrees Restaurant is a trusted restaurants located in Dundalk, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does 54 Degrees Restaurant take reservations?",
+        "a": "Yes, 54 Degrees Restaurant accepts reservations. Call ahead or book online for the best experience."
+      },
+      {
+        "q": "What type of cuisine does 54 Degrees Restaurant serve?",
+        "a": "54 Degrees Restaurant offers a carefully curated menu featuring local and international dishes."
+      },
+      {
+        "q": "Does 54 Degrees Restaurant have parking?",
+        "a": "Please contact 54 Degrees Restaurant directly for parking information and availability."
+      },
+      {
+        "q": "Is there a dress code at 54 Degrees Restaurant?",
+        "a": "Smart casual attire is recommended. Contact the restaurant for specific event requirements."
+      },
+      {
+        "q": "Does 54 Degrees Restaurant offer private dining?",
+        "a": "54 Degrees Restaurant may offer private dining options for special events. Contact them for details."
+      }
+    ],
+    "schema_type": "Restaurant",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "queens-hotel-restaurant",
+    "name": "Queens Hotel Restaurant",
+    "vertical": "restaurants",
+    "city": "Ennis",
+    "citySlug": "ennis",
+    "country": "ireland",
+    "address": "Ennis, Ireland",
+    "phone": "+353 65 6828963",
+    "website": "https://www.queenshotelennis.com/en/restaurant-ennis/",
+    "email": "",
+    "description": "Queens Hotel Restaurant is a trusted restaurants located in Ennis, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Queens Hotel Restaurant take reservations?",
+        "a": "Yes, Queens Hotel Restaurant accepts reservations. Call ahead or book online for the best experience."
+      },
+      {
+        "q": "What type of cuisine does Queens Hotel Restaurant serve?",
+        "a": "Queens Hotel Restaurant offers a carefully curated menu featuring local and international dishes."
+      },
+      {
+        "q": "Does Queens Hotel Restaurant have parking?",
+        "a": "Please contact Queens Hotel Restaurant directly for parking information and availability."
+      },
+      {
+        "q": "Is there a dress code at Queens Hotel Restaurant?",
+        "a": "Smart casual attire is recommended. Contact the restaurant for specific event requirements."
+      },
+      {
+        "q": "Does Queens Hotel Restaurant offer private dining?",
+        "a": "Queens Hotel Restaurant may offer private dining options for special events. Contact them for details."
+      }
+    ],
+    "schema_type": "Restaurant",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "barrack-gate-vets",
+    "name": "Barrack Gate Vets",
+    "vertical": "vets",
+    "city": "Naas",
+    "citySlug": "naas",
+    "country": "ireland",
+    "address": "Naas, Ireland",
+    "phone": "045 876 041",
+    "website": "https://topvet.net/practices/ireland/co-kildare/naas/barrack-gate-vets-21275",
+    "email": "",
+    "description": "Barrack Gate Vets is a trusted veterinary clinics located in Naas, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Barrack Gate Vets treat?",
+        "a": "Barrack Gate Vets treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Barrack Gate Vets offer emergency veterinary services?",
+        "a": "Contact Barrack Gate Vets for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Barrack Gate Vets provide vaccinations?",
+        "a": "Yes, Barrack Gate Vets offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Barrack Gate Vets?",
+        "a": "Barrack Gate Vets can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "acuphysio-clinic",
+    "name": "AcuPhysio Clinic",
+    "vertical": "physios",
+    "city": "Bray",
+    "citySlug": "bray",
+    "country": "ireland",
+    "address": "Bray, Ireland",
+    "phone": "",
+    "website": "https://acuphysio.ie",
+    "email": "",
+    "description": "AcuPhysio Clinic is a trusted physiotherapy located in Bray, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Do I need a referral for AcuPhysio Clinic?",
+        "a": "In most cases, you don't need a referral. Contact AcuPhysio Clinic to book directly."
+      },
+      {
+        "q": "What conditions does AcuPhysio Clinic treat?",
+        "a": "AcuPhysio Clinic treats sports injuries, back pain, rehabilitation, and more."
+      },
+      {
+        "q": "Does AcuPhysio Clinic accept health insurance?",
+        "a": "AcuPhysio Clinic is covered by most major health insurers. Confirm your plan when booking."
+      }
+    ],
+    "schema_type": "PhysicalTherapy",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "dbc-bray-physio",
+    "name": "DBC Bray Physio",
+    "vertical": "physios",
+    "city": "Bray",
+    "citySlug": "bray",
+    "country": "ireland",
+    "address": "Bray, Ireland",
+    "phone": "01 531 0333",
+    "website": "https://www.dbc.ie/bray-physio-clinic/",
+    "email": "",
+    "description": "DBC Bray Physio is a trusted physiotherapy located in Bray, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Do I need a referral for DBC Bray Physio?",
+        "a": "In most cases, you don't need a referral. Contact DBC Bray Physio to book directly."
+      },
+      {
+        "q": "What conditions does DBC Bray Physio treat?",
+        "a": "DBC Bray Physio treats sports injuries, back pain, rehabilitation, and more."
+      },
+      {
+        "q": "Does DBC Bray Physio accept health insurance?",
+        "a": "DBC Bray Physio is covered by most major health insurers. Confirm your plan when booking."
+      }
+    ],
+    "schema_type": "PhysicalTherapy",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "lyrath-estate",
+    "name": "Lyrath Estate",
+    "vertical": "restaurants",
+    "city": "Kilkenny",
+    "citySlug": "kilkenny",
+    "country": "ireland",
+    "address": "Kilkenny, Ireland",
+    "phone": "+353 (0) 56776 0088",
+    "website": "https://www.lyrath.com/dine/",
+    "email": "",
+    "description": "Lyrath Estate is a trusted restaurants located in Kilkenny, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Lyrath Estate take reservations?",
+        "a": "Yes, Lyrath Estate accepts reservations. Call ahead or book online for the best experience."
+      },
+      {
+        "q": "What type of cuisine does Lyrath Estate serve?",
+        "a": "Lyrath Estate offers a carefully curated menu featuring local and international dishes."
+      },
+      {
+        "q": "Does Lyrath Estate have parking?",
+        "a": "Please contact Lyrath Estate directly for parking information and availability."
+      },
+      {
+        "q": "Is there a dress code at Lyrath Estate?",
+        "a": "Smart casual attire is recommended. Contact the restaurant for specific event requirements."
+      },
+      {
+        "q": "Does Lyrath Estate offer private dining?",
+        "a": "Lyrath Estate may offer private dining options for special events. Contact them for details."
+      }
+    ],
+    "schema_type": "Restaurant",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "molly-fultons",
+    "name": "Molly Fultons",
+    "vertical": "restaurants",
+    "city": "Sligo",
+    "citySlug": "sligo",
+    "country": "ireland",
+    "address": "Sligo, Ireland",
+    "phone": "(071) 9160027",
+    "website": "https://www.mollyfultons.com/",
+    "email": "",
+    "description": "Molly Fultons is a trusted restaurants located in Sligo, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Molly Fultons take reservations?",
+        "a": "Yes, Molly Fultons accepts reservations. Call ahead or book online for the best experience."
+      },
+      {
+        "q": "What type of cuisine does Molly Fultons serve?",
+        "a": "Molly Fultons offers a carefully curated menu featuring local and international dishes."
+      },
+      {
+        "q": "Does Molly Fultons have parking?",
+        "a": "Please contact Molly Fultons directly for parking information and availability."
+      },
+      {
+        "q": "Is there a dress code at Molly Fultons?",
+        "a": "Smart casual attire is recommended. Contact the restaurant for specific event requirements."
+      },
+      {
+        "q": "Does Molly Fultons offer private dining?",
+        "a": "Molly Fultons may offer private dining options for special events. Contact them for details."
+      }
+    ],
+    "schema_type": "Restaurant",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "royal-indian-cuisine",
+    "name": "Royal Indian Cuisine",
+    "vertical": "restaurants",
+    "city": "Drogheda",
+    "citySlug": "drogheda",
+    "country": "ireland",
+    "address": "Drogheda, Ireland",
+    "phone": "+353 41 983 2433",
+    "website": "",
+    "email": "",
+    "description": "Royal Indian Cuisine is a trusted restaurants located in Drogheda, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Royal Indian Cuisine take reservations?",
+        "a": "Yes, Royal Indian Cuisine accepts reservations. Call ahead or book online for the best experience."
+      },
+      {
+        "q": "What type of cuisine does Royal Indian Cuisine serve?",
+        "a": "Royal Indian Cuisine offers a carefully curated menu featuring local and international dishes."
+      },
+      {
+        "q": "Does Royal Indian Cuisine have parking?",
+        "a": "Please contact Royal Indian Cuisine directly for parking information and availability."
+      },
+      {
+        "q": "Is there a dress code at Royal Indian Cuisine?",
+        "a": "Smart casual attire is recommended. Contact the restaurant for specific event requirements."
+      },
+      {
+        "q": "Does Royal Indian Cuisine offer private dining?",
+        "a": "Royal Indian Cuisine may offer private dining options for special events. Contact them for details."
+      }
+    ],
+    "schema_type": "Restaurant",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
     "slug": "don-julio",
     "name": "Don Julio",
     "vertical": "restaurants",
@@ -37777,6 +38937,1910 @@
       {
         "q": "What treatments does Gentle Dental Care 7 Days (Campbelltown) offer?",
         "a": "Gentle Dental Care 7 Days (Campbelltown) provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "holistic-dental-melbourne-cbd",
+    "name": "Holistic Dental Melbourne CBD",
+    "vertical": "dentists",
+    "city": "Melbourne CBD",
+    "citySlug": "melbourne-cbd",
+    "country": "ireland",
+    "address": "Melbourne CBD, Ireland",
+    "phone": "",
+    "website": "holisticdentalmelbournecbd.com.au",
+    "email": "",
+    "description": "Holistic Dental Melbourne CBD is a trusted dentists located in Melbourne CBD, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Holistic Dental Melbourne CBD accepting new patients?",
+        "a": "Holistic Dental Melbourne CBD welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Holistic Dental Melbourne CBD offer emergency dental care?",
+        "a": "Contact Holistic Dental Melbourne CBD directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Holistic Dental Melbourne CBD accept?",
+        "a": "Holistic Dental Melbourne CBD works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Holistic Dental Melbourne CBD offer?",
+        "a": "Holistic Dental Melbourne CBD provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "dental-on-flinders",
+    "name": "Dental on Flinders",
+    "vertical": "dentists",
+    "city": "Melbourne CBD",
+    "citySlug": "melbourne-cbd",
+    "country": "ireland",
+    "address": "Melbourne CBD, Ireland",
+    "phone": "",
+    "website": "www.dentalonflinders.com.au",
+    "email": "",
+    "description": "Dental on Flinders is a trusted dentists located in Melbourne CBD, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Dental on Flinders accepting new patients?",
+        "a": "Dental on Flinders welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Dental on Flinders offer emergency dental care?",
+        "a": "Contact Dental on Flinders directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Dental on Flinders accept?",
+        "a": "Dental on Flinders works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Dental on Flinders offer?",
+        "a": "Dental on Flinders provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "art-de-dente",
+    "name": "Art De Dente",
+    "vertical": "dentists",
+    "city": "Melbourne CBD",
+    "citySlug": "melbourne-cbd",
+    "country": "ireland",
+    "address": "Melbourne CBD, Ireland",
+    "phone": "",
+    "website": "artdedente.com.au",
+    "email": "",
+    "description": "Art De Dente is a trusted dentists located in Melbourne CBD, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Art De Dente accepting new patients?",
+        "a": "Art De Dente welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Art De Dente offer emergency dental care?",
+        "a": "Contact Art De Dente directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Art De Dente accept?",
+        "a": "Art De Dente works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Art De Dente offer?",
+        "a": "Art De Dente provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "australian-dentists-clinic-melbourne-cbd",
+    "name": "Australian Dentists Clinic Melbourne CBD",
+    "vertical": "dentists",
+    "city": "Melbourne CBD",
+    "citySlug": "melbourne-cbd",
+    "country": "ireland",
+    "address": "Melbourne CBD, Ireland",
+    "phone": "",
+    "website": "dentistsclinic.com.au",
+    "email": "",
+    "description": "Australian Dentists Clinic Melbourne CBD is a trusted dentists located in Melbourne CBD, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Australian Dentists Clinic Melbourne CBD accepting new patients?",
+        "a": "Australian Dentists Clinic Melbourne CBD welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Australian Dentists Clinic Melbourne CBD offer emergency dental care?",
+        "a": "Contact Australian Dentists Clinic Melbourne CBD directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Australian Dentists Clinic Melbourne CBD accept?",
+        "a": "Australian Dentists Clinic Melbourne CBD works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Australian Dentists Clinic Melbourne CBD offer?",
+        "a": "Australian Dentists Clinic Melbourne CBD provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "happy-dentistry",
+    "name": "Happy Dentistry",
+    "vertical": "dentists",
+    "city": "Melbourne CBD",
+    "citySlug": "melbourne-cbd",
+    "country": "ireland",
+    "address": "Melbourne CBD, Ireland",
+    "phone": "",
+    "website": "happy-dentistry.com.au",
+    "email": "",
+    "description": "Happy Dentistry is a trusted dentists located in Melbourne CBD, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Happy Dentistry accepting new patients?",
+        "a": "Happy Dentistry welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Happy Dentistry offer emergency dental care?",
+        "a": "Contact Happy Dentistry directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Happy Dentistry accept?",
+        "a": "Happy Dentistry works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Happy Dentistry offer?",
+        "a": "Happy Dentistry provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "qv-dental",
+    "name": "QV Dental",
+    "vertical": "dentists",
+    "city": "Melbourne CBD",
+    "citySlug": "melbourne-cbd",
+    "country": "ireland",
+    "address": "Melbourne CBD, Ireland",
+    "phone": "",
+    "website": "qvdental.com.au",
+    "email": "",
+    "description": "QV Dental is a trusted dentists located in Melbourne CBD, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is QV Dental accepting new patients?",
+        "a": "QV Dental welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does QV Dental offer emergency dental care?",
+        "a": "Contact QV Dental directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does QV Dental accept?",
+        "a": "QV Dental works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does QV Dental offer?",
+        "a": "QV Dental provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "collins-street-dental",
+    "name": "Collins Street Dental",
+    "vertical": "dentists",
+    "city": "Melbourne CBD",
+    "citySlug": "melbourne-cbd",
+    "country": "ireland",
+    "address": "Melbourne CBD, Ireland",
+    "phone": "",
+    "website": "www.collinsstreetdental.net.au",
+    "email": "",
+    "description": "Collins Street Dental is a trusted dentists located in Melbourne CBD, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Collins Street Dental accepting new patients?",
+        "a": "Collins Street Dental welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Collins Street Dental offer emergency dental care?",
+        "a": "Contact Collins Street Dental directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Collins Street Dental accept?",
+        "a": "Collins Street Dental works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Collins Street Dental offer?",
+        "a": "Collins Street Dental provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "dentist-melbourne-clinic",
+    "name": "Dentist Melbourne Clinic",
+    "vertical": "dentists",
+    "city": "Melbourne CBD",
+    "citySlug": "melbourne-cbd",
+    "country": "ireland",
+    "address": "Melbourne CBD, Ireland",
+    "phone": "(03) 9998 2636",
+    "website": "www.dentistmelbourneclinic.com.au",
+    "email": "",
+    "description": "Dentist Melbourne Clinic is a trusted dentists located in Melbourne CBD, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Dentist Melbourne Clinic accepting new patients?",
+        "a": "Dentist Melbourne Clinic welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Dentist Melbourne Clinic offer emergency dental care?",
+        "a": "Contact Dentist Melbourne Clinic directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Dentist Melbourne Clinic accept?",
+        "a": "Dentist Melbourne Clinic works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Dentist Melbourne Clinic offer?",
+        "a": "Dentist Melbourne Clinic provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "dental-on-clarendon",
+    "name": "Dental on Clarendon",
+    "vertical": "dentists",
+    "city": "South Melbourne",
+    "citySlug": "south-melbourne",
+    "country": "ireland",
+    "address": "South Melbourne, Ireland",
+    "phone": "",
+    "website": "dentalonclarendon.com.au",
+    "email": "",
+    "description": "Dental on Clarendon is a trusted dentists located in South Melbourne, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Dental on Clarendon accepting new patients?",
+        "a": "Dental on Clarendon welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Dental on Clarendon offer emergency dental care?",
+        "a": "Contact Dental on Clarendon directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Dental on Clarendon accept?",
+        "a": "Dental on Clarendon works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Dental on Clarendon offer?",
+        "a": "Dental on Clarendon provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "south-melbourne-dental-group",
+    "name": "South Melbourne Dental Group",
+    "vertical": "dentists",
+    "city": "South Melbourne",
+    "citySlug": "south-melbourne",
+    "country": "ireland",
+    "address": "South Melbourne, Ireland",
+    "phone": "(03) 9690 6388",
+    "website": "www.southmelbournedental.com.au",
+    "email": "",
+    "description": "South Melbourne Dental Group is a trusted dentists located in South Melbourne, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is South Melbourne Dental Group accepting new patients?",
+        "a": "South Melbourne Dental Group welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does South Melbourne Dental Group offer emergency dental care?",
+        "a": "Contact South Melbourne Dental Group directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does South Melbourne Dental Group accept?",
+        "a": "South Melbourne Dental Group works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does South Melbourne Dental Group offer?",
+        "a": "South Melbourne Dental Group provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "core-dental-south-melbourne",
+    "name": "Core Dental South Melbourne",
+    "vertical": "dentists",
+    "city": "South Melbourne",
+    "citySlug": "south-melbourne",
+    "country": "ireland",
+    "address": "South Melbourne, Ireland",
+    "phone": "",
+    "website": "www.coredental.com.au/locations/south-melbourne/",
+    "email": "",
+    "description": "Core Dental South Melbourne is a trusted dentists located in South Melbourne, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Core Dental South Melbourne accepting new patients?",
+        "a": "Core Dental South Melbourne welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Core Dental South Melbourne offer emergency dental care?",
+        "a": "Contact Core Dental South Melbourne directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Core Dental South Melbourne accept?",
+        "a": "Core Dental South Melbourne works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Core Dental South Melbourne offer?",
+        "a": "Core Dental South Melbourne provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "bay-street-dental-group",
+    "name": "Bay Street Dental Group",
+    "vertical": "dentists",
+    "city": "South Melbourne",
+    "citySlug": "south-melbourne",
+    "country": "ireland",
+    "address": "South Melbourne, Ireland",
+    "phone": "",
+    "website": "dentistportmelbourne.com.au",
+    "email": "",
+    "description": "Bay Street Dental Group is a trusted dentists located in South Melbourne, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Bay Street Dental Group accepting new patients?",
+        "a": "Bay Street Dental Group welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Bay Street Dental Group offer emergency dental care?",
+        "a": "Contact Bay Street Dental Group directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Bay Street Dental Group accept?",
+        "a": "Bay Street Dental Group works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Bay Street Dental Group offer?",
+        "a": "Bay Street Dental Group provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "bupa-dental-south-melbourne",
+    "name": "Bupa Dental South Melbourne",
+    "vertical": "dentists",
+    "city": "South Melbourne",
+    "citySlug": "south-melbourne",
+    "country": "ireland",
+    "address": "South Melbourne, Ireland",
+    "phone": "",
+    "website": "www.bupadental.com.au/find-a-dentist/vic-melbourne-3004-au/bupa-dental-south-melbourne",
+    "email": "",
+    "description": "Bupa Dental South Melbourne is a trusted dentists located in South Melbourne, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Bupa Dental South Melbourne accepting new patients?",
+        "a": "Bupa Dental South Melbourne welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Bupa Dental South Melbourne offer emergency dental care?",
+        "a": "Contact Bupa Dental South Melbourne directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Bupa Dental South Melbourne accept?",
+        "a": "Bupa Dental South Melbourne works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Bupa Dental South Melbourne offer?",
+        "a": "Bupa Dental South Melbourne provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "dental-kingsway",
+    "name": "Dental@Kingsway",
+    "vertical": "dentists",
+    "city": "South Melbourne",
+    "citySlug": "south-melbourne",
+    "country": "ireland",
+    "address": "South Melbourne, Ireland",
+    "phone": "",
+    "website": "www.dentalatkingsway.com.au",
+    "email": "",
+    "description": "Dental@Kingsway is a trusted dentists located in South Melbourne, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Dental@Kingsway accepting new patients?",
+        "a": "Dental@Kingsway welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Dental@Kingsway offer emergency dental care?",
+        "a": "Contact Dental@Kingsway directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Dental@Kingsway accept?",
+        "a": "Dental@Kingsway works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Dental@Kingsway offer?",
+        "a": "Dental@Kingsway provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "south-melbourne-dental-smiles",
+    "name": "South Melbourne Dental Smiles",
+    "vertical": "dentists",
+    "city": "South Melbourne",
+    "citySlug": "south-melbourne",
+    "country": "ireland",
+    "address": "South Melbourne, Ireland",
+    "phone": "",
+    "website": "www.southmelbournedentalsmiles.com.au",
+    "email": "",
+    "description": "South Melbourne Dental Smiles is a trusted dentists located in South Melbourne, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is South Melbourne Dental Smiles accepting new patients?",
+        "a": "South Melbourne Dental Smiles welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does South Melbourne Dental Smiles offer emergency dental care?",
+        "a": "Contact South Melbourne Dental Smiles directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does South Melbourne Dental Smiles accept?",
+        "a": "South Melbourne Dental Smiles works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does South Melbourne Dental Smiles offer?",
+        "a": "South Melbourne Dental Smiles provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "abbotsford-dental",
+    "name": "Abbotsford Dental",
+    "vertical": "dentists",
+    "city": "Abbotsford",
+    "citySlug": "abbotsford",
+    "country": "ireland",
+    "address": "Abbotsford, Ireland",
+    "phone": "",
+    "website": "www.dentistabbotsford.com.au",
+    "email": "",
+    "description": "Abbotsford Dental is a trusted dentists located in Abbotsford, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Abbotsford Dental accepting new patients?",
+        "a": "Abbotsford Dental welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Abbotsford Dental offer emergency dental care?",
+        "a": "Contact Abbotsford Dental directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Abbotsford Dental accept?",
+        "a": "Abbotsford Dental works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Abbotsford Dental offer?",
+        "a": "Abbotsford Dental provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "dentalfit",
+    "name": "DentalFit",
+    "vertical": "dentists",
+    "city": "Collingwood",
+    "citySlug": "collingwood",
+    "country": "ireland",
+    "address": "Collingwood, Ireland",
+    "phone": "",
+    "website": "www.dentalfit.com.au",
+    "email": "",
+    "description": "DentalFit is a trusted dentists located in Collingwood, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is DentalFit accepting new patients?",
+        "a": "DentalFit welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does DentalFit offer emergency dental care?",
+        "a": "Contact DentalFit directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does DentalFit accept?",
+        "a": "DentalFit works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does DentalFit offer?",
+        "a": "DentalFit provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "dentl-east-melbourne",
+    "name": "DENTL East Melbourne",
+    "vertical": "dentists",
+    "city": "East Melbourne",
+    "citySlug": "east-melbourne",
+    "country": "ireland",
+    "address": "East Melbourne, Ireland",
+    "phone": "",
+    "website": "dentl.com.au",
+    "email": "",
+    "description": "DENTL East Melbourne is a trusted dentists located in East Melbourne, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is DENTL East Melbourne accepting new patients?",
+        "a": "DENTL East Melbourne welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does DENTL East Melbourne offer emergency dental care?",
+        "a": "Contact DENTL East Melbourne directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does DENTL East Melbourne accept?",
+        "a": "DENTL East Melbourne works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does DENTL East Melbourne offer?",
+        "a": "DENTL East Melbourne provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "victoria-street-dental",
+    "name": "Victoria Street Dental",
+    "vertical": "dentists",
+    "city": "Richmond",
+    "citySlug": "richmond",
+    "country": "ireland",
+    "address": "Richmond, Ireland",
+    "phone": "",
+    "website": "www.victoriastreetdental.com.au",
+    "email": "",
+    "description": "Victoria Street Dental is a trusted dentists located in Richmond, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Victoria Street Dental accepting new patients?",
+        "a": "Victoria Street Dental welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Victoria Street Dental offer emergency dental care?",
+        "a": "Contact Victoria Street Dental directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Victoria Street Dental accept?",
+        "a": "Victoria Street Dental works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Victoria Street Dental offer?",
+        "a": "Victoria Street Dental provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "dentists-of-east-melbourne",
+    "name": "Dentists of East Melbourne",
+    "vertical": "dentists",
+    "city": "East Melbourne",
+    "citySlug": "east-melbourne",
+    "country": "ireland",
+    "address": "East Melbourne, Ireland",
+    "phone": "",
+    "website": "doem.com.au",
+    "email": "",
+    "description": "Dentists of East Melbourne is a trusted dentists located in East Melbourne, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Dentists of East Melbourne accepting new patients?",
+        "a": "Dentists of East Melbourne welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Dentists of East Melbourne offer emergency dental care?",
+        "a": "Contact Dentists of East Melbourne directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Dentists of East Melbourne accept?",
+        "a": "Dentists of East Melbourne works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Dentists of East Melbourne offer?",
+        "a": "Dentists of East Melbourne provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "dentist-collingwood",
+    "name": "Dentist Collingwood",
+    "vertical": "dentists",
+    "city": "Collingwood",
+    "citySlug": "collingwood",
+    "country": "ireland",
+    "address": "Collingwood, Ireland",
+    "phone": "",
+    "website": "www.dentistcollingwood.com.au",
+    "email": "",
+    "description": "Dentist Collingwood is a trusted dentists located in Collingwood, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Dentist Collingwood accepting new patients?",
+        "a": "Dentist Collingwood welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Dentist Collingwood offer emergency dental care?",
+        "a": "Contact Dentist Collingwood directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Dentist Collingwood accept?",
+        "a": "Dentist Collingwood works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Dentist Collingwood offer?",
+        "a": "Dentist Collingwood provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "chapel-gate-dental",
+    "name": "Chapel Gate Dental",
+    "vertical": "dentists",
+    "city": "St Kilda",
+    "citySlug": "st-kilda",
+    "country": "ireland",
+    "address": "St Kilda, Ireland",
+    "phone": "(03) 9531 3742",
+    "website": "chapelgatedental.com",
+    "email": "",
+    "description": "Chapel Gate Dental is a trusted dentists located in St Kilda, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Chapel Gate Dental accepting new patients?",
+        "a": "Chapel Gate Dental welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Chapel Gate Dental offer emergency dental care?",
+        "a": "Contact Chapel Gate Dental directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Chapel Gate Dental accept?",
+        "a": "Chapel Gate Dental works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Chapel Gate Dental offer?",
+        "a": "Chapel Gate Dental provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "dental-art-st-kilda",
+    "name": "Dental Art St Kilda",
+    "vertical": "dentists",
+    "city": "St Kilda East",
+    "citySlug": "st-kilda-east",
+    "country": "ireland",
+    "address": "St Kilda East, Ireland",
+    "phone": "(03) 9527 2273",
+    "website": "www.dentalart.com.au",
+    "email": "",
+    "description": "Dental Art St Kilda is a trusted dentists located in St Kilda East, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Dental Art St Kilda accepting new patients?",
+        "a": "Dental Art St Kilda welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Dental Art St Kilda offer emergency dental care?",
+        "a": "Contact Dental Art St Kilda directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Dental Art St Kilda accept?",
+        "a": "Dental Art St Kilda works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Dental Art St Kilda offer?",
+        "a": "Dental Art St Kilda provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "complete-dental-care",
+    "name": "Complete Dental Care",
+    "vertical": "dentists",
+    "city": "St Kilda Road",
+    "citySlug": "st-kilda-road",
+    "country": "ireland",
+    "address": "St Kilda Road, Ireland",
+    "phone": "(03) 9866 1171",
+    "website": "cdc.net.au",
+    "email": "info@cdc.net.au",
+    "description": "Complete Dental Care is a trusted dentists located in St Kilda Road, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Complete Dental Care accepting new patients?",
+        "a": "Complete Dental Care welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Complete Dental Care offer emergency dental care?",
+        "a": "Contact Complete Dental Care directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Complete Dental Care accept?",
+        "a": "Complete Dental Care works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Complete Dental Care offer?",
+        "a": "Complete Dental Care provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "parkview-dental",
+    "name": "Parkview Dental",
+    "vertical": "dentists",
+    "city": "St Kilda Road",
+    "citySlug": "st-kilda-road",
+    "country": "ireland",
+    "address": "St Kilda Road, Ireland",
+    "phone": "(03) 9867 1818",
+    "website": "parkviewdental.melbourne",
+    "email": "",
+    "description": "Parkview Dental is a trusted dentists located in St Kilda Road, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Parkview Dental accepting new patients?",
+        "a": "Parkview Dental welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Parkview Dental offer emergency dental care?",
+        "a": "Contact Parkview Dental directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Parkview Dental accept?",
+        "a": "Parkview Dental works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Parkview Dental offer?",
+        "a": "Parkview Dental provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "east-st-kilda-dental",
+    "name": "East St Kilda Dental",
+    "vertical": "dentists",
+    "city": "East St Kilda",
+    "citySlug": "east-st-kilda",
+    "country": "ireland",
+    "address": "East St Kilda, Ireland",
+    "phone": "",
+    "website": "eaststkildadental.com.au",
+    "email": "",
+    "description": "East St Kilda Dental is a trusted dentists located in East St Kilda, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is East St Kilda Dental accepting new patients?",
+        "a": "East St Kilda Dental welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does East St Kilda Dental offer emergency dental care?",
+        "a": "Contact East St Kilda Dental directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does East St Kilda Dental accept?",
+        "a": "East St Kilda Dental works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does East St Kilda Dental offer?",
+        "a": "East St Kilda Dental provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "prahran-dental-group",
+    "name": "Prahran Dental Group",
+    "vertical": "dentists",
+    "city": "Prahran",
+    "citySlug": "prahran",
+    "country": "ireland",
+    "address": "Prahran, Ireland",
+    "phone": "",
+    "website": "prahrandentalgroup.com.au",
+    "email": "",
+    "description": "Prahran Dental Group is a trusted dentists located in Prahran, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Prahran Dental Group accepting new patients?",
+        "a": "Prahran Dental Group welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Prahran Dental Group offer emergency dental care?",
+        "a": "Contact Prahran Dental Group directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Prahran Dental Group accept?",
+        "a": "Prahran Dental Group works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Prahran Dental Group offer?",
+        "a": "Prahran Dental Group provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "brunswick-dental-practice",
+    "name": "Brunswick Dental Practice",
+    "vertical": "dentists",
+    "city": "Brunswick",
+    "citySlug": "brunswick",
+    "country": "ireland",
+    "address": "Brunswick, Ireland",
+    "phone": "",
+    "website": "brunswickdentalpractice.com.au",
+    "email": "",
+    "description": "Brunswick Dental Practice is a trusted dentists located in Brunswick, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Brunswick Dental Practice accepting new patients?",
+        "a": "Brunswick Dental Practice welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Brunswick Dental Practice offer emergency dental care?",
+        "a": "Contact Brunswick Dental Practice directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Brunswick Dental Practice accept?",
+        "a": "Brunswick Dental Practice works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Brunswick Dental Practice offer?",
+        "a": "Brunswick Dental Practice provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "brunswick-east-dental-studio",
+    "name": "Brunswick East Dental Studio",
+    "vertical": "dentists",
+    "city": "Brunswick East",
+    "citySlug": "brunswick-east",
+    "country": "ireland",
+    "address": "Brunswick East, Ireland",
+    "phone": "",
+    "website": "brunswickeastdental.com.au",
+    "email": "",
+    "description": "Brunswick East Dental Studio is a trusted dentists located in Brunswick East, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Brunswick East Dental Studio accepting new patients?",
+        "a": "Brunswick East Dental Studio welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Brunswick East Dental Studio offer emergency dental care?",
+        "a": "Contact Brunswick East Dental Studio directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Brunswick East Dental Studio accept?",
+        "a": "Brunswick East Dental Studio works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Brunswick East Dental Studio offer?",
+        "a": "Brunswick East Dental Studio provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "aspire-one-dental",
+    "name": "Aspire One Dental",
+    "vertical": "dentists",
+    "city": "Carlton",
+    "citySlug": "carlton",
+    "country": "ireland",
+    "address": "Carlton, Ireland",
+    "phone": "",
+    "website": "aspireonedental.com.au",
+    "email": "",
+    "description": "Aspire One Dental is a trusted dentists located in Carlton, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Aspire One Dental accepting new patients?",
+        "a": "Aspire One Dental welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Aspire One Dental offer emergency dental care?",
+        "a": "Contact Aspire One Dental directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Aspire One Dental accept?",
+        "a": "Aspire One Dental works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Aspire One Dental offer?",
+        "a": "Aspire One Dental provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "north-carlton-dental-group",
+    "name": "North Carlton Dental Group",
+    "vertical": "dentists",
+    "city": "Carlton",
+    "citySlug": "carlton",
+    "country": "ireland",
+    "address": "Carlton, Ireland",
+    "phone": "",
+    "website": "carltondental.com.au",
+    "email": "",
+    "description": "North Carlton Dental Group is a trusted dentists located in Carlton, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is North Carlton Dental Group accepting new patients?",
+        "a": "North Carlton Dental Group welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does North Carlton Dental Group offer emergency dental care?",
+        "a": "Contact North Carlton Dental Group directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does North Carlton Dental Group accept?",
+        "a": "North Carlton Dental Group works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does North Carlton Dental Group offer?",
+        "a": "North Carlton Dental Group provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "brunswick-dental-group",
+    "name": "Brunswick Dental Group",
+    "vertical": "dentists",
+    "city": "Brunswick",
+    "citySlug": "brunswick",
+    "country": "ireland",
+    "address": "Brunswick, Ireland",
+    "phone": "",
+    "website": "brunswickdentalgroup.com.au",
+    "email": "",
+    "description": "Brunswick Dental Group is a trusted dentists located in Brunswick, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Brunswick Dental Group accepting new patients?",
+        "a": "Brunswick Dental Group welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Brunswick Dental Group offer emergency dental care?",
+        "a": "Contact Brunswick Dental Group directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Brunswick Dental Group accept?",
+        "a": "Brunswick Dental Group works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Brunswick Dental Group offer?",
+        "a": "Brunswick Dental Group provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "smile-hawthorn",
+    "name": "Smile Hawthorn",
+    "vertical": "dentists",
+    "city": "Hawthorn",
+    "citySlug": "hawthorn",
+    "country": "ireland",
+    "address": "Hawthorn, Ireland",
+    "phone": "",
+    "website": "www.smilehawthorn.com.au",
+    "email": "",
+    "description": "Smile Hawthorn is a trusted dentists located in Hawthorn, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Smile Hawthorn accepting new patients?",
+        "a": "Smile Hawthorn welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Smile Hawthorn offer emergency dental care?",
+        "a": "Contact Smile Hawthorn directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Smile Hawthorn accept?",
+        "a": "Smile Hawthorn works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Smile Hawthorn offer?",
+        "a": "Smile Hawthorn provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "hawthorn-east-dental",
+    "name": "Hawthorn East Dental",
+    "vertical": "dentists",
+    "city": "Hawthorn East",
+    "citySlug": "hawthorn-east",
+    "country": "ireland",
+    "address": "Hawthorn East, Ireland",
+    "phone": "(03) 9882 6606",
+    "website": "www.hawthorneastdental.com.au",
+    "email": "",
+    "description": "Hawthorn East Dental is a trusted dentists located in Hawthorn East, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Hawthorn East Dental accepting new patients?",
+        "a": "Hawthorn East Dental welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Hawthorn East Dental offer emergency dental care?",
+        "a": "Contact Hawthorn East Dental directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Hawthorn East Dental accept?",
+        "a": "Hawthorn East Dental works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Hawthorn East Dental offer?",
+        "a": "Hawthorn East Dental provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "imperial-dental-implant-centre",
+    "name": "Imperial Dental & Implant Centre",
+    "vertical": "dentists",
+    "city": "Hawthorn East",
+    "citySlug": "hawthorn-east",
+    "country": "ireland",
+    "address": "Hawthorn East, Ireland",
+    "phone": "",
+    "website": "imperialdental.com.au",
+    "email": "",
+    "description": "Imperial Dental & Implant Centre is a trusted dentists located in Hawthorn East, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Imperial Dental & Implant Centre accepting new patients?",
+        "a": "Imperial Dental & Implant Centre welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Imperial Dental & Implant Centre offer emergency dental care?",
+        "a": "Contact Imperial Dental & Implant Centre directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Imperial Dental & Implant Centre accept?",
+        "a": "Imperial Dental & Implant Centre works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Imperial Dental & Implant Centre offer?",
+        "a": "Imperial Dental & Implant Centre provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "tendler-dental",
+    "name": "Tendler Dental",
+    "vertical": "dentists",
+    "city": "Hawthorn East",
+    "citySlug": "hawthorn-east",
+    "country": "ireland",
+    "address": "Hawthorn East, Ireland",
+    "phone": "",
+    "website": "tendlerdental.com.au",
+    "email": "",
+    "description": "Tendler Dental is a trusted dentists located in Hawthorn East, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Tendler Dental accepting new patients?",
+        "a": "Tendler Dental welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Tendler Dental offer emergency dental care?",
+        "a": "Contact Tendler Dental directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Tendler Dental accept?",
+        "a": "Tendler Dental works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Tendler Dental offer?",
+        "a": "Tendler Dental provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "care-dental-camberwell",
+    "name": "Care Dental Camberwell",
+    "vertical": "dentists",
+    "city": "Camberwell",
+    "citySlug": "camberwell",
+    "country": "ireland",
+    "address": "Camberwell, Ireland",
+    "phone": "",
+    "website": "www.caredentalcamberwell.com.au",
+    "email": "",
+    "description": "Care Dental Camberwell is a trusted dentists located in Camberwell, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Care Dental Camberwell accepting new patients?",
+        "a": "Care Dental Camberwell welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Care Dental Camberwell offer emergency dental care?",
+        "a": "Contact Care Dental Camberwell directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Care Dental Camberwell accept?",
+        "a": "Care Dental Camberwell works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Care Dental Camberwell offer?",
+        "a": "Care Dental Camberwell provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "your-dentist-hawthorn",
+    "name": "Your Dentist Hawthorn",
+    "vertical": "dentists",
+    "city": "Hawthorn",
+    "citySlug": "hawthorn",
+    "country": "ireland",
+    "address": "Hawthorn, Ireland",
+    "phone": "",
+    "website": "yourdentisthawthorn.com.au",
+    "email": "",
+    "description": "Your Dentist Hawthorn is a trusted dentists located in Hawthorn, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Your Dentist Hawthorn accepting new patients?",
+        "a": "Your Dentist Hawthorn welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Your Dentist Hawthorn offer emergency dental care?",
+        "a": "Contact Your Dentist Hawthorn directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Your Dentist Hawthorn accept?",
+        "a": "Your Dentist Hawthorn works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Your Dentist Hawthorn offer?",
+        "a": "Your Dentist Hawthorn provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "balwyn-dental-practice",
+    "name": "Balwyn Dental Practice",
+    "vertical": "dentists",
+    "city": "Balwyn",
+    "citySlug": "balwyn",
+    "country": "ireland",
+    "address": "Balwyn, Ireland",
+    "phone": "",
+    "website": "balwyndentalpractice.com.au",
+    "email": "",
+    "description": "Balwyn Dental Practice is a trusted dentists located in Balwyn, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Balwyn Dental Practice accepting new patients?",
+        "a": "Balwyn Dental Practice welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Balwyn Dental Practice offer emergency dental care?",
+        "a": "Contact Balwyn Dental Practice directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Balwyn Dental Practice accept?",
+        "a": "Balwyn Dental Practice works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Balwyn Dental Practice offer?",
+        "a": "Balwyn Dental Practice provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "the-melbourne-smile-centre",
+    "name": "The Melbourne Smile Centre",
+    "vertical": "dentists",
+    "city": "Toorak",
+    "citySlug": "toorak",
+    "country": "ireland",
+    "address": "Toorak, Ireland",
+    "phone": "(03) 9824 7722",
+    "website": "themelbournesmilecentre.com.au",
+    "email": "enquiries@tmsc1007.com.au",
+    "description": "The Melbourne Smile Centre is a trusted dentists located in Toorak, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is The Melbourne Smile Centre accepting new patients?",
+        "a": "The Melbourne Smile Centre welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does The Melbourne Smile Centre offer emergency dental care?",
+        "a": "Contact The Melbourne Smile Centre directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does The Melbourne Smile Centre accept?",
+        "a": "The Melbourne Smile Centre works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does The Melbourne Smile Centre offer?",
+        "a": "The Melbourne Smile Centre provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "k1-dental",
+    "name": "K1 Dental",
+    "vertical": "dentists",
+    "city": "Toorak",
+    "citySlug": "toorak",
+    "country": "ireland",
+    "address": "Toorak, Ireland",
+    "phone": "",
+    "website": "www.k1dental.com.au",
+    "email": "",
+    "description": "K1 Dental is a trusted dentists located in Toorak, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is K1 Dental accepting new patients?",
+        "a": "K1 Dental welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does K1 Dental offer emergency dental care?",
+        "a": "Contact K1 Dental directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does K1 Dental accept?",
+        "a": "K1 Dental works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does K1 Dental offer?",
+        "a": "K1 Dental provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "toorak-dental-studio",
+    "name": "Toorak Dental Studio",
+    "vertical": "dentists",
+    "city": "Toorak",
+    "citySlug": "toorak",
+    "country": "ireland",
+    "address": "Toorak, Ireland",
+    "phone": "",
+    "website": "toorakdentalstudio.com.au",
+    "email": "",
+    "description": "Toorak Dental Studio is a trusted dentists located in Toorak, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Toorak Dental Studio accepting new patients?",
+        "a": "Toorak Dental Studio welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Toorak Dental Studio offer emergency dental care?",
+        "a": "Contact Toorak Dental Studio directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Toorak Dental Studio accept?",
+        "a": "Toorak Dental Studio works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Toorak Dental Studio offer?",
+        "a": "Toorak Dental Studio provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "toorak-dental-group",
+    "name": "Toorak Dental Group",
+    "vertical": "dentists",
+    "city": "Toorak",
+    "citySlug": "toorak",
+    "country": "ireland",
+    "address": "Toorak, Ireland",
+    "phone": "",
+    "website": "www.toorakdentalgroup.com.au",
+    "email": "",
+    "description": "Toorak Dental Group is a trusted dentists located in Toorak, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Toorak Dental Group accepting new patients?",
+        "a": "Toorak Dental Group welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Toorak Dental Group offer emergency dental care?",
+        "a": "Contact Toorak Dental Group directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Toorak Dental Group accept?",
+        "a": "Toorak Dental Group works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Toorak Dental Group offer?",
+        "a": "Toorak Dental Group provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "south-yarra-dental-group",
+    "name": "South Yarra Dental Group",
+    "vertical": "dentists",
+    "city": "South Yarra",
+    "citySlug": "south-yarra",
+    "country": "ireland",
+    "address": "South Yarra, Ireland",
+    "phone": "",
+    "website": "sydg.com.au",
+    "email": "",
+    "description": "South Yarra Dental Group is a trusted dentists located in South Yarra, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is South Yarra Dental Group accepting new patients?",
+        "a": "South Yarra Dental Group welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does South Yarra Dental Group offer emergency dental care?",
+        "a": "Contact South Yarra Dental Group directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does South Yarra Dental Group accept?",
+        "a": "South Yarra Dental Group works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does South Yarra Dental Group offer?",
+        "a": "South Yarra Dental Group provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "the-dentists-south-yarra",
+    "name": "The Dentists South Yarra",
+    "vertical": "dentists",
+    "city": "South Yarra",
+    "citySlug": "south-yarra",
+    "country": "ireland",
+    "address": "South Yarra, Ireland",
+    "phone": "",
+    "website": "www.thedentists.com.au",
+    "email": "",
+    "description": "The Dentists South Yarra is a trusted dentists located in South Yarra, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is The Dentists South Yarra accepting new patients?",
+        "a": "The Dentists South Yarra welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does The Dentists South Yarra offer emergency dental care?",
+        "a": "Contact The Dentists South Yarra directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does The Dentists South Yarra accept?",
+        "a": "The Dentists South Yarra works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does The Dentists South Yarra offer?",
+        "a": "The Dentists South Yarra provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "chadstone-dental",
+    "name": "Chadstone Dental",
+    "vertical": "dentists",
+    "city": "Chadstone",
+    "citySlug": "chadstone",
+    "country": "ireland",
+    "address": "Chadstone, Ireland",
+    "phone": "(03) 9568 0222",
+    "website": "chadstonedental.com.au",
+    "email": "info@chadstonedental.com.au",
+    "description": "Chadstone Dental is a trusted dentists located in Chadstone, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Chadstone Dental accepting new patients?",
+        "a": "Chadstone Dental welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Chadstone Dental offer emergency dental care?",
+        "a": "Contact Chadstone Dental directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Chadstone Dental accept?",
+        "a": "Chadstone Dental works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Chadstone Dental offer?",
+        "a": "Chadstone Dental provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "dentalcare-carnegie",
+    "name": "DentalCare Carnegie",
+    "vertical": "dentists",
+    "city": "Carnegie",
+    "citySlug": "carnegie",
+    "country": "ireland",
+    "address": "Carnegie, Ireland",
+    "phone": "(03) 9571 6667",
+    "website": "dentalcarecarnegie.com.au",
+    "email": "",
+    "description": "DentalCare Carnegie is a trusted dentists located in Carnegie, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is DentalCare Carnegie accepting new patients?",
+        "a": "DentalCare Carnegie welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does DentalCare Carnegie offer emergency dental care?",
+        "a": "Contact DentalCare Carnegie directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does DentalCare Carnegie accept?",
+        "a": "DentalCare Carnegie works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does DentalCare Carnegie offer?",
+        "a": "DentalCare Carnegie provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "ashwood-dental-care",
+    "name": "Ashwood Dental Care",
+    "vertical": "dentists",
+    "city": "Ashwood",
+    "citySlug": "ashwood",
+    "country": "ireland",
+    "address": "Ashwood, Ireland",
+    "phone": "(03) 9885 2712",
+    "website": "www.ashwooddental.com.au",
+    "email": "",
+    "description": "Ashwood Dental Care is a trusted dentists located in Ashwood, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Ashwood Dental Care accepting new patients?",
+        "a": "Ashwood Dental Care welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Ashwood Dental Care offer emergency dental care?",
+        "a": "Contact Ashwood Dental Care directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Ashwood Dental Care accept?",
+        "a": "Ashwood Dental Care works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Ashwood Dental Care offer?",
+        "a": "Ashwood Dental Care provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "gardiner-dental",
+    "name": "Gardiner Dental",
+    "vertical": "dentists",
+    "city": "Glen Iris",
+    "citySlug": "glen-iris",
+    "country": "ireland",
+    "address": "Glen Iris, Ireland",
+    "phone": "",
+    "website": "gardinerdental.com.au",
+    "email": "",
+    "description": "Gardiner Dental is a trusted dentists located in Glen Iris, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Gardiner Dental accepting new patients?",
+        "a": "Gardiner Dental welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Gardiner Dental offer emergency dental care?",
+        "a": "Contact Gardiner Dental directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Gardiner Dental accept?",
+        "a": "Gardiner Dental works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Gardiner Dental offer?",
+        "a": "Gardiner Dental provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "supreme-dental-doncaster",
+    "name": "Supreme Dental Doncaster",
+    "vertical": "dentists",
+    "city": "Doncaster",
+    "citySlug": "doncaster",
+    "country": "ireland",
+    "address": "Doncaster, Ireland",
+    "phone": "(03) 9848 4989",
+    "website": "doncastersupremedental.com.au",
+    "email": "",
+    "description": "Supreme Dental Doncaster is a trusted dentists located in Doncaster, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Supreme Dental Doncaster accepting new patients?",
+        "a": "Supreme Dental Doncaster welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Supreme Dental Doncaster offer emergency dental care?",
+        "a": "Contact Supreme Dental Doncaster directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Supreme Dental Doncaster accept?",
+        "a": "Supreme Dental Doncaster works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Supreme Dental Doncaster offer?",
+        "a": "Supreme Dental Doncaster provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "doncaster-dental",
+    "name": "Doncaster Dental",
+    "vertical": "dentists",
+    "city": "Doncaster",
+    "citySlug": "doncaster",
+    "country": "ireland",
+    "address": "Doncaster, Ireland",
+    "phone": "",
+    "website": "doncasterdental.com.au",
+    "email": "",
+    "description": "Doncaster Dental is a trusted dentists located in Doncaster, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Doncaster Dental accepting new patients?",
+        "a": "Doncaster Dental welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Doncaster Dental offer emergency dental care?",
+        "a": "Contact Doncaster Dental directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Doncaster Dental accept?",
+        "a": "Doncaster Dental works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Doncaster Dental offer?",
+        "a": "Doncaster Dental provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "generations-dental",
+    "name": "Generations Dental",
+    "vertical": "dentists",
+    "city": "Doncaster",
+    "citySlug": "doncaster",
+    "country": "ireland",
+    "address": "Doncaster, Ireland",
+    "phone": "(03) 9848 9422",
+    "website": "www.generationsdental.com.au",
+    "email": "",
+    "description": "Generations Dental is a trusted dentists located in Doncaster, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Generations Dental accepting new patients?",
+        "a": "Generations Dental welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Generations Dental offer emergency dental care?",
+        "a": "Contact Generations Dental directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Generations Dental accept?",
+        "a": "Generations Dental works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Generations Dental offer?",
+        "a": "Generations Dental provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "doncaster-hill-dental",
+    "name": "Doncaster Hill Dental",
+    "vertical": "dentists",
+    "city": "Doncaster",
+    "citySlug": "doncaster",
+    "country": "ireland",
+    "address": "Doncaster, Ireland",
+    "phone": "",
+    "website": "doncasterhilldental.com.au",
+    "email": "",
+    "description": "Doncaster Hill Dental is a trusted dentists located in Doncaster, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Doncaster Hill Dental accepting new patients?",
+        "a": "Doncaster Hill Dental welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Doncaster Hill Dental offer emergency dental care?",
+        "a": "Contact Doncaster Hill Dental directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Doncaster Hill Dental accept?",
+        "a": "Doncaster Hill Dental works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Doncaster Hill Dental offer?",
+        "a": "Doncaster Hill Dental provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "dental-symphony",
+    "name": "Dental Symphony",
+    "vertical": "dentists",
+    "city": "Doncaster",
+    "citySlug": "doncaster",
+    "country": "ireland",
+    "address": "Doncaster, Ireland",
+    "phone": "",
+    "website": "www.dentalsymphony.com.au",
+    "email": "",
+    "description": "Dental Symphony is a trusted dentists located in Doncaster, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Dental Symphony accepting new patients?",
+        "a": "Dental Symphony welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Dental Symphony offer emergency dental care?",
+        "a": "Contact Dental Symphony directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Dental Symphony accept?",
+        "a": "Dental Symphony works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Dental Symphony offer?",
+        "a": "Dental Symphony provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "mc-dental-doncaster",
+    "name": "MC Dental Doncaster",
+    "vertical": "dentists",
+    "city": "Doncaster",
+    "citySlug": "doncaster",
+    "country": "ireland",
+    "address": "Doncaster, Ireland",
+    "phone": "",
+    "website": "www.mcdental.com.au/locations/westfield-doncaster/",
+    "email": "",
+    "description": "MC Dental Doncaster is a trusted dentists located in Doncaster, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is MC Dental Doncaster accepting new patients?",
+        "a": "MC Dental Doncaster welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does MC Dental Doncaster offer emergency dental care?",
+        "a": "Contact MC Dental Doncaster directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does MC Dental Doncaster accept?",
+        "a": "MC Dental Doncaster works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does MC Dental Doncaster offer?",
+        "a": "MC Dental Doncaster provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "lincoln-dental-box-hill",
+    "name": "Lincoln Dental Box Hill",
+    "vertical": "dentists",
+    "city": "Box Hill",
+    "citySlug": "box-hill",
+    "country": "ireland",
+    "address": "Box Hill, Ireland",
+    "phone": "(03) 9874 1309",
+    "website": "lincolndental.com.au",
+    "email": "",
+    "description": "Lincoln Dental Box Hill is a trusted dentists located in Box Hill, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Lincoln Dental Box Hill accepting new patients?",
+        "a": "Lincoln Dental Box Hill welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Lincoln Dental Box Hill offer emergency dental care?",
+        "a": "Contact Lincoln Dental Box Hill directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Lincoln Dental Box Hill accept?",
+        "a": "Lincoln Dental Box Hill works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Lincoln Dental Box Hill offer?",
+        "a": "Lincoln Dental Box Hill provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
       }
     ],
     "schema_type": "Dentist",
