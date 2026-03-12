@@ -2730,6 +2730,380 @@
     "openingHours": "Mo-Fr 09:00-18:00"
   },
   {
+    "slug": "trenes",
+    "name": "Trenes",
+    "vertical": "dentists",
+    "city": "Buenos Aires",
+    "citySlug": "buenos-aires",
+    "country": "ireland",
+    "address": "Buenos Aires, Ireland",
+    "phone": "(011) 4831-4971",
+    "website": "",
+    "email": "",
+    "description": "Trenes is a trusted dentists located in Buenos Aires, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Trenes accepting new patients?",
+        "a": "Trenes welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Trenes offer emergency dental care?",
+        "a": "Contact Trenes directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Trenes accept?",
+        "a": "Trenes works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Trenes offer?",
+        "a": "Trenes provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "holos-sa",
+    "name": "Holos Sa",
+    "vertical": "dentists",
+    "city": "Buenos Aires",
+    "citySlug": "buenos-aires",
+    "country": "ireland",
+    "address": "Buenos Aires, Ireland",
+    "phone": "(011) 4775-3638",
+    "website": "",
+    "email": "",
+    "description": "Holos Sa is a trusted dentists located in Buenos Aires, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Holos Sa accepting new patients?",
+        "a": "Holos Sa welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Holos Sa offer emergency dental care?",
+        "a": "Contact Holos Sa directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Holos Sa accept?",
+        "a": "Holos Sa works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Holos Sa offer?",
+        "a": "Holos Sa provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "pluss-odontologia",
+    "name": "Pluss Odontología",
+    "vertical": "dentists",
+    "city": "Rosario",
+    "citySlug": "rosario",
+    "country": "ireland",
+    "address": "Rosario, Ireland",
+    "phone": "",
+    "website": "https://plussodontologia.com.ar/",
+    "email": "",
+    "description": "Pluss Odontología is a trusted dentists located in Rosario, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Is Pluss Odontología accepting new patients?",
+        "a": "Pluss Odontología welcomes new patients. Call to schedule your first appointment."
+      },
+      {
+        "q": "Does Pluss Odontología offer emergency dental care?",
+        "a": "Contact Pluss Odontología directly for emergency dental care availability and after-hours service."
+      },
+      {
+        "q": "What insurance does Pluss Odontología accept?",
+        "a": "Pluss Odontología works with most major dental insurance providers. Call to confirm your plan."
+      },
+      {
+        "q": "What treatments does Pluss Odontología offer?",
+        "a": "Pluss Odontología provides a full range of dental services including check-ups, cleanings, fillings, and cosmetic dentistry."
+      }
+    ],
+    "schema_type": "Dentist",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "veterinaria-sivet",
+    "name": "Veterinaria SiVet",
+    "vertical": "vets",
+    "city": "Rosario",
+    "citySlug": "rosario",
+    "country": "ireland",
+    "address": "Rosario, Ireland",
+    "phone": "0341-4251035",
+    "website": "https://sivet.com.ar/",
+    "email": "",
+    "description": "Veterinaria SiVet is a trusted veterinary clinics located in Rosario, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Veterinaria SiVet treat?",
+        "a": "Veterinaria SiVet treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Veterinaria SiVet offer emergency veterinary services?",
+        "a": "Contact Veterinaria SiVet for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Veterinaria SiVet provide vaccinations?",
+        "a": "Yes, Veterinaria SiVet offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Veterinaria SiVet?",
+        "a": "Veterinaria SiVet can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "hospital-animal-dr-cossia",
+    "name": "Hospital Animal Dr. Cossia",
+    "vertical": "vets",
+    "city": "Rosario",
+    "citySlug": "rosario",
+    "country": "ireland",
+    "address": "Rosario, Ireland",
+    "phone": "4820405 / 4853330",
+    "website": "",
+    "email": "",
+    "description": "Hospital Animal Dr. Cossia is a trusted veterinary clinics located in Rosario, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Hospital Animal Dr. Cossia treat?",
+        "a": "Hospital Animal Dr. Cossia treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Hospital Animal Dr. Cossia offer emergency veterinary services?",
+        "a": "Contact Hospital Animal Dr. Cossia for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Hospital Animal Dr. Cossia provide vaccinations?",
+        "a": "Yes, Hospital Animal Dr. Cossia offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Hospital Animal Dr. Cossia?",
+        "a": "Hospital Animal Dr. Cossia can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "clinica-veterinaria-dr-fabio-di-giovanni",
+    "name": "Clínica Veterinaria Dr. Fabio Di Giovanni",
+    "vertical": "vets",
+    "city": "Rosario",
+    "citySlug": "rosario",
+    "country": "ireland",
+    "address": "Rosario, Ireland",
+    "phone": "0341-4653307",
+    "website": "",
+    "email": "",
+    "description": "Clínica Veterinaria Dr. Fabio Di Giovanni is a trusted veterinary clinics located in Rosario, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Clínica Veterinaria Dr. Fabio Di Giovanni treat?",
+        "a": "Clínica Veterinaria Dr. Fabio Di Giovanni treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Clínica Veterinaria Dr. Fabio Di Giovanni offer emergency veterinary services?",
+        "a": "Contact Clínica Veterinaria Dr. Fabio Di Giovanni for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Clínica Veterinaria Dr. Fabio Di Giovanni provide vaccinations?",
+        "a": "Yes, Clínica Veterinaria Dr. Fabio Di Giovanni offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Clínica Veterinaria Dr. Fabio Di Giovanni?",
+        "a": "Clínica Veterinaria Dr. Fabio Di Giovanni can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "veterinaria-yaafar",
+    "name": "Veterinaria Yaafar",
+    "vertical": "vets",
+    "city": "Rosario",
+    "citySlug": "rosario",
+    "country": "ireland",
+    "address": "Rosario, Ireland",
+    "phone": "0341-4324074",
+    "website": "",
+    "email": "",
+    "description": "Veterinaria Yaafar is a trusted veterinary clinics located in Rosario, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Veterinaria Yaafar treat?",
+        "a": "Veterinaria Yaafar treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Veterinaria Yaafar offer emergency veterinary services?",
+        "a": "Contact Veterinaria Yaafar for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Veterinaria Yaafar provide vaccinations?",
+        "a": "Yes, Veterinaria Yaafar offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Veterinaria Yaafar?",
+        "a": "Veterinaria Yaafar can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "centro-veterinario-cevet",
+    "name": "Centro Veterinario Cevet",
+    "vertical": "vets",
+    "city": "Rosario",
+    "citySlug": "rosario",
+    "country": "ireland",
+    "address": "Rosario, Ireland",
+    "phone": "0341-4240840",
+    "website": "",
+    "email": "",
+    "description": "Centro Veterinario Cevet is a trusted veterinary clinics located in Rosario, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Centro Veterinario Cevet treat?",
+        "a": "Centro Veterinario Cevet treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Centro Veterinario Cevet offer emergency veterinary services?",
+        "a": "Contact Centro Veterinario Cevet for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Centro Veterinario Cevet provide vaccinations?",
+        "a": "Yes, Centro Veterinario Cevet offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Centro Veterinario Cevet?",
+        "a": "Centro Veterinario Cevet can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "clinica-veterinaria-totalvet",
+    "name": "Clínica Veterinaria Totalvet",
+    "vertical": "vets",
+    "city": "Rosario",
+    "citySlug": "rosario",
+    "country": "ireland",
+    "address": "Rosario, Ireland",
+    "phone": "0341-3795809",
+    "website": "",
+    "email": "",
+    "description": "Clínica Veterinaria Totalvet is a trusted veterinary clinics located in Rosario, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Clínica Veterinaria Totalvet treat?",
+        "a": "Clínica Veterinaria Totalvet treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Clínica Veterinaria Totalvet offer emergency veterinary services?",
+        "a": "Contact Clínica Veterinaria Totalvet for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Clínica Veterinaria Totalvet provide vaccinations?",
+        "a": "Yes, Clínica Veterinaria Totalvet offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Clínica Veterinaria Totalvet?",
+        "a": "Clínica Veterinaria Totalvet can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "mascota24",
+    "name": "Mascota24",
+    "vertical": "vets",
+    "city": "Rosario",
+    "citySlug": "rosario",
+    "country": "ireland",
+    "address": "Rosario, Ireland",
+    "phone": "0341-4204880",
+    "website": "https://www.mascota24.com.ar/",
+    "email": "",
+    "description": "Mascota24 is a trusted veterinary clinics located in Rosario, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Mascota24 treat?",
+        "a": "Mascota24 treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Mascota24 offer emergency veterinary services?",
+        "a": "Contact Mascota24 for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Mascota24 provide vaccinations?",
+        "a": "Yes, Mascota24 offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Mascota24?",
+        "a": "Mascota24 can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "hospital-veterinario-cordoba-hvc",
+    "name": "Hospital Veterinario Córdoba (HVC)",
+    "vertical": "vets",
+    "city": "Córdoba",
+    "citySlug": "cordoba",
+    "country": "ireland",
+    "address": "Córdoba, Ireland",
+    "phone": "0351-4282426",
+    "website": "https://hvcweb.ar/",
+    "email": "",
+    "description": "Hospital Veterinario Córdoba (HVC) is a trusted veterinary clinics located in Córdoba, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "What animals does Hospital Veterinario Córdoba (HVC) treat?",
+        "a": "Hospital Veterinario Córdoba (HVC) treats cats, dogs, and other companion animals. Call to enquire about exotic pets."
+      },
+      {
+        "q": "Does Hospital Veterinario Córdoba (HVC) offer emergency veterinary services?",
+        "a": "Contact Hospital Veterinario Córdoba (HVC) for information about emergency and after-hours veterinary care."
+      },
+      {
+        "q": "Does Hospital Veterinario Córdoba (HVC) provide vaccinations?",
+        "a": "Yes, Hospital Veterinario Córdoba (HVC) offers a full vaccination schedule for pets. Book an appointment today."
+      },
+      {
+        "q": "Can I get pet insurance advice from Hospital Veterinario Córdoba (HVC)?",
+        "a": "Hospital Veterinario Córdoba (HVC) can help guide you on pet insurance options during your consultation."
+      }
+    ],
+    "schema_type": "VeterinaryCare",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
     "slug": "apex-plumbing-services",
     "name": "Apex Plumbing Services",
     "vertical": "plumbers",
@@ -29423,6 +29797,390 @@
       {
         "q": "Does Royal Indian Cuisine offer private dining?",
         "a": "Royal Indian Cuisine may offer private dining options for special events. Contact them for details."
+      }
+    ],
+    "schema_type": "Restaurant",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "tj-hegarty-solicitors",
+    "name": "TJ Hegarty Solicitors",
+    "vertical": "accountants",
+    "city": "Cork",
+    "citySlug": "cork",
+    "country": "ireland",
+    "address": "Cork, Ireland",
+    "phone": "",
+    "website": "https://www.tjhegarty.ie/",
+    "email": "",
+    "description": "TJ Hegarty Solicitors is a trusted professional services located in Cork, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does TJ Hegarty Solicitors offer free consultations?",
+        "a": "Contact TJ Hegarty Solicitors to enquire about initial consultation availability."
+      },
+      {
+        "q": "What services does TJ Hegarty Solicitors provide?",
+        "a": "TJ Hegarty Solicitors offers a range of professional services. Contact them for details."
+      },
+      {
+        "q": "Does TJ Hegarty Solicitors work with small businesses?",
+        "a": "Yes, TJ Hegarty Solicitors works with businesses of all sizes. Get in touch to discuss your needs."
+      }
+    ],
+    "schema_type": "AccountingService",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "joyce-company-solicitors",
+    "name": "Joyce & Company Solicitors",
+    "vertical": "accountants",
+    "city": "Cork",
+    "citySlug": "cork",
+    "country": "ireland",
+    "address": "Cork, Ireland",
+    "phone": "",
+    "website": "https://joycecosolicitors.ie/",
+    "email": "",
+    "description": "Joyce & Company Solicitors is a trusted professional services located in Cork, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Joyce & Company Solicitors offer free consultations?",
+        "a": "Contact Joyce & Company Solicitors to enquire about initial consultation availability."
+      },
+      {
+        "q": "What services does Joyce & Company Solicitors provide?",
+        "a": "Joyce & Company Solicitors offers a range of professional services. Contact them for details."
+      },
+      {
+        "q": "Does Joyce & Company Solicitors work with small businesses?",
+        "a": "Yes, Joyce & Company Solicitors works with businesses of all sizes. Get in touch to discuss your needs."
+      }
+    ],
+    "schema_type": "AccountingService",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "denise-kelleher-associates-solicitors",
+    "name": "Denise Kelleher & Associates Solicitors",
+    "vertical": "accountants",
+    "city": "Cork",
+    "citySlug": "cork",
+    "country": "ireland",
+    "address": "Cork, Ireland",
+    "phone": "021 4888777",
+    "website": "https://www.denisekelleher.ie/",
+    "email": "",
+    "description": "Denise Kelleher & Associates Solicitors is a trusted professional services located in Cork, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Denise Kelleher & Associates Solicitors offer free consultations?",
+        "a": "Contact Denise Kelleher & Associates Solicitors to enquire about initial consultation availability."
+      },
+      {
+        "q": "What services does Denise Kelleher & Associates Solicitors provide?",
+        "a": "Denise Kelleher & Associates Solicitors offers a range of professional services. Contact them for details."
+      },
+      {
+        "q": "Does Denise Kelleher & Associates Solicitors work with small businesses?",
+        "a": "Yes, Denise Kelleher & Associates Solicitors works with businesses of all sizes. Get in touch to discuss your needs."
+      }
+    ],
+    "schema_type": "AccountingService",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "taxassist-accountants-cork-city",
+    "name": "TaxAssist Accountants Cork City",
+    "vertical": "accountants",
+    "city": "Cork",
+    "citySlug": "cork",
+    "country": "ireland",
+    "address": "Cork, Ireland",
+    "phone": "1800 98 76 09",
+    "website": "https://www.taxassist.ie/accountants/cork-city/",
+    "email": "",
+    "description": "TaxAssist Accountants Cork City is a trusted professional services located in Cork, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does TaxAssist Accountants Cork City offer free consultations?",
+        "a": "Contact TaxAssist Accountants Cork City to enquire about initial consultation availability."
+      },
+      {
+        "q": "What services does TaxAssist Accountants Cork City provide?",
+        "a": "TaxAssist Accountants Cork City offers a range of professional services. Contact them for details."
+      },
+      {
+        "q": "Does TaxAssist Accountants Cork City work with small businesses?",
+        "a": "Yes, TaxAssist Accountants Cork City works with businesses of all sizes. Get in touch to discuss your needs."
+      }
+    ],
+    "schema_type": "AccountingService",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "xeinadin-cork",
+    "name": "Xeinadin Cork",
+    "vertical": "accountants",
+    "city": "Cork",
+    "citySlug": "cork",
+    "country": "ireland",
+    "address": "Cork, Ireland",
+    "phone": "",
+    "website": "https://xeinadin.ie/office/cork/",
+    "email": "",
+    "description": "Xeinadin Cork is a trusted professional services located in Cork, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Xeinadin Cork offer free consultations?",
+        "a": "Contact Xeinadin Cork to enquire about initial consultation availability."
+      },
+      {
+        "q": "What services does Xeinadin Cork provide?",
+        "a": "Xeinadin Cork offers a range of professional services. Contact them for details."
+      },
+      {
+        "q": "Does Xeinadin Cork work with small businesses?",
+        "a": "Yes, Xeinadin Cork works with businesses of all sizes. Get in touch to discuss your needs."
+      }
+    ],
+    "schema_type": "AccountingService",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "tasc-accountants",
+    "name": "TASC Accountants",
+    "vertical": "accountants",
+    "city": "Dublin",
+    "citySlug": "dublin",
+    "country": "ireland",
+    "address": "Dublin, Ireland",
+    "phone": "",
+    "website": "https://tascaccountants.com/",
+    "email": "",
+    "description": "TASC Accountants is a trusted professional services located in Dublin, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does TASC Accountants offer free consultations?",
+        "a": "Contact TASC Accountants to enquire about initial consultation availability."
+      },
+      {
+        "q": "What services does TASC Accountants provide?",
+        "a": "TASC Accountants offers a range of professional services. Contact them for details."
+      },
+      {
+        "q": "Does TASC Accountants work with small businesses?",
+        "a": "Yes, TASC Accountants works with businesses of all sizes. Get in touch to discuss your needs."
+      }
+    ],
+    "schema_type": "AccountingService",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "ace-autobody-galway",
+    "name": "ACE Autobody Galway",
+    "vertical": "mechanics",
+    "city": "Galway",
+    "citySlug": "galway",
+    "country": "ireland",
+    "address": "Galway, Ireland",
+    "phone": "",
+    "website": "https://aceautobody.ie/ace-autobody-galway/",
+    "email": "",
+    "description": "ACE Autobody Galway is a trusted mechanics located in Galway, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does ACE Autobody Galway service all car brands?",
+        "a": "ACE Autobody Galway works on most vehicle makes and models. Call to confirm your car."
+      },
+      {
+        "q": "Does ACE Autobody Galway offer free estimates?",
+        "a": "Contact ACE Autobody Galway for pricing information and repair estimates."
+      },
+      {
+        "q": "Does ACE Autobody Galway handle NCT prep?",
+        "a": "ACE Autobody Galway can help prepare your car for NCT testing. Book an appointment."
+      }
+    ],
+    "schema_type": "AutoRepair",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "mechanic-365",
+    "name": "Mechanic 365",
+    "vertical": "mechanics",
+    "city": "Dublin",
+    "citySlug": "dublin",
+    "country": "ireland",
+    "address": "Dublin, Ireland",
+    "phone": "",
+    "website": "http://www.mechanic365.ie/",
+    "email": "",
+    "description": "Mechanic 365 is a trusted mechanics located in Dublin, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Mechanic 365 service all car brands?",
+        "a": "Mechanic 365 works on most vehicle makes and models. Call to confirm your car."
+      },
+      {
+        "q": "Does Mechanic 365 offer free estimates?",
+        "a": "Contact Mechanic 365 for pricing information and repair estimates."
+      },
+      {
+        "q": "Does Mechanic 365 handle NCT prep?",
+        "a": "Mechanic 365 can help prepare your car for NCT testing. Book an appointment."
+      }
+    ],
+    "schema_type": "AutoRepair",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "kingfisher-waterford",
+    "name": "Kingfisher Waterford",
+    "vertical": "gyms",
+    "city": "Waterford",
+    "citySlug": "waterford",
+    "country": "ireland",
+    "address": "Waterford, Ireland",
+    "phone": "(051) 850300",
+    "website": "https://kingfisherclub.com/gym-waterford/",
+    "email": "",
+    "description": "Kingfisher Waterford is a trusted gyms located in Waterford, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Kingfisher Waterford offer trial memberships?",
+        "a": "Contact Kingfisher Waterford to ask about trial passes and membership options."
+      },
+      {
+        "q": "What classes does Kingfisher Waterford offer?",
+        "a": "Kingfisher Waterford offers a range of fitness classes. Check their schedule for availability."
+      },
+      {
+        "q": "Does Kingfisher Waterford have personal trainers?",
+        "a": "Yes, Kingfisher Waterford has qualified personal trainers available. Enquire about packages."
+      }
+    ],
+    "schema_type": "HealthClub",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "petronella",
+    "name": "Petronella",
+    "vertical": "restaurants",
+    "city": "Kilkenny",
+    "citySlug": "kilkenny",
+    "country": "ireland",
+    "address": "Kilkenny, Ireland",
+    "phone": "",
+    "website": "https://www.petronella.ie",
+    "email": "",
+    "description": "Petronella is a trusted restaurants located in Kilkenny, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Petronella take reservations?",
+        "a": "Yes, Petronella accepts reservations. Call ahead or book online for the best experience."
+      },
+      {
+        "q": "What type of cuisine does Petronella serve?",
+        "a": "Petronella offers a carefully curated menu featuring local and international dishes."
+      },
+      {
+        "q": "Does Petronella have parking?",
+        "a": "Please contact Petronella directly for parking information and availability."
+      },
+      {
+        "q": "Is there a dress code at Petronella?",
+        "a": "Smart casual attire is recommended. Contact the restaurant for specific event requirements."
+      },
+      {
+        "q": "Does Petronella offer private dining?",
+        "a": "Petronella may offer private dining options for special events. Contact them for details."
+      }
+    ],
+    "schema_type": "Restaurant",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "black-bull-inn",
+    "name": "Black Bull Inn",
+    "vertical": "restaurants",
+    "city": "Drogheda",
+    "citySlug": "drogheda",
+    "country": "ireland",
+    "address": "Drogheda, Ireland",
+    "phone": "",
+    "website": "https://blackbullinn.ie",
+    "email": "",
+    "description": "Black Bull Inn is a trusted restaurants located in Drogheda, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Black Bull Inn take reservations?",
+        "a": "Yes, Black Bull Inn accepts reservations. Call ahead or book online for the best experience."
+      },
+      {
+        "q": "What type of cuisine does Black Bull Inn serve?",
+        "a": "Black Bull Inn offers a carefully curated menu featuring local and international dishes."
+      },
+      {
+        "q": "Does Black Bull Inn have parking?",
+        "a": "Please contact Black Bull Inn directly for parking information and availability."
+      },
+      {
+        "q": "Is there a dress code at Black Bull Inn?",
+        "a": "Smart casual attire is recommended. Contact the restaurant for specific event requirements."
+      },
+      {
+        "q": "Does Black Bull Inn offer private dining?",
+        "a": "Black Bull Inn may offer private dining options for special events. Contact them for details."
+      }
+    ],
+    "schema_type": "Restaurant",
+    "locale": "en",
+    "openingHours": "Mo-Fr 09:00-18:00"
+  },
+  {
+    "slug": "monasterboice-inn",
+    "name": "Monasterboice Inn",
+    "vertical": "restaurants",
+    "city": "Drogheda",
+    "citySlug": "drogheda",
+    "country": "ireland",
+    "address": "Drogheda, Ireland",
+    "phone": "",
+    "website": "https://monasterboice-inn.ie",
+    "email": "",
+    "description": "Monasterboice Inn is a trusted restaurants located in Drogheda, Ireland. Providing quality service to the local community.",
+    "faqs": [
+      {
+        "q": "Does Monasterboice Inn take reservations?",
+        "a": "Yes, Monasterboice Inn accepts reservations. Call ahead or book online for the best experience."
+      },
+      {
+        "q": "What type of cuisine does Monasterboice Inn serve?",
+        "a": "Monasterboice Inn offers a carefully curated menu featuring local and international dishes."
+      },
+      {
+        "q": "Does Monasterboice Inn have parking?",
+        "a": "Please contact Monasterboice Inn directly for parking information and availability."
+      },
+      {
+        "q": "Is there a dress code at Monasterboice Inn?",
+        "a": "Smart casual attire is recommended. Contact the restaurant for specific event requirements."
+      },
+      {
+        "q": "Does Monasterboice Inn offer private dining?",
+        "a": "Monasterboice Inn may offer private dining options for special events. Contact them for details."
       }
     ],
     "schema_type": "Restaurant",
