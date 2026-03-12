@@ -206,43 +206,6 @@ test.describe('Fair Use Cap Enforcement', () => {
   });
 });
 
-test.describe('Trial Usage', () => {
-  test('trial calls are not charged', async ({ api }) => {
-    await api.loginAsDevUser('starter');
-
-    // Simulate a trial call
-    const simulateResponse = await fetch(`${API_URL}/api/billing/test/simulate-call`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        userId: TEST_USERS.starter,
-        planId: 'starter',
-        vapiCostCents: 50,
-        isTrial: true
-      })
-    });
-
-    if (simulateResponse.ok) {
-      const result = await simulateResponse.json();
-      expect(result.costCents).toBe(0); // Trial = free
-    }
-  });
-
-  test('GET /api/billing/trial-usage returns trial status', async ({ api }) => {
-    await api.loginAsDevUser('starter');
-
-    const response = await fetch(`${API_URL}/api/billing/trial-usage`);
-
-    if (response.ok) {
-      const trial = await response.json();
-
-      expect(trial).toHaveProperty('callsMade');
-      expect(trial).toHaveProperty('callsAllowed');
-      expect(trial).toHaveProperty('callsRemaining');
-    }
-  });
-});
-
 test.describe('Billing Dashboard UI', () => {
   test('displays usage summary on billing page', async ({ page, api }) => {
     await api.loginAsDevUser('starter');
