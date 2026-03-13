@@ -294,55 +294,6 @@ test.describe('Routes with Dev Mode Auth', () => {
   });
 });
 
-test.describe('Trial Status in Dashboard', () => {
-  test.beforeEach(async ({ request }) => {
-    await createTestUser(request, TEST_USER_ID);
-  });
-
-  test('trial subscription shows trialing status', async ({ request }) => {
-    const cookie = await getAuthCookie(request, TEST_USER_ID);
-
-    // Start trial
-    await request.post(`${API_URL}/api/billing/start-trial`, {
-      headers: { 'Cookie': cookie },
-      data: { planId: 'starter' }
-    });
-
-    // Check subscription status
-    const response = await request.get(`${API_URL}/api/billing/subscription`, {
-      headers: { 'Cookie': cookie }
-    });
-    const data = await response.json();
-
-    expect(data.status).toBe('trialing');
-    expect(data.trial_ends_at).toBeDefined();
-    console.log('Trial status shown correctly:', {
-      status: data.status,
-      trialEndsAt: data.trial_ends_at
-    });
-  });
-
-  test('trial usage shown in dashboard data', async ({ request }) => {
-    const cookie = await getAuthCookie(request, TEST_USER_ID);
-
-    // Start trial
-    await request.post(`${API_URL}/api/billing/start-trial`, {
-      headers: { 'Cookie': cookie },
-      data: { planId: 'starter' }
-    });
-
-    // Check usage endpoint
-    const response = await request.get(`${API_URL}/api/billing/usage`, {
-      headers: { 'Cookie': cookie }
-    });
-    const data = await response.json();
-
-    // Should show trial-specific information
-    expect(data).toBeDefined();
-    console.log('Trial usage data:', data);
-  });
-});
-
 test.describe('No Subscription State', () => {
   test.beforeEach(async ({ request }) => {
     await createTestUser(request, TEST_USER_ID);

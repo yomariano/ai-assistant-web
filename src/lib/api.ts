@@ -423,16 +423,6 @@ export const billingApi = {
     const { data } = await api.post('/api/billing/portal');
     return data;
   },
-
-  startTrial: async (planId: 'starter' | 'growth' | 'pro'): Promise<{
-    message: string;
-    subscription: unknown;
-    trialEndsAt: string;
-    trialCalls: number;
-  }> => {
-    const { data } = await api.post('/api/billing/start-trial', { planId });
-    return data;
-  },
 };
 
 // Integrations / Booking System

@@ -37,27 +37,6 @@ function CheckoutContent() {
       }
 
       try {
-        const bypassStripe =
-          typeof window !== 'undefined' &&
-          (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') &&
-          process.env.NEXT_PUBLIC_BYPASS_STRIPE === 'true';
-
-        // Localhost-only bypass: start a trial without Stripe
-        if (bypassStripe) {
-          try {
-            sessionStorage.setItem(
-              'postCheckoutSubscriptionRefresh',
-              JSON.stringify({ startedAt: Date.now(), planId })
-            );
-          } catch {
-            // ignore storage errors
-          }
-
-          await billingApi.startTrial(planId as 'starter' | 'growth' | 'pro');
-          router.push('/dashboard');
-          return;
-        }
-
         // Get the payment link from the API
         const region = isSupportedRegion(selectedRegion)
           ? selectedRegion

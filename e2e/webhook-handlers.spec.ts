@@ -101,7 +101,7 @@ test.describe('Subscription Update Webhook', () => {
     console.log('Plan updated to:', dbState.subscription.plan_id);
   });
 
-  test('subscription.updated with trialing status creates trial usage', async ({ request }) => {
+  test('subscription.updated with trialing status stores Stripe trial status', async ({ request }) => {
     const trialEnd = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000); // 7 days from now
 
     await simulateWebhook(request, 'customer.subscription.updated', TEST_USER_ID, {
@@ -112,8 +112,7 @@ test.describe('Subscription Update Webhook', () => {
 
     const dbState = await getDbState(request, TEST_USER_ID);
     expect(dbState.subscription.status).toBe('trialing');
-    expect(dbState.trialUsage).toBeDefined();
-    console.log('Trial status set with usage tracking');
+    console.log('Trial status synced from webhook');
   });
 
   test('subscription.updated with cancel_at_period_end flag', async ({ request }) => {
