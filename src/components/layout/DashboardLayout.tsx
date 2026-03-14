@@ -7,7 +7,7 @@ import Sidebar from './Sidebar';
 import Navbar from './Navbar';
 import DevUserSwitcher from '@/components/dev/DevUserSwitcher';
 import { OnboardingTour, type OnboardingData } from '@/components/onboarding';
-import { userApi, billingApi, assistantApi } from '@/lib/api';
+import { userApi, billingApi, assistantApi, numberOrderingApi } from '@/lib/api';
 
 interface DashboardLayoutProps {
   children: React.ReactNode;
@@ -21,10 +21,27 @@ function getDemoPhoneNumber(region?: string | null) {
 }
 
 function getPendingProvisioningLabel(region?: string | null) {
-  if (region === 'US') return 'US number being set up...';
-  if (region === 'AU') return 'Australian number being set up...';
-  if (region === 'AR') return 'Argentina number being set up...';
+  const normalizedRegion = region === 'UK' ? 'GB' : region;
+  if (normalizedRegion === 'US') return 'US number being set up...';
+  if (normalizedRegion === 'AU') return 'Australian number being set up...';
+  if (normalizedRegion === 'AR') return 'Argentina number being set up...';
+  if (normalizedRegion && normalizedRegion.length === 2) {
+    try {
+      const displayNames = new Intl.DisplayNames(['en'], { type: 'region' });
+      const countryName = displayNames.of(normalizedRegion);
+      if (countryName) {
+        return `${countryName} number being set up...`;
+      }
+    } catch {
+      // ignore and use generic fallback
+    }
+  }
   return 'Number being set up...';
+}
+
+function getPendingVerificationLabel(countryCode?: string | null) {
+  if (countryCode === 'ES') return 'Spanish number verification in progress...';
+  return 'Number verification in progress...';
 }
 
 export default function DashboardLayout({ children }: DashboardLayoutProps) {
@@ -305,9 +322,24 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
             const pendingPlan = sessionStorage.getItem('selectedPlan');
             if (pendingPlan) {
               const pendingRegion = sessionStorage.getItem('selectedRegion') || '';
+              const pendingNumberCountry = sessionStorage.getItem('selectedNumberCountry') || '';
+              const pendingNumberCategory = sessionStorage.getItem('selectedNumberCategory') || '';
+              if (pendingNumberCountry && pendingNumberCategory) {
+                sessionStorage.removeItem('selectedPlan');
+                console.log('[DASHBOARD] Pending plan and number selection found after auth - redirecting to checkout:', pendingPlan);
+                const params = new URLSearchParams({ plan: pendingPlan });
+                if (pendingRegion) {
+                  params.set('region', pendingRegion);
+                }
+                params.set('numberCountry', pendingNumberCountry);
+                params.set('numberCategory', pendingNumberCategory);
+                router.push(`/checkout?${params.toString()}`);
+                return;
+              }
+
               sessionStorage.removeItem('selectedPlan');
-              console.log('[DASHBOARD] Pending plan found after auth - redirecting to checkout:', pendingPlan);
-              router.push(`/checkout?plan=${encodeURIComponent(pendingPlan)}&region=${encodeURIComponent(pendingRegion)}`);
+              console.log('[DASHBOARD] Pending plan found after auth - opening paywall for number selection');
+              openPaywallOnboarding();
               return;
             }
             console.log('[DASHBOARD] No active subscription - opening onboarding paywall');
@@ -396,7 +428,15 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
                   label: getPendingProvisioningLabel(provisioningRegion)
                 }];
               } else {
-                onboardingPhoneNumbers = [{ number: getFallbackPhoneNumber(), label: 'Primary (Demo)' }];
+                const { request } = await numberOrderingApi.getLatestRequest().catch(() => ({ request: null }));
+                if (request && ['submitted', 'approved'].includes(request.status)) {
+                  onboardingPhoneNumbers = [{
+                    number: 'PENDING',
+                    label: getPendingVerificationLabel(request.countryCode)
+                  }];
+                } else {
+                  onboardingPhoneNumbers = [{ number: getFallbackPhoneNumber(), label: 'Primary (Demo)' }];
+                }
               }
             } catch {
               onboardingPhoneNumbers = [{ number: getFallbackPhoneNumber(), label: 'Primary (Demo)' }];

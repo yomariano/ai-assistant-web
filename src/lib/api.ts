@@ -388,11 +388,22 @@ export const billingApi = {
     return data;
   },
 
-  getPaymentLink: async (planId: string, region?: string | null): Promise<{ url: string }> => {
+  getPaymentLink: async (
+    planId: string,
+    region?: string | null,
+    numberCountry?: string | null,
+    numberCategory?: string | null
+  ): Promise<{ url: string }> => {
     // Cache-bust to prevent browser from serving stale payment links
     const params = new URLSearchParams({ _t: Date.now().toString() });
     if (region) {
       params.set('region', region);
+    }
+    if (numberCountry) {
+      params.set('numberCountry', numberCountry);
+    }
+    if (numberCategory) {
+      params.set('numberCategory', numberCategory);
     }
     const { data } = await api.get(`/api/billing/payment-link/${planId}?${params.toString()}`);
     return data;
@@ -421,6 +432,75 @@ export const billingApi = {
 
   createPortalSession: async (): Promise<{ url: string }> => {
     const { data } = await api.post('/api/billing/portal');
+    return data;
+  },
+};
+
+export interface NumberOrderingRule {
+  id: string;
+  provider: string;
+  countryCode: string;
+  countryName: string;
+  numberCategory: string;
+  rawStatus: 'no_docs' | 'docs_required' | 'no_regions';
+  appStatus: 'instant' | 'verification_required' | 'hide';
+  requiresManualReview: boolean;
+  documentTypes: string[];
+  notes: string | null;
+  lastVerifiedAt: string | null;
+  active: boolean;
+}
+
+export interface NumberOrderingCountry {
+  countryCode: string;
+  countryName: string;
+  categories: NumberOrderingRule[];
+}
+
+export interface NumberRequest {
+  id: string;
+  userId: string;
+  ruleId: string | null;
+  provider: string;
+  countryCode: string;
+  countryName: string;
+  numberCategory: string;
+  status: 'draft' | 'submitted' | 'approved' | 'rejected' | 'provisioned';
+  requestData: Record<string, unknown>;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export const numberOrderingApi = {
+  getOptions: async (): Promise<{ countries: NumberOrderingCountry[] }> => {
+    const { data } = await api.get('/api/number-ordering/options');
+    return data;
+  },
+
+  evaluateRule: async (
+    countryCode: string,
+    numberCategory: string
+  ): Promise<{ rule: NumberOrderingRule | null }> => {
+    const { data } = await api.get('/api/number-ordering/rules/evaluate', {
+      params: { countryCode, numberCategory },
+    });
+    return data;
+  },
+
+  getLatestRequest: async (): Promise<{ request: NumberRequest | null }> => {
+    const { data } = await api.get('/api/number-ordering/requests/latest');
+    return data;
+  },
+
+  createRequest: async (params: {
+    countryCode: string;
+    numberCategory: string;
+    planId: string;
+    endUserName?: string;
+    businessName?: string;
+    notes?: string;
+  }): Promise<{ success: boolean; created: boolean; request: NumberRequest; rule: NumberOrderingRule }> => {
+    const { data } = await api.post('/api/number-ordering/requests', params);
     return data;
   },
 };

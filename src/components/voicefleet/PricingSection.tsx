@@ -176,7 +176,7 @@ const PricingSection = ({ embedded = false, trackingData }: PricingSectionProps)
   const { region: detectedRegion } = useRegion();
   const routeRegion = getRouteRegionOverride(pathname);
   const region: Region = routeRegion || (isSupportedRegion(detectedRegion) ? detectedRegion : 'EU');
-  const paymentLinks = getPaymentLinks(isAnnual, region);
+  const legacyPaymentLinks = getPaymentLinks(isAnnual, region);
   const pricing = REGIONAL_PRICING[region];
   const { isAuthenticated, token } = useAuthStore();
   // Get checkAuth with a stable reference to avoid infinite loops
@@ -202,11 +202,11 @@ const PricingSection = ({ embedded = false, trackingData }: PricingSectionProps)
   const handleGetStarted = async (planId: string) => {
     emitEvent("plan_selected", { plan: planId, region, billing: isAnnual ? "annual" : "monthly" });
 
+    sessionStorage.setItem('selectedPlan', planId);
+    sessionStorage.setItem('selectedRegion', region);
+
     // If user is not authenticated, go directly to Google OAuth
     if (!isAuthenticated) {
-      // Store the selected plan for after login
-      sessionStorage.setItem('selectedPlan', planId);
-      sessionStorage.setItem('selectedRegion', region);
       setRedirectingPlan(planId);
       try {
         await signInWithGoogle({ next: '/dashboard' });
@@ -242,26 +242,26 @@ const PricingSection = ({ embedded = false, trackingData }: PricingSectionProps)
       if (response.ok) {
         const data = await response.json();
         if (data.url) {
-          // Redirect to appropriate URL (payment link or portal)
+          // Redirect to appropriate URL (payment link, portal, or in-app paywall)
           window.location.href = data.url;
           return;
         }
       }
 
-      // Fallback to direct payment link if API fails
-      const link = paymentLinks[planId as keyof typeof paymentLinks];
-      if (link) {
-        window.location.href = link;
-      } else {
-        window.location.href = `/checkout?plan=${planId}${region !== 'EU' ? `&region=${region}` : ''}`;
-      }
+      console.warn('Billing redirect did not return a URL. Falling back to in-app paywall.', {
+        planId,
+        region,
+        hasLegacyPaymentLink: Boolean(legacyPaymentLinks[planId as keyof typeof legacyPaymentLinks]),
+      });
+      window.location.href = '/dashboard?paywall=1';
     } catch (error) {
       console.error('Failed to get redirect URL:', error);
-      // Fallback to direct payment link
-      const link = paymentLinks[planId as keyof typeof paymentLinks];
-      if (link) {
-        window.location.href = link;
-      }
+      console.warn('Opening in-app paywall instead of legacy direct Stripe link.', {
+        planId,
+        region,
+        hasLegacyPaymentLink: Boolean(legacyPaymentLinks[planId as keyof typeof legacyPaymentLinks]),
+      });
+      window.location.href = '/dashboard?paywall=1';
     } finally {
       setRedirectingPlan(null);
     }
