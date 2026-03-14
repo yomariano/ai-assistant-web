@@ -83,24 +83,25 @@ const REGIONAL_PRICING = {
 const PricingSectionES = () => {
   const [isAnnual, setIsAnnual] = useState(false);
   const [region, setRegion] = useState<Region>('AR');
-  const paymentLinks = getPaymentLinks(isAnnual, region);
+  const legacyPaymentLinks = getPaymentLinks(isAnnual, region);
   const pricing = REGIONAL_PRICING[region];
   const { isAuthenticated, token } = useAuthStore();
   const checkAuth = useAuthStore((state) => state.checkAuth);
-  const [authChecked, setAuthChecked] = useState(false);
   const [redirectingPlan, setRedirectingPlan] = useState<string | null>(null);
   const hasCheckedAuth = useRef(false);
 
   useEffect(() => {
     if (!hasCheckedAuth.current) {
       hasCheckedAuth.current = true;
-      checkAuth().then(() => setAuthChecked(true));
+      void checkAuth();
     }
   }, [checkAuth]);
 
   const handleGetStarted = async (planId: string) => {
+    sessionStorage.setItem('selectedPlan', planId);
+    sessionStorage.setItem('selectedRegion', region);
+
     if (!isAuthenticated) {
-      sessionStorage.setItem('selectedPlan', planId);
       setRedirectingPlan(planId);
       try {
         await signInWithGoogle({ next: '/dashboard' });
@@ -119,8 +120,13 @@ const PricingSectionES = () => {
         headers['Authorization'] = `Bearer ${token}`;
       }
 
+      const params = new URLSearchParams({
+        planId,
+        region,
+      });
+
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/billing/redirect?planId=${planId}`,
+        `${process.env.NEXT_PUBLIC_API_URL}/api/billing/redirect?${params.toString()}`,
         { credentials: 'include', headers }
       );
 
@@ -132,18 +138,20 @@ const PricingSectionES = () => {
         }
       }
 
-      const link = paymentLinks[planId as keyof typeof paymentLinks];
-      if (link) {
-        window.location.href = link;
-      } else {
-        window.location.href = `/checkout?plan=${planId}`;
-      }
+      console.warn('Billing redirect did not return a URL. Falling back to in-app paywall.', {
+        planId,
+        region,
+        hasLegacyPaymentLink: Boolean(legacyPaymentLinks[planId as keyof typeof legacyPaymentLinks]),
+      });
+      window.location.href = '/dashboard?paywall=1';
     } catch (error) {
       console.error('Failed to get redirect URL:', error);
-      const link = paymentLinks[planId as keyof typeof paymentLinks];
-      if (link) {
-        window.location.href = link;
-      }
+      console.warn('Opening in-app paywall instead of legacy direct Stripe link.', {
+        planId,
+        region,
+        hasLegacyPaymentLink: Boolean(legacyPaymentLinks[planId as keyof typeof legacyPaymentLinks]),
+      });
+      window.location.href = '/dashboard?paywall=1';
     } finally {
       setRedirectingPlan(null);
     }

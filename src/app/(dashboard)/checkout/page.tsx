@@ -15,6 +15,8 @@ function CheckoutContent() {
 
   const planId = searchParams.get('plan');
   const selectedRegion = searchParams.get('region');
+  const selectedNumberCountry = searchParams.get('numberCountry');
+  const selectedNumberCategory = searchParams.get('numberCategory');
 
   useEffect(() => {
     async function redirectToStripe() {
@@ -27,6 +29,12 @@ function CheckoutContent() {
       trackEvent("checkout_started", { plan: planId });
       if (isSupportedRegion(selectedRegion)) {
         sessionStorage.setItem('selectedRegion', selectedRegion);
+      }
+      if (selectedNumberCountry) {
+        sessionStorage.setItem('selectedNumberCountry', selectedNumberCountry);
+      }
+      if (selectedNumberCategory) {
+        sessionStorage.setItem('selectedNumberCategory', selectedNumberCategory);
       }
 
       // Validate plan ID
@@ -41,7 +49,9 @@ function CheckoutContent() {
         const region = isSupportedRegion(selectedRegion)
           ? selectedRegion
           : sessionStorage.getItem('selectedRegion');
-        const { url } = await billingApi.getPaymentLink(planId, region);
+        const numberCountry = selectedNumberCountry || sessionStorage.getItem('selectedNumberCountry');
+        const numberCategory = selectedNumberCategory || sessionStorage.getItem('selectedNumberCategory');
+        const { url } = await billingApi.getPaymentLink(planId, region, numberCountry, numberCategory);
 
         if (url) {
           // Mark that we initiated Stripe checkout so /dashboard can auto-refresh subscription on return
@@ -63,7 +73,20 @@ function CheckoutContent() {
         console.error('Checkout error:', err);
 
         // Check for specific error messages
-        const errorMessage = err instanceof Error ? err.message : 'Unknown error';
+        const errorMessage =
+          typeof err === 'object' && err !== null && 'response' in err
+            ? String(
+                (
+                  err as {
+                    response?: {
+                      data?: { error?: { message?: string } };
+                    };
+                  }
+                ).response?.data?.error?.message || 'Unknown error'
+              )
+            : err instanceof Error
+              ? err.message
+              : 'Unknown error';
 
         // Handle "already has subscription" error
         if (errorMessage.includes('already have an active subscription')) {
@@ -71,13 +94,13 @@ function CheckoutContent() {
           return;
         }
 
-        setError('Failed to start checkout. Please try again or contact support.');
+        setError(errorMessage || 'Failed to start checkout. Please try again or contact support.');
         setIsLoading(false);
       }
     }
 
     redirectToStripe();
-  }, [planId, selectedRegion, router]);
+  }, [planId, selectedRegion, selectedNumberCountry, selectedNumberCategory, router]);
 
   if (isLoading) {
     return (

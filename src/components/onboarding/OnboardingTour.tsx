@@ -18,7 +18,7 @@ import {
   TestCallStep,
   CompletionStep,
 } from "./steps";
-import type { PlanId } from "./steps/PaywallStep";
+import type { NumberSelection, PlanId } from "./steps/PaywallStep";
 import { useRegion } from "@/hooks/useRegion";
 
 export interface OnboardingData {
@@ -117,12 +117,19 @@ export function OnboardingTour({
   }, [currentStep, goToStep]);
 
   const handleSelectPlan = useCallback(
-    (planId: PlanId) => {
+    (planId: PlanId, selection: NumberSelection) => {
+      const params = new URLSearchParams({ plan: planId });
+      if (region) {
+        params.set("region", region);
+      }
+      params.set("numberCountry", selection.countryCode);
+      params.set("numberCategory", selection.numberCategory);
+
       // Close modal before navigating so /checkout can run its redirect effect unobstructed.
       onOpenChange(false);
-      router.push(`/checkout?plan=${planId}${region ? `&region=${region}` : ''}`);
+      router.push(`/checkout?${params.toString()}`);
     },
-    [onOpenChange, router]
+    [onOpenChange, region, router]
   );
 
   const handleRefreshSubscription = useCallback(async () => {
@@ -194,6 +201,7 @@ export function OnboardingTour({
               regionPlans={regionPlans}
               currencySymbol={currencySymbol || "€"}
               isLoadingRegion={isLoadingRegion}
+              detectedRegion={region}
             />
           )}
           {currentStep === 1 + offset && (
