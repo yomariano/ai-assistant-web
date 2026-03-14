@@ -120,8 +120,13 @@ const PricingSectionES = () => {
         headers['Authorization'] = `Bearer ${token}`;
       }
 
+      const params = new URLSearchParams({
+        planId,
+        region,
+      });
+
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/billing/redirect?planId=${planId}`,
+        `${process.env.NEXT_PUBLIC_API_URL}/api/billing/redirect?${params.toString()}`,
         { credentials: 'include', headers }
       );
 
